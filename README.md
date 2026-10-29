@@ -19,7 +19,7 @@ The project started a year ago with Hotaru working alone. What was meant to be a
 
 ---
 
-[b]Requirements & Installation Order[/b]
+Requirements & Installation Order
 
 Enhanced Edition Trilogy (EET): Required.
 BP-BGT-Worldmap: Not strictly required if you aren't playing with other map-expanding mods. However, if you do use it, BP-BGT-Worldmap must be installed AFTER this mod (and after any other mod that adds new areas).
@@ -27,7 +27,7 @@ Worldmap Patch: We have included a dedicated Worldmap patch as the very last com
 
 Since this is an additive WeiDU mod, it can technically be installed at any point, but we highly recommend placing it alongside other BG1 quest mods, ideally after the BG1 NPC Project.
 
-[b]Tested Compatibility & Load Order[/b]
+Tested Compatibility & Load Order
 Chronicles of the Sword Coast is compatible with the vast majority of WeiDU mods, including those that modify the second level of the Ice Island (such as Unfinished Business or Mysteries of the Sword Coast).
 
 We officially tested the mod using the following install order:
@@ -46,27 +46,23 @@ We officially tested the mod using the following install order:
 
 ---
 
-[b][b]Known Issues & Important Notices
-[/b][/b]
+Known Issues & Important Notices
 If you install "Better Immersion for Beregost", Neera may take longer to spawn (sometimes up to 2 minutes). If she doesn't appear right away, explore the town a bit and return to her spawn location. She should show up eventually.
 If you install "Better Immersion for Baldur's Gate and Better Immersion for Beregost" installer may say it is installed with warnings. This does not cause any problems, but is strictly related to certain NPC's contained within each component.
 
 ---
 
-[b]Bug Reporting & Feedback
-[/b]
+Bug Reporting & Feedback
 We cannot test every single WeiDU mod in existence. If you encounter any bugs or incompatibilities, please report them to us. In the event of a game crash (especially in new areas), please attach your crash dump file. This will massively help us narrow down and fix the issue.
 
 ---
 
-[b]Crossmod & Permissions
-[/b]
+Crossmod & Permissions
 Anyone is free to create crossmod content (such as interjections with your custom mod characters), provided that either myself or Hotaru are informed first. You can contact Mapek at Beamdog Forum, or Hotaru in The Gibberling 3 forum of the mod.
 
 ---
 
-[b]Credits & Special Thanks
-[/b]
+Credits & Special Thanks
 From Hotaru:
 Special thanks to @LavaDelVortel, @Jastey, and @Acifer for their advice on tile conversion, .J file corrections, and dialogue states. I would still be stuck on these specific mechanics if it weren't for your help!
 
