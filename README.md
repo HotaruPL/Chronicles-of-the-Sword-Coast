@@ -157,6 +157,17 @@ Purple Wyrm Inn in Baldur's Gate (custom area)
 
 Orphanage 'Haven's Hope' within Baldur's Gate (custom area)
 
+HOW TO UNBLOCK ON THE WORLD MAP: 
+- Torm's Hand - Speak to Randalla Brasshorn at Purple Wyrm Inn
+
+- Red Fang Marauders Wilds - Speak to Kaeira at Purple Wyrm Inn
+
+- New sewer section - Southern part of the eastern sewers
+
+- Purple Wyrm Inn - Building to the left of Elfsong tavern in eastern Baldur's Gate
+
+- Orphanage - Opposite to Oberan's Estate in Central Baldur's Gate
+
 REMNANTS OF THE PAST - NEW DUNGEON (by Hotaru)
 
       - Adds a second floor of the dungeon to Firewine Ruins.
@@ -165,6 +176,8 @@ HALRUAAN AND THE FLYING SHIP (by Hotaru)
 
       - Extends the Shandalar's quest and Ice Island plot. It also adds two new areas to the world map, being:
 Shandalar's Home (custom area)
+
+HOW TO UNBLOCK ON THE WORLD MAP: Finish Shandalar's first mission as normal in Ulgoth's Beard. He will invite you to his home. All the other new areas will be unlocked from there.
 
 Northern Wilderness (custom area)
 
@@ -235,6 +248,8 @@ RIVER DISTRICT (by Hotaru)
 
       - Adds a new district to Athkatla with new quests, old faces, companion interjections and intrigues.
 
+ HOW TO UNBLOCK ON THE WORLD MAP: Accessible since speaking to Gaelan Bayle in Slums of Athkatla and starting Chapter 14. Additional area - Forest Brewery - is accessible as soon as you leave City Gates.     
+
 RANGER AND HIS WIFE (by Mapek)
 
       - Help a ranger from Umar's Hills find his wife.
@@ -262,6 +277,8 @@ UNICORN GROVE AND DISTORTED MEMORIES (by Hotaru)
       - Adds a new area to the world map accessible after beating Underdark - Unicorn Grove with a unique quest.
 
 NOTE: Although not essential, Imoen adds a lot to the quest itself and it is recommended to take her along.
+
+HOW TO UNBLOCK THE AREA ON THE WORLD MAP: It is accessible within Tethir forests as soon as you leave the Underdark and speak to Elhan.
 
 BETTER IMMERSION FOR CITIES IN BG2 (by Hotaru & Mapek)
 
@@ -338,4 +355,6 @@ Jastey, Acifer and LavaDelVortel for few advices on how to handle things during 
 PLEASE, LET ME KNOW IF ANY BUGS OR CRASHES OCCUR AND IF A CRASH HAPPENS, SENT ME THE CRASH DUMP. IT WILL BE EASIER TO FIND THE CULPRIT.
 
 CHANGELOG:
+V1.2 - Traified the files to simplify translations to other languages, corrected Shandalar's bug with his daughters disappearing, fixed the World Map issue with new areas not appearing on BGT-Worldmap, fixed Thalantyr's dialogue looping during Ancient Coin dialogue, fixed faulty interjection of Imoen, removed information about a non-existing potion that appears during installs.
+
 V1.1 - First release
