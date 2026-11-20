@@ -1,0 +1,1066 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_remaining_major_items_npcs.tra~
+
+// ============================================================
+// Exterior: QCHALR
+// ============================================================
+COPY ~CotSC/halruaan_flying_ship/QCHALR.ARE~ ~override/QCHALR.ARE~
+COPY ~CotSC/halruaan_flying_ship/QCHALR.WED~ ~override/QCHALR.WED~
+COPY ~CotSC/halruaan_flying_ship/QCHALR.TIS~ ~override/QCHALR.TIS~
+COPY ~CotSC/halruaan_flying_ship/QHALR00.PVRZ~ ~override/QHALR00.PVRZ~
+COPY ~CotSC/halruaan_flying_ship/QHALR01.PVRZ~ ~override/QHALR01.PVRZ~
+COPY ~CotSC/halruaan_flying_ship/QCHALRSR.BMP~ ~override/QCHALRSR.BMP~
+COPY ~CotSC/halruaan_flying_ship/QCHALRLM.BMP~ ~override/QCHALRLM.BMP~
+COPY ~CotSC/halruaan_flying_ship/QCHALRHT.BMP~ ~override/QCHALRHT.BMP~
+
+COPY_EXISTING ~QCHALR.ARE~ ~override/QCHALR.ARE~
+  WRITE_ASCII 0x94 ~~ #8
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 875
+      fj_loc_y = 270
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCHALRSHIP
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF GAME_IS ~eet~ BEGIN
+  INCLUDE ~EET/other/EET_functions.tph~
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY toNewArea BEGIN
+    "BG1000" => "Exitwmp"
+  END
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY fromNewArea BEGIN
+    // BG1000's standard world-map entrance is the safe Ulgoth's Beard arrival
+    // (around X=2970,Y=877).  ExitNW was the wrong entry and could place
+    // the party outside the playable map.
+    "BG1000" => "Exitwmp"
+  END
+  OUTER_SPRINT qc_wm_qchalr_name @19002
+  OUTER_SPRINT qc_wm_qchalr_desc @19002
+  LAF sc#addWmpAre
+    INT_VAR
+      // v68: default wilderness icon. The normalization pass below reads
+      // BG3500 (Mutamin's Garden) and copies its real icon ID exactly.
+      mapIcon = 16
+      xCoord = 660
+      yCoord = 1391
+      tTime = 0
+      visible = 0
+      visibleAdjacent = 0
+      reachable = 0
+      visited = 0
+      inclSv = 0
+    STR_VAR
+      areName = ~QCHALR~
+      strName = EVAL ~%qc_wm_qchalr_name%~
+      strDesc = EVAL ~%qc_wm_qchalr_desc%~
+      worldmap = ~worldmap~
+  END
+
+  // Northern Wilderness uses the same world-map construction as Shandalar's Home.
+  // Only the area resref/name/icon/coordinates differ.  It starts hidden and
+  // unreachable and is revealed by Shandalar's dialogue.
+  OUTER_SPRINT qc_wm_qchalf_name @19003
+  OUTER_SPRINT qc_wm_qchalf_desc @19003
+  LAF sc#addWmpAre
+    INT_VAR
+      mapIcon = 16
+      xCoord = 660
+      yCoord = 1291
+      tTime = 0
+      visible = 0
+      visibleAdjacent = 0
+      reachable = 0
+      visited = 0
+      inclSv = 0
+    STR_VAR
+      areName = ~QCHALF~
+      strName = EVAL ~%qc_wm_qchalf_name%~
+      strDesc = EVAL ~%qc_wm_qchalf_desc%~
+      worldmap = ~worldmap~
+  END
+
+  // v68: use exactly the existing EET wilderness map icon of BG3500
+  // (Mutamin's Garden / Sharp Teeth Plain). Read it from WORLDMAP.WMP
+  // instead of guessing an index or modifying the shared MAPICONS.BAM.
+  // Existing Torm's Hand coordinates stay at v67's approved position.
+  COPY_EXISTING ~worldmap.wmp~ ~override/worldmap.wmp~
+    SET q68_garden_icon = 16
+    SET q68_icon_found = 0
+    READ_LONG 0x08 q68_wcount
+    READ_LONG 0x0c q68_woff
+    FOR (q68_m = 0; q68_m < q68_wcount; q68_m += 1) BEGIN
+      SET q68_wbase = q68_woff + q68_m * 0xb8
+      READ_LONG (q68_wbase + 0x20) q68_acount
+      READ_LONG (q68_wbase + 0x24) q68_aoff
+      FOR (q68_a = 0; q68_a < q68_acount; q68_a += 1) BEGIN
+        SET q68_p = q68_aoff + q68_a * 0xf0
+        READ_ASCII q68_p q68_area (8) NULL
+        PATCH_IF (~%q68_area%~ STRING_EQUAL_CASE ~BG3500~) BEGIN
+          READ_LONG (q68_p + 0x34) q68_garden_icon
+          SET q68_icon_found = 1
+        END
+      END
+    END
+    FOR (q68_m = 0; q68_m < q68_wcount; q68_m += 1) BEGIN
+      SET q68_wbase = q68_woff + q68_m * 0xb8
+      READ_LONG (q68_wbase + 0x20) q68_acount
+      READ_LONG (q68_wbase + 0x24) q68_aoff
+      FOR (q68_a = 0; q68_a < q68_acount; q68_a += 1) BEGIN
+        SET q68_p = q68_aoff + q68_a * 0xf0
+        READ_ASCII q68_p q68_area (8) NULL
+        PATCH_IF (~%q68_area%~ STRING_EQUAL_CASE ~TORMHA~) BEGIN
+          WRITE_LONG (q68_p + 0x38) 540
+          WRITE_LONG (q68_p + 0x3c) 1475
+        END
+        PATCH_IF (~%q68_area%~ STRING_EQUAL_CASE ~QCHALR~) BEGIN
+          WRITE_LONG (q68_p + 0x34) q68_garden_icon
+        END
+      END
+    END
+  BUT_ONLY_IF_IT_CHANGES
+  ACTION_IF (q68_icon_found == 0) BEGIN
+    WARN @20137
+  END
+
+  // Normalize any duplicate QCHALR/QCHALF entries in the master WMP to the
+  // same hidden/unreachable state. This never touches saved-game WMPs.
+  COPY_EXISTING ~worldmap.wmp~ ~override/worldmap.wmp~
+    READ_LONG 0x08 qce_map_count
+    READ_LONG 0x0c qce_map_offset
+    FOR (qce_m = 0; qce_m < qce_map_count; ++qce_m) BEGIN
+      SET qce_map_pos = qce_map_offset + (qce_m * 0x0b8)
+      READ_LONG (qce_map_pos + 0x20) qce_area_count
+      READ_LONG (qce_map_pos + 0x24) qce_area_offset
+      FOR (qce_a = 0; qce_a < qce_area_count; ++qce_a) BEGIN
+        SET qce_area_pos = qce_area_offset + (qce_a * 0x0f0)
+        READ_ASCII qce_area_pos qce_area_resref (8) NULL
+        PATCH_IF (~%qce_area_resref%~ STRING_EQUAL_CASE ~QCHALR~) BEGIN
+          WRITE_LONG (qce_area_pos + 0x30) 0
+        END
+        PATCH_IF (~%qce_area_resref%~ STRING_EQUAL_CASE ~QCHALF~) BEGIN
+          WRITE_LONG (qce_area_pos + 0x30) 0
+        END
+      END
+    END
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+// ============================================================
+// Forest quest area: QCHALF
+// ============================================================
+COPY ~CotSC/halruaan_forest/QCHALF.ARE~ ~override/QCHALF.ARE~
+// CotSC v43: Northern Wilderness was outdoor + forest (0x11), but lacked
+// the day/night lighting flag (bit 1). Preserve all other area-type flags.
+COPY_EXISTING ~QCHALF.ARE~ ~override/QCHALF.ARE~
+  READ_SHORT 0x48 qc_halw_are_type
+  WRITE_SHORT 0x48 (qc_halw_are_type BOR 0x0002)
+BUT_ONLY_IF_IT_CHANGES
+COPY ~CotSC/halruaan_forest/QCHALF.WED~ ~override/QCHALF.WED~
+COPY ~CotSC/halruaan_forest/QCHALF.TIS~ ~override/QCHALF.TIS~
+COPY ~CotSC/halruaan_forest/QCHALFHT.BMP~ ~override/QCHALFHT.BMP~
+COPY ~CotSC/halruaan_forest/QCHALFLM.BMP~ ~override/QCHALFLM.BMP~
+COPY ~CotSC/halruaan_forest/QCHALFSR.BMP~ ~override/QCHALFSR.BMP~
+COPY ~CotSC/halruaan_forest/QHALF00.PVRZ~ ~override/QHALF00.PVRZ~
+COPY ~CotSC/halruaan_forest/QHALF01.PVRZ~ ~override/QHALF01.PVRZ~
+
+// ============================================================
+// Northern Wilderness: world-map arrival + forest soundscape
+// ============================================================
+COPY_EXISTING ~QCHALF.ARE~ ~override/QCHALF.ARE~
+  // Existing Exitwmp entrance starts at 0xE4 in the minimal ARE.
+  WRITE_SHORT 0x104 1120
+  WRITE_SHORT 0x106 913
+  WRITE_SHORT 0x108 0
+
+BUT_ONLY_IF_IT_CHANGES
+
+// QCHALF collision/occlusion is frozen at Forest v1.4.
+// Do not alter QCHALFSR.BMP unless explicitly reopening the component.
+
+// ============================================================
+// QCHALF / QCHALR exits: direct return to Ulgoth's Beard
+// ============================================================
+// v7.19 uses the same proven pattern as Better Immersion QCCARN -> BG4900:
+// a normal ARE travel region points directly at a named destination entrance.
+// The original 4-bit search maps are preserved byte-for-byte except that only
+// the old colour-index 14 world-map travel cells at these exits are changed to
+// ordinary index 0 cells.  The BMPs remain genuine 4-bit IE search maps, so
+// collision is preserved.  No Pillow/8-bit conversion is used.
+// The travel regions below send the whole party directly to BG1000 at
+// X=2970,Y=877 without opening the world map.
+//
+// This keeps the WMP entries themselves intact so the quest areas can still
+// be reached through the world map when the quest calls for it; only the
+// *exit* behaviour is changed.
+
+// Safe Ulgoth's Beard destination used by both QCHALF and QCHALR.
+COPY_EXISTING ~BG1000.ARE~ ~override/BG1000.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2970
+      fj_loc_y = 877
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCHALRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Northern Wilderness: bottom and right visible exits.
+COPY_EXISTING ~QCHALF.ARE~ ~override/QCHALF.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 1184
+      fj_box_top = 996
+      fj_box_right = 1263
+      fj_box_bottom = 1023
+      fj_cursor_idx = 34
+      fj_flags = 4
+      fj_vertex_0 = 1184 + (996 << 16)
+      fj_vertex_1 = 1263 + (996 << 16)
+      fj_vertex_2 = 1263 + (1023 << 16)
+      fj_vertex_3 = 1184 + (1023 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCFEXIT1
+      fj_destination_area = BG1000
+      fj_destination_name = QCHALRET
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 1472
+      fj_box_top = 528
+      fj_box_right = 1535
+      fj_box_bottom = 587
+      fj_cursor_idx = 34
+      fj_flags = 4
+      fj_vertex_0 = 1472 + (528 << 16)
+      fj_vertex_1 = 1535 + (528 << 16)
+      fj_vertex_2 = 1535 + (587 << 16)
+      fj_vertex_3 = 1472 + (587 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCFEXIT2
+      fj_destination_area = BG1000
+      fj_destination_name = QCHALRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Shandalar's Home exterior: former bottom world-map exit.
+COPY_EXISTING ~QCHALR.ARE~ ~override/QCHALR.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 720
+      fj_box_top = 816
+      fj_box_right = 815
+      fj_box_bottom = 895
+      fj_cursor_idx = 34
+      fj_flags = 4
+      fj_vertex_0 = 720 + (816 << 16)
+      fj_vertex_1 = 815 + (816 << 16)
+      fj_vertex_2 = 815 + (895 << 16)
+      fj_vertex_3 = 720 + (895 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCREXIT
+      fj_destination_area = BG1000
+      fj_destination_name = QCHALRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ============================================================
+// Ship interior: QCHALI
+// ============================================================
+COPY ~CotSC/halruaan_interior/QCHALI.ARE~ ~override/QCHALI.ARE~
+COPY ~CotSC/halruaan_interior/QCHALI.WED~ ~override/QCHALI.WED~
+COPY ~CotSC/halruaan_interior/QCHALI.TIS~ ~override/QCHALI.TIS~
+COPY ~CotSC/halruaan_interior/QCHALIHT.BMP~ ~override/QCHALIHT.BMP~
+COPY ~CotSC/halruaan_interior/QCHALILM.BMP~ ~override/QCHALILM.BMP~
+COPY ~CotSC/halruaan_interior/QCHALISR.BMP~ ~override/QCHALISR.BMP~
+COPY ~CotSC/halruaan_interior/QHALI00.PVRZ~ ~override/QHALI00.PVRZ~
+
+// QCHALI collision is intentionally fully walkable for initial rendering/NPC work.
+// ============================================================
+// Transitions: QCHALR <-> QCHALI
+// ============================================================
+// QCHALR arrival from the ship interior.  The destination entrance is
+// deliberately outside the travel-region footprint to prevent an immediate
+// re-trigger when the party arrives.
+COPY_EXISTING ~QCHALR.ARE~ ~override/QCHALR.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 983
+      fj_loc_y = 309
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCHALIIN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 881
+      fj_box_top = 243
+      fj_box_right = 945
+      fj_box_bottom = 307
+      fj_cursor_idx = 34
+      fj_flags = 4
+      fj_vertex_0 = 881 + (243 << 16)
+      fj_vertex_1 = 945 + (243 << 16)
+      fj_vertex_2 = 945 + (307 << 16)
+      fj_vertex_3 = 881 + (307 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCHALRINT
+      fj_destination_area = QCHALI
+      fj_destination_name = QCHALIOUT
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ============================================================
+// Transitions: QCHALI doors + lower-deck stairs
+// ============================================================
+COPY_EXISTING ~QCHALI.ARE~ ~override/QCHALI.ARE~
+  // Outside / main deck door.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 366
+      fj_loc_y = 450
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCHALIOUT
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 334
+      fj_box_top = 374
+      fj_box_right = 398
+      fj_box_bottom = 438
+      fj_cursor_idx = 34
+      fj_flags = 4
+      fj_vertex_0 = 334 + (374 << 16)
+      fj_vertex_1 = 398 + (374 << 16)
+      fj_vertex_2 = 398 + (438 << 16)
+      fj_vertex_3 = 334 + (438 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCHALIOUTDOOR
+      fj_destination_area = QCHALR
+      fj_destination_name = QCHALIIN
+  END
+
+  // Lower-deck stair entrance.  Arrival is placed just below the stair
+  // region so the party does not land directly inside the travel trigger.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 419
+      fj_loc_y = 346
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCHALIBACK
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 387
+      fj_box_top = 258
+      fj_box_right = 451
+      fj_box_bottom = 322
+      fj_cursor_idx = 28
+      fj_flags = 0
+      fj_vertex_0 = 387 + (258 << 16)
+      fj_vertex_1 = 451 + (258 << 16)
+      fj_vertex_2 = 451 + (322 << 16)
+      fj_vertex_3 = 387 + (322 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCHALIDOWN
+      fj_destination_area = QCHALB
+      fj_destination_name = Exit0135
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ============================================================
+// Lower deck: cloned from BG0136
+// ============================================================
+// BG0136 already contains a working stair travel region (Door0135) with
+// cursor 28.  We keep its geometry and visual resources, change only the
+// area/WED/script resrefs, and retarget that existing travel region so the
+// stairs lead back to QCHALI.
+COPY ~CotSC/halruaan_bottom/BG0136.ARE~ ~override/QCHALB.ARE~
+COPY ~CotSC/halruaan_bottom/BG0136.WED~ ~override/QCHALB.WED~
+COPY ~CotSC/halruaan_bottom/BG0136.BCS~ ~override/QCHALB.BCS~
+COPY_EXISTING ~BG0136HT.BMP~ ~override/QCHALBHT.BMP~
+COPY_EXISTING ~BG0136LM.BMP~ ~override/QCHALBLM.BMP~
+COPY_EXISTING ~BG0136SR.BMP~ ~override/QCHALBSR.BMP~
+
+COPY_EXISTING ~QCHALB.ARE~ ~override/QCHALB.ARE~
+  WRITE_ASCII 0x08 ~QCHALB~ #8
+  WRITE_ASCII 0x94 ~QCHALB~ #8
+  LPF ALTER_AREA_REGION
+    STR_VAR
+      region_name = ~Door0135~
+      destination_area = ~QCHALI~
+      entrance_name = ~QCHALIBACK~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ============================================================
+// QCHALB loot
+// ============================================================
+// QCHALB is a direct copy of BG0136 and has four existing containers:
+// 1 = gold, 2 = Bloodstone Gems, 3 and 4 = empty.
+// Add the requested quest loot without touching the existing contents.
+COPY_EXISTING ~QCHALB.ARE~ ~override/QCHALB.ARE~
+  // Existing Bloodstone Gems container (#2).
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+    STR_VAR
+      item_to_add = ~POTN42~
+  END
+  // First empty container (#3).
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+    STR_VAR
+      item_to_add = ~SCRL81~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+    STR_VAR
+      item_to_add = ~SCRL2A~
+  END
+  // Second empty container (#4).
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+    STR_VAR
+      item_to_add = ~AMUL11~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+    STR_VAR
+      item_to_add = ~RING35~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+    STR_VAR
+      item_to_add = ~STAF18~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ============================================================
+// QCHALI: Shandalar clone
+// ============================================================
+// Clone the original Shandalar CRE for later quest use.  The clone gets a
+// unique death variable so it is a separate actor, while retaining his
+// original stats, inventory, scripts and dialogue.
+// Preserve Shandalar's original SHOUTDLG override AI, but prepend one short
+// self-cleanup block. QCSHREM is a valid <=8-character resref.
+COPY_EXISTING ~SHOUTDLG.BCS~ ~override/QCSHREM.BCS~
+EXTEND_TOP ~QCSHREM.BCS~ ~CotSC/halruaan_flying_ship/QCSHREM.baf~
+
+COPY_EXISTING ~SHANDAL2.CRE~ ~override/QCSHAND.CRE~
+  WRITE_ASCII 0x280 ~QCSHAND~ #32
+  WRITE_BYTE 0x27b 0x23
+  WRITE_BYTE 0x7f 0
+  WRITE_ASCII 0x248 ~QCSHREM~ #8
+  WRITE_ASCII 0x2cc ~QCSHAND~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QCHALI.ARE~ ~override/QCHALI.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 185
+      fj_loc_y       = 208
+      fj_dest_x      = 185
+      fj_dest_y      = 208
+      fj_orientation = 14   // SE
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCSHAND
+      fj_cre_resref     = QCSHAND
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QCHALI has no original area script. Give the copied area a small cleanup
+// script instead of overriding Shandalar's own creature scripts. The final
+// Ice Island exit sets QC_SHANDALAR_REMOVE; when QCHALI is next loaded, the
+// area script destroys only the QC Shandalar clone.
+COPY_EXISTING ~QCHALI.ARE~ ~override/QCHALI.ARE~
+  WRITE_ASCII 0x94 ~QCHALISH~ #8
+BUT_ONLY_IF_IT_CHANGES
+COMPILE ~CotSC/halruaan_flying_ship/QCHALISH.baf~
+
+// ============================================================
+// Shandalar Skyship quest hook
+// ============================================================
+// The supplied SHANDAL2.DLG was inspected and the three ordinary
+// post-Ice-Island outcomes are states 27, 28 and 29.  They all already
+// terminate with Shandalar's original DRYAD_TELEPORT action.  The patch
+// preserves that exact teleport sequence and inserts the new quest offer
+// immediately before it.
+ADD_JOURNAL TITLE (@1) @2 USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/shandalar_quest.tra~
+ADD_JOURNAL TITLE (@3) @4 USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/shandalar_quest.tra~
+COMPILE ~CotSC/halruaan_flying_ship/shandalar_quest.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/shandalar_quest.tra~
+// Register all Halruaan continuation entries under one quest title.
+ADD_JOURNAL TITLE (@1) @2 @3 @4 @5 @6 @7 @8 @9 @10 @11 USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/quest_journal.tra~
+COMPILE ~CotSC/halruaan_flying_ship/qcshand.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/quest_journal.tra~
+// One-time, quest-gated map unlock; also repairs an already-started quest in a save.
+// Does not reveal Northern Wilderness before Shandalar starts the quest.
+EXTEND_TOP ~BALDUR.BCS~ ~CotSC/halruaan_flying_ship/QCHALUN.baf~
+
+// ============================================================
+// Shandalar quest continuation after Ervin
+// ============================================================
+COMPILE ~CotSC/halruaan_flying_ship/shandalar_continuation.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/quest_journal.tra~
+COMPILE ~CotSC/halruaan_flying_ship/delorna_continuation.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/quest_journal.tra~
+COMPILE ~CotSC/halruaan_flying_ship/helsha_continuation.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/quest_journal.tra~
+COMPILE ~CotSC/halruaan_flying_ship/ithmee_continuation.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/quest_journal.tra~
+COMPILE ~CotSC/halruaan_flying_ship/qcshand_interjections.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/qcshand.tra~
+COMPILE ~CotSC/halruaan_flying_ship/ice_island.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/quest_journal.tra~
+
+// Friendly Arm Inn Ervin: spawn only after Shandalar has located him.
+// BG2301 X=208, Y=652. The existing BG2301 area script is extended; the
+// existing area/WED/script resources are otherwise left intact.
+EXTEND_BOTTOM ~BG2301.BCS~ ~CotSC/halruaan_flying_ship/ervin_friendly_arm.baf~
+
+
+// ------------------------------------------------------------
+// Beyn: Ulgoth's Beard epilogue clone.
+// Unique human NPC gets a QC-prefixed resource so BEYN.CRE is untouched.
+COPY_EXISTING ~BEYN.CRE~ ~override/QCBEYUGB.CRE~
+  SAY NAME1 @4010
+  SAY NAME2 @4010
+  WRITE_ASCII 0x280 ~QCBYEUGB~ #32
+  WRITE_ASCII 0x2cc ~QCBEYUGB~ #8
+  WRITE_ASCII 0x248 ~QCBYUGSC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+COMPILE ~CotSC/halruaan_flying_ship/qc_beyn_ugb.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/qc_beyn_ugb.tra~
+EXTEND_BOTTOM ~BG1000.BCS~ ~CotSC/halruaan_flying_ship/QCBYUGSC.baf~
+
+// ============================================================
+// Ice Island copies of BG1008 / BG1009 / BG1010
+// ============================================================
+// The three ARE/WED sources are the user-supplied working originals.
+// They are copied to QC-prefixed areas and their internal destinations
+// are rewritten so no vanilla BG1008/BG1009/BG1010 exit is left behind.
+
+// ------------------------------------------------------------
+// QCICEA: copy of BG1008
+// ------------------------------------------------------------
+COPY ~CotSC/halruaan_ice/BG1008.ARE~ ~override/QCICEA.ARE~
+COPY ~CotSC/halruaan_ice/BG1008.WED~ ~override/QCICEA.WED~
+COPY ~CotSC/halruaan_ice/BG1008.bcs~ ~override/QCICEA.BCS~
+COPY_EXISTING ~BG1008.TIS~ ~override/QCICEA.TIS~
+COPY_EXISTING ~BG1008SR.BMP~ ~override/QCICEASR.BMP~
+COPY_EXISTING ~BG1008LM.BMP~ ~override/QCICEALM.BMP~
+COPY_EXISTING ~BG1008HT.BMP~ ~override/QCICEAHT.BMP~
+
+// Patch the copied ARE only. Do not apply ARE offsets or fj_are_structure to
+// the copied height/search/light BMPs.
+COPY_EXISTING ~QCICEA.ARE~ ~override/QCICEA.ARE~
+  WRITE_ASCII 0x08 ~QCICEA~ #8
+  WRITE_ASCII 0x94 ~QCICEA~ #8
+  LPF ALTER_AREA_REGION
+    STR_VAR
+      region_name = Door1008
+      destination_area = QCICEB
+      destination_name = Exit1008
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 398
+      fj_loc_y = 488
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCICEAIN
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ------------------------------------------------------------
+// QCICEB: clean copy of BG1009 with the original actor table replaced
+// ------------------------------------------------------------
+// BG1009's original NPCs/monsters are NOT carried into QCICEB.
+// The packaged QCICEB.ARE contains only the intended Ice Island actors.
+// This avoids stale actor records and malformed section offsets.
+COPY ~CotSC/halruaan_ice/QCICEB.ARE~ ~override/QCICEB.ARE~
+COPY ~CotSC/halruaan_ice/BG1009.WED~ ~override/QCICEB.WED~
+COPY_EXISTING ~BG1009.TIS~ ~override/QCICEB.TIS~
+COPY_EXISTING ~BG1009SR.BMP~ ~override/QCICEBSR.BMP~
+COPY_EXISTING ~BG1009LM.BMP~ ~override/QCICEBLM.BMP~
+COPY_EXISTING ~BG1009HT.BMP~ ~override/QCICEBHT.BMP~
+
+COPY_EXISTING ~QCICEB.ARE~ ~override/QCICEB.ARE~
+  LPF ALTER_AREA_REGION
+    STR_VAR
+      region_name = Door1010
+      destination_area = QCICEC
+      destination_name = QCICECIN
+  END
+  LPF ALTER_AREA_REGION
+    STR_VAR
+      region_name = Door1008
+      destination_area = QCICEA
+      destination_name = QCICEAIN
+  END
+  // Dedicated destination for the upper QCICEC doorway.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 657
+      fj_loc_y = 235
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCICBRT
+  END
+  WRITE_ASCII 0x08 ~QCICEB~ #8
+  WRITE_ASCII 0x94 ~QCICEB~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// ------------------------------------------------------------
+// QCICEC: clean copy of BG1010 with the original actor table removed
+// ------------------------------------------------------------
+// The packaged QCICEC.ARE contains only the intended Ice Island actors.
+// BG1010.ARE is used only as the graphics/geometry source below.
+COPY ~CotSC/halruaan_ice/QCICEC.ARE~ ~override/QCICEC.ARE~
+COPY ~CotSC/halruaan_ice/BG1010.WED~ ~override/QCICEC.WED~
+COPY_EXISTING ~BG1010.TIS~ ~override/QCICEC.TIS~
+COPY_EXISTING ~BG1010SR.BMP~ ~override/QCICECSR.BMP~
+COPY_EXISTING ~BG1010LM.BMP~ ~override/QCICECLM.BMP~
+COPY_EXISTING ~BG1010HT.BMP~ ~override/QCICECHT.BMP~
+
+COPY_EXISTING ~QCICEC.ARE~ ~override/QCICEC.ARE~
+  WRITE_ASCII 0x08 ~QCICEC~ #8
+  WRITE_ASCII 0x94 ~QCICEC~ #8
+  // Destination entrance for the QCICEB -> QCICEC transition.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 958
+      fj_loc_y = 158
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCICECIN
+  END
+  LPF ALTER_AREA_REGION
+    STR_VAR
+      region_name = Door1009
+      destination_area = QCICEB
+      destination_name = QCICBRT
+  END
+  // BG1010's original Door1009 polygon sits too far north (Y=21..97) for
+  // the visible doorway around X=976,Y=157. Add a correctly placed travel
+  // strip immediately above the landing point and send it back to QCICEB.
+  // The destination is placed just below QCICEB's own travel trigger to avoid
+  // an immediate transition loop on arrival.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 930
+      fj_box_top = 98
+      fj_box_right = 1020
+      fj_box_bottom = 145
+      fj_cursor_idx = 28
+      fj_flags = 4
+      fj_vertex_0 = 930 + (98 << 16)
+      fj_vertex_1 = 1020 + (98 << 16)
+      fj_vertex_2 = 1020 + (145 << 16)
+      fj_vertex_3 = 930 + (145 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCICBEX
+      fj_destination_area = QCICEB
+      fj_destination_name = QCICBRT
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QCICEC.ARE~ ~override/QCICEC.ARE~
+  // Upper doorway near Delorna -> back to QCICEB upper entrance.
+  // Preserve the lower BG1010 exit, but keep it inside the copied Ice Island chain.
+  LPF ALTER_AREA_REGION
+    STR_VAR
+      region_name = DOOR1008
+      destination_area = QCICEB
+      destination_name = QCICEBUP
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Custom area scripts. The user-supplied BG1008 script is preserved for QCICEA.
+COMPILE ~CotSC/halruaan_ice/qciceb.baf~
+COMPILE ~CotSC/halruaan_ice/qcicec.baf~
+
+// Make the copied areas use the custom scripts.
+COPY_EXISTING ~QCICEB.ARE~ ~override/QCICEB.ARE~
+  WRITE_ASCII 0x94 ~QCICEB~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~QCICEC.ARE~ ~override/QCICEC.ARE~
+  WRITE_ASCII 0x94 ~QCICEC~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// ------------------------------------------------------------
+// Ice Island creature clones
+// ------------------------------------------------------------
+// Beyn: unique identity/dialogue; original character remains untouched.
+COPY_EXISTING ~BEYN.CRE~ ~override/QCBEYNIC.CRE~
+  SAY NAME1 @4010
+  SAY NAME2 @4010
+  WRITE_ASCII 0x280 ~QCBYNDIE~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCBEYN~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Ithmeera: preserve her supplied portrait/stats, but give the clone its own identity.
+COPY ~CotSC/halruaan_ice/ITHMEE.CRE~ ~override/QCITHMIC.CRE~
+COPY_EXISTING ~QCITHMIC.CRE~ ~override/QCITHMIC.CRE~
+  SAY NAME1 @4011
+  SAY NAME2 @4011
+  WRITE_ASCII 0x280 ~QCITHMIC~ #32
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x2cc ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Helshara: unique identity/dialogue while retaining her supplied CRE data.
+COPY ~CotSC/halruaan_ice/HELSHA.CRE~ ~override/QCHLICE.CRE~
+COPY_EXISTING ~QCHLICE.CRE~ ~override/QCHLICE.CRE~
+  SAY NAME1 @4012
+  SAY NAME2 @4012
+  WRITE_ASCII 0x280 ~QCHLICE~ #32
+  WRITE_ASCII 0x2cc ~QCHLICE~ #8
+BUT_ONLY_IF_IT_CHANGES
+COMPILE ~CotSC/halruaan_ice/qcice_helshara.baf~
+
+// Delorna: two clones to prevent old/new area actors from colliding by resref.
+COPY ~CotSC/halruaan_ice/DELORN.CRE~ ~override/QCDELI.CRE~
+COPY_EXISTING ~QCDELI.CRE~ ~override/QCDELI.CRE~
+  WRITE_ASCII 0x280 ~QCDELI~ #32
+  WRITE_ASCII 0x2cc ~QCDELI~ #8
+  // GOODBUTBLUE = party-friendly allegiance with a blue selection circle.
+  WRITE_BYTE 0x270 29
+  WRITE_ASCII 0x248 ~QCDLNEU~ #8
+  LPF DELETE_CRE_EFFECT
+    INT_VAR opcode_to_delete = 208
+  END
+  LPF ADD_CRE_EFFECT
+    INT_VAR opcode=208 target=1 timing=9 parameter1=1 resist_dispel=0
+  END
+  // Shandalar carries Flesh to Stone. Minimum-HP immunity does not stop
+  // petrification (opcode 134), so block that death route explicitly.
+  LPF ADD_CRE_EFFECT
+    INT_VAR opcode=101 target=1 timing=9 parameter2=134 resist_dispel=0
+  END
+  // QCSHICE is assigned Specific=250 below. This protection prevents only
+  // that final Shandalar clone from targeting Delorna; player attacks remain
+  // possible and QCDLNEU still restores her blue/friendly state.
+  LPF ADD_CRE_EFFECT
+    INT_VAR opcode=100 target=1 timing=9 parameter1=250 parameter2=6 resist_dispel=0
+  END
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~QCDELI.CRE~ ~override/QCDELIF.CRE~
+  WRITE_ASCII 0x280 ~QCDELIF~ #32
+  WRITE_ASCII 0x2cc ~QCDELIF~ #8
+  WRITE_BYTE 0x270 29
+  WRITE_ASCII 0x248 ~QCDLNEU~ #8
+  LPF DELETE_CRE_EFFECT
+    INT_VAR opcode_to_delete = 208
+  END
+  LPF ADD_CRE_EFFECT
+    INT_VAR opcode=208 target=1 timing=9 parameter1=1 resist_dispel=0
+  END
+BUT_ONLY_IF_IT_CHANGES
+COMPILE ~CotSC/halruaan_ice/qcice_delorna.baf~
+COMPILE ~CotSC/halruaan_ice/QCDLNEU.baf~
+// Ozeroth keeps Narcillicus's original SHOUT override behaviour. The short
+// custom blocks are inserted at the top, then the original SHOUT blocks follow.
+COPY_EXISTING ~SHOUT.BCS~ ~override/QCOZTALK.BCS~
+EXTEND_TOP ~QCOZTALK.BCS~ ~CotSC/halruaan_ice/QCOZTALK.baf~
+// Vesnam's short override owns only the pre-fight conversation. Once hostile,
+// QCVSMAG supplies reliable mage combat while WTASIGHT remains his default AI.
+COMPILE ~CotSC/halruaan_ice/QCVSTALK.baf~
+COMPILE ~CotSC/halruaan_ice/QCVSMAG.baf~
+
+// Ozeroth: NARCIL base. Preserve every original NARCIL script so he keeps
+// his normal automatic approach/dialogue/combat behaviour. Only the identity
+// and dialogue resource are changed.
+COPY_EXISTING ~NARCIL.CRE~ ~override/QCOZEROT.CRE~
+  SAY NAME1 @4013
+  SAY NAME2 @4013
+  WRITE_ASCII 0x280 ~QCOZEROT~ #32
+  WRITE_BYTE 0x2c 84
+  WRITE_BYTE 0x2d 84
+  WRITE_BYTE 0x2e 60
+  WRITE_BYTE 0x2f 20
+  WRITE_BYTE 0x30 84
+  WRITE_BYTE 0x31 84
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCOZER~ #8
+  WRITE_ASCII 0x248 ~QCOZTALK~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Vesnam: Davaeorn base. Preserve Davaeorn's stats/spellcasting chassis, but
+// use a dedicated class script because DAVAEORN.BCS depends on the original
+// Cloakwood encounter state and was not casting reliably in QCICEC.
+COPY_EXISTING ~DAVAEO.CRE~ ~override/QCVESNAM.CRE~
+  SAY NAME1 @4014
+  SAY NAME2 @4014
+  WRITE_ASCII 0x280 ~QCVESNAM~ #32
+  WRITE_BYTE 0x2c 180
+  WRITE_BYTE 0x2d 180
+  WRITE_BYTE 0x2e 180
+  WRITE_BYTE 0x2f 20
+  WRITE_BYTE 0x30 180
+  WRITE_BYTE 0x31 180
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCVESNAM~ #8
+  WRITE_ASCII 0x248 ~QCVSTALK~ #8
+  // Davaeorn's original class script is highly encounter-specific. Vesnam
+  // gets a dedicated mage class script so he reliably casts in QCICEC.
+  WRITE_ASCII 0x250 ~QCVSMAG~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~STAF01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~CLCK17~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~ EQUIP
+  ADD_CRE_ITEM ~SCRL06~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+BUT_ONLY_IF_IT_CHANGES
+
+// Final Shandalar: unique clone of SHANDAL2 so the QCHALI actor can disappear
+// without affecting the final Ice Island actor.
+COPY_EXISTING ~SHANDAL2.CRE~ ~override/QCSHICE.CRE~
+  SAY NAME1 @4015
+  SAY NAME2 @4015
+  WRITE_ASCII 0x280 ~QCSHICE~ #32
+  WRITE_BYTE 0x270 255
+  // SHANDAL2 is class INNOCENT (155).  BGEE applies the normal innocent-
+  // murder reputation penalty from CLASS.IDS even when the EE per-kill
+  // reputation byte at 0x7f is zero.  This quest clone is an actual mage,
+  // so class him as MAGE and keep the explicit per-kill value at zero.
+  WRITE_BYTE 0x273 1
+  WRITE_BYTE 0x274 250
+  WRITE_BYTE 0x27b 0x23
+  WRITE_BYTE 0x7f 0
+  WRITE_ASCII 0x2cc ~QCSHICE~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Silent Ogre Mage creature chassis. Use the common HOSTILE ogre mages
+// (A/B/C), not the neutral/dialogue variants D and OGRMBA. Preserve their
+// original combat scripts; only clear their dialogue resource.
+COPY_EXISTING ~OGREMA_C.CRE~ ~override/OGRMAGE1.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~OGREMA_A.CRE~ ~override/OGRMAGE2.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~OGREMA_B.CRE~ ~override/OGRMAGE3.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Creature actors (polar bears, winter wolves, mephits, ogres, golems) use their
+// original CRE resources and do not need QC-prefixed actor names.
+// Human/unique actors keep QC-prefixed CREs and actor names so original game
+// characters are never overwritten.
+
+// ------------------------------------------------------------
+// QCICEB actors
+// ------------------------------------------------------------
+// Actors are baked into CotSC/halruaan_ice/QCICEB.ARE so the original BG1009
+// actor block is physically gone before installation reaches this point.
+COPY_EXISTING ~QCICEB.ARE~ ~override/QCICEB.ARE~
+  LPF ALTER_AREA_ACTOR
+    STR_VAR actor_name=GORMIST1 cre_file=MEPICE01
+  END
+  LPF ALTER_AREA_ACTOR
+    STR_VAR actor_name=GORMIST2 cre_file=MEPICE01
+  END
+  LPF ALTER_AREA_ACTOR
+    STR_VAR actor_name=QCHELSICE script_general=qcice_helshara dlg_file=QCHLICE
+  END
+  LPF ALTER_AREA_ACTOR
+    INT_VAR flag_invulnerable=1 flag_override_script_name=1
+    STR_VAR actor_name=QCDELI script_override=QCDLNEU dlg_file=QCDELI
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ------------------------------------------------------------
+// QCICEC actors
+// ------------------------------------------------------------
+// QCICEC.ARE is a clean rebuild of BG1010 with the original Dezkiel,
+// winter wolves and polar bears removed before the intended Ice Island
+// actor table was inserted.
+// Do not recopy the source here: that would erase the area patches above.
+COPY_EXISTING ~QCICEC.ARE~ ~override/QCICEC.ARE~
+  LPF ALTER_AREA_ACTOR
+    STR_VAR actor_name=QCOZEROT dlg_file=QCOZER cre_file=QCOZEROT
+  END
+  LPF ALTER_AREA_ACTOR
+    STR_VAR actor_name=QCVESNAM dlg_file=QCVESNAM cre_file=QCVESNAM
+  END
+  LPF ALTER_AREA_ACTOR
+    INT_VAR flag_invulnerable=1 flag_override_script_name=1
+    STR_VAR actor_name=QCDELIF script_override=QCDLNEU dlg_file=QCDELIF
+  END
+  // New exit near X=552,Y=2716 -> QCICEA.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 552
+      fj_loc_y = 2716
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCICEAOUT
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 520
+      fj_box_top = 2684
+      fj_box_right = 584
+      fj_box_bottom = 2748
+      fj_cursor_idx = 34
+      fj_flags = 4
+      fj_vertex_0 = 520 + (2684 << 16)
+      fj_vertex_1 = 584 + (2684 << 16)
+      fj_vertex_2 = 584 + (2748 << 16)
+      fj_vertex_3 = 520 + (2748 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCICEAEXIT
+      fj_destination_area = QCICEA
+      fj_destination_name = QCICEAIN
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ============================================================
+// Ervin, the gnomish wizard
+// ============================================================
+// Use the exact proven Kyril method from the working Durlag's Tower
+// component: LOVE.CRE is the talking-creature base. We do NOT transplant
+// script fields from another creature and we do NOT attach a custom BAF.
+// Only the appearance, identity and dialogue are changed.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~LOVE.CRE~ BEGIN
+  FAIL @20138
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MADARC.CRE~ BEGIN
+  FAIL @20139
+END
+
+COPY_EXISTING ~MADARC.CRE~ ~override/__QCMAD.TMP~
+  READ_LONG 0x28 ~qc_mad_anim~
+  READ_BYTE 0x2c ~qc_mad_metal~
+  READ_BYTE 0x2d ~qc_mad_minor~
+  READ_BYTE 0x2e ~qc_mad_major~
+  READ_BYTE 0x2f ~qc_mad_skin~
+  READ_BYTE 0x30 ~qc_mad_leather~
+  READ_BYTE 0x31 ~qc_mad_armor~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~LOVE.CRE~ ~override/QCERVIN.CRE~
+  WRITE_ASCII 0x2e8 ~QCERVIN~ #32
+  SAY NAME1 @4016
+  SAY NAME2 @4016
+  WRITE_LONG 0x28 ~qc_mad_anim~
+  WRITE_BYTE 0x2c ~qc_mad_metal~
+  WRITE_BYTE 0x2d ~qc_mad_minor~
+  WRITE_BYTE 0x2e ~qc_mad_major~
+  WRITE_BYTE 0x2f ~qc_mad_skin~
+  WRITE_BYTE 0x30 ~qc_mad_leather~
+  WRITE_BYTE 0x31 ~qc_mad_armor~
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCERVIN~ #32
+  WRITE_ASCII 0x2cc ~QCERVIN~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Ervin uses LOVE's original talking/interaction scripts unchanged.
+// Only the dialogue resource itself is replaced with QCERVDLG.
+COMPILE ~CotSC/halruaan_flying_ship/qcervin.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/quest_journal.tra~
+COMPILE ~CotSC/halruaan_flying_ship/ervin_friendly_arm_interjections.d~ USING ~CotSC/translation/%LANGUAGE%/halruaan_flying_ship/ervin_friendly_arm_interjections.tra~
+
+// ============================================================
+// Northern Wilderness fauna + Ervin
+// ============================================================
+COPY_EXISTING ~QCHALF.ARE~ ~override/QCHALF.ARE~
+  // Squirrel
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 863 fj_loc_y = 735
+      fj_dest_x = 863 fj_dest_y = 735
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCSQUIR
+      fj_cre_resref = SQUIRL
+  END
+  // Wolf 1
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 565 fj_loc_y = 869
+      fj_dest_x = 565 fj_dest_y = 869
+      fj_spawned = 1 fj_orientation = 6 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCWOLF1
+      fj_cre_resref = WOLF
+  END
+  // Wolf 2
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 614 fj_loc_y = 889
+      fj_dest_x = 614 fj_dest_y = 889
+      fj_spawned = 1 fj_orientation = 6 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCWOLF2
+      fj_cre_resref = WOLF
+  END
+  // Brown Bear
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 970 fj_loc_y = 163
+      fj_dest_x = 970 fj_dest_y = 163
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCBEAR
+      fj_cre_resref = BEARBR
+  END
+  // Greater Basilisk
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1235 fj_loc_y = 285
+      fj_dest_x = 1235 fj_dest_y = 285
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCBASIL
+      fj_cre_resref = BASILG
+  END
+  // Ervin, red palette, southeast.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 384 fj_loc_y = 242
+      fj_dest_x = 384 fj_dest_y = 242
+      fj_spawned = 1 fj_orientation = 14 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCERVIN
+      fj_cre_resref = QCERVIN
+      fj_dlg_resref = QCERVIN
+  END
+BUT_ONLY_IF_IT_CHANGES

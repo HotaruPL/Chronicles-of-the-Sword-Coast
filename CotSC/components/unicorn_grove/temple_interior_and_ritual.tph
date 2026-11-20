@@ -1,0 +1,559 @@
+// v22.1: new final-memory temple interior, crash-fixed page layout.
+
+// ---------- Integrated milestone: QC: Bhaal's Temple - Interior final memory area render test (QCBTEM)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBHAL.ARE~ BEGIN FAIL ~Install the working QCBHAL forest components first.~ END
+
+COPY ~CotSC/qc_unicorn_grove/area/QCBTEM.ARE~ ~override/QCBTEM.ARE~
+COPY ~CotSC/qc_unicorn_grove/area/QCBTEM.WED~ ~override/QCBTEM.WED~
+COPY ~CotSC/qc_unicorn_grove/area/QCBTEM.TIS~ ~override/QCBTEM.TIS~
+COPY ~CotSC/qc_unicorn_grove/area/QCBTEMSR.BMP~ ~override/QCBTEMSR.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCBTEMLM.BMP~ ~override/QCBTEMLM.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCBTEMHT.BMP~ ~override/QCBTEMHT.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QBTEM00.PVRZ~ ~override/QBTEM00.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QBTEM01.PVRZ~ ~override/QBTEM01.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QBTEM02.PVRZ~ ~override/QBTEM02.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QBTEM03.PVRZ~ ~override/QBTEM03.PVRZ~
+
+COPY_EXISTING ~QCBTEM.ARE~ ~override/QCBTEM.ARE~
+  READ_LONG 0xbc qcbtem_song_table
+  PATCH_IF (qcbtem_song_table > 0) AND (qcbtem_song_table + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG (qcbtem_song_table + 0) %QCB_AMBIENT%
+    WRITE_LONG (qcbtem_song_table + 4) %QCB_AMBIENT%
+    WRITE_LONG (qcbtem_song_table + 8) %QCB_VICTORY%
+    WRITE_LONG (qcbtem_song_table + 12) %QCB_BATTLE%
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 768 fj_loc_y = 965 fj_orientation = 0
+    STR_VAR fj_structure_type = entrance fj_name = QBTENTR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 2 fj_box_left = 604 fj_box_top = 980
+      fj_box_right = 934 fj_box_bottom = 1110
+      fj_cursor_idx = 30 fj_flags = 4
+      fj_vertex_0 = 604 + (980 << 16)
+      fj_vertex_1 = 934 + (980 << 16)
+      fj_vertex_2 = 934 + (1110 << 16)
+      fj_vertex_3 = 604 + (1110 << 16)
+    STR_VAR fj_structure_type = region fj_name = QBTEXIT
+      fj_destination_area = QCBHAL fj_destination_name = QCBTIN
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QCBHAL.ARE~ ~override/QCBHAL.ARE~
+  READ_LONG 0x5c qcbhal_regions_off
+  READ_SHORT 0x5a qcbhal_regions_num
+  FOR (qcbhal_i = 0; qcbhal_i < qcbhal_regions_num; qcbhal_i += 1) BEGIN
+    SET qcbhal_r = qcbhal_regions_off + (qcbhal_i * 0xc4)
+    READ_ASCII qcbhal_r qcbhal_name (32) NULL
+    PATCH_IF (~%qcbhal_name%~ STRING_EQUAL ~QCBTDOOR~) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_delete_mode = qcbhal_i
+        STR_VAR fj_structure_type = region
+      END
+      SET qcbhal_i = qcbhal_regions_num
+    END
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1370 fj_loc_y = 555 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCBTIN
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 2 fj_box_left = 1348 fj_box_top = 477
+      fj_box_right = 1392 fj_box_bottom = 513 fj_cursor_idx = 30 fj_flags = 4
+      fj_vertex_0 = 1348 + (477 << 16)
+      fj_vertex_1 = 1392 + (477 << 16)
+      fj_vertex_2 = 1392 + (513 << 16)
+      fj_vertex_3 = 1348 + (513 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCBTDOOR
+      fj_destination_area = QCBTEM fj_destination_name = QBTENTR
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+
+// v23: The final ritual memory. Does NOT reinstall QCBTEM WED/TIS/PVRZ/SR/LM/HT.
+
+// ---------- Integrated milestone: QC: Bhaal's Temple - Final Memory Ritual Encounter (QCBTEM)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBTEM.ARE~ BEGIN FAIL ~Install the working QCBTEM interior first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBHAL.ARE~ BEGIN FAIL ~Install the forest approach first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~ZEELA.CRE~ BEGIN FAIL ~ZEELA.CRE is required for Alianna.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDMADELE.CRE~ BEGIN FAIL ~BDMADELE.CRE is required for Madele.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TAUGOS.CRE~ BEGIN FAIL ~TAUGOS.CRE is required for the cultists.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DAESE.CRE~ BEGIN FAIL ~DAESE.CRE is required for female cultists.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~GORION.CRE~ BEGIN FAIL ~GORION.CRE is required for this memory.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TANARI01.CRE~ BEGIN FAIL ~TANARI01.CRE is required for the temple guardians.~ END
+
+// Child base resources vary between BGEE/EET installs; never require
+// BOY01/CHILD01/GIRL01/CHILD02 to exist.
+// Prefer real existing child creatures, then fall back to the creature files
+// already REQUIRED by this component. All three resulting actors receive
+// actual BOY/GIRL animation IDs below, regardless of the copied base.
+ACTION_IF FILE_EXISTS_IN_GAME ~CHILNA.CRE~ BEGIN
+ OUTER_SPRINT qbt_boy_base ~CHILNA.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~CHILDULG.CRE~ BEGIN
+ OUTER_SPRINT qbt_boy_base ~CHILDULG.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~BOY01.CRE~ BEGIN
+ OUTER_SPRINT qbt_boy_base ~BOY01.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~CHILD01.CRE~ BEGIN
+ OUTER_SPRINT qbt_boy_base ~CHILD01.CRE~
+END ELSE BEGIN
+ OUTER_SPRINT qbt_boy_base ~TAUGOS.CRE~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~GIRL01.CRE~ BEGIN
+ OUTER_SPRINT qbt_girl_base ~GIRL01.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~CHILD02.CRE~ BEGIN
+ OUTER_SPRINT qbt_girl_base ~CHILD02.CRE~
+END ELSE BEGIN
+ OUTER_SPRINT qbt_girl_base ~DAESE.CRE~
+END
+
+MKDIR ~music/QBTBOS~
+COPY ~CotSC/qc_unicorn_grove/music/QBTBOSA.acm~ ~music/QBTBOS/QBTBOSA.acm~
+ADD_MUSIC ~QBT_BOSS~ ~CotSC/qc_unicorn_grove/music/QBTBOS.MUS~
+
+// Clear inherited equipment on the two named ritualists and equip requested items.
+COPY_EXISTING ~ZEELA.CRE~ ~override/QBTALIA.CRE~
+  SAY NAME1 @3095
+  SAY NAME2 @3095
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBTALIA~ #32
+  WRITE_ASCII 0x2cc ~QBTALIA~ #8
+  WRITE_ASCII 0x248 ~QBTALAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~PLAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SLNG02~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~BULL02~ #50 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+  ADD_CRE_ITEM ~POTN52~ #1 #0 #0 ~IDENTIFIED~ ~QITEM1~
+  ADD_CRE_ITEM ~POTN52~ #1 #0 #0 ~IDENTIFIED~ ~QITEM2~
+  ADD_CRE_ITEM ~POTN52~ #1 #0 #0 ~IDENTIFIED~ ~QITEM3~
+  ADD_CRE_ITEM ~POTN52~ #1 #0 #0 ~IDENTIFIED~ ~INV1~
+  ADD_CRE_ITEM ~POTN52~ #1 #0 #0 ~IDENTIFIED~ ~INV2~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BDMADELE.CRE~ ~override/QBTMADE.CRE~
+  SAY NAME1 @3096
+  SAY NAME2 @3096
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBTMADE~ #32
+  WRITE_ASCII 0x2cc ~QBTMADE~ #8
+  WRITE_ASCII 0x248 ~QBTMADAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~CHAN01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SHLD04~ #0 #0 #0 ~IDENTIFIED~ ~SHIELD~
+  ADD_CRE_ITEM ~BLUN05~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~HELM06~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+  ADD_CRE_ITEM ~POTN52~ #1 #0 #0 ~IDENTIFIED~ ~QITEM1~
+  ADD_CRE_ITEM ~POTN52~ #1 #0 #0 ~IDENTIFIED~ ~QITEM2~
+  ADD_CRE_ITEM ~POTN52~ #1 #0 #0 ~IDENTIFIED~ ~QITEM3~
+BUT_ONLY_IF_IT_CHANGES
+
+// Female cultists use the previously established female priest model but NO potions.
+COPY_EXISTING ~TAUGOS.CRE~ ~override/QBTCULT.CRE~
+  SAY NAME1 @3092
+  SAY NAME2 @3092
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBTCULT~ #32
+  WRITE_ASCII 0x248 ~QBTENMAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEM ~POTN01~
+  REMOVE_CRE_ITEM ~POTN02~
+  REMOVE_CRE_ITEM ~POTN03~
+  REMOVE_CRE_ITEM ~POTN04~
+  REMOVE_CRE_ITEM ~POTN05~
+  REMOVE_CRE_ITEM ~POTN06~
+  REMOVE_CRE_ITEM ~POTN07~
+  REMOVE_CRE_ITEM ~POTN08~
+  REMOVE_CRE_ITEM ~POTN09~
+  REMOVE_CRE_ITEM ~POTN10~
+  REMOVE_CRE_ITEM ~POTN11~
+  REMOVE_CRE_ITEM ~POTN12~
+  REMOVE_CRE_ITEM ~POTN13~
+  REMOVE_CRE_ITEM ~POTN14~
+  REMOVE_CRE_ITEM ~POTN15~
+  REMOVE_CRE_ITEM ~POTN16~
+  REMOVE_CRE_ITEM ~POTN17~
+  REMOVE_CRE_ITEM ~POTN18~
+  REMOVE_CRE_ITEM ~POTN19~
+  REMOVE_CRE_ITEM ~POTN20~
+  REMOVE_CRE_ITEM ~POTN21~
+  REMOVE_CRE_ITEM ~POTN22~
+  REMOVE_CRE_ITEM ~POTN23~
+  REMOVE_CRE_ITEM ~POTN24~
+  REMOVE_CRE_ITEM ~POTN25~
+  REMOVE_CRE_ITEM ~POTN26~
+  REMOVE_CRE_ITEM ~POTN27~
+  REMOVE_CRE_ITEM ~POTN28~
+  REMOVE_CRE_ITEM ~POTN29~
+  REMOVE_CRE_ITEM ~POTN30~
+  REMOVE_CRE_ITEM ~POTN31~
+  REMOVE_CRE_ITEM ~POTN32~
+  REMOVE_CRE_ITEM ~POTN33~
+  REMOVE_CRE_ITEM ~POTN34~
+  REMOVE_CRE_ITEM ~POTN35~
+  REMOVE_CRE_ITEM ~POTN36~
+  REMOVE_CRE_ITEM ~POTN37~
+  REMOVE_CRE_ITEM ~POTN38~
+  REMOVE_CRE_ITEM ~POTN39~
+  REMOVE_CRE_ITEM ~POTN40~
+  REMOVE_CRE_ITEM ~POTN41~
+  REMOVE_CRE_ITEM ~POTN42~
+  REMOVE_CRE_ITEM ~POTN43~
+  REMOVE_CRE_ITEM ~POTN44~
+  REMOVE_CRE_ITEM ~POTN45~
+  REMOVE_CRE_ITEM ~POTN46~
+  REMOVE_CRE_ITEM ~POTN47~
+  REMOVE_CRE_ITEM ~POTN48~
+  REMOVE_CRE_ITEM ~POTN49~
+  REMOVE_CRE_ITEM ~POTN50~
+  REMOVE_CRE_ITEM ~POTN51~
+  REMOVE_CRE_ITEM ~POTN52~
+  REMOVE_CRE_ITEM ~POTN53~
+  REMOVE_CRE_ITEM ~POTN54~
+  REMOVE_CRE_ITEM ~POTN55~
+  ADD_CRE_ITEM ~HELM10~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DAESE.CRE~ ~override/QBTCULF.CRE~
+  SAY NAME1 @3092
+  SAY NAME2 @3092
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_LONG 0x28 0x6110 // visible human female avatar
+  WRITE_BYTE 0x275 2
+  WRITE_ASCII 0x280 ~QBTCULF~ #32
+  WRITE_ASCII 0x248 ~QBTENMAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~HELM10~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+  ADD_CRE_ITEM ~BLUN01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~TAUGOS.CRE~ ~override/QBTGEHR.CRE~
+  SAY NAME1 @3097
+  SAY NAME2 @3097
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBTGEHR~ #32
+  WRITE_ASCII 0x2cc ~QBTGEHR~ #8
+  WRITE_ASCII 0x248 ~QBTENMAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEM ~POTN01~
+  REMOVE_CRE_ITEM ~POTN02~
+  REMOVE_CRE_ITEM ~POTN03~
+  REMOVE_CRE_ITEM ~POTN04~
+  REMOVE_CRE_ITEM ~POTN05~
+  REMOVE_CRE_ITEM ~POTN06~
+  REMOVE_CRE_ITEM ~POTN07~
+  REMOVE_CRE_ITEM ~POTN08~
+  REMOVE_CRE_ITEM ~POTN09~
+  REMOVE_CRE_ITEM ~POTN10~
+  REMOVE_CRE_ITEM ~POTN11~
+  REMOVE_CRE_ITEM ~POTN12~
+  REMOVE_CRE_ITEM ~POTN13~
+  REMOVE_CRE_ITEM ~POTN14~
+  REMOVE_CRE_ITEM ~POTN15~
+  REMOVE_CRE_ITEM ~POTN16~
+  REMOVE_CRE_ITEM ~POTN17~
+  REMOVE_CRE_ITEM ~POTN18~
+  REMOVE_CRE_ITEM ~POTN19~
+  REMOVE_CRE_ITEM ~POTN20~
+  REMOVE_CRE_ITEM ~POTN21~
+  REMOVE_CRE_ITEM ~POTN22~
+  REMOVE_CRE_ITEM ~POTN23~
+  REMOVE_CRE_ITEM ~POTN24~
+  REMOVE_CRE_ITEM ~POTN25~
+  REMOVE_CRE_ITEM ~POTN26~
+  REMOVE_CRE_ITEM ~POTN27~
+  REMOVE_CRE_ITEM ~POTN28~
+  REMOVE_CRE_ITEM ~POTN29~
+  REMOVE_CRE_ITEM ~POTN30~
+  REMOVE_CRE_ITEM ~POTN31~
+  REMOVE_CRE_ITEM ~POTN32~
+  REMOVE_CRE_ITEM ~POTN33~
+  REMOVE_CRE_ITEM ~POTN34~
+  REMOVE_CRE_ITEM ~POTN35~
+  REMOVE_CRE_ITEM ~POTN36~
+  REMOVE_CRE_ITEM ~POTN37~
+  REMOVE_CRE_ITEM ~POTN38~
+  REMOVE_CRE_ITEM ~POTN39~
+  REMOVE_CRE_ITEM ~POTN40~
+  REMOVE_CRE_ITEM ~POTN41~
+  REMOVE_CRE_ITEM ~POTN42~
+  REMOVE_CRE_ITEM ~POTN43~
+  REMOVE_CRE_ITEM ~POTN44~
+  REMOVE_CRE_ITEM ~POTN45~
+  REMOVE_CRE_ITEM ~POTN46~
+  REMOVE_CRE_ITEM ~POTN47~
+  REMOVE_CRE_ITEM ~POTN48~
+  REMOVE_CRE_ITEM ~POTN49~
+  REMOVE_CRE_ITEM ~POTN50~
+  REMOVE_CRE_ITEM ~POTN51~
+  REMOVE_CRE_ITEM ~POTN52~
+  REMOVE_CRE_ITEM ~POTN53~
+  REMOVE_CRE_ITEM ~POTN54~
+  REMOVE_CRE_ITEM ~POTN55~
+  ADD_CRE_ITEM ~HELM10~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+BUT_ONLY_IF_IT_CHANGES
+
+// Gorion is not allied to the party's enemies, cannot be recruited, and does not retaliate.
+// His very high HP plus passive script prevent ordinary combat deaths; he leaves via script.
+COPY_EXISTING ~GORION.CRE~ ~override/QBTGOR.CRE~
+  SAY NAME1 @3098
+  SAY NAME2 @3098
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 32000
+  WRITE_SHORT 0x26 32000
+  READ_LONG 0x10 qbt_gor_flags
+  WRITE_LONG 0x10 (qbt_gor_flags BOR 0x2000) // quest critical
+  WRITE_ASCII 0x280 ~QBTGOR~ #32
+  WRITE_ASCII 0x2cc ~QBTGOR~ #8
+  WRITE_ASCII 0x248 ~QBTGORAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~BDROBE01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~%qbt_boy_base%~ ~override/QBTCHBM.CRE~
+  SAY NAME1 @3099
+  SAY NAME2 @3099
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x275 1
+  WRITE_LONG 0x28 0xC700 // BGEE child BOY animation (ANIMATE.IDS)
+  WRITE_ASCII 0x280 ~QBTCHBM~ #32
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~QBTCHAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~%qbt_girl_base%~ ~override/QBTCHGF.CRE~
+  SAY NAME1 @3099
+  SAY NAME2 @3099
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x275 2
+  WRITE_LONG 0x28 0xC710 // BGEE child GIRL animation (ANIMATE.IDS)
+  WRITE_ASCII 0x280 ~QBTCHGF~ #32
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~QBTCHAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~%qbt_boy_base%~ ~override/QBTBOY.CRE~
+  SAY NAME1 @3100
+  SAY NAME2 @3100
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x275 1
+  WRITE_LONG 0x28 0xC700 // BGEE child BOY animation (ANIMATE.IDS)
+  WRITE_BYTE 0x32 39 // dark hair
+  WRITE_BYTE 0x2d 12 // yellow palette
+  WRITE_BYTE 0x2e 12
+  WRITE_ASCII 0x280 ~QBTBOY~ #32
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~QBTBOYAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~TANARI01.CRE~ ~override/QBTGRDN.CRE~
+  SAY NAME1 @3101
+  SAY NAME2 @3101
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QBTGRDN~ #32
+  WRITE_ASCII 0x248 ~QBTGUAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/QBTMEM.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QBTMEM.tra~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTAREA.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTALAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTMADAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTENMAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTGORAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTCHAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTBOYAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTGUAI.baf~
+
+// Area-only patch: keep the successful v22.5 WED, TIS, PVRZ and collision map untouched.
+COPY_EXISTING ~QCBTEM.ARE~ ~override/QCBTEM.ARE~
+  WRITE_ASCII 0x94 ~QBTAREA~ #8
+  READ_LONG 0xbc qbt_songs
+  PATCH_IF (qbt_songs > 0) AND (qbt_songs + 0x10 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG (qbt_songs + 12) %QBT_BOSS%
+  END ELSE BEGIN
+    PATCH_FAIL @20300
+  END
+  // The temple's indoor doorway is at 1079,836; the separate arrival point is 1402,957.
+  READ_LONG 0x5c qbt_reg_off
+  READ_SHORT 0x5a qbt_reg_num
+  FOR (qbt_ri = 0; qbt_ri < qbt_reg_num; qbt_ri += 1) BEGIN
+    SET qbt_ro = qbt_reg_off + (qbt_ri * 0xc4)
+    READ_ASCII qbt_ro qbt_rname (32) NULL
+    PATCH_IF (~%qbt_rname%~ STRING_EQUAL ~QBTEXIT~) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_delete_mode = qbt_ri
+        STR_VAR fj_structure_type = region
+      END
+      SET qbt_ri = qbt_reg_num
+    END
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 2 fj_box_left = 1045 fj_box_top = 810
+      fj_box_right = 1115 fj_box_bottom = 862
+      fj_cursor_idx = 30 fj_flags = 4
+      fj_vertex_0 = 1045 + (810 << 16)
+      fj_vertex_1 = 1115 + (810 << 16)
+      fj_vertex_2 = 1115 + (862 << 16)
+      fj_vertex_3 = 1045 + (862 << 16)
+    STR_VAR fj_structure_type = region fj_name = QBTEXIT
+      fj_destination_area = QCBHAL fj_destination_name = QCBTIN
+  END
+  // The existing entrance QBTENTR from the forest now brings the party into the chamber.
+  READ_LONG 0x68 qbt_entrance_offset
+  READ_LONG 0x6c qbt_entrance_count
+  FOR (qbt_i = 0; qbt_i < qbt_entrance_count; qbt_i += 1) BEGIN
+    SET qbt_e = qbt_entrance_offset + qbt_i * 0x68
+    READ_ASCII qbt_e qbt_nm (32) NULL
+    PATCH_IF (~%qbt_nm%~ STRING_EQUAL ~QBTENTR~) BEGIN
+      WRITE_SHORT (qbt_e + 0x20) 1402
+      WRITE_SHORT (qbt_e + 0x22) 957
+      WRITE_SHORT (qbt_e + 0x24) 0
+    END
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 773 fj_loc_y = 689 fj_orientation = 2
+    STR_VAR fj_structure_type = actor fj_name = QBTALI01 fj_cre_resref = QBTALIA
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 696 fj_loc_y = 814 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QBTGEH01 fj_cre_resref = QBTGEHR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 628 fj_loc_y = 663 fj_orientation = 4
+    STR_VAR fj_structure_type = actor fj_name = QBTMAD01 fj_cre_resref = QBTMADE
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1024 fj_loc_y = 792 fj_orientation = 14
+    STR_VAR fj_structure_type = actor fj_name = QBTGOR01 fj_cre_resref = QBTGOR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 778 fj_loc_y = 841 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QBTBOY01 fj_cre_resref = QBTBOY
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 863 fj_loc_y = 857 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL00 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 827 fj_loc_y = 901 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL01 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 740 fj_loc_y = 891 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL02 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 631 fj_loc_y = 841 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL04 fj_cre_resref = QBTCULF
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 619 fj_loc_y = 751 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL05 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 570 fj_loc_y = 697 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL06 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 597 fj_loc_y = 783 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL07 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 478 fj_loc_y = 629 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL08 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 496 fj_loc_y = 531 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL09 fj_cre_resref = QBTCULF
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 586 fj_loc_y = 449 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL10 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 697 fj_loc_y = 443 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL11 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 805 fj_loc_y = 457 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL12 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 855 fj_loc_y = 517 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL13 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 941 fj_loc_y = 572 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL14 fj_cre_resref = QBTCULF
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1014 fj_loc_y = 599 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL15 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1153 fj_loc_y = 589 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL16 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1107 fj_loc_y = 631 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL17 fj_cre_resref = QBTCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1186 fj_loc_y = 673 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL18 fj_cre_resref = QBTCULF
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 645 fj_loc_y = 640 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTCL19 fj_cre_resref = QBTCULT
+  END
+BUT_ONLY_IF_IT_CHANGES
+PRINT @20301
+
+

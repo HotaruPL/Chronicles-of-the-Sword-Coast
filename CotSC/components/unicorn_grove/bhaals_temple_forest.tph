@@ -1,0 +1,496 @@
+// v19: Bhaal's Temple forest encounters and conversations. Separate component so the
+// known-good QCBHAL WED/TIS/PVRZ, container hitboxes and QCJHR1 dialogue stay frozen.
+
+// ---------- Integrated milestone: QC: Bhaal's Temple - Forest Encounters and Dialogue (QCBHAL)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBHAL.ARE~ BEGIN FAIL ~Install the working QCBHAL temple area (component 5) first.~ END
+
+// HARPASS.CRE is not a standard resource in every EET installation.
+// Prefer it when installed; otherwise reuse the already-required female
+// humanoid DAESE.CRE and explicitly assign Triss a human female avatar.
+ACTION_IF FILE_EXISTS_IN_GAME ~HARPASS.CRE~ BEGIN
+  OUTER_SPRINT qcb_triss_base ~HARPASS.CRE~
+END ELSE BEGIN
+  OUTER_SPRINT qcb_triss_base ~DAESE.CRE~
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TAUGOS.CRE~ BEGIN FAIL ~TAUGOS.CRE missing: needed for Bhaal cultists.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DAESE.CRE~ BEGIN FAIL ~DAESE.CRE missing: needed for Bhaal priest.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDMURS.CRE~ BEGIN FAIL ~BDMURS.CRE missing: needed for Malzoth.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SQUIRL.CRE~ BEGIN FAIL ~SQUIRL.CRE missing: needed for squirrel.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~HELM10.ITM~ BEGIN FAIL ~HELM10.ITM missing for cultist helmets.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~STAF18.ITM~ BEGIN FAIL ~STAF18.ITM (quarterstaff +2) missing.~ END
+ACTION_IF FILE_EXISTS_IN_GAME ~RABBIT.CRE~ BEGIN
+  OUTER_SPRINT qcb_rabbit_base ~RABBIT.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~RABBIT01.CRE~ BEGIN
+  OUTER_SPRINT qcb_rabbit_base ~RABBIT01.CRE~
+END ELSE BEGIN
+  FAIL @20297
+END
+
+COPY_EXISTING ~SQUIRL.CRE~ ~override/QCBSQUI.CRE~
+  SAY NAME1 @3045
+  SAY NAME2 @3045
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCBSQUI~ #32
+  WRITE_ASCII 0x248 ~QCBROAM~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~%qcb_rabbit_base%~ ~override/QCBRAB.CRE~
+  SAY NAME1 @3090
+  SAY NAME2 @3090
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCBRAB~ #32
+  WRITE_ASCII 0x248 ~QCBROAM~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~%qcb_triss_base%~ ~override/QCBTRIS.CRE~
+  SAY NAME1 @3091
+  SAY NAME2 @3091
+  // Ensure the alternate base looks like Triss and cannot transform via
+  // inherited display animation or permanent status.
+  WRITE_LONG 0x28 0x6110 // FIGHTER_FEMALE_HUMAN avatar
+  WRITE_LONG 0x20 0 // no inherited permanent status flags
+  WRITE_BYTE 0x275 2 // female gender
+  WRITE_BYTE 0x272 1 // human race
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x32 105 // white hair
+  WRITE_BYTE 0x2d 18 // green clothing
+  WRITE_BYTE 0x2e 110 // pale white clothing
+  WRITE_ASCII 0x280 ~QCBTRIS~ #32
+  WRITE_ASCII 0x2cc ~QCBTRIS~ #8
+  WRITE_ASCII 0x248 ~QCBTRAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~STAF18~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+// Optional: borrow all of the native Amalas/Ruffian voice slots, while keeping
+// TAUGOS's model and combat stats. The vanilla EET creature is RUFFIAN.CRE.
+ACTION_IF FILE_EXISTS_IN_GAME ~RUFFIAN.CRE~ BEGIN
+  COPY_EXISTING ~RUFFIAN.CRE~ ~override/QCBRVO.CRE~
+    READ_LONG 0xa4 qcb_rvoice_0
+    READ_LONG 0xa8 qcb_rvoice_1
+    READ_LONG 0xac qcb_rvoice_2
+    READ_LONG 0xb0 qcb_rvoice_3
+    READ_LONG 0xb4 qcb_rvoice_4
+    READ_LONG 0xb8 qcb_rvoice_5
+    READ_LONG 0xbc qcb_rvoice_6
+    READ_LONG 0xc0 qcb_rvoice_7
+    READ_LONG 0xc4 qcb_rvoice_8
+    READ_LONG 0xc8 qcb_rvoice_9
+    READ_LONG 0xcc qcb_rvoice_10
+    READ_LONG 0xd0 qcb_rvoice_11
+    READ_LONG 0xd4 qcb_rvoice_12
+    READ_LONG 0xd8 qcb_rvoice_13
+    READ_LONG 0xdc qcb_rvoice_14
+    READ_LONG 0xe0 qcb_rvoice_15
+    READ_LONG 0xe4 qcb_rvoice_16
+    READ_LONG 0xe8 qcb_rvoice_17
+    READ_LONG 0xec qcb_rvoice_18
+    READ_LONG 0xf0 qcb_rvoice_19
+    READ_LONG 0xf4 qcb_rvoice_20
+    READ_LONG 0xf8 qcb_rvoice_21
+    READ_LONG 0xfc qcb_rvoice_22
+    READ_LONG 0x100 qcb_rvoice_23
+    READ_LONG 0x104 qcb_rvoice_24
+    READ_LONG 0x108 qcb_rvoice_25
+    READ_LONG 0x10c qcb_rvoice_26
+    READ_LONG 0x110 qcb_rvoice_27
+    READ_LONG 0x114 qcb_rvoice_28
+    READ_LONG 0x118 qcb_rvoice_29
+    READ_LONG 0x11c qcb_rvoice_30
+    READ_LONG 0x120 qcb_rvoice_31
+    READ_LONG 0x124 qcb_rvoice_32
+    READ_LONG 0x128 qcb_rvoice_33
+    READ_LONG 0x12c qcb_rvoice_34
+    READ_LONG 0x130 qcb_rvoice_35
+    READ_LONG 0x134 qcb_rvoice_36
+    READ_LONG 0x138 qcb_rvoice_37
+    READ_LONG 0x13c qcb_rvoice_38
+    READ_LONG 0x140 qcb_rvoice_39
+    READ_LONG 0x144 qcb_rvoice_40
+    READ_LONG 0x148 qcb_rvoice_41
+    READ_LONG 0x14c qcb_rvoice_42
+    READ_LONG 0x150 qcb_rvoice_43
+    READ_LONG 0x154 qcb_rvoice_44
+    READ_LONG 0x158 qcb_rvoice_45
+    READ_LONG 0x15c qcb_rvoice_46
+    READ_LONG 0x160 qcb_rvoice_47
+    READ_LONG 0x164 qcb_rvoice_48
+    READ_LONG 0x168 qcb_rvoice_49
+    READ_LONG 0x16c qcb_rvoice_50
+    READ_LONG 0x170 qcb_rvoice_51
+    READ_LONG 0x174 qcb_rvoice_52
+    READ_LONG 0x178 qcb_rvoice_53
+    READ_LONG 0x17c qcb_rvoice_54
+    READ_LONG 0x180 qcb_rvoice_55
+    READ_LONG 0x184 qcb_rvoice_56
+    READ_LONG 0x188 qcb_rvoice_57
+    READ_LONG 0x18c qcb_rvoice_58
+    READ_LONG 0x190 qcb_rvoice_59
+    READ_LONG 0x194 qcb_rvoice_60
+    READ_LONG 0x198 qcb_rvoice_61
+    READ_LONG 0x19c qcb_rvoice_62
+    READ_LONG 0x1a0 qcb_rvoice_63
+    READ_LONG 0x1a4 qcb_rvoice_64
+    READ_LONG 0x1a8 qcb_rvoice_65
+    READ_LONG 0x1ac qcb_rvoice_66
+    READ_LONG 0x1b0 qcb_rvoice_67
+    READ_LONG 0x1b4 qcb_rvoice_68
+    READ_LONG 0x1b8 qcb_rvoice_69
+    READ_LONG 0x1bc qcb_rvoice_70
+    READ_LONG 0x1c0 qcb_rvoice_71
+    READ_LONG 0x1c4 qcb_rvoice_72
+    READ_LONG 0x1c8 qcb_rvoice_73
+    READ_LONG 0x1cc qcb_rvoice_74
+    READ_LONG 0x1d0 qcb_rvoice_75
+    READ_LONG 0x1d4 qcb_rvoice_76
+    READ_LONG 0x1d8 qcb_rvoice_77
+    READ_LONG 0x1dc qcb_rvoice_78
+    READ_LONG 0x1e0 qcb_rvoice_79
+    READ_LONG 0x1e4 qcb_rvoice_80
+    READ_LONG 0x1e8 qcb_rvoice_81
+    READ_LONG 0x1ec qcb_rvoice_82
+    READ_LONG 0x1f0 qcb_rvoice_83
+    READ_LONG 0x1f4 qcb_rvoice_84
+    READ_LONG 0x1f8 qcb_rvoice_85
+    READ_LONG 0x1fc qcb_rvoice_86
+    READ_LONG 0x200 qcb_rvoice_87
+    READ_LONG 0x204 qcb_rvoice_88
+    READ_LONG 0x208 qcb_rvoice_89
+    READ_LONG 0x20c qcb_rvoice_90
+    READ_LONG 0x210 qcb_rvoice_91
+    READ_LONG 0x214 qcb_rvoice_92
+    READ_LONG 0x218 qcb_rvoice_93
+    READ_LONG 0x21c qcb_rvoice_94
+    READ_LONG 0x220 qcb_rvoice_95
+    READ_LONG 0x224 qcb_rvoice_96
+    READ_LONG 0x228 qcb_rvoice_97
+    READ_LONG 0x22c qcb_rvoice_98
+    READ_LONG 0x230 qcb_rvoice_99
+END
+
+COPY_EXISTING ~TAUGOS.CRE~ ~override/QCBCULT.CRE~
+  SAY NAME1 @3092
+  SAY NAME2 @3092
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCBCULT~ #32
+  WRITE_ASCII 0x248 ~QCBCULA~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  PATCH_IF (FILE_EXISTS_IN_GAME ~RUFFIAN.CRE~) BEGIN
+    WRITE_LONG 0xa4 qcb_rvoice_0
+    WRITE_LONG 0xa8 qcb_rvoice_1
+    WRITE_LONG 0xac qcb_rvoice_2
+    WRITE_LONG 0xb0 qcb_rvoice_3
+    WRITE_LONG 0xb4 qcb_rvoice_4
+    WRITE_LONG 0xb8 qcb_rvoice_5
+    WRITE_LONG 0xbc qcb_rvoice_6
+    WRITE_LONG 0xc0 qcb_rvoice_7
+    WRITE_LONG 0xc4 qcb_rvoice_8
+    WRITE_LONG 0xc8 qcb_rvoice_9
+    WRITE_LONG 0xcc qcb_rvoice_10
+    WRITE_LONG 0xd0 qcb_rvoice_11
+    WRITE_LONG 0xd4 qcb_rvoice_12
+    WRITE_LONG 0xd8 qcb_rvoice_13
+    WRITE_LONG 0xdc qcb_rvoice_14
+    WRITE_LONG 0xe0 qcb_rvoice_15
+    WRITE_LONG 0xe4 qcb_rvoice_16
+    WRITE_LONG 0xe8 qcb_rvoice_17
+    WRITE_LONG 0xec qcb_rvoice_18
+    WRITE_LONG 0xf0 qcb_rvoice_19
+    WRITE_LONG 0xf4 qcb_rvoice_20
+    WRITE_LONG 0xf8 qcb_rvoice_21
+    WRITE_LONG 0xfc qcb_rvoice_22
+    WRITE_LONG 0x100 qcb_rvoice_23
+    WRITE_LONG 0x104 qcb_rvoice_24
+    WRITE_LONG 0x108 qcb_rvoice_25
+    WRITE_LONG 0x10c qcb_rvoice_26
+    WRITE_LONG 0x110 qcb_rvoice_27
+    WRITE_LONG 0x114 qcb_rvoice_28
+    WRITE_LONG 0x118 qcb_rvoice_29
+    WRITE_LONG 0x11c qcb_rvoice_30
+    WRITE_LONG 0x120 qcb_rvoice_31
+    WRITE_LONG 0x124 qcb_rvoice_32
+    WRITE_LONG 0x128 qcb_rvoice_33
+    WRITE_LONG 0x12c qcb_rvoice_34
+    WRITE_LONG 0x130 qcb_rvoice_35
+    WRITE_LONG 0x134 qcb_rvoice_36
+    WRITE_LONG 0x138 qcb_rvoice_37
+    WRITE_LONG 0x13c qcb_rvoice_38
+    WRITE_LONG 0x140 qcb_rvoice_39
+    WRITE_LONG 0x144 qcb_rvoice_40
+    WRITE_LONG 0x148 qcb_rvoice_41
+    WRITE_LONG 0x14c qcb_rvoice_42
+    WRITE_LONG 0x150 qcb_rvoice_43
+    WRITE_LONG 0x154 qcb_rvoice_44
+    WRITE_LONG 0x158 qcb_rvoice_45
+    WRITE_LONG 0x15c qcb_rvoice_46
+    WRITE_LONG 0x160 qcb_rvoice_47
+    WRITE_LONG 0x164 qcb_rvoice_48
+    WRITE_LONG 0x168 qcb_rvoice_49
+    WRITE_LONG 0x16c qcb_rvoice_50
+    WRITE_LONG 0x170 qcb_rvoice_51
+    WRITE_LONG 0x174 qcb_rvoice_52
+    WRITE_LONG 0x178 qcb_rvoice_53
+    WRITE_LONG 0x17c qcb_rvoice_54
+    WRITE_LONG 0x180 qcb_rvoice_55
+    WRITE_LONG 0x184 qcb_rvoice_56
+    WRITE_LONG 0x188 qcb_rvoice_57
+    WRITE_LONG 0x18c qcb_rvoice_58
+    WRITE_LONG 0x190 qcb_rvoice_59
+    WRITE_LONG 0x194 qcb_rvoice_60
+    WRITE_LONG 0x198 qcb_rvoice_61
+    WRITE_LONG 0x19c qcb_rvoice_62
+    WRITE_LONG 0x1a0 qcb_rvoice_63
+    WRITE_LONG 0x1a4 qcb_rvoice_64
+    WRITE_LONG 0x1a8 qcb_rvoice_65
+    WRITE_LONG 0x1ac qcb_rvoice_66
+    WRITE_LONG 0x1b0 qcb_rvoice_67
+    WRITE_LONG 0x1b4 qcb_rvoice_68
+    WRITE_LONG 0x1b8 qcb_rvoice_69
+    WRITE_LONG 0x1bc qcb_rvoice_70
+    WRITE_LONG 0x1c0 qcb_rvoice_71
+    WRITE_LONG 0x1c4 qcb_rvoice_72
+    WRITE_LONG 0x1c8 qcb_rvoice_73
+    WRITE_LONG 0x1cc qcb_rvoice_74
+    WRITE_LONG 0x1d0 qcb_rvoice_75
+    WRITE_LONG 0x1d4 qcb_rvoice_76
+    WRITE_LONG 0x1d8 qcb_rvoice_77
+    WRITE_LONG 0x1dc qcb_rvoice_78
+    WRITE_LONG 0x1e0 qcb_rvoice_79
+    WRITE_LONG 0x1e4 qcb_rvoice_80
+    WRITE_LONG 0x1e8 qcb_rvoice_81
+    WRITE_LONG 0x1ec qcb_rvoice_82
+    WRITE_LONG 0x1f0 qcb_rvoice_83
+    WRITE_LONG 0x1f4 qcb_rvoice_84
+    WRITE_LONG 0x1f8 qcb_rvoice_85
+    WRITE_LONG 0x1fc qcb_rvoice_86
+    WRITE_LONG 0x200 qcb_rvoice_87
+    WRITE_LONG 0x204 qcb_rvoice_88
+    WRITE_LONG 0x208 qcb_rvoice_89
+    WRITE_LONG 0x20c qcb_rvoice_90
+    WRITE_LONG 0x210 qcb_rvoice_91
+    WRITE_LONG 0x214 qcb_rvoice_92
+    WRITE_LONG 0x218 qcb_rvoice_93
+    WRITE_LONG 0x21c qcb_rvoice_94
+    WRITE_LONG 0x220 qcb_rvoice_95
+    WRITE_LONG 0x224 qcb_rvoice_96
+    WRITE_LONG 0x228 qcb_rvoice_97
+    WRITE_LONG 0x22c qcb_rvoice_98
+    WRITE_LONG 0x230 qcb_rvoice_99
+  END
+  ADD_CRE_ITEM ~HELM10~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DAESE.CRE~ ~override/QCBPRST.CRE~
+  SAY NAME1 @3093
+  SAY NAME2 @3093
+  WRITE_BYTE 0x270 255
+  WRITE_BYTE 0x32 105 // white hair
+  WRITE_BYTE 0x2d 0 // black major colour
+  WRITE_BYTE 0x2e 0 // black minor colour
+  WRITE_ASCII 0x280 ~QCBPRST~ #32
+  WRITE_ASCII 0x248 ~QCBPRIA~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BDMURS.CRE~ ~override/QCBMALZ.CRE~
+  SAY NAME1 @3094
+  SAY NAME2 @3094
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x2d 72 // purple robes/skin colour gradient
+  WRITE_BYTE 0x2e 74 // purple trim
+  WRITE_ASCII 0x280 ~QCBMALZ~ #32
+  WRITE_ASCII 0x2cc ~QCBMALZ~ #8
+  WRITE_ASCII 0x248 ~QCBMALI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCBAR.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCBROAM.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCBTRAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCBMALI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCBPRIA.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCBCULA.baf~
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/QCBFOREST.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QCBFOREST.tra~
+
+// Keep the existing area structure and its previously fixed WED, textures,
+// temple containers, song table and search map. Only patch the ARE.
+COPY_EXISTING ~QCBHAL.ARE~ ~override/QCBHAL.ARE~
+  WRITE_ASCII 0x94 ~QCBAR~ #8
+  ADD_MAP_NOTE #1397 #191 ~gray~ ~Temple of Bhaal~
+  // Arrival from the Dark Khalid / Jaheira memory room.
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 785 fj_loc_y = 1712 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCBARV
+  END
+  // Animals
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 407 fj_loc_y = 1481 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCBSQ01 fj_cre_resref = QCBSQUI
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1629 fj_loc_y = 1123 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCBRB01 fj_cre_resref = QCBRAB
+  END
+  // Conversations and enemies
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1107 fj_loc_y = 1014 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCBTR01 fj_cre_resref = QCBTRIS
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 391 fj_loc_y = 552 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCBCU01 fj_cre_resref = QCBCULT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 319 fj_loc_y = 483 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCBPR01 fj_cre_resref = QCBPRST
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2087 fj_loc_y = 998 fj_orientation = 2
+    STR_VAR fj_structure_type = actor fj_name = QCBMA01 fj_cre_resref = QCBMALZ
+  END
+  // Question-mark: praying Bhaal priests / foreboding temple emblem
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 669 fj_box_top = 1328
+      fj_box_right = 701 fj_box_bottom = 1364 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~The statues depict priests of Bhaal with their palms pressed together in solemn supplication. As you pass, an unsettling sensation takes hold: their carved eyes seem to follow your every movement.~)
+      fj_vertex_0 = 669 + (1328 << 16)
+      fj_vertex_1 = 701 + (1328 << 16)
+      fj_vertex_2 = 701 + (1364 << 16)
+      fj_vertex_3 = 669 + (1364 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCBINFO1
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 933 fj_box_top = 1407
+      fj_box_right = 965 fj_box_bottom = 1443 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~The statues depict priests of Bhaal with their palms pressed together in solemn supplication. As you pass, an unsettling sensation takes hold: their carved eyes seem to follow your every movement.~)
+      fj_vertex_0 = 933 + (1407 << 16)
+      fj_vertex_1 = 965 + (1407 << 16)
+      fj_vertex_2 = 965 + (1443 << 16)
+      fj_vertex_3 = 933 + (1443 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCBINFO2
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 1348 fj_box_top = 266
+      fj_box_right = 1380 fj_box_bottom = 302 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~Bhaal's insignia looms over the temple entrance. Its forbidding visage stirs a nameless dread, and passing beneath it leaves you feeling strangely helpless, as though the stone itself knows what awaits you within.~)
+      fj_vertex_0 = 1348 + (266 << 16)
+      fj_vertex_1 = 1380 + (266 << 16)
+      fj_vertex_2 = 1380 + (302 << 16)
+      fj_vertex_3 = 1348 + (302 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCBINFO3
+  END
+  // Not a transition until the temple interior actually exists.
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 1348 fj_box_top = 477
+      fj_box_right = 1392 fj_box_bottom = 513 fj_cursor_idx = 30
+      fj_info_point_strref = RESOLVE_STR_REF(~The temple doors stand before you. Whatever lies beyond them belongs to the final, still-unrevealed memory.~)
+      fj_vertex_0 = 1348 + (477 << 16)
+      fj_vertex_1 = 1392 + (477 << 16)
+      fj_vertex_2 = 1392 + (513 << 16)
+      fj_vertex_3 = 1348 + (513 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCBTDOOR
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Redirect existing QCJHR1 staircase to the new lower-forest arrival point.
+COPY_EXISTING ~QCJHR1.ARE~ ~override/QCJHR1.ARE~
+  READ_LONG 0x5c qcb_r_off
+  READ_SHORT 0x5a qcb_r_num
+  SET qcb_r_found = 0
+  FOR (qcb_ix = 0; qcb_ix < qcb_r_num; qcb_ix += 1) BEGIN
+    SET qcb_r = qcb_r_off + (qcb_ix * 0xc4)
+    READ_ASCII qcb_r qcb_rnm (32) NULL
+    PATCH_IF (~%qcb_rnm%~ STRING_EQUAL ~QCJNEXT~) BEGIN
+      WRITE_ASCII (qcb_r + 0x40) ~QCBARV~ #32
+      SET qcb_r_found = 1
+    END
+  END
+  PATCH_IF (qcb_r_found = 0) BEGIN
+    PATCH_FAIL @20298
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+
+// v20: Preserve the completed QCBHAL render/encounters and replace ONLY
+// the search-map collision and normal (day/night) exploration music.
+// Install after temple and forest encounters so battle/victory songs are unchanged.
+
+// ---------- Integrated milestone: QC: Bhaal's Temple Forest - Collision and Exploration Music (QCBHAL)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBHAL.ARE~ BEGIN FAIL ~Install Bhaal's Temple area component first.~ END
+
+COPY ~CotSC/qc_unicorn_grove/area/QCBHALSR.BMP~ ~override/QCBHALSR.BMP~
+
+// Same proven EE Vorbis-in-.ACM approach as existing QCHAMB music.
+MKDIR ~music/QCBTHM~
+COPY ~CotSC/qc_unicorn_grove/music/QCBTHMA.acm~ ~music/QCBTHM/QCBTHMA.acm~
+ADD_MUSIC ~QCB_FOREST_THEME~ ~CotSC/qc_unicorn_grove/music/QCBTHM.MUS~
+COPY_EXISTING ~QCBHAL.ARE~ ~override/QCBHAL.ARE~
+  READ_LONG 0xbc qcb_v20_song_table
+  PATCH_IF (qcb_v20_song_table > 0) AND (qcb_v20_song_table + 0x10 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG (qcb_v20_song_table + 0) %QCB_FOREST_THEME%
+    WRITE_LONG (qcb_v20_song_table + 4) %QCB_FOREST_THEME%
+  END ELSE BEGIN
+    PATCH_FAIL @20299
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+
+// v21: behaviour-only corrections.  Do NOT touch the established area art,
+// combat encounters, dialogue/interjections, search map, or music.
+
+// ---------- Integrated milestone: QC: Bhaal's Temple Forest - Triss departure, fair spellcasting and one-way memory~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBHAL.ARE~ BEGIN FAIL ~Install QCBHAL temple components first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBTRIS.CRE~ BEGIN FAIL ~Install QCBHAL forest encounters first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBPRST.CRE~ BEGIN FAIL ~Install QCBHAL forest encounters first.~ END
+
+// Compile only the revised NPC scripts. Existing CRE script slots already
+// reference these resrefs, so no creature/portrait/item modifications needed.
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCBTRAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCBPRIA.baf~
+
+// Delete the QCBRET travel region, INCLUDING its vertex data, through the
+// native WeiDU fj_are_structure routine. This does not alter the arrival
+// entrance or QCJHR1's forward staircase.
+COPY_EXISTING ~QCBHAL.ARE~ ~override/QCBHAL.ARE~
+  READ_LONG 0x5c qcb21_regions_off
+  READ_SHORT 0x5a qcb21_regions_num
+  SET qcb21_found = 0
+  FOR (qcb21_i = 0; qcb21_i < qcb21_regions_num; qcb21_i += 1) BEGIN
+    SET qcb21_r = qcb21_regions_off + (qcb21_i * 0xc4)
+    READ_ASCII qcb21_r qcb21_name (32) NULL
+    PATCH_IF (~%qcb21_name%~ STRING_EQUAL ~QCBRET~) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_delete_mode = qcb21_i
+        STR_VAR fj_structure_type = region
+      END
+      SET qcb21_found = 1
+      SET qcb21_i = qcb21_regions_num // stop scanning after deletion
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+

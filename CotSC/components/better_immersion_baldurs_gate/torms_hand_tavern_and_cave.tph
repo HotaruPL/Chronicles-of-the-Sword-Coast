@@ -1,0 +1,486 @@
+// ---------------------------------------------------------------------------
+// TORM'S HAND - SHRIVELED POTATO TAVERN NPCs
+// Ensure the same dialogue-validity state used by the existing Better Immersion interjections.
+APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~ UNLESS ~CD_STATE_NOTVALID~
+
+// ---------------------------------------------------------------------------
+// The area itself is the validated BIBG4801 clone. These are unique CRE/STORE
+// copies based on vanilla resources; no vanilla creature resource is replaced.
+
+COPY_EXISTING ~INNKN2.CRE~ ~override/BITBART.CRE~
+  SAY NAME1 @2054
+  SAY NAME2 @2054
+  WRITE_ASCII 0x2cc ~BITBARTD~ #8
+  WRITE_ASCII 0x280 ~BITBART~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FARM.CRE~ ~override/BITMAL01.CRE~
+  SAY NAME1 @2014
+  SAY NAME2 @2014
+  WRITE_ASCII 0x2cc ~BITMALD~ #8
+  WRITE_ASCII 0x280 ~BITMAL01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/BITFEM01.CRE~
+  SAY NAME1 @2014
+  SAY NAME2 @2014
+  WRITE_ASCII 0x2cc ~BITFEMD~ #8
+  WRITE_ASCII 0x280 ~BITFEM01~ #32
+  WRITE_ASCII 0x248 ~BITFEMW~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~CADRIL.CRE~ ~override/BITNYRIE.CRE~
+  SAY NAME1 @2074
+  SAY NAME2 @2074
+  WRITE_ASCII 0x2cc ~BITNYRDL~ #8
+  WRITE_ASCII 0x280 ~BITNYRIE~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BITBNCR.CRE~
+  SAY NAME1 @2024
+  SAY NAME2 @2024
+  WRITE_ASCII 0x2cc ~BITBOUNC~ #8
+  WRITE_ASCII 0x280 ~BITBNCR~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// INN0119 is the proven drink + room-rental store template already used by
+// Better Immersion elsewhere. We give the new store its own resource name.
+COPY_EXISTING ~INN0119.STO~ ~override/BIPOTATO.STO~
+  SAY NAME2 @2075
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/torm_tavern_npcs.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/torm_tavern_npcs.tra~
+COMPILE ~CotSC/better_immersion_beregost/bibtavsc.baf~
+COMPILE ~CotSC/better_immersion_beregost/bitfemw.baf~
+
+// ENT_TAVERN is a four-vertex travel region centered on the requested
+// TORMHA coordinate 617,607. It enters the cloned BIBG4801 area through
+// the original BG4801 entrance Exit4800.
+COPY ~CotSC/better_immersion_beregost/area/TORMHA.ARE~ ~override/TORMHA.ARE~
+BUT_ONLY_IF_IT_CHANGES
+
+// TORMHA.ARE is supplied by this component with the village NPC actors,
+// travel regions, information points, and repaired Fortress entrance already
+// embedded. Do not COPY_EXISTING the game area here or those changes would be overwritten.
+
+
+// Kaeira travel controller. The same Kaeira CRE leaves Purple Wyrm, appears
+// at the wilderness site, and later returns with the party to the inn.
+COPY_EXISTING ~PWYKAE9.CRE~ ~override/PWYKAE9.CRE~
+  WRITE_ASCII 0x248 ~PWYKAES~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Rare Spices - temporary sack-like icon; a dedicated artwork can replace it
+// later without changing the quest logic.
+COPY_EXISTING ~BDMISC40.ITM~ ~override/PWYSPICE.ITM~
+  READ_LONG 0x18 pwyspice_flags
+  SAY NAME1 @2076
+  SAY NAME2 @2076
+  SAY DESC @2077
+  WRITE_LONG 0x18 (pwyspice_flags BOR 1)
+  WRITE_SHORT 0x38 1
+  WRITE_LONG 0x4c 1
+BUT_ONLY_IF_IT_CHANGES
+
+// Kaeira at the caravan attack site.
+COPY_EXISTING ~PWYTR1.ARE~ ~override/PWYTR1.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 344
+      fj_loc_y = 824
+      fj_dest_x = 344
+      fj_dest_y = 824
+      fj_spawned = 1
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = PWYKAE9
+      fj_cre_resref = PWYKAE9
+      fj_dlg_resref = PWYKTRD
+  END
+
+  // Moose.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 720
+      fj_loc_y = 425
+      fj_dest_x = 720
+      fj_dest_y = 425
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = PWYMOOS
+      fj_cre_resref = PWYMOOS
+  END
+
+  // Hostile wolf.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1031
+      fj_loc_y = 158
+      fj_dest_x = 1031
+      fj_dest_y = 158
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = PWYWOLF
+      fj_cre_resref = PWYWOLF
+  END
+
+  // Door transition to the Red Fang cave.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 1380
+      fj_box_top = 149
+      fj_box_right = 1424
+      fj_box_bottom = 193
+      fj_cursor_idx = 30
+      fj_flags = 0
+      fj_vertex_0 = 1380 + (149 << 16)
+      fj_vertex_1 = 1424 + (149 << 16)
+      fj_vertex_2 = 1424 + (193 << 16)
+      fj_vertex_3 = 1380 + (193 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = PWYTR1CAVE
+      fj_destination_area = PWYTR2
+      fj_destination_name = PWYTR1IN
+  END
+
+  // Forest ambience: stock BG2EE forest/cricket ambient used by working custom areas.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 832
+      fj_loc_y = 512
+      fj_radius = 1400
+      fj_volume = 80
+      fj_sound_num = 1
+      fj_delay = 18
+      fj_variation = 6
+      fj_schedule = 0xFFFFFF
+      fj_flags = 3
+    STR_VAR
+      fj_structure_type = ambient
+      fj_name = PWYFORESTAMB
+      fj_wav_resref0 = AMB_E07A
+  END
+
+  // Cloakwood-style outdoor music. BG(2)EE songlist.2da maps Area1600 to 28;
+  // BF1 (51) is the standard BG2EE battle track.
+  LPF fj_are_structure
+    INT_VAR
+      fj_song_day = 28
+      fj_song_night = 28
+      fj_song_victory = 0
+      fj_song_battle = 51
+      fj_song_defeat = 0
+      fj_song_day_vol = 100
+      fj_song_night_vol = 100
+      fj_song_reverb = 0
+    STR_VAR
+      fj_structure_type = songs
+  END
+
+  // Return entrance used by the cave's travel region.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1402
+      fj_loc_y = 171
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = PWYTR1BACK
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/PWYKTRD.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/PWYKTRD.tra~
+COMPILE ~CotSC/better_immersion_beregost/PWYREDQ.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/PWYREDQ.tra~
+COMPILE ~CotSC/better_immersion_beregost/PWYKAES.baf~
+COMPILE ~CotSC/better_immersion_beregost/PWYRINN.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/durbem_quest.tra~
+
+
+// Wildlife used by the wilderness scene.
+COPY_EXISTING ~moose01.CRE~ ~override/PWYMOOS.CRE~
+  SAY NAME1 @2078
+  SAY NAME2 @2078
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~PWYMOOS~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~WOLF.CRE~ ~override/PWYWOLF.CRE~
+  SAY NAME1 @2079
+  SAY NAME2 @2079
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~PWYWOLF~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_BYTE 0x270 255
+BUT_ONLY_IF_IT_CHANGES
+
+// ---------------------------------------------------------------------------
+// Kaeira: Red Fang Marauders Cave - custom cave interior
+// ---------------------------------------------------------------------------
+// Palette-based TIS/WED implementation matching the proven custom-area
+// structure used by QCCARN/QCVELM/Purple Wyrm. No PVRZ pages are required.
+
+// The cave can be installed independently, so make sure the quest item exists here too.
+COPY_EXISTING ~BDMISC40.ITM~ ~override/PWYSPICE.ITM~
+  READ_LONG 0x18 pwyspice_flags
+  SAY NAME1 @2076
+  SAY NAME2 @2076
+  SAY DESC @2077
+  WRITE_LONG 0x18 (pwyspice_flags BOR 1)
+  WRITE_SHORT 0x38 1
+  WRITE_LONG 0x4c 1
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~CotSC/better_immersion_beregost/area/PWYTR2.ARE~ ~override/PWYTR2.ARE~
+COPY ~CotSC/better_immersion_beregost/area/PWYTR2.WED~ ~override/PWYTR2.WED~
+// Same padded texture-atlas conversion for the Red Fang caves.
+COPY ~CotSC/better_immersion_beregost/area/BIPYTR2.TIS~ ~override/BIPYTR2.TIS~
+COPY ~CotSC/better_immersion_beregost/area/BPYTR200.PVRZ~ ~override/BPYTR200.PVRZ~
+COPY ~CotSC/better_immersion_beregost/area/BPYTR201.PVRZ~ ~override/BPYTR201.PVRZ~
+COPY ~CotSC/better_immersion_beregost/area/PWYTR2SR.BMP~ ~override/PWYTR2SR.BMP~
+COPY ~CotSC/better_immersion_beregost/area/PWYTR2LM.BMP~ ~override/PWYTR2LM.BMP~
+COPY ~CotSC/better_immersion_beregost/area/PWYTR2HT.BMP~ ~override/PWYTR2HT.BMP~
+
+// Red Fang Marauder creature resources. They are embedded directly in the
+// area so no spawn script can duplicate them. Their base inventories and class
+// abilities are preserved; goblins receive higher HP/THAC0 and all goblins/orcs
+// get a small random extra loot roll through PWYLOOT.
+COPY_EXISTING ~NEGOB01.CRE~ ~override/PWYRGOB.CRE~
+  SAY NAME1 @2080
+  SAY NAME2 @2080
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~PWYRGOB~ #32
+  WRITE_ASCII 0x248 ~PWYLOOT~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_SHORT 0x24 30
+  WRITE_SHORT 0x26 30
+  WRITE_BYTE 0x52 15
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~orc01.CRE~ ~override/PWYROCR.CRE~
+  SAY NAME1 @2081
+  SAY NAME2 @2081
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~PWYROCR~ #32
+  WRITE_ASCII 0x248 ~PWYLOOT~ #8
+  WRITE_BYTE 0x270 255
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~GORORC03.CRE~ ~override/PWYRSHA.CRE~
+  SAY NAME1 @2082
+  SAY NAME2 @2082
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~PWYRSHA~ #32
+  WRITE_ASCII 0x248 ~PWYLOOT~ #8
+  WRITE_BYTE 0x270 255
+BUT_ONLY_IF_IT_CHANGES
+
+// Red Queen — based on Lamalha, but with a dedicated encounter AI/dialogue.
+// FREEZE: PWYTR1/PWYTR2 audio and the existing Orc Shaman resource are left untouched.
+COPY_EXISTING ~LAMALH.CRE~ ~override/PWYREDQ.CRE~
+  SAY NAME1 @2083
+  SAY NAME2 @2083
+  WRITE_ASCII 0x2cc ~PWYREDQ~ #8
+  WRITE_ASCII 0x280 ~PWYREDQ~ #32
+  WRITE_ASCII 0x248 ~PWYREDQ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_SHORT 0x24 120
+  WRITE_SHORT 0x26 120
+  WRITE_BYTE 0x52 8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~PLAT24~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SHLD01~ #0 #0 #0 ~IDENTIFIED~ ~SHIELD~
+  PATCH_IF (FILE_EXISTS_IN_GAME ~BLUN04.ITM~) BEGIN
+    ADD_CRE_ITEM ~BLUN04~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  END ELSE BEGIN
+    PATCH_FAIL @20033
+  END
+  ADD_CRE_ITEM ~PWYSPICE~ #1 #0 #0 ~IDENTIFIED~ ~INV1~
+
+  // Red Queen priest spells: deliberately limited to spells available to a 5th-level cleric.
+  // ADD_MEMORIZED_SPELL also ensures the spells are known to the creature.
+  ADD_MEMORIZED_SPELL ~SPPR111~ #0 ~priest~ ( 2 ) // Armor of Faith
+  ADD_MEMORIZED_SPELL ~SPPR1208~ #1 ~priest~ ( 2 ) // Hold Person
+  ADD_MEMORIZED_SPELL ~SPPR1311~ #2 ~priest~ ( 1 ) // Rigid Thinking
+  ADD_MEMORIZED_SPELL ~SPPR1314~ #2 ~priest~ ( 2 ) // Unholy Blight
+  ADD_MEMORIZED_SPELL ~SPPR1315~ #2 ~priest~ ( 2 ) // Cure Medium Wounds
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/PWYREDQ.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/PWYREDQ.tra~
+COMPILE ~CotSC/better_immersion_beregost/PWYREDQ.baf~
+COMPILE ~CotSC/better_immersion_beregost/PWYTR2.baf~
+COMPILE ~CotSC/better_immersion_beregost/PWYLOOT.baf~
+
+// Cave exit back to the wilderness and the complete hostile encounter layout.
+COPY_EXISTING ~PWYTR2.ARE~ ~override/PWYTR2.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 37
+      fj_loc_y = 481
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = PWYTR1IN
+  END
+
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 17
+      fj_box_top = 461
+      fj_box_right = 61
+      fj_box_bottom = 505
+      fj_cursor_idx = 30
+      fj_flags = 0
+      fj_vertex_0 = 17 + (461 << 16)
+      fj_vertex_1 = 61 + (461 << 16)
+      fj_vertex_2 = 61 + (505 << 16)
+      fj_vertex_3 = 17 + (505 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = PWYTR2OUT
+      fj_destination_area = PWYTR1
+      fj_destination_name = PWYTR1BACK
+  END
+
+  // Cave-water ambience for the pools and waterfall; no fire/torch sounds.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 768
+      fj_loc_y = 512
+      fj_radius = 1250
+      fj_volume = 80
+      fj_sound_num = 1
+      fj_delay = 16
+      fj_variation = 5
+      fj_schedule = 0xFFFFFF
+      fj_flags = 3
+    STR_VAR
+      fj_structure_type = ambient
+      fj_name = PWYCAVEAMB
+      fj_wav_resref0 = AMB_E08B
+  END
+
+  // Cave battle music. Normal area music is left silent so the cave ambience
+  // remains the background until combat starts.
+  LPF fj_are_structure
+    INT_VAR
+      fj_song_day = 0
+      fj_song_night = 0
+      fj_song_victory = 0
+      fj_song_battle = 48
+      fj_song_defeat = 0
+      fj_song_day_vol = 100
+      fj_song_night_vol = 100
+      fj_song_reverb = 0
+    STR_VAR
+      fj_structure_type = songs
+  END
+
+  // Three goblins, northeast-facing.
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 288 fj_loc_y = 812 fj_dest_x = 288 fj_dest_y = 812 fj_spawned = 1 fj_orientation = 10
+    STR_VAR fj_structure_type = actor fj_name = PWYRG1 fj_cre_resref = PWYRGOB
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 314 fj_loc_y = 779 fj_dest_x = 314 fj_dest_y = 779 fj_spawned = 1 fj_orientation = 10
+    STR_VAR fj_structure_type = actor fj_name = PWYRG2 fj_cre_resref = PWYRGOB
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 391 fj_loc_y = 783 fj_dest_x = 391 fj_dest_y = 783 fj_spawned = 1 fj_orientation = 10
+    STR_VAR fj_structure_type = actor fj_name = PWYRG3 fj_cre_resref = PWYRGOB
+  END
+
+  // Southern group: two goblins and one orc.
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 527 fj_loc_y = 159 fj_dest_x = 527 fj_dest_y = 159 fj_spawned = 1 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = PWYRG4 fj_cre_resref = PWYRGOB
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 633 fj_loc_y = 206 fj_dest_x = 633 fj_dest_y = 206 fj_spawned = 1 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = PWYRG5 fj_cre_resref = PWYRGOB
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 563 fj_loc_y = 189 fj_dest_x = 563 fj_dest_y = 189 fj_spawned = 1 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = PWYRO1 fj_cre_resref = PWYROCR
+  END
+
+  // Eastern/southern group.
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 991 fj_loc_y = 283 fj_dest_x = 991 fj_dest_y = 283 fj_spawned = 1 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = PWYRG6 fj_cre_resref = PWYRGOB
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1073 fj_loc_y = 221 fj_dest_x = 1073 fj_dest_y = 221 fj_spawned = 1 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = PWYRG7 fj_cre_resref = PWYRGOB
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1168 fj_loc_y = 275 fj_dest_x = 1168 fj_dest_y = 275 fj_spawned = 1 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = PWYRG8 fj_cre_resref = PWYRGOB
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1042 fj_loc_y = 198 fj_dest_x = 1042 fj_dest_y = 198 fj_spawned = 1 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = PWYRS1 fj_cre_resref = PWYRSHA
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1096 fj_loc_y = 392 fj_dest_x = 1096 fj_dest_y = 392 fj_spawned = 1 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = PWYRO2 fj_cre_resref = PWYROCR
+  END
+
+  // Lone orc shaman, facing northwest.
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1378 fj_loc_y = 662 fj_dest_x = 1378 fj_dest_y = 662 fj_spawned = 1 fj_orientation = 6
+    STR_VAR fj_structure_type = actor fj_name = PWYRS2 fj_cre_resref = PWYRSHA
+  END
+
+  // Red Queen.
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1367 fj_loc_y = 231 fj_dest_x = 1367 fj_dest_y = 231 fj_spawned = 1 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = PWYREDQ fj_cre_resref = PWYREDQ fj_dlg_resref = PWYREDQ
+  END
+
+  // Dedicated area script for the Red Queen encounter trigger.
+  WRITE_ASCII 0x94 ~PWYTR2~ #8
+
+BUT_ONLY_IF_IT_CHANGES
+

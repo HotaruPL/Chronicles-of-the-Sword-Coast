@@ -1,0 +1,115 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR2300.ARE~ BEGIN
+  FAIL @20279
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SIRINE01.CRE~ BEGIN
+  FAIL @20280
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SAHRAMB2.CRE~ BEGIN
+  FAIL @20281
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SAHPR2.CRE~ BEGIN
+  FAIL @20282
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC36.ITM~ BEGIN
+  FAIL @20283
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~CLCK01.ITM~ BEGIN
+  FAIL @20284
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AROW04.ITM~ BEGIN
+  FAIL @20285
+END
+
+COPY ~CotSC/qc_coral_pearl/items/QCCVICO.BAM~ ~override/QCCVICO.BAM~
+COPY ~CotSC/qc_coral_pearl/items/QCCVDES.BAM~ ~override/QCCVDES.BAM~
+
+// Unique pearl prevents normal gemstones fulfilling Coral's quest.
+COPY_EXISTING ~MISC36.ITM~ ~override/QCCPEARL.ITM~
+  SAY NAME1 @5034
+  SAY NAME2 @5034
+  SAY UNIDENTIFIED_DESC @5035
+  SAY DESC @5036
+  WRITE_LONG 0x34 0
+  WRITE_SHORT 0x42 0
+BUT_ONLY_IF_IT_CHANGES
+
+// Original cloak stats are cleared; only the requested cold resistance / regeneration remain.
+COPY_EXISTING ~CLCK01.ITM~ ~override/QCCVEST.ITM~
+  SAY NAME1 @5037
+  SAY NAME2 @5037
+  SAY UNIDENTIFIED_DESC @5038
+  SAY DESC @5039
+  WRITE_ASCII 0x3a ~QCCVICO~ #8
+  WRITE_ASCII 0x58 ~QCCVDES~ #8
+  WRITE_SHORT 0x42 0
+  WRITE_LONG 0x34 5000
+  WRITE_SHORT 0x70 0 // discard equipping effects inherited from CLCK01 (+1 AC and saving throws)
+  WRITE_BYTE 0x2f (THIS BOR 0x02) // Wizard Slayer unusable (kit restriction 4)
+  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 28 target = 1 parameter1 = 50 parameter2 = 0 timing = 2 END
+  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 98 target = 1 parameter1 = 3 parameter2 = 3 timing = 2 special = 0 END
+BUT_ONLY_IF_IT_CHANGES
+
+// Coral is neutral. Do not retain native sirine AI that charms on sight.
+COPY_EXISTING ~SIRINE01.CRE~ ~override/QCCORAL.CRE~
+  SAY NAME1 @5040
+  SAY NAME2 @5040
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCCORAL~ #32
+  WRITE_BYTE 0x271 1 // set death variable for Dead("QCCORAL")
+  WRITE_ASCII 0x2cc ~QCCORAL~ #8
+  WRITE_ASCII 0x248 ~QCCORAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEM ~MISC36~ // Coral must not carry the generic Sirine pearl.
+BUT_ONLY_IF_IT_CHANGES
+
+// Zexylinn is a distinct rebel, not a replacement for the original Prince or his court.
+COPY_EXISTING ~SAHRAMB2.CRE~ ~override/QCCOZEX.CRE~
+  SAY NAME1 @5041
+  SAY NAME2 @5041
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCCOZEX~ #32
+  WRITE_BYTE 0x271 1
+  WRITE_ASCII 0x2cc ~QCCOZEX~ #8
+  WRITE_ASCII 0x248 ~QCCOZAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  // Keep the rebel's native weapons/equipment so he remains capable of fighting.
+  ADD_CRE_ITEM ~QCCPEARL~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR2300.ARE~ ~override/AR2300.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2450
+      fj_loc_y = 2419
+      fj_orientation = 8 // south
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCCORAL
+      fj_cre_resref = QCCORAL
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 4053
+      fj_loc_y = 3247
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCCOZEX
+      fj_cre_resref = QCCOZEX
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qc_coral_pearl/scripts/QCCORAI.baf~
+COMPILE ~CotSC/qc_coral_pearl/scripts/QCCOZAI.baf~
+ADD_JOURNAL TITLE (@7014) @100 @101 @102 @103 @104 USING ~CotSC/translation/%LANGUAGE%/qc_coral_pearl/tra/coral.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+COMPILE ~CotSC/qc_coral_pearl/dialogue/coral.d~ USING ~CotSC/translation/%LANGUAGE%/qc_coral_pearl/tra/coral.tra~
+
+// Public installer: development progress message omitted.

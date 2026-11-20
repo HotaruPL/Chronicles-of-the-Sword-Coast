@@ -1,0 +1,626 @@
+// ---------------------------------------------------------------------------
+// PURPLE WYRM INN - COMPLETE AREA / COLLISION / TWO-WAY CONNECTION
+// ---------------------------------------------------------------------------
+// Final working Purple Wyrm implementation.  The search map below is the
+// proven 192x171 4bpp format; blocked furniture is encoded as light obstacle
+// terrain so it remains impassable without unnecessarily obscuring the room.
+
+COPY ~CotSC/better_immersion_beregost/area/BIPWYR.ARE~ ~override/BIPWYR.ARE~
+COPY ~CotSC/better_immersion_beregost/area/BIPWYR.WED~ ~override/BIPWYR.WED~
+// Near Infinity WED-aware PVRZ conversion for Purple Wyrm.
+// Remove any stale pages from earlier experimental conversions before copying
+// the exact pages referenced by the exported BIPWYR.TIS.
+DELETE ~BIPWYR00.PVRZ~
+DELETE ~BIPWYR01.PVRZ~
+DELETE ~BIPWYR02.PVRZ~
+DELETE ~BIPWYR03.PVRZ~
+DELETE ~BIPWYR04.PVRZ~
+DELETE ~BIPWYR05.PVRZ~
+DELETE ~BIPWYR06.PVRZ~
+DELETE ~BPWYR02.PVRZ~
+DELETE ~BPWYR03.PVRZ~
+DELETE ~BPWYR04.PVRZ~
+DELETE ~BPWYR05.PVRZ~
+DELETE ~BPWYR06.PVRZ~
+COPY ~CotSC/better_immersion_beregost/area/BIPWYR.TIS~ ~override/BIPWYR.TIS~
+COPY ~CotSC/better_immersion_beregost/area/BPWYR00.PVRZ~ ~override/BPWYR00.PVRZ~
+COPY ~CotSC/better_immersion_beregost/area/BPWYR01.PVRZ~ ~override/BPWYR01.PVRZ~
+COPY ~CotSC/better_immersion_beregost/area/BIPWYRSR.BMP~ ~override/BIPWYRSR.BMP~
+COPY ~CotSC/better_immersion_beregost/area/BIPWYRLM.BMP~ ~override/BIPWYRLM.BMP~
+COPY ~CotSC/better_immersion_beregost/area/BIPWYRHT.BMP~ ~override/BIPWYRHT.BMP~
+
+// ---------------------------------------------------------------------------
+// PURPLE WYRM INN - UPSTAIRS (BG0104 / Splurging Sturgeon geometry)
+// ---------------------------------------------------------------------------
+// Use the original BG0104 visual resources as the basis for the upstairs.
+// The ARE is made into a clean, actor-free room with only the return stairs.
+// BG0104's original WED/TIS remain untouched; the search/light/height maps
+// are copied under the new area resref.
+
+COPY_EXISTING ~BG0104.ARE~ ~override/BIPWYRUP.ARE~
+  WRITE_ASCII 0x08 ~BG0104~ #8
+  WRITE_ASCII 0x94 ~BIPWYRUP~ #8
+  WRITE_SHORT 0x58 0
+  WRITE_SHORT 0x5a 0
+  WRITE_SHORT 0x6c 0
+  WRITE_ASCII 0x94 ~ ~ #8
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 750
+      fj_loc_y = 300
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = Downstairs
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 725
+      fj_box_top = 275
+      fj_box_right = 775
+      fj_box_bottom = 325
+      fj_cursor_idx = 28
+      fj_flags = 0
+      fj_vertex_0 = 725 + (275 << 16)
+      fj_vertex_1 = 775 + (275 << 16)
+      fj_vertex_2 = 775 + (325 << 16)
+      fj_vertex_3 = 725 + (325 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = UpstairsBack
+      fj_destination_area = BIPWYR
+      fj_destination_name = Downstairs
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BG0104SR.BMP~ ~override/BIPWYRUPSR.BMP~
+COPY_EXISTING ~BG0104LM.BMP~ ~override/BIPWYRUPLM.BMP~
+COPY_EXISTING ~BG0104HT.BMP~ ~override/BIPWYRUPHT.BMP~
+
+// ---------------------------------------------------------------------------
+// PURPLE WYRM INN - UPSTAIRS NPCs / CONTAINERS
+// ---------------------------------------------------------------------------
+// These actors are embedded directly in BIPWYRUP.ARE so they do not depend on
+// an area script and cannot be duplicated by a spawn pass.
+
+COPY_EXISTING ~FARM.CRE~ ~override/PWYPATR.CRE~
+  SAY NAME1 @2034
+  SAY NAME2 @2034
+  WRITE_ASCII 0x2cc ~PWYPATR~ #8
+  WRITE_ASCII 0x280 ~PWYPATR~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/PWYKOBUP.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~PWYKOBUP~ #8
+  WRITE_ASCII 0x280 ~PWYKOBUP~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BIPWYRUP.ARE~ ~override/BIPWYRUP.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 659
+      fj_loc_y = 410
+      fj_dest_x = 659
+      fj_dest_y = 410
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = PWYPATR
+      fj_cre_resref = PWYPATR
+      fj_dlg_resref = PWYPATR
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 168
+      fj_loc_y = 382
+      fj_dest_x = 168
+      fj_dest_y = 382
+      fj_spawned = 1
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = PWYKOBUP
+      fj_cre_resref = PWYKOBUP
+      fj_dlg_resref = PWYKOBUP
+  END
+
+  // Empty every existing container on the upstairs floor before adding the
+  // deliberately small inn-room stash. Each item is kept in its own chest.
+  LPF DELETE_AREA_ITEM END
+
+  // The three existing upstairs containers are converted to proper chests.
+  READ_LONG 0x70 pwyup_container_offset
+  READ_SHORT 0x74 pwyup_container_count
+  FOR (pwyup_i = 0; pwyup_i < pwyup_container_count; ++pwyup_i) BEGIN
+    READ_ASCII (pwyup_container_offset + (0xc0 * pwyup_i)) pwyup_container_name (32) NULL
+    LPF ALTER_AREA_CONTAINER
+      INT_VAR
+        container_type = 2
+      STR_VAR
+        container_name = ~%pwyup_container_name%~
+    END
+  END
+
+  // Preserve the three original BG0104 upstairs chests. The temporary
+  // fourth chest near (560,250) was misplaced and is intentionally omitted.
+
+  // Chest 1: fourteen gold pieces.
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 14
+    STR_VAR
+      item_to_add = MISC07
+      flags = IDENTIFIED
+  END
+
+  // Chest 2: one Potion of Extra Healing.
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = POTN52
+      flags = IDENTIFIED
+  END
+
+  // Chest 3: one Fire Agate.
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+      charges1 = 1
+    STR_VAR
+      item_to_add = MISC16
+      flags = IDENTIFIED
+  END
+
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/PWYUP.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/PWYUP.tra~
+
+// Preserve all existing transition geometry and destinations. Only the
+// visual cursor for the upstairs/downstairs inn transition is corrected to
+// the standard stairs cursor (28). The Carnival transition remains untouched.
+COPY_EXISTING ~BIPWYR.ARE~ ~override/BIPWYR.ARE~
+  WRITE_LONG 0xAE8 28
+
+// Purple Wyrm downstairs entrance addition. Audio is patched in the final
+// post-area section below so later COPY_EXISTING operations cannot overwrite it.
+COPY_EXISTING ~BIPWYR.ARE~ ~override/BIPWYR.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1419
+      fj_loc_y = 751
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = Downstairs
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Destination entrance inside Purple Wyrm Inn.
+COPY_EXISTING ~BIPWYR.ARE~ ~override/BIPWYR.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1215
+      fj_loc_y = 1278
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = Exit0800
+  END
+
+  // Return travel region from the inn back to BG0800.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 1190
+      fj_box_top = 1253
+      fj_box_right = 1240
+      fj_box_bottom = 1303
+      fj_cursor_idx = 30
+      fj_flags = 0
+      fj_vertex_0 = 1190 + (1253 << 16)
+      fj_vertex_1 = 1240 + (1253 << 16)
+      fj_vertex_2 = 1240 + (1303 << 16)
+      fj_vertex_3 = 1190 + (1303 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = PWYRBACK
+      fj_destination_area = BG0800
+      fj_destination_name = PWYRBACK
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Purple Wyrm Inn entrance from BG0800.
+COPY_EXISTING ~BG0800.ARE~ ~override/BG0800.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 2965
+      fj_box_top = 2680
+      fj_box_right = 3005
+      fj_box_bottom = 2710
+      fj_cursor_idx = 30
+      fj_flags = 0
+      fj_vertex_0 = 2965 + (2680 << 16)
+      fj_vertex_1 = 3005 + (2680 << 16)
+      fj_vertex_2 = 3005 + (2710 << 16)
+      fj_vertex_3 = 2965 + (2710 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = BIPWYR
+      fj_destination_area = BIPWYR
+      fj_destination_name = Exit0800
+  END
+
+  // Return entrance just outside the travel region to avoid an immediate
+  // bounce back into the inn.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2985
+      fj_loc_y = 2730
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = PWYRBACK
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Purple Wyrm map marker on the BG0800 city map.
+// Coordinates requested for the inn: X=3070, Y=2671.
+COPY_EXISTING ~BG0800.ARE~ ~override/BG0800.ARE~
+  ADD_MAP_NOTE #3070 #2671 ~orange~
+    ~Purple Wyrm~
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0800_baldurs_gate.baf~
+EXTEND_TOP ~BG0800.BCS~ ~CotSC/better_immersion_beregost/bg0800_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - ELFSONG / TAVERN ADDITIONS
+// ---------------------------------------------------------------------------
+
+COMPILE ~CotSC/better_immersion_beregost/baldurs_gate_taverns.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/baldurs_gate_taverns.tra~
+
+// Elven Worker — elf chassis, static.
+COPY_EXISTING ~SARELF04.CRE~ ~override/BIBELW01.CRE~
+  SAY NAME1 @2035
+  SAY NAME2 @2035
+  WRITE_ASCII 0x2cc ~BIBELW01~ #8
+  WRITE_ASCII 0x280 ~BIBELW01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Irina — use the existing BDIRINA creature as requested, but give her the
+// Better Immersion dialogue.
+COPY_EXISTING ~BDIRINA.CRE~ ~override/BDIRINA.CRE~
+  SAY NAME1 @2036
+  SAY NAME2 @2036
+  WRITE_ASCII 0x2cc ~BIBIRINA~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Hobgoblin Commoner — preserve a neutral, humanoid chassis and give it
+// continuous wandering behaviour.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BIBHOG01.CRE~
+  SAY NAME1 @2006
+  SAY NAME2 @2006
+  WRITE_ASCII 0x2cc ~BIBHOG01~ #8
+  WRITE_ASCII 0x280 ~BIBHOG01~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Dwarven Commoner — dwarf chassis with continuous wandering behaviour.
+COPY_EXISTING ~BREVLI.CRE~ ~override/BIBDWAR1.CRE~
+  SAY NAME1 @2029
+  SAY NAME2 @2029
+  WRITE_ASCII 0x2cc ~BIBDWAR1~ #8
+  WRITE_ASCII 0x280 ~BIBDWAR1~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Half-Ogre Bouncer — neutral, no movement, attacks whoever attacks it.
+COPY_EXISTING ~OGREHA.CRE~ ~override/BIBOGRB1.CRE~
+  SAY NAME1 @2024
+  SAY NAME2 @2024
+  WRITE_ASCII 0x2cc ~BIBOGRB1~ #8
+  WRITE_ASCII 0x280 ~BIBOGRB1~ #32
+  WRITE_ASCII 0x248 ~BIBBOUNC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~OGREHA.CRE~ ~override/BIBOGRB2.CRE~
+  SAY NAME1 @2024
+  SAY NAME2 @2024
+  WRITE_ASCII 0x2cc ~BIBOGRB2~ #8
+  WRITE_ASCII 0x280 ~BIBOGRB2~ #32
+  WRITE_ASCII 0x248 ~BIBBOUNC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Hobgoblin Bouncer — neutral, no movement, attacks whoever attacks it.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BIBHGB01.CRE~
+  SAY NAME1 @2024
+  SAY NAME2 @2024
+  WRITE_ASCII 0x2cc ~BIBHGB01~ #8
+  WRITE_ASCII 0x280 ~BIBHGB01~ #32
+  WRITE_ASCII 0x248 ~BIBBOUNC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// ---------------------------------------------------------------------------
+// BG1100 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+COMPILE ~CotSC/better_immersion_beregost/bg1100_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg1100_baldurs_gate.tra~
+
+// Kira — based on BDZELMA, with a custom high-damage weapon and a personal
+// override script that approaches the party member she first sees.
+COPY_EXISTING ~BDZELMA.CRE~ ~override/BIKIRA.CRE~
+  SAY NAME1 @2037
+  SAY NAME2 @2037
+  WRITE_ASCII 0x2cc ~BIKIRA~ #8
+  WRITE_ASCII 0x280 ~BIKIRA~ #32
+  WRITE_ASCII 0x248 ~BIKIRAA~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Kira's weapon — based on the standard two-handed sword, but deliberately
+// upgraded to deal very heavy damage when option 3 turns her hostile.
+COPY_EXISTING ~SW2H01.ITM~ ~override/BIKIRWPN.ITM~
+  READ_LONG 0x64 abilities_offset
+  READ_SHORT 0x68 abilities_count
+  READ_LONG 0x18 item_flags
+  SET patchmelee = 0
+  SET ability_index = 0
+  WHILE (ability_index < abilities_count) AND (patchmelee = 0) BEGIN
+    READ_BYTE (abilities_offset + (ability_index * 0x38)) ability_type
+    PATCH_IF ability_type = 1 BEGIN
+      WRITE_BYTE (abilities_offset + (ability_index * 0x38) + 0x16) 10
+      WRITE_BYTE (abilities_offset + (ability_index * 0x38) + 0x18) 5
+      WRITE_SHORT (abilities_offset + (ability_index * 0x38) + 0x1a) 5
+      SET patchmelee = 1
+    END
+    SET ability_index = (ability_index + 1)
+  END
+  WRITE_LONG 0x18 (item_flags BOR 0x40)
+  WRITE_SHORT 0x26 0
+  WRITE_LONG 0x60 3
+  SAY NAME1 @2038
+  SAY NAME2 @2038
+BUT_ONLY_IF_IT_CHANGES
+
+// Other BG1100 NPCs.
+COPY_EXISTING ~ORC01.CRE~ ~override/BIBORC11.CRE~
+  SAY NAME1 @2039
+  SAY NAME2 @2039
+  WRITE_ASCII 0x2cc ~BIBORC11~ #8
+  WRITE_ASCII 0x280 ~BIBORC11~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SARELF01.CRE~ ~override/BIBELF16.CRE~
+  SAY NAME1 @2012
+  SAY NAME2 @2012
+  WRITE_ASCII 0x2cc ~BIBELF16~ #8
+  WRITE_ASCII 0x280 ~BIBELF16~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QUINN.CRE~ ~override/BIBDWR16.CRE~
+  SAY NAME1 @2025
+  SAY NAME2 @2025
+  WRITE_LONG 0x2c0 0
+  WRITE_ASCII 0x2cc ~BIBDWR16~ #8
+  WRITE_ASCII 0x280 ~BIBDWR16~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  // Quinn is a dwarf in BGEE and provides the alternate dwarf voice requested here.
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BIBHOB16.CRE~
+  SAY NAME1 @2006
+  SAY NAME2 @2006
+  WRITE_ASCII 0x2cc ~BIBHOB16~ #8
+  WRITE_ASCII 0x280 ~BIBHOB16~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FARM.CRE~ ~override/BIBHUM14.CRE~
+  SAY NAME1 @2014
+  SAY NAME2 @2014
+  WRITE_ASCII 0x2cc ~BIBHUM14~ #8
+  WRITE_ASCII 0x280 ~BIBHUM14~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BIBKOB18.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BIBKOB18~ #8
+  WRITE_ASCII 0x280 ~BIBKOB18~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~CELVAN.CRE~ ~override/BIBGNM11.CRE~
+  SAY NAME1 @2008
+  SAY NAME2 @2008
+  WRITE_ASCII 0x2cc ~BIBGNM11~ #8
+  WRITE_ASCII 0x280 ~BIBGNM11~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~CAT.CRE~ ~override/BIBCAT11.CRE~
+  SAY NAME1 @2023
+  SAY NAME2 @2023
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BIBCAT11~ #32
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KPDOG02.CRE~ ~override/BIBDOG14.CRE~
+  SAY NAME1 @2018
+  SAY NAME2 @2018
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BIBDOG14~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SARELF01.CRE~ ~override/BIBELF17.CRE~
+  SAY NAME1 @2012
+  SAY NAME2 @2012
+  WRITE_ASCII 0x2cc ~BIBELF17~ #8
+  WRITE_ASCII 0x280 ~BIBELF17~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HALFG3.CRE~ ~override/BIBHAL16.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~BIBHAL16~ #8
+  WRITE_ASCII 0x280 ~BIBHAL16~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~NEGOB03.CRE~ ~override/BIBGOB11.CRE~
+  SAY NAME1 @2010
+  SAY NAME2 @2010
+  WRITE_ASCII 0x2cc ~BIBGOB11~ #8
+  WRITE_ASCII 0x280 ~BIBGOB11~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bikiraa.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg1100_baldurs_gate.baf~
+EXTEND_TOP ~BG1100.BCS~ ~CotSC/better_immersion_beregost/bg1100_baldurs_gate.baf~
+

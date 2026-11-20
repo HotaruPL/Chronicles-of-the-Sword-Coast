@@ -1,0 +1,296 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_remaining_major_items_npcs.tra~
+
+// Custom item: Boots of Traitor
+COPY ~CotSC/qc_firewine_dungeon_expansion/items/QCTBOOT.ITM~ ~override/QCTBOOT.ITM~
+  // Thief-class usability: allow Thief, Thief kits, and every multiclass containing Thief; block classes with no Thief component. No race/alignment restrictions.
+  WRITE_BYTE 0x1e 0xC0
+  WRITE_BYTE 0x1f 0xFD
+  WRITE_BYTE 0x20 0x34
+  WRITE_BYTE 0x21 0x60
+  SAY 0x08 @4000
+  SAY 0x0c @4001
+  SAY 0x50 @4002
+  SAY 0x54 @4003
+
+COPY ~CotSC/qc_firewine_dungeon_expansion/items/QCTBTI.BAM~ ~override/QCTBTI.BAM~
+COPY ~CotSC/qc_firewine_dungeon_expansion/items/QCTBTC.BAM~ ~override/QCTBTC.BAM~
+
+
+// Manticore's Hide: inventory-only raw material. The BAM is derived from the
+// user-supplied hide artwork; the ITM itself is a clean header-only misc item.
+COPY ~CotSC/qc_firewine_dungeon_expansion/items/QCFMHIDE.ITM~ ~override/QCFMHIDE.ITM~
+  SAY NAME1 @4004
+  SAY NAME2 @4004
+  SAY DESC @4005
+COPY ~CotSC/qc_firewine_dungeon_expansion/items/QCFMHID.BAM~ ~override/QCFMHID.BAM~
+
+// Taerom's finished armor. Use OHLEAT51 exactly when that resource is present,
+// as requested. A vanilla hide/leather fallback exists only so the standalone
+// component does not become uninstallable on setups where OHLEAT51 is absent.
+ACTION_IF FILE_EXISTS_IN_GAME ~OHLEAT51.ITM~ BEGIN
+  COPY_EXISTING ~OHLEAT51.ITM~ ~override/QCFMANE.ITM~
+    SAY NAME1 @4006
+    SAY NAME2 @4006
+    SAY DESC @4007
+    LPF ADD_ITEM_EQEFFECT
+      INT_VAR opcode = 30 target = 1 timing = 2 parameter1 = 20 parameter2 = 0 probability1 = 100
+    END
+    LPF ADD_ITEM_EQEFFECT
+      INT_VAR opcode = 28 target = 1 timing = 2 parameter1 = 20 parameter2 = 0 probability1 = 100
+    END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+  PRINT @20136
+  COPY_EXISTING ~LEAT01.ITM~ ~override/QCFMANE.ITM~
+    SAY NAME1 @4006
+    SAY NAME2 @4006
+    SAY DESC @4007
+    LPF ADD_ITEM_EQEFFECT
+      INT_VAR opcode = 30 target = 1 timing = 2 parameter1 = 20 parameter2 = 0 probability1 = 100
+    END
+    LPF ADD_ITEM_EQEFFECT
+      INT_VAR opcode = 28 target = 1 timing = 2 parameter1 = 20 parameter2 = 0 probability1 = 100
+    END
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+// Invisible clickable proxy for the static manticore artwork.
+// SQUIRL is a known BGEE/EET creature resource and gives us a tiny footprint;
+// permanent transparency leaves only the neutral blue selection circle.
+COPY_EXISTING ~SQUIRL.CRE~ ~override/QCFMANT.CRE~
+  SAY NAME1 @4008
+  SAY NAME2 @4008
+  WRITE_ASCII 0x280 ~QCFMANT~ #32
+  WRITE_ASCII 0x2cc ~QCFMANTC~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  LPF ADD_CRE_EFFECT
+    INT_VAR opcode = 66 target = 1 timing = 9 parameter1 = 255 parameter2 = 0 resist_dispel = 0
+  END
+  // NEUTRAL allegiance keeps hostile creatures from selecting the proxy as NearestEnemyOf().
+  // The proxy cannot be killed accidentally; dialogue destroys it explicitly
+  // when the player grants the manticore's request.
+  LPF ADD_CRE_EFFECT
+    INT_VAR opcode = 208 target = 1 timing = 9 parameter1 = 1 resist_dispel = 0
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Lara in BG5201. GERDE is the requested visual/stat basis; only her identity,
+// dialogue/scripts and visible equipment are changed. Existing GERDE weapons/stats remain.
+COPY_EXISTING ~GERDE.CRE~ ~override/QCFLARA.CRE~
+  SAY NAME1 @4009
+  SAY NAME2 @4009
+  WRITE_ASCII 0x280 ~QCFLARA~ #32
+  WRITE_ASCII 0x2cc ~QCFLARA~ #8
+  WRITE_ASCII 0x248 ~QCFLARS~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REPLACE_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  REPLACE_CRE_ITEM ~HELM01~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+BUT_ONLY_IF_IT_CHANGES
+
+// Enemy creature copies. Patch only Enemy-Ally so every placed monster is hostile;
+// retain the source creature's combat stats, inventory, spells and normal AI.
+COPY_EXISTING ~ICMYC01.CRE~ ~override/QCFMYC.CRE~
+  WRITE_BYTE 0x270 255
+COPY_EXISTING ~ICFUNG02.CRE~ ~override/QCFSPORE.CRE~
+  WRITE_BYTE 0x270 255
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QCFKCOM.CRE~
+  WRITE_BYTE 0x270 255
+COPY_EXISTING ~MEPMAG01.CRE~ ~override/QCFMMEP.CRE~
+  WRITE_BYTE 0x270 255
+COPY_EXISTING ~SPIDSW.CRE~ ~override/QCFSWSP.CRE~
+  WRITE_BYTE 0x270 255
+COPY_EXISTING ~ETTERC.CRE~ ~override/QCFETTR.CRE~
+  WRITE_BYTE 0x270 255
+COPY_EXISTING ~SPIDPHAS.CRE~ ~override/QCFASPI.CRE~
+  WRITE_BYTE 0x270 255
+COPY_EXISTING ~SPIDHU.CRE~ ~override/QCFHSPI.CRE~
+  WRITE_BYTE 0x270 255
+COPY_EXISTING ~SPIDSM01.CRE~ ~override/QCFSSPI.CRE~
+  WRITE_BYTE 0x270 255
+COPY_EXISTING ~KOBOLD.CRE~ ~override/QCFKOB.CRE~
+  WRITE_BYTE 0x270 255
+
+// Engine-supported low-visibility spell: opcode 262, flat VISUALRANGE 8.
+COPY ~CotSC/qc_firewine_dungeon_expansion/spells/QCFLOWV.SPL~ ~override/QCFLOWV.SPL~
+COPY ~CotSC/qc_firewine_dungeon_expansion/spells/QCFVRES.SPL~ ~override/QCFVRES.SPL~
+
+// Trap scripts from the confirmed-working v1.9 baseline plus local kobold roaming.
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/scripts/QCFWEB.baf~
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/scripts/QCFFIRE.baf~
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/scripts/QCFARRW.baf~
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/scripts/QCFROAM.baf~
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/scripts/QCCFIR.baf~
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/scripts/QCFVRES.baf~
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/dialogue/QCFMANTC.d~ USING ~CotSC/translation/%LANGUAGE%/qc_firewine_dungeon_expansion/dialogue/QCFMANTC.tra~
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/dialogue/QCFTAERO.d~ USING ~CotSC/translation/%LANGUAGE%/qc_firewine_dungeon_expansion/dialogue/QCFTAERO.tra~
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/scripts/QCFLARS.baf~
+COMPILE ~CotSC/qc_firewine_dungeon_expansion/dialogue/QCFLARA.d~ USING ~CotSC/translation/%LANGUAGE%/qc_firewine_dungeon_expansion/dialogue/QCFLARA.tra~
+
+// Remove the low-visibility effect immediately on return to BG5201.
+EXTEND_TOP ~BG5201.BCS~ ~CotSC/qc_firewine_dungeon_expansion/scripts/QCFVRES.baf~
+
+// New custom Firewine expansion area. Area resref: QCCFIR
+// v1.12 containers, loot, Boots and v1.9 one-shot traps are preserved.
+// v1.13 hostile monsters are preserved; v1.14 adds the Manticore encounter, hide/crafting path, and wild-magic field.
+COPY ~CotSC/qc_firewine_dungeon_expansion/area/QCCFIR.ARE~ ~override/QCCFIR.ARE~
+  // Enable the dedicated area script. The script reproduces SotSC's proven
+  // Firewine wild-magic method using WILD_MAGIC_AREA every 14 timer units.
+  WRITE_ASCII 0x94 ~QCCFIR~ #8
+
+  // Explicit BG1 dungeon music. BG5201 itself stores -1 for its song fields,
+  // meaning it inherits from a master area; QCCFIR has no such master relationship.
+  // DUNG1 is the verified BG1 dungeon track at song slot 121 on EET.
+  // Keep the proven cave battle track (48) used by our earlier custom dungeon work.
+  READ_LONG 0xBC qcfir_song_off
+  WRITE_LONG "%qcfir_song_off%" 121
+  WRITE_LONG ("%qcfir_song_off%" + 0x04) 121
+  WRITE_LONG ("%qcfir_song_off%" + 0x08) 0
+  WRITE_LONG ("%qcfir_song_off%" + 0x0C) 48
+  WRITE_LONG ("%qcfir_song_off%" + 0x10) 0
+
+  // Arrival point from BG5201 at the requested lower-level stairs.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 781
+      fj_loc_y = 1184
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCFIRIN
+  END
+
+  // QCCFIR -> BG5201. Cursor 30 is the proven door/entrance cursor used by
+  // the working Purple Wyrm and other interior transitions.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 753
+      fj_box_top = 1158
+      fj_box_right = 809
+      fj_box_bottom = 1210
+      fj_cursor_idx = 30
+      fj_flags = 0
+      fj_vertex_0 = 753 + (1158 << 16)
+      fj_vertex_1 = 809 + (1158 << 16)
+      fj_vertex_2 = 809 + (1210 << 16)
+      fj_vertex_3 = 753 + (1210 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCFTO520
+      fj_destination_area = BG5201
+      fj_destination_name = QCFIRRET
+  END
+
+  // Invisible/transparent blue-circle dialogue proxy for the chained manticore.
+  LPF fj_are_structure INT_VAR fj_loc_x=1302 fj_loc_y=451 fj_dest_x=1302 fj_dest_y=451 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCFMANT fj_cre_resref=QCFMANT fj_dlg_resref=QCFMANTC END
+
+  // Four Myconids from screenshot coordinates.
+  LPF fj_are_structure INT_VAR fj_loc_x=1289 fj_loc_y=887 fj_dest_x=1289 fj_dest_y=887 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCFMYC1 fj_cre_resref=QCFMYC END
+  LPF fj_are_structure INT_VAR fj_loc_x=1299 fj_loc_y=833 fj_dest_x=1299 fj_dest_y=833 fj_orientation=4 STR_VAR fj_structure_type=actor fj_name=QCFMYC2 fj_cre_resref=QCFMYC END
+  LPF fj_are_structure INT_VAR fj_loc_x=1270 fj_loc_y=759 fj_dest_x=1270 fj_dest_y=759 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QCFMYC3 fj_cre_resref=QCFMYC END
+  LPF fj_are_structure INT_VAR fj_loc_x=1408 fj_loc_y=912 fj_dest_x=1408 fj_dest_y=912 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCFMYC4 fj_cre_resref=QCFMYC END
+
+  // Two Spore Colonies: final two screenshot coordinates.
+  LPF fj_are_structure INT_VAR fj_loc_x=1391 fj_loc_y=1028 fj_dest_x=1391 fj_dest_y=1028 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCFSPO1 fj_cre_resref=QCFSPORE END
+  LPF fj_are_structure INT_VAR fj_loc_x=1307 fj_loc_y=1021 fj_dest_x=1307 fj_dest_y=1021 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCFSPO2 fj_cre_resref=QCFSPORE END
+
+  // Three hostile Kobold Commandos, locally roaming. QCFROAM is placed in the
+  // actor-specific slot; all source combat-script slots remain intact.
+  LPF fj_are_structure INT_VAR fj_loc_x=401 fj_loc_y=691 fj_dest_x=401 fj_dest_y=691 fj_orientation=12 fj_wander_dist_actor=100 fj_mvmt_dist_actor=100 STR_VAR fj_structure_type=actor fj_name=QCFKCOM1 fj_cre_resref=QCFKCOM fj_bcs_specific=QCFROAM END
+  LPF fj_are_structure INT_VAR fj_loc_x=601 fj_loc_y=693 fj_dest_x=601 fj_dest_y=693 fj_orientation=4 fj_wander_dist_actor=100 fj_mvmt_dist_actor=100 STR_VAR fj_structure_type=actor fj_name=QCFKCOM2 fj_cre_resref=QCFKCOM fj_bcs_specific=QCFROAM END
+  LPF fj_are_structure INT_VAR fj_loc_x=594 fj_loc_y=810 fj_dest_x=594 fj_dest_y=810 fj_orientation=8 fj_wander_dist_actor=100 fj_mvmt_dist_actor=100 STR_VAR fj_structure_type=actor fj_name=QCFKCOM3 fj_cre_resref=QCFKCOM fj_bcs_specific=QCFROAM END
+
+  // Magma Mephits.
+  LPF fj_are_structure INT_VAR fj_loc_x=812 fj_loc_y=318 fj_dest_x=812 fj_dest_y=318 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCFMMEP1 fj_cre_resref=QCFMMEP END
+  LPF fj_are_structure INT_VAR fj_loc_x=831 fj_loc_y=267 fj_dest_x=831 fj_dest_y=267 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCFMMEP2 fj_cre_resref=QCFMMEP END
+
+  // Spider room enemies.
+  LPF fj_are_structure INT_VAR fj_loc_x=244 fj_loc_y=374 fj_dest_x=244 fj_dest_y=374 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCFSWSP1 fj_cre_resref=QCFSWSP END
+  LPF fj_are_structure INT_VAR fj_loc_x=202 fj_loc_y=340 fj_dest_x=202 fj_dest_y=340 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QCFETTR1 fj_cre_resref=QCFETTR END
+  LPF fj_are_structure INT_VAR fj_loc_x=208 fj_loc_y=225 fj_dest_x=208 fj_dest_y=225 fj_orientation=4 STR_VAR fj_structure_type=actor fj_name=QCFASPI1 fj_cre_resref=QCFASPI END
+  LPF fj_are_structure INT_VAR fj_loc_x=286 fj_loc_y=221 fj_dest_x=286 fj_dest_y=221 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCFHSPI1 fj_cre_resref=QCFHSPI END
+  LPF fj_are_structure INT_VAR fj_loc_x=392 fj_loc_y=219 fj_dest_x=392 fj_dest_y=219 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QCFSWSP2 fj_cre_resref=QCFSWSP END
+  LPF fj_are_structure INT_VAR fj_loc_x=533 fj_loc_y=360 fj_dest_x=533 fj_dest_y=360 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCFSSPI1 fj_cre_resref=QCFSSPI END
+  LPF fj_are_structure INT_VAR fj_loc_x=494 fj_loc_y=392 fj_dest_x=494 fj_dest_y=392 fj_orientation=4 STR_VAR fj_structure_type=actor fj_name=QCFSSPI2 fj_cre_resref=QCFSSPI END
+
+  // One ordinary hostile Kobold, also locally roaming.
+  LPF fj_are_structure INT_VAR fj_loc_x=781 fj_loc_y=578 fj_dest_x=781 fj_dest_y=578 fj_orientation=12 fj_wander_dist_actor=80 fj_mvmt_dist_actor=80 STR_VAR fj_structure_type=actor fj_name=QCFKOB1 fj_cre_resref=QCFKOB fj_bcs_specific=QCFROAM END
+
+COPY ~CotSC/qc_firewine_dungeon_expansion/area/QCCFIR.WED~ ~override/QCCFIR.WED~
+COPY ~CotSC/qc_firewine_dungeon_expansion/area/QCCFIR.TIS~ ~override/QCCFIR.TIS~
+COPY ~CotSC/qc_firewine_dungeon_expansion/area/QCCFIRSR.BMP~ ~override/QCCFIRSR.BMP~
+COPY ~CotSC/qc_firewine_dungeon_expansion/area/QCCFIRLM.BMP~ ~override/QCCFIRLM.BMP~
+COPY ~CotSC/qc_firewine_dungeon_expansion/area/QCCFIRHT.BMP~ ~override/QCCFIRHT.BMP~
+COPY ~CotSC/qc_firewine_dungeon_expansion/area/QCFIR00.PVRZ~ ~override/QCFIR00.PVRZ~
+COPY ~CotSC/qc_firewine_dungeon_expansion/area/QCFIR01.PVRZ~ ~override/QCFIR01.PVRZ~
+COPY ~CotSC/qc_firewine_dungeon_expansion/area/QCFIR02.PVRZ~ ~override/QCFIR02.PVRZ~
+
+// ---------------------------------------------------------------------------
+// BG5201 <-> QCCFIR connection and Lara warning encounter
+// ---------------------------------------------------------------------------
+// Patch the installed BG5201 rather than replacing it with the supplied ARE,
+// preserving any changes from EET or other already-installed mods.
+COPY_EXISTING ~BG5201.ARE~ ~override/BG5201.ARE~
+  // Arrival from QCCFIR at the requested X=55,Y=872.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 55
+      fj_loc_y = 872
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCFIRRET
+  END
+
+  // BG5201 -> QCCFIR return stairs, using the same door icon cursor.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 29
+      fj_box_top = 844
+      fj_box_right = 81
+      fj_box_bottom = 900
+      fj_cursor_idx = 30
+      fj_flags = 0
+      fj_vertex_0 = 29 + (844 << 16)
+      fj_vertex_1 = 81 + (844 << 16)
+      fj_vertex_2 = 81 + (900 << 16)
+      fj_vertex_3 = 29 + (900 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCFROM52
+      fj_destination_area = QCCFIR
+      fj_destination_name = QCFIRIN
+  END
+
+  // Lara: just east of the new stairs, facing north. Her ARE actor override script
+  // uses the proven Kira/Delcia pattern: See([PC]) and LastSeenBy(Myself),
+  // so she approaches and warns whichever party member she sees first.
+  // The dialogue then uses EscapeArea(), which removes her after the warning.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 130
+      fj_loc_y = 856
+      fj_dest_x = 130
+      fj_dest_y = 856
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCFLARA
+      fj_cre_resref = QCFLARA
+      fj_dlg_resref = QCFLARA
+      fj_bcs_override = QCFLARS
+  END
+
+  // Dungeon-map marker for the newly connected lower level.
+  ADD_MAP_NOTE #55 #872 ~orange~
+    ~Lower Level~
+BUT_ONLY_IF_IT_CHANGES

@@ -1,0 +1,169 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_bg1_towns_carnivals.tra~
+
+// Elven Traveler — based on the same male elf chassis used for Beregost.
+COPY_EXISTING ~SARELF01.CRE~ ~override/BIFATRV.CRE~
+  SAY NAME1 @1028
+  SAY NAME2 @1028
+  WRITE_ASCII 0x2cc ~BIFATRV~ #8
+  WRITE_ASCII 0x280 ~BIFATRV~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Halfling Commoner — male Gullykin halfling chassis.
+COPY_EXISTING ~HALFG3.CRE~ ~override/BIFHAL01.CRE~
+  SAY NAME1 @1029
+  SAY NAME2 @1029
+  WRITE_ASCII 0x2cc ~BIFHAL01~ #8
+  WRITE_ASCII 0x280 ~BIFHAL01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Dwarven Peasant — SAILAL chassis, retaining its normal wandering behaviour.
+COPY_EXISTING ~SAILAL.CRE~ ~override/BIFDWP01.CRE~
+  SAY NAME1 @1030
+  SAY NAME2 @1030
+  WRITE_ASCII 0x2cc ~BIFDWP01~ #8
+  WRITE_ASCII 0x280 ~BIFDWP01~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Non-hostile Orc — standard ORC01 chassis; all AI scripts removed.
+COPY_EXISTING ~ORC01.CRE~ ~override/BIFORC01.CRE~
+  SAY NAME1 @1031
+  SAY NAME2 @1031
+  WRITE_ASCII 0x2cc ~BIFORC01~ #8
+  WRITE_ASCII 0x280 ~BIFORC01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Elven Commoner — same SARELF01 male elf chassis as in Beregost.
+COPY_EXISTING ~SARELF01.CRE~ ~override/BIFELF01.CRE~
+  SAY NAME1 @1021
+  SAY NAME2 @1021
+  WRITE_ASCII 0x2cc ~BIFELF01~ #8
+  WRITE_ASCII 0x280 ~BIFELF01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Female Dwarf Cook — female dwarf adventurer chassis with AI stripped.
+COPY_EXISTING ~FEAR.CRE~ ~override/BIFFCOOK.CRE~
+  SAY NAME1 @1032
+  SAY NAME2 @1032
+  WRITE_ASCII 0x2cc ~BIFFCOOK~ #8
+  WRITE_ASCII 0x280 ~BIFFCOOK~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Halfling Commoner — standing in the private chamber.
+COPY_EXISTING ~HALFFG.CRE~ ~override/BIFHAL02.CRE~
+  SAY NAME1 @1029
+  SAY NAME2 @1029
+  WRITE_ASCII 0x2cc ~BIFHAL02~ #8
+  WRITE_ASCII 0x280 ~BIFHAL02~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Non-hostile dog.
+COPY_EXISTING ~DOGWIL01.CRE~ ~override/BIFDOG01.CRE~
+  SAY NAME1 @1033
+  SAY NAME2 @1033
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BIFDOG01~ #32
+  WRITE_ASCII 0x248 ~QCFWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Ravoc — exact BDRAVOC chassis; neutral until the third conversation.
+COPY_EXISTING ~BDRAVOC.CRE~ ~override/BIFRAVOC.CRE~
+  SAY NAME1 @1034
+  SAY NAME2 @1034
+  WRITE_ASCII 0x2cc ~BIFRAVOC~ #8
+  WRITE_ASCII 0x280 ~BIFRAVOC~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/friendly_arm_inn.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/friendly_arm_inn.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg2300_friendly_arm.baf~
+EXTEND_TOP ~BG2300.BCS~ ~CotSC/better_immersion_beregost/bg2300_friendly_arm.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg2301_friendly_arm.baf~
+EXTEND_TOP ~BG2301.BCS~ ~CotSC/better_immersion_beregost/bg2301_friendly_arm.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg2302_friendly_arm.baf~
+EXTEND_TOP ~BG2302.BCS~ ~CotSC/better_immersion_beregost/bg2302_friendly_arm.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg2303_friendly_arm.baf~
+EXTEND_TOP ~BG2303.BCS~ ~CotSC/better_immersion_beregost/bg2303_friendly_arm.baf~
+
+// ---------------------------------------------------------------------------
+
+// CotSC optional BG1/EET interjections added after the original dialogue resources.
+COMPILE ~CotSC/better_immersion_beregost/QCFWAND.baf~

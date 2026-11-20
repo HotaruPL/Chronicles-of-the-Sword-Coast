@@ -1,0 +1,160 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/coran/tra/english/coran_old_flame.tra~
+ADD_JOURNAL TITLE (@7007) @1 @2 @3 USING ~CotSC/translation/%LANGUAGE%/coran/tra/english/coran_old_flame.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDACT04.CRE~ BEGIN
+  FAIL @20149
+END
+
+// Restore only the BG1 override scripts if a previous installation changed them to BG2 scripts.
+// This does NOT replace the characters and does not touch their dialogue files.
+// EET's official NPC transition definitions use these BG1 override scripts:
+// Imoen = IMOEN_, Jaheira = JAHEIRA_, Edwin = EDWIN_.
+ACTION_IF GAME_IS ~eet~ BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~IMOEN.CRE~ BEGIN
+    COPY_EXISTING ~IMOEN.CRE~ ~override~
+      READ_ASCII 0x248 ~qca_old_script~ (8)
+      PATCH_IF ~%qca_old_script%~ STRING_EQUAL_CASE ~IMOEN2~ BEGIN
+        WRITE_ASCII 0x248 ~IMOEN_~ #8
+      END
+    BUT_ONLY_IF_IT_CHANGES
+  END
+  ACTION_FOR_EACH qca_imoen_cre IN IMOEN1.CRE IMOEN4.CRE IMOEN6.CRE BEGIN
+    ACTION_IF FILE_EXISTS_IN_GAME ~%qca_imoen_cre%~ BEGIN
+      COPY_EXISTING ~%qca_imoen_cre%~ ~override~
+        READ_ASCII 0x248 ~qca_old_script~ (8)
+        PATCH_IF ~%qca_old_script%~ STRING_EQUAL_CASE ~IMOEN2~ BEGIN
+          WRITE_ASCII 0x248 ~IMOEN_~ #8
+        END
+      BUT_ONLY_IF_IT_CHANGES
+    END
+  END
+  ACTION_IF FILE_EXISTS_IN_GAME ~JAHEIRA_.CRE~ BEGIN
+    COPY_EXISTING ~JAHEIRA_.CRE~ ~override~
+      READ_ASCII 0x248 ~qca_old_script~ (8)
+      PATCH_IF ~%qca_old_script%~ STRING_EQUAL_CASE ~JAHEIRA~ BEGIN
+        WRITE_ASCII 0x248 ~JAHEIRA_~ #8
+      END
+    BUT_ONLY_IF_IT_CHANGES
+  END
+  ACTION_IF FILE_EXISTS_IN_GAME ~EDWIN_.CRE~ BEGIN
+    COPY_EXISTING ~EDWIN_.CRE~ ~override~
+      READ_ASCII 0x248 ~qca_old_script~ (8)
+      PATCH_IF ~%qca_old_script%~ STRING_EQUAL_CASE ~EDWIN~ BEGIN
+        WRITE_ASCII 0x248 ~EDWIN_~ #8
+      END
+    BUT_ONLY_IF_IT_CHANGES
+  END
+END
+
+// EET BG1 joined-dialogue resources only.
+// Do not copy, replace, or patch the BG1 character CREs.
+COPY_EXISTING ~BDACT04.CRE~ ~override/QCANNA.CRE~
+  SAY NAME1 @5011
+  SAY NAME2 @5011
+  WRITE_ASCII 0x248 ~QCANNA~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x280 ~QCANNA~ #32
+  WRITE_ASCII 0x2cc ~QCANNA~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/coran/QCANNA.D~ USING ~CotSC/translation/%LANGUAGE%/coran/tra/english/coran_old_flame.tra~
+COMPILE ~CotSC/coran/QCANNA.BAF~
+COMPILE ~CotSC/coran/QCANAE.BAF~
+
+
+// Annaebiel's house interior, first floor. Actors are already removed
+// from the bundled copy; containers are preserved exactly.
+COPY ~CotSC/coran/QCANAE.ARE~ ~override/QCANAE.ARE~
+
+// Annaebiel's house interior, second section. Actors are already removed
+// from the bundled copy; containers are preserved exactly.
+COPY ~CotSC/coran/QCANAE2.ARE~ ~override/QCANAE2.ARE~
+COPY ~CotSC/coran/QCANAE2.BCS~ ~override/QCANAE2.BCS~
+
+// Exterior entrance at BG1300 [1913,790]. Door cursor = 30.
+// The region points into the QCANAE entrance named Exit0700.
+COPY_EXISTING ~BG1300.ARE~ ~override/BG1300.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 1893
+      fj_box_top = 760
+      fj_box_right = 1933
+      fj_box_bottom = 820
+      fj_cursor_idx = 30
+      fj_flags = 0
+      fj_vertex_0 = 1893 + (760 << 16)
+      fj_vertex_1 = 1933 + (760 << 16)
+      fj_vertex_2 = 1933 + (820 << 16)
+      fj_vertex_3 = 1893 + (820 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = ~QCAnaDoor~
+      fj_destination_area = ~QCANAE~
+      fj_destination_name = ~Exit0700~
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1913
+      fj_loc_y = 790
+      fj_orientation = 6
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = ~QCAnaOutside~
+  END
+  ADD_MAP_NOTE #1913 #790 ~gray~ ~Annaebiel's house~
+
+// Fix the two copied interior travel links.
+// QCANAE first-floor entrance -> outside BG1300.
+COPY_EXISTING ~QCANAE.ARE~ ~override/QCANAE.ARE~
+  LPF ALTER_AREA_REGION
+    INT_VAR
+      type = 2
+      cursor = 30
+      flag_connect_to_door = 0
+    STR_VAR
+      region_name = ~Door0700~
+      destination_area = ~BG1300~
+      entrance_name = ~QCAnaOutside~
+  END
+  // QCANAE first floor -> upper section. Use the door cursor for a real usable transition.
+  LPF ALTER_AREA_REGION
+    INT_VAR
+      type = 2
+      cursor = 30
+      flag_connect_to_door = 0
+    STR_VAR
+      region_name = ~Door0708~
+      destination_area = ~QCANAE2~
+      entrance_name = ~Exit0707~
+  END
+
+// QCANAE2 -> QCANAE downstairs.
+COPY_EXISTING ~QCANAE2.ARE~ ~override/QCANAE2.ARE~
+  LPF ALTER_AREA_REGION
+    INT_VAR
+      type = 2
+      cursor = 30
+      flag_connect_to_door = 0
+    STR_VAR
+      region_name = ~Door0707~
+      destination_area = ~QCANAE~
+      entrance_name = ~Exit0708~
+  END
+  // Ensure the downstairs destination entrance exists.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 425
+      fj_loc_y = 350
+      fj_orientation = 6
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = ~Exit0708~
+  END

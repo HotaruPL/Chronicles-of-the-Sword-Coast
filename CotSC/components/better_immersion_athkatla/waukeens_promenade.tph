@@ -1,0 +1,394 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_bg2_quests_and_districts.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0700.ARE~ BEGIN
+  FAIL @20321
+END
+
+// ---------------------------------------------------------------------------
+// WAUKEEN'S PROMENADE - AR0700
+// All new resources use the QC prefix.
+// ---------------------------------------------------------------------------
+
+COMPILE ~CotSC/qc_better_immersion_athkatla/scripts/QCAWAND.baf~
+COMPILE ~CotSC/qc_better_immersion_athkatla/dialogue/QCAWAUK.d~ USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCAWAUK.tra~
+COMPILE ~CotSC/qc_better_immersion_athkatla/scripts/QCAHOST.baf~
+COMPILE ~CotSC/qc_better_immersion_athkatla/dialogue/QCASLUM.d~ USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCASLUM.tra~
+
+// Gnome Commoner - BENTLY chassis.
+COPY_EXISTING ~BENTLY.CRE~ ~override/QCAWGNO.CRE~
+  SAY NAME1 @3105
+  SAY NAME2 @3105
+  WRITE_ASCII 0x2cc ~QCAWGNO~ #8
+  WRITE_ASCII 0x280 ~QCAWGNO~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Elven Commoner - requested SARELF01 chassis.
+COPY_EXISTING ~SARELF01.CRE~ ~override/QCAWEL1.CRE~
+  SAY NAME1 @3106
+  SAY NAME2 @3106
+  WRITE_ASCII 0x2cc ~QCAWEL1~ #8
+  WRITE_ASCII 0x280 ~QCAWEL1~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Female human Commoner with a red-toned palette.
+COPY_EXISTING ~FTOBE3.CRE~ ~override/QCAWFEM.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_ASCII 0x2cc ~QCAWFEM~ #8
+  WRITE_ASCII 0x280 ~QCAWFEM~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x2d 47
+  WRITE_BYTE 0x2e 47
+  WRITE_BYTE 0x30 47
+  WRITE_BYTE 0x31 47
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming male Halfling Commoner.
+COPY_EXISTING ~HALFG3.CRE~ ~override/QCAWHAL.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  WRITE_ASCII 0x2cc ~QCAWHAL~ #8
+  WRITE_ASCII 0x280 ~QCAWHAL~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming neutral dog.
+COPY_EXISTING ~DOGWIL01.CRE~ ~override/QCAWDOG.CRE~
+  SAY NAME1 @3107
+  SAY NAME2 @3107
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCAWDOG~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Cattleman - human FARM chassis.
+COPY_EXISTING ~FARM.CRE~ ~override/QCAWCOW.CRE~
+  SAY NAME1 @3108
+  SAY NAME2 @3108
+  WRITE_ASCII 0x2cc ~QCAWCOW~ #8
+  WRITE_ASCII 0x280 ~QCAWCOW~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming Kobold Commoner.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QCAWKOB.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_ASCII 0x2cc ~QCAWKOB~ #8
+  WRITE_ASCII 0x280 ~QCAWKOB~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Female Elven Commoner - requested SARELF04 chassis, silver/grey clothing palette.
+COPY_EXISTING ~SARELF04.CRE~ ~override/QCAWEL2.CRE~
+  SAY NAME1 @3106
+  SAY NAME2 @3106
+  WRITE_ASCII 0x2cc ~QCAWEL2~ #8
+  WRITE_ASCII 0x280 ~QCAWEL2~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x2d 15
+  WRITE_BYTE 0x2e 15
+  WRITE_BYTE 0x30 15
+  WRITE_BYTE 0x31 15
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming Elven Commoner - requested SARELF03 chassis.
+COPY_EXISTING ~SARELF03.CRE~ ~override/QCAWEL3.CRE~
+  SAY NAME1 @3106
+  SAY NAME2 @3106
+  WRITE_ASCII 0x2cc ~QCAWEL3~ #8
+  WRITE_ASCII 0x280 ~QCAWEL3~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Dwarf Commoner.
+COPY_EXISTING ~SAILAL.CRE~ ~override/QCAWDW1.CRE~
+  SAY NAME1 @3109
+  SAY NAME2 @3109
+  WRITE_ASCII 0x2cc ~QCAWDW1~ #8
+  WRITE_ASCII 0x280 ~QCAWDW1~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Half-Elf Commoner - requested RINNIE chassis, recolored red.
+COPY_EXISTING ~RINNIE.CRE~ ~override/QCAWHLF.CRE~
+  SAY NAME1 @3015
+  SAY NAME2 @3015
+  WRITE_ASCII 0x2cc ~QCAWHLF~ #8
+  WRITE_ASCII 0x280 ~QCAWHLF~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x2d 47
+  WRITE_BYTE 0x2e 47
+  WRITE_BYTE 0x30 47
+  WRITE_BYTE 0x31 47
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Neutral cat.
+COPY_EXISTING ~CAT.CRE~ ~override/QCAWCAT.CRE~
+  SAY NAME1 @3017
+  SAY NAME2 @3017
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCAWCAT~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Static Kobold Commoner / Zekiel.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QCAWKO2.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_ASCII 0x2cc ~QCAWKO2~ #8
+  WRITE_ASCII 0x280 ~QCAWKO2~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Human male Commoner.
+COPY_EXISTING ~FARM.CRE~ ~override/QCAWHUM.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_ASCII 0x2cc ~QCAWHUM~ #8
+  WRITE_ASCII 0x280 ~QCAWHUM~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Female Halfling Commoner.
+COPY_EXISTING ~HALFFG.CRE~ ~override/QCAWHF1.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  WRITE_ASCII 0x2cc ~QCAWHF1~ #8
+  WRITE_ASCII 0x280 ~QCAWHF1~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Dwarf Commoner - QUINNE is not present in EET; use verified SAILAL dwarf chassis, weaponless, green/white palette.
+COPY_EXISTING ~SAILAL.CRE~ ~override/QCAWDW2.CRE~
+  SAY NAME1 @3109
+  SAY NAME2 @3109
+  WRITE_ASCII 0x2cc ~QCAWDW2~ #8
+  WRITE_ASCII 0x280 ~QCAWDW2~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  // Two-tone green/white clothing. Skin and hair are preserved from the dwarf chassis.
+  WRITE_BYTE 0x2d 5
+  WRITE_BYTE 0x2e 15
+  WRITE_BYTE 0x30 5
+  WRITE_BYTE 0x31 15
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Patch AR0700 in place. The uploaded ARE is reference-only; never replace the game area.
+COPY_EXISTING ~AR0700.ARE~ ~override~
+  // X=3042 Y=721 - Gnome, facing south.
+  LPF fj_are_structure INT_VAR fj_loc_x=3042 fj_loc_y=721 fj_dest_x=3042 fj_dest_y=721 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCAWGNO fj_cre_resref=QCAWGNO fj_dlg_resref=QCAWGNO END
+  // X=3044 Y=737 - SARELF01, facing north.
+  LPF fj_are_structure INT_VAR fj_loc_x=3044 fj_loc_y=737 fj_dest_x=3044 fj_dest_y=737 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCAWEL1 fj_cre_resref=QCAWEL1 fj_dlg_resref=QCAWEL1 END
+  // X=3003 Y=111 - female human, red palette, facing east.
+  LPF fj_are_structure INT_VAR fj_loc_x=3003 fj_loc_y=111 fj_dest_x=3003 fj_dest_y=111 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QCAWFEM fj_cre_resref=QCAWFEM fj_dlg_resref=QCAWFEM END
+  // X=3524 Y=1514 - roaming male halfling.
+  LPF fj_are_structure INT_VAR fj_loc_x=3524 fj_loc_y=1514 fj_dest_x=3524 fj_dest_y=1514 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCAWHAL fj_cre_resref=QCAWHAL fj_dlg_resref=QCAWHAL fj_bcs_override=QCAWAND END
+  // X=2040 Y=845 - roaming dog.
+  LPF fj_are_structure INT_VAR fj_loc_x=2040 fj_loc_y=845 fj_dest_x=2040 fj_dest_y=845 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCAWDOG fj_cre_resref=QCAWDOG fj_bcs_override=QCAWAND END
+  // X=1539 Y=983 - Cattleman.
+  LPF fj_are_structure INT_VAR fj_loc_x=1539 fj_loc_y=983 fj_dest_x=1539 fj_dest_y=983 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCAWCOW fj_cre_resref=QCAWCOW fj_dlg_resref=QCAWCOW END
+  // X=1738 Y=1637 - roaming Kobold Commoner.
+  LPF fj_are_structure INT_VAR fj_loc_x=1738 fj_loc_y=1637 fj_dest_x=1738 fj_dest_y=1637 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCAWKOB fj_cre_resref=QCAWKOB fj_dlg_resref=QCAWKOB fj_bcs_override=QCAWAND END
+  // X=2191 Y=2271 - SARELF04, silver, facing south-east.
+  LPF fj_are_structure INT_VAR fj_loc_x=2191 fj_loc_y=2271 fj_dest_x=2191 fj_dest_y=2271 fj_orientation=14 STR_VAR fj_structure_type=actor fj_name=QCAWEL2 fj_cre_resref=QCAWEL2 fj_dlg_resref=QCAWEL2 END
+  // X=2349 Y=2598 - roaming SARELF03.
+  LPF fj_are_structure INT_VAR fj_loc_x=2349 fj_loc_y=2598 fj_dest_x=2349 fj_dest_y=2598 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCAWEL3 fj_cre_resref=QCAWEL3 fj_dlg_resref=QCAWEL3 fj_bcs_override=QCAWAND END
+  // X=5003 Y=2466 - Dwarf Commoner, rotated 180 degrees: now facing west.
+  LPF fj_are_structure INT_VAR fj_loc_x=5003 fj_loc_y=2466 fj_dest_x=5003 fj_dest_y=2466 fj_orientation=4 STR_VAR fj_structure_type=actor fj_name=QCAWDW1 fj_cre_resref=QCAWDW1 fj_dlg_resref=QCAWDW1 END
+  // X=4970 Y=2465 - RINNIE-based Half-Elf, red, rotated 180 degrees: now facing east.
+  LPF fj_are_structure INT_VAR fj_loc_x=4970 fj_loc_y=2465 fj_dest_x=4970 fj_dest_y=2465 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QCAWHLF fj_cre_resref=QCAWHLF fj_dlg_resref=QCAWHLF END
+  // X=4874 Y=553 - cat.
+  LPF fj_are_structure INT_VAR fj_loc_x=4874 fj_loc_y=553 fj_dest_x=4874 fj_dest_y=553 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCAWCAT fj_cre_resref=QCAWCAT END
+  // X=194 Y=1197 - static Kobold Commoner, facing south.
+  LPF fj_are_structure INT_VAR fj_loc_x=194 fj_loc_y=1197 fj_dest_x=194 fj_dest_y=1197 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCAWKO2 fj_cre_resref=QCAWKO2 fj_dlg_resref=QCAWKO2 END
+  // X=1480 Y=754 - human male, facing north-west.
+  LPF fj_are_structure INT_VAR fj_loc_x=1480 fj_loc_y=754 fj_dest_x=1480 fj_dest_y=754 fj_orientation=6 STR_VAR fj_structure_type=actor fj_name=QCAWHUM fj_cre_resref=QCAWHUM fj_dlg_resref=QCAWHUM END
+  // X=1461 Y=733 - female halfling, facing south-east.
+  LPF fj_are_structure INT_VAR fj_loc_x=1461 fj_loc_y=733 fj_dest_x=1461 fj_dest_y=733 fj_orientation=14 STR_VAR fj_structure_type=actor fj_name=QCAWHF1 fj_cre_resref=QCAWHF1 fj_dlg_resref=QCAWHF1 END
+  // X=1357 Y=518 - dwarf commoner, facing north.
+  LPF fj_are_structure INT_VAR fj_loc_x=1357 fj_loc_y=518 fj_dest_x=1357 fj_dest_y=518 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCAWDW2 fj_cre_resref=QCAWDW2 fj_dlg_resref=QCAWDW2 END
+BUT_ONLY_IF_IT_CHANGES
+
+
+// ---------------------------------------------------------------------------
+// AR0702 - Adventurer's Mart interior
+// ---------------------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0702.ARE~ BEGIN
+  FAIL @20322
+END
+
+// Neutral Hobgoblin customer / cargo worker. Use the proven EET hobgoblin chassis.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC702HOB.CRE~
+  SAY NAME1 @3110
+  SAY NAME2 @3110
+  WRITE_ASCII 0x2cc ~QC702HOB~ #8
+  WRITE_ASCII 0x280 ~QC702HOB~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0702.ARE~ ~override~
+  // X=359 Y=549 - Hobgoblin, facing north-west.
+  LPF fj_are_structure INT_VAR fj_loc_x=359 fj_loc_y=549 fj_dest_x=359 fj_dest_y=549 fj_orientation=6 STR_VAR fj_structure_type=actor fj_name=QC702HOB fj_cre_resref=QC702HOB fj_dlg_resref=QC702HOB END
+BUT_ONLY_IF_IT_CHANGES
+
+// ---------------------------------------------------------------------------
+// AR0709 - Mithrest Inn
+// ---------------------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0709.ARE~ BEGIN
+  FAIL @20323
+END
+
+// Static neutral Hobgoblin bouncer. Keep the hobgoblin chassis/equipment but make him non-hostile.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC709BOU.CRE~
+  SAY NAME1 @3111
+  SAY NAME2 @3111
+  WRITE_ASCII 0x2cc ~QC709BOU~ #8
+  WRITE_ASCII 0x280 ~QC709BOU~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0709.ARE~ ~override~
+  // X=382 Y=846 - Bouncer, facing north-east.
+  LPF fj_are_structure INT_VAR fj_loc_x=382 fj_loc_y=846 fj_dest_x=382 fj_dest_y=846 fj_orientation=10 STR_VAR fj_structure_type=actor fj_name=QC709BOU fj_cre_resref=QC709BOU fj_dlg_resref=QC709BOU END
+BUT_ONLY_IF_IT_CHANGES
+
+

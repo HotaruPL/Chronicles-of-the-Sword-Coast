@@ -1,0 +1,628 @@
+// ---------------------------------------------------------------------------
+// BG1109 - BALDUR'S GATE DISTRICT ADDITION
+// ---------------------------------------------------------------------------
+
+COMPILE ~CotSC/better_immersion_beregost/bg1109_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg1109_baldurs_gate.tra~
+
+COPY_EXISTING ~OGREHA.CRE~ ~override/BIBOGRB3.CRE~
+  SAY NAME1 @2024
+  SAY NAME2 @2024
+  WRITE_ASCII 0x2cc ~BIBBOU13~ #8
+  WRITE_ASCII 0x280 ~BIBOGRB3~ #32
+  WRITE_ASCII 0x248 ~BIBBOUNC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg1109_baldurs_gate.baf~
+EXTEND_TOP ~BG1109.BCS~ ~CotSC/better_immersion_beregost/bg1109_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BG0600 - BALDUR'S GATE CENTRAL DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+COMPILE ~CotSC/better_immersion_beregost/bg0600_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0600_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0600_baldurs_gate.baf~
+EXTEND_TOP ~BG0600.BCS~ ~CotSC/better_immersion_beregost/bg0600_baldurs_gate.baf~
+
+// Remove stale diagnostic resources from previous Half-Orc tests.
+DELETE ~override/BIBHORK0.CRE~
+DELETE ~override/BIBHORK02.CRE~
+DELETE ~override/BIBHORK1.CRE~
+DELETE ~override/BIBHORKA.BCS~
+DELETE ~override/BIBORC01.CRE~
+DELETE ~override/BIBORCA.BCS~
+
+// Elven Commoner — static.
+COPY_EXISTING ~SARELF01.CRE~ ~override/BIBELF18.CRE~
+  SAY NAME1 @2012
+  SAY NAME2 @2012
+  WRITE_ASCII 0x2cc ~BIBELF18~ #8
+  WRITE_ASCII 0x280 ~BIBELF18~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Female Human Commoner — static.
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/BIBHUM15.CRE~
+  SAY NAME1 @2014
+  SAY NAME2 @2014
+  WRITE_ASCII 0x2cc ~BIBHUM15~ #8
+  WRITE_ASCII 0x280 ~BIBHUM15~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering Halfling Commoner — preserve the generic wandering AI.
+COPY_EXISTING ~HALFG3.CRE~ ~override/BIBHAL17.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~BIBHAL17~ #8
+  WRITE_ASCII 0x280 ~BIBHAL17~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Orc Commoner — weaponless and static.
+COPY_EXISTING ~ORC02.CRE~ ~override/BIBORC12.CRE~
+  SAY NAME1 @2004
+  SAY NAME2 @2004
+  WRITE_ASCII 0x2cc ~BIBORC12~ #8
+  WRITE_ASCII 0x280 ~BIBORC12~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~ORC02.CRE~ ~override/BIBORC13.CRE~
+  SAY NAME1 @2004
+  SAY NAME2 @2004
+  WRITE_ASCII 0x2cc ~BIBORC13~ #8
+  WRITE_ASCII 0x280 ~BIBORC13~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering Kobold Commoner — preserve the generic wandering AI.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BIBKOB20.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BIBKOB20~ #8
+  WRITE_ASCII 0x280 ~BIBKOB20~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering Duergar Commoner — same PDWARF01 chassis; only the displayed name changes.
+COPY_EXISTING ~PDWARF01.CRE~ ~override/BIBDWR17.CRE~
+  SAY NAME1 @2019
+  SAY NAME2 @2019
+  WRITE_ASCII 0x2cc ~BIBDWR17~ #8
+  WRITE_ASCII 0x280 ~BIBDWR17~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Human baker diagnostic NPC: use the standard NALBARG chassis/sprite.
+// This is a completely new resource and has no dependency on any previous
+// Half-Orc or Orc diagnostic CRE.
+COPY_EXISTING ~NALBARG.CRE~ ~override/BIBBAK01.CRE~
+  SAY NAME1 @2040
+  SAY NAME2 @2040
+  WRITE_ASCII 0x2cc ~BIBBAK01~ #8
+  WRITE_ASCII 0x280 ~BIBBAK01~ #32
+  WRITE_ASCII 0x248 ~BIBBAKA~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bibbak01.baf~
+
+// ---------------------------------------------------------------------------
+// BG0607 - FLAMING FIST GAOL ADDITIONS
+// ---------------------------------------------------------------------------
+
+// Drow prisoner — male drow chassis, stripped of all equipment and AI.
+COPY_EXISTING ~DADROW2.CRE~ ~override/BIBDRO07.CRE~
+  SAY NAME1 @2041
+  SAY NAME2 @2041
+  WRITE_ASCII 0x2cc ~BIBDRO07~ #8
+  WRITE_ASCII 0x280 ~BIBDRO07~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Troll prisoner — normal troll chassis, with AI removed and allegiance set to neutral.
+// Its native troll mechanics are retained.
+COPY_EXISTING ~TROLL01.CRE~ ~override/BIBTROL7.CRE~
+  SAY NAME1 @2042
+  SAY NAME2 @2042
+  WRITE_ASCII 0x2cc ~BIBTROL7~ #8
+  WRITE_ASCII 0x280 ~BIBTROL7~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// High Constable — noble-looking human chassis, stripped of AI/equipment.
+COPY_EXISTING ~ENTAR.CRE~ ~override/BIBHCON7.CRE~
+  SAY NAME1 @2043
+  SAY NAME2 @2043
+  WRITE_ASCII 0x2cc ~BIBHCON7~ #8
+  WRITE_ASCII 0x280 ~BIBHCON7~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  // Clear the CRE sound-set strrefs inherited from Entar so the High Constable
+  // does not use Entar's voiced selection lines (e.g. the line about Skie).
+  FOR (i = 0; i < 100; ++i) BEGIN
+    WRITE_LONG (0xa4 + (i * 4)) 0
+  END
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Kobold Commoner — BG1114, weaponless and static.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BIBKOB19.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BIBKOB19~ #8
+  WRITE_ASCII 0x280 ~BIBKOB19~ #32
+  WRITE_ASCII 0x248 ~QCKOB114~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0607_flaming_fist_gaol.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0607_flaming_fist_gaol.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0607_flaming_fist_gaol.baf~
+EXTEND_TOP ~BG0607.BCS~ ~CotSC/better_immersion_beregost/bg0607_flaming_fist_gaol.baf~
+
+// ---------------------------------------------------------------------------
+// BG1114 - YE OLDE INN, SECOND FLOOR
+// ---------------------------------------------------------------------------
+
+COMPILE ~CotSC/better_immersion_beregost/bg1114.baf~
+EXTEND_TOP ~BG1114.BCS~ ~CotSC/better_immersion_beregost/bg1114.baf~
+
+
+// ---------------------------------------------------------------------------
+// BG0300 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BIB0301.CRE~
+  SAY NAME1 @2006
+  SAY NAME2 @2006
+  WRITE_ASCII 0x2cc ~BIB0301~ #8
+  WRITE_ASCII 0x280 ~BIB0301~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HALFG3.CRE~ ~override/BIB0302.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~BIB0302~ #8
+  WRITE_ASCII 0x280 ~BIB0302~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BIB0303.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BIB0303~ #8
+  WRITE_ASCII 0x280 ~BIB0303~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BIB0304.CRE~
+  SAY NAME1 @2044
+  SAY NAME2 @2044
+  WRITE_ASCII 0x2cc ~BIB0304~ #8
+  WRITE_ASCII 0x280 ~BIB0304~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BIB0305.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BIB0305~ #8
+  WRITE_ASCII 0x280 ~BIB0305~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HALFG3.CRE~ ~override/BIB0306.CRE~
+  SAY NAME1 @2045
+  SAY NAME2 @2045
+  WRITE_ASCII 0x2cc ~BIB0306~ #8
+  WRITE_ASCII 0x280 ~BIB0306~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BIB0307.CRE~
+  SAY NAME1 @2006
+  SAY NAME2 @2006
+  WRITE_ASCII 0x2cc ~BIB0307~ #8
+  WRITE_ASCII 0x280 ~BIB0307~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0300_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0300_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0300_baldurs_gate.baf~
+EXTEND_TOP ~BG0300.BCS~ ~CotSC/better_immersion_beregost/bg0300_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BG0103 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~OGREHA.CRE~ ~override/BIB1031.CRE~
+  SAY NAME1 @2046
+  SAY NAME2 @2046
+  WRITE_ASCII 0x2cc ~BIB1031~ #8
+  WRITE_ASCII 0x280 ~BIB1031~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BIB1032.CRE~
+  SAY NAME1 @2024
+  SAY NAME2 @2024
+  WRITE_ASCII 0x2cc ~BIB1032~ #8
+  WRITE_ASCII 0x280 ~BIB1032~ #32
+  WRITE_ASCII 0x248 ~BIBBOUNC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0103_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0103_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0103_baldurs_gate.baf~
+EXTEND_TOP ~BG0103.BCS~ ~CotSC/better_immersion_beregost/bg0103_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BG0104 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~VOLTIN.CRE~ ~override/BIB1041.CRE~
+  SAY NAME1 @2015
+  SAY NAME2 @2015
+  WRITE_ASCII 0x2cc ~BIB1041~ #8
+  WRITE_ASCII 0x280 ~BIB1041~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0104_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0104_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0104_baldurs_gate.baf~
+EXTEND_TOP ~BG0104.BCS~ ~CotSC/better_immersion_beregost/bg0104_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BG0304 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+// Same FEAR.CRE chassis used for the BG0700 Duergar Commoner; only the
+// resource name is different so the two placed NPCs remain independent.
+COPY_EXISTING ~FEAR.CRE~ ~override/BIBDWR18.CRE~
+  SAY NAME1 @2019
+  SAY NAME2 @2019
+  WRITE_ASCII 0x2cc ~BIBDWR18~ #8
+  WRITE_ASCII 0x280 ~BIBDWR18~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0304_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0304_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0304_baldurs_gate.baf~
+EXTEND_TOP ~BG0304.BCS~ ~CotSC/better_immersion_beregost/bg0304_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BG0100 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~OGRE.CRE~ ~override/BIB1001.CRE~
+  SAY NAME1 @2047
+  SAY NAME2 @2047
+  WRITE_ASCII 0x2cc ~BIB1001~ #8
+  WRITE_ASCII 0x280 ~BIB1001~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/BIB1002.CRE~
+  SAY NAME1 @2014
+  SAY NAME2 @2014
+  WRITE_ASCII 0x2cc ~BIB1002~ #8
+  WRITE_ASCII 0x280 ~BIB1002~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~LAOLA.CRE~ ~override/BIB1003.CRE~
+  SAY NAME1 @2011
+  SAY NAME2 @2011
+  WRITE_ASCII 0x2cc ~BIB1003~ #8
+  WRITE_ASCII 0x280 ~BIB1003~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SARELF01.CRE~ ~override/BIB1004.CRE~
+  SAY NAME1 @2012
+  SAY NAME2 @2012
+  WRITE_ASCII 0x2cc ~BIB1004~ #8
+  WRITE_ASCII 0x280 ~BIB1004~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HALFFG.CRE~ ~override/BIB1005.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~BIB1005~ #8
+  WRITE_ASCII 0x280 ~BIB1005~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FLAME.CRE~ ~override/BIB1006.CRE~
+  SAY NAME1 @2011
+  SAY NAME2 @2011
+  WRITE_ASCII 0x2cc ~BIB1006~ #8
+  WRITE_ASCII 0x280 ~BIB1006~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  // Keep original Flaming Fist armor and weapons.
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BIB1007.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BIB1007~ #8
+  WRITE_ASCII 0x280 ~BIB1007~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~NEB.CRE~ ~override/BIB1008.CRE~
+  SAY NAME1 @2048
+  SAY NAME2 @2048
+  WRITE_ASCII 0x2cc ~BIB1008~ #8
+  WRITE_ASCII 0x280 ~BIB1008~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0100_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0100_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0100_baldurs_gate.baf~
+EXTEND_TOP ~BG0100.BCS~ ~CotSC/better_immersion_beregost/bg0100_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BG0165 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~SARELF03.CRE~ ~override/BIB1651.CRE~
+  SAY NAME1 @2017
+  SAY NAME2 @2017
+  WRITE_ASCII 0x2cc ~BIB1651~ #8
+  WRITE_ASCII 0x280 ~BIB1651~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0165_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0165_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0165_baldurs_gate.baf~
+EXTEND_TOP ~BG0165.BCS~ ~CotSC/better_immersion_beregost/bg0165_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BG0166 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BIB1661.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BIB1661~ #8
+  WRITE_ASCII 0x280 ~BIB1661~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0166_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0166_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0166_baldurs_gate.baf~
+EXTEND_TOP ~BG0166.BCS~ ~CotSC/better_immersion_beregost/bg0166_baldurs_gate.baf~
+
+
+
+

@@ -1,0 +1,40 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+// Clone the existing BG1 hermit. Do not alter PORTAL.CRE globally.
+COPY_EXISTING ~PORTAL.CRE~ ~override/QOPHERM.CRE~
+  WRITE_ASCII 0x248 ~QOPAPP~ #8
+  WRITE_ASCII 0x250 ~~ #32 // clear original class/race/general/default scripts
+  WRITE_ASCII 0x280 ~QOPHERM~ #32 // unique death variable
+  WRITE_ASCII 0x2cc ~QOPORT~ #8
+  WRITE_BYTE 0x270 128 // neutral, non-hostile
+BUT_ONLY
+
+// A unique, removable copy of HELM02. The original item is untouched.
+COPY_EXISTING ~HELM02.ITM~ ~override/QOPHELM.ITM~
+  READ_LONG 0x18 ~flags~
+  WRITE_LONG 0x18 (flags BAND 0xFFFFFFEF) // clear cursed item flag (bit 4)
+  SAY NAME1 @5049
+  SAY NAME2 @5049
+  SAY DESC @5050
+BUT_ONLY
+
+// Initialise ToB joined dialogue assignments before introducing Portal.
+COMPILE ~CotSC/old_friend_saradush/scripts/QOPAPP.baf~
+COMPILE ~CotSC/old_friend_saradush/dialogue/QOPORT.d~ USING ~CotSC/translation/%LANGUAGE%/old_friend_saradush/dialogue/QOPORT.tra~
+
+// Add one actor without replacing or redistributing the user's AR5003.ARE.
+// AR5003 is the Saradush tavern, not outdoor city AR5000.
+COPY_EXISTING ~AR5003.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 999
+      fj_loc_y       = 871
+      fj_dest_x      = 999
+      fj_dest_y      = 871
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = ~Portalbendarwinden~
+      fj_cre_resref     = ~QOPHERM~
+  END
+BUT_ONLY

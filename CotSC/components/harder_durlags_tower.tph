@@ -1,0 +1,126 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+// This component deliberately uses existing creature resources wherever possible.
+// It adds fixed encounters to the Durlag's Tower areas and one named neutral
+// Dwarven Doom Guard (Kyril) with a repeatable dialogue.
+//
+// All new resources use the HDT prefix.
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DOOMDUR.CRE~ BEGIN
+  FAIL @20153
+END
+
+// ---------------------------------------------------------------------------
+// KIEL'S LETTER
+// Based on the working MISC8B note item so the inventory/ground/description
+// icon structure is retained.
+// ---------------------------------------------------------------------------
+COPY_EXISTING ~MISC8B.ITM~ ~override/HDTKIELL.ITM~
+  SAY NAME1 @5014
+  SAY NAME2 @5014
+  SAY DESC @5015
+
+// ---------------------------------------------------------------------------
+// MECHEZARIN LORE BOOK
+// Based on the existing ohnnote5 book item so its proven book presentation/icon
+// remains intact.
+// ---------------------------------------------------------------------------
+COPY_EXISTING ~OHNNOTE5.ITM~ ~override/HDTMECHE.ITM~
+  SAY NAME1 @5016
+  SAY NAME2 @5016
+  SAY DESC @5017
+
+// Lore items are created by the area scripts after the areas load.
+// This avoids modifying the ARE container item tables directly.
+
+// ---------------------------------------------------------------------------
+// KYRIL
+// ---------------------------------------------------------------------------
+// Kyril is deliberately based on the original Love warder rather than the
+// silent Doom Guard creature. Love is a proven talking Durlag's Tower actor.
+// We then copy the Doom Guard animation and palette so Kyril still looks like
+// one of Durlag's iron guardians.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~LOVE.CRE~ BEGIN
+  FAIL @20154
+END
+
+COPY_EXISTING ~DOOMDUR.CRE~ ~override/HDTKYRIL.CRE~
+  READ_LONG 0x28 ~hdt_doom_anim~
+  READ_BYTE 0x2c ~hdt_doom_metal~
+  READ_BYTE 0x2d ~hdt_doom_minor~
+  READ_BYTE 0x2e ~hdt_doom_major~
+  READ_BYTE 0x2f ~hdt_doom_skin~
+  READ_BYTE 0x30 ~hdt_doom_leather~
+  READ_BYTE 0x31 ~hdt_doom_armor~
+  WRITE_ASCII 0x2e8 ~HDTKYRIL~ #32
+  WRITE_BYTE 0x2d8 128
+
+COPY_EXISTING ~LOVE.CRE~ ~override/HDTKYRIL.CRE~
+  WRITE_ASCII 0x2e8 ~HDTKYRIL~ #32
+  SAY NAME1 @5018
+  SAY NAME2 @5018
+  WRITE_LONG 0x28 ~hdt_doom_anim~
+  WRITE_BYTE 0x2c ~hdt_doom_metal~
+  WRITE_BYTE 0x2d ~hdt_doom_minor~
+  WRITE_BYTE 0x2e ~hdt_doom_major~
+  WRITE_BYTE 0x2f ~hdt_doom_skin~
+  WRITE_BYTE 0x30 ~hdt_doom_leather~
+  WRITE_BYTE 0x31 ~hdt_doom_armor~
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~HDTKYRIL~ #8
+  ADD_CRE_ITEM ~HELM01~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+  ADD_CRE_ITEM ~SW1H53~ #0 #0 #0 ~IDENTIFIED&UNDROPPABLE~ ~WEAPON1~ EQUIP
+  // Keep Love's known-working creature scripts.
+
+// ---------------------------------------------------------------------------
+// NAMED CREATURE COPIES
+// These keep the existing creature statistics/scripts while giving the new
+// placed creatures unique resrefs/death variables.
+// ---------------------------------------------------------------------------
+COPY_EXISTING ~GORTAN6.CRE~ ~override/HDTVGHUL.CRE~
+  SAY NAME1 @5019
+  SAY NAME2 @5019
+  WRITE_ASCII 0x2e8 ~HDTVGHUL~ #32
+  WRITE_BYTE 0x270 255
+
+COPY_EXISTING ~ICYUAN03.CRE~ ~override/HDTVERZI.CRE~
+  SAY NAME1 @5020
+  SAY NAME2 @5020
+  WRITE_ASCII 0x280 ~HDTVERZI~ #32
+
+COMPILE ~CotSC/harder_durlags_tower/HDTKYRIL.D~ USING ~CotSC/translation/%LANGUAGE%/harder_durlags_tower/HDTKYRIL.tra~
+
+// ---------------------------------------------------------------------------
+// KYRIL AREA ACTOR
+// Use the Love-based creature directly. No custom Kyril movement/dialogue
+// script is attached; the copied Love CRE supplies its normal interaction.
+// ---------------------------------------------------------------------------
+COPY_EXISTING ~BG0513.ARE~ ~override/BG0513.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 700
+      fj_loc_y = 1631
+      fj_dest_x = 700
+      fj_dest_y = 1631
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = ~HDTKYRIL~
+      fj_cre_resref = ~HDTKYRIL~
+      fj_dlg_resref = ~HDTKYRIL~
+  END
+  BUT_ONLY
+
+// ---------------------------------------------------------------------------
+// AREA SPAWNS
+// Directions: 0=south, 4=west, 8=north, 12=east.
+// ---------------------------------------------------------------------------
+EXTEND_BOTTOM ~BG0503.BCS~ ~CotSC/harder_durlags_tower/BG0503_HDT.baf~
+EXTEND_BOTTOM ~BG0504.BCS~ ~CotSC/harder_durlags_tower/BG0504_HDT.baf~
+EXTEND_BOTTOM ~BG0505.BCS~ ~CotSC/harder_durlags_tower/BG0505_HDT.baf~
+EXTEND_BOTTOM ~BG0511.BCS~ ~CotSC/harder_durlags_tower/BG0511_HDT.baf~
+EXTEND_BOTTOM ~BG0512.BCS~ ~CotSC/harder_durlags_tower/BG0512_HDT.baf~
+EXTEND_BOTTOM ~BG0513.BCS~ ~CotSC/harder_durlags_tower/BG0513_HDT.baf~
+EXTEND_BOTTOM ~BG0514.BCS~ ~CotSC/harder_durlags_tower/BG0514_HDT.baf~
+EXTEND_BOTTOM ~BG0516.BCS~ ~CotSC/harder_durlags_tower/BG0516_HDT.baf~

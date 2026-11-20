@@ -1,0 +1,96 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_bg2_quests_and_districts.tra~
+
+// IMPORTANT: This is a SINGLE INSTALLABLE COMPONENT. Do not layer it on top
+// of all the already-installed historical River District WeiDU components.
+// Use a test EET installation or remove historical components in reverse order
+// with WeiDU first, and load a game saved outside QCRIVD.
+// This is a *build consolidation*, not proof of in-game functioning.
+
+// ====================================================================
+// PART 1/7: Frozen v2.0 outdoor area, six approved containers, padded texture atlases
+// ====================================================================
+
+// WED corrected from 9 wall groups to 24 for 54x26 tiles; other files unchanged.
+// Existing areas, scripts, creatures and dialogue are not touched.
+COPY ~CotSC/qc_river_district/area/QCRIVD.ARE~ ~override/QCRIVD.ARE~
+COPY ~CotSC/qc_river_district/area/QCRIVD.WED~ ~override/QCRIVD.WED~
+COPY ~CotSC/qc_river_district/area/QCRIVD.TIS~ ~override/QCRIVD.TIS~
+COPY ~CotSC/qc_river_district/area/QRIVD00.PVRZ~ ~override/QRIVD00.PVRZ~
+COPY ~CotSC/qc_river_district/area/QRIVD01.PVRZ~ ~override/QRIVD01.PVRZ~
+COPY ~CotSC/qc_river_district/area/QRIVD02.PVRZ~ ~override/QRIVD02.PVRZ~
+COPY ~CotSC/qc_river_district/area/QRIVD03.PVRZ~ ~override/QRIVD03.PVRZ~
+COPY ~CotSC/qc_river_district/area/QRIVD04.PVRZ~ ~override/QRIVD04.PVRZ~
+COPY ~CotSC/qc_river_district/area/QRIVD05.PVRZ~ ~override/QRIVD05.PVRZ~
+COPY ~CotSC/qc_river_district/area/QRIVD06.PVRZ~ ~override/QRIVD06.PVRZ~
+COPY ~CotSC/qc_river_district/area/QCRIVDSR.BMP~ ~override/QCRIVDSR.BMP~
+COPY ~CotSC/qc_river_district/area/QCRIVDLM.BMP~ ~override/QCRIVDLM.BMP~
+COPY ~CotSC/qc_river_district/area/QCRIVDHT.BMP~ ~override/QCRIVDHT.BMP~
+
+// v3.6: new QCHANN Hannibal Hideout area; derived from user-supplied map.
+// Its complete resource chain is owned by THIS unified installer.
+COPY ~CotSC/qriv_hannibal/area/QCHANN.ARE~ ~override/QCHANN.ARE~
+COPY ~CotSC/qriv_hannibal/area/QCHANN.WED~ ~override/QCHANN.WED~
+COPY ~CotSC/qriv_hannibal/area/QCHANN.TIS~ ~override/QCHANN.TIS~
+COPY ~CotSC/qriv_hannibal/area/QHANN00.PVRZ~ ~override/QHANN00.PVRZ~
+COPY ~CotSC/qriv_hannibal/area/QHANN01.PVRZ~ ~override/QHANN01.PVRZ~
+COPY ~CotSC/qriv_hannibal/area/QHANN02.PVRZ~ ~override/QHANN02.PVRZ~
+COPY ~CotSC/qriv_hannibal/area/QHANN03.PVRZ~ ~override/QHANN03.PVRZ~
+COPY ~CotSC/qriv_hannibal/area/QHANN04.PVRZ~ ~override/QHANN04.PVRZ~
+COPY ~CotSC/qriv_hannibal/area/QHANN05.PVRZ~ ~override/QHANN05.PVRZ~
+COPY ~CotSC/qriv_hannibal/area/QHANN06.PVRZ~ ~override/QHANN06.PVRZ~
+COPY ~CotSC/qriv_hannibal/area/QCHANNSR.BMP~ ~override/QCHANNSR.BMP~
+COPY ~CotSC/qriv_hannibal/area/QCHANNLM.BMP~ ~override/QCHANNLM.BMP~
+COPY ~CotSC/qriv_hannibal/area/QCHANNHT.BMP~ ~override/QCHANNHT.BMP~
+
+// v4.6: three ordinary bottles of wine without borrowing a quest-specific wine resref.
+COPY_EXISTING ~MISC61.ITM~ ~override/QRHWINE.ITM~
+  SAY NAME1 @3000
+  SAY NAME2 @3000
+  SAY DESC @3001
+  SAY UNIDENTIFIED_DESC @3001
+BUT_ONLY_IF_IT_CHANGES
+
+// v4.6: Felicity's unique quest ring. Use the uploaded gold-leaf ring art,
+// not the standard silver ring sprite. Mechanical template is mundane RING11.
+COPY ~CotSC/qriv_hannibal/items/QRFRNG.BAM~ ~override/QRFRNG.BAM~
+COPY ~CotSC/qriv_hannibal/items/QRFRG2.BAM~ ~override/QRFRG2.BAM~
+COPY_EXISTING ~RING11.ITM~ ~override/QRVFRING.ITM~
+  SAY NAME1 @3002
+  SAY NAME2 @3002
+  SAY DESC @3003
+  SAY UNIDENTIFIED_DESC @3004
+  WRITE_ASCII 0x3A ~QRFRNG~ #8
+  WRITE_ASCII 0x58 ~QRFRG2~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// ====================================================================
+// PART 2/7: v2.1 music and day/night cycle
+// ====================================================================
+
+// This is an addon: it patches the installed ARE, not the packaged baseline.
+// The six approved containers and all graphics/collision resources are preserved.
+
+
+// This track is Ogg Vorbis audio with .ACM extension, supported by BG2EE/EET.
+// The .MUS playlist contains one segment: music/QCRIVD/QCRIVDA.ACM.
+MKDIR ~music/QCRIVD~
+COPY ~CotSC/qc_river_music/music/QCRIVD/QCRIVDA.acm~ ~music/QCRIVD/QCRIVDA.acm~
+ADD_MUSIC ~QRIV_THEME~ ~CotSC/qc_river_music/music/QCRIVD.MUS~
+
+// 0x48: Outdoor(1) + Day/Night(2) + City(8), retain all original flags.
+// At the existing song table offset (0xBC), override only day and night songs.
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  PATCH_IF (SOURCE_SIZE < 0xE4) BEGIN
+    PATCH_FAIL @20174
+  END
+  READ_SHORT 0x48 qriv_area_type
+  WRITE_SHORT 0x48 (qriv_area_type BOR 0x000B)
+  READ_LONG 0xBC qriv_song_table
+  PATCH_IF (qriv_song_table > 0) AND (qriv_song_table + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG qriv_song_table QRIV_THEME
+    WRITE_LONG (qriv_song_table + 4) QRIV_THEME
+  END ELSE BEGIN
+    PATCH_FAIL @20175
+  END
+BUT_ONLY_IF_IT_CHANGES
+

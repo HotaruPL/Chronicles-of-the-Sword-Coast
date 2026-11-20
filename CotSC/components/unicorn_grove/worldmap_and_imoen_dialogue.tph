@@ -1,0 +1,267 @@
+// v26: place Unicorn Grove's worldmap arrival and precisely limited exit areas.
+// Preserve v25's already-working hidden worldmap reveal and all other components.
+
+// ---------- Integrated milestone: QC: Unicorn Grove - Arrival and Two Worldmap Exits (QCCGRV)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCCGRV.ARE~ BEGIN FAIL ~Install the working Unicorn Grove first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCCGRVSR.BMP~ BEGIN FAIL ~Unicorn Grove search map is missing.~ END
+
+// Unified build: QCSTART already exists in the source ARE; the precise
+// 969,1725 location is set by the verified v29 0x68 entrance patch.
+// Worldmap exits in the Infinity Engine are painted as palette INDEX 14
+// in the SR bitmap. We patch only tiny areas around (730,1795) and (345,47).
+// This avoids copying an entire SR map and losing collision from other mods.
+COPY_EXISTING ~QCCGRVSR.BMP~ ~override/QCCGRVSR.BMP~
+  READ_SHORT 0x1c qcwm26_bpp
+  READ_LONG 0x12 qcwm26_w
+  READ_LONG 0x16 qcwm26_h
+  PATCH_IF (qcwm26_bpp != 4) OR (qcwm26_w != 212) OR (qcwm26_h != 160) BEGIN
+    PATCH_FAIL @20316
+  END
+  READ_BYTE 0x530 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x530 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x4c4 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x4c4 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x458 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x458 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x530 qcwm26_old
+  PATCH_IF ((qcwm26_old BAND 0x0F) == 4) OR ((qcwm26_old BAND 0x0F) == 14) BEGIN
+    WRITE_BYTE 0x530 ((qcwm26_old BAND 0xF0) BOR 0x0E)
+  END
+  READ_BYTE 0x4c4 qcwm26_old
+  PATCH_IF ((qcwm26_old BAND 0x0F) == 4) OR ((qcwm26_old BAND 0x0F) == 14) BEGIN
+    WRITE_BYTE 0x4c4 ((qcwm26_old BAND 0xF0) BOR 0x0E)
+  END
+  READ_BYTE 0x458 qcwm26_old
+  PATCH_IF ((qcwm26_old BAND 0x0F) == 4) OR ((qcwm26_old BAND 0x0F) == 14) BEGIN
+    WRITE_BYTE 0x458 ((qcwm26_old BAND 0xF0) BOR 0x0E)
+  END
+  READ_BYTE 0x531 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x531 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x4c5 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x4c5 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x459 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x459 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x42bc qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x42bc ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x4250 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x4250 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x41e4 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x41e4 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x4178 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x4178 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x42bc qcwm26_old
+  PATCH_IF ((qcwm26_old BAND 0x0F) == 4) OR ((qcwm26_old BAND 0x0F) == 14) BEGIN
+    WRITE_BYTE 0x42bc ((qcwm26_old BAND 0xF0) BOR 0x0E)
+  END
+  READ_BYTE 0x4250 qcwm26_old
+  PATCH_IF ((qcwm26_old BAND 0x0F) == 4) OR ((qcwm26_old BAND 0x0F) == 14) BEGIN
+    WRITE_BYTE 0x4250 ((qcwm26_old BAND 0xF0) BOR 0x0E)
+  END
+  READ_BYTE 0x41e4 qcwm26_old
+  PATCH_IF ((qcwm26_old BAND 0x0F) == 4) OR ((qcwm26_old BAND 0x0F) == 14) BEGIN
+    WRITE_BYTE 0x41e4 ((qcwm26_old BAND 0xF0) BOR 0x0E)
+  END
+  READ_BYTE 0x4178 qcwm26_old
+  PATCH_IF ((qcwm26_old BAND 0x0F) == 4) OR ((qcwm26_old BAND 0x0F) == 14) BEGIN
+    WRITE_BYTE 0x4178 ((qcwm26_old BAND 0xF0) BOR 0x0E)
+  END
+  READ_BYTE 0x42bd qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x42bd ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x4251 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x4251 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x41e5 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x41e5 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+  READ_BYTE 0x4179 qcwm26_old
+  PATCH_IF (((qcwm26_old BAND 0xF0) / 16) == 4) OR (((qcwm26_old BAND 0xF0) / 16) == 14) BEGIN
+    WRITE_BYTE 0x4179 ((qcwm26_old BAND 0x0F) BOR 0xE0)
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+PRINT @20317
+
+
+// v27: small worldmap entry adjustment + resilience when Imoen cuts off
+// the ritual dialogue. Preserve v25 worldmap reveal and working native door.
+
+// ---------- Integrated milestone: QC: Unicorn Grove - Arrival Correction and Core Dialogue Safety Net~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCCGRV.ARE~ BEGIN FAIL ~Install Unicorn Grove first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTAREA.BCS~ BEGIN FAIL ~Install the QCBTEM ritual encounter first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTCORE.CRE~ BEGIN FAIL ~Install Core's dragon creature first.~ END
+
+// Unified build: skip legacy v27 patch (misread the container offset).
+// Add guards to the existing QBTAREA script, rather than rewriting its
+// working character scripts, dialogue files, WED, search maps, or native door.
+EXTEND_TOP ~QBTAREA.BCS~ ~CotSC/qc_unicorn_grove/scripts/QBTCORE27.baf~
+
+// Public installer: development progress message omitted.
+
+// v29: repair QCSTART arrival and test initial-session Imoen J-dialogue setup.
+// No WED/TIS/PVRZ, search map, portrait, NPC encounter or Core changes.
+
+// ---------- Integrated milestone: QC: Unicorn Grove - Correct Worldmap Arrival and Imoen Session Initialization~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCCGRV.ARE~ BEGIN FAIL ~Unicorn Grove QCCGRV must be installed first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHLAR.BCS~ BEGIN FAIL ~Nightmare Candlekeep memory areas must be installed first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCJAR.BCS~ BEGIN FAIL ~Dark Jaheira and Khalid area must be installed first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBAR.BCS~ BEGIN FAIL ~Bhaal temple forest encounters must be installed first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTAREA.BCS~ BEGIN FAIL ~Final temple encounter must be installed first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~IMOEN2J.DLG~ BEGIN FAIL ~Imoen's SoA joined dialogue is missing.~ END
+
+// Fix an actual ARE offset error in v26/v27: 0x68 is ENTRANCE offset;
+// 0x70 is CONTAINER offset. Earlier patches read 0x70 and sometimes added
+// duplicate QCSTART entrances, leaving the original centred at (700,880).
+// Update EVERY QCSTART, including duplicates, so the engine's choice
+// of matching entry no longer matters. Existing exit areas are unaffected.
+COPY_EXISTING ~QCCGRV.ARE~ ~override/QCCGRV.ARE~
+  READ_LONG 0x68 qc29_entries_off
+  READ_LONG 0x6c qc29_entries_num
+  PATCH_IF (qc29_entries_num < 1) OR (qc29_entries_num > 512) OR (qc29_entries_off + qc29_entries_num * 0x68 > SOURCE_SIZE) BEGIN
+    PATCH_FAIL @20318
+  END
+  SET qc29_found = 0
+  FOR (qc29_i=0; qc29_i<qc29_entries_num; qc29_i+=1) BEGIN
+    SET qc29_pos = qc29_entries_off + (qc29_i * 0x68)
+    READ_ASCII qc29_pos qc29_label (32) NULL
+    PATCH_IF (~%qc29_label%~ STRING_EQUAL_CASE ~QCSTART~) BEGIN
+      WRITE_SHORT (qc29_pos + 0x20) 969
+      WRITE_SHORT (qc29_pos + 0x22) 1725
+      SET qc29_found += 1
+    END
+  END
+  PATCH_IF (qc29_found == 0) BEGIN
+    PATCH_FAIL @20319
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Force the actual joined dialogue file into Imoen's CRE when this memory
+// area first becomes active. Saving/reloading currently performs equivalent
+// initialization in some new-session tests. This is the smallest reversible
+// hypothesis test and leaves each NPC's existing content intact.
+// The outdoor area currently has no area script: install one only in that case.
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCI29INI.baf~
+COPY_EXISTING ~QCCGRV.ARE~ ~override/QCCGRV.ARE~
+  READ_ASCII 0x94 qc29_areascript (8) NULL
+  PATCH_IF (~%qc29_areascript%~ STRING_EQUAL ~~) BEGIN
+    WRITE_ASCII 0x94 ~QCI29INI~ #8
+  END ELSE BEGIN
+    PATCH_IF (~%qc29_areascript%~ STRING_EQUAL_CASE ~QCI29INI~) BEGIN
+    END ELSE BEGIN
+      PATCH_WARN @20320
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Other memory areas already have proper area scripts. Extend those at top
+// so Imoen is initialized before their area-introduction dialogue triggers.
+EXTEND_TOP ~QCHLAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QCI29INI.baf~
+EXTEND_TOP ~QCJAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QCI29INI.baf~
+EXTEND_TOP ~QCBAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QCI29INI.baf~
+EXTEND_TOP ~QBTAREA.BCS~ ~CotSC/qc_unicorn_grove/scripts/QCI29INI.baf~
+
+// Installer diagnostic removed for public release (v62).
+
+
+// v30: FRESH-SESSION IMOEN DIAGNOSTICS AND CANDLEKEEP SLOT FALLBACK.
+// Install AFTER v29. Keep all original resources, Core dialogue, party
+// interjections, worldmap arrival, WED, TIS, PVRZ and SR unchanged.
+
+// ---------- Integrated milestone: QC: v30 - Imoen Fresh-Game Slot Check and Candlekeep Reaction Fallback~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCI29INI.BCS~ BEGIN FAIL ~Install v29 Unicorn Grove arrival and initialization first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHLAR.BCS~ BEGIN FAIL ~Install the Nightmare Candlekeep script first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHINAR.BCS~ BEGIN FAIL ~Install the Nightmare Candlekeep interior script first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHSTAR.BCS~ BEGIN FAIL ~Install the Nightmare Candlekeep storage script first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTAREA.BCS~ BEGIN FAIL ~Install the final memory encounter first.~ END
+
+// The outdoor logger runs only once in a new game; memory logger once on
+// the first visit to any supported memory area.
+
+// Slot-based fallback exclusively for three original Candlekeep Imoen
+// callbacks that previously relied on IsValidForPartyDialog("Imoen2").
+EXTEND_TOP ~QCHLAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QC30HLAR.baf~
+EXTEND_TOP ~QCHINAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QC30INAR.baf~
+EXTEND_TOP ~QCHSTAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QC30STAR.baf~
+
+// Public installer: development progress message omitted.
+
+// v31: The original Candlekeep script calls used StartDialog(), which changes
+// the actual party NPC's assigned dialogue file permanently. This can leave
+// Imoen pointing at QCHIMTR / QCHSTIM rather than IMOEN2J until party restore.
+// Use the non-destructive StartDialogOverride and give failed early attempts
+// a retry, without changing her actual creature, dialogue strings or identity.
+
+// ---------- Integrated milestone: QC: v31 - Imoen Fresh-Game Dialogue Repair (no save/reload required)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCI29INI.BCS~ BEGIN FAIL ~Install v29 and v30 components first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHLAR.BCS~ BEGIN FAIL ~Nightmare Candlekeep must be installed first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHINAR.BCS~ BEGIN FAIL ~Nightmare Candlekeep interior must be installed first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHSTAR.BCS~ BEGIN FAIL ~Nightmare Candlekeep storage must be installed first.~ END
+
+// Correct existing compiled v30 actions as well, so none of them can replace
+// the joined dialogue with an unrelated scripted conversation.
+COPY_EXISTING ~QCHLAR.BCS~ ~override/QCHLAR.BCS~
+  DECOMPILE_AND_PATCH BEGIN
+    REPLACE_TEXTUALLY ~StartDialog(~ ~StartDialogOverride(~
+  END
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~QCHINAR.BCS~ ~override/QCHINAR.BCS~
+  DECOMPILE_AND_PATCH BEGIN
+    REPLACE_TEXTUALLY ~StartDialog(~ ~StartDialogOverride(~
+  END
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~QCHSTAR.BCS~ ~override/QCHSTAR.BCS~
+  DECOMPILE_AND_PATCH BEGIN
+    REPLACE_TEXTUALLY ~StartDialog(~ ~StartDialogOverride(~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Top priority: address the actor found in party slots 2 through 6, bypassing
+// the mistaken assumption that a valid early dialogue lookup is available.
+// Scene flags become 2 only when her dialogue itself completes; retry at 8s
+// intervals if an initial StartDialogOverride fails to open it.
+EXTEND_TOP ~QCHLAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QC31HLAR.baf~
+EXTEND_TOP ~QCHINAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QC31INAR.baf~
+EXTEND_TOP ~QCHSTAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QC31STAR.baf~
+
+// Installer diagnostic removed for public release (v62).
+
+
+// v33: minimal evidence-based dialogue restoration.
+// A fresh-session test verified that manually setting Player2's dialogue
+// back to IMOEN2J immediately restores her CHAIN interjections.
+// Only restore *after* a scripted Imoen scene has set its finished flag to 2.
+
+// ---------- Integrated milestone: QC: v33 - Restore Imoen Joined Dialogue After Memory Scenes~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHLAR.BCS~ BEGIN FAIL ~Install Nightmare Candlekeep before v33.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHINAR.BCS~ BEGIN FAIL ~Install Nightmare Candlekeep interiors before v33.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHSTAR.BCS~ BEGIN FAIL ~Install Nightmare Candlekeep storage before v33.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~IMOEN2J.DLG~ BEGIN FAIL ~IMOEN2J joined dialogue is missing; cannot restore Imoen.~ END
+
+EXTEND_TOP ~QCHLAR.BCS~  ~CotSC/qc_unicorn_grove/scripts/QC33IMRS.baf~
+EXTEND_TOP ~QCHINAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QC33IMRS.baf~
+EXTEND_TOP ~QCHSTAR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QC33IMRS.baf~
+
+// Public installer: development progress message omitted.

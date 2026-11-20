@@ -1,0 +1,415 @@
+// v24: AFTER the working v23 ritual encounter and v22.5 collision.
+
+// ---------- Integrated milestone: QC: Bhaal's Temple - Core Dragon and Unicorn Grove Finale (QCBTEM)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBTEM.ARE~ BEGIN FAIL ~Install the temple interior first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTALIA.CRE~ BEGIN FAIL ~Install the working final ritual encounter first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBTRIS.CRE~ BEGIN FAIL ~Install the working forest dialogue and Triss first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDHALAT.CRE~ BEGIN FAIL ~BDHALAT.CRE is required for the Core dragon.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC4P.ITM~ BEGIN FAIL ~The game must contain the key item MISC4P.ITM.~ END
+
+// Native key item, separate resref, short description and normal key inventory type.
+COPY_EXISTING ~MISC4P.ITM~ ~override/QBTKEY.ITM~
+  SAY NAME1 @3102
+  SAY NAME2 @3102
+  SAY UNIDENTIFIED_DESC @3103
+  SAY DESC @3103
+BUT_ONLY_IF_IT_CHANGES
+
+// Keep Alianna's currently tested combat and spells; merely add a physical drop to her pack.
+COPY_EXISTING ~QBTALIA.CRE~ ~override/QBTALIA.CRE~
+  ADD_CRE_ITEM ~QBTKEY~ #0 #0 #0 ~IDENTIFIED~ ~INV15~
+BUT_ONLY_IF_IT_CHANGES
+
+// Triss in the temple: a copy of the already working forest Triss, no new model.
+COPY_EXISTING ~QCBTRIS.CRE~ ~override/QBTTRIS.CRE~
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QBTTRIS~ #32
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~QBTTRAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Halatathlaer is copied verbatim apart from speaker/hostile settings and extra dialogue/voice hooks.
+// Preserve all original dragon combat stats, spell resources, inventory, general and class AI.
+COPY_EXISTING ~BDHALAT.CRE~ ~override/QBTCORE.CRE~
+  SAY NAME1 @3104
+  SAY NAME2 @3104
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QBTCORE~ #32
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~ ~ #8 // Let the original dragon general/class AI run without an overriding generic attack loop
+  WRITE_LONG 0xa4 0xffffffff
+  WRITE_LONG 0xa8 0xffffffff
+  WRITE_LONG 0xac 0xffffffff
+  WRITE_LONG 0xb0 0xffffffff
+  WRITE_LONG 0xb4 0xffffffff
+  WRITE_LONG 0xb8 0xffffffff
+  WRITE_LONG 0xbc 0xffffffff
+  WRITE_LONG 0xc0 0xffffffff
+  WRITE_LONG 0xc4 0xffffffff
+  WRITE_LONG 0xc8 0xffffffff
+  WRITE_LONG 0xcc 0xffffffff
+  WRITE_LONG 0xd0 0xffffffff
+  WRITE_LONG 0xd4 0xffffffff
+  WRITE_LONG 0xd8 0xffffffff
+  WRITE_LONG 0xdc 0xffffffff
+  WRITE_LONG 0xe0 0xffffffff
+  WRITE_LONG 0xe4 0xffffffff
+  WRITE_LONG 0xe8 0xffffffff
+  WRITE_LONG 0xec 0xffffffff
+  WRITE_LONG 0xf0 0xffffffff
+  WRITE_LONG 0xf4 0xffffffff
+  WRITE_LONG 0xf8 0xffffffff
+  WRITE_LONG 0xfc 0xffffffff
+  WRITE_LONG 0x100 0xffffffff
+  WRITE_LONG 0x104 0xffffffff
+  WRITE_LONG 0x108 0xffffffff
+  WRITE_LONG 0x10c 0xffffffff
+  WRITE_LONG 0x110 0xffffffff
+  WRITE_LONG 0x114 0xffffffff
+  WRITE_LONG 0x118 0xffffffff
+  WRITE_LONG 0x11c 0xffffffff
+  WRITE_LONG 0x120 0xffffffff
+  WRITE_LONG 0x124 0xffffffff
+  WRITE_LONG 0x128 0xffffffff
+  WRITE_LONG 0x12c 0xffffffff
+  WRITE_LONG 0x130 0xffffffff
+  WRITE_LONG 0x134 0xffffffff
+  WRITE_LONG 0x138 0xffffffff
+  WRITE_LONG 0x13c 0xffffffff
+  WRITE_LONG 0x140 0xffffffff
+  WRITE_LONG 0x144 0xffffffff
+  WRITE_LONG 0x148 0xffffffff
+  WRITE_LONG 0x14c 0xffffffff
+  WRITE_LONG 0x150 0xffffffff
+  WRITE_LONG 0x154 0xffffffff
+  WRITE_LONG 0x158 0xffffffff
+  WRITE_LONG 0x15c 0xffffffff
+  WRITE_LONG 0x160 0xffffffff
+  WRITE_LONG 0x164 0xffffffff
+  WRITE_LONG 0x168 0xffffffff
+  WRITE_LONG 0x16c 0xffffffff
+  WRITE_LONG 0x170 0xffffffff
+  WRITE_LONG 0x174 0xffffffff
+  WRITE_LONG 0x178 0xffffffff
+  WRITE_LONG 0x17c 0xffffffff
+  WRITE_LONG 0x180 0xffffffff
+  WRITE_LONG 0x184 0xffffffff
+  WRITE_LONG 0x188 0xffffffff
+  WRITE_LONG 0x18c 0xffffffff
+  WRITE_LONG 0x190 0xffffffff
+  WRITE_LONG 0x194 0xffffffff
+  WRITE_LONG 0x198 0xffffffff
+  WRITE_LONG 0x19c 0xffffffff
+  WRITE_LONG 0x1a0 0xffffffff
+  WRITE_LONG 0x1a4 0xffffffff
+  WRITE_LONG 0x1a8 0xffffffff
+  WRITE_LONG 0x1ac 0xffffffff
+  WRITE_LONG 0x1b0 0xffffffff
+  WRITE_LONG 0x1b4 0xffffffff
+  WRITE_LONG 0x1b8 0xffffffff
+  WRITE_LONG 0x1bc 0xffffffff
+  WRITE_LONG 0x1c0 0xffffffff
+BUT_ONLY_IF_IT_CHANGES
+
+// Use CULTT2's original voices, never change models, equipment or the working combat scripts.
+ACTION_IF FILE_EXISTS_IN_GAME ~CULTT2.CRE~ BEGIN
+  COPY_EXISTING ~CULTT2.CRE~ ~override/CULTT2.CRE~
+    READ_LONG 0xa4 qbt_v_0
+    READ_LONG 0xa8 qbt_v_1
+    READ_LONG 0xac qbt_v_2
+    READ_LONG 0xb0 qbt_v_3
+    READ_LONG 0xb4 qbt_v_4
+    READ_LONG 0xb8 qbt_v_5
+    READ_LONG 0xbc qbt_v_6
+    READ_LONG 0xc0 qbt_v_7
+    READ_LONG 0xc4 qbt_v_8
+    READ_LONG 0xc8 qbt_v_9
+    READ_LONG 0xcc qbt_v_10
+    READ_LONG 0xd0 qbt_v_11
+    READ_LONG 0xd4 qbt_v_12
+    READ_LONG 0xd8 qbt_v_13
+    READ_LONG 0xdc qbt_v_14
+    READ_LONG 0xe0 qbt_v_15
+    READ_LONG 0xe4 qbt_v_16
+    READ_LONG 0xe8 qbt_v_17
+    READ_LONG 0xec qbt_v_18
+    READ_LONG 0xf0 qbt_v_19
+    READ_LONG 0xf4 qbt_v_20
+    READ_LONG 0xf8 qbt_v_21
+    READ_LONG 0xfc qbt_v_22
+    READ_LONG 0x100 qbt_v_23
+    READ_LONG 0x104 qbt_v_24
+    READ_LONG 0x108 qbt_v_25
+    READ_LONG 0x10c qbt_v_26
+    READ_LONG 0x110 qbt_v_27
+    READ_LONG 0x114 qbt_v_28
+    READ_LONG 0x118 qbt_v_29
+    READ_LONG 0x11c qbt_v_30
+    READ_LONG 0x120 qbt_v_31
+    READ_LONG 0x124 qbt_v_32
+    READ_LONG 0x128 qbt_v_33
+    READ_LONG 0x12c qbt_v_34
+    READ_LONG 0x130 qbt_v_35
+    READ_LONG 0x134 qbt_v_36
+    READ_LONG 0x138 qbt_v_37
+    READ_LONG 0x13c qbt_v_38
+    READ_LONG 0x140 qbt_v_39
+    READ_LONG 0x144 qbt_v_40
+    READ_LONG 0x148 qbt_v_41
+    READ_LONG 0x14c qbt_v_42
+    READ_LONG 0x150 qbt_v_43
+    READ_LONG 0x154 qbt_v_44
+    READ_LONG 0x158 qbt_v_45
+    READ_LONG 0x15c qbt_v_46
+    READ_LONG 0x160 qbt_v_47
+    READ_LONG 0x164 qbt_v_48
+    READ_LONG 0x168 qbt_v_49
+    READ_LONG 0x16c qbt_v_50
+    READ_LONG 0x170 qbt_v_51
+    READ_LONG 0x174 qbt_v_52
+    READ_LONG 0x178 qbt_v_53
+    READ_LONG 0x17c qbt_v_54
+    READ_LONG 0x180 qbt_v_55
+    READ_LONG 0x184 qbt_v_56
+    READ_LONG 0x188 qbt_v_57
+    READ_LONG 0x18c qbt_v_58
+    READ_LONG 0x190 qbt_v_59
+    READ_LONG 0x194 qbt_v_60
+    READ_LONG 0x198 qbt_v_61
+    READ_LONG 0x19c qbt_v_62
+    READ_LONG 0x1a0 qbt_v_63
+    READ_LONG 0x1a4 qbt_v_64
+    READ_LONG 0x1a8 qbt_v_65
+    READ_LONG 0x1ac qbt_v_66
+    READ_LONG 0x1b0 qbt_v_67
+    READ_LONG 0x1b4 qbt_v_68
+    READ_LONG 0x1b8 qbt_v_69
+    READ_LONG 0x1bc qbt_v_70
+    READ_LONG 0x1c0 qbt_v_71
+  BUT_ONLY_IF_IT_CHANGES
+  COPY_EXISTING ~QBTCULT.CRE~ ~override/QBTCULT.CRE~
+    WRITE_LONG 0xa4 qbt_v_0
+    WRITE_LONG 0xa8 qbt_v_1
+    WRITE_LONG 0xac qbt_v_2
+    WRITE_LONG 0xb0 qbt_v_3
+    WRITE_LONG 0xb4 qbt_v_4
+    WRITE_LONG 0xb8 qbt_v_5
+    WRITE_LONG 0xbc qbt_v_6
+    WRITE_LONG 0xc0 qbt_v_7
+    WRITE_LONG 0xc4 qbt_v_8
+    WRITE_LONG 0xc8 qbt_v_9
+    WRITE_LONG 0xcc qbt_v_10
+    WRITE_LONG 0xd0 qbt_v_11
+    WRITE_LONG 0xd4 qbt_v_12
+    WRITE_LONG 0xd8 qbt_v_13
+    WRITE_LONG 0xdc qbt_v_14
+    WRITE_LONG 0xe0 qbt_v_15
+    WRITE_LONG 0xe4 qbt_v_16
+    WRITE_LONG 0xe8 qbt_v_17
+    WRITE_LONG 0xec qbt_v_18
+    WRITE_LONG 0xf0 qbt_v_19
+    WRITE_LONG 0xf4 qbt_v_20
+    WRITE_LONG 0xf8 qbt_v_21
+    WRITE_LONG 0xfc qbt_v_22
+    WRITE_LONG 0x100 qbt_v_23
+    WRITE_LONG 0x104 qbt_v_24
+    WRITE_LONG 0x108 qbt_v_25
+    WRITE_LONG 0x10c qbt_v_26
+    WRITE_LONG 0x110 qbt_v_27
+    WRITE_LONG 0x114 qbt_v_28
+    WRITE_LONG 0x118 qbt_v_29
+    WRITE_LONG 0x11c qbt_v_30
+    WRITE_LONG 0x120 qbt_v_31
+    WRITE_LONG 0x124 qbt_v_32
+    WRITE_LONG 0x128 qbt_v_33
+    WRITE_LONG 0x12c qbt_v_34
+    WRITE_LONG 0x130 qbt_v_35
+    WRITE_LONG 0x134 qbt_v_36
+    WRITE_LONG 0x138 qbt_v_37
+    WRITE_LONG 0x13c qbt_v_38
+    WRITE_LONG 0x140 qbt_v_39
+    WRITE_LONG 0x144 qbt_v_40
+    WRITE_LONG 0x148 qbt_v_41
+    WRITE_LONG 0x14c qbt_v_42
+    WRITE_LONG 0x150 qbt_v_43
+    WRITE_LONG 0x154 qbt_v_44
+    WRITE_LONG 0x158 qbt_v_45
+    WRITE_LONG 0x15c qbt_v_46
+    WRITE_LONG 0x160 qbt_v_47
+    WRITE_LONG 0x164 qbt_v_48
+    WRITE_LONG 0x168 qbt_v_49
+    WRITE_LONG 0x16c qbt_v_50
+    WRITE_LONG 0x170 qbt_v_51
+    WRITE_LONG 0x174 qbt_v_52
+    WRITE_LONG 0x178 qbt_v_53
+    WRITE_LONG 0x17c qbt_v_54
+    WRITE_LONG 0x180 qbt_v_55
+    WRITE_LONG 0x184 qbt_v_56
+    WRITE_LONG 0x188 qbt_v_57
+    WRITE_LONG 0x18c qbt_v_58
+    WRITE_LONG 0x190 qbt_v_59
+    WRITE_LONG 0x194 qbt_v_60
+    WRITE_LONG 0x198 qbt_v_61
+    WRITE_LONG 0x19c qbt_v_62
+    WRITE_LONG 0x1a0 qbt_v_63
+    WRITE_LONG 0x1a4 qbt_v_64
+    WRITE_LONG 0x1a8 qbt_v_65
+    WRITE_LONG 0x1ac qbt_v_66
+    WRITE_LONG 0x1b0 qbt_v_67
+    WRITE_LONG 0x1b4 qbt_v_68
+    WRITE_LONG 0x1b8 qbt_v_69
+    WRITE_LONG 0x1bc qbt_v_70
+    WRITE_LONG 0x1c0 qbt_v_71
+  BUT_ONLY_IF_IT_CHANGES
+  COPY_EXISTING ~QBTGEHR.CRE~ ~override/QBTGEHR.CRE~
+    WRITE_LONG 0xa4 qbt_v_0
+    WRITE_LONG 0xa8 qbt_v_1
+    WRITE_LONG 0xac qbt_v_2
+    WRITE_LONG 0xb0 qbt_v_3
+    WRITE_LONG 0xb4 qbt_v_4
+    WRITE_LONG 0xb8 qbt_v_5
+    WRITE_LONG 0xbc qbt_v_6
+    WRITE_LONG 0xc0 qbt_v_7
+    WRITE_LONG 0xc4 qbt_v_8
+    WRITE_LONG 0xc8 qbt_v_9
+    WRITE_LONG 0xcc qbt_v_10
+    WRITE_LONG 0xd0 qbt_v_11
+    WRITE_LONG 0xd4 qbt_v_12
+    WRITE_LONG 0xd8 qbt_v_13
+    WRITE_LONG 0xdc qbt_v_14
+    WRITE_LONG 0xe0 qbt_v_15
+    WRITE_LONG 0xe4 qbt_v_16
+    WRITE_LONG 0xe8 qbt_v_17
+    WRITE_LONG 0xec qbt_v_18
+    WRITE_LONG 0xf0 qbt_v_19
+    WRITE_LONG 0xf4 qbt_v_20
+    WRITE_LONG 0xf8 qbt_v_21
+    WRITE_LONG 0xfc qbt_v_22
+    WRITE_LONG 0x100 qbt_v_23
+    WRITE_LONG 0x104 qbt_v_24
+    WRITE_LONG 0x108 qbt_v_25
+    WRITE_LONG 0x10c qbt_v_26
+    WRITE_LONG 0x110 qbt_v_27
+    WRITE_LONG 0x114 qbt_v_28
+    WRITE_LONG 0x118 qbt_v_29
+    WRITE_LONG 0x11c qbt_v_30
+    WRITE_LONG 0x120 qbt_v_31
+    WRITE_LONG 0x124 qbt_v_32
+    WRITE_LONG 0x128 qbt_v_33
+    WRITE_LONG 0x12c qbt_v_34
+    WRITE_LONG 0x130 qbt_v_35
+    WRITE_LONG 0x134 qbt_v_36
+    WRITE_LONG 0x138 qbt_v_37
+    WRITE_LONG 0x13c qbt_v_38
+    WRITE_LONG 0x140 qbt_v_39
+    WRITE_LONG 0x144 qbt_v_40
+    WRITE_LONG 0x148 qbt_v_41
+    WRITE_LONG 0x14c qbt_v_42
+    WRITE_LONG 0x150 qbt_v_43
+    WRITE_LONG 0x154 qbt_v_44
+    WRITE_LONG 0x158 qbt_v_45
+    WRITE_LONG 0x15c qbt_v_46
+    WRITE_LONG 0x160 qbt_v_47
+    WRITE_LONG 0x164 qbt_v_48
+    WRITE_LONG 0x168 qbt_v_49
+    WRITE_LONG 0x16c qbt_v_50
+    WRITE_LONG 0x170 qbt_v_51
+    WRITE_LONG 0x174 qbt_v_52
+    WRITE_LONG 0x178 qbt_v_53
+    WRITE_LONG 0x17c qbt_v_54
+    WRITE_LONG 0x180 qbt_v_55
+    WRITE_LONG 0x184 qbt_v_56
+    WRITE_LONG 0x188 qbt_v_57
+    WRITE_LONG 0x18c qbt_v_58
+    WRITE_LONG 0x190 qbt_v_59
+    WRITE_LONG 0x194 qbt_v_60
+    WRITE_LONG 0x198 qbt_v_61
+    WRITE_LONG 0x19c qbt_v_62
+    WRITE_LONG 0x1a0 qbt_v_63
+    WRITE_LONG 0x1a4 qbt_v_64
+    WRITE_LONG 0x1a8 qbt_v_65
+    WRITE_LONG 0x1ac qbt_v_66
+    WRITE_LONG 0x1b0 qbt_v_67
+    WRITE_LONG 0x1b4 qbt_v_68
+    WRITE_LONG 0x1b8 qbt_v_69
+    WRITE_LONG 0x1bc qbt_v_70
+    WRITE_LONG 0x1c0 qbt_v_71
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+  PRINT @20302
+END
+
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTLOCKA.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTTRAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTCOREA.baf~
+
+// Extend, do NOT replace, the proven temple ritual-area script and Eaglehorn's hut scripts.
+EXTEND_TOP ~QBTAREA.BCS~ ~CotSC/qc_unicorn_grove/scripts/QBTLATE.baf~
+EXTEND_TOP ~QCUEGAI.BCS~ ~CotSC/qc_unicorn_grove/scripts/QBTRETA.baf~
+EXTEND_TOP ~QCUEMAI.BCS~ ~CotSC/qc_unicorn_grove/scripts/QBTEMHA.baf~
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/QBTEND.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QBTEND.tra~ ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/eaglehorn.tra~ ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/unicorn_grove.tra~ ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QBTEND.tra~
+ADD_JOURNAL TITLE (@7016) @104 USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QBTEND.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+
+// Only add the new container/Triss and relocate the room's existing exit.
+COPY_EXISTING ~QCBTEM.ARE~ ~override/QCBTEM.ARE~
+  READ_LONG 0x5c qbt24_regoff
+  READ_SHORT 0x5a qbt24_regnum
+  FOR (qbt24_i = 0; qbt24_i < qbt24_regnum; qbt24_i += 1) BEGIN
+    SET qbt24_ro = qbt24_regoff + (qbt24_i * 0xc4)
+    READ_ASCII qbt24_ro qbt24_rname (32) NULL
+    PATCH_IF (~%qbt24_rname%~ STRING_EQUAL ~QBTEXIT~) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_delete_mode = qbt24_i
+        STR_VAR fj_structure_type = region
+      END
+      SET qbt24_i = qbt24_regnum
+    END
+  END
+  // Player returns outdoors only from the lower-right chamber doorway.
+  LPF fj_are_structure
+    INT_VAR fj_type = 2 fj_box_left = 1432 fj_box_top = 940
+      fj_box_right = 1503 fj_box_bottom = 1007
+      fj_cursor_idx = 30 fj_flags = 4
+      fj_vertex_0 = 1432 + (940 << 16)
+      fj_vertex_1 = 1503 + (940 << 16)
+      fj_vertex_2 = 1503 + (1007 << 16)
+      fj_vertex_3 = 1432 + (1007 << 16)
+    STR_VAR fj_structure_type = region fj_name = QBTEXIT
+      fj_destination_area = QCBHAL fj_destination_name = QCBTIN
+  END
+  // Original user-drawn tiny blue region at approximately 123–148, 660–709.
+  // Use a real altar container with an engine-native key reference and magical lock.
+  LPF fj_are_structure
+    INT_VAR fj_type = 7 fj_loc_x = 180 fj_loc_y = 655
+      fj_box_left = 121 fj_box_top = 658
+      fj_box_right = 150 fj_box_bottom = 710
+      fj_lock_diff = 100 fj_flags = 5
+      fj_lockpick_strref = RESOLVE_STR_REF(~This lock cannot be opened without a key or ward.~)
+      fj_vertex_0 = 130 + (659 << 16)
+      fj_vertex_1 = 145 + (662 << 16)
+      fj_vertex_2 = 150 + (671 << 16)
+      fj_vertex_3 = 146 + (690 << 16)
+      fj_vertex_4 = 132 + (708 << 16)
+      fj_vertex_5 = 123 + (704 << 16)
+      fj_vertex_6 = 121 + (678 << 16)
+    STR_VAR fj_structure_type = container fj_name = QBTLOCK
+      fj_key_resref = QBTKEY fj_trap_script = QBTLOCKA
+    RET fj_return_offset
+  END
+  // Cannot bash this lock open. A non-damaging scripted release creates Core.
+  WRITE_LONG (fj_return_offset + 0x80) 100
+  WRITE_SHORT (fj_return_offset + 0x30) 1 // scripted trigger active
+  WRITE_SHORT (fj_return_offset + 0x2c) 100 // hard to spot
+  WRITE_SHORT (fj_return_offset + 0x2e) 100 // hard to disarm
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1174 fj_loc_y = 787 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QBTTRI01 fj_cre_resref = QBTTRIS
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+

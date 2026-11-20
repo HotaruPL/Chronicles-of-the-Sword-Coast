@@ -1,0 +1,778 @@
+// ====================================================================
+// v4.8 QCHANN encounter: eight brigands, Hannibal, Cormack and two Blades.
+// Keep all seven containers, v4.7 traps, v4.3 artwork and v4.4 collision frozen.
+// Source-only extension inside the ONE existing WeiDU component.
+// ====================================================================
+
+// Verify every base creature and equipment resource. Never change originals.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~THIEF2.CRE~ BEGIN
+  FAIL @20217
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~THIEF3.CRE~ BEGIN
+  FAIL @20218
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~THIEF4.CRE~ BEGIN
+  FAIL @20219
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~OHRHOJAR.CRE~ BEGIN
+  FAIL @20220
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~OULAM.CRE~ BEGIN
+  FAIL @20221
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~JAYLOS.CRE~ BEGIN
+  FAIL @20222
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BOW05.ITM~ BEGIN
+  FAIL @20223
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AROW05.ITM~ BEGIN
+  FAIL @20224
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AROW07.ITM~ BEGIN
+  FAIL @20225
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AROW04.ITM~ BEGIN
+  FAIL @20226
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AROW10.ITM~ BEGIN
+  FAIL @20227
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~POTN10.ITM~ BEGIN
+  FAIL @20228
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~CLCK17.ITM~ BEGIN
+  FAIL @20229
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SPCL152.SPL~ BEGIN
+  FAIL @20230
+END
+
+COMPILE ~CotSC/qriv_hannibal/scripts/QHBRAI.baf~
+COMPILE ~CotSC/qriv_hannibal/scripts/QHSTAI.baf~
+COMPILE ~CotSC/qriv_hannibal/scripts/QHHNAI.baf~
+COMPILE ~CotSC/qriv_hannibal/scripts/QHCMAI.baf~
+COMPILE ~CotSC/qriv_hannibal/scripts/QHBLDAI.baf~
+COMPILE ~CotSC/qriv_hannibal/scripts/QHAREA.baf~
+COMPILE ~CotSC/qriv_hannibal/dialogue/QHHAN.d~ USING ~CotSC/translation/%LANGUAGE%/qriv_hannibal/dialogue/QHHAN.tra~
+
+// Brigand 1: THIEF2 base; 1329,891; AROW05.
+COPY_EXISTING ~THIEF2.CRE~ ~override/QHBG01.CRE~
+  SAY NAME1 @3020
+  SAY NAME2 @3020
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBG01~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHBRAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 48
+  WRITE_SHORT 0x26 48
+  WRITE_BYTE 0x52 12
+  WRITE_BYTE 0x53 2
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~BOW05~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP TWOHANDED
+  ADD_CRE_ITEM ~AROW05~ #20 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+  ADD_CRE_ITEM ~SW1H21~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
+BUT_ONLY_IF_IT_CHANGES
+
+// Brigand 2: THIEF3 base; 1394,1008; invisibility/backstab.
+COPY_EXISTING ~THIEF3.CRE~ ~override/QHBG02.CRE~
+  SAY NAME1 @3020
+  SAY NAME2 @3020
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBG02~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHSTAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 43
+  WRITE_SHORT 0x26 43
+  WRITE_BYTE 0x52 12
+  WRITE_BYTE 0x53 2
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SW1H21~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~POTN10~ #1 #0 #0 ~IDENTIFIED~ ~QITEM1~
+BUT_ONLY_IF_IT_CHANGES
+
+// Brigand 3: THIEF4 base; 1445,1027; AROW07.
+COPY_EXISTING ~THIEF4.CRE~ ~override/QHBG03.CRE~
+  SAY NAME1 @3020
+  SAY NAME2 @3020
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBG03~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHBRAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 46
+  WRITE_SHORT 0x26 46
+  WRITE_BYTE 0x52 12
+  WRITE_BYTE 0x53 2
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~BOW05~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP TWOHANDED
+  ADD_CRE_ITEM ~AROW07~ #20 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+  ADD_CRE_ITEM ~SW1H21~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
+BUT_ONLY_IF_IT_CHANGES
+
+// Brigand 4: THIEF2 base; 1527,1102; AROW04.
+COPY_EXISTING ~THIEF2.CRE~ ~override/QHBG04.CRE~
+  SAY NAME1 @3020
+  SAY NAME2 @3020
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBG04~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHBRAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 49
+  WRITE_SHORT 0x26 49
+  WRITE_BYTE 0x52 12
+  WRITE_BYTE 0x53 2
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~BOW05~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP TWOHANDED
+  ADD_CRE_ITEM ~AROW04~ #20 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+  ADD_CRE_ITEM ~SW1H21~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
+BUT_ONLY_IF_IT_CHANGES
+
+// Brigand 5: THIEF4 base; 1102,1062; invisibility/backstab.
+COPY_EXISTING ~THIEF4.CRE~ ~override/QHBG05.CRE~
+  SAY NAME1 @3020
+  SAY NAME2 @3020
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBG05~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHSTAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 52
+  WRITE_SHORT 0x26 52
+  WRITE_BYTE 0x52 10
+  WRITE_BYTE 0x53 2
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SW1H21~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~POTN10~ #1 #0 #0 ~IDENTIFIED~ ~QITEM1~
+BUT_ONLY_IF_IT_CHANGES
+
+// Brigand 6: THIEF3 base; 1048,1184; AROW10.
+COPY_EXISTING ~THIEF3.CRE~ ~override/QHBG06.CRE~
+  SAY NAME1 @3020
+  SAY NAME2 @3020
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBG06~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHBRAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 55
+  WRITE_SHORT 0x26 55
+  WRITE_BYTE 0x52 10
+  WRITE_BYTE 0x53 2
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~BOW05~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP TWOHANDED
+  ADD_CRE_ITEM ~AROW10~ #20 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+  ADD_CRE_ITEM ~SW1H21~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
+BUT_ONLY_IF_IT_CHANGES
+
+// Brigand 7: THIEF2 base; 1076,1396; AROW05.
+COPY_EXISTING ~THIEF2.CRE~ ~override/QHBG07.CRE~
+  SAY NAME1 @3020
+  SAY NAME2 @3020
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBG07~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHBRAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 58
+  WRITE_SHORT 0x26 58
+  WRITE_BYTE 0x52 10
+  WRITE_BYTE 0x53 2
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~BOW05~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP TWOHANDED
+  ADD_CRE_ITEM ~AROW05~ #20 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+  ADD_CRE_ITEM ~SW1H21~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
+BUT_ONLY_IF_IT_CHANGES
+
+// Brigand 8: THIEF4 base; 908,1214; invisibility/backstab.
+COPY_EXISTING ~THIEF4.CRE~ ~override/QHBG08.CRE~
+  SAY NAME1 @3020
+  SAY NAME2 @3020
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBG08~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHSTAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 61
+  WRITE_SHORT 0x26 61
+  WRITE_BYTE 0x52 10
+  WRITE_BYTE 0x53 2
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SW1H21~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~POTN10~ #1 #0 #0 ~IDENTIFIED~ ~QITEM1~
+BUT_ONLY_IF_IT_CHANGES
+
+// Hannibal: OHRHOJAR template, neutral only until he delivers his threat.
+COPY_EXISTING ~OHRHOJAR.CRE~ ~override/QHHANIB.CRE~
+  SAY NAME1 @3021
+  SAY NAME2 @3021
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHHANIB~ #32
+  WRITE_ASCII 0x2cc ~QHHAN~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x248 ~QHHNAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 110
+  WRITE_SHORT 0x26 110
+  WRITE_BYTE 0x52 8
+  WRITE_BYTE 0x53 3
+  ADD_CRE_ITEM ~LEAT02~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SW1H01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~SHLD01~ #0 #0 #0 ~IDENTIFIED~ ~SHIELD~
+  ADD_CRE_ITEM ~QHHSYM~ #1 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+
+// Cormack: OULAM mage, black cloak/robe with Evil Archmagi properties.
+// Preserve original OULAM class AI + memorized spells for mage behavior.
+COPY_EXISTING ~OULAM.CRE~ ~override/QHCMACK.CRE~
+  SAY NAME1 @3022
+  SAY NAME2 @3022
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHCMACK~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_BYTE 0x27b 35 // Chaotic Evil permits CLCK17 robe
+  WRITE_BYTE 0x2c 30
+  WRITE_BYTE 0x2d 30
+  WRITE_BYTE 0x2e 30
+  WRITE_BYTE 0x30 30
+  WRITE_BYTE 0x31 30
+  WRITE_ASCII 0x248 ~QHCMAI~ #8
+  // Preserve original 0x250 .. 0x268 mage class/race/general/default scripts.
+  ADD_CRE_ITEM ~CLCK17~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~STAF01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+// Two blades as requested: JAYLOS and THIEF4, aggressive swordfighters.
+COPY_EXISTING ~JAYLOS.CRE~ ~override/QHBLD1.CRE~
+  SAY NAME1 @3023
+  SAY NAME2 @3023
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBLD1~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHBLDAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 75
+  WRITE_SHORT 0x26 75
+  WRITE_BYTE 0x52 9
+  WRITE_BYTE 0x53 3
+  ADD_CRE_ITEM ~LEAT02~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SW1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~THIEF4.CRE~ ~override/QHBLD2.CRE~
+  SAY NAME1 @3023
+  SAY NAME2 @3023
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QHBLD2~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QHBLDAI~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_SHORT 0x24 70
+  WRITE_SHORT 0x26 70
+  WRITE_BYTE 0x52 9
+  WRITE_BYTE 0x53 3
+  ADD_CRE_ITEM ~LEAT02~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SW1H08~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+// QCHANN has no script in our original ARE. Give it a dedicated watcher
+// so a silent brigand kill also raises the alarm across the whole hideout.
+COPY_EXISTING ~QCHANN.ARE~ ~override/QCHANN.ARE~
+  WRITE_ASCII 0x94 ~QHAREA~ #8
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1329
+      fj_loc_y = 891
+      fj_dest_x = 1329
+      fj_dest_y = 891
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QHBG01
+      fj_cre_resref = QHBG01
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1394
+      fj_loc_y = 1008
+      fj_dest_x = 1394
+      fj_dest_y = 1008
+      fj_orientation = 3
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QHBG02
+      fj_cre_resref = QHBG02
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1445
+      fj_loc_y = 1027
+      fj_dest_x = 1445
+      fj_dest_y = 1027
+      fj_orientation = 10
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QHBG03
+      fj_cre_resref = QHBG03
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1527
+      fj_loc_y = 1102
+      fj_dest_x = 1527
+      fj_dest_y = 1102
+      fj_orientation = 6
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QHBG04
+      fj_cre_resref = QHBG04
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1102
+      fj_loc_y = 1062
+      fj_dest_x = 1102
+      fj_dest_y = 1062
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QHBG05
+      fj_cre_resref = QHBG05
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1048
+      fj_loc_y = 1184
+      fj_dest_x = 1048
+      fj_dest_y = 1184
+      fj_orientation = 14
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QHBG06
+      fj_cre_resref = QHBG06
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1076
+      fj_loc_y = 1396
+      fj_dest_x = 1076
+      fj_dest_y = 1396
+      fj_orientation = 4
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QHBG07
+      fj_cre_resref = QHBG07
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 908
+      fj_loc_y = 1214
+      fj_dest_x = 908
+      fj_dest_y = 1214
+      fj_orientation = 2
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QHBG08
+      fj_cre_resref = QHBG08
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2688
+      fj_loc_y = 965
+      fj_dest_x = 2688
+      fj_dest_y = 965
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Hannibal
+      fj_cre_resref = QHHANIB
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// v4.9: Reproduce the music and ambience *configuration* of the user-
+// supplied AR0404.ARE (not AR0404's irrelevant sound positions).
+// Original songs: day=12, night=12, victory=0, battle=-2, defeat=0.
+// Use the current EET songlist references exactly as AR0404 specifies.
+// No extra music files are needed: these are existing base-game tracks.
+COPY_EXISTING ~QCHANN.ARE~ ~override/QCHANN.ARE~
+  READ_LONG 0xbc qh_songs_off
+  PATCH_IF (qh_songs_off < 0x11c) OR (qh_songs_off + 0x90 > BUFFER_LENGTH) BEGIN
+    PATCH_FAIL @20231
+  END
+  // Use explicit unsigned 32-bit values for -2 and -1.  Bare negative
+  // WRITE_LONG operands can produce a WeiDU GLR parse error here.
+  WRITE_LONG (qh_songs_off + 0x00) 12
+  WRITE_LONG (qh_songs_off + 0x04) 12
+  WRITE_LONG (qh_songs_off + 0x08) 0
+  WRITE_LONG (qh_songs_off + 0x0c) 0xFFFFFFFE // -2, AR0404 battle song
+  WRITE_LONG (qh_songs_off + 0x10) 0
+  WRITE_LONG (qh_songs_off + 0x14) 0xFFFFFFFF // -1, unused
+  WRITE_LONG (qh_songs_off + 0x18) 0xFFFFFFFF
+  WRITE_LONG (qh_songs_off + 0x1c) 0xFFFFFFFF
+  WRITE_LONG (qh_songs_off + 0x20) 0xFFFFFFFF
+  WRITE_LONG (qh_songs_off + 0x24) 0xFFFFFFFF
+  // QCHANN source contains no ambients; this is an add-only operation.
+  PATCH_IF (SHORT_AT 0x82 != 0) BEGIN
+    PATCH_FAIL @20232
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1560
+      fj_loc_y = 1160
+      fj_radius = 500
+      fj_volume = 100
+      fj_sound_num = 1
+      fj_delay = 0
+      fj_variation = 0
+      fj_flags = 7
+    STR_VAR
+      fj_structure_type = ambient
+      fj_name = ~QH_MAIN~
+      fj_wav_resref0 = ~AM0404~
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1020
+      fj_loc_y = 1090
+      fj_radius = 500
+      fj_volume = 80
+      fj_sound_num = 5
+      fj_delay = 18
+      fj_variation = 7
+      fj_flags = 13
+    STR_VAR
+      fj_structure_type = ambient
+      fj_name = ~QH_RATS~
+      fj_wav_resref0 = ~AM0400B1~
+      fj_wav_resref1 = ~AM0400B2~
+      fj_wav_resref2 = ~AM0400B3~
+      fj_wav_resref3 = ~AM0400B4~
+      fj_wav_resref4 = ~AM0400B5~
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1470
+      fj_loc_y = 1190
+      fj_radius = 500
+      fj_volume = 80
+      fj_sound_num = 5
+      fj_delay = 15
+      fj_variation = 10
+      fj_flags = 13
+    STR_VAR
+      fj_structure_type = ambient
+      fj_name = ~QH_SPLASH~
+      fj_wav_resref0 = ~AM0404B1~
+      fj_wav_resref1 = ~AM0404B2~
+      fj_wav_resref2 = ~AM0404B3~
+      fj_wav_resref3 = ~AM0404B4~
+      fj_wav_resref4 = ~AM0404B5~
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1600
+      fj_loc_y = 870
+      fj_radius = 500
+      fj_volume = 80
+      fj_sound_num = 5
+      fj_delay = 20
+      fj_variation = 6
+      fj_flags = 13
+    STR_VAR
+      fj_structure_type = ambient
+      fj_name = ~QH_PIPES~
+      fj_wav_resref0 = ~AM0404C1~
+      fj_wav_resref1 = ~AM0404C2~
+      fj_wav_resref2 = ~AM0404C3~
+      fj_wav_resref3 = ~AM0404C4~
+      fj_wav_resref4 = ~AM0404C5~
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1470
+      fj_loc_y = 1220
+      fj_radius = 600
+      fj_volume = 100
+      fj_sound_num = 1
+      fj_delay = 0
+      fj_variation = 0
+      fj_flags = 11
+    STR_VAR
+      fj_structure_type = ambient
+      fj_name = ~QH_DRAIN~
+      fj_wav_resref0 = ~AM0404F~
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1660
+      fj_loc_y = 1130
+      fj_radius = 600
+      fj_volume = 100
+      fj_sound_num = 1
+      fj_delay = 0
+      fj_variation = 0
+      fj_flags = 11
+    STR_VAR
+      fj_structure_type = ambient
+      fj_name = ~QH_WPIPE~
+      fj_wav_resref0 = ~AM0404G~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Cormack and the Blades spawn from QHAREA only when Hannibal speaks;
+// do not preplace duplicate creatures in the ARE.
+
+// Thug: replace Iron Throne voice lines with Docks Ruffian (DRUFF1) soundset.
+// Source creature is unmodified; only sound-set strref 0xA4..0x233 is copied.
+COPY_EXISTING ~QRVTHUG.CRE~ ~override/QRVTHUG.CRE~
+  INNER_PATCH_FILE ~DRUFF1.CRE~ BEGIN
+    READ_LONG 0x0A4 qrvsnd00
+    READ_LONG 0x0A8 qrvsnd01
+    READ_LONG 0x0AC qrvsnd02
+    READ_LONG 0x0B0 qrvsnd03
+    READ_LONG 0x0B4 qrvsnd04
+    READ_LONG 0x0B8 qrvsnd05
+    READ_LONG 0x0BC qrvsnd06
+    READ_LONG 0x0C0 qrvsnd07
+    READ_LONG 0x0C4 qrvsnd08
+    READ_LONG 0x0C8 qrvsnd09
+    READ_LONG 0x0CC qrvsnd10
+    READ_LONG 0x0D0 qrvsnd11
+    READ_LONG 0x0D4 qrvsnd12
+    READ_LONG 0x0D8 qrvsnd13
+    READ_LONG 0x0DC qrvsnd14
+    READ_LONG 0x0E0 qrvsnd15
+    READ_LONG 0x0E4 qrvsnd16
+    READ_LONG 0x0E8 qrvsnd17
+    READ_LONG 0x0EC qrvsnd18
+    READ_LONG 0x0F0 qrvsnd19
+    READ_LONG 0x0F4 qrvsnd20
+    READ_LONG 0x0F8 qrvsnd21
+    READ_LONG 0x0FC qrvsnd22
+    READ_LONG 0x100 qrvsnd23
+    READ_LONG 0x104 qrvsnd24
+    READ_LONG 0x108 qrvsnd25
+    READ_LONG 0x10C qrvsnd26
+    READ_LONG 0x110 qrvsnd27
+    READ_LONG 0x114 qrvsnd28
+    READ_LONG 0x118 qrvsnd29
+    READ_LONG 0x11C qrvsnd30
+    READ_LONG 0x120 qrvsnd31
+    READ_LONG 0x124 qrvsnd32
+    READ_LONG 0x128 qrvsnd33
+    READ_LONG 0x12C qrvsnd34
+    READ_LONG 0x130 qrvsnd35
+    READ_LONG 0x134 qrvsnd36
+    READ_LONG 0x138 qrvsnd37
+    READ_LONG 0x13C qrvsnd38
+    READ_LONG 0x140 qrvsnd39
+    READ_LONG 0x144 qrvsnd40
+    READ_LONG 0x148 qrvsnd41
+    READ_LONG 0x14C qrvsnd42
+    READ_LONG 0x150 qrvsnd43
+    READ_LONG 0x154 qrvsnd44
+    READ_LONG 0x158 qrvsnd45
+    READ_LONG 0x15C qrvsnd46
+    READ_LONG 0x160 qrvsnd47
+    READ_LONG 0x164 qrvsnd48
+    READ_LONG 0x168 qrvsnd49
+    READ_LONG 0x16C qrvsnd50
+    READ_LONG 0x170 qrvsnd51
+    READ_LONG 0x174 qrvsnd52
+    READ_LONG 0x178 qrvsnd53
+    READ_LONG 0x17C qrvsnd54
+    READ_LONG 0x180 qrvsnd55
+    READ_LONG 0x184 qrvsnd56
+    READ_LONG 0x188 qrvsnd57
+    READ_LONG 0x18C qrvsnd58
+    READ_LONG 0x190 qrvsnd59
+    READ_LONG 0x194 qrvsnd60
+    READ_LONG 0x198 qrvsnd61
+    READ_LONG 0x19C qrvsnd62
+    READ_LONG 0x1A0 qrvsnd63
+    READ_LONG 0x1A4 qrvsnd64
+    READ_LONG 0x1A8 qrvsnd65
+    READ_LONG 0x1AC qrvsnd66
+    READ_LONG 0x1B0 qrvsnd67
+    READ_LONG 0x1B4 qrvsnd68
+    READ_LONG 0x1B8 qrvsnd69
+    READ_LONG 0x1BC qrvsnd70
+    READ_LONG 0x1C0 qrvsnd71
+    READ_LONG 0x1C4 qrvsnd72
+    READ_LONG 0x1C8 qrvsnd73
+    READ_LONG 0x1CC qrvsnd74
+    READ_LONG 0x1D0 qrvsnd75
+    READ_LONG 0x1D4 qrvsnd76
+    READ_LONG 0x1D8 qrvsnd77
+    READ_LONG 0x1DC qrvsnd78
+    READ_LONG 0x1E0 qrvsnd79
+    READ_LONG 0x1E4 qrvsnd80
+    READ_LONG 0x1E8 qrvsnd81
+    READ_LONG 0x1EC qrvsnd82
+    READ_LONG 0x1F0 qrvsnd83
+    READ_LONG 0x1F4 qrvsnd84
+    READ_LONG 0x1F8 qrvsnd85
+    READ_LONG 0x1FC qrvsnd86
+    READ_LONG 0x200 qrvsnd87
+    READ_LONG 0x204 qrvsnd88
+    READ_LONG 0x208 qrvsnd89
+    READ_LONG 0x20C qrvsnd90
+    READ_LONG 0x210 qrvsnd91
+    READ_LONG 0x214 qrvsnd92
+    READ_LONG 0x218 qrvsnd93
+    READ_LONG 0x21C qrvsnd94
+    READ_LONG 0x220 qrvsnd95
+    READ_LONG 0x224 qrvsnd96
+    READ_LONG 0x228 qrvsnd97
+    READ_LONG 0x22C qrvsnd98
+    READ_LONG 0x230 qrvsnd99
+  END
+  WRITE_LONG 0x0A4 qrvsnd00
+  WRITE_LONG 0x0A8 qrvsnd01
+  WRITE_LONG 0x0AC qrvsnd02
+  WRITE_LONG 0x0B0 qrvsnd03
+  WRITE_LONG 0x0B4 qrvsnd04
+  WRITE_LONG 0x0B8 qrvsnd05
+  WRITE_LONG 0x0BC qrvsnd06
+  WRITE_LONG 0x0C0 qrvsnd07
+  WRITE_LONG 0x0C4 qrvsnd08
+  WRITE_LONG 0x0C8 qrvsnd09
+  WRITE_LONG 0x0CC qrvsnd10
+  WRITE_LONG 0x0D0 qrvsnd11
+  WRITE_LONG 0x0D4 qrvsnd12
+  WRITE_LONG 0x0D8 qrvsnd13
+  WRITE_LONG 0x0DC qrvsnd14
+  WRITE_LONG 0x0E0 qrvsnd15
+  WRITE_LONG 0x0E4 qrvsnd16
+  WRITE_LONG 0x0E8 qrvsnd17
+  WRITE_LONG 0x0EC qrvsnd18
+  WRITE_LONG 0x0F0 qrvsnd19
+  WRITE_LONG 0x0F4 qrvsnd20
+  WRITE_LONG 0x0F8 qrvsnd21
+  WRITE_LONG 0x0FC qrvsnd22
+  WRITE_LONG 0x100 qrvsnd23
+  WRITE_LONG 0x104 qrvsnd24
+  WRITE_LONG 0x108 qrvsnd25
+  WRITE_LONG 0x10C qrvsnd26
+  WRITE_LONG 0x110 qrvsnd27
+  WRITE_LONG 0x114 qrvsnd28
+  WRITE_LONG 0x118 qrvsnd29
+  WRITE_LONG 0x11C qrvsnd30
+  WRITE_LONG 0x120 qrvsnd31
+  WRITE_LONG 0x124 qrvsnd32
+  WRITE_LONG 0x128 qrvsnd33
+  WRITE_LONG 0x12C qrvsnd34
+  WRITE_LONG 0x130 qrvsnd35
+  WRITE_LONG 0x134 qrvsnd36
+  WRITE_LONG 0x138 qrvsnd37
+  WRITE_LONG 0x13C qrvsnd38
+  WRITE_LONG 0x140 qrvsnd39
+  WRITE_LONG 0x144 qrvsnd40
+  WRITE_LONG 0x148 qrvsnd41
+  WRITE_LONG 0x14C qrvsnd42
+  WRITE_LONG 0x150 qrvsnd43
+  WRITE_LONG 0x154 qrvsnd44
+  WRITE_LONG 0x158 qrvsnd45
+  WRITE_LONG 0x15C qrvsnd46
+  WRITE_LONG 0x160 qrvsnd47
+  WRITE_LONG 0x164 qrvsnd48
+  WRITE_LONG 0x168 qrvsnd49
+  WRITE_LONG 0x16C qrvsnd50
+  WRITE_LONG 0x170 qrvsnd51
+  WRITE_LONG 0x174 qrvsnd52
+  WRITE_LONG 0x178 qrvsnd53
+  WRITE_LONG 0x17C qrvsnd54
+  WRITE_LONG 0x180 qrvsnd55
+  WRITE_LONG 0x184 qrvsnd56
+  WRITE_LONG 0x188 qrvsnd57
+  WRITE_LONG 0x18C qrvsnd58
+  WRITE_LONG 0x190 qrvsnd59
+  WRITE_LONG 0x194 qrvsnd60
+  WRITE_LONG 0x198 qrvsnd61
+  WRITE_LONG 0x19C qrvsnd62
+  WRITE_LONG 0x1A0 qrvsnd63
+  WRITE_LONG 0x1A4 qrvsnd64
+  WRITE_LONG 0x1A8 qrvsnd65
+  WRITE_LONG 0x1AC qrvsnd66
+  WRITE_LONG 0x1B0 qrvsnd67
+  WRITE_LONG 0x1B4 qrvsnd68
+  WRITE_LONG 0x1B8 qrvsnd69
+  WRITE_LONG 0x1BC qrvsnd70
+  WRITE_LONG 0x1C0 qrvsnd71
+  WRITE_LONG 0x1C4 qrvsnd72
+  WRITE_LONG 0x1C8 qrvsnd73
+  WRITE_LONG 0x1CC qrvsnd74
+  WRITE_LONG 0x1D0 qrvsnd75
+  WRITE_LONG 0x1D4 qrvsnd76
+  WRITE_LONG 0x1D8 qrvsnd77
+  WRITE_LONG 0x1DC qrvsnd78
+  WRITE_LONG 0x1E0 qrvsnd79
+  WRITE_LONG 0x1E4 qrvsnd80
+  WRITE_LONG 0x1E8 qrvsnd81
+  WRITE_LONG 0x1EC qrvsnd82
+  WRITE_LONG 0x1F0 qrvsnd83
+  WRITE_LONG 0x1F4 qrvsnd84
+  WRITE_LONG 0x1F8 qrvsnd85
+  WRITE_LONG 0x1FC qrvsnd86
+  WRITE_LONG 0x200 qrvsnd87
+  WRITE_LONG 0x204 qrvsnd88
+  WRITE_LONG 0x208 qrvsnd89
+  WRITE_LONG 0x20C qrvsnd90
+  WRITE_LONG 0x210 qrvsnd91
+  WRITE_LONG 0x214 qrvsnd92
+  WRITE_LONG 0x218 qrvsnd93
+  WRITE_LONG 0x21C qrvsnd94
+  WRITE_LONG 0x220 qrvsnd95
+  WRITE_LONG 0x224 qrvsnd96
+  WRITE_LONG 0x228 qrvsnd97
+  WRITE_LONG 0x22C qrvsnd98
+  WRITE_LONG 0x230 qrvsnd99
+BUT_ONLY_IF_IT_CHANGES
+

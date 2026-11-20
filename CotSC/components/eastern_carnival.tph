@@ -1,0 +1,1127 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_bg1_towns_carnivals.tra~
+
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCCARN.ARE~ ~override/QCCARN.ARE~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCCARN.BCS~ ~override/QCCARN.BCS~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCCARN.TIS~ ~override/QCCARN.TIS~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCARN00.PVRZ~ ~override/QCARN00.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCARN01.PVRZ~ ~override/QCARN01.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCARN02.PVRZ~ ~override/QCARN02.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCARN03.PVRZ~ ~override/QCARN03.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCARN04.PVRZ~ ~override/QCARN04.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCARN05.PVRZ~ ~override/QCARN05.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCARN06.PVRZ~ ~override/QCARN06.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCCARN.WED~ ~override/QCCARN.WED~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCCARNSR.BMP~ ~override/QCCARNSR.BMP~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCCARNHT.BMP~ ~override/QCCARNHT.BMP~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCCARNLM.BMP~ ~override/QCCARNLM.BMP~
+
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCTENT01.ARE~ ~override/QCTENT01.ARE~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCTENT01.BCS~ ~override/QCTENT01.BCS~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCTENT02.ARE~ ~override/QCTENT02.ARE~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCTENT02.BCS~ ~override/QCTENT02.BCS~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCTENT04.ARE~ ~override/QCTENT04.ARE~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCTENT04.BCS~ ~override/QCTENT04.BCS~
+
+
+// QCVELM working area and its two-way transition with QCCARN.
+// QCVELM.TIS remains the original full-tile TIS; the experimental PVRZ atlas
+// path is intentionally not used, avoiding atlas-boundary/vertical-seam bleed.
+// QCVELMSR uses the proven TORMHA-style occlusion treatment: the isolated
+// central obstacle is type 8 while the continuous boundary remains type 0.
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QCVELM.ARE~ ~override/QCVELM.ARE~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QCVELM.WED~ ~override/QCVELM.WED~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QCVELM.TIS~ ~override/QCVELM.TIS~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QVELM00.PVRZ~ ~override/QVELM00.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QVELM01.PVRZ~ ~override/QVELM01.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QVELM02.PVRZ~ ~override/QVELM02.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QVELM03.PVRZ~ ~override/QVELM03.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QVELM04.PVRZ~ ~override/QVELM04.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QVELM05.PVRZ~ ~override/QVELM05.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QVELM06.PVRZ~ ~override/QVELM06.PVRZ~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QCVELMSR.BMP~ ~override/QCVELMSR.BMP~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QCVELMHT.BMP~ ~override/QCVELMHT.BMP~
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QCVELMLM.BMP~ ~override/QCVELMLM.BMP~
+
+// QCCARN -> QCVELM.
+// The 96x96 trigger is centered exactly on X=954, Y=867.
+// QCVELM receives the party at X=1572, Y=1962 via this entrance.
+COPY_EXISTING ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCCARN.ARE~ ~override/QCCARN.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_type       = 2
+      fj_box_left   = 906
+      fj_box_top    = 819
+      fj_box_right  = 1002
+      fj_box_bottom = 915
+      fj_cursor_idx = 34
+      fj_flags      = 4
+      fj_vertex_0   = 906  + (819 << 16)
+      fj_vertex_1   = 1002 + (819 << 16)
+      fj_vertex_2   = 1002 + (915 << 16)
+      fj_vertex_3   = 906  + (915 << 16)
+    STR_VAR
+      fj_structure_type   = region
+      fj_name              = CARNQCVELM
+      fj_destination_area  = QCVELM
+      fj_destination_name  = CARN_ARRIVE
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 1098
+      fj_loc_y       = 934
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name           = QCVELM_EXIT
+  END
+  BUT_ONLY
+
+// QCVELM -> QCCARN.
+// The 96x96 trigger is centered exactly on X=1511, Y=2032.
+// QCCARN receives the party safely at X=1098, Y=934.
+COPY_EXISTING ~CotSC/Quests_and_Challenges/Eastern_Carnival/qcvelm/QCVELM.ARE~ ~override/QCVELM.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_type       = 2
+      fj_box_left   = 1463
+      fj_box_top    = 1984
+      fj_box_right  = 1559
+      fj_box_bottom = 2080
+      fj_cursor_idx = 34
+      fj_flags      = 0
+      fj_vertex_0   = 1463 + (1984 << 16)
+      fj_vertex_1   = 1559 + (1984 << 16)
+      fj_vertex_2   = 1559 + (2080 << 16)
+      fj_vertex_3   = 1463 + (2080 << 16)
+    STR_VAR
+      fj_structure_type   = region
+      fj_name              = QCVELMCARN
+      fj_destination_area  = QCCARN
+      fj_destination_name = QCVELM_EXIT
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 1572
+      fj_loc_y       = 1962
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name           = CARN_ARRIVE
+  END
+  BUT_ONLY
+
+
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCLASLO.BAM~ ~override/QCLASLO.BAM~
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qac_amnis.d~ ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qac_male1.d~ ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qac_male2.d~ ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qac_female.d~ ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qac_overly.d~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qac_dialogue.tra~
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qac_rhynn.d~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qc_carn_quests.tra~
+
+COPY_EXISTING ~AMNIS4.CRE~ ~override/QACAMN01.CRE~
+  WRITE_ASCII 0x2cc ~QACAMN~ #8
+  WRITE_ASCII 0x280 ~QACAMN01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AMNIS4.CRE~ ~override/QACAMN02.CRE~
+  WRITE_ASCII 0x2cc ~QACAMN~ #8
+  WRITE_ASCII 0x280 ~QACAMN02~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AMNIS4.CRE~ ~override/QACAMN03.CRE~
+  WRITE_ASCII 0x2cc ~QACAMN~ #8
+  WRITE_ASCII 0x280 ~QACAMN03~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~MTBE6.CRE~ ~override/QACCIT01.CRE~
+  WRITE_ASCII 0x2cc ~QACM01~ #8
+  WRITE_ASCII 0x280 ~QACCIT01~ #32
+  WRITE_ASCII 0x248 ~QACWAND~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~MTBE6.CRE~ ~override/QACCIT02.CRE~
+  WRITE_ASCII 0x2cc ~QACM02~ #8
+  WRITE_ASCII 0x280 ~QACCIT02~ #32
+  WRITE_ASCII 0x248 ~QACWAND~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FTOBE3.CRE~ ~override/QACCIT03.CRE~
+  WRITE_ASCII 0x2cc ~QACF01~ #8
+  WRITE_ASCII 0x280 ~QACCIT03~ #32
+  WRITE_ASCII 0x248 ~QACWAND~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DREPPI.CRE~ ~override/QACRHYN.CRE~
+  SAY NAME1 @1000
+  SAY NAME2 @1000
+  WRITE_ASCII 0x2cc ~QACRHYN~ #8
+  WRITE_ASCII 0x280 ~QACRHYN~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~MTBE6.CRE~ ~override/QACOVER.CRE~
+  SAY NAME1 @1001
+  SAY NAME2 @1001
+  WRITE_ASCII 0x2cc ~QACOVER~ #8
+  WRITE_ASCII 0x280 ~QACOVER~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Permanent Alfie in QCVELM; kobolds are spawned by the existing QCCARN area script.
+COPY_EXISTING ~QCVELM.ARE~ ~override/QCVELM.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 1525
+      fj_loc_y       = 1400
+      fj_dest_x      = 1525
+      fj_dest_y      = 1400
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCALFIE
+      fj_cre_resref     = QCALFIE
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// Additional QCVELM civilians. The two generic peasants retain their base-game
+// movement scripts; the woman and girl use custom dialogue and remain facing NE.
+COPY_EXISTING ~QCVELM.ARE~ ~override/QCVELM.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x              = 1197
+      fj_loc_y              = 826
+      fj_dest_x             = 1197
+      fj_dest_y             = 826
+      fj_orientation        = 0
+      fj_wander_dist_actor  = 500
+      fj_mvmt_dist_actor    = 500
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCVFARM
+      fj_dlg_resref    = QCVFARM
+      fj_bcs_override  = QACWAND
+      fj_cre_resref     = QCVFARM
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x              = 2367
+      fj_loc_y              = 1062
+      fj_dest_x             = 2367
+      fj_dest_y             = 1062
+      fj_orientation        = 0
+      fj_wander_dist_actor  = 500
+      fj_mvmt_dist_actor    = 500
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCVPEAS2
+      fj_dlg_resref    = QCVPEAS2
+      fj_bcs_override  = QACWAND
+      fj_cre_resref     = QCVPEAS2
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 1368
+      fj_loc_y       = 1135
+      fj_dest_x      = 1368
+      fj_dest_y      = 1135
+      fj_orientation = 13
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCVWOMAN
+      fj_dlg_resref   = QCVWOMAN
+      fj_cre_resref   = QCVWOMAN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 1344
+      fj_loc_y       = 1114
+      fj_dest_x      = 1344
+      fj_dest_y      = 1114
+      fj_orientation = 13
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCVGIRL
+      fj_dlg_resref   = QCVGIRL
+      fj_cre_resref   = QCVGIRL
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCLASLO.BAM~ ~override/QCLASLO.BAM~
+
+COPY_EXISTING ~MISC03.ITM~ ~override/QCLASLO.ITM~
+  SAY NAME1 @1002
+  SAY NAME2 @1002
+  SAY DESC @1003
+  READ_LONG 0x18 item_flags
+  WRITE_LONG 0x18 0x00000009
+  WRITE_SHORT 0x1c 0
+  WRITE_ASCII 0x3a ~QCLASLO~ #8
+  WRITE_ASCII 0x44 ~QCLASLO~ #8
+  WRITE_ASCII 0x58 ~QCLASLO~ #8
+  WRITE_LONG 0x34 0
+  WRITE_SHORT 0x38 1
+  WRITE_LONG 0x4c 0
+  WRITE_SHORT 0x68 0
+  WRITE_SHORT 0x70 0
+BUT_ONLY_IF_IT_CHANGES
+
+
+// Two QCCARN containers — v31: exact clickable polygons traced from the
+// player's blue-painted shapes on the 3072x2048 original-size grid.
+// NOTE: fj_loc_* is container reference/opening position; it is placed
+// slightly above the painted object. fj_trap_loc_* is the TRAP LAUNCH point,
+// not the character's destination. No SR/WED/TIS/light/height data are changed.
+COPY_EXISTING ~QCCARN.ARE~ ~override/QCCARN.ARE~
+  // Left barrel: blue 6-sided upright outline, bounds 418..453 / 1025..1077.
+  // Container reference point sits just above its top edge, on open ground.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type       = 11
+      fj_loc_x      = 434
+      fj_loc_y      = 1012
+      fj_box_left   = 418
+      fj_box_top    = 1025
+      fj_box_right  = 453
+      fj_box_bottom = 1077
+      fj_trap_loc_x = 435
+      fj_trap_loc_y = 1052
+      fj_vertex_0   = 434 + (1025 << 16)
+      fj_vertex_1   = 418 + (1038 << 16)
+      fj_vertex_2   = 418 + (1068 << 16)
+      fj_vertex_3   = 438 + (1077 << 16)
+      fj_vertex_4   = 453 + (1064 << 16)
+      fj_vertex_5   = 453 + (1037 << 16)
+    STR_VAR
+      fj_structure_type = container
+      fj_name           = QCBBAR01
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = SHORT_AT 0x74 - 1
+      fj_flags       = 1
+      fj_charge0    = 2
+    STR_VAR
+      fj_name           = MISC07
+      fj_structure_type = itm
+  END
+  // Right chest: blue slanted quadrilateral, bounds 1116..1233 / 1134..1191.
+  // Reference/opening point offset above the marked blue region, on accessible
+  // ground to the left of the fenced display. It is not a trap launch point.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type       = 2
+      fj_loc_x      = 1170
+      fj_loc_y      = 1121
+      fj_box_left   = 1116
+      fj_box_top    = 1134
+      fj_box_right  = 1233
+      fj_box_bottom = 1191
+      fj_trap_loc_x = 1175
+      fj_trap_loc_y = 1161
+      fj_vertex_0   = 1233 + (1158 << 16)
+      fj_vertex_1   = 1206 + (1134 << 16)
+      fj_vertex_2   = 1116 + (1172 << 16)
+      fj_vertex_3   = 1148 + (1191 << 16)
+    STR_VAR
+      fj_structure_type = container
+      fj_name           = QCCHES01
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = SHORT_AT 0x74 - 1
+      fj_flags       = 1
+    STR_VAR
+      fj_name           = STAF01
+      fj_structure_type = itm
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = SHORT_AT 0x74 - 1
+      fj_flags       = 1
+    STR_VAR
+      fj_name           = POTN20
+      fj_structure_type = itm
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// Alfie, the elephant trainer, and the kobold quest in QCVELM.
+// This is part of the same Carnival test component; it is not being added
+// to the main Quests and Challenges component yet.
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~CATLEO01.CRE~ BEGIN
+  FAIL @20001
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SQUIRL.CRE~ BEGIN
+  FAIL @20002
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KPFARM02.CRE~ BEGIN
+  FAIL @20003
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FTOBE3.CRE~ BEGIN
+  FAIL @20004
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DRIENN.CRE~ BEGIN
+  FAIL @20005
+END
+
+COPY_EXISTING ~CATLEO01.CRE~ ~override/QCLEOP01.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCLEOP01~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SQUIRL.CRE~ ~override/QCSQRL01.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCSQRL01~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SQUIRL.CRE~ ~override/QCSQRL02.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCSQRL02~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KPFARM02.CRE~ ~override/QCVFARM.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCVFARM~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FTOBE3.CRE~ ~override/QCVPEAS2.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCVPEAS2~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FTOBE3.CRE~ ~override/QCVWOMAN.CRE~
+  SAY NAME1 @1004
+  SAY NAME2 @1004
+  WRITE_ASCII 0x2cc ~QCVWOMAN~ #8
+  WRITE_ASCII 0x280 ~QCVWOMAN~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Explicitly assign the custom dialogue to the woman.
+COPY_EXISTING ~QCVWOMAN.CRE~ ~override/QCVWOMAN.CRE~
+  WRITE_ASCII 0x2cc ~QCVWOMAN~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DRIENN.CRE~ ~override/QCVGIRL.CRE~
+  SAY NAME1 @1005
+  SAY NAME2 @1005
+  WRITE_ASCII 0x2cc ~QCVGIRL~ #8
+  WRITE_ASCII 0x280 ~QCVGIRL~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Explicitly assign the custom dialogue to the girl.
+COPY_EXISTING ~QCVGIRL.CRE~ ~override/QCVGIRL.CRE~
+  WRITE_ASCII 0x2cc ~QCVGIRL~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~ALDETH.CRE~ BEGIN
+  FAIL @20006
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KOBOLD.CRE~ BEGIN
+  FAIL @20007
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KOBSHA01.CRE~ BEGIN
+  FAIL @20008
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SW1H20.ITM~ BEGIN
+  FAIL @20009
+END
+
+COPY_EXISTING ~ALDETH.CRE~ ~override/QCALFIE.CRE~
+  SAY NAME1 @1006
+  SAY NAME2 @1006
+  WRITE_ASCII 0x2cc ~QCALFIE~ #8
+  WRITE_ASCII 0x280 ~QCALFIE~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBOLD.CRE~ ~override/QCKOB01.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCKOB01~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBOLD.CRE~ ~override/QCKOB02.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCKOB02~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBOLD.CRE~ ~override/QCKOB03.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCKOB03~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBOLD.CRE~ ~override/QCKOB04.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCKOB04~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SCRL2J.ITM~ ~override/QCKNOTE.ITM~
+  SAY NAME1 @1007
+  SAY NAME2 @1007
+  SAY DESC @1008
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBSHA01.CRE~ ~override/QCKSH01.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCKSH01~ #32
+  ADD_CRE_ITEM ~QCKNOTE~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SW1H20.ITM~ ~override/QCALUCK.ITM~
+  SAY NAME1 @1009
+  SAY NAME2 @1009
+  SAY DESC @1010
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR
+      opcode = 22
+      target = 1
+      timing = 1
+      parameter1 = 2
+      parameter2 = 0
+      probability1 = 100
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Register 3 Carnival stories as EE Quests, not ordinary Important Events.
+ADD_JOURNAL TITLE (@7000) @50 @51 USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcalfie.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+ADD_JOURNAL TITLE (@3) @4 @5 USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qc_carn_quests.tra~
+ADD_JOURNAL TITLE (@6) @7 @8 USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qc_carn_quests.tra~
+
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcvelm.d~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcvelm.tra~
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcalfie.d~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcalfie.tra~
+
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qacwand.baf~
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qccarn.baf~
+
+
+// Fergie the Wanderer - potion merchant in QCTENR02.
+// The merchant is based on GALTOK only for his gnome appearance.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~GALTOK.CRE~ BEGIN
+  FAIL @20010
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~HIGHHED2.STO~ BEGIN
+  FAIL @20011
+END
+
+COPY_EXISTING ~GALTOK.CRE~ ~override/QCFERGIE.CRE~
+  SAY NAME1 @1011
+  SAY NAME2 @1011
+  WRITE_ASCII 0x2cc ~QCFERGIE~ #8
+  WRITE_ASCII 0x280 ~QCFERGIE~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QCTENT02.ARE~ ~override/QCTENT02.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 249
+      fj_loc_y       = 229
+      fj_dest_x      = 249
+      fj_dest_y      = 229
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCFERGIE
+      fj_dlg_resref     = QCFERGIE
+      fj_cre_resref     = QCFERGIE
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// Fergie's Emporium. Start from an existing potion-capable store structure,
+// clear its sale list, then add Fergie's stock. Standard item values are retained
+// so the prices remain consistent with the normal game items and other merchants.
+COPY_EXISTING ~HIGHHED2.STO~ ~override/QCFERGIE.STO~
+  LPF DELETE_STORE_ITEM
+    STR_VAR item_to_delete = ~.*~
+  END
+  ADD_STORE_ITEM ~POTN08~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN52~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN42~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~QCLIFE~ #0 #0 #0 ~IDENTIFIED~ #2
+  ADD_STORE_ITEM ~POTN55~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN20~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN29~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN30~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN18~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN24~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN19~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN13~ #0 #0 #0 ~IDENTIFIED~ #2
+  ADD_STORE_ITEM ~POTN27~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~POTN45~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN31~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN09~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN10~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~POTN34~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~POTN11~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~POTN35~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~POTN37~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN38~ #0 #0 #0 ~IDENTIFIED~ #2
+  ADD_STORE_ITEM ~POTN14~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~POTN46~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~POTN03~ #0 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~POTN12~ #0 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~POTN04~ #0 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~POTN05~ #0 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~POTN06~ #0 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~POTN07~ #0 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~POTN39~ #0 #0 #0 ~IDENTIFIED~ #2
+  ADD_STORE_ITEM ~POTN41~ #0 #0 #0 ~IDENTIFIED~ #2
+  ADD_STORE_ITEM ~POTN43~ #0 #0 #0 ~IDENTIFIED~ #2
+  ADD_STORE_ITEM ~BAG06~ #0 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~BAG03~ #0 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+// Custom Potion of Life Saving. Based on the standard healing potion,
+// but its healing effect is increased from 9 HP to 80 HP.
+COPY_EXISTING ~POTN08.ITM~ ~override/QCLIFE.ITM~
+  SAY NAME1 @1012
+  SAY NAME2 @1012
+  WRITE_LONG 0x34 5000 // Potion of Life Saving base value; existing store modifiers may apply.
+  SAY DESC @1013
+  WRITE_ASCII 0x3a ~QCLIFE~ #8
+  WRITE_ASCII 0x44 ~QCLIFE~ #8
+  WRITE_ASCII 0x58 ~QCLIFE~ #8
+  // The quick-item slot renders the item ABILITY icon, not the inventory icon.
+  READ_LONG 0x64 qc_lifesave_header_offset
+  READ_SHORT 0x68 qc_lifesave_header_count
+  FOR (qc_lifesave_h = 0; qc_lifesave_h < qc_lifesave_header_count; qc_lifesave_h += 1) BEGIN
+    WRITE_ASCII (qc_lifesave_header_offset + qc_lifesave_h * 0x38 + 0x04) ~QCLIFE~ #8
+  END
+  LPF ALTER_ITEM_EFFECT
+    INT_VAR
+      check_headers = 1
+      check_globals = 0
+      match_opcode = 17
+      match_parameter1 = 9
+      parameter1 = 80
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/QCLIFE.BAM~ ~override/QCLIFE.BAM~
+
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcfegie.d~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcfegie.tra~
+
+// Fergie the Wanderer - additional appearances in Siege of Dragonspear areas.
+// Same QCFERGIE.CRE means the same appearance, equipment and store setup as QCTENT02.
+// Only actor records are added; area collision, WED, TIS and HT resources are untouched.
+
+COPY_EXISTING ~BD1000.ARE~ ~override/BD1000.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 784
+      fj_loc_y       = 3643
+      fj_dest_x      = 784
+      fj_dest_y      = 3643
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCFERGIE
+      fj_dlg_resref     = QCFERGIE
+      fj_cre_resref     = QCFERGIE
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BD7100.ARE~ ~override/BD7100.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 313
+      fj_loc_y       = 3213
+      fj_dest_x      = 313
+      fj_dest_y      = 3213
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCFERGIE
+      fj_dlg_resref     = QCFERGIE
+      fj_cre_resref     = QCFERGIE
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BD3000.ARE~ ~override/BD3000.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 1968
+      fj_loc_y       = 1810
+      fj_dest_x      = 1968
+      fj_dest_y      = 1810
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCFERGIE
+      fj_dlg_resref     = QCFERGIE
+      fj_cre_resref     = QCFERGIE
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// Zara the Mummy - talkable, non-hostile merchant in QCTENT01.
+// Her CRE is based on the existing Fergie CRE so she keeps the same equipment;
+// only the animation is replaced with the standard generic mummy animation.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MUMMY01.CRE~ BEGIN
+  FAIL @20012
+END
+
+COPY_EXISTING ~QCFERGIE.CRE~ ~override/QCZARA.CRE~
+  SAY NAME1 @1014
+  SAY NAME2 @1014
+  WRITE_ASCII 0x2cc ~QCZARA~ #8
+  WRITE_ASCII 0x280 ~QCZARA~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  INNER_PATCH_FILE ~MUMMY01.CRE~ BEGIN
+    READ_LONG 0x28 mummy_animation
+    READ_LONG (0x0a4 + (0 * 4)) mummy_sound_0
+    READ_LONG (0x0a4 + (1 * 4)) mummy_sound_1
+    READ_LONG (0x0a4 + (2 * 4)) mummy_sound_2
+    READ_LONG (0x0a4 + (3 * 4)) mummy_sound_3
+    READ_LONG (0x0a4 + (4 * 4)) mummy_sound_4
+    READ_LONG (0x0a4 + (5 * 4)) mummy_sound_5
+    READ_LONG (0x0a4 + (6 * 4)) mummy_sound_6
+    READ_LONG (0x0a4 + (7 * 4)) mummy_sound_7
+    READ_LONG (0x0a4 + (8 * 4)) mummy_sound_8
+    READ_LONG (0x0a4 + (9 * 4)) mummy_sound_9
+    READ_LONG (0x0a4 + (10 * 4)) mummy_sound_10
+    READ_LONG (0x0a4 + (11 * 4)) mummy_sound_11
+    READ_LONG (0x0a4 + (12 * 4)) mummy_sound_12
+    READ_LONG (0x0a4 + (13 * 4)) mummy_sound_13
+    READ_LONG (0x0a4 + (14 * 4)) mummy_sound_14
+    READ_LONG (0x0a4 + (15 * 4)) mummy_sound_15
+    READ_LONG (0x0a4 + (16 * 4)) mummy_sound_16
+    READ_LONG (0x0a4 + (17 * 4)) mummy_sound_17
+    READ_LONG (0x0a4 + (18 * 4)) mummy_sound_18
+    READ_LONG (0x0a4 + (19 * 4)) mummy_sound_19
+    READ_LONG (0x0a4 + (20 * 4)) mummy_sound_20
+    READ_LONG (0x0a4 + (21 * 4)) mummy_sound_21
+    READ_LONG (0x0a4 + (22 * 4)) mummy_sound_22
+    READ_LONG (0x0a4 + (23 * 4)) mummy_sound_23
+    READ_LONG (0x0a4 + (24 * 4)) mummy_sound_24
+    READ_LONG (0x0a4 + (25 * 4)) mummy_sound_25
+    READ_LONG (0x0a4 + (26 * 4)) mummy_sound_26
+    READ_LONG (0x0a4 + (27 * 4)) mummy_sound_27
+    READ_LONG (0x0a4 + (28 * 4)) mummy_sound_28
+    READ_LONG (0x0a4 + (29 * 4)) mummy_sound_29
+    READ_LONG (0x0a4 + (30 * 4)) mummy_sound_30
+    READ_LONG (0x0a4 + (31 * 4)) mummy_sound_31
+    READ_LONG (0x0a4 + (32 * 4)) mummy_sound_32
+    READ_LONG (0x0a4 + (33 * 4)) mummy_sound_33
+    READ_LONG (0x0a4 + (34 * 4)) mummy_sound_34
+    READ_LONG (0x0a4 + (35 * 4)) mummy_sound_35
+    READ_LONG (0x0a4 + (36 * 4)) mummy_sound_36
+    READ_LONG (0x0a4 + (37 * 4)) mummy_sound_37
+    READ_LONG (0x0a4 + (38 * 4)) mummy_sound_38
+    READ_LONG (0x0a4 + (39 * 4)) mummy_sound_39
+    READ_LONG (0x0a4 + (40 * 4)) mummy_sound_40
+    READ_LONG (0x0a4 + (41 * 4)) mummy_sound_41
+    READ_LONG (0x0a4 + (42 * 4)) mummy_sound_42
+    READ_LONG (0x0a4 + (43 * 4)) mummy_sound_43
+    READ_LONG (0x0a4 + (44 * 4)) mummy_sound_44
+    READ_LONG (0x0a4 + (45 * 4)) mummy_sound_45
+    READ_LONG (0x0a4 + (46 * 4)) mummy_sound_46
+    READ_LONG (0x0a4 + (47 * 4)) mummy_sound_47
+    READ_LONG (0x0a4 + (48 * 4)) mummy_sound_48
+    READ_LONG (0x0a4 + (49 * 4)) mummy_sound_49
+    READ_LONG (0x0a4 + (50 * 4)) mummy_sound_50
+    READ_LONG (0x0a4 + (51 * 4)) mummy_sound_51
+    READ_LONG (0x0a4 + (52 * 4)) mummy_sound_52
+    READ_LONG (0x0a4 + (53 * 4)) mummy_sound_53
+    READ_LONG (0x0a4 + (54 * 4)) mummy_sound_54
+    READ_LONG (0x0a4 + (55 * 4)) mummy_sound_55
+    READ_LONG (0x0a4 + (56 * 4)) mummy_sound_56
+    READ_LONG (0x0a4 + (57 * 4)) mummy_sound_57
+    READ_LONG (0x0a4 + (58 * 4)) mummy_sound_58
+    READ_LONG (0x0a4 + (59 * 4)) mummy_sound_59
+    READ_LONG (0x0a4 + (60 * 4)) mummy_sound_60
+    READ_LONG (0x0a4 + (61 * 4)) mummy_sound_61
+    READ_LONG (0x0a4 + (62 * 4)) mummy_sound_62
+    READ_LONG (0x0a4 + (63 * 4)) mummy_sound_63
+    READ_LONG (0x0a4 + (64 * 4)) mummy_sound_64
+    READ_LONG (0x0a4 + (65 * 4)) mummy_sound_65
+    READ_LONG (0x0a4 + (66 * 4)) mummy_sound_66
+    READ_LONG (0x0a4 + (67 * 4)) mummy_sound_67
+    READ_LONG (0x0a4 + (68 * 4)) mummy_sound_68
+    READ_LONG (0x0a4 + (69 * 4)) mummy_sound_69
+    READ_LONG (0x0a4 + (70 * 4)) mummy_sound_70
+    READ_LONG (0x0a4 + (71 * 4)) mummy_sound_71
+    READ_LONG (0x0a4 + (72 * 4)) mummy_sound_72
+    READ_LONG (0x0a4 + (73 * 4)) mummy_sound_73
+    READ_LONG (0x0a4 + (74 * 4)) mummy_sound_74
+    READ_LONG (0x0a4 + (75 * 4)) mummy_sound_75
+    READ_LONG (0x0a4 + (76 * 4)) mummy_sound_76
+    READ_LONG (0x0a4 + (77 * 4)) mummy_sound_77
+    READ_LONG (0x0a4 + (78 * 4)) mummy_sound_78
+    READ_LONG (0x0a4 + (79 * 4)) mummy_sound_79
+    READ_LONG (0x0a4 + (80 * 4)) mummy_sound_80
+    READ_LONG (0x0a4 + (81 * 4)) mummy_sound_81
+    READ_LONG (0x0a4 + (82 * 4)) mummy_sound_82
+    READ_LONG (0x0a4 + (83 * 4)) mummy_sound_83
+    READ_LONG (0x0a4 + (84 * 4)) mummy_sound_84
+    READ_LONG (0x0a4 + (85 * 4)) mummy_sound_85
+    READ_LONG (0x0a4 + (86 * 4)) mummy_sound_86
+    READ_LONG (0x0a4 + (87 * 4)) mummy_sound_87
+    READ_LONG (0x0a4 + (88 * 4)) mummy_sound_88
+    READ_LONG (0x0a4 + (89 * 4)) mummy_sound_89
+    READ_LONG (0x0a4 + (90 * 4)) mummy_sound_90
+    READ_LONG (0x0a4 + (91 * 4)) mummy_sound_91
+    READ_LONG (0x0a4 + (92 * 4)) mummy_sound_92
+    READ_LONG (0x0a4 + (93 * 4)) mummy_sound_93
+    READ_LONG (0x0a4 + (94 * 4)) mummy_sound_94
+    READ_LONG (0x0a4 + (95 * 4)) mummy_sound_95
+    READ_LONG (0x0a4 + (96 * 4)) mummy_sound_96
+    READ_LONG (0x0a4 + (97 * 4)) mummy_sound_97
+    READ_LONG (0x0a4 + (98 * 4)) mummy_sound_98
+    READ_LONG (0x0a4 + (99 * 4)) mummy_sound_99
+  END
+  WRITE_LONG 0x28 %mummy_animation%
+  WRITE_LONG (0x0a4 + (0 * 4)) %mummy_sound_0%
+  WRITE_LONG (0x0a4 + (1 * 4)) %mummy_sound_1%
+  WRITE_LONG (0x0a4 + (2 * 4)) %mummy_sound_2%
+  WRITE_LONG (0x0a4 + (3 * 4)) %mummy_sound_3%
+  WRITE_LONG (0x0a4 + (4 * 4)) %mummy_sound_4%
+  WRITE_LONG (0x0a4 + (5 * 4)) %mummy_sound_5%
+  WRITE_LONG (0x0a4 + (6 * 4)) %mummy_sound_6%
+  WRITE_LONG (0x0a4 + (7 * 4)) %mummy_sound_7%
+  WRITE_LONG (0x0a4 + (8 * 4)) %mummy_sound_8%
+  WRITE_LONG (0x0a4 + (9 * 4)) %mummy_sound_9%
+  WRITE_LONG (0x0a4 + (10 * 4)) %mummy_sound_10%
+  WRITE_LONG (0x0a4 + (11 * 4)) %mummy_sound_11%
+  WRITE_LONG (0x0a4 + (12 * 4)) %mummy_sound_12%
+  WRITE_LONG (0x0a4 + (13 * 4)) %mummy_sound_13%
+  WRITE_LONG (0x0a4 + (14 * 4)) %mummy_sound_14%
+  WRITE_LONG (0x0a4 + (15 * 4)) %mummy_sound_15%
+  WRITE_LONG (0x0a4 + (16 * 4)) %mummy_sound_16%
+  WRITE_LONG (0x0a4 + (17 * 4)) %mummy_sound_17%
+  WRITE_LONG (0x0a4 + (18 * 4)) %mummy_sound_18%
+  WRITE_LONG (0x0a4 + (19 * 4)) %mummy_sound_19%
+  WRITE_LONG (0x0a4 + (20 * 4)) %mummy_sound_20%
+  WRITE_LONG (0x0a4 + (21 * 4)) %mummy_sound_21%
+  WRITE_LONG (0x0a4 + (22 * 4)) %mummy_sound_22%
+  WRITE_LONG (0x0a4 + (23 * 4)) %mummy_sound_23%
+  WRITE_LONG (0x0a4 + (24 * 4)) %mummy_sound_24%
+  WRITE_LONG (0x0a4 + (25 * 4)) %mummy_sound_25%
+  WRITE_LONG (0x0a4 + (26 * 4)) %mummy_sound_26%
+  WRITE_LONG (0x0a4 + (27 * 4)) %mummy_sound_27%
+  WRITE_LONG (0x0a4 + (28 * 4)) %mummy_sound_28%
+  WRITE_LONG (0x0a4 + (29 * 4)) %mummy_sound_29%
+  WRITE_LONG (0x0a4 + (30 * 4)) %mummy_sound_30%
+  WRITE_LONG (0x0a4 + (31 * 4)) %mummy_sound_31%
+  WRITE_LONG (0x0a4 + (32 * 4)) %mummy_sound_32%
+  WRITE_LONG (0x0a4 + (33 * 4)) %mummy_sound_33%
+  WRITE_LONG (0x0a4 + (34 * 4)) %mummy_sound_34%
+  WRITE_LONG (0x0a4 + (35 * 4)) %mummy_sound_35%
+  WRITE_LONG (0x0a4 + (36 * 4)) %mummy_sound_36%
+  WRITE_LONG (0x0a4 + (37 * 4)) %mummy_sound_37%
+  WRITE_LONG (0x0a4 + (38 * 4)) %mummy_sound_38%
+  WRITE_LONG (0x0a4 + (39 * 4)) %mummy_sound_39%
+  WRITE_LONG (0x0a4 + (40 * 4)) %mummy_sound_40%
+  WRITE_LONG (0x0a4 + (41 * 4)) %mummy_sound_41%
+  WRITE_LONG (0x0a4 + (42 * 4)) %mummy_sound_42%
+  WRITE_LONG (0x0a4 + (43 * 4)) %mummy_sound_43%
+  WRITE_LONG (0x0a4 + (44 * 4)) %mummy_sound_44%
+  WRITE_LONG (0x0a4 + (45 * 4)) %mummy_sound_45%
+  WRITE_LONG (0x0a4 + (46 * 4)) %mummy_sound_46%
+  WRITE_LONG (0x0a4 + (47 * 4)) %mummy_sound_47%
+  WRITE_LONG (0x0a4 + (48 * 4)) %mummy_sound_48%
+  WRITE_LONG (0x0a4 + (49 * 4)) %mummy_sound_49%
+  WRITE_LONG (0x0a4 + (50 * 4)) %mummy_sound_50%
+  WRITE_LONG (0x0a4 + (51 * 4)) %mummy_sound_51%
+  WRITE_LONG (0x0a4 + (52 * 4)) %mummy_sound_52%
+  WRITE_LONG (0x0a4 + (53 * 4)) %mummy_sound_53%
+  WRITE_LONG (0x0a4 + (54 * 4)) %mummy_sound_54%
+  WRITE_LONG (0x0a4 + (55 * 4)) %mummy_sound_55%
+  WRITE_LONG (0x0a4 + (56 * 4)) %mummy_sound_56%
+  WRITE_LONG (0x0a4 + (57 * 4)) %mummy_sound_57%
+  WRITE_LONG (0x0a4 + (58 * 4)) %mummy_sound_58%
+  WRITE_LONG (0x0a4 + (59 * 4)) %mummy_sound_59%
+  WRITE_LONG (0x0a4 + (60 * 4)) %mummy_sound_60%
+  WRITE_LONG (0x0a4 + (61 * 4)) %mummy_sound_61%
+  WRITE_LONG (0x0a4 + (62 * 4)) %mummy_sound_62%
+  WRITE_LONG (0x0a4 + (63 * 4)) %mummy_sound_63%
+  WRITE_LONG (0x0a4 + (64 * 4)) %mummy_sound_64%
+  WRITE_LONG (0x0a4 + (65 * 4)) %mummy_sound_65%
+  WRITE_LONG (0x0a4 + (66 * 4)) %mummy_sound_66%
+  WRITE_LONG (0x0a4 + (67 * 4)) %mummy_sound_67%
+  WRITE_LONG (0x0a4 + (68 * 4)) %mummy_sound_68%
+  WRITE_LONG (0x0a4 + (69 * 4)) %mummy_sound_69%
+  WRITE_LONG (0x0a4 + (70 * 4)) %mummy_sound_70%
+  WRITE_LONG (0x0a4 + (71 * 4)) %mummy_sound_71%
+  WRITE_LONG (0x0a4 + (72 * 4)) %mummy_sound_72%
+  WRITE_LONG (0x0a4 + (73 * 4)) %mummy_sound_73%
+  WRITE_LONG (0x0a4 + (74 * 4)) %mummy_sound_74%
+  WRITE_LONG (0x0a4 + (75 * 4)) %mummy_sound_75%
+  WRITE_LONG (0x0a4 + (76 * 4)) %mummy_sound_76%
+  WRITE_LONG (0x0a4 + (77 * 4)) %mummy_sound_77%
+  WRITE_LONG (0x0a4 + (78 * 4)) %mummy_sound_78%
+  WRITE_LONG (0x0a4 + (79 * 4)) %mummy_sound_79%
+  WRITE_LONG (0x0a4 + (80 * 4)) %mummy_sound_80%
+  WRITE_LONG (0x0a4 + (81 * 4)) %mummy_sound_81%
+  WRITE_LONG (0x0a4 + (82 * 4)) %mummy_sound_82%
+  WRITE_LONG (0x0a4 + (83 * 4)) %mummy_sound_83%
+  WRITE_LONG (0x0a4 + (84 * 4)) %mummy_sound_84%
+  WRITE_LONG (0x0a4 + (85 * 4)) %mummy_sound_85%
+  WRITE_LONG (0x0a4 + (86 * 4)) %mummy_sound_86%
+  WRITE_LONG (0x0a4 + (87 * 4)) %mummy_sound_87%
+  WRITE_LONG (0x0a4 + (88 * 4)) %mummy_sound_88%
+  WRITE_LONG (0x0a4 + (89 * 4)) %mummy_sound_89%
+  WRITE_LONG (0x0a4 + (90 * 4)) %mummy_sound_90%
+  WRITE_LONG (0x0a4 + (91 * 4)) %mummy_sound_91%
+  WRITE_LONG (0x0a4 + (92 * 4)) %mummy_sound_92%
+  WRITE_LONG (0x0a4 + (93 * 4)) %mummy_sound_93%
+  WRITE_LONG (0x0a4 + (94 * 4)) %mummy_sound_94%
+  WRITE_LONG (0x0a4 + (95 * 4)) %mummy_sound_95%
+  WRITE_LONG (0x0a4 + (96 * 4)) %mummy_sound_96%
+  WRITE_LONG (0x0a4 + (97 * 4)) %mummy_sound_97%
+  WRITE_LONG (0x0a4 + (98 * 4)) %mummy_sound_98%
+  WRITE_LONG (0x0a4 + (99 * 4)) %mummy_sound_99%
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QCTENT01.ARE~ ~override/QCTENT01.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 252
+      fj_loc_y       = 228
+      fj_dest_x      = 252
+      fj_dest_y      = 228
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCZARA
+      fj_dlg_resref     = QCZARA
+      fj_cre_resref     = QCZARA
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// Clear the three existing QCTENT01 containers, then refill two of them.
+// Container 1: 11 gold coins. Container 2: empty. Container 3: History of Amn.
+COPY_EXISTING ~QCTENT01.ARE~ ~override/QCTENT01.ARE~
+  LPF DELETE_AREA_ITEM
+    STR_VAR item_to_delete = ~.*~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 11
+    STR_VAR
+      item_to_add = ~MISC07~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+    STR_VAR
+      item_to_add = ~BOOK45~
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// Zara's merchant inventory.
+COPY_EXISTING ~QCFERGIE.STO~ ~override/QCZARA.STO~
+  LPF DELETE_STORE_ITEM
+    STR_VAR item_to_delete = ~.*~
+  END
+  ADD_STORE_ITEM ~GBERRY~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~SCRL5L~ #1 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~SCRL5M~ #1 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~WAND08~ #50 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~WAND09~ #50 #0 #0 ~IDENTIFIED~ #1
+BUT_ONLY_IF_IT_CHANGES
+
+// Sandrine in BG4900 reveals the custom Eastern Carnival on the world map.
+// Stock EET registration is performed only when BP-BGT Worldmap is not yet
+// installed. BP-BGT Worldmap builds its own QCCARN entry from CotSC tables.
+// Sandrine's translated dialogue also enables all required travel flags.
+COPY_EXISTING ~LANTAN.CRE~ ~override/QCSANDRI.CRE~
+  SAY NAME1 @1015
+  SAY NAME2 @1015
+  WRITE_ASCII 0x2cc ~QCSANDRI~ #8
+  WRITE_ASCII 0x280 ~QCSANDRI~ #32
+  WRITE_ASCII 0x248 ~QCSANDRI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Sandrine approaches the party in BG4900 when she sees them.
+COPY_EXISTING ~BG4900.ARE~ ~override/BG4900.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 2966
+      fj_loc_y       = 3233
+      fj_dest_x      = 2966
+      fj_dest_y      = 3233
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCSANDRI
+      fj_dlg_resref     = QCSANDRI
+      fj_bcs_override   = QCSANDRI
+      fj_cre_resref     = QCSANDRI
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// Add the custom Eastern Carnival to the EET/BG1 world map.
+// The actual Nashkel Carnival worldmap area in this EET WMP is BG4900.
+// QCCARN is reached through its Exitwmp entrance; returning from QCCARN
+// uses the existing BG4900 entrance CDWestExit.
+ACTION_DEFINE_ASSOCIATIVE_ARRAY toNewArea BEGIN
+  "BG4900" => "Exitwmp"
+END
+ACTION_DEFINE_ASSOCIATIVE_ARRAY fromNewArea BEGIN
+  "BG4900" => "CDWestExit"
+END
+// Keep the stock EET WMP update when BP-BGT Worldmap is absent.
+// Once BP-BGT Worldmap is installed, only its own built WMP and the CotSC
+// registration tables should control QCCARN (avoid stock-map coordinates).
+ACTION_IF MOD_IS_INSTALLED ~bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2~ 0 BEGIN
+  PRINT @20013
+END ELSE BEGIN
+  OUTER_SPRINT qc_wm_qccarn_name @19000
+  OUTER_SPRINT qc_wm_qccarn_desc @19000
+  LAUNCH_ACTION_FUNCTION sc#addWmpAre
+    INT_VAR
+      mapIcon         = 72
+      xCoord          = 1150
+      yCoord          = 2072
+      tTime           = 0
+      inclSv          = 1
+      visible         = 0
+      visibleAdjacent = 0
+      reachable       = 0
+      visited         = 0
+    STR_VAR
+      areName         = ~QCCARN~
+      strName         = EVAL ~%qc_wm_qccarn_name%~
+      strDesc         = EVAL ~%qc_wm_qccarn_desc%~
+  END
+END
+
+// World-map arrival entrance. This is a new entrance only; existing Carnival
+// transitions and collision are untouched.
+COPY_EXISTING ~QCCARN.ARE~ ~override/QCCARN.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 393
+      fj_loc_y       = 1877
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name           = Exitwmp
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcsandri.baf~
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcsandri.d~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcsandri.tra~
+
+// Virage - a polymorphed illusionist trapped in cat form inside QCTENT04.
+// His human form is based on ARKION; his initial animation is copied from CAT.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~ARKION.CRE~ BEGIN
+  FAIL @20014
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~CAT.CRE~ BEGIN
+  FAIL @20015
+END
+
+COPY_EXISTING ~ARKION.CRE~ ~override/QCVIRAGE.CRE~
+  SAY NAME1 @1016
+  SAY NAME2 @1016
+  WRITE_ASCII 0x2cc ~QCVIRAGE~ #8
+  WRITE_ASCII 0x280 ~QCVIRAGE~ #32
+  WRITE_ASCII 0x248 ~QCVIRAGE~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  INNER_PATCH_FILE ~CAT.CRE~ BEGIN
+    READ_LONG 0x28 virage_cat_animation
+  END
+  WRITE_LONG 0x28 %virage_cat_animation%
+BUT_ONLY_IF_IT_CHANGES
+
+// Place Virage where the original merchant stood inside the supplied BG4905 interior.
+COPY_EXISTING ~QCTENT04.ARE~ ~override/QCTENT04.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 290
+      fj_loc_y       = 250
+      fj_dest_x      = 290
+      fj_dest_y      = 250
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name           = QCVIRAGE
+      fj_dlg_resref     = QCVIRAGE
+      fj_cre_resref     = QCVIRAGE
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// Stable return point for QCCARN's lower-left exit. The prior exit pointed
+// at CDWestExit, which isn't added or guaranteed to exist in BG4900. Create
+// our own destination so the region never resolves a missing entrance.
+COPY_EXISTING ~BG4900.ARE~ ~override/BG4900.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x       = 784
+      fj_loc_y       = 3643
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name           = QCCRET
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// SAFE RETURN TO NASHKEL CARNIVAL
+// Do not create custom QCCARN -> world-map edge regions. Those regions have
+// repeatedly crashed the EET engine when clicked. Instead, QCCARN returns
+// to the normal Nashkel Carnival area. The player can use BG4900's existing
+// world-map travel from there. This keeps the QCCARN world-map entry/reveal
+// intact while avoiding the unstable custom edge-region mechanism.
+COPY_EXISTING ~QCCARN.ARE~ ~override/QCCARN.ARE~
+  // Remove the inherited, unregistered southern BG5100 world-map connection.
+  // The working eastern route is left untouched, as is the lower-left region.
+  WRITE_ASCII 0x30 ~~ #8
+  WRITE_LONG  0x38 0
+  LPF fj_are_structure
+    INT_VAR
+      fj_type       = 2
+      fj_box_left   = 641
+      fj_box_top    = 1987
+      fj_box_right  = 737
+      fj_box_bottom = 2083
+      fj_cursor_idx = 34
+      fj_flags      = 4
+      fj_vertex_0   = 641 + (1987 << 16)
+      fj_vertex_1   = 737 + (1987 << 16)
+      fj_vertex_2   = 737 + (2083 << 16)
+      fj_vertex_3   = 641 + (2083 << 16)
+    STR_VAR
+      fj_structure_type  = region
+      fj_name            = QCCARN_RETURN
+      fj_destination_area = BG4900
+      fj_destination_name = QCCRET
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// QCTENT04 already has a dedicated QCCARN return entrance in the supplied ARE.
+// Keep QCCARN's original TENT03 entrance intact for the outbound transition.
+
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcvirage.baf~
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qcvirage.d~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qc_carn_quests.tra~
+
+COMPILE ~CotSC/Quests_and_Challenges/Eastern_Carnival/qccarncol/qczara.d~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/Eastern_Carnival/qccarncol/qczara.tra~

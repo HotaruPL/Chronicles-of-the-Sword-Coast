@@ -1,0 +1,8 @@
+INCLUDE ~CotSC/components/unicorn_grove/grove_and_quest_setup.tph~
+INCLUDE ~CotSC/components/unicorn_grove/nightmare_candlekeep.tph~
+INCLUDE ~CotSC/components/unicorn_grove/jaheira_and_khalid_memories.tph~
+INCLUDE ~CotSC/components/unicorn_grove/bhaals_temple_forest.tph~
+INCLUDE ~CotSC/components/unicorn_grove/temple_interior_and_ritual.tph~
+INCLUDE ~CotSC/components/unicorn_grove/dragon_and_grove_finale.tph~
+INCLUDE ~CotSC/components/unicorn_grove/altar_and_door_fixes.tph~
+INCLUDE ~CotSC/components/unicorn_grove/worldmap_and_imoen_dialogue.tph~

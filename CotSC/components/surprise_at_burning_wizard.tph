@@ -1,0 +1,34 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+// Copy his original appearance but disconnect the BG2 dialogue and all five
+// original AI script slots. Original VIEKANG.CRE is NOT modified.
+COPY_EXISTING ~VIEKANG.CRE~ ~override/QCVIEBR.CRE~
+  SAY NAME1 @5008
+  SAY NAME2 @5008
+  WRITE_ASCII 0x248 ~QCVIEBR~ #8  // new override script
+  WRITE_ASCII 0x250 ~~ #32        // clear class/race/general/default scripts
+  WRITE_ASCII 0x280 ~QCVIEBR~ #32 // unique script/death variable
+  WRITE_ASCII 0x2cc ~~ #8         // no reused BG2 dialogue
+  WRITE_BYTE 0x270 128           // neutral; no aggression
+
+// Bark automatically when he sees ANY party member; play a harmless animation
+// matching the original game's Viekang teleport and remove him safely.
+COMPILE ~CotSC/Quests_and_Challenges/AREA/QCVIEBR.baf~
+  USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCVIEBR.tra~
+
+COPY_EXISTING ~BG3307.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 423
+      fj_loc_y = 239
+      fj_dest_x = 423
+      fj_dest_y = 239
+      fj_spawned = 1
+      fj_orientation = 14 // south-east
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCVIEBR_Actor~
+      fj_cre_resref = ~QCVIEBR~
+  END

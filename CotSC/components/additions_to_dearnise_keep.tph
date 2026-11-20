@@ -1,0 +1,292 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+// Modify existing game areas; never replace the original AR1300/1301/1303.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR1300.ARE~ BEGIN FAIL ~AR1300.ARE missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR1301.ARE~ BEGIN FAIL ~AR1301.ARE missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR1303.ARE~ BEGIN FAIL ~AR1303.ARE missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~XVART01.CRE~ BEGIN FAIL ~Required resource XVART01.CRE missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TROLL01.CRE~ BEGIN FAIL ~Required resource TROLL01.CRE missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TROLSP01.CRE~ BEGIN FAIL ~Required resource TROLSP01.CRE missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DFTOWN1.CRE~ BEGIN FAIL ~Required resource DFTOWN1.CRE missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~WYVBAB01.CRE~ BEGIN FAIL ~Required resource WYVBAB01.CRE missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~RING06.ITM~ BEGIN FAIL ~Required resource RING06.ITM missing.~ END
+
+// Friendly Xvart spokesman and followers, with independent conversation / battle AI.
+COPY_EXISTING ~XVART01.CRE~ ~override/QCDXLEAD.CRE~
+  SAY NAME1 @5045
+  SAY NAME2 @5045
+  WRITE_SHORT 0x24 48
+  WRITE_SHORT 0x26 48
+  WRITE_BYTE 0x270 2 // Allied, not hostile to party.
+  WRITE_ASCII 0x280 ~QCDXLEAD~ #32
+  WRITE_ASCII 0x2cc ~QCDXLEAD~ #8
+  WRITE_ASCII 0x248 ~QCDXLEAD~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~XVART01.CRE~ ~override/QCDXVART.CRE~
+  SAY NAME1 @5045
+  SAY NAME2 @5045
+  WRITE_SHORT 0x24 48
+  WRITE_SHORT 0x26 48
+  WRITE_BYTE 0x270 2
+  WRITE_ASCII 0x280 ~QCDXVART~ #32
+  WRITE_ASCII 0x248 ~QCDXVART~ #8
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Retain native troll override and other scripts for regeneration/death. Only modify class AI.
+COPY_EXISTING ~TROLL01.CRE~ ~override/QCDTROL1.CRE~
+  WRITE_BYTE 0x270 128 // Temporarily neutral until the Xvart leader calls for help.
+  WRITE_ASCII 0x280 ~QCDTROL1~ #32
+  WRITE_ASCII 0x250 ~QCDTROLL~ #8 // Class AI; preserve original override death/regeneration behavior.
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~TROLSP01.CRE~ ~override/QCDTROL2.CRE~
+  WRITE_BYTE 0x270 128 // Temporarily neutral until the Xvart leader calls for help.
+  WRITE_ASCII 0x280 ~QCDTROL2~ #32
+  WRITE_ASCII 0x250 ~QCDTROLL~ #8 // Class AI; preserve original override death/regeneration behavior.
+BUT_ONLY_IF_IT_CHANGES
+
+// Rhianna: neutral NPC, red outfit, black hair, leaves after speaking.
+COPY_EXISTING ~DFTOWN1.CRE~ ~override/QCDRHIAN.CRE~
+  SAY NAME1 @5046
+  SAY NAME2 @5046
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x32 0
+  WRITE_BYTE 0x2d 28
+  WRITE_BYTE 0x2e 28
+  WRITE_ASCII 0x280 ~QCDRHIAN~ #32
+  WRITE_ASCII 0x2cc ~QCDRHIAN~ #8
+  WRITE_ASCII 0x248 ~QCDRHIAN~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Smaller trained wyvern uses the game's baby-wyvern model.
+COPY_EXISTING ~WYVBAB01.CRE~ ~override/QCDWYTRN.CRE~
+  SAY NAME1 @5047
+  SAY NAME2 @5047
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCDWYTRN~ #32
+  WRITE_ASCII 0x248 ~QCDWYAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// EET usually carries AIRASPEC (BG1 air aspect: fierce little wyvern-like monster).
+// If unavailable in a non-EET BG2EE setup, use a standard wyvern template.
+ACTION_IF FILE_EXISTS_IN_GAME ~AIRASPEC.CRE~ BEGIN
+  COPY_EXISTING ~AIRASPEC.CRE~ ~override/QCDWYBLD.CRE~
+    SAY NAME1 @5048
+    SAY NAME2 @5048
+    WRITE_BYTE 0x270 255
+    WRITE_ASCII 0x280 ~QCDWYBLD~ #32
+    WRITE_ASCII 0x248 ~QCDWYAI~ #8
+    WRITE_ASCII 0x250 ~ ~ #8
+    WRITE_ASCII 0x258 ~ ~ #8
+    WRITE_ASCII 0x260 ~ ~ #8
+    WRITE_ASCII 0x268 ~ ~ #8
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+  COPY_EXISTING ~WYVBAB01.CRE~ ~override/QCDWYBLD.CRE~
+    SAY NAME1 @5048
+    SAY NAME2 @5048
+    WRITE_BYTE 0x270 255
+    WRITE_ASCII 0x280 ~QCDWYBLD~ #32
+    WRITE_ASCII 0x248 ~QCDWYAI~ #8
+    WRITE_ASCII 0x250 ~ ~ #8
+    WRITE_ASCII 0x258 ~ ~ #8
+    WRITE_ASCII 0x260 ~ ~ #8
+    WRITE_ASCII 0x268 ~ ~ #8
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+// ARE files: append actors without touching background, transitions, ambience, or existing scripts.
+COPY_EXISTING ~AR1300.ARE~ ~override/AR1300.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3091
+      fj_loc_y = 347
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDXLEAD
+      fj_cre_resref = QCDXLEAD
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3073
+      fj_loc_y = 315
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDX01
+      fj_cre_resref = QCDXVART
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3060
+      fj_loc_y = 394
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDX02
+      fj_cre_resref = QCDXVART
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2981
+      fj_loc_y = 369
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDX03
+      fj_cre_resref = QCDXVART
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2996
+      fj_loc_y = 336
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDX04
+      fj_cre_resref = QCDXVART
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2814
+      fj_loc_y = 266
+      fj_orientation = 14
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDTROL1
+      fj_cre_resref = QCDTROL1
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2799
+      fj_loc_y = 307
+      fj_orientation = 14
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDTROL2
+      fj_cre_resref = QCDTROL2
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1162
+      fj_loc_y = 1749
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDWY01
+      fj_cre_resref = QCDWYTRN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2601
+      fj_loc_y = 519
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDWY02
+      fj_cre_resref = QCDWYTRN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2737
+      fj_loc_y = 633
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDWY03
+      fj_cre_resref = QCDWYTRN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2832
+      fj_loc_y = 1950
+      fj_orientation = 14
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDWYBLD
+      fj_cre_resref = QCDWYBLD
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR1301.ARE~ ~override/AR1301.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 956
+      fj_loc_y = 440
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDRHIAN
+      fj_cre_resref = QCDRHIAN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 979
+      fj_loc_y = 1530
+      fj_orientation = 6
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDWY04
+      fj_cre_resref = QCDWYTRN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2719
+      fj_loc_y = 403
+      fj_orientation = 2
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDWY05
+      fj_cre_resref = QCDWYTRN
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR1303.ARE~ ~override/AR1303.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 479
+      fj_loc_y = 1230
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDWY06
+      fj_cre_resref = QCDWYTRN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1022
+      fj_loc_y = 396
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDWY07
+      fj_cre_resref = QCDWYTRN
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qc_dearnise/scripts/QCDXLEAD.baf~
+COMPILE ~CotSC/qc_dearnise/scripts/QCDXVART.baf~
+COMPILE ~CotSC/qc_dearnise/scripts/QCDTROLL.baf~
+COMPILE ~CotSC/qc_dearnise/scripts/QCDRHIAN.baf~
+COMPILE ~CotSC/qc_dearnise/scripts/QCDWYAI.baf~
+COMPILE ~CotSC/qc_dearnise/dialogue/dearnise.d~ USING ~CotSC/translation/%LANGUAGE%/qc_dearnise/dialogue/dearnise.tra~
+
+// Public installer: development progress message omitted.

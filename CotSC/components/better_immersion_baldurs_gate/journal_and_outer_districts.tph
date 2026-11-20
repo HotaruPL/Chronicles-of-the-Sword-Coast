@@ -1,0 +1,334 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_baldurs_gate_city.tra~
+
+// Durbem's key quest: register active and completed entries as one EE quest.
+ADD_JOURNAL TITLE (@7001) @9000 @9001 USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/durbem_quest.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+ADD_JOURNAL TITLE (@7002) @9010 @9011 USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/missing_drow_quest.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+ADD_JOURNAL TITLE (@7003) @9020 @9021 USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/torm_quest.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+
+// ---------------------------------------------------------------------------
+// BG0200 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~SARHED.CRE~ ~override/BIB0201.CRE~
+  SAY NAME1 @2000
+  SAY NAME2 @2000
+  WRITE_ASCII 0x2cc ~BIB0201~ #8
+  WRITE_ASCII 0x280 ~BIB0201~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~ARENTHIS.CRE~ ~override/BIB0202.CRE~
+  SAY NAME1 @2001
+  SAY NAME2 @2001
+  WRITE_ASCII 0x2cc ~BIB0202~ #8
+  WRITE_ASCII 0x280 ~BIB0202~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DADROW2.CRE~ ~override/BIB0203.CRE~
+  SAY NAME1 @2002
+  SAY NAME2 @2002
+  WRITE_ASCII 0x2cc ~BIB0203~ #8
+  WRITE_ASCII 0x280 ~BIB0203~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HALFG3.CRE~ ~override/BIB0204.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~BIB0204~ #8
+  WRITE_ASCII 0x280 ~BIB0204~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~ORC02.CRE~ ~override/BIB0205.CRE~
+  SAY NAME1 @2004
+  SAY NAME2 @2004
+  WRITE_ASCII 0x2cc ~BIB0205~ #8
+  WRITE_ASCII 0x280 ~BIB0205~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~WOLF.CRE~ ~override/BIB0206.CRE~
+  SAY NAME1 @2005
+  SAY NAME2 @2005
+  WRITE_ASCII 0x2cc ~BIB0206~ #8
+  WRITE_ASCII 0x280 ~BIB0206~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BIB0207.CRE~
+  SAY NAME1 @2006
+  SAY NAME2 @2006
+  WRITE_ASCII 0x2cc ~BIB0207~ #8
+  WRITE_ASCII 0x280 ~BIB0207~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BDCHILD.CRE~ ~override/BIB0208.CRE~
+  SAY NAME1 @2007
+  SAY NAME2 @2007
+  WRITE_ASCII 0x2cc ~BIB0208~ #8
+  WRITE_ASCII 0x280 ~BIB0208~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~NEB.CRE~ ~override/BIB0209.CRE~
+  SAY NAME1 @2008
+  SAY NAME2 @2008
+  WRITE_ASCII 0x2cc ~BIB0209~ #8
+  WRITE_ASCII 0x280 ~BIB0209~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FARM.CRE~ ~override/BIB0210.CRE~
+  SAY NAME1 @2009
+  SAY NAME2 @2009
+  WRITE_ASCII 0x2cc ~BIB0210~ #8
+  WRITE_ASCII 0x280 ~BIB0210~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~NEGOB03.CRE~ ~override/BIB0211.CRE~
+  SAY NAME1 @2010
+  SAY NAME2 @2010
+  WRITE_ASCII 0x2cc ~BIB0211~ #8
+  WRITE_ASCII 0x280 ~BIB0211~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~NEGOB03.CRE~ ~override/BIB0212.CRE~
+  SAY NAME1 @2010
+  SAY NAME2 @2010
+  WRITE_ASCII 0x2cc ~BIB0212~ #8
+  WRITE_ASCII 0x280 ~BIB0212~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0200_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0200_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0200_baldurs_gate.baf~
+EXTEND_TOP ~BG0200.BCS~ ~CotSC/better_immersion_beregost/bg0200_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BG1300 / BG1306 - Baldur's Gate district additions
+// ---------------------------------------------------------------------------
+
+COMPILE ~CotSC/better_immersion_beregost/bg1300_citizens.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg1300_citizens.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg1300_skie_interject.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg1300_skie_interject.tra~
+
+COPY_EXISTING ~FLAME.CRE~ ~override/BIBFFO01.CRE~
+  SAY NAME1 @2011
+  SAY NAME2 @2011
+  WRITE_ASCII 0x2cc ~BIBFFO01~ #8
+  WRITE_ASCII 0x280 ~BIBFFO01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HALFG3.CRE~ ~override/BIBHAL13.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~BIBHAL13~ #8
+  WRITE_ASCII 0x280 ~BIBHAL13~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SARELF01.CRE~ ~override/BIBELF13.CRE~
+  SAY NAME1 @2012
+  SAY NAME2 @2012
+  WRITE_ASCII 0x2cc ~BIBELF13~ #8
+  WRITE_ASCII 0x280 ~BIBELF13~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BIBKOB13.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BIBKOB13~ #8
+  WRITE_ASCII 0x280 ~BIBKOB13~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FARM.CRE~ ~override/BIBHUM13.CRE~
+  SAY NAME1 @2014
+  SAY NAME2 @2014
+  WRITE_ASCII 0x2cc ~BIBHUM13~ #8
+  WRITE_ASCII 0x280 ~BIBHUM13~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BIBKOB14.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BIBKOB14~ #8
+  WRITE_ASCII 0x280 ~BIBKOB14~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HALFG3.CRE~ ~override/BIBHAL14.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~BIBHAL14~ #8
+  WRITE_ASCII 0x280 ~BIBHAL14~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~VOLTIN.CRE~ ~override/BIBTIE13.CRE~
+  SAY NAME1 @2015
+  SAY NAME2 @2015
+  WRITE_ASCII 0x2cc ~BIBTIE13~ #8
+  WRITE_ASCII 0x280 ~BIBTIE13~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SARDW01.CRE~ ~override/BIBDWR13.CRE~
+  SAY NAME1 @2016
+  SAY NAME2 @2016
+  WRITE_ASCII 0x2cc ~BIBDWR13~ #8
+  WRITE_ASCII 0x280 ~BIBDWR13~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BIBHOB13.CRE~
+  SAY NAME1 @2006
+  SAY NAME2 @2006
+  WRITE_ASCII 0x2cc ~BIBHOB13~ #8
+  WRITE_ASCII 0x280 ~BIBHOB13~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SARELF03.CRE~ ~override/BIBCOOK1.CRE~
+  SAY NAME1 @2017
+  SAY NAME2 @2017
+  WRITE_ASCII 0x2cc ~BIBCOOK1~ #8
+  WRITE_ASCII 0x280 ~BIBCOOK1~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bibwander.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg1300_baldurs_gate.baf~
+EXTEND_TOP ~BG1300.BCS~ ~CotSC/better_immersion_beregost/bg1300_baldurs_gate.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg1306_tavern.baf~
+EXTEND_TOP ~BG1306.BCS~ ~CotSC/better_immersion_beregost/bg1306_tavern.baf~
+
+// ---------------------------------------------------------------------------
+// ELFSONG / TAVERN SPAWN SCRIPTS
+// Restored here as part of the Baldur's Gate component.
+// ---------------------------------------------------------------------------
+
+COMPILE ~CotSC/better_immersion_beregost/bibwander.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg0705_elfsong.baf~
+EXTEND_TOP ~BG0705.BCS~ ~CotSC/better_immersion_beregost/bg0705_elfsong.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg0154_tavern.baf~
+EXTEND_TOP ~BG0154.BCS~ ~CotSC/better_immersion_beregost/bg0154_tavern.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg0171_tavern.baf~
+EXTEND_TOP ~BG0171.BCS~ ~CotSC/better_immersion_beregost/bg0171_tavern.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg0807_tavern.baf~
+EXTEND_TOP ~BG0807.BCS~ ~CotSC/better_immersion_beregost/bg0807_tavern.baf~
+
+// Bouncer retaliation script for the three tavern bouncers.
+COMPILE ~CotSC/better_immersion_beregost/bibouncer.baf~
+

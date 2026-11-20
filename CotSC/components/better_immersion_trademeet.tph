@@ -1,0 +1,343 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_bg2_quests_and_districts.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR2000.ARE~ BEGIN
+  FAIL @20340
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR2010.ARE~ BEGIN
+  FAIL @20341
+END
+
+COMPILE ~CotSC/qc_better_immersion_trademeet/scripts/QCTWAND.baf~
+COMPILE ~CotSC/qc_better_immersion_trademeet/scripts/QCTACOL.baf~
+COMPILE ~CotSC/qc_better_immersion_trademeet/scripts/QCTHODR.baf~
+ADD_JOURNAL TITLE (@1) @2 @3 USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_trademeet/dialogue/QCTRADE.tra~
+COMPILE ~CotSC/qc_better_immersion_trademeet/dialogue/QCTRADE.d~ USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_trademeet/dialogue/QCTRADE.tra~
+
+// Child's body quest item.
+COPY_EXISTING ~MISC54.ITM~ ~override/QCTBODY.ITM~
+  SAY NAME1 @3147
+  SAY NAME2 @3147
+  SAY DESC @3148
+  SAY IDENTIFIED_DESC @3148
+BUT_ONLY_IF_IT_CHANGES
+
+// Half-Elven Commoner.
+COPY_EXISTING ~RINNIE.CRE~ ~override/QCTHCOM.CRE~
+  SAY NAME1 @3149
+  SAY NAME2 @3149
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTHCOM~ #8
+  WRITE_ASCII 0x280 ~QCTHCOM~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Human male Commoner.
+COPY_EXISTING ~FARM.CRE~ ~override/QCTHUM.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTHUM~ #8
+  WRITE_ASCII 0x280 ~QCTHUM~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Orc Commoner.
+COPY_EXISTING ~ORC01.CRE~ ~override/QCTORC.CRE~
+  SAY NAME1 @3150
+  SAY NAME2 @3150
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTORC~ #8
+  WRITE_ASCII 0x280 ~QCTORC~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Gnoll Commoner.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QCTGNOL.CRE~
+  SAY NAME1 @3113
+  SAY NAME2 @3113
+  WRITE_SHORT 0x28 0x8000
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x272 110
+  WRITE_BYTE 0x273 120
+  WRITE_ASCII 0x2cc ~QCTGNOL~ #8
+  WRITE_ASCII 0x280 ~QCTGNOL~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Human female Commoner.
+COPY_EXISTING ~FTOBE3.CRE~ ~override/QCTFEM.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTFEM~ #8
+  WRITE_ASCII 0x280 ~QCTFEM~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Tiefling: human fighter animation with reddish/pink skin.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QCTTIEF.CRE~
+  SAY NAME1 @3119
+  SAY NAME2 @3119
+  WRITE_SHORT 0x28 0x6105
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x272 143
+  WRITE_BYTE 0x273 2
+  WRITE_BYTE 0x2c 47
+  WRITE_BYTE 0x2d 47
+  WRITE_BYTE 0x2e 47
+  WRITE_BYTE 0x30 47
+  WRITE_BYTE 0x31 47
+  WRITE_ASCII 0x2cc ~QCTTIEF~ #8
+  WRITE_ASCII 0x280 ~QCTTIEF~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Halfling Commoner.
+COPY_EXISTING ~HALFFG.CRE~ ~override/QCTHALF.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTHALF~ #8
+  WRITE_ASCII 0x280 ~QCTHALF~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming dog.
+COPY_EXISTING ~DOGWIL01.CRE~ ~override/QCTDOG.CRE~
+  SAY NAME1 @3107
+  SAY NAME2 @3107
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCTDOG~ #32
+  WRITE_ASCII 0x248 ~QCTWAND~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Static Kobold Commoner.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QCTKOB1.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTKOB1~ #8
+  WRITE_ASCII 0x280 ~QCTKOB1~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming Kobold Commoner.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QCTKOB2.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTKOB2~ #8
+  WRITE_ASCII 0x280 ~QCTKOB2~ #32
+  WRITE_ASCII 0x248 ~QCTWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Night-only Spectre.
+COPY_EXISTING ~BDGHOSTF.CRE~ ~override/QCTSPECT.CRE~
+  SAY NAME1 @3151
+  SAY NAME2 @3151
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTSPECT~ #8
+  WRITE_ASCII 0x280 ~QCTSPECT~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Hodrig, based on Slythe. Replace the Shadow's Blade with DAGG04.
+COPY_EXISTING ~SLYTHE.CRE~ ~override/QCTHODR.CRE~
+  SAY NAME1 @3152
+  SAY NAME2 @3152
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTHODR~ #8
+  WRITE_ASCII 0x280 ~QCTHODR~ #32
+  WRITE_ASCII 0x248 ~QCTHODR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEM ~SW1H10~
+  // v70: strip all inherited Slythe/Sarevok correspondence and invitation.
+  // Slythe's original source may be affected by earlier installed content mods;
+  // keep his combat equipment but do not import his plot documents into Hodrig.
+  REMOVE_CRE_ITEM ~SCRL2I~ // Generic letter sometimes used as a document
+  REMOVE_CRE_ITEM ~SCRL2K~ // Letter from Sarevok to Slythe
+  REMOVE_CRE_ITEM ~SCRL2L~ // Letter from Slythe to Sarevok, first
+  REMOVE_CRE_ITEM ~SCRL2M~ // Letter from Slythe to Sarevok, second
+  REMOVE_CRE_ITEM ~MISC78~ // Invitation to the Ducal Palace
+  ADD_CRE_ITEM ~DAGG04~ #0 #0 #0 ~NONE~ ~WEAPON1~ EQUIP
+  // v69: the recovered child's remains must be lootable if Hodrig dies
+  // before his low-HP surrender dialogue can fire.
+  ADD_CRE_ITEM ~QCTBODY~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Hodrig's three acolytes: PPMUR chassis. They remain neutral until
+// Hodrig starts combat. Their QC override immediately attacks the party;
+// no invisibility effect to strand them out of combat (v69).
+COPY_EXISTING ~PPMUR.CRE~ ~override/QCTAC1.CRE~
+  SAY NAME1 @3153
+  SAY NAME2 @3153
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCTAC1~ #32
+  WRITE_ASCII 0x248 ~QCTACOL~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~PPMUR.CRE~ ~override/QCTAC2.CRE~
+  SAY NAME1 @3153
+  SAY NAME2 @3153
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCTAC2~ #32
+  WRITE_ASCII 0x248 ~QCTACOL~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~PPMUR.CRE~ ~override/QCTAC3.CRE~
+  SAY NAME1 @3153
+  SAY NAME2 @3153
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QCTAC3~ #32
+  WRITE_ASCII 0x248 ~QCTACOL~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// AR2010 Cook.
+COPY_EXISTING ~HALFFG.CRE~ ~override/QCTCOOK.CRE~
+  SAY NAME1 @3154
+  SAY NAME2 @3154
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTCOOK~ #8
+  WRITE_ASCII 0x280 ~QCTCOOK~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// AR2010 Bouncer, requested DALTON chassis.
+COPY_EXISTING ~DALTON.CRE~ ~override/QCTBOUN.CRE~
+  SAY NAME1 @3111
+  SAY NAME2 @3111
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCTBOUN~ #8
+  WRITE_ASCII 0x280 ~QCTBOUN~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR2000.ARE~ ~override~
+  LPF fj_are_structure INT_VAR fj_loc_x=2645 fj_loc_y=2176 fj_dest_x=2645 fj_dest_y=2176 fj_orientation=2 STR_VAR fj_structure_type=actor fj_name=QCTHCOM fj_cre_resref=QCTHCOM fj_dlg_resref=QCTHCOM END
+  LPF fj_are_structure INT_VAR fj_loc_x=2606 fj_loc_y=2196 fj_dest_x=2606 fj_dest_y=2196 fj_orientation=10 STR_VAR fj_structure_type=actor fj_name=QCTHUM fj_cre_resref=QCTHUM fj_dlg_resref=QCTHUM END
+  LPF fj_are_structure INT_VAR fj_loc_x=2010 fj_loc_y=1930 fj_dest_x=2010 fj_dest_y=1930 fj_orientation=4 STR_VAR fj_structure_type=actor fj_name=QCTORC fj_cre_resref=QCTORC fj_dlg_resref=QCTORC END
+  LPF fj_are_structure INT_VAR fj_loc_x=2240 fj_loc_y=1173 fj_dest_x=2240 fj_dest_y=1173 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCTGNOL fj_cre_resref=QCTGNOL fj_dlg_resref=QCTGNOL END
+  LPF fj_are_structure INT_VAR fj_loc_x=2247 fj_loc_y=1217 fj_dest_x=2247 fj_dest_y=1217 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCTFEM fj_cre_resref=QCTFEM fj_dlg_resref=QCTFEM END
+  LPF fj_are_structure INT_VAR fj_loc_x=1487 fj_loc_y=1202 fj_dest_x=1487 fj_dest_y=1202 fj_orientation=4 STR_VAR fj_structure_type=actor fj_name=QCTTIEF fj_cre_resref=QCTTIEF fj_dlg_resref=QCTTIEF END
+  LPF fj_are_structure INT_VAR fj_loc_x=1442 fj_loc_y=1197 fj_dest_x=1442 fj_dest_y=1197 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QCTHALF fj_cre_resref=QCTHALF fj_dlg_resref=QCTHALF END
+  LPF fj_are_structure INT_VAR fj_loc_x=1032 fj_loc_y=2178 fj_dest_x=1032 fj_dest_y=2178 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCTDOG fj_cre_resref=QCTDOG fj_bcs_override=QCTWAND END
+  LPF fj_are_structure INT_VAR fj_loc_x=1995 fj_loc_y=3012 fj_dest_x=1995 fj_dest_y=3012 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCTKOB1 fj_cre_resref=QCTKOB1 fj_dlg_resref=QCTKOB1 END
+  LPF fj_are_structure INT_VAR fj_loc_x=2948 fj_loc_y=1057 fj_dest_x=2948 fj_dest_y=1057 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCTKOB2 fj_cre_resref=QCTKOB2 fj_dlg_resref=QCTKOB2 fj_bcs_override=QCTWAND END
+  LPF fj_are_structure INT_VAR fj_loc_x=1575 fj_loc_y=260 fj_dest_x=1575 fj_dest_y=260 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCTHODR fj_cre_resref=QCTHODR fj_dlg_resref=QCTHODR fj_bcs_override=QCTHODR END
+  LPF fj_are_structure INT_VAR fj_loc_x=1516 fj_loc_y=215 fj_dest_x=1516 fj_dest_y=215 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCTAC1 fj_cre_resref=QCTAC1 fj_bcs_override=QCTACOL END
+  LPF fj_are_structure INT_VAR fj_loc_x=1621 fj_loc_y=213 fj_dest_x=1621 fj_dest_y=213 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCTAC2 fj_cre_resref=QCTAC2 fj_bcs_override=QCTACOL END
+  LPF fj_are_structure INT_VAR fj_loc_x=1561 fj_loc_y=150 fj_dest_x=1561 fj_dest_y=150 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCTAC3 fj_cre_resref=QCTAC3 fj_bcs_override=QCTACOL END
+  // Add the Spectre last so its schedule can be patched deterministically.
+  LPF fj_are_structure INT_VAR fj_loc_x=2781 fj_loc_y=341 fj_dest_x=2781 fj_dest_y=341 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCTSPECT fj_cre_resref=QCTSPECT fj_dlg_resref=QCTSPECT END
+  READ_LONG 0x54 qct_actor_offset
+  READ_SHORT 0x58 qct_actor_count
+  // Night only: 20:30-06:29 (hours 20-23 and 0-5).
+  WRITE_LONG (qct_actor_offset + ((qct_actor_count - 1) * 0x110) + 0x40) 0x00f0003f
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR2010.ARE~ ~override~
+  LPF fj_are_structure INT_VAR fj_loc_x=958 fj_loc_y=292 fj_dest_x=958 fj_dest_y=292 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCTCOOK fj_cre_resref=QCTCOOK fj_dlg_resref=QCTCOOK END
+  LPF fj_are_structure INT_VAR fj_loc_x=234 fj_loc_y=536 fj_dest_x=234 fj_dest_y=536 fj_orientation=14 STR_VAR fj_structure_type=actor fj_name=QCTBOUN fj_cre_resref=QCTBOUN fj_dlg_resref=QCTBOUN END
+BUT_ONLY_IF_IT_CHANGES

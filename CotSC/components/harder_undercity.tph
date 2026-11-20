@@ -1,0 +1,80 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+// This component is standalone. It uses the QC prefix for all newly created
+// creature/area resources and is intended for Quest and Challenges.
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~GHASTF01.CRE~ BEGIN
+  FAIL @20156
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~VAMPAT01.CRE~ BEGIN
+  FAIL @20157
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MUMMY01.CRE~ BEGIN
+  FAIL @20158
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISTHO01.CRE~ BEGIN
+  FAIL @20159
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISTCD01.CRE~ BEGIN
+  FAIL @20160
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDDEAD01.CRE~ BEGIN
+  FAIL @20161
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SHADOW01.CRE~ BEGIN
+  FAIL @20162
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~ICBONE01.CRE~ BEGIN
+  FAIL @20163
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BAZGAU01.CRE~ BEGIN
+  FAIL @20164
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~GORSKU01.CRE~ BEGIN
+  FAIL @20165
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDBONBAT.CRE~ BEGIN
+  FAIL @20166
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SW1H10.ITM~ BEGIN
+  FAIL @20167
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~POTN10.ITM~ BEGIN
+  FAIL @20168
+END
+
+// BG0123 Undercity creature placements.
+EXTEND_BOTTOM ~BG0123.BCS~ ~CotSC/harder_undercity/BG0123_QCHU.baf~
+
+// BG0125 Kazhmira placement.
+EXTEND_BOTTOM ~BG0125.BCS~ ~CotSC/harder_undercity/BG0125_QCHU.baf~
+
+// Kazhmira is a direct adaptation of Dark Horizons' Isolde creature.
+// Preserve Isolde's original thief AI: SHOUT remains the override script and
+// WTARSGT remains the general/default combat AI. A separate class script is
+// used only to make the invisibility behaviour reliable with the three
+// supplied potions; it does not replace WTARSGT.
+COPY ~CotSC/harder_undercity/creatures/qckazhm_base.cre~ ~override/QCKAZHM.CRE~
+  SAY NAME1 @5023
+  SAY NAME2 @5023
+  WRITE_ASCII 0x248 ~SHOUT~ #8
+  WRITE_ASCII 0x250 ~QCKAZHM~ #8
+  WRITE_ASCII 0x260 ~WTARSGT~ #8
+  WRITE_ASCII 0x268 ~WTARSGT~ #8
+  WRITE_ASCII 0x280 ~QCKAZHM~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_BYTE 0x2e 5
+  // Raise Kazhmira to 11th level and give her a substantially larger HP pool.
+  WRITE_BYTE 0x234 11
+  WRITE_SHORT 0x24 70
+  WRITE_SHORT 0x26 70
+  REPLACE_CRE_ITEM ~SW1H10~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~POTN10~ #1 #0 #0 ~IDENTIFIED~ ~QITEM2~
+  ADD_CRE_ITEM ~POTN10~ #1 #0 #0 ~IDENTIFIED~ ~QITEM3~
+  ADD_CRE_ITEM ~POTN10~ #1 #0 #0 ~IDENTIFIED~ ~INV1~
+
+// No Dark Horizons component is required at runtime. The bundled Isolde CRE
+// is build material only and is transformed into QCKAZHM.CRE above.
+
+COMPILE ~CotSC/harder_undercity/QCKAZHM.BAF~

@@ -1,0 +1,88 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCASTAR.TRA~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0121.BCS~ BEGIN
+  FAIL @113
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~ENDER.CRE~ BEGIN
+  FAIL @51
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0156.BCS~ BEGIN
+  FAIL @53
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MTOWBE.CRE~ BEGIN
+  FAIL @54
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC65.ITM~ BEGIN
+  FAIL @55
+END
+
+COPY_EXISTING ~ENDER.CRE~ ~override/QCASTAR.CRE~
+  SAY NAME1 @5004
+  SAY NAME2 @5004
+  WRITE_ASCII 0x2cc ~QCASTAR~ #8
+  WRITE_ASCII 0x34 ~QCASTARS~ #8
+  WRITE_ASCII 0x3c ~QCASTARL~ #8
+  WRITE_ASCII 0x248 ~QCASTAR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x27b 0x23
+  WRITE_BYTE 0x273 4
+  WRITE_BYTE 0x7f 0
+  WRITE_ASCII 0x280 ~QCASTAR_DEAD~ #32
+
+COPY ~CotSC/Quests_and_Challenges/PORTRAIT/QCASTARL.BMP~ ~override/QCASTARL.BMP~
+COPY ~CotSC/Quests_and_Challenges/PORTRAIT/QCASTARS.BMP~ ~override/QCASTARS.BMP~
+
+// QCASTAR.D also APPENDs Ajantis's final confrontation to AJANTJ in the same
+// compilation unit, so the EXTERN target is available to WeiDU.
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCASTAR.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCASTAR.TRA~ ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCASTAR_JOURNAL.TRA~
+// EET party reactions belong to the NPCs' JOINED dialogue files.
+// INTERJECT_COPY_TRANS preserves QCASTAR's player responses immediately after the companion reaction.
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCASTAR_INTERJECTS.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCASTAR.TRA~
+COMPILE ~CotSC/Quests_and_Challenges/AREA/QCASTAR.BAF~
+
+// Derek's corpse uses Brage's Body as the physical item chassis, but with custom name/description.
+COPY_EXISTING ~MISC65.ITM~ ~override/QCDRBODY.ITM~
+  SAY NAME1 @47
+  SAY NAME2 @47
+  SAY DESC @48
+
+// Derek: an independent art dealer NPC spawned only after Astarion's bargain is accepted.
+COPY_EXISTING ~MTOWBE.CRE~ ~override/QCDEREK.CRE~
+  SAY NAME1 @5005
+  SAY NAME2 @5005
+  WRITE_ASCII 0x2cc ~QCDEREK~ #8
+  WRITE_ASCII 0x248 ~QCDEREK~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x27b 0x13
+  WRITE_BYTE 0x7f 0
+  WRITE_ASCII 0x280 ~QCDEREK_DEAD~ #32
+  ADD_CRE_ITEM ~QCDRBODY~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCDEREK.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCDEREK.TRA~ ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCASTAR_JOURNAL.TRA~
+
+// Keep all Astarion choices under one named Quest-tab entry.
+ADD_JOURNAL TITLE (@62) @63 @64 @65 @66 @67 @68 USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCASTAR_JOURNAL.TRA~
+COMPILE ~CotSC/Quests_and_Challenges/AREA/QCDEREK.BAF~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~VICONIA.DLG~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~VICONJ.DLG~ BEGIN
+    FAIL @52
+  END
+END
+
+EXTEND_BOTTOM ~BG0121.BCS~ ~CotSC/Quests_and_Challenges/AREA/QCASTAR_SPAWN.BAF~
+EXTEND_BOTTOM ~BG0156.BCS~ ~CotSC/Quests_and_Challenges/AREA/QCDEREK_SPAWN.BAF~

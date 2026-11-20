@@ -1,0 +1,385 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_bg2_quests_and_districts.tra~
+// All original stages in their original installation order; one reversible WeiDU component.
+
+// New area resources only. No world-map links, NPCs, collision fine-tuning or quest yet.
+COPY ~CotSC/qc_unicorn_grove/area/QCCGRV.ARE~ ~override/QCCGRV.ARE~
+COPY ~CotSC/qc_unicorn_grove/area/QCCGRV.WED~ ~override/QCCGRV.WED~
+COPY ~CotSC/qc_unicorn_grove/area/QCCGRV.TIS~ ~override/QCCGRV.TIS~
+COPY ~CotSC/qc_unicorn_grove/area/QCCGRVSR.BMP~ ~override/QCCGRVSR.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCCGRVLM.BMP~ ~override/QCCGRVLM.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCCGRVHT.BMP~ ~override/QCCGRVHT.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCGRV00.PVRZ~ ~override/QCGRV00.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QCGRV01.PVRZ~ ~override/QCGRV01.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QCGRV02.PVRZ~ ~override/QCGRV02.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QCGRV03.PVRZ~ ~override/QCGRV03.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QCGRV04.PVRZ~ ~override/QCGRV04.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QCGRV05.PVRZ~ ~override/QCGRV05.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QCGRV06.PVRZ~ ~override/QCGRV06.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QCGRV07.PVRZ~ ~override/QCGRV07.PVRZ~
+
+
+// v1.8 additions. The approved v1.5 art, v1.6 WED and v1.7 SR are installed
+// by the original resource COPY lines above, using their already-patched source files.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~ENDER.CRE~ BEGIN FAIL ~Missing ENDER.CRE (Sirian template).~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~STALKE.CRE~ BEGIN FAIL ~Missing STALKE.CRE (invisible unicorn interaction proxy).~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SQUIRL.CRE~ BEGIN FAIL ~Missing SQUIRL.CRE (squirrel).~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MOOSE01.CRE~ BEGIN FAIL ~Missing MOOSE01.CRE (moose).~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3317.WED~ BEGIN FAIL ~Missing native BG3317.WED required by BG3319 interior artwork.~ END
+
+// Existing River District method: Vorbis-encoded soundtrack stored as .ACM.
+MKDIR ~music/QCGRV~
+COPY ~CotSC/qc_unicorn_grove/music/QCGRVA.acm~ ~music/QCGRV/QCGRVA.acm~
+ADD_MUSIC ~QCU_MUSIC~ ~CotSC/qc_unicorn_grove/music/QCGRV.MUS~
+
+COPY_EXISTING ~ENDER.CRE~ ~override/QCUSIR.CRE~
+  SAY NAME1 @3065
+  SAY NAME2 @3065
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x2d 39
+  WRITE_BYTE 0x2e 39
+  WRITE_BYTE 0x2f 39
+  WRITE_BYTE 0x30 39
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QCUSIR~ #32
+  WRITE_ASCII 0x2cc ~QCUSIR~ #8
+  WRITE_ASCII 0x248 ~QCUSIAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Selectable click-only proxies using the naturally invisible STALKE sprite.
+// Keep neutral allegiance so the selection circle is blue, no automatic talk AI.
+COPY_EXISTING ~STALKE.CRE~ ~override/QCUUNIC.CRE~
+  SAY NAME1 @3066
+  SAY NAME2 @3066
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0  // Clear mechanical invisibility; STALKE sprite is visually empty.
+  WRITE_LONG 0x96 0x200 // Invulnerable, so clicking is dialogue-only.
+  FOR (qcu_voice_i = 0; qcu_voice_i < 100; qcu_voice_i += 1) BEGIN
+    WRITE_LONG (0xa4 + 4 * qcu_voice_i) 0xffffffff // Clear inherited soundset.
+  END
+  WRITE_ASCII 0x280 ~QCUUNIC~ #32
+  WRITE_ASCII 0x2cc ~QCUUNIC~ #8
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SQUIRL.CRE~ ~override/QCUSQUIR.CRE~
+  SAY NAME1 @3045
+  SAY NAME2 @3045
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QCUSQUIR~ #32
+  WRITE_ASCII 0x248 ~QCUROAM~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~MOOSE01.CRE~ ~override/QCUMOOSE.CRE~
+  SAY NAME1 @3067
+  SAY NAME2 @3067
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QCUMOOSE~ #32
+  WRITE_ASCII 0x248 ~QCUROAM~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// The BG3319 copy retains native BG3317 WED/TIS art. It has no original actor
+// and its existing exit leads back to QCCGRV at entrance QCUHRET.
+COPY ~CotSC/qc_unicorn_grove/interior/QCGHUT.ARE~ ~override/QCGHUT.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 1 charges1 = 40
+    STR_VAR item_to_add = ~BOLT01~
+  END
+
+// Patch the fresh area copy, NEVER the frozen WED/SR/PVRZ resources.
+COPY_EXISTING ~QCCGRV.ARE~ ~override/QCCGRV.ARE~
+  READ_LONG 0xBC qcu_song_table
+  PATCH_IF (qcu_song_table > 0) AND (qcu_song_table + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG qcu_song_table %QCU_MUSIC%
+    WRITE_LONG (qcu_song_table + 4) %QCU_MUSIC%
+  END ELSE BEGIN
+    PATCH_FAIL @20286
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 857
+      fj_loc_y = 1339
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUSIR
+      fj_cre_resref = QCUSIR
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 949
+      fj_loc_y = 1556
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUU01
+      fj_cre_resref = QCUUNIC
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 661
+      fj_loc_y = 399
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUU02
+      fj_cre_resref = QCUUNIC
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1741
+      fj_loc_y = 1014
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUU03
+      fj_cre_resref = QCUUNIC
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1917
+      fj_loc_y = 375
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUU04
+      fj_cre_resref = QCUUNIC
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2752
+      fj_loc_y = 739
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUU05
+      fj_cre_resref = QCUUNIC
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2774
+      fj_loc_y = 1690
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUU06
+      fj_cre_resref = QCUUNIC
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1963
+      fj_loc_y = 1386
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUSQ1
+      fj_cre_resref = QCUSQUIR
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2381
+      fj_loc_y = 491
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUSQ2
+      fj_cre_resref = QCUSQUIR
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1669
+      fj_loc_y = 252
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCUMO1
+      fj_cre_resref = QCUMOOSE
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 2622
+      fj_box_top = 306
+      fj_box_right = 2677
+      fj_box_bottom = 369
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 2622 + (306 << 16)
+      fj_vertex_1 = 2677 + (306 << 16)
+      fj_vertex_2 = 2677 + (369 << 16)
+      fj_vertex_3 = 2622 + (369 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCUHDOOR
+      fj_destination_area = QCGHUT
+      fj_destination_name = Exit3300
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2625
+      fj_loc_y = 392
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QCUHRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCUSIAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCUUNAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCUROAM.baf~
+// EE/EET quests require registration in BGEE.LUA to appear under Quests.
+// All five updates use the same quest header, Unicorn Grove.
+ADD_JOURNAL TITLE (@7016) @100 @101 @102 @103
+  USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/unicorn_grove.tra~ ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/eaglehorn.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/unicorn_grove.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/unicorn_grove.tra~ ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/unicorn_grove.tra~
+
+// Eaglehorn and Emhrys extension below. Never touch frozen PVRZ, WED, TIS or SR.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FAHRIN.CRE~ BEGIN FAIL ~Missing FAHRIN.CRE for Eaglehorn.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~C6EXTR02.CRE~ BEGIN FAIL ~Missing C6EXTR02.CRE for Emhrys.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~HALB02.ITM~ BEGIN FAIL ~Missing Halberd +1 (HALB02).~ END
+COPY_EXISTING ~FAHRIN.CRE~ ~override/QCUEAG.CRE~
+  SAY NAME1 @3068
+  SAY NAME2 @3068
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QCUEAG~ #32
+  WRITE_ASCII 0x2cc ~QCUEAG~ #8
+  WRITE_ASCII 0x248 ~QCUEGAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~HALB02~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~C6EXTR02.CRE~ ~override/QCUEMH.CRE~
+  SAY NAME1 @3069
+  SAY NAME2 @3069
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x2d 30
+  WRITE_BYTE 0x2e 30
+  WRITE_BYTE 0x2f 30
+  WRITE_BYTE 0x30 30
+  WRITE_ASCII 0x280 ~QCUEMH~ #32
+  WRITE_ASCII 0x2cc ~QCEEMH~ #8
+  WRITE_ASCII 0x248 ~QCUEMAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~CotSC/qc_unicorn_grove/interior/QCEH01.ARE~ ~override/QCEH01.ARE~
+COPY ~CotSC/qc_unicorn_grove/interior/QCEH02.ARE~ ~override/QCEH02.ARE~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCEH01.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCUEMAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCUHUT.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCUEGAI.baf~
+
+// Only add an actor and area script to the already existing cabin interior.
+COPY_EXISTING ~QCGHUT.ARE~ ~override/QCGHUT.ARE~
+  WRITE_ASCII 0x94 ~QCUHUT~ #8
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 513 fj_loc_y = 298 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QCUEAG fj_cre_resref = QCUEAG
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Add a map note to the working outdoors, without changing WED graphics or collision.
+COPY_EXISTING ~QCCGRV.ARE~ ~override/QCCGRV.ARE~
+  ADD_MAP_NOTE #2710 #275 ~blue~ ~Old Cabin~
+BUT_ONLY_IF_IT_CHANGES
+
+// Emhrys's BG2 quest requires a visit to Beregost (BG3300).
+// Remove the obsolete BG0300 door, return entrance, and old map note if
+// re-installing over a previously patched area. Do not touch other geometry.
+COPY_EXISTING ~BG0300.ARE~ ~override/BG0300.ARE~
+  READ_LONG 0x5c qce_old_region_offset
+  READ_SHORT 0x5a qce_old_region_count
+  FOR (qce_old_i = qce_old_region_count - 1; qce_old_i >= 0; qce_old_i -= 1) BEGIN
+    READ_ASCII (qce_old_region_offset + 0xc4 * qce_old_i) qce_old_region_name (32) NULL
+    PATCH_IF (~%qce_old_region_name%~ STRING_EQUAL ~QCEHDOR~) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_delete_mode = qce_old_i
+        STR_VAR fj_structure_type = region
+      END
+    END
+  END
+  READ_LONG 0x68 qce_old_entrance_offset
+  READ_LONG 0x6c qce_old_entrance_count
+  FOR (qce_old_i = qce_old_entrance_count - 1; qce_old_i >= 0; qce_old_i -= 1) BEGIN
+    READ_ASCII (qce_old_entrance_offset + 0x68 * qce_old_i) qce_old_entrance_name (32) NULL
+    PATCH_IF (~%qce_old_entrance_name%~ STRING_EQUAL ~QCEHRET~) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_delete_mode = qce_old_i
+        STR_VAR fj_structure_type = entrance
+      END
+    END
+  END
+  READ_LONG 0xc4 qce_old_note_offset
+  READ_LONG 0xc8 qce_old_note_count
+  FOR (qce_old_i = qce_old_note_count - 1; qce_old_i >= 0; qce_old_i -= 1) BEGIN
+    READ_SHORT (qce_old_note_offset + 0x34 * qce_old_i) qce_old_note_x
+    READ_SHORT (qce_old_note_offset + 0x34 * qce_old_i + 2) qce_old_note_y
+    PATCH_IF (qce_old_note_x == 1157) AND (qce_old_note_y == 1826) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_delete_mode = qce_old_i
+        STR_VAR fj_structure_type = note
+      END
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// New entrance in southeastern Beregost and requested map marker.
+COPY_EXISTING ~BG3300.ARE~ ~override/BG3300.ARE~
+  ADD_MAP_NOTE #3795 #3071 ~blue~ ~Emhrys House~
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 3824
+      fj_box_top = 2946
+      fj_box_right = 3872
+      fj_box_bottom = 2994
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 3824 + (2946 << 16)
+      fj_vertex_1 = 3872 + (2946 << 16)
+      fj_vertex_2 = 3872 + (2994 << 16)
+      fj_vertex_3 = 3824 + (2994 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCEHDOR
+      fj_destination_area = QCEH01
+      fj_destination_name = Exit0300 // Existing indoor entrance retained.
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 3848 fj_loc_y = 3032 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCEHRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/eaglehorn.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/eaglehorn.tra~ ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/eaglehorn.tra~
+
+// Public installer: development progress message omitted.
+

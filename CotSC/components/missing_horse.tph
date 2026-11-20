@@ -1,0 +1,131 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCHORSE.TRA~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG2300.ARE~ BEGIN
+  FAIL @90
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MTOWFR_A.CRE~ BEGIN
+  FAIL @91
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~HORSE.CRE~ BEGIN
+  FAIL @92
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FRIEND.DLG~ BEGIN
+  FAIL @93
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~NEGOB01.CRE~ BEGIN
+  FAIL @94
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~IMOEN2.DLG~ BEGIN
+  FAIL @95
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~XZARJ.DLG~ BEGIN
+  FAIL @96
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~JAHEIRAJ.DLG~ BEGIN
+  FAIL @97
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FALDOJ.DLG~ BEGIN
+  FAIL @98
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~VICONJ.DLG~ BEGIN
+  FAIL @99
+END
+
+COPY_EXISTING ~MTOWFR_A.CRE~ ~override/QCHTRAIN.CRE~
+  SAY NAME1 @1
+  SAY NAME2 @1
+  WRITE_ASCII 0x2cc ~QCHTRAIN~ #8
+  WRITE_ASCII 0x248 ~QCHORSE~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~ ~ #32
+
+COPY_EXISTING ~HORSE.CRE~ ~override/QCHROACH.CRE~
+  SAY NAME1 @5006
+  SAY NAME2 @5006
+  WRITE_ASCII 0x2cc ~QCHROACH~ #8
+  WRITE_ASCII 0x248 ~QCHROACH~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_ASCII 0x280 ~QCHROACH~ #32
+
+COPY_EXISTING ~NEGOB01.CRE~ ~override/QCHASHRK.CRE~
+  SAY NAME1 @5007
+  SAY NAME2 @5007
+  WRITE_ASCII 0x2cc ~QCHASHRK~ #8
+  WRITE_BYTE 0x2d8 128
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_ASCII 0x280 ~QCHASHRK_DEAD~ #32
+  REMOVE_CRE_ITEMS
+
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCHORSE.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCHORSE.TRA~
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCHORSE_INTERJECTS.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCHORSE.TRA~
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCHASHRK.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCHORSE.TRA~
+
+COPY_EXISTING ~BG2300.ARE~ ~override/BG2300.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2094
+      fj_loc_y = 1694
+      fj_dest_x = 2094
+      fj_dest_y = 1694
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = HorseTrainer
+      fj_cre_resref = QCHTRAIN
+      fj_dlg_resref = QCHORSE
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2054
+      fj_loc_y = 1671
+      fj_dest_x = 2054
+      fj_dest_y = 1671
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = HorseOne
+      fj_cre_resref = HORSE
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2009
+      fj_loc_y = 1659
+      fj_dest_x = 2009
+      fj_dest_y = 1659
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = HorseTwo
+      fj_cre_resref = HORSE
+  END
+
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCHORSE_GUARD.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCHORSE.TRA~
+
+ADD_JOURNAL TITLE (@41) @42 @43 @44 @45 USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCHORSE.TRA~
+
+EXTEND_TOP ~BG2300.BCS~ ~CotSC/Quests_and_Challenges/AREA/QCHORSE.BAF~

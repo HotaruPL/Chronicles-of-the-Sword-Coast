@@ -1,0 +1,321 @@
+// ---------------------------------------------------------------------------
+// ORPHANAGE - HOPE'S HAVEN
+// ---------------------------------------------------------------------------
+// Integrated from the frozen Better Immersion Orphanage package.
+// The area artwork, transitions, NPC/dialogue scripts, flower investigation,
+// companion interjections, pet/coin content, and BG0700 map integration are
+// copied unchanged. This block is additive to the existing Better Immersion
+// component and does not replace any existing component resources.
+// ---------------------------------------------------------------------------
+
+ADD_JOURNAL TITLE (@7004) @100 @101 USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHAN_QUEST.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+ADD_JOURNAL TITLE (@7005) @1 @2 USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHPET.TRA~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+ADD_JOURNAL TITLE (@7004) @100 @101 USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHAN_QUEST.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+
+// Friendly Cat and Strange Coin.
+COPY_EXISTING ~CAT.CRE~ ~override/ORPHCAT.CRE~
+  SAY NAME1 @2088
+  SAY NAME2 @2088
+  WRITE_ASCII 0x248 ~ORPHCAT~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_ASCII 0x280 ~ORPHCAT_DEAD~ #32
+  WRITE_ASCII 0x2cc ~ORPHCAT~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~MISC62.ITM~ ~override/ORPHCAT.ITM~
+  SAY NAME1 @2088
+  SAY NAME2 @2088
+  SAY DESC @2089
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHCOIN.BAM~ ~override/ORPHCOIN.BAM~
+
+COPY_EXISTING ~MISC07.ITM~ ~override/ORPHCOIN.ITM~
+  SAY NAME1 @2090
+  SAY NAME2 @2090
+  SAY DESC @2091
+  WRITE_SHORT 0x38 1
+  WRITE_ASCII 0x3a ~ORPHCOIN~ #8
+  WRITE_ASCII 0x44 ~ORPHCOIN~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Orphanage NPC resources.
+COPY_EXISTING ~LAUREL.CRE~ ~override/ORPHAL.CRE~
+  SAY NAME1 @2092
+  SAY NAME2 @2092
+  WRITE_ASCII 0x2cc ~ORPHAL~ #8
+  WRITE_ASCII 0x280 ~ORPHAL~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FARTHI.CRE~ ~override/ORPHMIA.CRE~
+  SAY NAME1 @2093 SAY NAME2 @2093
+  WRITE_ASCII 0x2cc ~ORPHMIA~ #8
+  WRITE_ASCII 0x280 ~ORPHMIA~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~PETRIN.CRE~ ~override/ORPHAIC.CRE~
+  SAY NAME1 @2094 SAY NAME2 @2094
+  WRITE_ASCII 0x2cc ~ORPHAIC~ #8
+  WRITE_ASCII 0x280 ~ORPHAIC~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~CHILNA.CRE~ ~override/ORPHCOL.CRE~
+  SAY NAME1 @2095 SAY NAME2 @2095
+  WRITE_ASCII 0x2cc ~ORPHCOL~ #8
+  WRITE_ASCII 0x280 ~ORPHCOL~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~CHILNA_A.CRE~ ~override/ORPHKEV.CRE~
+  SAY NAME1 @2096 SAY NAME2 @2096
+  WRITE_ASCII 0x2cc ~ORPHKEV~ #8
+  WRITE_ASCII 0x280 ~ORPHKEV~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FARTHI.CRE~ ~override/ORPHTIL.CRE~
+  SAY NAME1 @2097 SAY NAME2 @2097
+  WRITE_ASCII 0x2cc ~ORPHTIL~ #8
+  WRITE_ASCII 0x280 ~ORPHTIL~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Frozen orphanage area resources.
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage/ORPHAN.ARE~ ~override/ORPHAN.ARE~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage/ORPHAN.WED~ ~override/ORPHAN.WED~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage/ORPHAN.TIS~ ~override/ORPHAN.TIS~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage/ORPHANLM.BMP~ ~override/ORPHANLM.BMP~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage/ORPHANHT.BMP~ ~override/ORPHANHT.BMP~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage/ORPHANSR.BMP~ ~override/ORPHANSR.BMP~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage/OPHAN00.PVRZ~ ~override/OPHAN00.PVRZ~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage/OPHAN01.PVRZ~ ~override/OPHAN01.PVRZ~
+
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage_upstairs/ORPHUP.ARE~ ~override/ORPHUP.ARE~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage_upstairs/ORPHUP.WED~ ~override/ORPHUP.WED~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage_upstairs/ORPHUP.TIS~ ~override/ORPHUP.TIS~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage_upstairs/ORPHUPLM.BMP~ ~override/ORPHUPLM.BMP~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage_upstairs/ORPHUPHT.BMP~ ~override/ORPHUPHT.BMP~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage_upstairs/ORPHUPSR.BMP~ ~override/ORPHUPSR.BMP~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage_upstairs/OPHUP00.PVRZ~ ~override/OPHUP00.PVRZ~
+COPY ~CotSC/better_immersion_beregost/orphanage/orphanage_upstairs/OPHUP01.PVRZ~ ~override/OPHUP01.PVRZ~
+
+// Frozen transitions and NPC placements.
+COPY_EXISTING ~ORPHAN.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 883 fj_loc_y = 824 fj_orientation = 0
+    STR_VAR fj_structure_type = entrance fj_name = ORPHBG07
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 733 fj_loc_y = 259 fj_orientation = 0
+    STR_VAR fj_structure_type = entrance fj_name = ORPHDOWN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 853 fj_box_top = 794 fj_box_right = 913 fj_box_bottom = 854
+      fj_cursor_idx = 30
+      fj_vertex_0 = 853 + (794 << 16)
+      fj_vertex_1 = 913 + (794 << 16)
+      fj_vertex_2 = 913 + (854 << 16)
+      fj_vertex_3 = 853 + (854 << 16)
+      fj_flags = 4
+    STR_VAR
+      fj_structure_type = region
+      fj_name = ORPH_STREET
+      fj_destination_area = BG0700
+      fj_destination_name = ORPHENTR
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 744 fj_box_top = 185 fj_box_right = 804 fj_box_bottom = 245
+      fj_cursor_idx = 28
+      fj_vertex_0 = 744 + (185 << 16)
+      fj_vertex_1 = 804 + (185 << 16)
+      fj_vertex_2 = 804 + (245 << 16)
+      fj_vertex_3 = 744 + (245 << 16)
+      fj_flags = 4
+    STR_VAR
+      fj_structure_type = region
+      fj_name = ORPH_UPSTAIRS
+      fj_destination_area = ORPHUP
+      fj_destination_name = ORPHSTAIR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 539 fj_loc_y = 443 fj_dest_x = 539 fj_dest_y = 443 fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR fj_structure_type = actor fj_name = ORPHAL fj_cre_resref = ORPHAL fj_dlg_resref = ORPHAL
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1056 fj_loc_y = 558 fj_dest_x = 1056 fj_dest_y = 558 fj_spawned = 1 fj_orientation = 6 fj_schedule = 0xFFFFFF
+    STR_VAR fj_structure_type = actor fj_name = ORPHMIA fj_cre_resref = ORPHMIA fj_dlg_resref = ORPHMIA
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1105 fj_loc_y = 394 fj_dest_x = 1105 fj_dest_y = 394 fj_spawned = 1 fj_orientation = 2 fj_schedule = 0xFFFFFF
+    STR_VAR fj_structure_type = actor fj_name = ORPHAIC fj_cre_resref = ORPHAIC fj_dlg_resref = ORPHAIC
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1241 fj_loc_y = 474 fj_dest_x = 1241 fj_dest_y = 474 fj_spawned = 1 fj_orientation = 4 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor fj_name = ORPHCOL fj_cre_resref = ORPHCOL fj_dlg_resref = ORPHCOL
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 418 fj_loc_y = 761 fj_dest_x = 418 fj_dest_y = 761 fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR fj_structure_type = actor fj_name = ORPHKEV fj_cre_resref = ORPHKEV fj_dlg_resref = ORPHKEV
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 977 fj_loc_y = 389 fj_dest_x = 977 fj_dest_y = 389 fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR fj_structure_type = actor fj_name = ORPHTIL fj_cre_resref = ORPHTIL fj_dlg_resref = ORPHTIL
+  END
+BUT_ONLY
+
+COPY_EXISTING ~ORPHUP.ARE~ ~override~
+  WRITE_ASCII 0x94 ~ORPHUP~ #8
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 585 fj_loc_y = 833 fj_orientation = 0
+    STR_VAR fj_structure_type = entrance fj_name = ORPHSTAIR
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 555 fj_box_top = 803 fj_box_right = 615 fj_box_bottom = 863
+      fj_cursor_idx = 28
+      fj_vertex_0 = 555 + (803 << 16)
+      fj_vertex_1 = 615 + (803 << 16)
+      fj_vertex_2 = 615 + (863 << 16)
+      fj_vertex_3 = 555 + (863 << 16)
+      fj_flags = 4
+    STR_VAR
+      fj_structure_type = region
+      fj_name = ORPH_DOWNSTAIRS
+      fj_destination_area = ORPHAN
+      fj_destination_name = ORPHDOWN
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 1
+      fj_box_left = 899 fj_box_top = 484 fj_box_right = 959 fj_box_bottom = 544
+      fj_cursor_idx = 22
+      fj_flags = 0x40
+      fj_vertex_0 = 899 + (484 << 16)
+      fj_vertex_1 = 959 + (484 << 16)
+      fj_vertex_2 = 959 + (544 << 16)
+      fj_vertex_3 = 899 + (544 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = ORPHFLOWER
+      fj_reg_script = ORPHFLWR
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BG0700.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 3823 fj_loc_y = 357 fj_orientation = 0
+    STR_VAR fj_structure_type = entrance fj_name = ORPHENTR
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 3793 fj_box_top = 327 fj_box_right = 3853 fj_box_bottom = 387
+      fj_cursor_idx = 30
+      fj_vertex_0 = 3793 + (357 << 16)
+      fj_vertex_1 = 3823 + (327 << 16)
+      fj_vertex_2 = 3853 + (357 << 16)
+      fj_vertex_3 = 3823 + (387 << 16)
+      fj_flags = 4
+    STR_VAR
+      fj_structure_type = region
+      fj_name = ORPHAN_BG0700
+      fj_destination_area = ORPHAN
+      fj_destination_name = ORPHBG07
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2826 fj_loc_y = 550 fj_dest_x = 2826 fj_dest_y = 550 fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR fj_structure_type = actor fj_name = ORPHCAT fj_cre_resref = ORPHCAT fj_dlg_resref = ORPHCAT
+  END
+BUT_ONLY
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0700.BCS~ BEGIN
+  EXTEND_TOP ~BG0700.BCS~ ~CotSC/better_immersion_beregost/orphanage/scripts/BG0700_ORPHANAGE_MAP.BAF~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHAN_QUEST.tra~
+END
+
+// Frozen Orphanage dialogue and scripts.
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHAL.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHAN_QUEST.tra~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHMIA.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHPET.TRA~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHAIC.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHAIC.tra~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHCOL.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHCOL.tra~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHKEV.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHKEV.tra~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHTIL.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHTIL.tra~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHFLWR.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHFLWR.tra~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHCAT.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHCAT.tra~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHTHAL.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHTHAL.tra~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/dialogue/ORPHSILENC.D~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/orphanage/dialogue/ORPHSILENC.tra~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/scripts/ORPHCAT.BAF~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/scripts/ORPHFLWR.BAF~
+COMPILE ~CotSC/better_immersion_beregost/orphanage/scripts/ORPHUP.BAF~
+
+// CotSC BG1 city dialogue corrections and optional companion reactions.
+COMPILE ~CotSC/better_immersion_beregost/QCKOB114.baf~
+COMPILE ~CotSC/better_immersion_beregost/qc37_baldurs_gate_interjections.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/qc37_baldurs_gate_interjections.tra~
+// QC v39: Irina, city watch, Robel-adjacent and Beregost party reactions.
+COMPILE ~CotSC/better_immersion_beregost/qc39_city_interjections.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/qc39_city_interjections.tra~
+
+
+// QC: Remnants of the Past (Firewine Dungeon Expansion)
+// Original tested v1.37 source is appended verbatim below.
+
+  COMPILE ~CotSC/better_immersion_beregost/QC75NITE.baf~
+

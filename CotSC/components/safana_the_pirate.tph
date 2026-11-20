@@ -1,0 +1,64 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DELGOD.CRE~ BEGIN
+  FAIL @20150
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~IRONELIT.CRE~ BEGIN
+  FAIL @20151
+END
+
+COPY_EXISTING ~DELGOD.CRE~ ~override/QCSBTH.CRE~
+  SAY NAME1 @5012
+  SAY NAME2 @5012
+  WRITE_ASCII 0x248 ~QCSBTH~ #8
+  WRITE_ASCII 0x2cc ~QCSBTH~ #8
+  WRITE_ASCII 0x280 ~QCSBTH~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QCSBTH.CRE~ ~override/QCSBTA.CRE~
+  WRITE_ASCII 0x248 ~QCSBTA~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x2cc ~QCSBTA~ #8
+  WRITE_ASCII 0x280 ~QCSBTA~ #32
+  WRITE_BYTE 0x270 128 // Neutral until post-dialogue combat.
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_FOR_EACH qcs_goon IN QCSBTHG1 QCSBTHG2 QCSBTHG3 BEGIN
+  COPY_EXISTING ~IRONELIT.CRE~ ~override/%qcs_goon%.CRE~
+    SAY NAME1 @5013
+    SAY NAME2 @5013
+    WRITE_ASCII 0x248 ~QCSBGN~ #8
+    WRITE_ASCII 0x250 ~~ #8
+    WRITE_ASCII 0x258 ~~ #8
+    WRITE_ASCII 0x260 ~~ #8
+    WRITE_ASCII 0x268 ~~ #8
+    WRITE_ASCII 0x280 ~%qcs_goon%~ #32
+    WRITE_BYTE 0x270 128 // Neutral before combat starts.
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+COPY_EXISTING ~BG0115.ARE~ ~override/BG0115.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 748
+      fj_loc_y = 671
+      fj_dest_x = 748
+      fj_dest_y = 671
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~Balthrim~
+      fj_cre_resref = ~QCSBTH~
+      fj_dlg_resref = ~QCSBTH~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qcsafana/QCSAFANA_ALL.D~ USING ~CotSC/translation/%LANGUAGE%/qcsafana/QCSAFANA_ALL.tra~
+COMPILE ~CotSC/qcsafana/QCSBTH.BAF~
+COMPILE ~CotSC/qcsafana/QCSBTA.BAF~
+COMPILE ~CotSC/qcsafana/QCSBGN.BAF~
+COMPILE ~CotSC/qcsafana/QCSAFANA_AMBUSH.D~ USING ~CotSC/translation/%LANGUAGE%/qcsafana/QCSAFANA_AMBUSH.tra~
+EXTEND_TOP ~BD1000.BCS~ ~CotSC/qcsafana/QCSAFANA_BD1000.BAF~

@@ -1,0 +1,236 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_bg1_towns_carnivals.tra~
+
+// Amnian Guards — retain armor/equipment, neutral until they see an enemy.
+COPY_EXISTING ~AMNIS4.CRE~ ~override/BICGRD01.CRE~
+  SAY NAME1 @1044
+  SAY NAME2 @1044
+  WRITE_ASCII 0x2cc ~BICGRD01~ #8
+  WRITE_ASCII 0x280 ~BICGRD01~ #32
+  WRITE_ASCII 0x248 ~BICGRDSC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AMNIS4.CRE~ ~override/BICGRD02.CRE~
+  SAY NAME1 @1044
+  SAY NAME2 @1044
+  WRITE_ASCII 0x2cc ~BICGRD02~ #8
+  WRITE_ASCII 0x280 ~BICGRD02~ #32
+  WRITE_ASCII 0x248 ~BICGRDSC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AMNIS4.CRE~ ~override/BICGRD03.CRE~
+  SAY NAME1 @1044
+  SAY NAME2 @1044
+  WRITE_ASCII 0x2cc ~BICGRD03~ #8
+  WRITE_ASCII 0x280 ~BICGRD03~ #32
+  WRITE_ASCII 0x248 ~BICGRDSC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AMNIS4.CRE~ ~override/BICGRD04.CRE~
+  SAY NAME1 @1044
+  SAY NAME2 @1044
+  WRITE_ASCII 0x2cc ~BICGRD04~ #8
+  WRITE_ASCII 0x280 ~BICGRD04~ #32
+  WRITE_ASCII 0x248 ~BICGRDSC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AMNIS4.CRE~ ~override/BICGRD05.CRE~
+  SAY NAME1 @1044
+  SAY NAME2 @1044
+  WRITE_ASCII 0x2cc ~BICGRD05~ #8
+  WRITE_ASCII 0x280 ~BICGRD05~ #32
+  WRITE_ASCII 0x248 ~BICGRDSC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Deer — normal deer, preserving its original wandering AI.
+COPY_EXISTING ~DEER01.CRE~ ~override/BICDEER1.CRE~
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BICDEER1~ #32
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Dogs — non-hostile, preserving their original wandering AI.
+COPY_EXISTING ~DOGWIL01.CRE~ ~override/BICDOG01.CRE~
+  SAY NAME1 @1033
+  SAY NAME2 @1033
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BICDOG01~ #32
+  WRITE_ASCII 0x248 ~QCIWAND~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DOGWIL01.CRE~ ~override/BICDOG02.CRE~
+  SAY NAME1 @1033
+  SAY NAME2 @1033
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BICDOG02~ #32
+  WRITE_ASCII 0x248 ~QCIWAND~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Fire Eater — copied from an existing Carnival Performer and made into a wandering NPC.
+COPY_EXISTING ~PNASHK.CRE~ ~override/BICFIRE1.CRE~
+  SAY NAME1 @1045
+  SAY NAME2 @1045
+  WRITE_ASCII 0x2cc ~BICFIRE1~ #8
+  WRITE_ASCII 0x280 ~BICFIRE1~ #32
+  WRITE_ASCII 0x248 ~QCIWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Statue Lover — noblewoman chassis, with a special Branwen reaction.
+COPY_EXISTING ~NOBW4.CRE~ ~override/BICSLVR.CRE~
+  SAY NAME1 @1046
+  SAY NAME2 @1046
+  WRITE_ASCII 0x2cc ~BICSLVR~ #8
+  WRITE_ASCII 0x280 ~BICSLVR~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Halfling Farmer — male halfling, preserving its original wandering AI.
+COPY_EXISTING ~HALFG3.CRE~ ~override/BICHALF1.CRE~
+  SAY NAME1 @1047
+  SAY NAME2 @1047
+  WRITE_ASCII 0x2cc ~BICHALF1~ #8
+  WRITE_ASCII 0x280 ~BICHALF1~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Orc Archer — use ORC02 for the bow-equipped model.
+COPY_EXISTING ~ORC02.CRE~ ~override/BICORC01.CRE~
+  SAY NAME1 @1048
+  SAY NAME2 @1048
+  WRITE_ASCII 0x2cc ~BICORC01~ #8
+  WRITE_ASCII 0x280 ~BICORC01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Female Halfling Farmer — female halfling, preserving its original wandering AI.
+COPY_EXISTING ~HALFFG.CRE~ ~override/BICHALF2.CRE~
+  SAY NAME1 @1047
+  SAY NAME2 @1047
+  WRITE_ASCII 0x2cc ~BICHALF2~ #8
+  WRITE_ASCII 0x280 ~BICHALF2~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Trained Wolf — neutral, stationary, talkative wolf.
+COPY_EXISTING ~WOLF.CRE~ ~override/BICWLF01.CRE~
+  SAY NAME1 @1049
+  SAY NAME2 @1049
+  WRITE_ASCII 0x2cc ~BICWLF01~ #8
+  WRITE_ASCII 0x280 ~BICWLF01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Half-Ogre — neutral, preserving its original AI.
+COPY_EXISTING ~OGREHA.CRE~ ~override/BICOGRE1.CRE~
+  SAY NAME1 @1050
+  SAY NAME2 @1050
+  WRITE_ASCII 0x2cc ~BICOGRE1~ #8
+  WRITE_ASCII 0x280 ~BICOGRE1~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Elf — SARELF04 chassis.
+COPY_EXISTING ~SARELF04.CRE~ ~override/BICELF01.CRE~
+  SAY NAME1 @1051
+  SAY NAME2 @1051
+  WRITE_ASCII 0x2cc ~BICFATM1~ #8
+  WRITE_ASCII 0x280 ~BICELF01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/carnival.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/carnival.tra~
+COMPILE ~CotSC/better_immersion_beregost/bibouncer.baf~
+
+COMPILE ~CotSC/better_immersion_beregost/bicwander.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg4900_carnival.baf~
+EXTEND_TOP ~BG4900.BCS~ ~CotSC/better_immersion_beregost/bg4900_carnival.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg4907_carnival.baf~
+EXTEND_TOP ~BG4907.BCS~ ~CotSC/better_immersion_beregost/bg4907_carnival.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg4904_carnival.baf~
+EXTEND_TOP ~BG4904.BCS~ ~CotSC/better_immersion_beregost/bg4904_carnival.baf~
+
+
+// ---------------------------------------------------------------------------
+
+// CotSC optional BG1/EET interjections added after the original dialogue resources.
+COMPILE ~CotSC/better_immersion_beregost/QCIWAND.baf~
+COMPILE ~CotSC/better_immersion_beregost/qc37_carnival_interjections.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/qc37_carnival_interjections.tra~

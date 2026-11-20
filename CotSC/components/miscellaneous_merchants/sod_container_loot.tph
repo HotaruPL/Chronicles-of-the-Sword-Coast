@@ -1,0 +1,175 @@
+// ===========================================================
+// Version 1.1: SIEGE OF DRAGONSPEAR CONTAINER PROVISIONS
+// This optional Part VII only modifies area containers.
+// Original contents and all merchants/NPCs/custom items preserved.
+// Container closest to user-specified position receives each stack.
+// The Part VI Xzar-only fix above broadens his search to unused
+// quick-item slots if no backpack slot is free. No other companions
+// or components are modified.
+// ===========================================================
+// Former WeiDU component: Miscellaneous Merchants - Part VII: Siege of Dragonspear Container Loot (17 locations)
+
+// Copied from the v0.9 BG1 loot function with SoD-specific identifiers.
+// It relies on the tested fj_are_structure helper and appends rather
+// than replacing the container's existing items.
+DEFINE_PATCH_FUNCTION QCMM_SOD_CONTAINER_LOOT
+  INT_VAR x = 0 y = 0 charge = 1
+  STR_VAR item = ~~
+BEGIN
+  READ_SHORT 0x74 qcmm_sod_cnt
+  READ_LONG  0x70 qcmm_sod_off
+  PATCH_IF (qcmm_sod_cnt > 0) BEGIN
+    SET qcmm_sod_best = 0
+    SET qcmm_sod_dist_best = 2147483647
+    FOR (qcmm_sod_i = 0; qcmm_sod_i < qcmm_sod_cnt; qcmm_sod_i += 1) BEGIN
+      READ_SHORT (qcmm_sod_off + qcmm_sod_i * 0xc0 + 0x20) qcmm_sod_x
+      READ_SHORT (qcmm_sod_off + qcmm_sod_i * 0xc0 + 0x22) qcmm_sod_y
+      SET qcmm_sod_dx = qcmm_sod_x - x
+      SET qcmm_sod_dy = qcmm_sod_y - y
+      SET qcmm_sod_dist = qcmm_sod_dx * qcmm_sod_dx + qcmm_sod_dy * qcmm_sod_dy
+      PATCH_IF (qcmm_sod_dist < qcmm_sod_dist_best) BEGIN
+        SET qcmm_sod_dist_best = qcmm_sod_dist
+        SET qcmm_sod_best = qcmm_sod_i
+      END
+    END
+    LPF fj_are_structure
+      INT_VAR
+        fj_con_itm_idx = qcmm_sod_best
+        fj_charge0 = charge
+        fj_flags = 1
+      STR_VAR
+        fj_structure_type = ~itm~
+        fj_name = EVAL ~%item%~
+    END
+  END ELSE BEGIN
+    PATCH_PRINT @20344
+  END
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD0109.ARE~ BEGIN
+  COPY_EXISTING ~BD0109.ARE~ ~override~
+    // Nearest existing container to X=653, Y=264.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 653 y = 264 charge = 1 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 653 y = 264 charge = 1 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20406
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD0110.ARE~ BEGIN
+  COPY_EXISTING ~BD0110.ARE~ ~override~
+    // Nearest existing container to X=717, Y=718.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 717 y = 718 charge = 1 STR_VAR item = ~QCHONEY~ END
+END ELSE BEGIN
+
+PRINT @20407
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD0117.ARE~ BEGIN
+  COPY_EXISTING ~BD0117.ARE~ ~override~
+    // Nearest existing container to X=305, Y=450.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 305 y = 450 charge = 1 STR_VAR item = ~QCGRAIN~ END
+END ELSE BEGIN
+
+PRINT @20408
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD0104.ARE~ BEGIN
+  COPY_EXISTING ~BD0104.ARE~ ~override~
+    // Nearest existing container to X=993, Y=892.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 993 y = 892 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20409
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD1000.ARE~ BEGIN
+  COPY_EXISTING ~BD1000.ARE~ ~override~
+    // Nearest existing container to X=499, Y=3201.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 499 y = 3201 charge = 2 STR_VAR item = ~QCWATER~ END
+    // Nearest existing container to X=2397, Y=2438.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 2397 y = 2438 charge = 1 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20410
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD2000.ARE~ BEGIN
+  COPY_EXISTING ~BD2000.ARE~ ~override~
+    // Nearest existing container to X=2994, Y=2663.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 2994 y = 2663 charge = 2 STR_VAR item = ~QCMEAT~ END
+    // Nearest existing container to X=1947, Y=2697.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 1947 y = 2697 charge = 2 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20411
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD7230.ARE~ BEGIN
+  COPY_EXISTING ~BD7230.ARE~ ~override~
+    // Nearest existing container to X=2348, Y=1218.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 2348 y = 1218 charge = 3 STR_VAR item = ~QCMEAT~ END
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 2348 y = 1218 charge = 1 STR_VAR item = ~QCSAUSG~ END
+    // Nearest existing container to X=263, Y=1429.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 263 y = 1429 charge = 1 STR_VAR item = ~QCBREAD~ END
+    // Nearest existing container to X=3166, Y=1771.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 3166 y = 1771 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20412
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD7000.ARE~ BEGIN
+  COPY_EXISTING ~BD7000.ARE~ ~override~
+    // Nearest existing container to X=1242, Y=1717.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 1242 y = 1717 charge = 1 STR_VAR item = ~QCCORN~ END
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 1242 y = 1717 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20413
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD7410.ARE~ BEGIN
+  COPY_EXISTING ~BD7410.ARE~ ~override~
+    // Nearest existing container to X=708, Y=681.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 708 y = 681 charge = 2 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20414
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD5100.ARE~ BEGIN
+  COPY_EXISTING ~BD5100.ARE~ ~override~
+    // Nearest existing container to X=3934, Y=1981.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 3934 y = 1981 charge = 1 STR_VAR item = ~QCSAUSG~ END
+    // Nearest existing container to X=4524, Y=2049.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 4524 y = 2049 charge = 1 STR_VAR item = ~QCFLOUR~ END
+END ELSE BEGIN
+
+PRINT @20415
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BD4000.ARE~ BEGIN
+  COPY_EXISTING ~BD4000.ARE~ ~override~
+    // Nearest existing container to X=1235, Y=1471.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 1235 y = 1471 charge = 2 STR_VAR item = ~QCSAUSG~ END
+    // Nearest existing container to X=3024, Y=2524.
+    LPF QCMM_SOD_CONTAINER_LOOT INT_VAR x = 3024 y = 2524 charge = 1 STR_VAR item = ~QCEGGS~ END
+END ELSE BEGIN
+
+PRINT @20416
+
+END
+
+

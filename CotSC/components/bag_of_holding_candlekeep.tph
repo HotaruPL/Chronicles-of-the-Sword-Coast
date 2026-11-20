@@ -1,0 +1,30 @@
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG2617.ARE~ BEGIN
+  FAIL @20170
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BAG31.ITM~ BEGIN
+  FAIL @20171
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BAG31.STO~ BEGIN
+  FAIL @20172
+END
+
+// QC-prefixed independent copy of the game's standard Bag of Holding.
+// A unique STO keeps this copy's contents independent from other BAG31 bags.
+COPY_EXISTING ~BAG31.ITM~ ~override/QCBAGH.ITM~
+COPY_EXISTING ~BAG31.STO~ ~override/QCBAGH.STO~
+
+// BG2617: the drawer nearest the requested X=132, Y=280 is the stock
+// "Container 1" at X=119, Y=300. It is container index 0 in BG2617.ARE.
+// Add the QC-prefixed Bag of Holding to that existing container only.
+COPY_EXISTING ~BG2617.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = 0
+      fj_flags       = 1 // identified
+    STR_VAR
+      fj_name           = QCBAGH
+      fj_structure_type = itm
+  END
+BUT_ONLY_IF_IT_CHANGES

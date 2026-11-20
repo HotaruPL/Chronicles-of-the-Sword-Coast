@@ -1,0 +1,653 @@
+// ===========================================================
+// Version 1.2: SHADOWS OF AMN CONTAINER PROVISIONS
+// Optional Part VIII -- preserves every earlier component exactly.
+// Patches the nearest existing container to each user-supplied position.
+// Preserves pre-existing container contents. No new containers are created.
+// OH6100 normalizes the provided 0H6100 typo (letter O, not digit zero).
+// "MEAR" and "EGS" normalize to QCMEAT / QCEGGS.
+// ===========================================================
+// Former WeiDU component: Miscellaneous Merchants - Part VIII: Shadows of Amn Container Loot (73 locations)
+
+DEFINE_PATCH_FUNCTION QCMM_SOA_CONTAINER_LOOT
+  INT_VAR x = 0 y = 0 charge = 1
+  STR_VAR item = ~~
+BEGIN
+  READ_SHORT 0x74 qcmm_soa_cnt
+  READ_LONG  0x70 qcmm_soa_off
+  PATCH_IF (qcmm_soa_cnt > 0) BEGIN
+    SET qcmm_soa_best = 0
+    SET qcmm_soa_dist_best = 2147483647
+    FOR (qcmm_soa_i = 0; qcmm_soa_i < qcmm_soa_cnt; qcmm_soa_i += 1) BEGIN
+      READ_SHORT (qcmm_soa_off + qcmm_soa_i * 0xc0 + 0x20) qcmm_soa_x
+      READ_SHORT (qcmm_soa_off + qcmm_soa_i * 0xc0 + 0x22) qcmm_soa_y
+      SET qcmm_soa_dx = qcmm_soa_x - x
+      SET qcmm_soa_dy = qcmm_soa_y - y
+      SET qcmm_soa_dist = qcmm_soa_dx * qcmm_soa_dx + qcmm_soa_dy * qcmm_soa_dy
+      PATCH_IF (qcmm_soa_dist < qcmm_soa_dist_best) BEGIN
+        SET qcmm_soa_dist_best = qcmm_soa_dist
+        SET qcmm_soa_best = qcmm_soa_i
+      END
+    END
+    LPF fj_are_structure
+      INT_VAR
+        fj_con_itm_idx = qcmm_soa_best
+        fj_charge0 = charge
+        fj_flags = 1
+      STR_VAR
+        fj_structure_type = ~itm~
+        fj_name = EVAL ~%item%~
+    END
+  END ELSE BEGIN
+    PATCH_PRINT @20417
+  END
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0602.ARE~ BEGIN
+  COPY_EXISTING ~AR0602.ARE~ ~override~
+    // Nearest container to X=3337, Y=839.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 3337 y = 839 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Nearest container to X=3176, Y=2444.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 3176 y = 2444 charge = 2 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 3176 y = 2444 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Nearest container to X=1288, Y=1438.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1288 y = 1438 charge = 2 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20418
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0603.ARE~ BEGIN
+  COPY_EXISTING ~AR0603.ARE~ ~override~
+    // Nearest container to X=329, Y=2901.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 329 y = 2901 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Nearest container to X=2830, Y=1503.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2830 y = 1503 charge = 1 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2830 y = 1503 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20419
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0700.ARE~ BEGIN
+  COPY_EXISTING ~AR0700.ARE~ ~override~
+    // Nearest container to X=3256, Y=525.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 3256 y = 525 charge = 2 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 3256 y = 525 charge = 1 STR_VAR item = ~QCMEAT~ END
+    // Nearest container to X=2978, Y=96.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2978 y = 96 charge = 1 STR_VAR item = ~QCCORN~ END
+    // Nearest container to X=2148, Y=1386.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2148 y = 1386 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20420
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0704.ARE~ BEGIN
+  COPY_EXISTING ~AR0704.ARE~ ~override~
+    // Nearest container to X=615, Y=545.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 615 y = 545 charge = 1 STR_VAR item = ~QCMEAT~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 615 y = 545 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20421
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0708.ARE~ BEGIN
+  COPY_EXISTING ~AR0708.ARE~ ~override~
+    // Nearest container to X=568, Y=219.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 568 y = 219 charge = 1 STR_VAR item = ~QCGRAIN~ END
+END ELSE BEGIN
+
+PRINT @20422
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0713.ARE~ BEGIN
+  COPY_EXISTING ~AR0713.ARE~ ~override~
+    // Nearest container to X=486, Y=269.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 486 y = 269 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20423
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0400.ARE~ BEGIN
+  COPY_EXISTING ~AR0400.ARE~ ~override~
+    // Nearest container to X=2647, Y=1067.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2647 y = 1067 charge = 2 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20424
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0417.ARE~ BEGIN
+  COPY_EXISTING ~AR0417.ARE~ ~override~
+    // Nearest container to X=557, Y=198.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 557 y = 198 charge = 1 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20425
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0405.ARE~ BEGIN
+  COPY_EXISTING ~AR0405.ARE~ ~override~
+    // Nearest container to X=662, Y=1020.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 662 y = 1020 charge = 1 STR_VAR item = ~QCMEAT~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 662 y = 1020 charge = 2 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20426
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0500.ARE~ BEGIN
+  COPY_EXISTING ~AR0500.ARE~ ~override~
+    // Nearest container to X=3599, Y=1454.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 3599 y = 1454 charge = 1 STR_VAR item = ~QCEGGS~ END
+    // Nearest container to X=2679, Y=2030.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2679 y = 2030 charge = 2 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20427
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0509.ARE~ BEGIN
+  COPY_EXISTING ~AR0509.ARE~ ~override~
+    // Nearest container to X=482, Y=557.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 482 y = 557 charge = 1 STR_VAR item = ~QCMEAT~ END
+    // Nearest container to X=586, Y=674.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 586 y = 674 charge = 1 STR_VAR item = ~QCMEAT~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 586 y = 674 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20428
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0513.ARE~ BEGIN
+  COPY_EXISTING ~AR0513.ARE~ ~override~
+    // Nearest container to X=154, Y=625.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 154 y = 625 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20429
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1003.ARE~ BEGIN
+  COPY_EXISTING ~AR1003.ARE~ ~override~
+    // Nearest container to X=907, Y=386.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 907 y = 386 charge = 1 STR_VAR item = ~QCGRAIN~ END
+END ELSE BEGIN
+
+PRINT @20430
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1006.ARE~ BEGIN
+  COPY_EXISTING ~AR1006.ARE~ ~override~
+    // Nearest container to X=803, Y=235.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 803 y = 235 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Nearest container to X=616, Y=226.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 616 y = 226 charge = 1 STR_VAR item = ~QCFLOUR~ END
+END ELSE BEGIN
+
+PRINT @20431
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0326.ARE~ BEGIN
+  COPY_EXISTING ~AR0326.ARE~ ~override~
+    // Nearest container to X=319, Y=287.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 319 y = 287 charge = 1 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20432
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0306.ARE~ BEGIN
+  COPY_EXISTING ~AR0306.ARE~ ~override~
+    // Nearest container to X=415, Y=315.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 415 y = 315 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20433
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0305.ARE~ BEGIN
+  COPY_EXISTING ~AR0305.ARE~ ~override~
+    // Nearest container to X=993, Y=742.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 993 y = 742 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20434
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0318.ARE~ BEGIN
+  COPY_EXISTING ~AR0318.ARE~ ~override~
+    // Nearest container to X=362, Y=326.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 362 y = 326 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20435
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0308.ARE~ BEGIN
+  COPY_EXISTING ~AR0308.ARE~ ~override~
+    // Nearest container to X=1130, Y=432.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1130 y = 432 charge = 1 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1130 y = 432 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20436
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0302.ARE~ BEGIN
+  COPY_EXISTING ~AR0302.ARE~ ~override~
+    // Nearest container to X=724, Y=179.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 724 y = 179 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20437
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1101.ARE~ BEGIN
+  COPY_EXISTING ~AR1101.ARE~ ~override~
+    // Nearest container to X=152, Y=390.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 152 y = 390 charge = 2 STR_VAR item = ~QCFLOUR~ END
+    // Nearest container to X=250, Y=174.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 250 y = 174 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20438
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1102.ARE~ BEGIN
+  COPY_EXISTING ~AR1102.ARE~ ~override~
+    // Nearest container to X=813, Y=363.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 813 y = 363 charge = 1 STR_VAR item = ~QCGRAIN~ END
+    // Nearest container to X=473, Y=571.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 473 y = 571 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20439
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1105.ARE~ BEGIN
+  COPY_EXISTING ~AR1105.ARE~ ~override~
+    // Nearest container to X=181, Y=665.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 181 y = 665 charge = 1 STR_VAR item = ~QCFLOUR~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 181 y = 665 charge = 8 STR_VAR item = ~QCSAUSG~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 181 y = 665 charge = 3 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20440
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1104.ARE~ BEGIN
+  COPY_EXISTING ~AR1104.ARE~ ~override~
+    // Nearest container to X=205, Y=421.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 205 y = 421 charge = 1 STR_VAR item = ~QCCORN~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 205 y = 421 charge = 1 STR_VAR item = ~QCEGGS~ END
+END ELSE BEGIN
+
+PRINT @20441
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2000.ARE~ BEGIN
+  COPY_EXISTING ~AR2000.ARE~ ~override~
+    // Nearest container to X=186, Y=2050.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 186 y = 2050 charge = 1 STR_VAR item = ~QCGRAIN~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 186 y = 2050 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20442
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2007.ARE~ BEGIN
+  COPY_EXISTING ~AR2007.ARE~ ~override~
+    // Nearest container to X=995, Y=263.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 995 y = 263 charge = 1 STR_VAR item = ~QCHONEY~ END
+END ELSE BEGIN
+
+PRINT @20443
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2011.ARE~ BEGIN
+  COPY_EXISTING ~AR2011.ARE~ ~override~
+    // Nearest container to X=894, Y=382.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 894 y = 382 charge = 1 STR_VAR item = ~QCGRAIN~ END
+END ELSE BEGIN
+
+PRINT @20444
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2002.ARE~ BEGIN
+  COPY_EXISTING ~AR2002.ARE~ ~override~
+    // Nearest container to X=294, Y=400.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 294 y = 400 charge = 1 STR_VAR item = ~QCHONEY~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 294 y = 400 charge = 3 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20445
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1204.ARE~ BEGIN
+  COPY_EXISTING ~AR1204.ARE~ ~override~
+    // Nearest container to X=260, Y=338.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 260 y = 338 charge = 1 STR_VAR item = ~QCEGGS~ END
+    // Nearest container to X=351, Y=410.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 351 y = 410 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 351 y = 410 charge = 1 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20446
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1202.ARE~ BEGIN
+  COPY_EXISTING ~AR1202.ARE~ ~override~
+    // Nearest container to X=833, Y=1654.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 833 y = 1654 charge = 1 STR_VAR item = ~QCCORN~ END
+    // Nearest container to X=970, Y=2138.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 970 y = 2138 charge = 6 STR_VAR item = ~QCMEAT~ END
+    // Nearest container to X=2744, Y=2372.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2744 y = 2372 charge = 1 STR_VAR item = ~QCHONEY~ END
+END ELSE BEGIN
+
+PRINT @20447
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1301.ARE~ BEGIN
+  COPY_EXISTING ~AR1301.ARE~ ~override~
+    // Nearest container to X=1925, Y=964.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1925 y = 964 charge = 1 STR_VAR item = ~QCCORN~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1925 y = 964 charge = 2 STR_VAR item = ~QCGRAIN~ END
+END ELSE BEGIN
+
+PRINT @20448
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1303.ARE~ BEGIN
+  COPY_EXISTING ~AR1303.ARE~ ~override~
+    // Nearest container to X=1215, Y=1426.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1215 y = 1426 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1215 y = 1426 charge = 2 STR_VAR item = ~QCBREAD~ END
+    // Nearest container to X=1714, Y=813.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1714 y = 813 charge = 1 STR_VAR item = ~QCEGGS~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1714 y = 813 charge = 1 STR_VAR item = ~QCCORN~ END
+END ELSE BEGIN
+
+PRINT @20449
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1302.ARE~ BEGIN
+  COPY_EXISTING ~AR1302.ARE~ ~override~
+    // Nearest container to X=1808, Y=704.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1808 y = 704 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1808 y = 704 charge = 1 STR_VAR item = ~QCFLOUR~ END
+    // Nearest container to X=1526, Y=517.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1526 y = 517 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20450
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1600.ARE~ BEGIN
+  COPY_EXISTING ~AR1600.ARE~ ~override~
+    // Nearest container to X=1614, Y=1717.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1614 y = 1717 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Nearest container to X=1181, Y=591.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1181 y = 591 charge = 1 STR_VAR item = ~QCMEAT~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1181 y = 591 charge = 1 STR_VAR item = ~SCRL5N~ END
+END ELSE BEGIN
+
+PRINT @20451
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1605.ARE~ BEGIN
+  COPY_EXISTING ~AR1605.ARE~ ~override~
+    // Nearest container to X=403, Y=349.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 403 y = 349 charge = 1 STR_VAR item = ~QCMEAT~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 403 y = 349 charge = 2 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20452
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1610.ARE~ BEGIN
+  COPY_EXISTING ~AR1610.ARE~ ~override~
+    // Nearest container to X=376, Y=458.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 376 y = 458 charge = 1 STR_VAR item = ~QCMEAT~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 376 y = 458 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 376 y = 458 charge = 5 STR_VAR item = ~AROW07~ END
+END ELSE BEGIN
+
+PRINT @20453
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2100.ARE~ BEGIN
+  COPY_EXISTING ~AR2100.ARE~ ~override~
+    // Nearest container to X=2255, Y=888.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2255 y = 888 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Nearest container to X=2066, Y=745.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2066 y = 745 charge = 3 STR_VAR item = ~QCMEAT~ END
+    // Nearest container to X=2171, Y=639.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2171 y = 639 charge = 1 STR_VAR item = ~POTN55~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2171 y = 639 charge = 1 STR_VAR item = ~QCHONEY~ END
+    // Nearest container to X=2382, Y=625.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2382 y = 625 charge = 1 STR_VAR item = ~QCEGGS~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2382 y = 625 charge = 1 STR_VAR item = ~QCMEAT~ END
+    // Nearest container to X=2428, Y=728.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2428 y = 728 charge = 1 STR_VAR item = ~QCCORN~ END
+END ELSE BEGIN
+
+PRINT @20454
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2202.ARE~ BEGIN
+  COPY_EXISTING ~AR2202.ARE~ ~override~
+    // Nearest container to X=1201, Y=1093.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1201 y = 1093 charge = 1 STR_VAR item = ~QCSAUSG~ END
+    // Nearest container to X=1358, Y=831.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1358 y = 831 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1358 y = 831 charge = 1 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20455
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2204.ARE~ BEGIN
+  COPY_EXISTING ~AR2204.ARE~ ~override~
+    // Nearest container to X=602, Y=635.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 602 y = 635 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20456
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2401.ARE~ BEGIN
+  COPY_EXISTING ~AR2401.ARE~ ~override~
+    // Nearest container to X=656, Y=559.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 656 y = 559 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 656 y = 559 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20457
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2603.ARE~ BEGIN
+  COPY_EXISTING ~AR2603.ARE~ ~override~
+    // Nearest container to X=188, Y=365.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 188 y = 365 charge = 1 STR_VAR item = ~QCCORN~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 188 y = 365 charge = 1 STR_VAR item = ~QCHONEY~ END
+    // Nearest container to X=509, Y=233.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 509 y = 233 charge = 7 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20458
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2811.ARE~ BEGIN
+  COPY_EXISTING ~AR2811.ARE~ ~override~
+    // Nearest container to X=346, Y=246.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 346 y = 246 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 346 y = 246 charge = 2 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20459
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2808.ARE~ BEGIN
+  COPY_EXISTING ~AR2808.ARE~ ~override~
+    // Nearest container to X=306, Y=327.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 306 y = 327 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20460
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2801.ARE~ BEGIN
+  COPY_EXISTING ~AR2801.ARE~ ~override~
+    // Nearest container to X=299, Y=322.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 299 y = 322 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20461
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~AR3001.ARE~ BEGIN
+  COPY_EXISTING ~AR3001.ARE~ ~override~
+    // Nearest container to X=2041, Y=1929.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 2041 y = 1929 charge = 2 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20462
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~OH6100.ARE~ BEGIN
+  COPY_EXISTING ~OH6100.ARE~ ~override~
+    // Nearest container to X=1241, Y=899.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1241 y = 899 charge = 2 STR_VAR item = ~QCMEAT~ END
+    // Nearest container to X=1269, Y=749.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1269 y = 749 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Nearest container to X=1343, Y=520.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1343 y = 520 charge = 1 STR_VAR item = ~QCEGGS~ END
+END ELSE BEGIN
+
+PRINT @20463
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~OH6300.ARE~ BEGIN
+  COPY_EXISTING ~OH6300.ARE~ ~override~
+    // Nearest container to X=951, Y=785.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 951 y = 785 charge = 1 STR_VAR item = ~QCMEAT~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 951 y = 785 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Nearest container to X=1453, Y=1148.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1453 y = 1148 charge = 1 STR_VAR item = ~QCHONEY~ END
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1453 y = 1148 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20464
+
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~OH7200.ARE~ BEGIN
+  COPY_EXISTING ~OH7200.ARE~ ~override~
+    // Nearest container to X=1993, Y=867.
+    LPF QCMM_SOA_CONTAINER_LOOT INT_VAR x = 1993 y = 867 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20465
+
+END
+
+
+

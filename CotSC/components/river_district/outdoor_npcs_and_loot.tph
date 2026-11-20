@@ -1,0 +1,679 @@
+// ====================================================================
+// PART 3/7: v2.2a outdoor dialogue, loot, NPCs
+// ====================================================================
+
+// Requires v2.1 already installed. This add-on does not overwrite any area art or music.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCRIVD.ARE~ BEGIN
+  FAIL @20176
+END
+COMPILE ~CotSC/qc_river_people/dialogue/qrivd_npcs.d~ USING ~CotSC/translation/%LANGUAGE%/qc_river_people/dialogue/qrivd_npcs.tra~
+COMPILE ~CotSC/qc_river_people/scripts/QRVROAM.baf~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FTWBAX_C.CRE~ BEGIN
+  FAIL @20177
+END
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/QRVWF1.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_ASCII 0x2cc ~QRVWF1~ #8
+  WRITE_ASCII 0x280 ~QRVWF1~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x2d 47
+  WRITE_BYTE 0x2e 47
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FARM.CRE~ BEGIN
+  FAIL @20178
+END
+COPY_EXISTING ~FARM.CRE~ ~override/QRVWM1.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_ASCII 0x2cc ~QRVWM1~ #8
+  WRITE_ASCII 0x280 ~QRVWM1~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x2d 0
+  WRITE_BYTE 0x2e 0
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AMNG2.CRE~ BEGIN
+  FAIL @20179
+END
+COPY_EXISTING ~AMNG2.CRE~ ~override/QRVSOLD.CRE~
+  SAY NAME1 @3006
+  SAY NAME2 @3006
+  WRITE_ASCII 0x2cc ~QRVSOLD~ #8
+  WRITE_ASCII 0x280 ~QRVSOLD~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FARM.CRE~ BEGIN
+  FAIL @20178
+END
+COPY_EXISTING ~FARM.CRE~ ~override/QRVFLRT.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_ASCII 0x2cc ~QRVFLRT~ #8
+  WRITE_ASCII 0x280 ~QRVFLRT~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~HALFG3.CRE~ BEGIN
+  FAIL @20180
+END
+COPY_EXISTING ~HALFG3.CRE~ ~override/QRVHALF.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  WRITE_ASCII 0x2cc ~QRVHALF~ #8
+  WRITE_ASCII 0x280 ~QRVHALF~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FARM.CRE~ BEGIN
+  FAIL @20178
+END
+COPY_EXISTING ~FARM.CRE~ ~override/QRVDRNK.CRE~
+  SAY NAME1 @3008
+  SAY NAME2 @3008
+  WRITE_ASCII 0x2cc ~QRVDRNK~ #8
+  WRITE_ASCII 0x280 ~QRVDRNK~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_ASCII 0x248 ~QRVROAM~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KOBCOMM.CRE~ BEGIN
+  FAIL @20181
+END
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QRVKOB.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_ASCII 0x2cc ~QRVKOB~ #8
+  WRITE_ASCII 0x280 ~QRVKOB~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FARM.CRE~ BEGIN
+  FAIL @20178
+END
+COPY_EXISTING ~FARM.CRE~ ~override/QRVSEA1.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_ASCII 0x2cc ~QRVSEA1~ #8
+  WRITE_ASCII 0x280 ~QRVSEA1~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_LONG 0x28 0x4100
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FTWBAX_C.CRE~ BEGIN
+  FAIL @20177
+END
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/QRVSEA2.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_ASCII 0x2cc ~QRVSEA2~ #8
+  WRITE_ASCII 0x280 ~QRVSEA2~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_LONG 0x28 0x4110
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~HOBGBEG1.CRE~ BEGIN
+  FAIL @20182
+END
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QRVHOB.CRE~
+  SAY NAME1 @3010
+  SAY NAME2 @3010
+  WRITE_ASCII 0x2cc ~QRVHOB~ #8
+  WRITE_ASCII 0x280 ~QRVHOB~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_ASCII 0x248 ~QRVROAM~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FARM.CRE~ BEGIN
+  FAIL @20178
+END
+COPY_EXISTING ~FARM.CRE~ ~override/QRVWORK.CRE~
+  SAY NAME1 @3011
+  SAY NAME2 @3011
+  WRITE_ASCII 0x2cc ~QRVWORK~ #8
+  WRITE_ASCII 0x280 ~QRVWORK~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x2d 0
+  WRITE_BYTE 0x2e 0
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~OGREHA.CRE~ BEGIN
+  FAIL @20183
+END
+COPY_EXISTING ~OGREHA.CRE~ ~override/QRVWRK2.CRE~
+  SAY NAME1 @3011
+  SAY NAME2 @3011
+  WRITE_ASCII 0x2cc ~QRVWRK2~ #8
+  WRITE_ASCII 0x280 ~QRVWRK2~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~OGREHA.CRE~ BEGIN
+  FAIL @20183
+END
+COPY_EXISTING ~OGREHA.CRE~ ~override/QRVGUARD.CRE~
+  SAY NAME1 @3012
+  SAY NAME2 @3012
+  WRITE_ASCII 0x2cc ~QRVGUARD~ #8
+  WRITE_ASCII 0x280 ~QRVGUARD~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TANADV06.CRE~ BEGIN
+  FAIL @20184
+END
+COPY_EXISTING ~TANADV06.CRE~ ~override/QRVSHAD.CRE~
+  SAY NAME1 @3013
+  SAY NAME2 @3013
+  WRITE_ASCII 0x2cc ~QRVSHAD~ #8
+  WRITE_ASCII 0x280 ~QRVSHAD~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KESTOR.CRE~ BEGIN
+  FAIL @20185
+END
+COPY_EXISTING ~KESTOR.CRE~ ~override/QRVTHUG.CRE~
+  SAY NAME1 @3014
+  SAY NAME2 @3014
+  WRITE_ASCII 0x2cc ~QRVTHUG~ #8
+  WRITE_ASCII 0x280 ~QRVTHUG~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FTWBAX_C.CRE~ BEGIN
+  FAIL @20177
+END
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/QRVELF.CRE~
+  SAY NAME1 @3015
+  SAY NAME2 @3015
+  WRITE_ASCII 0x2cc ~QRVELF~ #8
+  WRITE_ASCII 0x280 ~QRVELF~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x272 3
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~UHRANG01.CRE~ BEGIN
+  FAIL @20186
+END
+COPY_EXISTING ~UHRANG01.CRE~ ~override/QRVFEL.CRE~
+  SAY NAME1 @3016
+  SAY NAME2 @3016
+  WRITE_ASCII 0x2cc ~QRVFEL~ #8
+  WRITE_ASCII 0x280 ~QRVFEL~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x2d 7
+  WRITE_BYTE 0x2e 47
+  WRITE_BYTE 0x2f 6
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~OGREHA.CRE~ BEGIN
+  FAIL @20183
+END
+COPY_EXISTING ~OGREHA.CRE~ ~override/QRVOGRE.CRE~
+  SAY NAME1 @3012
+  SAY NAME2 @3012
+  WRITE_ASCII 0x2cc ~QRVOGRE~ #8
+  WRITE_ASCII 0x280 ~QRVOGRE~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_LONG 0x28 0x9000
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~CAT.CRE~ BEGIN
+  FAIL @20187
+END
+COPY_EXISTING ~CAT.CRE~ ~override/QRVCAT.CRE~
+  SAY NAME1 @3017
+  SAY NAME2 @3017
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QRVCAT~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x248 ~QRVROAM~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Loot is assigned in approved container order 1..6. Container 6 stays empty.
+// Consistent with ADD_AREA_ITEM using 1-based container numbering.
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  READ_SHORT 0x74 qr_con_count
+  PATCH_IF (qr_con_count != 6) BEGIN
+    PATCH_FAIL @20188
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 13
+    STR_VAR
+      item_to_add = ~MISC07~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~DAGG01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~SCRL69~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+      charges1 = 7
+    STR_VAR
+      item_to_add = ~MISC07~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~LEAT01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~MISC27~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 5
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~AMUL04~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// NPC actor records only; fj_are_structure dynamically adjusts the ARE offsets.
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3219
+      fj_loc_y = 489
+      fj_dest_x = 3219
+      fj_dest_y = 489
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVWF1
+      fj_cre_resref = QRVWF1
+      fj_dlg_resref = QRVWF1
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3255
+      fj_loc_y = 487
+      fj_dest_x = 3255
+      fj_dest_y = 487
+      fj_orientation = 4
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVWM1
+      fj_cre_resref = QRVWM1
+      fj_dlg_resref = QRVWM1
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1908
+      fj_loc_y = 1470
+      fj_dest_x = 1908
+      fj_dest_y = 1470
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVSOLD
+      fj_cre_resref = QRVSOLD
+      fj_dlg_resref = QRVSOLD
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 834
+      fj_loc_y = 433
+      fj_dest_x = 834
+      fj_dest_y = 433
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVFLRT
+      fj_cre_resref = QRVFLRT
+      fj_dlg_resref = QRVFLRT
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 834
+      fj_loc_y = 469
+      fj_dest_x = 834
+      fj_dest_y = 469
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVHALF
+      fj_cre_resref = QRVHALF
+      fj_dlg_resref = QRVHALF
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2966
+      fj_loc_y = 1196
+      fj_dest_x = 2966
+      fj_dest_y = 1196
+      fj_orientation = 0
+      fj_wander_dist_actor = 180
+      fj_mvmt_dist_actor = 180
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVDRNK
+      fj_cre_resref = QRVDRNK
+      fj_dlg_resref = QRVDRNK
+      fj_bcs_override = QRVROAM
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1209
+      fj_loc_y = 1427
+      fj_dest_x = 1209
+      fj_dest_y = 1427
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVKOB
+      fj_cre_resref = QRVKOB
+      fj_dlg_resref = QRVKOB
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1773
+      fj_loc_y = 906
+      fj_dest_x = 1773
+      fj_dest_y = 906
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVSEA1
+      fj_cre_resref = QRVSEA1
+      fj_dlg_resref = QRVSEA1
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1772
+      fj_loc_y = 931
+      fj_dest_x = 1772
+      fj_dest_y = 931
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVSEA2
+      fj_cre_resref = QRVSEA2
+      fj_dlg_resref = QRVSEA2
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2586
+      fj_loc_y = 1409
+      fj_dest_x = 2586
+      fj_dest_y = 1409
+      fj_orientation = 0
+      fj_wander_dist_actor = 180
+      fj_mvmt_dist_actor = 180
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVHOB
+      fj_cre_resref = QRVHOB
+      fj_dlg_resref = QRVHOB
+      fj_bcs_override = QRVROAM
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2539
+      fj_loc_y = 1157
+      fj_dest_x = 2539
+      fj_dest_y = 1157
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVWORK
+      fj_cre_resref = QRVWORK
+      fj_dlg_resref = QRVWORK
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2340
+      fj_loc_y = 974
+      fj_dest_x = 2340
+      fj_dest_y = 974
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVWRK2
+      fj_cre_resref = QRVWRK2
+      fj_dlg_resref = QRVWRK2
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2810
+      fj_loc_y = 597
+      fj_dest_x = 2810
+      fj_dest_y = 597
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVGUARD
+      fj_cre_resref = QRVGUARD
+      fj_dlg_resref = QRVGUARD
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2318
+      fj_loc_y = 587
+      fj_dest_x = 2318
+      fj_dest_y = 587
+      fj_orientation = 4
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVSHAD
+      fj_cre_resref = QRVSHAD
+      fj_dlg_resref = QRVSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2361
+      fj_loc_y = 590
+      fj_dest_x = 2361
+      fj_dest_y = 590
+      fj_orientation = 12
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVTHUG
+      fj_cre_resref = QRVTHUG
+      fj_dlg_resref = QRVTHUG
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 147
+      fj_loc_y = 1032
+      fj_dest_x = 147
+      fj_dest_y = 1032
+      fj_orientation = 14
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVELF
+      fj_cre_resref = QRVELF
+      fj_dlg_resref = QRVELF
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 716
+      fj_loc_y = 644
+      fj_dest_x = 716
+      fj_dest_y = 644
+      fj_orientation = 4
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVFEL
+      fj_cre_resref = QRVFEL
+      fj_dlg_resref = QRVFEL
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 207
+      fj_loc_y = 787
+      fj_dest_x = 207
+      fj_dest_y = 787
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVOGRE
+      fj_cre_resref = QRVOGRE
+      fj_dlg_resref = QRVOGRE
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 486
+      fj_loc_y = 1102
+      fj_dest_x = 486
+      fj_dest_y = 1102
+      fj_orientation = 0
+      fj_wander_dist_actor = 180
+      fj_mvmt_dist_actor = 180
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVCAT
+      fj_cre_resref = QRVCAT
+      fj_bcs_override = QRVROAM
+  END
+BUT_ONLY_IF_IT_CHANGES
+

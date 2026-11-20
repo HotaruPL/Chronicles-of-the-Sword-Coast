@@ -1,0 +1,234 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_bg1_towns_carnivals.tra~
+
+// Fisherman 1 — normal human commoner chassis, with a distinct palette.
+COPY_EXISTING ~FARM.CRE~ ~override/BNFISH01.CRE~
+  SAY NAME1 @1035
+  SAY NAME2 @1035
+  WRITE_ASCII 0x2cc ~BNFISH01~ #8
+  WRITE_ASCII 0x280 ~BNFISH01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_BYTE 0x2d 2
+  WRITE_BYTE 0x2e 7
+  WRITE_BYTE 0x2f 6
+  WRITE_BYTE 0x30 4
+  WRITE_BYTE 0x32 5
+BUT_ONLY_IF_IT_CHANGES
+
+// Fisherman 2 — same chassis, different palette.
+COPY_EXISTING ~FARM.CRE~ ~override/BNFISH02.CRE~
+  SAY NAME1 @1035
+  SAY NAME2 @1035
+  WRITE_ASCII 0x2cc ~BNFISH02~ #8
+  WRITE_ASCII 0x280 ~BNFISH02~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_BYTE 0x2d 4
+  WRITE_BYTE 0x2e 10
+  WRITE_BYTE 0x2f 4
+  WRITE_BYTE 0x30 3
+  WRITE_BYTE 0x32 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Neutral dog.
+COPY_EXISTING ~DOGWIL01.CRE~ ~override/BINDOG01.CRE~
+  SAY NAME1 @1033
+  SAY NAME2 @1033
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BINDOG01~ #32
+  WRITE_ASCII 0x248 ~QCNWAND~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Female halfling mourner — keep the known-good halfling dialogue setup.
+COPY_EXISTING ~HALFFG.CRE~ ~override/BINMOURN.CRE~
+  SAY NAME1 @1036
+  SAY NAME2 @1036
+  WRITE_ASCII 0x2cc ~BINMOURN~ #8
+  WRITE_ASCII 0x280 ~BINMOURN~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Tiefling citizen — use the requested VOLTIN chassis.
+COPY_EXISTING ~VOLTIN.CRE~ ~override/BNTIEF01.CRE~
+  SAY NAME1 @1037
+  SAY NAME2 @1037
+  WRITE_ASCII 0x2cc ~BNTIEF01~ #8
+  WRITE_ASCII 0x280 ~BNTIEF01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Gnome commoner — use BENTLY's original wandering behavior.
+COPY_EXISTING ~BDWAIZAH.CRE~ ~override/BNGNOM01.CRE~
+  SAY NAME1 @1038
+  SAY NAME2 @1038
+  WRITE_ASCII 0x2cc ~BNGNOM01~ #8
+  WRITE_ASCII 0x280 ~BNGNOM01~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Cat.
+COPY_EXISTING ~CAT.CRE~ ~override/BINCAT01.CRE~
+  SAY NAME1 @1039
+  SAY NAME2 @1039
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BINCAT01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Male halfling commoner.
+COPY_EXISTING ~HALFG3.CRE~ ~override/BINHAL01.CRE~
+  SAY NAME1 @1029
+  SAY NAME2 @1029
+  WRITE_ASCII 0x2cc ~BINHAL01~ #8
+  WRITE_ASCII 0x280 ~BINHAL01~ #32
+  WRITE_ASCII 0x248 ~QCNWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Half-orc farmer — use the requested OHNREGI chassis.
+COPY_EXISTING ~OHNREGI.CRE~ ~override/BNHORK01.CRE~
+  SAY NAME1 @1040
+  SAY NAME2 @1040
+  WRITE_ASCII 0x2cc ~BNHORK01~ #8
+  WRITE_ASCII 0x280 ~BNHORK01~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Female halfling commoner — preserve original wandering behavior.
+COPY_EXISTING ~HALFFG.CRE~ ~override/BINHAL02.CRE~
+  SAY NAME1 @1029
+  SAY NAME2 @1029
+  WRITE_ASCII 0x2cc ~BINHAL02~ #8
+  WRITE_ASCII 0x280 ~BINHAL02~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Normal moose.
+COPY_EXISTING ~MOOSE.CRE~ ~override/BINMOOSE.CRE~
+  SAY NAME1 @1041
+  SAY NAME2 @1041
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BINMOOSE~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+
+
+
+// Bouncer — neutral hobgoblin archer at the carnival entrance.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BNBOUNCE.CRE~
+  SAY NAME1 @1042
+  SAY NAME2 @1042
+  WRITE_ASCII 0x2cc ~BNBOUNCE~ #8
+  WRITE_ASCII 0x280 ~BNBOUNCE~ #32
+  WRITE_ASCII 0x248 ~BNBOUNCE~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// The guard retains HURGAN's original armor, inventory, dialogue and AI.
+// Only the 100 creature soundset slots are copied from Quinn, the existing
+// Dwarf Commoner voice source also used for BIBDWR16 in this component.
+COPY_EXISTING ~QUINN.CRE~ ~override~
+  FOR (qc_ng_slot = 0; qc_ng_slot < 100; qc_ng_slot += 1) BEGIN
+    READ_LONG (0xa4 + (qc_ng_slot * 4)) qc_ng_soundref
+    SET $qc_nashkel_guard_voice("%qc_ng_slot%") = qc_ng_soundref
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Guard — based on HURGAN, retaining armor and equipment.
+COPY_EXISTING ~HURGAN.CRE~ ~override/BNGUARD0.CRE~
+  FOR (qc_ng_slot = 0; qc_ng_slot < 100; qc_ng_slot += 1) BEGIN
+    WRITE_LONG (0xa4 + (qc_ng_slot * 4)) $qc_nashkel_guard_voice("%qc_ng_slot%")
+  END
+  SAY NAME1 @1043
+  SAY NAME2 @1043
+  WRITE_ASCII 0x2cc ~BNGUARD0~ #8
+  WRITE_ASCII 0x280 ~BNGUARD0~ #32
+  WRITE_ASCII 0x248 ~BNGUARD0~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/nashkel_citizens.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/nashkel_citizens.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg4800_nashkel.baf~
+EXTEND_TOP ~BG4800.BCS~ ~CotSC/better_immersion_beregost/bg4800_nashkel.baf~
+
+// Bouncer and Guard additions remain part of THIS Nashkel component.
+COMPILE ~CotSC/better_immersion_beregost/bnbouncer.baf~
+COMPILE ~CotSC/better_immersion_beregost/bnguard.baf~
+COMPILE ~CotSC/better_immersion_beregost/nashkel_extras.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/nashkel_extras.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg4801_nashkel_extras.baf~
+EXTEND_TOP ~BG4801.BCS~ ~CotSC/better_immersion_beregost/bg4801_nashkel_extras.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg4803_nashkel_extras.baf~
+EXTEND_TOP ~BG4803.BCS~ ~CotSC/better_immersion_beregost/bg4803_nashkel_extras.baf~
+
+// ---------------------------------------------------------------------------
+
+// CotSC optional BG1/EET interjections added after the original dialogue resources.
+COMPILE ~CotSC/better_immersion_beregost/QCNWAND.baf~
+COMPILE ~CotSC/better_immersion_beregost/qc37_nashkel_interjections.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/qc37_nashkel_interjections.tra~

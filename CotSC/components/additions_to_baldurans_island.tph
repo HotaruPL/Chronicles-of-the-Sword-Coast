@@ -1,0 +1,311 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_remaining_major_items_npcs.tra~
+
+// ------------------------------------------------------------
+// Required vanilla resources
+// ------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MARALE.CRE~ BEGIN
+  FAIL @20140
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TALOUN.CRE~ BEGIN
+  FAIL @20141
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~LOTHAN.CRE~ BEGIN
+  FAIL @20142
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~ANKHEG.CRE~ BEGIN
+  FAIL @20143
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MOOSE01.CRE~ BEGIN
+  FAIL @20144
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SIRINE.CRE~ BEGIN
+  FAIL @20145
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DOGWI.CRE~ BEGIN
+  FAIL @20146
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC79.ITM~ BEGIN
+  FAIL @20147
+END
+
+// ------------------------------------------------------------
+// Dialogue/journal resources
+// ------------------------------------------------------------
+ADD_JOURNAL TITLE (@1) @2 USING ~CotSC/translation/%LANGUAGE%/qc_werewolf_island/QCWWJOUR.tra~
+
+COMPILE ~CotSC/qc_werewolf_island/QCLSSNDR.d~ USING ~CotSC/translation/%LANGUAGE%/qc_werewolf_island/QCWWJOUR.tra~
+COMPILE ~CotSC/qc_werewolf_island/QCFISHR.d~ USING ~CotSC/translation/%LANGUAGE%/qc_werewolf_island/QCFISHR.tra~
+COMPILE ~CotSC/qc_werewolf_island/QCTHIEF.d~ USING ~CotSC/translation/%LANGUAGE%/qc_werewolf_island/QCWWJOUR.tra~
+COMPILE ~CotSC/qc_werewolf_island/QCTKIV.d~ USING ~CotSC/translation/%LANGUAGE%/qc_werewolf_island/QCTKIV.tra~
+COMPILE ~CotSC/qc_werewolf_island/QCKAYA.d~ USING ~CotSC/translation/%LANGUAGE%/qc_werewolf_island/QCKAYA.tra~
+COMPILE ~CotSC/qc_werewolf_island/QCLAHL.d~ USING ~CotSC/translation/%LANGUAGE%/qc_werewolf_island/QCLAHL.tra~
+
+COMPILE ~CotSC/qc_werewolf_island/QCTHSC.baf~
+COMPILE ~CotSC/qc_werewolf_island/QCKAYSC.baf~
+COMPILE ~CotSC/qc_werewolf_island/QCDOGRO.baf~
+
+// ------------------------------------------------------------
+// New QC-prefixed creature/item resources
+// ------------------------------------------------------------
+
+// Lessandra: MARALE visual base, silver palette, neutral and independent
+// from Maralee's original scripts/dialogue.
+COPY_EXISTING ~MARALE.CRE~ ~override/QCLSSNDR.CRE~
+  SAY NAME1 @4017
+  SAY NAME2 @4017
+  WRITE_BYTE 0x2c 27
+  WRITE_BYTE 0x2d 27
+  WRITE_BYTE 0x2e 27
+  WRITE_BYTE 0x30 27
+  WRITE_BYTE 0x31 27
+  WRITE_BYTE 0x32 27
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x280 ~QCLSSNDR~ #32
+  WRITE_ASCII 0x2cc ~QCLSSNDR~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Fisherman: TALOUN visual/chassis with only the new one-line dialogue.
+COPY_EXISTING ~TALOUN.CRE~ ~override/QCFISHR.CRE~
+  SAY NAME1 @4018
+  SAY NAME2 @4018
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x280 ~QCFISHR~ #32
+  WRITE_ASCII 0x2cc ~QCFISHR~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Village thief: LOTHAN visual/chassis, black palette.  His QC override starts
+// the conversation on sight and, on the hostile branch, owns the attack loop.
+COPY_EXISTING ~LOTHAN.CRE~ ~override/QCTHIEF.CRE~
+  SAY NAME1 @4019
+  SAY NAME2 @4019
+  WRITE_BYTE 0x2c 75
+  WRITE_BYTE 0x2d 75
+  WRITE_BYTE 0x2e 75
+  WRITE_BYTE 0x30 75
+  WRITE_BYTE 0x31 75
+  WRITE_BYTE 0x32 75
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x248 ~QCTHSC~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x280 ~QCTHIEF~ #32
+  WRITE_ASCII 0x2cc ~QCTHIEF~ #8
+  REMOVE_CRE_ITEM ~BOOT01~
+  ADD_CRE_ITEM ~AROW05~ #10 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+BUT_ONLY_IF_IT_CHANGES
+
+// Kaya: blue clothes, black hair, talkable while using PlayDead to remain
+// visibly prone until the party speaks with her.
+COPY_EXISTING ~MARALE.CRE~ ~override/QCKAYA.CRE~
+  SAY NAME1 @4020
+  SAY NAME2 @4020
+  WRITE_BYTE 0x2c 57
+  WRITE_BYTE 0x2d 57
+  WRITE_BYTE 0x2e 58
+  WRITE_BYTE 0x30 57
+  WRITE_BYTE 0x31 58
+  WRITE_BYTE 0x32 75
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x248 ~QCKAYSC~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x280 ~QCKAYA~ #32
+  WRITE_ASCII 0x2cc ~QCKAYA~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Kaya's unconscious body. MISC79 is the original Female Body quest-item template; only
+// the display name and requested 24 lb weight are changed.
+COPY_EXISTING ~MISC79.ITM~ ~override/QCKAYBOD.ITM~
+  SAY NAME1 @4021
+  SAY NAME2 @4021
+  SAY UNIDENTIFIED_DESC @4022
+  SAY DESC @4022
+  WRITE_LONG 0x4c 24
+BUT_ONLY_IF_IT_CHANGES
+
+// Five identical Ankhegs share a QC death variable so BG2000 can use
+// NumDead("QCLAHANK",5) without touching the game's original Ankhegs.
+COPY_EXISTING ~ANKHEG.CRE~ ~override/QCLAHANK.CRE~
+  WRITE_ASCII 0x280 ~QCLAHANK~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+// Hostile sirine clone: preserve normal Sirine combat scripts/spells, but make
+// hostility explicit and remove any inherited dialogue resource.
+COPY_EXISTING ~SIRINE.CRE~ ~override/QCSIRINE.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCSIRINE~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Non-hostile roaming dog.  Clear Wild Dog combat scripts and give it only a
+// tiny neutral random-walk override.
+COPY_EXISTING ~DOGWI.CRE~ ~override/QCDOG.CRE~
+  SAY NAME1 @4023
+  SAY NAME2 @4023
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x248 ~QCDOGRO~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x280 ~QCDOG~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// ------------------------------------------------------------
+// Area loot
+// ------------------------------------------------------------
+// BG2006: one Potion of Extra Healing in one existing container.
+COPY_EXISTING ~BG2006.ARE~ ~override/BG2006.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 1
+    STR_VAR item_to_add = ~POTN52~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// BG2011: one Potion of Extra Healing in one existing container.
+COPY_EXISTING ~BG2011.ARE~ ~override/BG2011.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 1
+    STR_VAR item_to_add = ~POTN52~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// BG1501: Fire Giant Strength potion in the container immediately beside Kaya.
+COPY_EXISTING ~BG1501.ARE~ ~override/BG1501.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 1
+    STR_VAR item_to_add = ~POTN05~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ------------------------------------------------------------
+// BG2009: Lessandra
+// ------------------------------------------------------------
+COPY_EXISTING ~BG2009.ARE~ ~override/BG2009.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 254 fj_loc_y = 227
+      fj_dest_x = 254 fj_dest_y = 227
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCLSSNDR
+      fj_cre_resref = QCLSSNDR
+      fj_dlg_resref = QCLSSNDR
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ------------------------------------------------------------
+// BG2003: auto-talking thief
+// ------------------------------------------------------------
+COPY_EXISTING ~BG2003.ARE~ ~override/BG2003.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 319 fj_loc_y = 367
+      fj_dest_x = 319 fj_dest_y = 367
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCTHIEF
+      fj_cre_resref = QCTHIEF
+      fj_dlg_resref = QCTHIEF
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ------------------------------------------------------------
+// BG1501: injured Kaya
+// ------------------------------------------------------------
+COPY_EXISTING ~BG1501.ARE~ ~override/BG1501.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 622 fj_loc_y = 272
+      fj_dest_x = 622 fj_dest_y = 272
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCKAYA
+      fj_cre_resref = QCKAYA
+      fj_dlg_resref = QCKAYA
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ------------------------------------------------------------
+// BG2000: fisherman, wildlife and Lahl's Ankheg quest
+// ------------------------------------------------------------
+COPY_EXISTING ~BG2000.ARE~ ~override/BG2000.ARE~
+  // Fisherman, southeast.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1395 fj_loc_y = 2757
+      fj_dest_x = 1395 fj_dest_y = 2757
+      fj_spawned = 1 fj_orientation = 14 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCFISHR
+      fj_cre_resref = QCFISHR
+      fj_dlg_resref = QCFISHR
+  END
+  // Moose.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 4454 fj_loc_y = 1008
+      fj_dest_x = 4454 fj_dest_y = 1008
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCMOOSE
+      fj_cre_resref = MOOSE01
+  END
+  // Hostile Sirine 1.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 183 fj_loc_y = 633
+      fj_dest_x = 183 fj_dest_y = 633
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCSIRN1
+      fj_cre_resref = QCSIRINE
+  END
+  // Hostile Sirine 2.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 185 fj_loc_y = 554
+      fj_dest_x = 185 fj_dest_y = 554
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCSIRN2
+      fj_cre_resref = QCSIRINE
+  END
+  // Friendly roaming dog.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3397 fj_loc_y = 854
+      fj_dest_x = 3397 fj_dest_y = 854
+      fj_spawned = 1 fj_orientation = 0 fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCDOG
+      fj_cre_resref = QCDOG
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Do not replace BG2000's original area script. Append only the tiny death
+// counter/reward-dialogue launcher used by Lahl's five QC Ankhegs.
+EXTEND_BOTTOM ~BG2000.BCS~ ~CotSC/qc_werewolf_island/QCBG2000.baf~

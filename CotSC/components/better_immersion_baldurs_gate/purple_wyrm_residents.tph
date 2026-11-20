@@ -1,0 +1,629 @@
+// ---------------------------------------------------------------------------
+// PURPLE WYRM INN - CORE NPCS / DIALOGUE - PART 1
+// ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// MERGED BALDUR'S GATE COMPONENT
+// Purple Wyrm Inn NPCs/dialogue, Kaeira Spice Raid, Red Fang Marauders
+// cave, and PWYTR2 waterfall removal are intentionally part of this
+// single Better Immersion for Baldur's Gate component.
+// ---------------------------------------------------------------------------
+
+// Attach the Purple Wyrm's area script without touching its frozen collision,
+// WED, TIS, lighting/height maps, or BG0800 transition.
+COPY_EXISTING ~BIPWYR.ARE~ ~override/BIPWYR.ARE~
+  WRITE_ASCII 0x0094 ~PWYRINN~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Theo the Historian - human commoner, stationary.
+COPY_EXISTING ~FARM.CRE~ ~override/PWYTHEO.CRE~
+  SAY NAME1 @2049
+  SAY NAME2 @2049
+  WRITE_ASCII 0x2cc ~PWYTHEO~ #8
+  WRITE_ASCII 0x280 ~PWYTHEO~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_ASCII 0x2cc ~PWYTHEO~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Kaeira - female commoner voice/CRE chassis, with KIRIAN's visual animation and plate armour.
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/PWYKAE9.CRE~
+  SAY NAME1 @2050
+  SAY NAME2 @2050
+  WRITE_ASCII 0x2cc ~PWYKAEI~ #8
+  WRITE_ASCII 0x280 ~PWYKAE9~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REPLACE_CRE_ITEM ~PLAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  INNER_PATCH_FILE ~KIRIAN.CRE~ BEGIN
+    READ_LONG 0x28 pwy_kaeira_animation
+  END
+  WRITE_LONG 0x28 "%pwy_kaeira_animation%"
+BUT_ONLY_IF_IT_CHANGES
+
+// Randalla Brasshorn - use MOOK as the visual/animation basis, with a red-toned palette.
+COPY_EXISTING ~MOOK.CRE~ ~override/PWYRAND.CRE~
+  SAY NAME1 @2051
+  SAY NAME2 @2051
+  WRITE_ASCII 0x2cc ~PWYRAND~ #8
+  WRITE_ASCII 0x280 ~PWYRAND~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x2d 47
+  WRITE_BYTE 0x2e 47
+  WRITE_BYTE 0x30 47
+  WRITE_BYTE 0x31 47
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Lady Delcia Caan - preserve her original appearance/voice, but give her a dedicated script
+// so she can approach the party automatically and leave with Hendron afterward.
+COPY_EXISTING ~DELCIA.CRE~ ~override/PWYDELC.CRE~
+  SAY NAME1 @2052
+  SAY NAME2 @2052
+  WRITE_ASCII 0x2cc ~PWYDELC~ #8
+  WRITE_ASCII 0x280 ~PWYDELC~ #32
+  WRITE_ASCII 0x248 ~PWYDELCS~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Hendron - KPSOLD01 chassis with his original armour and sword retained.
+// His dedicated script handles the departure together with Delcia.
+COPY_EXISTING ~KPSOLD01.CRE~ ~override/PWYHEND.CRE~
+  SAY NAME1 @2053
+  SAY NAME2 @2053
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~PWYHEND~ #32
+  WRITE_ASCII 0x248 ~PWYHENDS~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Bartender - use the Enhanced Edition MERC0706 chassis/appearance.
+COPY_EXISTING ~MERC0706.CRE~ ~override/PWYBART.CRE~
+  SAY NAME1 @2054
+  SAY NAME2 @2054
+  WRITE_ASCII 0x2cc ~PWYBART~ #8
+  WRITE_ASCII 0x280 ~PWYBART~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Purple Wyrm Inn service store. INN0119 is an existing inn template with
+// room-rental and drinks/ale services, so we reuse its proven store structure.
+COPY_EXISTING ~INN0119.STO~ ~override/PWYINN.STO~
+  SAY NAME2 @2055
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering female halfling.
+COPY_EXISTING ~BIBHAL16.CRE~ ~override/PWYHAL7.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~PWYHALF~ #8
+  WRITE_ASCII 0x280 ~PWYHAL7~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering male human commoner.
+COPY_EXISTING ~FARM.CRE~ ~override/PWYCMN7.CRE~
+  SAY NAME1 @2014
+  SAY NAME2 @2014
+  WRITE_ASCII 0x2cc ~PWYCMNR~ #8
+  WRITE_ASCII 0x280 ~PWYCMN7~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+BUT_ONLY_IF_IT_CHANGES
+
+// Ulua - working commoner chassis with NEIRA appearance and sound set.
+COPY_EXISTING ~FARM.CRE~ ~override/PWYULU5.CRE~
+  SAY NAME1 @2056
+  SAY NAME2 @2056
+  WRITE_ASCII 0x2cc ~PWYULUA~ #8
+  WRITE_ASCII 0x280 ~PWYULU5~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x271 1
+  // Give Ulua a dark drow-like skin tone (same palette family used by Viconia-style dark skin).
+  WRITE_BYTE 0x2f 96
+  INNER_PATCH_FILE ~NEIRA.CRE~ BEGIN
+    READ_LONG 0x28 pwy_anim
+    READ_BYTE 0x237 pwy_gender
+    READ_BYTE 0x272 pwy_race
+    READ_BYTE 0x273 pwy_class
+    READ_LONG (0xa4 + (0 * 4)) pwy_s0
+    READ_LONG (0xa4 + (1 * 4)) pwy_s1
+    READ_LONG (0xa4 + (2 * 4)) pwy_s2
+    READ_LONG (0xa4 + (3 * 4)) pwy_s3
+    READ_LONG (0xa4 + (4 * 4)) pwy_s4
+    READ_LONG (0xa4 + (5 * 4)) pwy_s5
+    READ_LONG (0xa4 + (6 * 4)) pwy_s6
+    READ_LONG (0xa4 + (7 * 4)) pwy_s7
+    READ_LONG (0xa4 + (8 * 4)) pwy_s8
+    READ_LONG (0xa4 + (9 * 4)) pwy_s9
+    READ_LONG (0xa4 + (10 * 4)) pwy_s10
+    READ_LONG (0xa4 + (11 * 4)) pwy_s11
+    READ_LONG (0xa4 + (12 * 4)) pwy_s12
+    READ_LONG (0xa4 + (13 * 4)) pwy_s13
+    READ_LONG (0xa4 + (14 * 4)) pwy_s14
+    READ_LONG (0xa4 + (15 * 4)) pwy_s15
+    READ_LONG (0xa4 + (16 * 4)) pwy_s16
+    READ_LONG (0xa4 + (17 * 4)) pwy_s17
+    READ_LONG (0xa4 + (18 * 4)) pwy_s18
+    READ_LONG (0xa4 + (19 * 4)) pwy_s19
+    READ_LONG (0xa4 + (20 * 4)) pwy_s20
+    READ_LONG (0xa4 + (21 * 4)) pwy_s21
+    READ_LONG (0xa4 + (22 * 4)) pwy_s22
+    READ_LONG (0xa4 + (23 * 4)) pwy_s23
+    READ_LONG (0xa4 + (24 * 4)) pwy_s24
+    READ_LONG (0xa4 + (25 * 4)) pwy_s25
+    READ_LONG (0xa4 + (26 * 4)) pwy_s26
+    READ_LONG (0xa4 + (27 * 4)) pwy_s27
+    READ_LONG (0xa4 + (28 * 4)) pwy_s28
+    READ_LONG (0xa4 + (29 * 4)) pwy_s29
+    READ_LONG (0xa4 + (30 * 4)) pwy_s30
+    READ_LONG (0xa4 + (31 * 4)) pwy_s31
+    READ_LONG (0xa4 + (32 * 4)) pwy_s32
+    READ_LONG (0xa4 + (33 * 4)) pwy_s33
+    READ_LONG (0xa4 + (34 * 4)) pwy_s34
+    READ_LONG (0xa4 + (35 * 4)) pwy_s35
+    READ_LONG (0xa4 + (36 * 4)) pwy_s36
+    READ_LONG (0xa4 + (37 * 4)) pwy_s37
+    READ_LONG (0xa4 + (38 * 4)) pwy_s38
+    READ_LONG (0xa4 + (39 * 4)) pwy_s39
+    READ_LONG (0xa4 + (40 * 4)) pwy_s40
+    READ_LONG (0xa4 + (41 * 4)) pwy_s41
+    READ_LONG (0xa4 + (42 * 4)) pwy_s42
+    READ_LONG (0xa4 + (43 * 4)) pwy_s43
+    READ_LONG (0xa4 + (44 * 4)) pwy_s44
+    READ_LONG (0xa4 + (45 * 4)) pwy_s45
+    READ_LONG (0xa4 + (46 * 4)) pwy_s46
+    READ_LONG (0xa4 + (47 * 4)) pwy_s47
+    READ_LONG (0xa4 + (48 * 4)) pwy_s48
+    READ_LONG (0xa4 + (49 * 4)) pwy_s49
+    READ_LONG (0xa4 + (50 * 4)) pwy_s50
+    READ_LONG (0xa4 + (51 * 4)) pwy_s51
+    READ_LONG (0xa4 + (52 * 4)) pwy_s52
+    READ_LONG (0xa4 + (53 * 4)) pwy_s53
+    READ_LONG (0xa4 + (54 * 4)) pwy_s54
+    READ_LONG (0xa4 + (55 * 4)) pwy_s55
+    READ_LONG (0xa4 + (56 * 4)) pwy_s56
+    READ_LONG (0xa4 + (57 * 4)) pwy_s57
+    READ_LONG (0xa4 + (58 * 4)) pwy_s58
+    READ_LONG (0xa4 + (59 * 4)) pwy_s59
+    READ_LONG (0xa4 + (60 * 4)) pwy_s60
+    READ_LONG (0xa4 + (61 * 4)) pwy_s61
+    READ_LONG (0xa4 + (62 * 4)) pwy_s62
+    READ_LONG (0xa4 + (63 * 4)) pwy_s63
+    READ_LONG (0xa4 + (64 * 4)) pwy_s64
+    READ_LONG (0xa4 + (65 * 4)) pwy_s65
+    READ_LONG (0xa4 + (66 * 4)) pwy_s66
+    READ_LONG (0xa4 + (67 * 4)) pwy_s67
+    READ_LONG (0xa4 + (68 * 4)) pwy_s68
+    READ_LONG (0xa4 + (69 * 4)) pwy_s69
+    READ_LONG (0xa4 + (70 * 4)) pwy_s70
+    READ_LONG (0xa4 + (71 * 4)) pwy_s71
+    READ_LONG (0xa4 + (72 * 4)) pwy_s72
+    READ_LONG (0xa4 + (73 * 4)) pwy_s73
+    READ_LONG (0xa4 + (74 * 4)) pwy_s74
+    READ_LONG (0xa4 + (75 * 4)) pwy_s75
+    READ_LONG (0xa4 + (76 * 4)) pwy_s76
+    READ_LONG (0xa4 + (77 * 4)) pwy_s77
+    READ_LONG (0xa4 + (78 * 4)) pwy_s78
+    READ_LONG (0xa4 + (79 * 4)) pwy_s79
+    READ_LONG (0xa4 + (80 * 4)) pwy_s80
+    READ_LONG (0xa4 + (81 * 4)) pwy_s81
+    READ_LONG (0xa4 + (82 * 4)) pwy_s82
+    READ_LONG (0xa4 + (83 * 4)) pwy_s83
+    READ_LONG (0xa4 + (84 * 4)) pwy_s84
+    READ_LONG (0xa4 + (85 * 4)) pwy_s85
+    READ_LONG (0xa4 + (86 * 4)) pwy_s86
+    READ_LONG (0xa4 + (87 * 4)) pwy_s87
+    READ_LONG (0xa4 + (88 * 4)) pwy_s88
+    READ_LONG (0xa4 + (89 * 4)) pwy_s89
+    READ_LONG (0xa4 + (90 * 4)) pwy_s90
+    READ_LONG (0xa4 + (91 * 4)) pwy_s91
+    READ_LONG (0xa4 + (92 * 4)) pwy_s92
+    READ_LONG (0xa4 + (93 * 4)) pwy_s93
+    READ_LONG (0xa4 + (94 * 4)) pwy_s94
+    READ_LONG (0xa4 + (95 * 4)) pwy_s95
+    READ_LONG (0xa4 + (96 * 4)) pwy_s96
+    READ_LONG (0xa4 + (97 * 4)) pwy_s97
+    READ_LONG (0xa4 + (98 * 4)) pwy_s98
+    READ_LONG (0xa4 + (99 * 4)) pwy_s99
+  END
+  WRITE_LONG 0x28 "%pwy_anim%"
+  WRITE_BYTE 0x237 "%pwy_gender%"
+  WRITE_BYTE 0x272 "%pwy_race%"
+  WRITE_BYTE 0x273 "%pwy_class%"
+  WRITE_LONG (0xa4 + (0 * 4)) "%pwy_s0%"
+  WRITE_LONG (0xa4 + (1 * 4)) "%pwy_s1%"
+  WRITE_LONG (0xa4 + (2 * 4)) "%pwy_s2%"
+  WRITE_LONG (0xa4 + (3 * 4)) "%pwy_s3%"
+  WRITE_LONG (0xa4 + (4 * 4)) "%pwy_s4%"
+  WRITE_LONG (0xa4 + (5 * 4)) "%pwy_s5%"
+  WRITE_LONG (0xa4 + (6 * 4)) "%pwy_s6%"
+  WRITE_LONG (0xa4 + (7 * 4)) "%pwy_s7%"
+  WRITE_LONG (0xa4 + (8 * 4)) "%pwy_s8%"
+  WRITE_LONG (0xa4 + (9 * 4)) "%pwy_s9%"
+  WRITE_LONG (0xa4 + (10 * 4)) "%pwy_s10%"
+  WRITE_LONG (0xa4 + (11 * 4)) "%pwy_s11%"
+  WRITE_LONG (0xa4 + (12 * 4)) "%pwy_s12%"
+  WRITE_LONG (0xa4 + (13 * 4)) "%pwy_s13%"
+  WRITE_LONG (0xa4 + (14 * 4)) "%pwy_s14%"
+  WRITE_LONG (0xa4 + (15 * 4)) "%pwy_s15%"
+  WRITE_LONG (0xa4 + (16 * 4)) "%pwy_s16%"
+  WRITE_LONG (0xa4 + (17 * 4)) "%pwy_s17%"
+  WRITE_LONG (0xa4 + (18 * 4)) "%pwy_s18%"
+  WRITE_LONG (0xa4 + (19 * 4)) "%pwy_s19%"
+  WRITE_LONG (0xa4 + (20 * 4)) "%pwy_s20%"
+  WRITE_LONG (0xa4 + (21 * 4)) "%pwy_s21%"
+  WRITE_LONG (0xa4 + (22 * 4)) "%pwy_s22%"
+  WRITE_LONG (0xa4 + (23 * 4)) "%pwy_s23%"
+  WRITE_LONG (0xa4 + (24 * 4)) "%pwy_s24%"
+  WRITE_LONG (0xa4 + (25 * 4)) "%pwy_s25%"
+  WRITE_LONG (0xa4 + (26 * 4)) "%pwy_s26%"
+  WRITE_LONG (0xa4 + (27 * 4)) "%pwy_s27%"
+  WRITE_LONG (0xa4 + (28 * 4)) "%pwy_s28%"
+  WRITE_LONG (0xa4 + (29 * 4)) "%pwy_s29%"
+  WRITE_LONG (0xa4 + (30 * 4)) "%pwy_s30%"
+  WRITE_LONG (0xa4 + (31 * 4)) "%pwy_s31%"
+  WRITE_LONG (0xa4 + (32 * 4)) "%pwy_s32%"
+  WRITE_LONG (0xa4 + (33 * 4)) "%pwy_s33%"
+  WRITE_LONG (0xa4 + (34 * 4)) "%pwy_s34%"
+  WRITE_LONG (0xa4 + (35 * 4)) "%pwy_s35%"
+  WRITE_LONG (0xa4 + (36 * 4)) "%pwy_s36%"
+  WRITE_LONG (0xa4 + (37 * 4)) "%pwy_s37%"
+  WRITE_LONG (0xa4 + (38 * 4)) "%pwy_s38%"
+  WRITE_LONG (0xa4 + (39 * 4)) "%pwy_s39%"
+  WRITE_LONG (0xa4 + (40 * 4)) "%pwy_s40%"
+  WRITE_LONG (0xa4 + (41 * 4)) "%pwy_s41%"
+  WRITE_LONG (0xa4 + (42 * 4)) "%pwy_s42%"
+  WRITE_LONG (0xa4 + (43 * 4)) "%pwy_s43%"
+  WRITE_LONG (0xa4 + (44 * 4)) "%pwy_s44%"
+  WRITE_LONG (0xa4 + (45 * 4)) "%pwy_s45%"
+  WRITE_LONG (0xa4 + (46 * 4)) "%pwy_s46%"
+  WRITE_LONG (0xa4 + (47 * 4)) "%pwy_s47%"
+  WRITE_LONG (0xa4 + (48 * 4)) "%pwy_s48%"
+  WRITE_LONG (0xa4 + (49 * 4)) "%pwy_s49%"
+  WRITE_LONG (0xa4 + (50 * 4)) "%pwy_s50%"
+  WRITE_LONG (0xa4 + (51 * 4)) "%pwy_s51%"
+  WRITE_LONG (0xa4 + (52 * 4)) "%pwy_s52%"
+  WRITE_LONG (0xa4 + (53 * 4)) "%pwy_s53%"
+  WRITE_LONG (0xa4 + (54 * 4)) "%pwy_s54%"
+  WRITE_LONG (0xa4 + (55 * 4)) "%pwy_s55%"
+  WRITE_LONG (0xa4 + (56 * 4)) "%pwy_s56%"
+  WRITE_LONG (0xa4 + (57 * 4)) "%pwy_s57%"
+  WRITE_LONG (0xa4 + (58 * 4)) "%pwy_s58%"
+  WRITE_LONG (0xa4 + (59 * 4)) "%pwy_s59%"
+  WRITE_LONG (0xa4 + (60 * 4)) "%pwy_s60%"
+  WRITE_LONG (0xa4 + (61 * 4)) "%pwy_s61%"
+  WRITE_LONG (0xa4 + (62 * 4)) "%pwy_s62%"
+  WRITE_LONG (0xa4 + (63 * 4)) "%pwy_s63%"
+  WRITE_LONG (0xa4 + (64 * 4)) "%pwy_s64%"
+  WRITE_LONG (0xa4 + (65 * 4)) "%pwy_s65%"
+  WRITE_LONG (0xa4 + (66 * 4)) "%pwy_s66%"
+  WRITE_LONG (0xa4 + (67 * 4)) "%pwy_s67%"
+  WRITE_LONG (0xa4 + (68 * 4)) "%pwy_s68%"
+  WRITE_LONG (0xa4 + (69 * 4)) "%pwy_s69%"
+  WRITE_LONG (0xa4 + (70 * 4)) "%pwy_s70%"
+  WRITE_LONG (0xa4 + (71 * 4)) "%pwy_s71%"
+  WRITE_LONG (0xa4 + (72 * 4)) "%pwy_s72%"
+  WRITE_LONG (0xa4 + (73 * 4)) "%pwy_s73%"
+  WRITE_LONG (0xa4 + (74 * 4)) "%pwy_s74%"
+  WRITE_LONG (0xa4 + (75 * 4)) "%pwy_s75%"
+  WRITE_LONG (0xa4 + (76 * 4)) "%pwy_s76%"
+  WRITE_LONG (0xa4 + (77 * 4)) "%pwy_s77%"
+  WRITE_LONG (0xa4 + (78 * 4)) "%pwy_s78%"
+  WRITE_LONG (0xa4 + (79 * 4)) "%pwy_s79%"
+  WRITE_LONG (0xa4 + (80 * 4)) "%pwy_s80%"
+  WRITE_LONG (0xa4 + (81 * 4)) "%pwy_s81%"
+  WRITE_LONG (0xa4 + (82 * 4)) "%pwy_s82%"
+  WRITE_LONG (0xa4 + (83 * 4)) "%pwy_s83%"
+  WRITE_LONG (0xa4 + (84 * 4)) "%pwy_s84%"
+  WRITE_LONG (0xa4 + (85 * 4)) "%pwy_s85%"
+  WRITE_LONG (0xa4 + (86 * 4)) "%pwy_s86%"
+  WRITE_LONG (0xa4 + (87 * 4)) "%pwy_s87%"
+  WRITE_LONG (0xa4 + (88 * 4)) "%pwy_s88%"
+  WRITE_LONG (0xa4 + (89 * 4)) "%pwy_s89%"
+  WRITE_LONG (0xa4 + (90 * 4)) "%pwy_s90%"
+  WRITE_LONG (0xa4 + (91 * 4)) "%pwy_s91%"
+  WRITE_LONG (0xa4 + (92 * 4)) "%pwy_s92%"
+  WRITE_LONG (0xa4 + (93 * 4)) "%pwy_s93%"
+  WRITE_LONG (0xa4 + (94 * 4)) "%pwy_s94%"
+  WRITE_LONG (0xa4 + (95 * 4)) "%pwy_s95%"
+  WRITE_LONG (0xa4 + (96 * 4)) "%pwy_s96%"
+  WRITE_LONG (0xa4 + (97 * 4)) "%pwy_s97%"
+  WRITE_LONG (0xa4 + (98 * 4)) "%pwy_s98%"
+  WRITE_LONG (0xa4 + (99 * 4)) "%pwy_s99%"
+// Ulua equipment: chain armor, helmet, shield and a war flail.
+ADD_CRE_ITEM ~CHAN01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~HELM01~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+ADD_CRE_ITEM ~SHLD01~ #0 #0 #0 ~IDENTIFIED~ ~SHIELD~
+ADD_CRE_ITEM ~BLUN02~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+// Durbem - working commoner chassis with KARLAT appearance and sound set.
+COPY_EXISTING ~FARM.CRE~ ~override/PWYDRB5.CRE~
+  SAY NAME1 @2057
+  SAY NAME2 @2057
+  WRITE_ASCII 0x2cc ~PWYDURB~ #8
+  WRITE_ASCII 0x280 ~PWYDRB5~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x271 1
+  INNER_PATCH_FILE ~KARLAT.CRE~ BEGIN
+    READ_LONG 0x28 pwy_anim
+    READ_BYTE 0x237 pwy_gender
+    READ_BYTE 0x272 pwy_race
+    READ_BYTE 0x273 pwy_class
+    READ_LONG (0xa4 + (0 * 4)) pwy_s0
+    READ_LONG (0xa4 + (1 * 4)) pwy_s1
+    READ_LONG (0xa4 + (2 * 4)) pwy_s2
+    READ_LONG (0xa4 + (3 * 4)) pwy_s3
+    READ_LONG (0xa4 + (4 * 4)) pwy_s4
+    READ_LONG (0xa4 + (5 * 4)) pwy_s5
+    READ_LONG (0xa4 + (6 * 4)) pwy_s6
+    READ_LONG (0xa4 + (7 * 4)) pwy_s7
+    READ_LONG (0xa4 + (8 * 4)) pwy_s8
+    READ_LONG (0xa4 + (9 * 4)) pwy_s9
+    READ_LONG (0xa4 + (10 * 4)) pwy_s10
+    READ_LONG (0xa4 + (11 * 4)) pwy_s11
+    READ_LONG (0xa4 + (12 * 4)) pwy_s12
+    READ_LONG (0xa4 + (13 * 4)) pwy_s13
+    READ_LONG (0xa4 + (14 * 4)) pwy_s14
+    READ_LONG (0xa4 + (15 * 4)) pwy_s15
+    READ_LONG (0xa4 + (16 * 4)) pwy_s16
+    READ_LONG (0xa4 + (17 * 4)) pwy_s17
+    READ_LONG (0xa4 + (18 * 4)) pwy_s18
+    READ_LONG (0xa4 + (19 * 4)) pwy_s19
+    READ_LONG (0xa4 + (20 * 4)) pwy_s20
+    READ_LONG (0xa4 + (21 * 4)) pwy_s21
+    READ_LONG (0xa4 + (22 * 4)) pwy_s22
+    READ_LONG (0xa4 + (23 * 4)) pwy_s23
+    READ_LONG (0xa4 + (24 * 4)) pwy_s24
+    READ_LONG (0xa4 + (25 * 4)) pwy_s25
+    READ_LONG (0xa4 + (26 * 4)) pwy_s26
+    READ_LONG (0xa4 + (27 * 4)) pwy_s27
+    READ_LONG (0xa4 + (28 * 4)) pwy_s28
+    READ_LONG (0xa4 + (29 * 4)) pwy_s29
+    READ_LONG (0xa4 + (30 * 4)) pwy_s30
+    READ_LONG (0xa4 + (31 * 4)) pwy_s31
+    READ_LONG (0xa4 + (32 * 4)) pwy_s32
+    READ_LONG (0xa4 + (33 * 4)) pwy_s33
+    READ_LONG (0xa4 + (34 * 4)) pwy_s34
+    READ_LONG (0xa4 + (35 * 4)) pwy_s35
+    READ_LONG (0xa4 + (36 * 4)) pwy_s36
+    READ_LONG (0xa4 + (37 * 4)) pwy_s37
+    READ_LONG (0xa4 + (38 * 4)) pwy_s38
+    READ_LONG (0xa4 + (39 * 4)) pwy_s39
+    READ_LONG (0xa4 + (40 * 4)) pwy_s40
+    READ_LONG (0xa4 + (41 * 4)) pwy_s41
+    READ_LONG (0xa4 + (42 * 4)) pwy_s42
+    READ_LONG (0xa4 + (43 * 4)) pwy_s43
+    READ_LONG (0xa4 + (44 * 4)) pwy_s44
+    READ_LONG (0xa4 + (45 * 4)) pwy_s45
+    READ_LONG (0xa4 + (46 * 4)) pwy_s46
+    READ_LONG (0xa4 + (47 * 4)) pwy_s47
+    READ_LONG (0xa4 + (48 * 4)) pwy_s48
+    READ_LONG (0xa4 + (49 * 4)) pwy_s49
+    READ_LONG (0xa4 + (50 * 4)) pwy_s50
+    READ_LONG (0xa4 + (51 * 4)) pwy_s51
+    READ_LONG (0xa4 + (52 * 4)) pwy_s52
+    READ_LONG (0xa4 + (53 * 4)) pwy_s53
+    READ_LONG (0xa4 + (54 * 4)) pwy_s54
+    READ_LONG (0xa4 + (55 * 4)) pwy_s55
+    READ_LONG (0xa4 + (56 * 4)) pwy_s56
+    READ_LONG (0xa4 + (57 * 4)) pwy_s57
+    READ_LONG (0xa4 + (58 * 4)) pwy_s58
+    READ_LONG (0xa4 + (59 * 4)) pwy_s59
+    READ_LONG (0xa4 + (60 * 4)) pwy_s60
+    READ_LONG (0xa4 + (61 * 4)) pwy_s61
+    READ_LONG (0xa4 + (62 * 4)) pwy_s62
+    READ_LONG (0xa4 + (63 * 4)) pwy_s63
+    READ_LONG (0xa4 + (64 * 4)) pwy_s64
+    READ_LONG (0xa4 + (65 * 4)) pwy_s65
+    READ_LONG (0xa4 + (66 * 4)) pwy_s66
+    READ_LONG (0xa4 + (67 * 4)) pwy_s67
+    READ_LONG (0xa4 + (68 * 4)) pwy_s68
+    READ_LONG (0xa4 + (69 * 4)) pwy_s69
+    READ_LONG (0xa4 + (70 * 4)) pwy_s70
+    READ_LONG (0xa4 + (71 * 4)) pwy_s71
+    READ_LONG (0xa4 + (72 * 4)) pwy_s72
+    READ_LONG (0xa4 + (73 * 4)) pwy_s73
+    READ_LONG (0xa4 + (74 * 4)) pwy_s74
+    READ_LONG (0xa4 + (75 * 4)) pwy_s75
+    READ_LONG (0xa4 + (76 * 4)) pwy_s76
+    READ_LONG (0xa4 + (77 * 4)) pwy_s77
+    READ_LONG (0xa4 + (78 * 4)) pwy_s78
+    READ_LONG (0xa4 + (79 * 4)) pwy_s79
+    READ_LONG (0xa4 + (80 * 4)) pwy_s80
+    READ_LONG (0xa4 + (81 * 4)) pwy_s81
+    READ_LONG (0xa4 + (82 * 4)) pwy_s82
+    READ_LONG (0xa4 + (83 * 4)) pwy_s83
+    READ_LONG (0xa4 + (84 * 4)) pwy_s84
+    READ_LONG (0xa4 + (85 * 4)) pwy_s85
+    READ_LONG (0xa4 + (86 * 4)) pwy_s86
+    READ_LONG (0xa4 + (87 * 4)) pwy_s87
+    READ_LONG (0xa4 + (88 * 4)) pwy_s88
+    READ_LONG (0xa4 + (89 * 4)) pwy_s89
+    READ_LONG (0xa4 + (90 * 4)) pwy_s90
+    READ_LONG (0xa4 + (91 * 4)) pwy_s91
+    READ_LONG (0xa4 + (92 * 4)) pwy_s92
+    READ_LONG (0xa4 + (93 * 4)) pwy_s93
+    READ_LONG (0xa4 + (94 * 4)) pwy_s94
+    READ_LONG (0xa4 + (95 * 4)) pwy_s95
+    READ_LONG (0xa4 + (96 * 4)) pwy_s96
+    READ_LONG (0xa4 + (97 * 4)) pwy_s97
+    READ_LONG (0xa4 + (98 * 4)) pwy_s98
+    READ_LONG (0xa4 + (99 * 4)) pwy_s99
+  END
+  WRITE_LONG 0x28 "%pwy_anim%"
+  WRITE_BYTE 0x237 "%pwy_gender%"
+  WRITE_BYTE 0x272 "%pwy_race%"
+  WRITE_BYTE 0x273 "%pwy_class%"
+  WRITE_LONG (0xa4 + (0 * 4)) "%pwy_s0%"
+  WRITE_LONG (0xa4 + (1 * 4)) "%pwy_s1%"
+  WRITE_LONG (0xa4 + (2 * 4)) "%pwy_s2%"
+  WRITE_LONG (0xa4 + (3 * 4)) "%pwy_s3%"
+  WRITE_LONG (0xa4 + (4 * 4)) "%pwy_s4%"
+  WRITE_LONG (0xa4 + (5 * 4)) "%pwy_s5%"
+  WRITE_LONG (0xa4 + (6 * 4)) "%pwy_s6%"
+  WRITE_LONG (0xa4 + (7 * 4)) "%pwy_s7%"
+  WRITE_LONG (0xa4 + (8 * 4)) "%pwy_s8%"
+  WRITE_LONG (0xa4 + (9 * 4)) "%pwy_s9%"
+  WRITE_LONG (0xa4 + (10 * 4)) "%pwy_s10%"
+  WRITE_LONG (0xa4 + (11 * 4)) "%pwy_s11%"
+  WRITE_LONG (0xa4 + (12 * 4)) "%pwy_s12%"
+  WRITE_LONG (0xa4 + (13 * 4)) "%pwy_s13%"
+  WRITE_LONG (0xa4 + (14 * 4)) "%pwy_s14%"
+  WRITE_LONG (0xa4 + (15 * 4)) "%pwy_s15%"
+  WRITE_LONG (0xa4 + (16 * 4)) "%pwy_s16%"
+  WRITE_LONG (0xa4 + (17 * 4)) "%pwy_s17%"
+  WRITE_LONG (0xa4 + (18 * 4)) "%pwy_s18%"
+  WRITE_LONG (0xa4 + (19 * 4)) "%pwy_s19%"
+  WRITE_LONG (0xa4 + (20 * 4)) "%pwy_s20%"
+  WRITE_LONG (0xa4 + (21 * 4)) "%pwy_s21%"
+  WRITE_LONG (0xa4 + (22 * 4)) "%pwy_s22%"
+  WRITE_LONG (0xa4 + (23 * 4)) "%pwy_s23%"
+  WRITE_LONG (0xa4 + (24 * 4)) "%pwy_s24%"
+  WRITE_LONG (0xa4 + (25 * 4)) "%pwy_s25%"
+  WRITE_LONG (0xa4 + (26 * 4)) "%pwy_s26%"
+  WRITE_LONG (0xa4 + (27 * 4)) "%pwy_s27%"
+  WRITE_LONG (0xa4 + (28 * 4)) "%pwy_s28%"
+  WRITE_LONG (0xa4 + (29 * 4)) "%pwy_s29%"
+  WRITE_LONG (0xa4 + (30 * 4)) "%pwy_s30%"
+  WRITE_LONG (0xa4 + (31 * 4)) "%pwy_s31%"
+  WRITE_LONG (0xa4 + (32 * 4)) "%pwy_s32%"
+  WRITE_LONG (0xa4 + (33 * 4)) "%pwy_s33%"
+  WRITE_LONG (0xa4 + (34 * 4)) "%pwy_s34%"
+  WRITE_LONG (0xa4 + (35 * 4)) "%pwy_s35%"
+  WRITE_LONG (0xa4 + (36 * 4)) "%pwy_s36%"
+  WRITE_LONG (0xa4 + (37 * 4)) "%pwy_s37%"
+  WRITE_LONG (0xa4 + (38 * 4)) "%pwy_s38%"
+  WRITE_LONG (0xa4 + (39 * 4)) "%pwy_s39%"
+  WRITE_LONG (0xa4 + (40 * 4)) "%pwy_s40%"
+  WRITE_LONG (0xa4 + (41 * 4)) "%pwy_s41%"
+  WRITE_LONG (0xa4 + (42 * 4)) "%pwy_s42%"
+  WRITE_LONG (0xa4 + (43 * 4)) "%pwy_s43%"
+  WRITE_LONG (0xa4 + (44 * 4)) "%pwy_s44%"
+  WRITE_LONG (0xa4 + (45 * 4)) "%pwy_s45%"
+  WRITE_LONG (0xa4 + (46 * 4)) "%pwy_s46%"
+  WRITE_LONG (0xa4 + (47 * 4)) "%pwy_s47%"
+  WRITE_LONG (0xa4 + (48 * 4)) "%pwy_s48%"
+  WRITE_LONG (0xa4 + (49 * 4)) "%pwy_s49%"
+  WRITE_LONG (0xa4 + (50 * 4)) "%pwy_s50%"
+  WRITE_LONG (0xa4 + (51 * 4)) "%pwy_s51%"
+  WRITE_LONG (0xa4 + (52 * 4)) "%pwy_s52%"
+  WRITE_LONG (0xa4 + (53 * 4)) "%pwy_s53%"
+  WRITE_LONG (0xa4 + (54 * 4)) "%pwy_s54%"
+  WRITE_LONG (0xa4 + (55 * 4)) "%pwy_s55%"
+  WRITE_LONG (0xa4 + (56 * 4)) "%pwy_s56%"
+  WRITE_LONG (0xa4 + (57 * 4)) "%pwy_s57%"
+  WRITE_LONG (0xa4 + (58 * 4)) "%pwy_s58%"
+  WRITE_LONG (0xa4 + (59 * 4)) "%pwy_s59%"
+  WRITE_LONG (0xa4 + (60 * 4)) "%pwy_s60%"
+  WRITE_LONG (0xa4 + (61 * 4)) "%pwy_s61%"
+  WRITE_LONG (0xa4 + (62 * 4)) "%pwy_s62%"
+  WRITE_LONG (0xa4 + (63 * 4)) "%pwy_s63%"
+  WRITE_LONG (0xa4 + (64 * 4)) "%pwy_s64%"
+  WRITE_LONG (0xa4 + (65 * 4)) "%pwy_s65%"
+  WRITE_LONG (0xa4 + (66 * 4)) "%pwy_s66%"
+  WRITE_LONG (0xa4 + (67 * 4)) "%pwy_s67%"
+  WRITE_LONG (0xa4 + (68 * 4)) "%pwy_s68%"
+  WRITE_LONG (0xa4 + (69 * 4)) "%pwy_s69%"
+  WRITE_LONG (0xa4 + (70 * 4)) "%pwy_s70%"
+  WRITE_LONG (0xa4 + (71 * 4)) "%pwy_s71%"
+  WRITE_LONG (0xa4 + (72 * 4)) "%pwy_s72%"
+  WRITE_LONG (0xa4 + (73 * 4)) "%pwy_s73%"
+  WRITE_LONG (0xa4 + (74 * 4)) "%pwy_s74%"
+  WRITE_LONG (0xa4 + (75 * 4)) "%pwy_s75%"
+  WRITE_LONG (0xa4 + (76 * 4)) "%pwy_s76%"
+  WRITE_LONG (0xa4 + (77 * 4)) "%pwy_s77%"
+  WRITE_LONG (0xa4 + (78 * 4)) "%pwy_s78%"
+  WRITE_LONG (0xa4 + (79 * 4)) "%pwy_s79%"
+  WRITE_LONG (0xa4 + (80 * 4)) "%pwy_s80%"
+  WRITE_LONG (0xa4 + (81 * 4)) "%pwy_s81%"
+  WRITE_LONG (0xa4 + (82 * 4)) "%pwy_s82%"
+  WRITE_LONG (0xa4 + (83 * 4)) "%pwy_s83%"
+  WRITE_LONG (0xa4 + (84 * 4)) "%pwy_s84%"
+  WRITE_LONG (0xa4 + (85 * 4)) "%pwy_s85%"
+  WRITE_LONG (0xa4 + (86 * 4)) "%pwy_s86%"
+  WRITE_LONG (0xa4 + (87 * 4)) "%pwy_s87%"
+  WRITE_LONG (0xa4 + (88 * 4)) "%pwy_s88%"
+  WRITE_LONG (0xa4 + (89 * 4)) "%pwy_s89%"
+  WRITE_LONG (0xa4 + (90 * 4)) "%pwy_s90%"
+  WRITE_LONG (0xa4 + (91 * 4)) "%pwy_s91%"
+  WRITE_LONG (0xa4 + (92 * 4)) "%pwy_s92%"
+  WRITE_LONG (0xa4 + (93 * 4)) "%pwy_s93%"
+  WRITE_LONG (0xa4 + (94 * 4)) "%pwy_s94%"
+  WRITE_LONG (0xa4 + (95 * 4)) "%pwy_s95%"
+  WRITE_LONG (0xa4 + (96 * 4)) "%pwy_s96%"
+  WRITE_LONG (0xa4 + (97 * 4)) "%pwy_s97%"
+  WRITE_LONG (0xa4 + (98 * 4)) "%pwy_s98%"
+  WRITE_LONG (0xa4 + (99 * 4)) "%pwy_s99%"
+// Durbem equipment: plate armor, helmet and a battle axe.
+ADD_CRE_ITEM ~PLAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+ADD_CRE_ITEM ~HELM01~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~
+ADD_CRE_ITEM ~AX1H01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+// Troll cook.
+COPY_EXISTING ~TROLL01.CRE~ ~override/PWYCOO7.CRE~
+  SAY NAME1 @2017
+  SAY NAME2 @2017
+  WRITE_ASCII 0x2cc ~PWYCOOK~ #8
+  WRITE_ASCII 0x280 ~PWYCOO7~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+

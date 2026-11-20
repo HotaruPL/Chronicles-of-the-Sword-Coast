@@ -1,0 +1,228 @@
+// ============================================================
+// v3.4: Temple of Helm inhabitants and custom Bassilus reward.
+// Only QRTEMP ARE receives two appended actors; all existing
+// temple geometry, entrances, containers, music and collision stay.
+// ============================================================
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BASSIL.CRE~ BEGIN
+  FAIL @20255
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~PRIHEL.CRE~ BEGIN
+  FAIL @20256
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TEM0002.STO~ BEGIN
+  FAIL @20257
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SW1H06.ITM~ BEGIN
+  FAIL @20258
+END
+
+// Make private copies. Do NOT change the original BG1 creatures.
+COPY_EXISTING ~BASSIL.CRE~ ~override/QRBSLUS.CRE~
+  SAY NAME1 @3057
+  SAY NAME2 @3057
+  REMOVE_CRE_ITEMS
+  REMOVE_CRE_EFFECTS
+  WRITE_ASCII 0x280 ~QRBSLUS~ #32
+  WRITE_ASCII 0x2cc ~QRBSLUS~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 30
+  WRITE_SHORT 0x26 30
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~PRIHEL.CRE~ ~override/QRSENYN.CRE~
+  SAY NAME1 @3058
+  SAY NAME2 @3058
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~CHAN01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  REMOVE_CRE_EFFECTS
+  WRITE_ASCII 0x280 ~QRSENYN~ #32
+  WRITE_ASCII 0x2cc ~QRSENYN~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 30
+  WRITE_SHORT 0x26 30
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Preserve all other QRTEMP records; add only the two people.
+COPY_EXISTING ~QRTEMP.ARE~ ~override/QRTEMP.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 311
+      fj_loc_y = 341
+      fj_dest_x = 311
+      fj_dest_y = 341
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Bassilus
+      fj_cre_resref = QRBSLUS
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 515
+      fj_loc_y = 411
+      fj_dest_x = 515
+      fj_dest_y = 411
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Senyan
+      fj_cre_resref = QRSENYN
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// The sword retains Varscona's +2 THAC0 and 1d8+2 weapon stats.
+// Replace only the additional 1 cold on-hit damage with 1 fire.
+COPY ~CotSC/qriv_temple/items/QRBSABR.BAM~ ~override/QRBSABR.BAM~
+COPY ~CotSC/qriv_temple/items/QRBSDES.BAM~ ~override/QRBSDES.BAM~
+COPY_EXISTING ~SW1H06.ITM~ ~override/QRBSABR.ITM~
+  SAY NAME1 @3059
+  SAY NAME2 @3059
+  SAY DESC @3060
+  WRITE_ASCII 0x3A ~QRBSABR~ #8
+  WRITE_ASCII 0x58 ~QRBSDES~ #8
+  LPF ALTER_ITEM_EFFECT
+    INT_VAR
+      check_headers = 1
+      match_opcode = 12
+      parameter2 = 524288
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Compile the main branching conversation and its companion responses.
+COMPILE ~CotSC/qriv_temple/dialogue/qriv_temple.d~ USING ~CotSC/translation/%LANGUAGE%/qriv_temple/dialogue/qriv_temple.tra~
+// Optional Dorn APPEND is compiled in the SAME D-file so symbolic
+// return labels stay resolvable; do not compile a second repair .D.
+
+
+// ====================================================================
+// v5.0: Hiarfi / Stolen Flute / Shady Man visibility and hand-in.
+// Does NOT change QCHANN, the Hannibal fight, or any validated traps.
+// ====================================================================
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~LASKAL.CRE~ BEGIN
+  FAIL @20259
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~POTN03.ITM~ BEGIN
+  FAIL @20260
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC04.ITM~ BEGIN
+  FAIL @20261
+END
+
+// Separate quest flute, using the user's instrument artwork.
+COPY ~CotSC/qriv_hiarfi/items/QRHFICO.BAM~ ~override/QRHFICO.BAM~
+COPY ~CotSC/qriv_hiarfi/items/QRHFDSC.BAM~ ~override/QRHFDSC.BAM~
+COPY_EXISTING ~MISC04.ITM~ ~override/QRHFLUT.ITM~
+  SAY NAME1 @3061
+  SAY NAME2 @3061
+  SAY DESC @3062
+  SAY UNIDENTIFIED_DESC @3063
+  WRITE_ASCII 0x3A ~QRHFICO~ #8
+  WRITE_ASCII 0x58 ~QRHFDSC~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// v5.1: Shady Man is a visible, combat-capable THIEF (not a commoner).
+// Black hair, primary and secondary clothing; neutral until dialogue provokes him.
+// Preserve the flute's single inventory copy for the fight/loot route.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~THIEF.CRE~ BEGIN
+  FAIL @20262
+END
+COPY_EXISTING ~THIEF.CRE~ ~override/QRVSHAD.CRE~
+  SAY NAME1 @3013
+  SAY NAME2 @3013
+  REMOVE_CRE_ITEMS
+  REMOVE_CRE_EFFECTS
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 30
+  WRITE_SHORT 0x26 30
+  WRITE_ASCII 0x280 ~QRVSHAD~ #32
+  WRITE_ASCII 0x2cc ~QRVSHAD~ #8
+  WRITE_BYTE 0x270 128 // neutral until threatened
+  WRITE_BYTE 0x2d 0 // black minor clothing
+  WRITE_BYTE 0x2e 0 // black major clothing
+  WRITE_BYTE 0x32 0 // black hair
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~QRVSHFT~ #8 // fights when hostile
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~DAGG01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~QRHFLUT~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qriv_hiarfi/scripts/QRVSHFT.baf~
+
+// Turn BOTH existing River District actors through 180 degrees (8 facings).
+// Existing direction Shady=4, Thug=12 -> now Shady=12, Thug=4.
+// Do not add new actors, move them, or touch their dialogue/hostility.
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  LPF ALTER_AREA_ACTOR INT_VAR orient = 12 STR_VAR actor_name = ~QRVSHAD~ END
+  LPF ALTER_AREA_ACTOR INT_VAR orient = 4 STR_VAR actor_name = ~QRVTHUG~ END
+BUT_ONLY_IF_IT_CHANGES
+
+// Hiarfi copies an already present and working BG creature.
+COPY_EXISTING ~LASKAL.CRE~ ~override/QRHIARFI.CRE~
+  SAY NAME1 @3064
+  SAY NAME2 @3064
+  REMOVE_CRE_ITEMS
+  REMOVE_CRE_EFFECTS
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 32
+  WRITE_SHORT 0x26 32
+  WRITE_ASCII 0x280 ~QRHIARFI~ #32
+  WRITE_ASCII 0x2cc ~QRHIARFI~ #8
+  WRITE_BYTE 0x32 0 // Black hair, separate from clothing palette
+  // Use a normal commoner's voice rather than Laskal's distinctive lines.
+  // Same proven INNER_PATCH_FILE pattern already used for Leslie in this mod.
+  FOR (qr_hv_offset = 0xA4; qr_hv_offset <= 0x230; qr_hv_offset += 4) BEGIN
+    INNER_PATCH_FILE ~FARM.CRE~ BEGIN
+      READ_LONG qr_hv_offset qr_hv_sound
+    END
+    WRITE_LONG qr_hv_offset qr_hv_sound
+  END
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// IMPORTANT: patch *installed* AR0021. Do not overwrite the original
+// area's doors, existing actors, containers, scripts or music.
+COPY_EXISTING ~AR0021.ARE~ ~override/AR0021.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 367
+      fj_loc_y = 326
+      fj_dest_x = 367
+      fj_dest_y = 326
+      fj_orientation = 14 // South-east in EE
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRHIARFI
+      fj_cre_resref = QRHIARFI
+      fj_dlg_resref = QRHIARFI
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+ADD_JOURNAL TITLE (@7012) @100 @101 USING ~CotSC/translation/%LANGUAGE%/qriv_hiarfi/tra/hiarfi.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+COMPILE ~CotSC/qriv_hiarfi/dialogue/hiarfi.d~ USING ~CotSC/translation/%LANGUAGE%/qriv_hiarfi/tra/hiarfi.tra~

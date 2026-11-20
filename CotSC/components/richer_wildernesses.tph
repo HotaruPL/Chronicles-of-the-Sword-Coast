@@ -1,0 +1,59 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDBUGB01.CRE~ BEGIN
+  FAIL @20155
+END
+
+// The three BG3500 goblins use a custom hostile clone with active combat AI.
+// The original FSGOBL creature and all other enemy templates are untouched.
+COMPILE ~CotSC/harder_wildernesses/QCHWGOB.baf~
+COPY_EXISTING ~FSGOBL.CRE~ ~override/QCHWGO1.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x248 ~QCHWGOB~ #8
+  WRITE_ASCII 0x280 ~QCHWGO1~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+// Hostile variants for creatures whose vanilla copies are neutral in BG1/EET.
+COPY_EXISTING ~SNAKE01.CRE~ ~override/QCHWSN1.CRE~
+  SAY NAME1 @5021
+  SAY NAME2 @5021
+  WRITE_ASCII 0x280 ~QCHWSN1~ #32
+  WRITE_BYTE 0x270 255
+
+COPY_EXISTING ~SNAKE01.CRE~ ~override/QCHWSN2.CRE~
+  SAY NAME1 @5021
+  SAY NAME2 @5021
+  WRITE_ASCII 0x280 ~QCHWSN2~ #32
+  WRITE_BYTE 0x270 255
+
+COPY_EXISTING ~SNAKE01.CRE~ ~override/QCHWSN3.CRE~
+  SAY NAME1 @5021
+  SAY NAME2 @5021
+  WRITE_ASCII 0x280 ~QCHWSN3~ #32
+  WRITE_BYTE 0x270 255
+
+COPY_EXISTING ~SIRINE_A.CRE~ ~override/QCHWSRN.CRE~
+  WRITE_ASCII 0x280 ~QCHWSRN~ #32
+  WRITE_BYTE 0x270 255
+
+COPY_EXISTING ~DOGWI.CRE~ ~override/QCHWTDOG.CRE~
+  SAY NAME1 @5022
+  SAY NAME2 @5022
+  WRITE_ASCII 0x280 ~QCHWTDOG~ #32
+  WRITE_BYTE 0x270 255
+
+EXTEND_BOTTOM ~BG2800.BCS~ ~CotSC/harder_wildernesses/BG2800_QCHW.baf~
+EXTEND_BOTTOM ~BG2700.BCS~ ~CotSC/harder_wildernesses/BG2700_QCHW.baf~
+EXTEND_BOTTOM ~BG3200.BCS~ ~CotSC/harder_wildernesses/BG3200_QCHW.baf~
+EXTEND_BOTTOM ~BG4100.BCS~ ~CotSC/harder_wildernesses/BG4100_QCHW.baf~
+EXTEND_BOTTOM ~BG4600.BCS~ ~CotSC/harder_wildernesses/BG4600_QCHW.baf~
+EXTEND_BOTTOM ~BG4300.BCS~ ~CotSC/harder_wildernesses/BG4300_QCHW.baf~
+EXTEND_BOTTOM ~BG4200.BCS~ ~CotSC/harder_wildernesses/BG4200_QCHW.baf~
+EXTEND_BOTTOM ~BG3400.BCS~ ~CotSC/harder_wildernesses/BG3400_QCHW.baf~
+EXTEND_BOTTOM ~BG3500.BCS~ ~CotSC/harder_wildernesses/BG3500_QCHW.baf~
+EXTEND_BOTTOM ~BG2900.BCS~ ~CotSC/harder_wildernesses/BG2900_QCHW.baf~
+EXTEND_BOTTOM ~BG1500.BCS~ ~CotSC/harder_wildernesses/BG1500_QCHW.baf~
+EXTEND_BOTTOM ~BG2200.BCS~ ~CotSC/harder_wildernesses/BG2200_QCHW.baf~
+EXTEND_BOTTOM ~BG2100.BCS~ ~CotSC/harder_wildernesses/BG2100_QCHW.baf~
+EXTEND_BOTTOM ~BG1600.BCS~ ~CotSC/harder_wildernesses/BG1600_QCHW.baf~
+EXTEND_BOTTOM ~BG1804.BCS~ ~CotSC/harder_wildernesses/BG1804_QCHW.baf~

@@ -1,0 +1,166 @@
+// ====================================================================
+// PART 4/7: v2.2c working companion dialogue and NPC repairs
+// ====================================================================
+
+// An add-on to v2.2a. No ARE, WED, TIS, collision, containers, music or weather edits.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QRVFEL.CRE~ BEGIN
+  FAIL @20189
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QRVFLRT.DLG~ BEGIN
+  FAIL @20190
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QRVSHAD.CRE~ BEGIN
+  FAIL @20191
+END
+
+// Repair the flirter without recompiling all other dialogues, especially
+// Minsc or the original JAHEIJ joined conversation.
+COMPILE ~CotSC/qriv_repairs/dialogue/qriv_flirt_repair.d~ USING ~CotSC/translation/%LANGUAGE%/qriv_repairs/dialogue/qriv_flirt_repair.tra~
+
+// Merella (UHRANG01) was a deceased ranger in the game: Felicity inherited
+// the dead state. Retain her existing ranger animation and appearance, but
+// make the independent copy QRVFEL a healthy living woman.
+COPY_EXISTING ~QRVFEL.CRE~ ~override/QRVFEL.CRE~
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 16
+  WRITE_SHORT 0x26 16
+  WRITE_BYTE 0x7e 0
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_BYTE 0x2c 7
+  WRITE_BYTE 0x2d 7
+  WRITE_BYTE 0x2e 47
+  WRITE_BYTE 0x2f 6
+  WRITE_BYTE 0x30 7
+  WRITE_BYTE 0x31 47
+  WRITE_BYTE 0x32 7
+BUT_ONLY_IF_IT_CHANGES
+
+// TANADV06 is an encounter/ambush creature. Keep its existing visuals,
+// but clear temporary state and make the separate River District copy
+// friendly, visible and talkable. Never modify TANADV06 itself.
+COPY_EXISTING ~QRVSHAD.CRE~ ~override/QRVSHAD.CRE~
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x7e 0
+  READ_SHORT 0x24 qr_shadhp
+  PATCH_IF (qr_shadhp < 1) BEGIN
+    WRITE_SHORT 0x24 12
+    WRITE_SHORT 0x26 12
+  END
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_ASCII 0x2cc ~QRVSHAD~ #8
+  REMOVE_CRE_EFFECTS
+BUT_ONLY_IF_IT_CHANGES
+
+// Kobold and hobgoblin: remove equipped weapons/inventory cleanly, not
+// by cutting binary CRE sections. Assign the existing roaming AI to both.
+COMPILE ~CotSC/qriv_repairs/scripts/QRVROAM.baf~
+COPY_EXISTING ~QRVKOB.CRE~ ~override/QRVKOB.CRE~
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x248 ~QRVROAM~ #8
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~QRVHOB.CRE~ ~override/QRVHOB.CRE~
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x248 ~QRVROAM~ #8
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+PRINT @20192
+
+// ====================================================================
+// PART 5/7: v2.2e Felicity, Lucky Ring quest, Shady Man recovery
+// ====================================================================
+
+// Only install over the existing and already working v2.2a/c River District.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QRVFEL.CRE~ BEGIN
+  FAIL @20193
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QRVFEL.DLG~ BEGIN
+  FAIL @20194
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QRVSHAD.CRE~ BEGIN
+  FAIL @20195
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~NORALE.CRE~ BEGIN
+  FAIL @20196
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SW1H01.ITM~ BEGIN
+  FAIL @20197
+END
+
+// Rebuild ONLY Felicity from living BG1 Noralee, keeping new resource QRVFEL.
+// Source is not modified. Copying NORALE replaces dead UHRANG01 stance entirely.
+COPY_EXISTING ~NORALE.CRE~ ~override/QRVFEL.CRE~
+  SAY NAME1 @3016
+  SAY NAME2 @3016
+  WRITE_ASCII 0x2cc ~QRVFEL~ #8
+  WRITE_ASCII 0x280 ~QRVFEL~ #32
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 20
+  WRITE_SHORT 0x26 20
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  // Original artwork request: blue/white clothes, blonde hair.
+  // Hair is 0x32, not 0x2e (major clothing colour).
+  WRITE_BYTE 0x2d 47
+  WRITE_BYTE 0x2e 7
+  WRITE_BYTE 0x32 7
+  // Clear inherited Noralee quest scripts and inventory.
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_EFFECTS
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~SW1H01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+// Register the quest as an Enhanced Edition QUEST, rather than only a journal note.
+// Using a shared tra ref ensures it is grouped and appears as an unfinished quest.
+ADD_JOURNAL TITLE (@7008) @100 @101 USING ~CotSC/translation/%LANGUAGE%/qriv_fixes/english/qriv_quest.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+COMPILE ~CotSC/qriv_fixes/dialogue/qriv_felicity.d~ USING ~CotSC/translation/%LANGUAGE%/qriv_fixes/english/qriv_quest.tra~
+
+// Preserve Shady Man's identity and dialogue, but reset lingering encounter state.
+COPY_EXISTING ~QRVSHAD.CRE~ ~override/QRVSHAD.CRE~
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 20
+  WRITE_SHORT 0x26 20
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x280 ~QRVSHAD~ #32
+  WRITE_ASCII 0x2cc ~QRVSHAD~ #8
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_EFFECTS
+BUT_ONLY_IF_IT_CHANGES
+
+// Optional one-time area spawn recovery for *missing* Shady Man.
+// Do not patch scripts, maps, collision, WED, containers, loot or actor geometry.
+// QCRIVD had no area BCS in the approved baseline. Only assign if empty.
+COMPILE ~CotSC/qriv_fixes/scripts/QRVSHD.baf~
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  READ_ASCII 0x94 qr_existing_script (8) NULL
+  PATCH_IF (~%qr_existing_script%~ STRING_EQUAL ~~) BEGIN
+    WRITE_ASCII 0x94 ~QRVSHD~ #8
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+

@@ -1,0 +1,6 @@
+INCLUDE ~CotSC/components/better_immersion_athkatla/waukeens_promenade.tph~
+INCLUDE ~CotSC/components/better_immersion_athkatla/slums_and_copper_coronet.tph~
+INCLUDE ~CotSC/components/better_immersion_athkatla/bridge_district.tph~
+INCLUDE ~CotSC/components/better_immersion_athkatla/government_district_and_varun.tph~
+INCLUDE ~CotSC/components/better_immersion_athkatla/temple_district.tph~
+INCLUDE ~CotSC/components/better_immersion_athkatla/graveyard_and_follow_up.tph~

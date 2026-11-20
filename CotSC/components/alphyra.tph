@@ -1,0 +1,68 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/Setup.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG2302.BCS~ BEGIN
+  FAIL @38
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~NATASH.CRE~ BEGIN
+  FAIL @39
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~WAND11.ITM~ BEGIN
+  FAIL @110
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~HALBAZ.DLG~ BEGIN
+  FAIL @111
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DYNAHJ.DLG~ BEGIN
+  FAIL @43
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~EDWINJ_.DLG~ BEGIN
+  FAIL @46
+END
+
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCCALPHY.TRA~
+
+// Adding CD_STATE_NOTVALID for dialogue validity checks before Alphyra dialogue is compiled.
+APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~ UNLESS ~CD_STATE_NOTVALID~
+
+// Alphyra's voice only: borrow the 100 CRE sound-slot strrefs from a normal BG1
+// female commoner. The original commoner and Natash CREs are never altered.
+// Alphyra keeps Natash's appearance, animations, stats, spells and scripts.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FTOWBE_B.CRE~ BEGIN
+  FAIL @20000
+END
+COPY_EXISTING ~FTOWBE_B.CRE~ ~override~
+  FOR (qc_alphy_voice_slot = 0; qc_alphy_voice_slot < 100; qc_alphy_voice_slot += 1) BEGIN
+    READ_LONG (0xa4 + (qc_alphy_voice_slot * 4)) qc_alphy_voice_strref
+    SET $qc_alphyra_commoner_voice("%qc_alphy_voice_slot%") = qc_alphy_voice_strref
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+// Create Alphyra from the native Natash CRE, but keep all resource references within the 8-character engine limit.
+COPY_EXISTING ~NATASH.CRE~ ~override/QCCALPHY.CRE~
+  // The CRE 0xa4..0x233 soundset block only; leave every other CRE field alone.
+  FOR (qc_alphy_voice_slot = 0; qc_alphy_voice_slot < 100; qc_alphy_voice_slot += 1) BEGIN
+    WRITE_LONG (0xa4 + (qc_alphy_voice_slot * 4)) $qc_alphyra_commoner_voice("%qc_alphy_voice_slot%")
+  END
+  SAY NAME1 @33
+  SAY NAME2 @33
+  WRITE_ASCII 0x2cc ~QCCALPHY~ #8
+  WRITE_ASCII 0x248 ~QCCALPHY~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCCALPHY_DEAD~ #32
+
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCCALPHY.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCCALPHY.TRA~
+
+// Associate each stage with one active/completed EE quest.
+ADD_JOURNAL TITLE (@38) @35 @39 @36 USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCCALPHY.TRA~
+
+// Spawn Alphyra through the area script rather than modifying BG2302.ARE. This avoids altering the native actor table.
+EXTEND_BOTTOM ~BG2302.BCS~ ~CotSC/Quests_and_Challenges/AREA/QCCALPHY.BAF~

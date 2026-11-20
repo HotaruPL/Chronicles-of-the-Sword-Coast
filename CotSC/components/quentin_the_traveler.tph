@@ -1,0 +1,294 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_remaining_major_items_npcs.tra~
+
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/quest_for_ingredients/tra/english/component.tra~
+
+// Quentin the Traveler: preserved ingredient item/quest logic from standalone v0.6.19.
+// Existing ingredient QFI resrefs retained to protect save compatibility.
+// EET transition: register the wine for import, track collection, and return it
+// to the player's inventory after the SoA dungeon's opening item confiscation.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC97.ITM~ BEGIN
+  FAIL @2
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISCAZ.ITM~ BEGIN
+  FAIL @3
+END
+
+// Frozen baseline items: do not alter unless explicitly requested.
+COPY_EXISTING ~MISC97.ITM~ ~override/QFIBWVEN.ITM~
+  SAY NAME1 @4024
+  SAY NAME2 @4024
+  SAY DESC @4025
+  WRITE_SHORT 0x1c 0
+  WRITE_LONG 0x34 1
+  WRITE_SHORT 0x38 1
+  WRITE_ASCII 0x3a ~QFIBWVEN~ #8
+  WRITE_ASCII 0x44 ~QFIBWVEN~ #8
+  WRITE_LONG 0x4c 0
+  WRITE_ASCII 0x58 ~QFIBWVEN~ #8
+
+COPY_EXISTING ~MISC97.ITM~ ~override/QFIRIPBK.ITM~
+  SAY NAME1 @4026
+  SAY NAME2 @4026
+  SAY DESC @4027
+  WRITE_SHORT 0x1c 0
+  WRITE_LONG 0x34 1
+  WRITE_SHORT 0x38 1
+  WRITE_ASCII 0x3a ~QFIRIPBK~ #8
+  WRITE_ASCII 0x44 ~QFIRIPBK~ #8
+  WRITE_LONG 0x4c 0
+  WRITE_ASCII 0x58 ~QFIRIPBK~ #8
+
+COPY_EXISTING ~MISC97.ITM~ ~override/QFISPPOI.ITM~
+  SAY NAME1 @4028
+  SAY NAME2 @4028
+  SAY DESC @4029
+  WRITE_SHORT 0x1c 0
+  WRITE_LONG 0x34 1
+  WRITE_SHORT 0x38 1
+  WRITE_ASCII 0x3a ~QFISPPOI~ #8
+  WRITE_ASCII 0x44 ~QFISPPOI~ #8
+  WRITE_LONG 0x4c 0
+  WRITE_ASCII 0x58 ~QFISPPOI~ #8
+
+COPY_EXISTING ~MISC97.ITM~ ~override/QFIDSWIN.ITM~
+  SAY NAME1 @4030
+  SAY NAME2 @4030
+  SAY DESC @4031
+  WRITE_SHORT 0x1c 0
+  WRITE_LONG 0x34 1
+  WRITE_SHORT 0x38 1
+  WRITE_ASCII 0x3a ~QFIDSWIN~ #8
+  WRITE_ASCII 0x44 ~QFIDSWIN~ #8
+  WRITE_LONG 0x4c 0
+  WRITE_ASCII 0x58 ~QFIDSWIN~ #8
+
+COPY_EXISTING ~MISCAZ.ITM~ ~override/QFIEYBEH.ITM~
+  SAY NAME1 @4032
+  SAY NAME2 @4032
+  SAY DESC @4033
+
+COPY_EXISTING ~MISC97.ITM~ ~override/QFIGLROS.ITM~
+  SAY NAME1 @4034
+  SAY NAME2 @4034
+  SAY DESC @4035
+  WRITE_SHORT 0x1c 0
+  WRITE_LONG 0x34 1
+  WRITE_SHORT 0x38 1
+  WRITE_ASCII 0x3a ~QFIGLROS~ #8
+  WRITE_ASCII 0x44 ~QFIGLROS~ #8
+  WRITE_LONG 0x4c 0
+  WRITE_ASCII 0x58 ~QFIGLROS~ #8
+
+COPY_EXISTING ~MISC97.ITM~ ~override/QFIDBRAN.ITM~
+  SAY NAME1 @4036
+  SAY NAME2 @4036
+  SAY DESC @4037
+  WRITE_SHORT 0x1c 0
+  WRITE_LONG 0x34 1
+  WRITE_SHORT 0x38 1
+  WRITE_ASCII 0x3a ~QFIDBRAN~ #8
+  WRITE_ASCII 0x44 ~QFIDBRAN~ #8
+  WRITE_LONG 0x4c 0
+  WRITE_ASCII 0x58 ~QFIDBRAN~ #8
+
+COPY_EXISTING ~MISC97.ITM~ ~override/QFILURGM.ITM~
+  SAY NAME1 @4038
+  SAY NAME2 @4038
+  SAY DESC @4039
+  WRITE_SHORT 0x1c 0
+  WRITE_LONG 0x34 1
+  WRITE_SHORT 0x38 1
+  WRITE_ASCII 0x3a ~QFILURGM~ #8
+  WRITE_ASCII 0x44 ~QFILURGM~ #8
+  WRITE_LONG 0x4c 0
+  WRITE_ASCII 0x58 ~QFILURGM~ #8
+
+COPY_EXISTING ~MISC97.ITM~ ~override/QFITRCLW.ITM~
+  SAY NAME1 @4040
+  SAY NAME2 @4040
+  SAY DESC @4041
+  WRITE_SHORT 0x1c 0
+  WRITE_LONG 0x34 1
+  WRITE_SHORT 0x38 1
+  WRITE_ASCII 0x3a ~QFITRCLW~ #8
+  WRITE_ASCII 0x44 ~QFITRCLW~ #8
+  WRITE_LONG 0x4c 0
+  WRITE_ASCII 0x58 ~QFITRCLW~ #8
+
+COPY ~CotSC/quest_for_ingredients/QFIBWVEN.BAM~ ~override/QFIBWVEN.BAM~
+COPY ~CotSC/quest_for_ingredients/QFIRIPBK.BAM~ ~override/QFIRIPBK.BAM~
+COPY ~CotSC/quest_for_ingredients/QFISPPOI.BAM~ ~override/QFISPPOI.BAM~
+COPY ~CotSC/quest_for_ingredients/QFIDSWIN.BAM~ ~override/QFIDSWIN.BAM~
+COPY ~CotSC/quest_for_ingredients/QFIDBRAN.BAM~ ~override/QFIDBRAN.BAM~
+COPY ~CotSC/quest_for_ingredients/QFILURGM.BAM~ ~override/QFILURGM.BAM~
+COPY ~CotSC/quest_for_ingredients/QFIGLROS.BAM~ ~override/QFIGLROS.BAM~
+COPY ~CotSC/quest_for_ingredients/QFITRCLW.BAM~ ~override/QFITRCLW.BAM~
+
+// Quentin quest content is part of the same Quest for Ingredients component.
+
+// Quentin is cloned from ORDULI.CRE as requested. The frozen QFI ingredient
+// resrefs remain unchanged; all new quest/NPC resources use the QC prefix.
+COPY_EXISTING ~ORDULI.CRE~ ~override/QCQUENT.CRE~
+  SAY NAME1 @4042
+  SAY NAME2 @4042
+  WRITE_LONG 0x14 0
+  WRITE_LONG 0x1c 5000
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x280 ~QCQUENT~ #32
+  WRITE_ASCII 0x2cc ~QCQUENT~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x2d 47
+  WRITE_BYTE 0x2e 47
+  WRITE_BYTE 0x2f 5
+  WRITE_BYTE 0x30 4
+  WRITE_BYTE 0x31 47
+  WRITE_BYTE 0x32 2
+
+COPY_EXISTING ~MISC8B.ITM~ ~override/QCQULIST.ITM~
+  SAY NAME1 @4043
+  SAY NAME2 @4043
+  SAY DESC @201
+  WRITE_SHORT 0x1c 0
+  WRITE_LONG 0x34 1
+  WRITE_SHORT 0x38 1
+  // Keep MISC8B's proven inventory, ground, and description icons.
+  // Do not point these fields at QCQULIST: no custom BAM exists for the letter.
+  WRITE_LONG 0x4c 0
+
+// Register Quentin's EE quest entries under one quest title.
+ADD_JOURNAL @101 @102 @103 @104 @105 @106 @107 @108 @109 @110 @111 USING ~CotSC/translation/%LANGUAGE%/quest_for_ingredients/tra/english/component.tra~
+
+COMPILE ~CotSC/quest_for_ingredients/QCQUENT.d~ USING ~CotSC/translation/%LANGUAGE%/quest_for_ingredients/tra/english/component.tra~
+COMPILE ~CotSC/quest_for_ingredients/QCQFI_INTERJECTS.D~ USING ~CotSC/translation/%LANGUAGE%/quest_for_ingredients/tra/english/component.tra~
+
+// ---------------------------------------------------------------------------
+// QUEST FOR INGREDIENTS - current ingredient placements
+// These use existing vanilla containers; no new container geometry is added.
+// ---------------------------------------------------------------------------
+
+// Golden Rose — BG0144, container 1.
+COPY_EXISTING ~BG0144.ARE~ ~override/BG0144.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = QFIGLROS
+      flags = IDENTIFIED
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Spider Poison — BG2101, its existing container.
+COPY_EXISTING ~BG2101.ARE~ ~override/BG2101.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = QFISPPOI
+      flags = IDENTIFIED
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Dragonspear Wine — BD4300, existing chest 1.
+COPY_EXISTING ~BD4300.ARE~ ~override/BD4300.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = QFIDSWIN
+      flags = IDENTIFIED
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Duergar Brandy — AR2100, chest 31 is immediately beside the requested
+// coordinates (1592,574 vs. the requested ~1586,576).
+COPY_EXISTING ~AR2100.ARE~ ~override/AR2100.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 31
+      charges1 = 1
+    STR_VAR
+      item_to_add = QFIDBRAN
+      flags = IDENTIFIED
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Eye of the Ancient Beholder — carried by BHEYE.
+COPY_EXISTING ~BHEYE.CRE~ ~override/BHEYE.CRE~
+  ADD_CRE_ITEM ~QFIEYBEH~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+
+// Ripplebark — BG0514, Shrooms 01 at (4502,3169), close to the requested
+// location (4482,3178).
+COPY_EXISTING ~BG0514.ARE~ ~override/BG0514.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 33
+      charges1 = 1
+    STR_VAR
+      item_to_add = QFIRIPBK
+      flags = IDENTIFIED
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Blood Wyvern — BG4501 at [745.791]. Use the untouched BG2 adult WYVERN01
+// chassis rather than WYVERNBI. WYVERN01 is a native BG2 wyvern with its
+// complete working combat setup and native WYVERN/WTASIGHT AI.
+// The only changes are its name, stronger HP, death variable, allegiance,
+// and the quest venom added to ordinary inventory.
+COPY_EXISTING ~WYVERN01.CRE~ ~override/QCBWYV.CRE~
+  SAY NAME1 @4044
+  SAY NAME2 @4044
+  WRITE_SHORT 0x24 150
+  WRITE_SHORT 0x26 150
+  WRITE_ASCII 0x280 ~QCBWYV~ #32
+  WRITE_BYTE 0x270 255
+  ADD_CRE_ITEM ~QFIBWVEN~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+
+// Tarrasque Claw — carried by AMLICH01 and therefore lootable from the corpse.
+COPY_EXISTING ~AMLICH01.CRE~ ~override/AMLICH01.CRE~
+  ADD_CRE_ITEM ~QFITRCLW~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+
+// Luriyl Gem — AR6110, first existing container. The area has three containers.
+COPY_EXISTING ~AR6110.ARE~ ~override/AR6110.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = QFILURGM
+      flags = IDENTIFIED
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+EXTEND_BOTTOM ~BG3357.BCS~ ~CotSC/quest_for_ingredients/QCQUENT_BG3357.baf~
+EXTEND_BOTTOM ~AR0704.BCS~ ~CotSC/quest_for_ingredients/QCQUENT.baf~
+EXTEND_BOTTOM ~AR5501.BCS~ ~CotSC/quest_for_ingredients/QCQUENT_AR5501.baf~
+EXTEND_BOTTOM ~BG4501.BCS~ ~CotSC/quest_for_ingredients/QCBWYV_BG4501.baf~
+
+// EET's officially supported SoD->SoA quest-item import table. EET_end must
+// be installed after this component to generate the transition code.
+ACTION_IF FILE_EXISTS_IN_GAME ~K#IMPORT.2DA~ BEGIN
+  APPEND ~K#IMPORT.2DA~ ~1 QFIDSWIN~ UNLESS ~QFIDSWIN~
+END ELSE BEGIN
+  PRINT @20152
+END
+
+// Record the ingredient when actually held during SoD; this flag survives EET.
+EXTEND_BOTTOM ~BD4300.BCS~ ~CotSC/quest_for_ingredients/QCQWINE_BD4300.BAF~
+ACTION_IF FILE_EXISTS_IN_GAME ~BD6100.BCS~ BEGIN
+  EXTEND_BOTTOM ~BD6100.BCS~ ~CotSC/quest_for_ingredients/QCQWINE_BD6100.BAF~
+END
+
+// Make a recoverable copy only if the item was collected and not delivered.
+// The guard prevents repeatedly generating the wine. No static BG2 loot added.
+EXTEND_BOTTOM ~AR0602.BCS~ ~CotSC/quest_for_ingredients/QCQWINE_AR0602.BAF~
