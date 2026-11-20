@@ -1,0 +1,25 @@
+IF
+  Global("QCJ_FIGHT","GLOBAL",2)
+  Global("QCJ_JH_BUFF","LOCALS",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QCJ_JH_BUFF","LOCALS",1)
+  Enemy()
+  ReallyForceSpellRES("SPPR105",NearestEnemyOf(Myself)) // Entangle
+END
+IF
+  Global("QCJ_FIGHT","GLOBAL",2)
+  !GlobalTimerNotExpired("QCJ_INSECT","LOCALS")
+  See(NearestEnemyOf(Myself))
+THEN
+ RESPONSE #100
+  SetGlobalTimer("QCJ_INSECT","LOCALS",120)
+  ReallyForceSpellRES("SPPR517",NearestEnemyOf(Myself)) // Insect Plague
+END
+IF
+  Global("QCJ_FIGHT","GLOBAL",2)
+  See(NearestEnemyOf(Myself))
+THEN
+ RESPONSE #100
+  Attack(NearestEnemyOf(Myself))
+END

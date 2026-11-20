@@ -1,0 +1,6 @@
+// BG0702 - Docks Worker
+BEGIN BIBDCK15
+IF ~True()~ THEN BEGIN 0
+  SAY @1
+  IF ~~ THEN EXIT
+END

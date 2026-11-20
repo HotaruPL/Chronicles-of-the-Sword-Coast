@@ -1,0 +1,35 @@
+// v2.7 - post-basilisk comments exclusively as overhead text, not dialogue log.
+// In EE DisplayStringHeadNoLog shows over the creature but DOES NOT log text.
+// The new one-shot flag names allow previously tested saves to display the new text once.
+IF
+  Dead("QRVBASI")
+  Global("QRH_BASILISK_DEAD","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QRH_BASILISK_DEAD","GLOBAL",1)
+    Continue()
+END
+IF
+  Global("QRH_BASILISK_DEAD","GLOBAL",1)
+  InParty("Jaheira")
+  InMyArea("Jaheira")
+  Global("QRH_JAH_OVER_V27","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QRH_JAH_OVER_V27","GLOBAL",1)
+    ActionOverride("Jaheira",DisplayStringHeadNoLog(Myself,@202))
+    Wait(5)
+    ActionOverride("Jaheira",DisplayStringHeadNoLog(Myself,@203))
+END
+IF
+  Global("QRH_BASILISK_DEAD","GLOBAL",1)
+  InParty("Mazzy")
+  InMyArea("Mazzy")
+  Global("QRH_MAZ_OVER_V27","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QRH_MAZ_OVER_V27","GLOBAL",1)
+    ActionOverride("Mazzy",DisplayStringHeadNoLog(Myself,@204))
+    Wait(5)
+    ActionOverride("Mazzy",DisplayStringHeadNoLog(Myself,@205))
+END

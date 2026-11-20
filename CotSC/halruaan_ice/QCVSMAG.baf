@@ -1,0 +1,71 @@
+// Vesnam's dedicated combat mage script.
+// QCVSTALK owns only the opening conversation. Once QCVESNAM.DLG calls
+// Enemy(), this class script guarantees visible spellcasting without relying
+// on Davaeorn's original area-specific encounter state machine.
+
+IF
+    Allegiance(Myself,ENEMY)
+    Global("QCVSMagic","LOCALS",0)
+THEN
+    RESPONSE #100
+        ForceSpell(Myself,WIZARD_MINOR_GLOBE_OF_INVULNERABILITY)
+        SetGlobal("QCVSMagic","LOCALS",1)
+END
+
+IF
+    Allegiance(Myself,ENEMY)
+    Global("QCVSMagic","LOCALS",1)
+THEN
+    RESPONSE #100
+        ForceSpell(Myself,WIZARD_IMPROVED_INVISIBILITY)
+        SetGlobal("QCVSMagic","LOCALS",2)
+END
+
+IF
+    Allegiance(Myself,ENEMY)
+    Global("QCVSMagic","LOCALS",2)
+    See([PC])
+THEN
+    RESPONSE #100
+        SpellNoDec([PC],WIZARD_CHAOS)
+        SetGlobal("QCVSMagic","LOCALS",3)
+END
+
+IF
+    Allegiance(Myself,ENEMY)
+    Global("QCVSMagic","LOCALS",3)
+    See([PC])
+THEN
+    RESPONSE #100
+        SpellNoDec([PC],WIZARD_FLAME_ARROW)
+        SetGlobal("QCVSMagic","LOCALS",4)
+END
+
+IF
+    Allegiance(Myself,ENEMY)
+    Global("QCVSMagic","LOCALS",4)
+    See([PC])
+THEN
+    RESPONSE #100
+        SpellNoDec([PC],WIZARD_HOLD_PERSON)
+        SetGlobal("QCVSMagic","LOCALS",5)
+END
+
+IF
+    Allegiance(Myself,ENEMY)
+    Global("QCVSMagic","LOCALS",5)
+    See([PC])
+THEN
+    RESPONSE #100
+        SpellNoDec([PC],WIZARD_MAGIC_MISSILE)
+        SetGlobal("QCVSMagic","LOCALS",6)
+END
+
+IF
+    Allegiance(Myself,ENEMY)
+    Global("QCVSMagic","LOCALS",6)
+THEN
+    RESPONSE #100
+        SpellNoDec(Myself,WIZARD_MIRROR_IMAGE)
+        SetGlobal("QCVSMagic","LOCALS",3)
+END

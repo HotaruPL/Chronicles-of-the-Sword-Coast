@@ -1,0 +1,52 @@
+// Preserve the trolls' native regeneration/death override scripts. This AI is
+// assigned to their class script and activates their hostility at the shout.
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  Global("QCDTSTART","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCDTSTART","LOCALS",1)
+    Enemy()
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  See("QCDX01")
+THEN
+  RESPONSE #100
+    Attack("QCDX01")
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  See("QCDX02")
+THEN
+  RESPONSE #100
+    Attack("QCDX02")
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  See("QCDX03")
+THEN
+  RESPONSE #100
+    Attack("QCDX03")
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  See("QCDX04")
+THEN
+  RESPONSE #100
+    Attack("QCDX04")
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  See("QCDXLEAD")
+THEN
+  RESPONSE #100
+    Attack("QCDXLEAD")
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END

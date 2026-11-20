@@ -1,0 +1,15 @@
+IF
+  Global("QCThiefHostile","GLOBAL",1)
+  See(Player1)
+THEN
+  RESPONSE #100
+    AttackReevaluate(Player1,30)
+END
+
+IF
+  Global("QCThiefMet","GLOBAL",0)
+  See(Player1)
+THEN
+  RESPONSE #100
+    StartDialogueNoSet(Player1)
+END

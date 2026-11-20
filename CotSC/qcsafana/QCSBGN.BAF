@@ -1,0 +1,17 @@
+// Balthrim's goons stay neutral until the encounter ends in combat.
+IF
+    Global("QCSAFANA_BD1000_AMBUSH_ATTACK","GLOBAL",1)
+    !Allegiance(Myself,ENEMY)
+THEN
+    RESPONSE #100
+        ChangeEnemyAlly(Myself,ENEMY)
+END
+
+// Select actual enemies dynamically, not only the protagonist.
+IF
+    Global("QCSAFANA_BD1000_AMBUSH_ATTACK","GLOBAL",1)
+    See(NearestEnemyOf(Myself))
+THEN
+    RESPONSE #100
+        AttackReevaluate(NearestEnemyOf(Myself),30)
+END

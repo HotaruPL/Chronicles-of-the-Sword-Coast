@@ -1,0 +1,11 @@
+// QC: Halruaan and the Flying Ship — Northern Wilderness access safeguard.
+// Only unlocks after Shandalar has started the silver-rod quest.
+// Unlike editing the master WMP, this runs on the save's current world map.
+IF
+  GlobalGT("QCFlyShipQuest","GLOBAL",0)
+  Global("QC_QCHALF_MAPFIX","GLOBAL",0)
+THEN
+  RESPONSE #100
+    AddWorldmapAreaFlag("QCHALF",7)
+    SetGlobal("QC_QCHALF_MAPFIX","GLOBAL",1)
+END

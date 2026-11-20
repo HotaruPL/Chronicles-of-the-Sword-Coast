@@ -1,0 +1,18 @@
+// Kazhmira's small class-script addition.
+// Isolde's WTARSGT remains her general/default AI. This script only makes sure
+// Kazhmira actually consumes her invisibility potions as soon as she detects
+// an enemy, then uses another potion after the first backstab/attack reveals her.
+
+IF
+  ActionListEmpty()
+  See(NearestEnemyOf(Myself))
+  HasItem("POTN10",Myself)
+  !GlobalTimerNotExpired("QCKazhmiraInvis","LOCALS")
+  !StateCheck(Myself,STATE_INVISIBLE)
+  !StateCheck(Myself,STATE_IMPROVEDINVISIBILITY)
+THEN
+  RESPONSE #100
+    SetGlobalTimer("QCKazhmiraInvis","LOCALS",ONE_ROUND)
+    DisplayStringHead(Myself,46150)
+    UseItem("POTN10",Myself)
+END

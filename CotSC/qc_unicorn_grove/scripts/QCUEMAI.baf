@@ -1,0 +1,13 @@
+// Emhrys's initial meeting in Baldur's Gate. Do not run after he has left for the grove.
+// Reliable explicit dialogue trigger, without changing his quest branches or reunion behavior.
+IF
+  Global("QCU_EMHREQ","GLOBAL",1)
+  Global("QCU_EMHSENT","GLOBAL",0)
+  Global("QCU_EMHTALK","GLOBAL",0)
+  Range(Player1,16)
+THEN
+  RESPONSE #100
+    SetGlobal("QCU_EMHTALK","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCEEMH",Player1)
+END

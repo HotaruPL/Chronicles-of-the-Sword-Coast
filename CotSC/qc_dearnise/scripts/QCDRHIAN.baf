@@ -1,0 +1,18 @@
+// Rhianna speaks on sight and then escapes. She is always non-hostile.
+IF
+  Global("QCDRHIDN","GLOBAL",0)
+  Global("QCDRHITK","LOCALS",0)
+  See(Player1)
+  Range(Player1,16)
+THEN
+  RESPONSE #100
+    SetGlobal("QCDRHITK","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCDRHIAN",Player1)
+END
+IF
+  Global("QCDRHIDN","GLOBAL",1)
+THEN
+  RESPONSE #100
+    EscapeArea()
+END

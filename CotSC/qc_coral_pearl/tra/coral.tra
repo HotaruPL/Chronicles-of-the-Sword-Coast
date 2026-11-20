@@ -1,0 +1,95 @@
+@100 = ~Sirine in Distress
+
+I met Coral, a sirine who entered the Sahuagin city in search of her stolen pearl. The rebels took it after killing her companions. She has asked me to recover it and promised her enchanted arrows if I succeed.~
+@101 = ~Sirine in Distress
+
+Zexylinn has offered a powerful magical reward if I kill Coral instead of returning her pearl. I should think really carefully if I want to save her or annihilate her.~
+@102 = ~Sirine in Distress
+
+I recovered Coral's pearl and returned it to her. She rewarded me with enchanted arrows. I can only hope she escapes this accursed city safely.~
+@103 = ~Sirine in Distress
+
+I killed Coral and delivered the news to Zexylinn. He rewarded me with the Cloak of Vestiges.~
+@104 = ~Sirine in Distress
+
+I gave up on helping Coral. The matter is closed without a reward.~
+
+// New English dialogue strings extracted for localisation.
+@105 = ~I cannot remain here much longer. The Sahuagin patrols grow larger by the hour. I need my pearl.~
+@106 = ~Here. We recovered it.~
+@107 = ~We decided to kill you. We were promised a reward for ending your life.~
+@108 = ~Not yet. We are still looking.~
+@109 = ~We don't want to work for you anymore.~
+@110 = ~I cannot remain here much longer. The Sahuagin patrols grow larger by the hour. I need my pearl.~
+@111 = ~Here. We recovered it.~
+@112 = ~We decided to kill you. We were promised a reward for ending your life.~
+@113 = ~Not yet. We are still looking.~
+@114 = ~We don't want to work for you anymore.~
+@115 = ~With my pearl restored, I may yet live to see the sea again. Thank you, friend. You have done more than you know.~
+@116 = ~Halt! You... you are not one of the Sahuagin. Outsiders? Here?~
+@117 = ~The same could be said of you. What is a sirine doing here?~
+@118 = ~Your kind caused me plenty of trouble on the coast. Why shouldn't I tell the Sahuagin you're trespassing... or kill you myself?~
+@119 = ~You would sell me to those brutes? I have already lost my sisters, and I came here for something they stole from me. At least hear me out before you decide I'm your enemy.~
+@120 = ~Very well. Tell me what happened.~
+@121 = ~I have no time for this.~
+@122 = ~I have not come here for pleasure, I assure you. My name is Coral, and yes, I am a sirine. Roaming this abominable city is revolting, but I have little choice. One of these foul Sahuagin stole my pearl.~
+@123 = ~The pearl allows its bearer to breathe beneath the waves and swim with wondrous speed. To my kind it is almost a heart: the symbol of what we are. Two Sahuagin caught me ashore and took mine as an offering to Sekolah and his endless hunger for riches.~
+@124 = ~The Sahuagin plunder the sea to heap treasure before their greedy god. A sirine's pearl is a prize beyond measure. My sisters and I slipped into the city to recover it, but... they did not survive. I cannot turn back now, not after coming so far.~
+@125 = ~We could help you.~
+@126 = ~We can search for your pearl, for a price.~
+@127 = ~I don't have time.~
+@128 = ~I had hoped you would say that. You are better equipped than I was, and far more likely to survive. I underestimated this place, and my sisters paid for it. If you find the Sahuagin who holds my pearl, please return it to me.~
+@129 = ~I have no gold to give, but I do have a generous supply of enchanted arrows. I brought them in case we were discovered. Find my pearl, and they are yours.~
+@130 = ~Consider it done.~
+@131 = ~That isn't enough. We won't take the risk.~
+@132 = ~Then you have my blessing. Find the Sahuagin who took my pearl, and bring it back to me. I beg you.~
+@133 = ~As you wish.~
+@134 = ~I was losing hope. Thank you, <RACE>. As promised, take these precious arrows, and may you pierce many wicked hearts with them.~
+@135 = ~As treacherous as I feared your kind would be. May you rot upon the seabed!~
+@136 = ~Please keep searching. It must be in the hands of these fish-men.~
+@137 = ~Then what am I to do alone? I... I will find it myself.~
+@138 = ~Ah, there you are, my valuable tool. Have you killed the sirine?~
+@139 = ~Yes. We have.~
+@140 = ~We have reconsidered. We'll kill you instead.~
+@141 = ~Ah, there you are, my valuable tool. Have you killed the sirine?~
+@142 = ~Yes. We have.~
+@143 = ~No. We are not so vile. We let her go.~
+@144 = ~We have decided to kill you instead.~
+@145 = ~We'll take care of that soon.~
+@146 = ~Our business is concluded. Enjoy the gift I so graciously bestowed on you.~
+@147 = ~So, have you made your choice?~
+@148 = ~I will kill the sirine for you.~
+@149 = ~I would rather take the pearl. By force!~
+@150 = ~I'll think about it.~
+@151 = ~Speak with Prince Villynaty, human.~
+@152 = ~I'd rather speak with you. That pearl you're examining is intriguing, to say the least.~
+@153 = ~I will.~
+@154 = ~Ah, an eye for wondrous gemstones! This trinket once belonged to what you call a sirine, a creature famed for deadly charms and for carrying such curiosities. It would be wasted in her company, so I took the liberty of... safeguarding it.~
+@155 = ~My people fashion exquisite jewellery from pearls. This one will adorn the prince's neck when I finish a necklace befitting his power, status and glory. Once his rebellion succeeds, my work shall honour all he has endured.~
+@156 = ~What are you, some kind of priest?~
+@157 = ~Could I persuade you to part with it?~
+@158 = ~The sirine who owns that pearl is here. She came looking for it.~
+@159 = ~Zexylinn, the jeweller! Surely your kind understands such a trade. I fashion rings, necklaces and ornaments. No jeweller for leagues can match my skill.~
+@160 = ~And before you ask, I will craft nothing for you. That shifty look in your eyes is familiar to anyone who's dealt with surface folk. I will not be swayed.~
+@161 = ~Then perhaps you'd trade the pearl?~
+@162 = ~That sirine is here, searching for it.~
+@163 = ~I will take my leave.~
+@164 = ~You want the pearl? Let me guess: the sirine I took it from sent you. Our rebels reported several sirines slain inside the city. Reckless fools! Breaking into a guarded city like ours was pure stupidity.~
+@165 = ~The pearl is rare indeed. Our rebels meant to raid a settlement ashore but happened upon sirines instead. A change of plan won us a handful of their treasures. The others escaped when they realised how badly they were outnumbered.~
+@166 = ~To hand over so fine a pearl without compensation would violate my code of honour.~
+@167 = ~But here is an offer. I shall reward you with an object of immense magical power if you execute the sirine for me. Surely what I have is far more valuable than anything she could promise you.~
+@168 = ~The choice is yours.~
+@169 = ~I will kill the sirine for you.~
+@170 = ~I think I'd rather take the pearl. By force!~
+@171 = ~I'll think about it.~
+@172 = ~I am aware, though kind of you to mention it. My rebels slew her little friends, but she eluded them. Not for long.~
+@173 = ~Do you know where she is?~
+@174 = ~And what if I do?~
+@175 = ~Hunt her down for me. I promise a generous material reward. Worshippers of Sekolah possess gifts of extraordinary power.~
+@176 = ~Wise choice. Come back when the deed is done.~
+@177 = ~Then I will wait patiently. Time is something I have in abundance.~
+@178 = ~I am counting on you.~
+@179 = ~Most inconvenient indeed. I put my faith in the wrong people. Surface folk cannot be trusted. Duly noted. Now leave! I shall find her myself!~
+@180 = ~I am pleased that you have finally come to your senses. Here is your reward. Wear it with pride, and remember who bestowed it on you.~
+@181 = ~Hah! You can certainly try. We have berserkers among us! You will face not only me, but every rebel in this city!~
+@182 = ~As if these revolting fish-men have any honour.~

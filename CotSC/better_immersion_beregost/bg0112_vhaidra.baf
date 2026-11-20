@@ -1,0 +1,25 @@
+// ---------------------------------------------------------------------------
+// VHAIDRA - BG0112 QUEST SPAWN / DEATH WATCH
+// Dialogue initiation is handled by Vhaidra's own creature script, matching
+// the proven Cadok/Shante pattern.
+// ---------------------------------------------------------------------------
+
+IF
+  Global("PWY_ULUA_VHAIDRA_ACTIVE","GLOBAL",1)
+  Global("PWY_VHAIDRA_SPAWNED","GLOBAL",0)
+  !Exists("PWYVHAI")
+THEN
+  RESPONSE #100
+    CreateCreature("PWYVHAI",[1941.817],8)
+    SetGlobal("PWY_VHAIDRA_SPAWNED","GLOBAL",1)
+END
+
+IF
+  Global("PWY_VHAIDRA_SPAWNED","GLOBAL",1)
+  Global("PWY_VHAIDRA_KILLED","GLOBAL",0)
+  !Global("PWY_VHAIDRA_REUNITED","GLOBAL",1)
+  Dead("PWYVHAI")
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_VHAIDRA_KILLED","GLOBAL",1)
+END

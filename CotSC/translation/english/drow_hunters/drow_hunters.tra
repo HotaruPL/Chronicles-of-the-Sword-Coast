@@ -1,0 +1,87 @@
+@1 = ~This component requires Baldur's Gate: Enhanced Edition in EET form.~
+@2 = ~Required resource BG3300.BCS was not found.~
+@3 = ~Required resource LINDIN.CRE was not found.~
+@4 = ~Required resource TELKA.CRE was not found.~
+@5 = ~Required resource SCRLNEI.ITM was not found.~
+@6 = ~Required resource BG0011.BCS was not found.~
+@7 = ~Required resource BG1603.BCS was not found.~
+@8 = ~Required resource BG1803.BCS was not found.~
+@100 = ~Drow Hunters
+Viconia has been attacked by two mercenaries whose job is to hunt drows down. They were instructed by mysterious J. We should keep an eye out during our travels.~
+@101 = ~Drow Hunters
+We found yet another clue about J and his obedient drow hunters. His location is still unknown but we will reach him eventually.~
+@102 = ~Drow Hunters
+We have learned the name of our mysterious hunter: Jardak. He is operating in Baldur's Gate. We will find him there.~
+@103 = ~Drow Hunters
+We found Jardak's house in Baldur's Gate. The man behind the hunt for Viconia is finally within our reach.~
+@104 = ~Drow Hunters
+Jardak is dead. His hunt for Viconia is over.~
+@105 = ~Drow Hunters
+The Drow Hunters' pursuit of Viconia is over. We helped her survive Jardak's vendetta.~
+@110 = ~Letter~
+@111 = ~Dear Dimwoork
+
+I trust this letter reached you in a relatively short time. We have gained intelligence on recent sighting of Viconia De'Vir - the drow in whose blood I am so eager to stick my sword in. According to our knowledge she is travelling with a particular group of people. They harbour a drow, which breaks the rules of normalcy in these territories so deal with them, should they put up resistance. Your objective is to hunt her down and kill her. Bring me her head on a silver platter and I shall reward you for your efforts as per my promise. Do not let me down!
+
+J~
+@112 = ~Dirty note~
+@113 = ~Dear Peter
+
+I received contradicting news regarding our last shipment. The woman we caught is NOT the Viconia De'Vir. Rather funny coincidence. We dealt with the prisoner accordingly but your failure to capture De'Vir is an insult to your well-opinioned capabilities. I require more subordinance from you. You could at least take a look at the image description I gave you. I am aware all of the filthy drows look the same, but failures are not an option at this point. Train those damn wyverns and get to work! I won't ask nicely again!
+
+J~
+@114 = ~Letter~
+@115 = ~Dear Jardak
+
+I am not pleased with you meddling with my interests. I understand your desire to catch this drow and as I promised she will perish at my hand, should she and <CHARNAME> reach me. I am not a toy for your amusement, Jardak. I comply if I wish to, and I can just as freely refuse your offer and step down. Your constant rambling about this Viconia is starting to wear on me, and you still haven't provided me with your initial pledge. You were to aid Iron Throne goals and answer to Semaj. He has a task for you. Comply with his wishes, and you shall get your drow's head on a spike. Guarantee. Semaj grew impatient and will visit you in Baldur's Gate soon to familiarise you with your end of the deal.
+
+Davaeorn~
+@120 = ~Hold right there. Hm, white hair, elven ears, dark skin... I think we got the right one.~
+@121 = ~What reason you have to eye me up and down like that, iblith!~
+@122 = ~Not me, my dear. My employer is highly interested in you. Your exotic skin will make a perfect trophy for him. I just need to be careful not to scar it too much.~
+@123 = ~Vyn'leth Darthiir. Unwise to attempt to strike me down.~
+@124 = ~Do you know these people?~
+@125 = ~Stop moaning. You're still alive.~
+@126 = ~We should go.~
+@127 = ~Hadn't had the pleasure. The letter on his body is revealing however. If they know me, they've been watching me for Shar knows how long. We need to be on our guard now. Whoever this J is, he does not seem the kind of man to give up on given word. May he strike with all his might. With Shar on our side I'll ensure he surrender to her wrath.~
+@128 = ~I am merely making an observation, jaluk. If these hunters aim to strike me down, we must watch our backs now. You can never tell when they come out of the shadows again. Whoever this J is, he does not seem the kind of man to give up on given word. May he strike with all his might. With Shar on our side I'll ensure he surrender to her wrath.~
+@129 = ~Evidently. If there are two, there are bound to be more. Whoever this J is, he does not seem the kind of man to give up on given word. May he strike with all his might. With Shar on our side I'll ensure he surrender to her wrath.~
+@130 = ~Oh, look at that. Next clue regarding our mysterious drow hater.~
+@131 = ~So it isn't just you they are after. They hunt drows in general, however this J feels some special disdain toward you.~
+@132 = ~Any ideas?~
+@133 = ~Yeah. We must go though.~
+@134 = ~Highly observant of you, <CHARNAME>. Truly. Since this J devised such a chase after me, he must be really desperate. Unbeknownst to him it will bring his doom upon him. Sooner than he hoped for.~
+@135 = ~An obvious one is to keep searching. Let's stick to our main quest and find Tazok's operation base. Maybe we'll find more clues along the way.~
+@136 = ~Yeah. Let's stick to our main objective. We shall find this J in time.~
+@137 = ~So, we have a name of our enigmatic J.~
+@138 = ~Jardak. Rings any bells?~
+@139 = ~Whoever he is, he signed a deal with Davaeorn and their abysmal operation.~
+@140 = ~Baldur's Gate. Coincidentally, this is where we go next anyway.~
+@141 = ~No. Never heard of it. But one hint onward at a time is as good as any. If this Jardak lives in Baldur's Gate he'll be hard to find in such heavily populated city. All the more fun at chase. His end is so near. I can feel it. Let's go.~
+@142 = ~His last mistake. Cowardice can be easily deducted from this. I evaded him for a while now, hardly breaking a sweat as I did, and he has to make uneasy alliances just to track me down? Flattering. Let's move out and go to Baldur's Gate. His end is near. I can feel it.~
+@143 = ~And go we shall. Jardak's ambitious plans will come to an end sooner than he expected. Let's go. His end is near. I can feel it.~
+@144 = ~Master Jardak, you say? How sweet. I will speak to him now, and you will fetch him like an obedient dog you are.~
+@145 = ~You!~
+@146 = ~Insolence is hardly the proper word on your side of things. Jardak, I presume? You and I played a long game.~
+@147 = ~Viconia De'Vir! You've been evading me for way too long. How naive and stupid of you to barge into my house like that. Right into the lion's den.~
+@148 = ~Before I end your miserable excuse for existence, tell me something. Why orchestrate all of that just to have me killed. I don't believe we've met.~
+@149 = ~You really have no clue, do you. A vile, dark-skinned murderer. I know exactly what had happened on that farm. The farmer and his family... peaceful family. Happy. Ordinary. Until you ingratiated yourself with them and sadistically murdered them like a wretched vixen you are! My job is to eradicate evil such as yourself. Even at grand costs.~
+@150 = ~You know nothing about what really happened back then! Drow society's cruelty is highly soaked within us, but that does not exclude vile deeds of your kind either. It won't change your judgment but you should know, that I killed them with utmost pleasure, not because that was my initial goal, but rather because they forced my hand.~
+@151 = ~Lies! They were but simple farmers! I am not inclined to listen to your deceit! You shall perish! Now! Prepare yourself, bitch!~
+@152 = ~Shar, I offer my gratitude. Your favor guided us in this righteous crusade.~
+@153 = ~Feeling better?~
+@154 = ~Jardak is no more and his hired hunters will disperse. There's nothing left for us here.~
+@155 = ~Our prevail was to be expected. With Night Singer on our side I was certain of our success. We should not tarry any longer.~
+@156 = ~I... know this will not sound like me but... thank you. Had I been alone, not even Shar's graces would be enough to grant me this victory. Your aid was... indispensable.~
+@157 = ~You're welcome, Viconia.~
+@158 = ~Viconia De'Vir is getting soft on me? How touching.~
+@159 = ~It's all right. Let's move.~
+@160 = ~Won't make that mistake again. Also, you were sloppy and you're still a rivvin. Now, quit wasting my time with your burdensome personality and let's move.~
+@161 = ~Agreed. May we be as victorious during our next objectives.~
+
+@162 = ~I am merely making an observation, jaluk. If these hunters aim to strike me down, we must watch our backs now. You can never tell when they come out of the shadows again. Whoever this J is, he does not seem the kind of man to give up on given word. May he strike with all his might. With Shar on our side I'll ensure he surrender to her wrath.~
+@163 = ~I am merely making an observation, jalil. If these hunters aim to strike me down, we must watch our backs now. You can never tell when they come out of the shadows again. Whoever this J is, he does not seem the kind of man to give up on given word. May he strike with all his might. With Shar on our side I'll ensure he surrender to her wrath.~
+@164 = ~Skip the pleasantries. We have another mission to complete, don't we? Let's get to it.~
+
+@166 = ~You shouldn't have broken into my master's home. Master Jardak will be quite displeased when he learns that ruffians have disturbed the order of his house.~
+@167 = ~What have you done?! My butler wouldn't have let you up here... unless you killed him. Pathetic wretches, do you know what you have done? Your screams will echo in hell for all eternity for your insolence!~

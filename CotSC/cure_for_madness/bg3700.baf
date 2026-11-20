@@ -1,0 +1,41 @@
+// Cure for Madness? - Red Canyon / BG3700
+
+// Spawn Arbolon once at the requested location.
+IF
+  Global("QCARBOLON_SPAWNED","GLOBAL",0)
+  Global("QCARBOLON_COMPLETE","GLOBAL",0)
+  !Exists("ARBOLON")
+THEN
+  RESPONSE #100
+    SetGlobal("QCARBOLON_SPAWNED","GLOBAL",1)
+    CreateCreature("ARBOLON",[3447.753],0)
+END
+
+// The failed ritual spawns the Abishai immediately at the end of the
+// conversation. Arbolon is already flagged to leave, so he can walk away
+// while the party deals with the demon.
+IF
+  Global("QCARBOLON_RITUAL","GLOBAL",1)
+  Global("QCARBOLON_DEMON_SPAWNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCARBOLON_DEMON_SPAWNED","GLOBAL",1)
+    CreateCreature("DEMABI01",[3447.753],0)
+    ActionOverride("DEMABI01",Enemy())
+    ActionOverride("DEMABI01",AttackReevaluate(Player1,30))
+END
+
+// After the Abishai is actually dead, Tiax gets the final line.
+IF
+  Global("QCARBOLON_RITUAL","GLOBAL",1)
+  Global("QCARBOLON_DEMON_SPAWNED","GLOBAL",1)
+  Global("QCARBOLON_AFTERMATH","GLOBAL",0)
+  Dead("DEMABI01")
+  InParty("TIAX")
+THEN
+  RESPONSE #100
+    SetGlobal("QCARBOLON_AFTERMATH","GLOBAL",1)
+    ActionOverride("TIAX",FaceObject(Player1))
+    ActionOverride("TIAX",Wait(1))
+    ActionOverride("TIAX",StartDialog("QCATIAX",Player1))
+END

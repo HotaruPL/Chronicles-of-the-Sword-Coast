@@ -1,0 +1,14 @@
+// BG0154 - tavern additions
+IF
+  !Exists("BIBDWAR1")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDWAR1",[244.587],0)
+END
+
+IF
+  !Exists("BIBOGRB1")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBOGRB1",[604.212],3)
+END

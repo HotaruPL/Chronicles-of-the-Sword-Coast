@@ -1,0 +1,21 @@
+// Talk only after all five placed mephits have been defeated.
+IF
+  Global("QCH_ROOM_DONE","GLOBAL",0)
+  Dead("QCHMSMO")
+  Dead("QCHMSAL")
+  Dead("QCHMDUS")
+  Dead("QCHMLIG")
+  Dead("QCHMMIN")
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_ROOM_DONE","GLOBAL",1)
+END
+IF
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  Global("QCH_IMROOM","GLOBAL",0)
+  IsValidForPartyDialog("Imoen2")
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride("Imoen2",StartDialog("QCHIMTR",Player1))
+END

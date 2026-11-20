@@ -1,0 +1,18 @@
+// Passive memory figure: Gorion neither retaliates nor follows hostiles.
+IF
+ Global("QBT_STAGE","GLOBAL",1)
+ Global("QBT_GORION_EXIT","LOCALS",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_GORION_EXIT","LOCALS",1)
+  MoveToPoint([723.665])
+  CreateVisualEffect("SPDIMDOR",[723.665])
+  SetGlobal("QBT_GORION_PORT","GLOBAL",1)
+  DestroySelf()
+END
+IF
+ HPPercentLT(Myself,95)
+THEN
+ RESPONSE #100
+  ReallyForceSpellRES("SPPR607",Myself) // heal, never retaliate
+END

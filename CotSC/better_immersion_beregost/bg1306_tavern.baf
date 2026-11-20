@@ -1,0 +1,8 @@
+// BG1306 - tavern/kitchen addition
+
+IF
+  !Exists("BIBCOOK1")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBCOOK1",[684.291],0)
+END

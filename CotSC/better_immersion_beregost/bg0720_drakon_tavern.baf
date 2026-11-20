@@ -1,0 +1,7 @@
+// Half-Ogre Bouncer at 543,623, facing north-west.
+IF
+  !Exists("BGBG0720")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0720",[543.623],6)
+END

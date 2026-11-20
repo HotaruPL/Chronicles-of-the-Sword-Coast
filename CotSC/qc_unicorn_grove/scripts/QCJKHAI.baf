@@ -1,0 +1,26 @@
+IF
+  Global("QCJ_FIGHT","GLOBAL",0)
+  Range(Player1,24)
+  Global("QCJ_KH_TALK","LOCALS",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QCJ_KH_TALK","LOCALS",1)
+  FaceObject(Player1)
+  StartDialog("QCJKHAL",Player1)
+END
+IF
+  Global("QCJ_FIGHT","GLOBAL",2)
+  Global("QCJ_KH_BUFF","LOCALS",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QCJ_KH_BUFF","LOCALS",1)
+  ReallyForceSpellRES("SPPR111",Myself) // Armor of Faith
+  Enemy()
+END
+IF
+  Global("QCJ_FIGHT","GLOBAL",2)
+  See(NearestEnemyOf(Myself))
+THEN
+ RESPONSE #100
+  Attack(NearestEnemyOf(Myself))
+END

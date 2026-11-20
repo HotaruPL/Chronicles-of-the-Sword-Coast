@@ -1,0 +1,8 @@
+// Set the unlock prerequisite when the party reaches the Underdark Exit.
+// No worldmap reveal here: the grove must be COMPLETELY hidden while inside AR2500.
+IF
+  Global("QCUGSeen2500","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCUGSeen2500","GLOBAL",1)
+END

@@ -1,0 +1,18 @@
+// Dark Horizons Tristan-style default script. The CRE uses INITDLG as the
+// override script and this script as Default, matching CMBOU02/CMBOU06.
+IF
+  AttackedBy([ANYONE],DEFAULT)
+  Global("DH9_TRIST_FIGHT","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("DH9_TRIST_FIGHT","GLOBAL",1)
+    Enemy()
+END
+
+IF
+  Global("DH9_TRIST_FIGHT","GLOBAL",1)
+  !Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    Enemy()
+END

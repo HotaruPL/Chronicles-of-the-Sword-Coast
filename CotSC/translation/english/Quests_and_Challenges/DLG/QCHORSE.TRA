@@ -1,0 +1,56 @@
+@1 = ~Horse Trainer~
+@2 = ~If you came to borrow a horse… I have to disappoint you. I'm closing the possibility to do so until I recover my missing horse. I am terribly sorry for any inconvenience this may cause you.~
+@3 = ~You lost a horse?~
+@4 = ~How is business going?~
+@5 = ~Good to know. Bye.~
+@6 = ~It happened so fast. I was already in my room, and suddenly I hear Roach's rearing. I look out the window, and I see someone riding out the gates into the darkness of the night, on my horse! And it was my fastest horse. Of course, guards are as helpful as flitch of pork fat and they pretend they didn't see a thing. Do they think I'm an idiot?~
+@7 = ~As bad as you'd expect it. Ever since I lost my horse, my business is running low. I decided to cease borrowing my horses to travellers as you never know who will stab you in the back. As long as I have been doing it, my horses were rented to honorable people. I suppose years of luck shut my eyes on potential catastrophies such as this.~
+@8 = ~Smoothly again, thanks to you. I am so delighted to be back in business. Now, Ash'Rakk uses his shamanic magic to learn alignment of my clients which helps me determine if they will double cross me or not. Needless to say, that alone cannot tell you whether to borrow a horse to somebody or not but at least I get some clue of how to interact with them or what I might deal with.~
+@9 = ~Maybe I could help you. Tell me exactly what happened.~
+@10 = ~Well, good luck.~
+@11 = ~Ehm… like I said, I saw someone on Roach's back. I did not recognise the person due to cloak of night but... it looked like a child maybe? Might've been a halfling, a gnome? They had a black robe and hood over their head so I wouldn't tell even if it was daylight. I'm afraid that's all I can give you. You might wanna ask the guard near the entrance to the inn. He might be able to tell you more if he saw the thief or which direction he went when pass the gates. I really appreciate the help.~
+@12 = ~Have you seen someone ride out on a horse last night? Assailant would wear black robes with a hood over his head.~
+@13 = ~Ah, you're looking for Horse Trainer's missing horse, huh? If so, here's all I can tell you. They rode out and turned left from the gate, in direction of Baldur's Gate city. I don't understand why Trainer got so mad at us, knowing that we cannot leave our posts. Our jobs are to guard the Inn, not the outside of its walls. I wish you luck finding him.~
+@14 = ~Me got a little treat for you… oh! Aaarch!~
+@15 = ~Don't move! You stole this horse and we want him back!~
+@16 = ~We do not want to fight. We wish to talk.~
+@17 = ~Goblin scum! Prepare to die!~
+@18 = ~Me did not! Me want a friend! Me like horses.~
+@19 = ~Me don't want to fight too! Me be friend. We all be friend.~
+@20 = ~No! Me defend meself!~
+@21 = ~Why did you take this horse?~
+@22 = ~Are you alone? Where is the rest of your brothers?~
+@23 = ~What will it take for you to give it back?~
+@24 = ~I'm gonna have to think about it.~
+@25 = ~Me love animals! Me be lonely. Horse nice. Me liking pets. Pets be nice and cuddly.~
+@26 = ~Me not having one. They all dead, killed by orcs. Me have no one left. Horse nice. He be my family now.~
+@27 = ~Back? Me not want to give him back. Me want to be his friend and companion. He be my loyal pet. Please, don't take him from me.~
+@28 = ~I am not negotiating with you. Give him back! Now!~
+@29 = ~What if you speak to the owner? Maybe he'll let you pet him or visit him? Maybe…~
+@30 = ~I tire of this. You're dead meat.~
+@31 = ~No! I will not! You will taste your own blood now! Ash'Rakk be shaman and he make you dead now!~
+@32 = ~The owner…? Me could ask. The owner be nice. That what people say. Maybe he let me pet horse. Me be horse friend forever. Me get more friends, more horse. Me have a big family. I take the horse back, say sorry and say with owner.~
+@33 = ~Hey, there you are. I spoke to Ash'Rakk. He is a nice gal actually. A little silly but he's got a good heart. I decided to forgive him, and we made a little deal. Since he knows shaman magic, he can cast a spell known as 'Know Alignment' which can be fruitful in my business. Maybe I can learn someone's intentions a little better. Bentley gave him a room next to mine but... he prefers to sleep with the horses. Well, his choice. You deserve a reward. Take this.~
+@34 = ~Me can stay and be friend with horses. Me be so happy. Me help trainer with clients and stay if I good. I be good. Me thank you.~
+@35 = ~Thank you so much for bringing Roach back. You have my gratitude. What happened to the thief?~
+@36 = ~We killed him. It was a goblin who simply tried to find a friend to be close to.~
+@37 = ~We killed him. It was a goblin scum who got a well deserved end.~
+@38 = ~Goblin? Hm, I saw these creatures in Friendly Arm Inn before but I thought them to be civilised enough to keep out of my horses. Well, you've done me a great service. Here you go.~
+@39 = ~Goblin? Hm, I saw these creatures in Friendly Arm Inn before but I thought them to be civilised enough to keep out of my horses. Anyway, thanks for bringing my horse back. Just... wash the blood off your clothes. Don't want people to think I am casually conversing with some murderer.~
+
+@40 = ~Business is back to normal, mostly. Losing Roach hurt me badly, and I still have to make up for the losses, but at least I can get back to doing business again. Thank you for bringing him back. I truly appreciate it.~
+@41 = ~Mystery of a Missing Horse~
+@42 = ~The Horse Trainer at the Friendly Arm Inn has lost his fastest horse, Roach. He believes someone rode the horse out of the Inn during the night. The guards claim the rider turned toward Baldur's Gate. I agreed to investigate and recover Roach.
+
+I should find the rider and recover Roach before returning to the Trainer.~
+@43 = ~I recovered Roach and resolved the mystery of the missing horse. Ash'Rakk was allowed to remain at the Friendly Arm Inn and will now help the Horse Trainer.~
+@44 = ~I recovered Roach, but Ash'Rakk, the goblin who took him, was killed.~
+@45 = ~I recovered Roach. Ash'Rakk was killed, though I chose to describe him as a lonely goblin who only wanted a friend.~
+@46 = ~I'm glad we decided to help the little man out... I mean, goblin. They are mischievous little things but they remind me a bit of me when I was younger and used to work on puffguts nerves all the time.~
+@47 = ~Must we waste our time putting other people's problems first? We have much more important business than looking for lost horses.~
+@48 = ~I hope this will be a lesson for him not to put too much blind faith in strangers.~
+@49 = ~Oh sweet mother! How many times did I say that what you commonheads call 'civilised' people are nothing more than muttonheads. Horses are children of nature and belong in the wilderness, rather than being kept and bred. Training horses is equivalent to stripping a species of its natural, primal instincts. We should've let this horse go into the wilds where it would gain his freedom.~
+@50 = ~I begin to wonder if joining this group was a good idea. If seeking runaway animals is what you do in your spare time, perhaps I should reconsider our collaboration.~
+
+
+@51 = ~I won't forget what you did for me.~

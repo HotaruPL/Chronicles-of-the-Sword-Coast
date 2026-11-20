@@ -1,0 +1,284 @@
+// CotSC Batch 34: English item/NPC names and descriptions in five large components.
+// Original English text and all installer quest logic are preserved.
+
+@4000 = ~Boots~
+
+@4001 = ~Boots of Traitor~
+
+@4002 = ~These red-and-black boots are surprisingly light and supple despite their age.~
+
+@4003 = ~These scarlet-and-black boots once belonged to an elven warrior charged with defending Firewine as it was destroyed in a magical battle. When he became convinced the defense was doomed, he betrayed those beside him. Under cover of night, he murdered several of his sleeping comrades, stripped them of their belongings, and tried to flee with his stolen spoils.
+
+He never escaped. The dying curse of the warriors he betrayed bound his soul to Firewine, condemning him to linger among the ruins he had abandoned. The boots survived as a bitter reminder of his treachery and still carry a trace of the stealth he used on the night of the murders.
+
+STATISTICS:
+
+Hide in Shadows: +15 points
+Move Silently: +10 points
+Weight: 4
+
+Not Usable By:
+Characters without the Thief class~
+
+@4004 = ~Manticore's Hide~
+
+@4005 = ~This immense section of russet hide was taken from the ancient manticore imprisoned beneath Firewine. Centuries of exposure to unstable arcane energies have changed the leather without ruining it. The hide is unusually dense, warm to the touch, and seems to resist extremes of heat and cold.
+
+A master armorer might be able to fashion something exceptional from material this rare.
+
+Weight: 12~
+
+@4006 = ~Manticore's Mane~
+
+@4007 = ~Fashioned by Taerom Fuiruim from the magically saturated hide of the ancient manticore beneath Firewine, this armor retains part of the strange energy that sustained the beast for centuries. Heat rolls away from its surface, while unnatural cold seems unable to bite through the dense hide.
+
+STATISTICS:
+
+Fire Resistance: +20%
+Cold Resistance: +20%~
+
+@4008 = ~Manticore~
+
+@4009 = ~Lara~
+
+@4010 = ~Beyn~
+
+@4011 = ~Ithmeera~
+
+@4012 = ~Helshara~
+
+@4013 = ~Ozeroth~
+
+@4014 = ~Vesnam~
+
+@4015 = ~Shandalar~
+
+@4016 = ~Ervin~
+
+@4017 = ~Lessandra~
+
+@4018 = ~Fisherman~
+
+@4019 = ~Thief~
+
+@4020 = ~Kaya~
+
+@4021 = ~Kaya's Unconscious Body~
+
+@4022 = ~Kaya is badly injured and unconscious. Her body is bruised, and one of her legs is bleeding heavily. Lessandra asked us to bring her sister back to the village alive.~
+
+@4023 = ~Dog~
+
+@4024 = ~Blood Wyvern's Venom~
+
+@4025 = ~A small glass flask containing the venom of a blood wyvern. The liquid is a deep crimson, and pale strands drift through it whenever the flask is moved. Even in such a tiny quantity, the venom is dangerously potent. It is unlikely to have any practical use except to someone who knows precisely what to do with it.~
+
+@4026 = ~Ripplebark~
+
+@4027 = ~A thick, brown fungus with a broad, rounded cap and a pale, fibrous stem. Ripplebark grows in the dark places beneath the surface world. Its strange appearance hides a useful property, and an alchemist with the right recipe may find it considerably more valuable than it first appears.~
+
+@4028 = ~Spider Poison~
+
+@4029 = ~A small green bottle containing concentrated spider poison. The venom has been carefully extracted and sealed before it could lose its potency. Even a small quantity would be dangerous to anyone foolish enough to swallow it.~
+
+@4030 = ~Dragonspear Wine~
+
+@4031 = ~A bottle of wine from Castle Dragonspear, kept in an ornate ceramic vessel. The wine has a rich, distinctive aroma and has clearly been stored with care. Whatever its value as a drink, someone seeking rare ingredients may have a more particular use for it.~
+
+@4032 = ~Eye of the Ancient Beholder~
+
+@4033 = ~The eye of an ancient beholder, taken from the creature known as the Unseeing Eye. Even after death, the strange orb retains a faint magical presence. Its surface is cloudy and unsettling, and it seems to hold a trace of the creature's unnatural power. It is difficult to imagine any practical use for it except in the hands of someone who knows exactly what it is seeking.~
+
+@4034 = ~Golden Rose~
+
+@4035 = ~A rose fashioned entirely from gold. It is not a real flower, despite the delicate petals, leaves and stem being formed with remarkable care. Yet there is something strange about it. The craftsmanship is almost unnaturally precise, and the rose seems to possess a quality that ordinary gold should not have.~
+
+@4036 = ~Duergar Brandy~
+
+@4037 = ~A small wooden cask of harsh, potent brandy brewed by the duergar. Its smoky scent is strong enough to sting the nose, and the liquor within is clearly not meant for casual drinking. Whatever its intended purpose, it has the unmistakable character of a drink made far below the surface.~
+
+@4038 = ~Luriyl Gem~
+
+@4039 = ~A strange blue-white gem with an otherworldly clarity. Its surface catches the light in cold flashes, and something within the stone seems to shift when it is turned in the hand. Luriyl gems react to magical monitoring by giving off a soft glow and a gentle vibration when subjected to scrying probes. Such a property makes the gem valuable to anyone with an interest in magical detection or warding.~
+
+@4040 = ~Tarrasque Claw~
+
+@4041 = ~A massive claw taken from a tarrasque. The talon is unnaturally hard and retains a strange, stubborn vitality even after being severed from the beast. It is the sort of rare component that only someone with an unusual purpose could have any use for.~
+
+@4042 = ~Quentin~
+
+@4043 = ~Quentin's Components~
+
+@4044 = ~Blood Wyvern~
+
+@4045 = ~Meat~
+
+@4046 = ~A well-roasted cut of meat, browned over a cooking fire and ready to eat. It makes a filling meal for travellers who have spent a long day on the road.
+
+STATISTICS:
+
+Special:
+Restores 10 Hit Points
+
+Weight: 0 lb.~
+
+@4047 = ~Sausage~
+
+@4048 = ~Several links of seasoned sausage, smoked to preserve their flavour. A convenient meal for a traveller, whether eaten cold or warmed beside the campfire.
+
+STATISTICS:
+
+Special:
+Restores 6 Hit Points
+
+Weight: 0 lb.~
+
+@4049 = ~Bread~
+
+@4050 = ~A round loaf of bread with a thick, golden crust and a soft centre. Such loaves are baked daily in the kitchens and ovens of towns and villages across the Sword Coast.
+
+STATISTICS:
+
+Special:
+Restores 5 Hit Points
+
+Weight: 0 lb.~
+
+@4051 = ~Cookies~
+
+@4052 = ~A handful of small, crisp baked cookies. Sweet and easily carried, they offer a welcome treat after hours of travelling on an empty stomach.
+
+STATISTICS:
+
+Special:
+Restores 4 Hit Points
+
+Weight: 0 lb.~
+
+@4053 = ~Waterskin~
+
+@4054 = ~A sturdy leather waterskin filled with clean drinking water. Keeping one close at hand is sensible when crossing open roads, hot plains, or country far from a well.
+
+STATISTICS:
+
+Special:
+Restores 12 Hit Points
+
+Weight: 0 lb.~
+
+@4055 = ~Honey~
+
+@4056 = ~A stout jug of golden honey gathered from local beehives. Prized for its sweetness, honey is used to flavour food and drink and is readily traded by merchants.
+
+STATISTICS:
+
+Type: Trade Good
+Weight: 0 lb.~
+
+@4057 = ~Corn~
+
+@4058 = ~Freshly harvested ears of corn, bundled together for transport to market. Farmers sell their surplus to townsfolk and traders, who carry it to settlements in need of provisions.
+
+STATISTICS:
+
+Type: Trade Good
+Weight: 0 lb.~
+
+@4059 = ~Eggs~
+
+@4060 = ~A small basket of eggs gathered from a farmyard. They are a familiar sight in village markets and a valuable ingredient in the kitchens of inns and households.
+
+STATISTICS:
+
+Type: Trade Good
+Weight: 0 lb.~
+
+@4061 = ~Flour~
+
+@4062 = ~Several large sacks of finely milled flour, carefully tied to protect their contents from damp. Flour is a staple commodity used by bakers, innkeepers, and households throughout the realm.
+
+STATISTICS:
+
+Type: Trade Good
+Weight: 100 lb.~
+
+@4063 = ~Grain~
+
+@4064 = ~A heavy sack packed with grain from a recent harvest. Grain is one of the most important goods carried between farming villages and the markets of larger towns, where it is bought for food and milling.
+
+STATISTICS:
+
+Type: Trade Good
+Weight: 165 lb.~
+
+@4065 = ~Luxurious Fabric~
+
+@4066 = ~This is a piece of exotic Calimshan fabric.
+
+STATISTICS:
+
+Type: Trade Good
+Weight: 54 lb.~
+
+@4067 = ~Food Merchant - Provisions~
+
+@4068 = ~Food Merchant~
+
+@4069 = ~Eustache - Provisions~
+
+@4070 = ~Eustache~
+
+@4071 = ~Evelyn - Provisions~
+
+@4072 = ~Evelyn~
+
+@4073 = ~Bronya - Provisions~
+
+@4074 = ~Bronya~
+
+@4075 = ~Orina - Provisions~
+
+@4076 = ~Orina~
+
+@4077 = ~Cindel~
+
+@4078 = ~Will - Provisions~
+
+@4079 = ~Will~
+
+@4080 = ~Kash - Provisions~
+
+@4081 = ~Kash~
+
+@4082 = ~Riggo - Provisions~
+
+@4083 = ~Riggo~
+
+@4084 = ~Halina~
+
+@4085 = ~Jaden - Provisions~
+
+@4086 = ~Jaden~
+
+@4087 = ~Lynda~
+
+@4088 = ~Igor~
+
+@4089 = ~Adelaide~
+
+@4090 = ~Gorvin - Provisions~
+
+@4091 = ~Gorvin~
+
+@4092 = ~Ulvryn~
+
+@4093 = ~Miley - Provisions~
+
+@4094 = ~Blake - General Goods~
+
+@4095 = ~Miley~
+
+@4096 = ~Blake~
+
+@4097 = ~Felicia~
+

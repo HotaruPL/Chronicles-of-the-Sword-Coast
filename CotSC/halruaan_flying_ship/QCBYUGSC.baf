@@ -1,0 +1,19 @@
+IF
+    Global("QCFlyShipQuest","GLOBAL",10)
+    Global("QCBeynUGBSpawned","GLOBAL",0)
+    !Dead("QCBYNDIE")
+THEN
+    RESPONSE #100
+        SetGlobal("QCBeynUGBSpawned","GLOBAL",1)
+        CreateCreature("QCBEYUGB",[1764.590],0)
+END
+
+IF
+    Global("QCBeynUGBSpawned","GLOBAL",1)
+    Global("QCBeynUGBTalked","GLOBAL",0)
+    Range(Player1,20)
+THEN
+    RESPONSE #100
+        FaceObject(Player1)
+        StartDialogueNoSet(Player1)
+END

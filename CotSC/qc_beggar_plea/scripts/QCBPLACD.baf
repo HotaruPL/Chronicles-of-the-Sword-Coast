@@ -1,0 +1,25 @@
+// Lacedon minions rally after the Ghoul Lord threatens the party.
+IF
+  !TimeOfDay(NIGHT)
+  Global("QCBP_FIGHT","GLOBAL",0)
+  Global("QCBP_GHDEAD","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCBP_GH_SPAWNED","GLOBAL",0)
+    DestroySelf()
+END
+IF
+  Global("QCBP_FIGHT","GLOBAL",1)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END
+IF
+  Global("QCBP_FIGHT","GLOBAL",1)
+  !See(NearestEnemyOf(Myself))
+  InMyArea(Player1)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END

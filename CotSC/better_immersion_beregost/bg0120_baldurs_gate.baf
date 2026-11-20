@@ -1,0 +1,19 @@
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - BG0120
+// ---------------------------------------------------------------------------
+
+// Wandering Halfling Commoner at 252,486.
+IF
+  !Exists("BIB1201")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB1201",[252.486],0)
+END
+
+// Wandering Cook's Assistant at 803,723.
+IF
+  !Exists("BIB1202")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB1202",[803.723],0)
+END

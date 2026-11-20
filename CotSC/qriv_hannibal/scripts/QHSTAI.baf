@@ -1,0 +1,55 @@
+// Use potion once, then try to approach and land a backstab.
+IF
+  Global("QH_ALARM","GLOBAL",0)
+  OR(3)
+    See([PC])
+    AttackedBy([GOODCUTOFF],DEFAULT)
+    HitBy([GOODCUTOFF],0)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_ALARM","GLOBAL",1)
+    GlobalShout(9188)
+END
+
+IF
+  Heard([ANYONE],9188)
+  Global("QH_ALARM","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_ALARM","GLOBAL",1)
+END
+
+IF
+  Global("QH_ALARM","GLOBAL",1)
+  Global("QH_USED_POT","LOCALS",0)
+  HasItem("POTN10",Myself)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_USED_POT","LOCALS",1)
+    UseItem("POTN10",Myself)
+END
+
+IF
+  Global("QH_ALARM","GLOBAL",1)
+  !Range(Player1,9)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QH_ALARM","GLOBAL",1)
+  Range(Player1,9)
+  Global("QH_FIRST_STAB","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_FIRST_STAB","LOCALS",1)
+    Attack(Player1)
+END
+
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

@@ -1,0 +1,6 @@
+IF
+    Clicked(Player1)
+THEN
+    RESPONSE #100
+        EscapeArea()
+END

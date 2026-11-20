@@ -1,0 +1,11 @@
+// Zephira combat follower: copied from the Dark Horizons Tristan/Isolde
+// architecture, with a dedicated override fallback so she changes allegiance
+// as soon as Dimwoork starts the fight.
+IF
+  Global("DH9_TRIST_FIGHT","GLOBAL",1)
+  !Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    Enemy()
+    AttackReevaluate(Player1,30)
+END

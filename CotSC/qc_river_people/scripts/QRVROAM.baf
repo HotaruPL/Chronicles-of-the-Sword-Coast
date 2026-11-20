@@ -1,0 +1,8 @@
+IF
+  True()
+THEN
+  RESPONSE #35
+    RandomWalk()
+  RESPONSE #65
+    NoAction()
+END

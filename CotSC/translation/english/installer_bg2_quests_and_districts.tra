@@ -1,0 +1,378 @@
+// CotSC Batch 33: BG2 quests and districts, English installer names and descriptions.
+// Original English preserved verbatim. No NPC, quest, area or script logic changes.
+
+@3000 = ~Bottle of Wine~
+
+@3001 = ~A bottle of ordinary wine from a local merchant. It bears no special markings.~
+
+@3002 = ~Felicity's Ring~
+
+@3003 = ~Felicity's Ring
+
+A finely fashioned gold ring decorated with delicate leaves. Its owner, Felicity, has been searching desperately for this keepsake somewhere in Athkatla's River District. It appears mundane, but its sentimental value is unmistakable.~
+
+@3004 = ~Felicity's Ring
+
+A finely fashioned gold ring decorated with delicate leaves. Felicity may be very happy to have it returned to her.~
+
+@3005 = ~Commoner~
+
+@3006 = ~Amnian Soldier~
+
+@3007 = ~Halfling Commoner~
+
+@3008 = ~Drunk Commoner~
+
+@3009 = ~Kobold Commoner~
+
+@3010 = ~Hobgoblin Commoner~
+
+@3011 = ~Worker~
+
+@3012 = ~Guard~
+
+@3013 = ~Shady Man~
+
+@3014 = ~Thug~
+
+@3015 = ~Half-Elf Commoner~
+
+@3016 = ~Felicity~
+
+@3017 = ~Cat~
+
+@3018 = ~Hannibal's Holy Symbol~
+
+@3019 = ~Hannibal's Holy Symbol
+
+This weathered holy symbol of Helm was once worn by Hannibal, the pirate who held the River District in fear. He served as a priest of the Watcher before renouncing his vows and taking a darker path, but he kept this token from his former life.
+
+Though the symbol no longer reflects its owner's faith, its history may mean something to the priests of Helm. Senyan at the Watchful Shield may wish to see it as proof that Hannibal has been brought to justice.~
+
+@3020 = ~Brigand~
+
+@3021 = ~Hannibal~
+
+@3022 = ~Cormack~
+
+@3023 = ~Blade~
+
+@3024 = ~Ring of Magnetic Appeal~
+
+@3025 = ~Ring of Magnetic Appeal
+
+A rich nobleman once rose to power through formidable influence and shrewd negotiation, though his hideous appearance drove even his closest associates from his company. Desperate to be seen as charming rather than repulsive, he commissioned a mage to enchant a personal ring so that others would behold an idealised version of his face. He wore it until his death, after which the ring passed through collectors and pawnbrokers, eventually vanishing into the markets of Amn.
+
+STATISTICS:
+Charisma: Set to 18 while equipped
+Weight: 0~
+
+@3026 = ~An elegant old silver ring whose polished band seems to catch the eye even in dim light.~
+
+@3027 = ~Delgado~
+
+@3028 = ~Xzor~
+
+@3029 = ~Nate~
+
+@3030 = ~Basilisk~
+
+@3031 = ~Thylion~
+
+@3032 = ~Larissa~
+
+@3033 = ~Baldie~
+
+@3034 = ~Warehouse Worker~
+
+@3035 = ~Daltan~
+
+@3036 = ~Leslie~
+
+@3037 = ~Black~
+
+@3038 = ~Evie~
+
+@3039 = ~Dar'kan~
+
+@3040 = ~Spectral Wolf of the Runestone~
+
+@3041 = ~Key to Hannibal's Base~
+
+@3042 = ~A heavy brass key carried by Leslie, one of the dangerous wardens employed in the River District warehouses. It bears a shallow carving of a sea-serpent wrapped around an anchor. This may open an entrance to Hannibal's hideout once it has been discovered.~
+
+@3043 = ~An old brass key stamped with an anchor and a sea-serpent.~
+
+@3044 = ~Wolf~
+
+@3045 = ~Squirrel~
+
+@3046 = ~Stallion~
+
+@3047 = ~Cow~
+
+@3048 = ~Brewer~
+
+@3049 = ~Deer~
+
+@3050 = ~Forest Brewery Drinks~
+
+@3051 = ~Defender of Amn~
+
+@3052 = ~Defender of Amn was once presented to one of the fairest soldiers in Amnian service, a young guardian whose determination to drive out crime was surpassed only by his faith in the goodness of others. He hoped to make his country a safer, kinder place.
+
+That faith became his undoing. A band of orcs approached the gates of Athkatla professing peaceful intentions. Trusting their word, the soldier allowed them through without collecting the required toll. Once inside, the orcs pillaged several buildings and murdered an innocent citizen before escaping.
+
+Dismissed from service and shunned by those who had praised him, the soldier found himself consumed by guilt. Unable to bear the disgrace or forgive himself, he took his own life. His shield passed into his family's keeping, a gilded reminder that even honourable intentions may have tragic consequences.
+
+STATISTICS:
+
+Armor Class Bonus: +3
+Armor Class Bonus vs. Missile Attacks: +5 (total)~
+
+@3053 = ~Brewer's Draught of Disinterest~
+
+@3054 = ~An unusual golden draught sealed with a sapphire-blue stopper. The brewer claims it can diminish a man's romantic appetites. Larissa asked for this potion as part of a desperate attempt to salvage her marriage. It is not intended for the party to drink.~
+
+@3055 = ~Brewer's Draught of Enchantment~
+
+@3056 = ~A dark draught kept in an ornate silver-rimmed vessel. The brewer claims it can make the drinker's affections turn toward a chosen beloved. Larissa requested it for her husband. It is not intended for the party to drink.~
+
+@3057 = ~Bassilus~
+
+@3058 = ~Senyan~
+
+@3059 = ~Obsidian Sabre +2~
+
+@3060 = ~Obsidian Sabre +2
+
+This long, dark-hilted sabre is said to have belonged to Fzoul Chembryl, the ruthlessly ambitious priest who held great influence over the religious forces of Zhentil Keep. Fzoul used faith, fear and political cunning as instruments of command. Few who crossed his path ever forgot the price of defiance.
+
+The blade's origins are disputed. Some maintain that Chembryl carried it as a mark of office before setting it aside for more potent symbols of his authority. Its enchantment has endured: the steel burns with a captive spark that scorches whatever it strikes. Whatever its true provenance, the weapon has passed far beyond the hands that once claimed it.
+
+STATISTICS:
+
+THAC0: +2 bonus
+Damage: 1d8+2 slashing, plus 1 fire damage
+Speed Factor: 3
+Proficiency Type: Long Sword
+Type: One-handed
+Requires: 6 Strength
+Weight: 4~
+
+@3061 = ~Hiarfi's Flute~
+
+@3062 = ~Hiarfi's Flute
+
+A carefully crafted wooden flute, presented to Hiarfi upon his graduation from New Olamn, the bards' college in Waterdeep. More than a musical instrument, it is his personal emblem of achievement. Hiarfi's name has been etched discreetly along the lower end.~
+
+@3063 = ~A finely made wooden flute, bearing its owner's name.~
+
+@3064 = ~Hiarfi~
+
+@3065 = ~Sirian~
+
+@3066 = ~Unicorn~
+
+@3067 = ~Moose~
+
+@3068 = ~Eaglehorn~
+
+@3069 = ~Emhrys~
+
+@3070 = ~Drowned in Blood~
+
+@3071 = ~Vampiric Wolf~
+
+@3072 = ~Distorted Memory~
+
+@3073 = ~Dark Imoen~
+
+@3074 = ~Throwing Axe~
+
+@3075 = ~Throwing Axe +2~
+
+@3076 = ~These enchanted throwing axes are consumed when thrown, unlike the returning Throwing Axe +2.
+
+STATISTICS:
+
+THAC0: +2
+Damage: 1d6+2
+Enchantment: +2
+Type: One-handed throwing axe~
+
+@3077 = ~Khalid's Wrath~
+
+@3078 = ~Long Sword +2 'Khalid's Wrath'~
+
+@3079 = ~This sword is not the weapon Khalid once carried. It is a memory of him, forged from grief and fear in a broken vision of Candlekeep. Its steel retains the familiar balance of a Long Sword +2, but its strikes leave an unnatural acidic sting.
+
+STATISTICS:
+
+THAC0: +2
+Damage: 1d8+2 slashing, plus 1 acid damage on each hit
+Enchantment: +2
+Proficiency: Long Sword~
+
+@3080 = ~Ashirukuru~
+
+@3081 = ~Bonebat~
+
+@3082 = ~Devil Shade~
+
+@3083 = ~Shadow~
+
+@3084 = ~Battle Horror~
+
+@3085 = ~Ogre Warrior~
+
+@3086 = ~Dark Jaheira~
+
+@3087 = ~Dark Khalid~
+
+@3088 = ~Buckler of Seven Reflexes~
+
+@3089 = ~Elenvar of the Silver Bough, an elven archer of the forest marches, survived seven battles in which his companions believed death had claimed him. On the seventh occasion, he knelt beneath a moonlit oak and offered his buckler to Selune, asking that his hands remain steady whenever he drew his bow to defend the innocent.
+
+The Moonmaiden blessed the shield, and Elenvar carried it for decades through raids, sieges, and skirmishes along the woodland roads. He said the blessing did not make him fearless; rather, it gave him the swiftness to act before fear could take hold. The light buckler remains unusually comfortable to wear, and the blessing sharpens the bearer's natural reflexes.
+
+STATISTICS:
+
+Equipped abilities:
+Dexterity: +1
+Armor Class: +1
+No protection against missile or piercing attacks
+
+Weight: 2
+Requires: 4 Strength~
+
+@3090 = ~Rabbit~
+
+@3091 = ~Triss~
+
+@3092 = ~Bhaal's Cultist~
+
+@3093 = ~Bhaal's Priest~
+
+@3094 = ~Malzoth~
+
+@3095 = ~Woman~
+
+@3096 = ~Madele~
+
+@3097 = ~Geherant~
+
+@3098 = ~Gorion~
+
+@3099 = ~Child~
+
+@3100 = ~Boy~
+
+@3101 = ~Temple Guardian~
+
+@3102 = ~Bhaal's Key~
+
+@3103 = ~A key found on a priestess who was sacrificing children. You do not know what it opens.~
+
+@3104 = ~Core~
+
+@3105 = ~Gnome Commoner~
+
+@3106 = ~Elven Commoner~
+
+@3107 = ~Dog~
+
+@3108 = ~Cattleman~
+
+@3109 = ~Dwarf Commoner~
+
+@3110 = ~Hobgoblin~
+
+@3111 = ~Bouncer~
+
+@3112 = ~Orc Beggar~
+
+@3113 = ~Gnoll Commoner~
+
+@3114 = ~Orc~
+
+@3115 = ~Elven Beggar~
+
+@3116 = ~Aggressive Dog~
+
+@3117 = ~Elven Warrior~
+
+@3118 = ~Half-Ogre~
+
+@3119 = ~Tiefling~
+
+@3120 = ~Panther~
+
+@3121 = ~Drawing~
+
+@3122 = ~Irving's Drawing~
+
+@3123 = ~Drawing received by an artist for helping him with concentrating. It is... something. The contrast, depth of colour... eh.~
+
+@3124 = ~Gnome Beggar~
+
+@3125 = ~Goblin Fisherman~
+
+@3126 = ~Irving~
+
+@3127 = ~Alina~
+
+@3128 = ~Varun~
+
+@3129 = ~Nobleman~
+
+@3130 = ~Noblewoman~
+
+@3131 = ~Prisoner~
+
+@3132 = ~Dwarven Commoner~
+
+@3133 = ~Vandal~
+
+@3134 = ~Suicidal Commoner~
+
+@3135 = ~Elven Mourner~
+
+@3136 = ~Amulet~
+
+@3137 = ~Fistacio's Amulet~
+
+@3138 = ~An amulet claimed by the orog Fistacio and carried by Pilther, a frightened deserter caught between Athkatla's rival thieves.~
+
+@3139 = ~Eulicia~
+
+@3140 = ~Gerais~
+
+@3141 = ~Velais~
+
+@3142 = ~Fistacio~
+
+@3143 = ~Potion Merchant~
+
+@3144 = ~Lifter~
+
+@3145 = ~Elven Fisherman~
+
+@3146 = ~Pilther~
+
+@3147 = ~Child's Body~
+
+@3148 = ~The lifeless body of a child taken by Hodrig. The small form is cold and still, wrapped in whatever cloth was at hand. A grieving spirit in Trademeet waits for the child's return.~
+
+@3149 = ~Half-Elven Commoner~
+
+@3150 = ~Orc Commoner~
+
+@3151 = ~Spectre~
+
+@3152 = ~Hodrig~
+
+@3153 = ~Hodrig's Acolyte~
+
+@3154 = ~Cook~
+

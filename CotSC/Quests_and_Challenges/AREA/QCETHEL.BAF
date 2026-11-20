@@ -1,0 +1,71 @@
+// Auntie Ethel creature override script.
+// The same CRE works both outside and inside the Submerged House.
+
+// Transform into Cornugon immediately when Ethel is attacked or the dialogue
+// reaches a hostile conclusion. DestroySelf() removes the Dushai creature
+// without killing her, avoiding a reputation penalty. The Cornugon is created
+// next to Ethel with the same name and carries the altar key.
+IF
+  Global("QCE_ETHEL_TRANSFORMED","LOCALS",0)
+  OR(2)
+    AttackedBy([ANYONE],DEFAULT)
+    Global("QCE_ETHEL_TRANSFORM","LOCALS",1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCE_ETHEL_TRANSFORMED","LOCALS",1)
+    CreateCreature("QCEBANS",[-1.-1],0)
+    ActionOverride("QCEBANS_DEAD",Enemy())
+    ActionOverride("QCEBANS_DEAD",Attack(Player1))
+    DestroySelf()
+END
+
+// Exterior: approach the party and start the invitation conversation.
+IF
+  Global("QCE_ETHEL_INTRO","GLOBAL",0)
+  Global("QCE_ETHEL_TALKED","LOCALS",0)
+  See(Player1)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QCE_ETHEL_INTRO","GLOBAL",0)
+  Global("QCE_ETHEL_TALKED","LOCALS",0)
+  See(Player1)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCE_ETHEL_TALKED","LOCALS",1)
+    SetGlobal("QCE_ETHEL_INTRO","GLOBAL",1)
+END
+
+IF
+  Global("QCE_ETHEL_INTRO","GLOBAL",1)
+  Global("QCE_ETHEL_TALKED","LOCALS",1)
+THEN
+  RESPONSE #100
+    Dialogue(Player1)
+END
+
+// Interior: Ethel is already part of the area file, so there is no spawn step.
+IF
+  Global("QCE_ETHEL_INTRO","GLOBAL",4)
+  Global("QCE_ETHEL_INSIDE_TALKED","LOCALS",0)
+  See(Player1)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCE_ETHEL_INSIDE_TALKED","LOCALS",1)
+    Dialogue(Player1)
+END
+
+// Restore normal player dialogue after Ethel's first interior conversation has ended.
+IF
+  Global("QCE_ETHEL_INTRO","GLOBAL",4)
+  Global("QCE_ETHEL_INSIDE_TALKED","LOCALS",1)
+THEN
+  RESPONSE #100
+    DialogInterrupt(TRUE)
+END

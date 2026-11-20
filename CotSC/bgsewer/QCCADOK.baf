@@ -1,0 +1,21 @@
+// Cadok: SHVERT-based creature. Approach the party, then explicitly start
+// QCCADOK.DLG without relying on the creature's current dialog assignment.
+
+IF
+  Global("QCCADOK_TALKED","LOCALS",0)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCCADOK_TALKED","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCCADOK",Player1)
+END
+
+IF
+  Global("QCCADOK_TALKED","LOCALS",0)
+  See(Player1)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END

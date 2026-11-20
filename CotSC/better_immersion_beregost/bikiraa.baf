@@ -1,0 +1,22 @@
+// Kira approaches the first party member she sees and initiates her dialogue once.
+IF
+  See([PC])
+  Global("BIB_KIRA_MET","LOCALS",0)
+  !StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    SetGlobal("BIB_KIRA_MET","LOCALS",1)
+    MoveToObject(LastSeenBy(Myself))
+    StartDialogueNoSet(LastSeenBy(Myself))
+END
+
+// After a peaceful conclusion, Kira walks away and disappears.
+IF
+  Global("BIB_KIRA_LEAVE","LOCALS",1)
+  !StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    MoveToPoint([4090.1288])
+    Wait(2)
+    DestroySelf()
+END

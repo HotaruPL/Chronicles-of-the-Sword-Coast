@@ -1,0 +1,12 @@
+// Start Eaglehorn's new final exchange once party is back in his hut.
+IF
+  Global("QBT_WOKEN","GLOBAL",1)
+  Global("QBT_EAG_TALK","GLOBAL",0)
+  Global("QBT_DONE","GLOBAL",0)
+  Range(Player1,22)
+THEN
+  RESPONSE #100
+    SetGlobal("QBT_EAG_TALK","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QBTREC",Player1)
+END

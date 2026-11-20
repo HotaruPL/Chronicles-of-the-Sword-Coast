@@ -1,0 +1,8 @@
+IF
+  Global("QCVarunQuest","GLOBAL",1)
+  Global("QCVarunGateSpawned","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCVarunGateSpawned","GLOBAL",1)
+    CreateCreature("QCVGATE",[757.587],4)
+END

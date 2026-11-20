@@ -1,0 +1,19 @@
+// Second meeting, only available after meeting Valas with Viconia present.
+IF
+  Global("QCV_STAGE","GLOBAL",2)
+THEN
+  RESPONSE #100
+    EscapeArea()
+END
+IF
+  Global("QCV_STAGE","GLOBAL",1)
+  IsValidForPartyDialog("Viconia")
+  Global("QCV_TALK2","LOCALS",0)
+  See(Player1)
+  Range(Player1,18)
+THEN
+  RESPONSE #100
+    SetGlobal("QCV_TALK2","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCVVAL2",Player1)
+END

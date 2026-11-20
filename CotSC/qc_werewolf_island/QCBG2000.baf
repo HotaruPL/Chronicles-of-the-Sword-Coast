@@ -1,0 +1,15 @@
+IF
+  Global("QCLahlBug","GLOBAL",1)
+  NumDead("QCLAHANK",5)
+THEN
+  RESPONSE #100
+    SetGlobal("QCLahlBug","GLOBAL",2)
+END
+
+IF
+  Global("QCLahlBug","GLOBAL",2)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    ActionOverride("Lahl",StartDialogueNoSet(Player1))
+END

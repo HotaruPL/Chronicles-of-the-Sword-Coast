@@ -1,0 +1,7 @@
+IF
+  Global("QCKayaPose","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCKayaPose","LOCALS",1)
+    PlayDead(1000000)
+END

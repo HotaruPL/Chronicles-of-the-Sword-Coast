@@ -1,0 +1,23 @@
+// Move the stolen Roach back to the Friendly Arm only after the dialogue
+// has finished changing the quest state.  Doing this in the area script
+// avoids trying to destroy and recreate the same creature during dialogue.
+IF
+  OR(2)
+    Global("QCHORSE_STATE","GLOBAL",2)
+    Global("QCHORSE_STATE","GLOBAL",3)
+  Global("QCHORSE_ROACH_RETURNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCHORSE_ROACH_RETURNED","GLOBAL",1)
+    ActionOverride("QCHROACH",DestroySelf())
+    Wait(1)
+    CreateCreature("QCHROACH",[2221.1758],4)
+END
+
+IF
+  Global("QCHORSE_STATE","GLOBAL",6)
+  Dead("QCHASHRK")
+THEN
+  RESPONSE #100
+    SetGlobal("QCHORSE_STATE","GLOBAL",3)
+END

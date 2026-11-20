@@ -1,0 +1,13 @@
+// Hannibal hideout container #6: native, disarmable Magic Missile trap.
+// Unlike v4.6 this script never runs on a True() trigger.
+// The engine's container flags/difficulty permit detecting and disarming.
+// Native containers with trap reset disabled are one-use; the separate
+// GLOBAL guard also prevents a second cast if this BCS receives a repeat event.
+IF
+  Opened([ANYONE])
+  Global("QH_TRAP_06_USED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_TRAP_06_USED","GLOBAL",1)
+    ReallyForceSpellRES("SPWI112",LastTrigger)
+END

@@ -1,0 +1,30 @@
+// After reaching Irenicus' Dungeon, restore a carried Dragonspear Wine
+// *once*, and only when it was actually collected in SoD and not given to Quentin.
+// Wait for the opening item-removal sequence before restoring the quest item.
+IF
+  Global("QC_QF_DSWIN_FOUND","GLOBAL",1)
+  Global("QC_QF_DSWIN","GLOBAL",0)
+  Global("QC_QF_DSWIN_BG2","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QC_QF_DSWIN_BG2","GLOBAL",1)
+    SetGlobalTimer("QC_QF_DSWIN_WAIT","GLOBAL",60)
+END
+IF
+  Global("QC_QF_DSWIN_BG2","GLOBAL",1)
+  GlobalTimerExpired("QC_QF_DSWIN_WAIT","GLOBAL")
+  Global("QC_QF_DSWIN","GLOBAL",0)
+  !PartyHasItem("QFIDSWIN")
+THEN
+  RESPONSE #100
+    SetGlobal("QC_QF_DSWIN_BG2","GLOBAL",2)
+    ActionOverride(Player1,CreateItem("QFIDSWIN",1,0,0))
+END
+IF
+  Global("QC_QF_DSWIN_BG2","GLOBAL",1)
+  GlobalTimerExpired("QC_QF_DSWIN_WAIT","GLOBAL")
+  PartyHasItem("QFIDSWIN")
+THEN
+  RESPONSE #100
+    SetGlobal("QC_QF_DSWIN_BG2","GLOBAL",2)
+END

@@ -1,0 +1,7 @@
+IF
+    Global("QC_SHANDALAR_REMOVE","GLOBAL",1)
+    Exists("QCSHAND")
+THEN
+    RESPONSE #100
+        ActionOverride("QCSHAND",DestroySelf())
+END

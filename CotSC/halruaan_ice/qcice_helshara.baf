@@ -1,0 +1,10 @@
+IF
+    Range(Player1,20)
+    Global("QCIceHelsharaTalked","LOCALS",0)
+THEN
+    RESPONSE #100
+        SetGlobal("QCIceHelsharaTalked","LOCALS",1)
+        MoveToObject(Player1)
+        FaceObject(Player1)
+        StartDialog("QCHLICE",Player1)
+END

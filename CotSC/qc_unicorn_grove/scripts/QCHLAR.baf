@@ -1,0 +1,43 @@
+// Narration and encounters, area resources kept unchanged.
+IF
+  Global("QCH_MEMENTER","GLOBAL",1)
+  Global("QCH_INTRO_DONE","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_INTRO_DONE","GLOBAL",1)
+    DisplayString(Player1,@1)
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  IsValidForPartyDialog("Imoen2")
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    ActionOverride("Imoen2",StartDialog("QCHIMTR",Player1))
+END
+IF
+  Dead("QCDREPP")
+  Global("QCH_DREPP_DEAD","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_DREPP_DEAD","GLOBAL",1)
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  IsValidForPartyDialog("Imoen2")
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    ActionOverride("Imoen2",StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DARK_FIGHT","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_DARK_FIGHT","GLOBAL",2)
+    CreateCreature("QCHMUMY",[1965.1096],S)
+    CreateCreature("QCHMUMY",[1613.1307],S)
+    ActionOverride("QCDIMOE",Enemy())
+END

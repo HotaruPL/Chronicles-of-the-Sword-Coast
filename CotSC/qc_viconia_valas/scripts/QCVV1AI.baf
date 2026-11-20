@@ -1,0 +1,42 @@
+// First appearance, stays neutral unless attacked through the dialogue.
+// The second creature is created only once after Viconia's farewell.
+IF
+  Global("QCV_STAGE","GLOBAL",1)
+  Global("QCV_MOVED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCV_MOVED","GLOBAL",1)
+    CreateCreature("QCVVAL2",[3949.1014],0)
+    EscapeArea()
+END
+IF
+  Global("QCV_STAGE","GLOBAL",3)
+THEN
+  RESPONSE #100
+    EscapeArea()
+END
+IF
+  Global("QCV_STAGE","GLOBAL",4)
+  Allegiance(Myself,NEUTRAL)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+IF
+  Global("QCV_STAGE","GLOBAL",4)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END
+IF
+  Global("QCV_STAGE","GLOBAL",0)
+  Global("QCV_TALK","LOCALS",0)
+  See(Player1)
+  Range(Player1,18)
+THEN
+  RESPONSE #100
+    SetGlobal("QCV_TALK","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCVVAL1",Player1)
+END

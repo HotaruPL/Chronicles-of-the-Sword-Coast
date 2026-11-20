@@ -1,0 +1,25 @@
+// Shante - preserve the proven Fixed 51 dialogue-start chain.
+// She waits until BOTH sewerfolk have been killed.
+
+IF
+  Global("QCSHANTE_TALKED","LOCALS",0)
+  Dead("QSEWRF1_DEAD")
+  Dead("QSEWRF3_DEAD")
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCSHANTE_TALKED","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCSHANTE",Player1)
+END
+
+IF
+  Global("QCSHANTE_TALKED","LOCALS",0)
+  Dead("QSEWRF1_DEAD")
+  Dead("QSEWRF3_DEAD")
+  See(Player1)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END

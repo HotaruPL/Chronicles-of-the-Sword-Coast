@@ -1,0 +1,8 @@
+IF
+  Global("QCHW_BG4600","BG4600",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCHW_BG4600","BG4600",1)
+    CreateCreature("CATLYN01",[4287.2960],0)
+    CreateCreature("CATLYN01",[4361.3013],0)
+END

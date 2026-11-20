@@ -1,0 +1,9 @@
+IF
+    Global("QCFlyShipQuest","GLOBAL",3)
+    Global("QCErvinFA_Spawned","GLOBAL",0)
+    !Exists("QCERVIN")
+THEN
+    RESPONSE #100
+        CreateCreature("QCERVIN",[208.652],0)
+        SetGlobal("QCErvinFA_Spawned","GLOBAL",1)
+END

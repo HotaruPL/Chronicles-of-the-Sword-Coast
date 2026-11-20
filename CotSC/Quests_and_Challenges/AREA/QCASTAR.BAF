@@ -1,0 +1,33 @@
+IF
+  Global("QCASTAR_TALKED","LOCALS",0)
+  See(Player1)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QCASTAR_TALKED","LOCALS",0)
+  See(Player1)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCASTAR_TALKED","LOCALS",1)
+END
+
+IF
+  Global("QCASTAR_TALKED","LOCALS",1)
+  See(Player1)
+THEN
+  RESPONSE #100
+    Dialogue(Player1)
+END
+
+IF
+  Global("QCASTAR_TALKED","LOCALS",4)
+THEN
+  RESPONSE #100
+    Enemy()
+    Attack(Player1)
+END

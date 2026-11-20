@@ -1,0 +1,14 @@
+// ---------------------------------------------------------------------------
+// PWYTR2 - Red Fang Marauders Cave area script
+// ---------------------------------------------------------------------------
+
+IF
+  Exists("PWYREDQ")
+  !Dead("PWYREDQ")
+  !Global("PWY_RED_QUEEN_DIALOGUE","GLOBAL",1)
+  See([PC])
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_RED_QUEEN_DIALOGUE","GLOBAL",1)
+    StartDialogue("PWYREDQ",Player1)
+END

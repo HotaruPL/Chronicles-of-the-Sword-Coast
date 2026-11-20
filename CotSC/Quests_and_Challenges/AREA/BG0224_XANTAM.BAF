@@ -1,0 +1,15 @@
+IF
+  Global("QAC_XANTAM_ENCOUNTER","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QAC_XANTAM_ENCOUNTER","GLOBAL",1)
+    CreateCreature("QCXANTAM",[771.623],0)
+    Wait(1)
+    DisplayStringHead("QCXANTAM",@5)
+    Wait(2)
+    CreateCreature("QCXMIN01",[773.664],0)
+    CreateCreature("QCXMIN02",[822.637],0)
+    ActionOverride("QCXANTAM",Enemy())
+    ActionOverride("QCXMIN01",Enemy())
+    ActionOverride("QCXMIN02",Enemy())
+END

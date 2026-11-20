@@ -1,0 +1,28 @@
+// BG1803 - Davaeorn's letter is created in Container 10 only after Peter's
+// letter has actually been collected by the party. Once DHNOTE3 is taken,
+// Viconia reacts exactly once as before.
+IF
+  Global("DH8_DAV_NOTE_PLACED","BG1803",0)
+  PartyHasItem("DHNOTE2")
+THEN
+  RESPONSE #100
+    ActionOverride("Container10",CreateItem("DHNOTE3",0,0,0))
+    SetGlobal("DH8_DAV_NOTE_PLACED","BG1803",1)
+END
+
+IF
+  Global("DH7_CLUE2","GLOBAL",1)
+  Global("DH7_DAV_NOTE","BG1803",0)
+  Global("DH7_CLUE3","GLOBAL",0)
+  Global("DH7_CLUE3_STARTED","GLOBAL",0)
+  PartyHasItem("DHNOTE3")
+  InParty("VICONIA")
+THEN
+  RESPONSE #100
+    SetGlobal("DH7_DAV_NOTE","BG1803",1)
+    SetGlobal("DH7_CLUE3","GLOBAL",1)
+    SetGlobal("DH7_CLUE3_STARTED","GLOBAL",1)
+    ActionOverride("VICONIA",FaceObject(Player1))
+    ActionOverride("VICONIA",Wait(1))
+    ActionOverride("VICONIA",StartDialog("DHVICON",Player1))
+END

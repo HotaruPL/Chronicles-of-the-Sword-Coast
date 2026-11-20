@@ -1,0 +1,16 @@
+// TORMFO - POST-ALMA RETURN STATE
+// Create the exact same Nyriel creature used by the Shriveled Potato tavern.
+// We deliberately do not use CreateCreatureObjectCopy: that can retain the
+// target Alma object's visual state.  A fresh BITNYRIE creature gives us the
+// tavern Nyriel sprite/animation, scripts, DV and dialogue assignment.
+IF
+  Global("TCR_ALMA_DEAD","GLOBAL",1)
+  Global("TCR_NYR_FORTRESS_DONE","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("TCR_NYR_FORTRESS_DONE","GLOBAL",1)
+    SetGlobal("TCR_TAVERN_NYR_GONE","GLOBAL",1)
+    ActionOverride("TORMALMA",DestroySelf())
+    ActionOverride("BITNYRIE",DestroySelf())
+    CreateCreature("BITNYRIE",[830.488],1)
+END

@@ -1,0 +1,113 @@
+// v30 fallback for the interior Candlekeep Imoen scene.
+// Original Imoen2 path remains first choice. Only use this when
+// IsValidForPartyDialog("Imoen2") is false, without altering her identity or scripts.
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen2",Player2)
+  InMyArea(Player2)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player2,StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen",Player2)
+  InMyArea(Player2)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player2,StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen2",Player3)
+  InMyArea(Player3)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player3,StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen",Player3)
+  InMyArea(Player3)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player3,StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen2",Player4)
+  InMyArea(Player4)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player4,StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen",Player4)
+  InMyArea(Player4)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player4,StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen2",Player5)
+  InMyArea(Player5)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player5,StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen",Player5)
+  InMyArea(Player5)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player5,StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen2",Player6)
+  InMyArea(Player6)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player6,StartDialog("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",0)
+  Global("QCH_ROOM_DONE","GLOBAL",1)
+  !IsValidForPartyDialog("Imoen2")
+  Name("Imoen",Player6)
+  InMyArea(Player6)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMROOM","GLOBAL",1)
+    ActionOverride(Player6,StartDialog("QCHIMTR",Player1))
+END

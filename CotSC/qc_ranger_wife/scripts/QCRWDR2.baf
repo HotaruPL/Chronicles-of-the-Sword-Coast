@@ -1,0 +1,45 @@
+// v1.1: Second follower becomes hostile alongside Seorad and actively fights.
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  !Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+  Global("QC_F2_AI","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QC_F2_AI","LOCALS",1)
+    SetGlobalTimer("QC_F2_NEXT","LOCALS",6)
+    ReallyForceSpellRES("SPPR105",NearestEnemyOf(Myself)) // Entangle
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+  Global("QC_F2_AI","LOCALS",1)
+  GlobalTimerExpired("QC_F2_NEXT","LOCALS")
+THEN
+  RESPONSE #100
+    SetGlobal("QC_F2_AI","LOCALS",2)
+    ReallyForceSpellRES("SPPR106",NearestEnemyOf(Myself)) // Magical Stone
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    MoveToObject(NearestEnemyOf(Myself))
+END

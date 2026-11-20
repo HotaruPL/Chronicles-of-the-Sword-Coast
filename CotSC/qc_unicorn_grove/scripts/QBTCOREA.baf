@@ -1,0 +1,7 @@
+// Core uses BDHALAT's original general/class combat scripts; no dialogue or vocal barks.
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END

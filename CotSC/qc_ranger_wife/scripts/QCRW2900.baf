@@ -1,0 +1,35 @@
+// Spawn Erica ONLY after the party has accepted Don's quest.
+IF
+  Global("QCRW_STAGE","GLOBAL",1)
+  Global("QCRW_ERA_LARSWOOD","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCRW_ERA_LARSWOOD","GLOBAL",1)
+    CreateCreature("QCRWERA",[4678.1696],0)
+END
+// Seorad and two druids are summoned ONLY if party tries to force Erica.
+IF
+  Global("QCRW_STAGE","GLOBAL",4)
+  Global("QCRW_SEOR_APPEARED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCRW_SEOR_APPEARED","GLOBAL",1)
+    CreateCreature("QCRWSEOR",[4844.1798],0)
+    CreateCreature("QCRWDR1",[4815.1874],0)
+    CreateCreature("QCRWDR2",[4909.1841],0)
+END
+// After a peaceful persuasion or after Seorad's death, transfer the entire
+// party to Don, one action per player slot; do not teleport only Player1.
+IF
+  Global("QCRW_STAGE","GLOBAL",6)
+  Global("QCRW_RETURN_HOME","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCRW_RETURN_HOME","GLOBAL",2)
+    ActionOverride(Player1,LeaveAreaLUA("AR1100","",[2346.3132],0))
+    ActionOverride(Player2,LeaveAreaLUA("AR1100","",[2370.3127],0))
+    ActionOverride(Player3,LeaveAreaLUA("AR1100","",[2340.3162],0))
+    ActionOverride(Player4,LeaveAreaLUA("AR1100","",[2381.3163],0))
+    ActionOverride(Player5,LeaveAreaLUA("AR1100","",[2315.3142],0))
+    ActionOverride(Player6,LeaveAreaLUA("AR1100","",[2403.3140],0))
+END

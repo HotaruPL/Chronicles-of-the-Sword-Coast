@@ -1,0 +1,10 @@
+IF
+    Range(Player1,20)
+    Global("QCIceDelornaTalked","LOCALS",0)
+THEN
+    RESPONSE #100
+        SetGlobal("QCIceDelornaTalked","LOCALS",1)
+        MoveToObject(Player1)
+        FaceObject(Player1)
+        StartDialog("QCDELI",Player1)
+END

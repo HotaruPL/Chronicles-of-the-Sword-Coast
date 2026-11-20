@@ -1,0 +1,8 @@
+// Torm's Hand house residents + Safana interjection. Original English; translated strings only.
+// Each @number is local to this file; existing .tra files are not modified.
+
+@1 = ~允许我自我介绍一下。我的名字叫“滚出去”！这是我的房子，不是随便什么地牢居民该来的地方！~
+@2 = ~如果你闯进我家是想清空我的箱子，尽管来！你会发现我的抽屉里什么都没有。~
+@3 = ~（他脸红了）~
+@4 = ~我相信你抽屉里的“装备”可不止什么都没有，亲爱的。倒不是我非要检查。~
+@5 = ~跟干瘪土豆旅店比起来，我的仓库肯定无趣得多。去那边吧，别再挤这个本来就窄的地方了。~

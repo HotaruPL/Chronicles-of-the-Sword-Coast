@@ -1,0 +1,7 @@
+// Guard at 499,244, facing south-east.
+IF
+  !Exists("BNGUARD0")
+THEN
+  RESPONSE #100
+    CreateCreature("BNGUARD0",[499.244],2)
+END

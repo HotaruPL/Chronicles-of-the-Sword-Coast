@@ -1,0 +1,79 @@
+// v1.1: Seorad stays neutral through his confrontation dialogue.
+IF
+  Global("QCRW_STAGE","GLOBAL",4)
+  Global("QCRW_SEOR_SPOKE","GLOBAL",0)
+  Range(Player1,30)
+THEN
+  RESPONSE #100
+    SetGlobal("QCRW_SEOR_SPOKE","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCRWSEOR",Player1)
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",4)
+  Global("QCRW_SEOR_SPOKE","GLOBAL",0)
+  !Range(Player1,30)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+// After the combat answer, all three druids become enemies.
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  !Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+
+// A one-time Entangle, then Call Lightning, then Hold Person, spaced apart.
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+  Global("QC_S_AI","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QC_S_AI","LOCALS",1)
+    SetGlobalTimer("QC_S_NEXT","LOCALS",6)
+    ReallyForceSpellRES("SPPR105",NearestEnemyOf(Myself)) // Entangle
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+  Global("QC_S_AI","LOCALS",1)
+  GlobalTimerExpired("QC_S_NEXT","LOCALS")
+THEN
+  RESPONSE #100
+    SetGlobal("QC_S_AI","LOCALS",2)
+    SetGlobalTimer("QC_S_NEXT","LOCALS",6)
+    ReallyForceSpellRES("SPPR302",NearestEnemyOf(Myself)) // Call Lightning, outdoors in Larswood
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+  Global("QC_S_AI","LOCALS",2)
+  GlobalTimerExpired("QC_S_NEXT","LOCALS")
+THEN
+  RESPONSE #100
+    SetGlobal("QC_S_AI","LOCALS",3)
+    ReallyForceSpellRES("SPPR208",NearestEnemyOf(Myself)) // Hold Person
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    MoveToObject(NearestEnemyOf(Myself))
+END

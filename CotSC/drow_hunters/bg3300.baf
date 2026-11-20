@@ -1,0 +1,92 @@
+// Drow Hunters - Beregost encounter.
+// Parse 31: Dark Horizons INITDLG architecture starts Dimwoork dialogue automatically.
+// This deliberately bypasses the creature override script; everything else remains frozen.
+// Mulahey must be dead first; no separate Chapter 3 check.
+IF
+  Global("sprite_is_deadmulahey","GLOBAL",1)
+  InParty("VICONIA")
+  Global("DH10_BEREGOST_HUNTERS_SPAWNED","BG3300",0)
+THEN
+  RESPONSE #100
+    SetGlobal("DH10_BEREGOST_HUNTERS_SPAWNED","BG3300",1)
+    CreateCreature("DHDIMW9",[1572.2885],0)
+    CreateCreature("DHZEPH8",[1480.2768],0)
+    // Zephira stays neutral here. Dimwoork's final dialogue state sets
+    // DH9_TRIST_FIGHT and turns both hunters hostile together.
+    Wait(1)
+    ActionOverride("DHDIMW9",MoveToObject(Player1))
+    Wait(6)
+    ActionOverride("DHDIMW9",FaceObject(Player1))
+    ActionOverride("DHDIMW9",StartDialog("DHDIMW9",Player1))
+END
+
+// Once Dimwoork's letter is in the party, Viconia reacts exactly once.
+// This is deliberately independent of the older encounter globals so a save from
+// an earlier broken build cannot suppress this conversation.
+IF
+  Global("DH8_FIRST_LETTER_TALKED","GLOBAL",0)
+  PartyHasItem("DHNOTE1")
+  InParty("VICONIA")
+THEN
+  RESPONSE #100
+    SetGlobal("DH8_FIRST_LETTER_TALKED","GLOBAL",1)
+    SetGlobal("DH7_CLUE1_STARTED","GLOBAL",1)
+    ActionOverride("VICONIA",FaceObject(Player1))
+    ActionOverride("VICONIA",Wait(1))
+    ActionOverride("VICONIA",StartDialog("DHVICON",Player1))
+END
+
+IF
+  Global("DH7_CLUE2","GLOBAL",1)
+  Global("DH7_VICONIA_2","GLOBAL",0)
+  Global("DH7_CLUE2_STARTED","GLOBAL",0)
+  InParty("VICONIA")
+THEN
+  RESPONSE #100
+    SetGlobal("DH7_CLUE2_STARTED","GLOBAL",1)
+    ActionOverride("VICONIA",FaceObject(Player1))
+    ActionOverride("VICONIA",Wait(1))
+    ActionOverride("VICONIA",StartDialog("DHVICON",Player1))
+END
+
+IF
+  Global("DH7_CLUE3","GLOBAL",1)
+  Global("DH7_VICONIA_3","GLOBAL",0)
+  Global("DH7_CLUE3_STARTED","GLOBAL",0)
+  InParty("VICONIA")
+THEN
+  RESPONSE #100
+    SetGlobal("DH7_CLUE3_STARTED","GLOBAL",1)
+    ActionOverride("VICONIA",FaceObject(Player1))
+    ActionOverride("VICONIA",Wait(1))
+    ActionOverride("VICONIA",StartDialog("DHVICON",Player1))
+END
+
+IF
+  Global("DH7_FINAL","GLOBAL",1)
+  Global("DH7_FINAL_TALK","GLOBAL",0)
+  Global("DH7_FINAL_STARTED","GLOBAL",0)
+  InParty("VICONIA")
+THEN
+  RESPONSE #100
+    SetGlobal("DH7_FINAL_STARTED","GLOBAL",1)
+    ActionOverride("VICONIA",FaceObject(Player1))
+    ActionOverride("VICONIA",Wait(1))
+    ActionOverride("VICONIA",StartDialog("DHVICON",Player1))
+END
+
+
+// Zephira fallback: the Dark Horizons default-script architecture is kept,
+// but we also issue the same post-dialogue hostile/attack command from the
+// area script once, after Dimwoork has started the fight.
+IF
+  Global("DH9_TRIST_FIGHT","GLOBAL",1)
+  Global("DH9_ZEPHIRA_FORCED","GLOBAL",0)
+  Exists("DHZEPH8")
+  !Dead("DHZEPH8")
+THEN
+  RESPONSE #100
+    SetGlobal("DH9_ZEPHIRA_FORCED","GLOBAL",1)
+    ActionOverride("DHZEPH8",Enemy())
+    ActionOverride("DHZEPH8",AttackReevaluate(Player1,30))
+END

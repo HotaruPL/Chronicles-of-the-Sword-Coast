@@ -1,0 +1,116 @@
+
+IF
+  !Exists("BICFIRE1")
+THEN
+  RESPONSE #100
+    CreateCreature("BICFIRE1",[1081.3443],0)
+END
+IF
+  !Exists("BICGRD01")
+THEN
+  RESPONSE #100
+    CreateCreature("BICGRD01",[551.3430],8)
+END
+
+IF
+  !Exists("BICGRD02")
+THEN
+  RESPONSE #100
+    CreateCreature("BICGRD02",[1779.3566],0)
+END
+
+IF
+  !Exists("BICGRD03")
+THEN
+  RESPONSE #100
+    CreateCreature("BICGRD03",[2001.2905],0)
+END
+
+IF
+  !Exists("BICGRD04")
+THEN
+  RESPONSE #100
+    CreateCreature("BICGRD04",[1613.2937],12)
+END
+
+IF
+  !Exists("BICGRD05")
+THEN
+  RESPONSE #100
+    CreateCreature("BICGRD05",[3347.2804],6)
+END
+
+// Like the Nashkel Bouncer's Neira check: if Oopah becomes hostile, order every Carnival guard to attack him.
+IF
+  Exists("OOPAH")
+  Allegiance("OOPAH",ENEMY)
+  !Global("BIC_GUARDS_OOPAH","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("BIC_GUARDS_OOPAH","GLOBAL",1)
+    ActionOverride("BICGRD01",Attack("OOPAH"))
+    ActionOverride("BICGRD02",Attack("OOPAH"))
+    ActionOverride("BICGRD03",Attack("OOPAH"))
+    ActionOverride("BICGRD04",Attack("OOPAH"))
+    ActionOverride("BICGRD05",Attack("OOPAH"))
+END
+
+IF
+  !Exists("BICDEER1")
+THEN
+  RESPONSE #100
+    CreateCreature("BICDEER1",[4893.3206],0)
+END
+
+IF
+  !Exists("BICDOG01")
+THEN
+  RESPONSE #100
+    CreateCreature("BICDOG01",[2995.3174],0)
+END
+
+IF
+  !Exists("BICDOG02")
+THEN
+  RESPONSE #100
+    CreateCreature("BICDOG02",[2952.3678],0)
+END
+
+IF
+  !Exists("BICSLVR")
+THEN
+  RESPONSE #100
+    CreateCreature("BICSLVR",[3131.2835],12)
+END
+
+IF
+  !Global("BIC_STATUE_DONE","GLOBAL",1)
+  Global("Branwen_Freed","GLOBAL",2)
+  InParty("Branwen")
+  !Global("BIC_STATUE_REACT","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("BIC_STATUE_REACT","GLOBAL",1)
+    StartDialogue("BICSLVR",Player1)
+END
+
+IF
+  !Exists("BICHALF1")
+THEN
+  RESPONSE #100
+    CreateCreature("BICHALF1",[2525.2636],0)
+END
+
+IF
+  !Exists("BICORC01")
+THEN
+  RESPONSE #100
+    CreateCreature("BICORC01",[3085.3540],4)
+END
+
+IF
+  !Exists("BICHALF2")
+THEN
+  RESPONSE #100
+    CreateCreature("BICHALF2",[2628.3121],0)
+END

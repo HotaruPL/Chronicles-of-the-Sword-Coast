@@ -1,0 +1,22 @@
+// Triss: leave the forest only after her full opening exchange has ended.
+// QCB_TRISS becomes 2 at the conclusion of the original v19 dialogue.
+IF
+  Global("QCB_TRISS","GLOBAL",2)
+  Global("QCB_TRISS_LEAVING","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCB_TRISS_LEAVING","LOCALS",1)
+    MoveToPoint([1370.495])
+    EscapeArea()
+END
+
+// Working dialogue trigger preserved.
+IF
+  Global("QCB_TRISS","GLOBAL",0)
+  See(Player1)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    FaceObject(Player1)
+    StartDialog("QCBTRIS",Player1)
+END

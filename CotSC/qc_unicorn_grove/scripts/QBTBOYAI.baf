@@ -1,0 +1,7 @@
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+THEN
+ RESPONSE #100
+  MoveToPoint([1249.1054])
+  EscapeArea()
+END

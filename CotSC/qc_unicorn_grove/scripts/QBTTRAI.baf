@@ -1,0 +1,10 @@
+// Triss enters alongside the memory Harpers and leaves with Gorion and the children.
+IF
+  Global("QBT_GORION_PORT","GLOBAL",1)
+  Global("QBT_TRISS_LEAVING","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QBT_TRISS_LEAVING","LOCALS",1)
+    MoveToPoint([1024.792])
+    EscapeArea()
+END

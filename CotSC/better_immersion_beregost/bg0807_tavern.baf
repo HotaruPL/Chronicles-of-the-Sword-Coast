@@ -1,0 +1,7 @@
+// BG0807 - tavern bouncer
+IF
+  !Exists("BIBHGB01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHGB01",[401.289],0)
+END

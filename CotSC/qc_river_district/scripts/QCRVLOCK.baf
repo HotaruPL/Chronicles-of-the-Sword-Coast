@@ -1,0 +1,32 @@
+// v66: first reach Athkatla's Slums. Never opens BG2 destinations during BG1.
+// WMPFLAG.IDS: VISIBLE=1, ENABLED=2, EXPLORABLE=4, EXPLORED=8.
+IF
+  Global("QCRVMapEnabledV66","GLOBAL",0)
+  AreaCheck("AR0400")
+THEN
+  RESPONSE #100
+    SetGlobal("QCRVMapEnabledV66","GLOBAL",1)
+    SetGlobal("QCRVMapUnlocked","GLOBAL",1)
+    RevealAreaOnMap("AR0020")
+    AddWorldmapAreaFlag("AR0020",VISIBLE)
+    AddWorldmapAreaFlag("AR0020",ENABLED)
+    AddWorldmapAreaFlag("AR0020",EXPLORABLE)
+    RevealAreaOnMap("QCRIVD")
+    AddWorldmapAreaFlag("QCRIVD",VISIBLE)
+    AddWorldmapAreaFlag("QCRIVD",ENABLED)
+    AddWorldmapAreaFlag("QCRIVD",EXPLORABLE)
+END
+
+// The City Gates must stay reachable independently of the Brewery.
+IF
+  Global("QCBRMapEnabledV66","GLOBAL",0)
+  AreaCheck("AR0020")
+THEN
+  RESPONSE #100
+    SetGlobal("QCBRMapEnabledV66","GLOBAL",1)
+    SetGlobal("QCBRMapUnlocked","GLOBAL",1)
+    RevealAreaOnMap("QCBREW")
+    AddWorldmapAreaFlag("QCBREW",VISIBLE)
+    AddWorldmapAreaFlag("QCBREW",ENABLED)
+    AddWorldmapAreaFlag("QCBREW",EXPLORABLE)
+END

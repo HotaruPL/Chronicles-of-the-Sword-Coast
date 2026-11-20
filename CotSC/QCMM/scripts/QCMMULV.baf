@@ -1,0 +1,15 @@
+// Ulvryn joins Ust Natha's hostility if and only if the original bartender does.
+IF
+  Global("QCMMUHST","GLOBAL",1)
+  Allegiance(Myself,NEUTRAL)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+IF
+  AttackedBy([GOODCUTOFF],DEFAULT)
+  Allegiance(Myself,NEUTRAL)
+THEN
+  RESPONSE #100
+    Enemy()
+END

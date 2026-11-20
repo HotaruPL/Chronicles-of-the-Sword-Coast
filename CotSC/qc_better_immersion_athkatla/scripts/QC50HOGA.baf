@@ -1,0 +1,7 @@
+IF
+  Global("QC50HogHostile","LOCALS",1)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

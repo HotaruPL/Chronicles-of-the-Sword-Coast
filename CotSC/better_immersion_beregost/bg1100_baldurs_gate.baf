@@ -1,0 +1,138 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - BG1100
+// ---------------------------------------------------------------------------
+
+// Kira at 3942,1288.
+IF
+  Global("BIB_KIRA_SPAWNED","GLOBAL",0)
+  !Exists("BIKIRA")
+THEN
+  RESPONSE #100
+    SetGlobal("BIB_KIRA_SPAWNED","GLOBAL",1)
+    CreateCreature("BIKIRA",[3942.1288],0)
+    ActionOverride("BIKIRA",CreateItem("BIKIRWPN",1,1,0))
+    ActionOverride("BIKIRA",EquipItem("BIKIRWPN"))
+END
+
+// Orc at 3891,1728.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBORC11")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBORC11",[3891.1728],0)
+END
+
+// Elven Commoner at 3364,2946, facing south.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBELF16")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBELF16",[3364.2946],0)
+END
+
+// Dwarf Commoner at 3362,2973, facing north.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDWR16")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDWR16",[3362.2973],8)
+END
+
+// Hobgoblin Commoner at 2585,2875, facing south.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHOB16")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHOB16",[2585.2875],0)
+END
+
+// Human female Commoner at 2582,2899, facing north.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHUM14")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHUM14",[2582.2899],8)
+END
+
+// Wandering Kobold Commoner at 1853,2262.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBKOB18")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBKOB18",[1853.2262],0)
+END
+
+// Wandering Gnome Commoner at 677,1641.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBGNM11")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBGNM11",[677.1641],0)
+END
+
+// Cat at 628,1075.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBCAT11")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBCAT11",[628.1075],0)
+END
+
+// Dog at 1221,256.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDOG14")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDOG14",[1221.256],0)
+END
+
+// Elven Commoner at 2651,1651, facing south-west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBELF17")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBELF17",[2651.1651],2)
+END
+
+// Wandering Halfling Commoner at 4006,672.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL16")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL16",[4006.672],0)
+END
+
+// Goblin at 3849,169, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBGOB11")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBGOB11",[3849.169],4)
+END

@@ -1,0 +1,35 @@
+IF
+  Global("QCB_MAL_HOSTILE","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCB_MAL_HOSTILE","GLOBAL",2)
+    Enemy()
+    ReallyForceSpellRES("SPWI212",Myself)
+    ReallyForceSpellRES("SPWI408",Myself)
+    ReallyForceSpellRES("SPWI508",NearestEnemyOf(Myself))
+    ReallyForceSpellRES("SPPR402",Myself)
+END
+IF
+  Global("QCB_MAL_GO","GLOBAL",1)
+  Global("QCB_MAL_HOSTILE","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCB_MAL_GO","GLOBAL",2)
+    EscapeArea()
+END
+IF
+  Global("QCB_MAL_TALK","GLOBAL",0)
+  See(Player1)
+  Range(Player1,18)
+THEN
+  RESPONSE #100
+    FaceObject(Player1)
+    StartDialog("QCBMALZ",Player1)
+END
+IF
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END

@@ -1,0 +1,30 @@
+// Cure for Madness? - Arbolon
+// Arbolon uses the same approach/dialogue-start pattern that proved reliable
+// in the earlier Better Immersion NPC work.
+
+IF
+  Global("QCARBOLON_TALKED","LOCALS",0)
+  See(Player1)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QCARBOLON_TALKED","LOCALS",0)
+  See(Player1)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCARBOLON_TALKED","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCARBOL",Player1)
+END
+
+IF
+  Global("QCARBOLON_LEAVE","GLOBAL",1)
+THEN
+  RESPONSE #100
+    EscapeArea()
+END

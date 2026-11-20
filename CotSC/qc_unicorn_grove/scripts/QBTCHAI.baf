@@ -1,0 +1,6 @@
+IF
+  Global("QBT_GORION_PORT","GLOBAL",1)
+THEN
+ RESPONSE #100
+  DestroySelf()
+END

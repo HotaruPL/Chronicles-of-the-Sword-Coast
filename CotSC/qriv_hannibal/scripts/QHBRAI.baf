@@ -1,0 +1,35 @@
+// Global alarm covers all of the level even if nobody is within shout range.
+IF
+  Global("QH_ALARM","GLOBAL",0)
+  OR(3)
+    See([PC])
+    AttackedBy([GOODCUTOFF],DEFAULT)
+    HitBy([GOODCUTOFF],0)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_ALARM","GLOBAL",1)
+    GlobalShout(9188)
+END
+
+IF
+  Heard([ANYONE],9188)
+  Global("QH_ALARM","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_ALARM","GLOBAL",1)
+END
+
+IF
+  Global("QH_ALARM","GLOBAL",1)
+  !See([PC])
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

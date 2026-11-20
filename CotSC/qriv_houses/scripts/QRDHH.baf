@@ -1,0 +1,33 @@
+// Quest-specific High Hedge activity; installed with EXTEND_TOP, not by
+// replacing BG3202.BCS. The original area/NPC/script remains intact.
+IF
+  Global("QRD_ST","GLOBAL",3)
+  Global("QRD_HH_CREATED","GLOBAL",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QRD_HH_CREATED","GLOBAL",1)
+  CreateCreature("QRVDARK",[300.229],6)
+  ActionOverride("Thalantyr",StartDialogueNoSet(Player1))
+END
+IF
+  Global("QRD_ST","GLOBAL",5)
+  Global("QRD_RITUAL","GLOBAL",1)
+  Global("QRD_WOLF_SPAWNED","GLOBAL",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QRD_WOLF_SPAWNED","GLOBAL",1)
+  CreateCreature("QRDWOLF",[370.300],6)
+END
+IF
+  Global("QRD_ST","GLOBAL",5)
+  Global("QRD_WOLF_SPAWNED","GLOBAL",1)
+  Dead("QRDWOLF")
+  Global("QRD_RESTORED","GLOBAL",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QRD_RESTORED","GLOBAL",1)
+  SetGlobal("QRD_ST","GLOBAL",6)
+  ActionOverride("QRVDARK",DestroySelf())
+  CreateCreature("QRVDHEL",[300.229],6)
+  ActionOverride("Thalantyr",StartDialogueNoSet(Player1))
+END

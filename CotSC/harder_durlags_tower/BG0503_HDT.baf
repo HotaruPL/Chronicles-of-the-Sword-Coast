@@ -1,0 +1,7 @@
+IF
+  Global("HDT_BG0503","BG0503",0)
+THEN
+  RESPONSE #100
+    SetGlobal("HDT_BG0503","BG0503",1)
+    CreateCreature("MEPLIG01",[1177.324],0)
+END

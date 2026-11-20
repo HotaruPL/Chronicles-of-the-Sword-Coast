@@ -1,0 +1,28 @@
+// Virage: a talking cat who can be restored by Dispel Magic.
+// Dispel Magic is an area-targeted spell in BGEE, so SpellCastOnMe() cannot
+// reliably detect it. We therefore detect the party casting the spell while
+// Virage is present in this small interior area.
+
+IF
+  Global("QCVIRAGE_STATE","GLOBAL",1)
+  OR(4)
+    SpellCast([PC],WIZARD_DISPEL_MAGIC)
+    SpellCastPriest([PC],CLERIC_DISPEL_MAGIC)
+    SpellCast([PC],WIZARD_TRUE_DISPEL_MAGIC)
+    SpellCastInnate([PC],INQUIS_DISPEL_MAGIC)
+THEN
+  RESPONSE #100
+    SetGlobal("QCVIRAGE_STATE","GLOBAL",2)
+    Polymorph(MAGE_MALE_HUMAN)
+    ChangeGeneral(Myself,HUMANOID)
+    ChangeRace(Myself,HUMAN)
+    ChangeClass(Myself,MAGE)
+    StartDialogueNoSet(Player1)
+END
+
+IF
+  Global("QCVIRAGE_STATE","GLOBAL",3)
+THEN
+  RESPONSE #100
+    EscapeArea()
+END

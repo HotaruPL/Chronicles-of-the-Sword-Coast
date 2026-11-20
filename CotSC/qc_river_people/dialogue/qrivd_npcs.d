@@ -1,0 +1,247 @@
+BEGIN ~QRVWF1~
+IF ~True()~ THEN BEGIN 0
+  SAY @1
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVWM1~
+IF ~True()~ THEN BEGIN 0
+  SAY @2
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVSOLD~
+IF ~True()~ THEN BEGIN 0
+  SAY @3
+  IF ~~ THEN REPLY @4 GOTO reason
+  IF ~~ THEN REPLY @5 EXIT
+END
+
+IF ~~ THEN BEGIN reason
+  SAY @6
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVFLRT~
+IF ~InParty("Jaheira") InMyArea("Jaheira")~ THEN BEGIN J
+  SAY @7
+  IF ~~ THEN EXTERN ~JAHEIJ~ QRV_J
+END
+
+IF ~InParty("Aerie") InMyArea("Aerie")~ THEN BEGIN A
+  SAY @8
+  IF ~~ THEN EXTERN ~AERIEJ~ QRV_A
+END
+
+IF ~InParty("Viconia") InMyArea("Viconia")~ THEN BEGIN V
+  SAY @9
+  IF ~~ THEN EXTERN ~VICONIJ~ QRV_V
+END
+
+IF ~InParty("Neera") InMyArea("Neera")~ THEN BEGIN N
+  SAY @10
+  IF ~~ THEN EXTERN ~NEERAJ~ QRV_N
+END
+
+IF ~True()~ THEN BEGIN NONE
+  SAY @11
+  IF ~~ THEN EXIT
+END
+
+APPEND ~JAHEIJ~
+IF ~~ THEN BEGIN QRV_J
+  SAY @12
+  IF ~~ THEN EXIT
+END
+END
+
+APPEND ~AERIEJ~
+IF ~~ THEN BEGIN QRV_A
+  SAY @13
+  IF ~~ THEN EXIT
+END
+END
+
+APPEND ~VICONIJ~
+IF ~~ THEN BEGIN QRV_V
+  SAY @14
+  IF ~~ THEN EXIT
+END
+END
+
+APPEND ~NEERAJ~
+IF ~~ THEN BEGIN QRV_N
+  SAY @15
+  IF ~~ THEN EXIT
+END
+END
+
+BEGIN ~QRVHALF~
+IF ~True()~ THEN BEGIN 0
+  SAY @16
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVDRNK~
+IF ~True()~ THEN BEGIN 0
+  SAY @17
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVKOB~
+IF ~True()~ THEN BEGIN 0
+  SAY @18
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVSEA1~
+IF ~InParty("Anomen") InMyArea("Anomen")~ THEN BEGIN ANO
+  SAY @19
+  IF ~~ THEN EXTERN ~ANOMENJ~ QRV_AN
+END
+IF ~True()~ THEN BEGIN NONE
+  SAY @20
+  IF ~~ THEN EXIT
+END
+IF ~~ THEN BEGIN RESP
+  SAY @21
+  IF ~~ THEN EXIT
+END
+
+APPEND ~ANOMENJ~
+IF ~~ THEN BEGIN QRV_AN
+  SAY @22
+  IF ~~ THEN EXTERN ~QRVSEA1~ RESP
+END
+END
+
+BEGIN ~QRVSEA2~
+IF ~True()~ THEN BEGIN 0
+  SAY @23
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVHOB~
+IF ~True()~ THEN BEGIN 0
+  SAY @24
+  IF ~~ THEN REPLY @25 GOTO confused
+  IF ~~ THEN REPLY @26 GOTO confused
+END
+
+IF ~~ THEN BEGIN confused
+  SAY @27
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVWORK~
+IF ~True()~ THEN BEGIN 0
+  SAY @28
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVWRK2~
+IF ~True()~ THEN BEGIN 0
+  SAY @29
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVGUARD~
+IF ~True()~ THEN BEGIN 0
+  SAY @30
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVSHAD~
+// Hiarfi's quest unlocks the flute discussion. All non-quest players
+// continue to receive the original harmless one-line greeting.
+IF ~Global("QHIA_QUEST","GLOBAL",1) Global("QHIA_SHAD_MET","GLOBAL",1) Global("QHIA_DONE","GLOBAL",0)~ THEN BEGIN q_repeat
+  SAY @31
+  IF ~PartyGoldGT(5049)~ THEN REPLY @32 GOTO sale
+  IF ~PartyGoldLT(5050)~ THEN REPLY @33 GOTO no_money
+  IF ~~ THEN REPLY @34 GOTO no_deal
+  IF ~~ THEN REPLY @35 GOTO fight
+END
+IF ~True()~ THEN BEGIN q_start
+  SAY @36
+  IF ~Global("QHIA_QUEST","GLOBAL",1) Global("QHIA_DONE","GLOBAL",0)~ THEN REPLY @37 GOTO accusation
+  IF ~~ THEN REPLY @38 EXIT
+END
+IF ~~ THEN BEGIN accusation
+  SAY @39
+  IF ~IsValidForPartyDialog("Keldorn")~ THEN EXTERN ~KELDORJ~ QRHIA_KELD
+  IF ~!IsValidForPartyDialog("Keldorn")~ THEN GOTO choices
+END
+IF ~~ THEN BEGIN choices
+  SAY @40
+  IF ~~ THEN REPLY @41 GOTO demand
+  IF ~~ THEN REPLY @42 GOTO fight
+END
+IF ~~ THEN BEGIN demand
+  SAY @43
+  IF ~~ THEN REPLY @44 GOTO lower1
+END
+IF ~~ THEN BEGIN lower1
+  SAY @45
+  IF ~~ THEN REPLY @46 GOTO lower2
+END
+IF ~~ THEN BEGIN lower2
+  SAY @47
+  IF ~~ THEN REPLY @48 GOTO final_price
+END
+IF ~~ THEN BEGIN final_price
+  SAY @49
+  IF ~PartyGoldGT(5049)~ THEN REPLY @50 GOTO sale
+  IF ~~ THEN REPLY @51 GOTO no_deal
+  IF ~~ THEN REPLY @52 GOTO fight
+END
+IF ~~ THEN BEGIN sale
+  SAY @53
+  IF ~~ THEN DO ~TakePartyGold(5050) DestroyItem("QRHFLUT") GiveItemCreate("QRHFLUT",Player1,1,0,0) SetGlobal("QHIA_SHAD_SOLD","GLOBAL",1) EscapeArea()~ EXIT
+END
+IF ~~ THEN BEGIN no_money
+  SAY @54
+  IF ~~ THEN DO ~SetGlobal("QHIA_SHAD_MET","GLOBAL",1)~ EXIT
+END
+IF ~~ THEN BEGIN no_deal
+  SAY @55
+  IF ~~ THEN DO ~SetGlobal("QHIA_SHAD_MET","GLOBAL",1)~ EXIT
+END
+IF ~~ THEN BEGIN fight
+  SAY @56
+  IF ~~ THEN DO ~SetGlobal("QHIA_SHAD_MET","GLOBAL",1) ActionOverride("QRVTHUG",Enemy()) Enemy() Attack(Player1)~ EXIT
+END
+APPEND ~KELDORJ~
+IF ~~ THEN BEGIN QRHIA_KELD
+  SAY @57
+  IF ~~ THEN EXTERN ~QRVSHAD~ choices
+END
+END
+
+BEGIN ~QRVTHUG~
+IF ~True()~ THEN BEGIN 0
+  SAY @58
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVELF~
+IF ~True()~ THEN BEGIN 0
+  SAY @59
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVFEL~
+IF ~Global("QRV_LUCKY_RING","GLOBAL",0)~ THEN BEGIN 0
+  SAY @60
+  IF ~~ THEN DO ~SetGlobal("QRV_LUCKY_RING","GLOBAL",1)~ UNSOLVED_JOURNAL @61 EXIT
+END
+IF ~Global("QRV_LUCKY_RING","GLOBAL",1)~ THEN BEGIN AGAIN
+  SAY @62
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVOGRE~
+IF ~True()~ THEN BEGIN 0
+  SAY @63
+  IF ~~ THEN EXIT
+END
+

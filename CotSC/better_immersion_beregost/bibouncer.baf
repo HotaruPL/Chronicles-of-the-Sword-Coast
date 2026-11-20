@@ -1,0 +1,8 @@
+// Bouncers remain neutral until attacked, then immediately retaliate.
+IF
+  AttackedBy([ANYONE],DEFAULT)
+THEN
+  RESPONSE #100
+    Enemy()
+    Attack(LastAttackerOf(Myself))
+END

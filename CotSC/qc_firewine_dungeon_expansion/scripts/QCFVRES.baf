@@ -1,0 +1,16 @@
+// Remove QCCFIR's long-lived visual-range effect immediately after the party
+// returns to BG5201. Opcode 321 in QCFVRES.SPL removes effects whose parent
+// resource is QCFLOWV, restoring each character's normal visual range without
+// hard-coding a replacement stat value.
+IF
+  Global("QCFIR_LOWVIS_ACTIVE","GLOBAL",1)
+THEN
+  RESPONSE #100
+    ApplySpellRES("QCFVRES",Player1)
+    ApplySpellRES("QCFVRES",Player2)
+    ApplySpellRES("QCFVRES",Player3)
+    ApplySpellRES("QCFVRES",Player4)
+    ApplySpellRES("QCFVRES",Player5)
+    ApplySpellRES("QCFVRES",Player6)
+    SetGlobal("QCFIR_LOWVIS_ACTIVE","GLOBAL",0)
+END

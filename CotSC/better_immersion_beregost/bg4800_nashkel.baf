@@ -1,0 +1,76 @@
+IF
+  !Exists("BNFISH01")
+THEN
+  RESPONSE #100
+    CreateCreature("BNFISH01",[1353.1186],2)
+END
+
+IF
+  !Exists("BNFISH02")
+THEN
+  RESPONSE #100
+    CreateCreature("BNFISH02",[1397.1233],2)
+END
+
+IF
+  !Exists("BINDOG01")
+THEN
+  RESPONSE #100
+    CreateCreature("BINDOG01",[2408.1576],0)
+END
+
+IF
+  !Exists("BINMOURN")
+THEN
+  RESPONSE #100
+    CreateCreature("BINMOURN",[2914.1501],6)
+END
+
+IF
+  !Exists("BNTIEF01")
+THEN
+  RESPONSE #100
+    CreateCreature("BNTIEF01",[2733.2019],10)
+END
+
+IF
+  !Exists("BNGNOM01")
+THEN
+  RESPONSE #100
+    CreateCreature("BNGNOM01",[3998.2746],0)
+END
+
+IF
+  !Exists("BINCAT01")
+THEN
+  RESPONSE #100
+    CreateCreature("BINCAT01",[3419.2816],0)
+END
+
+IF
+  !Exists("BINHAL01")
+THEN
+  RESPONSE #100
+    CreateCreature("BINHAL01",[2927.2548],6)
+END
+
+IF
+  !Exists("BNHORK01")
+THEN
+  RESPONSE #100
+    CreateCreature("BNHORK01",[1227.3185],8)
+END
+
+IF
+  !Exists("BINHAL02")
+THEN
+  RESPONSE #100
+    CreateCreature("BINHAL02",[563.2587],0)
+END
+
+IF
+  !Exists("BINMOOSE")
+THEN
+  RESPONSE #100
+    CreateCreature("BINMOOSE",[381.1359],0)
+END

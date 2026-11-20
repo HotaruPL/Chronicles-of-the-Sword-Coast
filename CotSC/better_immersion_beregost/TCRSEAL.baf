@@ -1,0 +1,9 @@
+// Disable the cave travel trigger after the scroll was used to return to TORMFO.
+IF
+  Global("TCRSCRLU","GLOBAL",2)
+  Global("TCR_CAVE_SEALED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("TCR_CAVE_SEALED","GLOBAL",1)
+    TriggerActivation("TORMCR_TRIG",FALSE)
+END

@@ -1,0 +1,148 @@
+// CotSC Batch 35: remaining English installer item and creature names/descriptions.
+// Original English strings; quest logic, map flags, item mechanics unchanged.
+
+@5000 = ~Merlee~
+
+@5001 = ~Popper~
+
+@5002 = ~Zothlon~
+
+@5003 = ~Noxelth~
+
+@5004 = ~Astarion~
+
+@5005 = ~Derek~
+
+@5006 = ~Roach~
+
+@5007 = ~Ash'Rakk~
+
+@5008 = ~Viekang~
+
+@5009 = ~Dimwoork Azeth~
+
+@5010 = ~Zephira~
+
+@5011 = ~Annaebiel~
+
+@5012 = ~Balthrim~
+
+@5013 = ~Balthrim's Goon~
+
+@5014 = ~Durlag's Letter to Kiel~
+
+@5015 = ~Kiel, my firstborn, my brightest gem. Forgive me.
+
+My blindness and festering paranoia allowed the beasts of a hundred faces to steal your life while I saw enemies in my own shadows. Rest now in the peace that will forever elude your father. I have cursed these very walls and bound the deep earth so your sleep remains undisturbed. I have steeped your flesh in our clan's ancient runic wards and embalmed you with the rarest essences of the Underdark—Time itself shall not touch your brow so long as this tower stands. You shall remain whole, looking as though you merely closed your eyes, waiting for a dawn that will never come for us.
+
+At your feet, I lay your morning star and buckler. Guarding your rest are my final, flawless creations—the Dwarven Doom Guards. I forged these iron shells myself and breathed into them a tireless, unyielding wrath. They know no fear, they feel no fatigue, and they possess no living hearts for the shapeshifters to deceive. Should any intruder, living or dead, dare reach for your birthright... my iron hounds will tear them asunder.
+
+Sleep, my boy. Your father keeps watch.
+— Durlag~
+
+@5016 = ~Mechezarin~
+
+@5017 = ~Mechezarin.
+
+Of all the creatures I dragged down into the darkness of my menagerie, he was the greatest—and my heaviest burden. He was barely out of his hatchling years when my clan snared him in the Earthspur Mountains, dragging him into these cavernous depths. I built this massive vault just to hold him, a grand trophy to make my guests marvel at the might of the Trollkiller.
+
+But a dragon is not meant for the cradle of stone. Over the decades, the damp cavern air and the endless, maddening ring of dwarven hammers broke his body. His magnificent wings, meant to catch the winds of the Trackless Sea, withered and never grew to their true span, scraping uselessly against the cold cave floor. His horns grew twisted, stunted by the lack of the open sky. I brought in the mage Daitel to mend him, but magic cannot replace the sun; all the wizard could do was reinforce the beast's tail, fusing bone to steel to help him bear his own colossal, unnatural weight.
+
+Yet, in that shared prison, a strange thing grew between us. Trust. Or perhaps just a mutual understanding of isolation. Mechezarin hated his captivity—I felt his burning fury every time his blind, pale eyes followed me through the gloom—but he also knew that I was the only soul who truly looked at him without fear. He ate from my hand, and in his low, rumbling growls, I fancied he spoke to me. He became the only creature in this tower whose hatred was honest. Unlike the shape-shifting maggots that later stole my family's skin, Mechezarin never wore a mask.~
+
+@5018 = ~Kyril~
+
+@5019 = ~Vampiric Ghoul~
+
+@5020 = ~Verzigo~
+
+@5021 = ~Snake~
+
+@5022 = ~Trained Dog~
+
+@5023 = ~Kazhmira~
+
+@5024 = ~Olmyrith~
+
+@5025 = ~Ranger Don~
+
+@5026 = ~Erica~
+
+@5027 = ~Seorad~
+
+@5028 = ~Seorad's Follower~
+
+@5029 = ~Dire Wolf Body~
+
+@5030 = ~The heavy carcass of a dire wolf, recently slain. Its thick pelt covers a substantial quantity of meat. Even in death, such a creature may yet be of use to something hungry enough to take it.~
+
+@5031 = ~Injured Wyvern~
+
+@5032 = ~Dire Wolf~
+
+@5033 = ~Valas De'Vir~
+
+@5034 = ~Coral's Pearl~
+
+@5035 = ~A lustrous pearl taken from a sirine. It seems unusually important to its rightful owner.~
+
+@5036 = ~A luminous pearl, prized by sirines as a symbol of their essence. Coral believes its loss has robbed her of the freedom to move through the sea as she once did.~
+
+@5037 = ~Cloak of Vestiges~
+
+@5038 = ~An old elven cloak, infused with unusually persistent magical warmth.~
+
+@5039 = ~Cloak of Vestiges
+
+Woven from rare elven cloth and suffused with protective magic, this cloak is attributed to a mage of Suldanessellar who struggled with the bitterest winters. Lacking the resilience to harsh climates that many of his kin enjoyed, he devised a garment that would shelter him from the cold and steadily mend the weariness of his journeys.
+
+STATISTICS:
+Cold Resistance: +50%
+Regeneration: 2 Hit Points per round~
+
+@5040 = ~Coral~
+
+@5041 = ~Zexylinn~
+
+@5042 = ~Shalvey~
+
+@5043 = ~Ghoul Lord~
+
+@5044 = ~Lacedon~
+
+@5045 = ~Xvart~
+
+@5046 = ~Rhianna~
+
+@5047 = ~Trained Wyvern~
+
+@5048 = ~Bloodthirsty Wyvern~
+
+@5049 = ~Helmet of Opposite Alignment~
+
+@5050 = ~Helmet of Opposite Alignment
+
+This peculiar helm reverses the moral and ethical alignment of whoever wears it. Good becomes evil and evil good; law becomes chaos and chaos law. A neutral outlook remains neutral along its respective axis. It also protects its wearer from critical hits.
+
+Unlike other specimens of this enchantment, this helm bears no binding curse and may be removed freely. Its strange magic persists only while it is worn.
+
+Portalbendarwinden offered it with an unsettling observation: a choice has meaning only when one is free to undo it.~
+
+@5051 = ~Mervin~
+
+@5052 = ~Flora~
+
+@5053 = ~Sebastien~
+
+@5054 = ~Kai~
+
+@5055 = ~Potion of Life Saving~
+
+@5056 = ~When consumed, the potion restores 80 HP of the person. This is the most powerful variant of the healing potion. The effect is instantaneous, and the potion is destroyed in the process.
+
+STATISTICS:
+
+Special: Restores 80 Hit Points
+
+Weight: 1~
+

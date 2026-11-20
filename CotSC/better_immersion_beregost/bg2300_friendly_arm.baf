@@ -1,0 +1,27 @@
+IF
+  !Exists("BIFATRV")
+THEN
+  RESPONSE #100
+    CreateCreature("BIFATRV",[2723.2215],12)
+END
+
+IF
+  !Exists("BIFHAL01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIFHAL01",[2760.2221],4)
+END
+
+IF
+  !Exists("BIFDWP01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIFDWP01",[4060.2663],0)
+END
+
+IF
+  !Exists("BIFDOG01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIFDOG01",[1249.2385],8)
+END

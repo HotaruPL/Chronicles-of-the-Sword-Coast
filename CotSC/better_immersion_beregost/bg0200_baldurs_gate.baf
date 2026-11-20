@@ -1,0 +1,134 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - BG0200
+// ---------------------------------------------------------------------------
+
+// Watch Member at 2281,3006, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0201")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0201",[2281.3006],4)
+END
+
+// Human-bodied citizen renamed Half Orc Citizen at 1091,2904, facing north.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0202")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0202",[1091.2904],8)
+END
+
+// Drow Commoner at 498,2465, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0203")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0203",[498.2465],4)
+END
+
+// Wandering Halfling Commoner at 600,792.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0204")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0204",[600.792],0)
+END
+
+// Orc Commoner at 966,1223, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0205")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0205",[966.1223],12)
+END
+
+// Homeless Dog at 1086,595, neutral and wandering.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0206")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0206",[1086.595],0)
+END
+
+// Hobgoblin Commoner at 2729,572, facing south.
+IF
+  !Exists("BIB0207")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0207",[2729.572],2)
+END
+
+// Human-bodied little girl named Elven Girl at 2961,1312, facing southwest.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0208")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0208",[2961.1312],2)
+END
+
+// Gnome Commoner at 4246,1034, wandering.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0209")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0209",[4246.1034],0)
+END
+
+// Robel at 3902,2463, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0210")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0210",[3902.2463],12)
+END
+
+// Goblin Commoner at 3289,2443, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0211")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0211",[3289.2443],12)
+END
+
+// Goblin Commoner at 3214,2443, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0212")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0212",[3214.2443],4)
+END
+
+// Positive Hobgoblin response: walk away, then remain available for a brief follow-up line.
+IF
+  Global("BIB_BG0200_HOBG_LEAVE","LOCALS",1)
+  Exists("BIB0207")
+THEN
+  RESPONSE #100
+    SetGlobal("BIB_BG0200_HOBG_LEAVE","LOCALS",2)
+    ActionOverride("BIB0207",MoveToPoint([3050.572]))
+END

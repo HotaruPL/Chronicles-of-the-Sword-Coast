@@ -1,0 +1,8 @@
+// Torm's Hand house residents + Safana interjection. Original English; translated strings only.
+// Each @number is local to this file; existing .tra files are not modified.
+
+@1 = ~Allow me to introduce myself. My name is 'Get out of here'! This is my house, not some random dungeon-dwellers!~
+@2 = ~If you broke into my house to empty my chests, have at it! You'll find zilch in my drawers.~
+@3 = ~(he blushes)~
+@4 = ~I'm sure your equipment in your drawers has a little more than zilch, darling. Not that I insist on checking.~
+@5 = ~Surely my warehouse is a lot less interesting in comparison to Shriveled Potato inn. Go over there, and stop crowding this already tight space.~

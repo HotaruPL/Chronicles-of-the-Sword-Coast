@@ -1,0 +1,11 @@
+IF
+    Global("QCSAFANA_BD1000_AMBUSH_READY","GLOBAL",1)
+    Global("QCSAFANA_BD1000_AMBUSH_STARTED","GLOBAL",0)
+THEN
+    RESPONSE #100
+        CreateCreature("QCSBTA",[1204.1168],0)
+        CreateCreature("QCSBTHG1",[1222.1118],0)
+        CreateCreature("QCSBTHG2",[1298.1114],0)
+        CreateCreature("QCSBTHG3",[1288.1170],0)
+        SetGlobal("QCSAFANA_BD1000_AMBUSH_STARTED","GLOBAL",1)
+END

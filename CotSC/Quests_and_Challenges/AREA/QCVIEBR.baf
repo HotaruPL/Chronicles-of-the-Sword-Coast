@@ -1,0 +1,24 @@
+// Surprise at Burning Wizard: one-shot automatic encounter.
+// See([PC]) is deliberately used instead of See(Player1) so any party member
+// can cause Viekang to panic. Avoid real lightning spells, TakeDamage, and his
+// original VIEKANG.BCS to prevent the old damage/teleport reaction loop.
+IF
+  Global("QCVIEBRSeen","GLOBAL",0)
+  See([PC])
+THEN
+  RESPONSE #100
+    SetGlobal("QCVIEBRSeen","GLOBAL",1)
+    DisplayStringHead(Myself,@0)
+    Wait(3)
+    // EFF_M36 is the original Viekang teleport SOUND (WAV), not a VVC/BAM.
+    // Play a real lightning animation and the electrical impact.  These are
+    // harmless visuals: no CallLightning action, damage effect, or spell cast.
+    PlaySound("EFF_M36")
+    CreateVisualEffectObject("SKYBOLT",Myself)
+    CreateVisualEffectObject("SPSHKIMP",Myself)
+    Wait(2)
+    // Give the vanishing moment a recognizable short teleport flash.
+    CreateVisualEffectObject("SPDIMNDR",Myself)
+    Wait(1)
+    DestroySelf()
+END

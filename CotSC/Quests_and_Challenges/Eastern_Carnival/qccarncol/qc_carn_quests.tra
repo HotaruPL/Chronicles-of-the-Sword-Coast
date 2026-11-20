@@ -1,0 +1,66 @@
+// Eastern Carnival EE Quest-tab stages, registered in the merged installer.
+@0 = ~Alfie's Kobold Problem~
+@1 = ~Alfie needs help dealing with a band of kobolds threatening his elephant and disrupting the Eastern Carnival. I agreed to look into the trouble near the ponds.~
+@2 = ~The kobolds threatening Alfie and his elephant have been defeated. Alfie thanked us and rewarded our assistance.~
+
+@3 = ~Rhynn's Missing Snake~
+@4 = ~Rhynn has lost Laslo, his prized Dead Grass Snake. Someone broke open the snake's cage, and Rhynn asked us to search the carnival for him.~
+@5 = ~We returned Laslo to Rhynn. He was relieved to have his snake back and rewarded us for our help.~
+
+@6 = ~Virage's Transformation~
+@7 = ~Virage, a carnival illusionist, has transformed himself into a cat. He is looking for someone able to dispel the magic and restore his human form.~
+@8 = ~Virage has been restored to his human form and has rewarded us for helping him undo his ill-advised transformation.~
+
+// Batch 22: Rhynn and Virage dialogue
+@9 = ~Have you found him?~
+@10 = ~We got your snake. Please, grab him before he turns on me like he did on the other unfortunate guy.~
+@11 = ~We're still looking.~
+@12 = ~Laslo! Oh, my friend. I am so glad to see you. Hold on... other unfortunate guy? Did he bite someone? Eh, nevermind. His bites aren't lethal. They might cause some minor health downgrades but it is temporary and more inconvenient than dangerous. You are forever in my debt. Here, take these few coins. You earned it. Now, excuse me. I need to wash Laslo. He smells horrendous.~
+@13 = ~Good luck and enjoy the Carnival, my friends.~
+@14 = ~If you came here to see Laslo the Snake... I'm afraid at the moment my hands are tied real tight. Maybe some other time?~
+@15 = ~Why? Something wrong?~
+@16 = ~Who is Laslo the Snake?~
+@17 = ~We don't like snakes much. Too slithery... we'll go now.~
+@18 = ~I probably shouldn't shoot my mouth off like that but what difference does it make anyway. Laslo was my trained snake, a rare specimen from Western Heartlands called Dead Grass Snake. I spent many moons training him for this occasion. He was more than my pet, he was my friend and companion. Unlike people he was a flawless listener to who I could vent about any problems I have.~
+@19 = ~I took my eyes off him for no less than 10 minutes and when I came back... he was gone. His cage was open forcefully judging by a broken lock. I asked around but no one saw anyone leaving the vicinity of the carnival with a snake. I searched every tent, every bush, even that old troglodyte - Fergie's wardrobes. Laslo is nowhere to be found.~
+@20 = ~Laslo was my snake and faithful companion. He was an attraction here, at the Carnival up until someone broke him out of the cage, and stole him.~
+@21 = ~Sure... makes little difference to me now.~
+@22 = ~This is tragic indeed. I do not know how will I go on without him. It's not even about show anymore. It's about how much I grew fond of him as a friend.~
+@23 = ~Any other clues you can give me? Maybe I can help you find him.~
+@24 = ~Can't you just... get a dog or something?~
+@25 = ~I am sorry to hear that. Good luck.~
+@26 = ~You would? Ehm, okay... I can't tell much aside from what I already told you. His cage was broken midday, and no eyewitnesses to verify a thief. I wish I could give you anything more than that but honestly I only know so much. I suppose if you look around the carnival, maybe you'll find someone suspicious. If not... then I suppose my snake is gone for good.~
+@27 = ~Do you know how many people have caught, somewhat befriended and trained a Dead Grass Snake? I... don't know how many... but it must be less than we can imagine. So to answer your question, No! I cannot just get a dog.~
+@28 = ~Sad to see him go. He was sort of cute. I much prefer rabbits over snakes but it's undeniable that despite their slithering, long... hungry... vicious... slimy... oh, forget it.~
+@29 = ~May he take a better care of him next time. Having a snake requires responsibility and commitment.~
+@30 = ~I was beginning to fear him. The way he looked at Boo, like he's a snack... it made Boo uncomfortable.~
+@31 = ~We shoulda crushed the lil bugger. These menacing eyes are asking for a good axe whipping.~
+@32 = ~Back in the cage he goes. I feel for that creature's fate. As someone who was trapped in a stone form for so long, I'd be lying if I said I don't pity such a fate. But perhaps he is better off with him, if the two trust each other.~
+@33 = ~Finally. I couldn't bear to keep this little slithering menace anywhere near me anymore. One more hiss from its mouth and I'd stomp on its head.~
+@34 = ~Such a cute little fella. We used to have a pet snake at the mansion when I was little. Daddy would never let me play with him, but I did it anyway. I am not his soldier to be following his orders like an obedient puppy. This Laslo reminds me so much of Mrs. Carnivore.~
+@35 = ~Salutations.~
+@36 = ~Ehm… who said that?~
+@37 = ~Down here.~
+@38 = ~Y... you? Did you just speak?~
+@39 = ~Yes, I just spoke. Yes, I look like a cat. No, I am not a cat and definitely yes, I want to revert back to my true form.~
+@40 = ~I'm telling you. My name is Virage and I am a performer. An illusioner. My forte is showing off illusionary tricks alongside Gazib.~
+@41 = ~Please. Help me.~
+@42 = ~Let me guess, you became a victim of your own trick?~
+@43 = ~Jaheira, what can we do to reverse this?~
+@44 = ~Edwin? Anything you can do to help?~
+@45 = ~Dynaheir? Can you revert him back to original shape?~
+@46 = ~Neera. Might need your intel.~
+@47 = ~If we ever find a way, we'll come back. Maybe.~
+@48 = ~(sigh) Yeah. That is correct. My ambition was to outrun Great Gazib. He and I were rivals since we got to know each other. I could always make illusionary animals and somewhat animate them but everyone always cheers for Amazing Oopah - his ogre. Oh, look at him! Oh, he explodes! Fantastic! What about me? I make gentle illusions such as cats, dogs, parrots… sometimes sheep. I mean, who wouldn't like a cuddly sheep.~
+@49 = ~I tried to learn something new, master more attention-grabbing spells and... well, this happened. I wanted to summon a displacement beast illusion as a more exotic vision of what I usually create. I mean, at least I didn't turn into said displacement beast. Guards would've killed me. Please, can you help me get back into human form? I cannot use my magic with these paws.~
+@50 = ~Oh, you are more useless than a ball of thread.~
+@51 = ~By mists of Leira, you've done it! I knew you could! My gratitude knows no bounds. I am in your debt now.~
+@52 = ~Let that be a lesson to you. Never try to rise above your station by being reckless.~
+@53 = ~Now, I expect payment or I revert you back into a furry backpack.~
+@54 = ~Yes. You're right. My overconfidence clouded my judgment. I will keep your words in mind. Best to stick to generating cats and dogs for pet loving children than becoming a pet for children. Thank you. Take this. Fare thee well.~
+@55 = ~You sneaky bastard! Here, take this and leave me alone. People these days. No consideration for other people's feelings. No goodness in their hollow hearts.~
+@56 = ~This isn't a cat, <CHARNAME>. It's a polymorphed person.~
+@57 = ~Certain spells such as dispel magic can revert majority of polymorphy effects. This isn't a particularly nasty transformation, so casting said spell should bring his former self back to normal.~
+@58 = ~What won't some simians do for attention. Magic isn't a toy to be tampered in line with amusement. If not for <CHARNAME>, I would leave you in this feline state and keep you as my personal pet to teach you the consequences of misusing magic. (typical for these barbaric northerners)~
+@59 = ~Tis not above my skills, though I must say: magic is a perilous tool to wield. Never overestimate its might. Now, move thee not.~
+@60 = ~I can do that. Easy task. I'll do my best not to explode you with my wild magic. Hah… ehm, sorry. That was insensitive.~

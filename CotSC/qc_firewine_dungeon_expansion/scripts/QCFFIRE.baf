@@ -1,0 +1,53 @@
+IF
+  Entered(Player1)
+THEN
+  RESPONSE #100
+    CreateVisualEffectObject("SPFIREBL",Player1)
+    ApplySpellRES("SPWI304",Player1)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player2)
+THEN
+  RESPONSE #100
+    CreateVisualEffectObject("SPFIREBL",Player2)
+    ApplySpellRES("SPWI304",Player2)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player3)
+THEN
+  RESPONSE #100
+    CreateVisualEffectObject("SPFIREBL",Player3)
+    ApplySpellRES("SPWI304",Player3)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player4)
+THEN
+  RESPONSE #100
+    CreateVisualEffectObject("SPFIREBL",Player4)
+    ApplySpellRES("SPWI304",Player4)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player5)
+THEN
+  RESPONSE #100
+    CreateVisualEffectObject("SPFIREBL",Player5)
+    ApplySpellRES("SPWI304",Player5)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player6)
+THEN
+  RESPONSE #100
+    CreateVisualEffectObject("SPFIREBL",Player6)
+    ApplySpellRES("SPWI304",Player6)
+    TriggerActivation(Myself,FALSE)
+END

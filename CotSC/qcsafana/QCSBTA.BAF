@@ -1,0 +1,45 @@
+// SoD Balthrim: Safana-present follow-up to the BG1 encounter.
+IF
+    Global("QCSAFANA_BD1000_AMBUSH_READY","GLOBAL",1)
+    Global("QCSAFANA_BD1000_AMBUSH_STARTED","GLOBAL",1)
+    Global("QCSAFANA_BD1000_AMBUSH_DONE","GLOBAL",0)
+    InParty("Safana")
+    InMyArea("Safana")
+    !Dead("Safana")
+    Range(Player1,20)
+THEN
+    RESPONSE #100
+        FaceObject(Player1)
+        StartDialog("QCSBTA",Player1)
+END
+
+// Safana left or was never recruited for the SoD episode. The prior BG1
+// encounter still has to have enabled the follow-up, so no surprise spawn
+// is added to unrelated playthroughs.
+IF
+    Global("QCSAFANA_BD1000_AMBUSH_READY","GLOBAL",1)
+    Global("QCSAFANA_BD1000_AMBUSH_STARTED","GLOBAL",1)
+    Global("QCSAFANA_BD1000_AMBUSH_DONE","GLOBAL",0)
+    !InParty("Safana")
+    Range(Player1,20)
+THEN
+    RESPONSE #100
+        FaceObject(Player1)
+        StartDialog("QCSBTA",Player1)
+END
+
+IF
+    Global("QCSAFANA_BD1000_AMBUSH_ATTACK","GLOBAL",1)
+    !Allegiance(Myself,ENEMY)
+THEN
+    RESPONSE #100
+        ChangeEnemyAlly(Myself,ENEMY)
+END
+
+IF
+    Global("QCSAFANA_BD1000_AMBUSH_ATTACK","GLOBAL",1)
+    See(NearestEnemyOf(Myself))
+THEN
+    RESPONSE #100
+        AttackReevaluate(NearestEnemyOf(Myself),30)
+END

@@ -1,0 +1,7 @@
+IF
+  Global("QCHW_BG2700","BG2700",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCHW_BG2700","BG2700",1)
+    CreateCreature("NEDEER1",[3542.1807],0)
+END

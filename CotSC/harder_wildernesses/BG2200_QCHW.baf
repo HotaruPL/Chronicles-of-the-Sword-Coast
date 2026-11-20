@@ -1,0 +1,9 @@
+IF
+  Global("QCHW_BG2200","BG2200",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCHW_BG2200","BG2200",1)
+    CreateCreature("grhog01",[3689.1792],0)
+    CreateCreature("CATLEO01",[3420.1004],0)
+    CreateCreature("NEMOOSE1",[542.2644],0)
+END

@@ -1,0 +1,7 @@
+IF
+  !See(NearestEnemyOf(Myself))
+  RandomNum(4,1)
+THEN
+  RESPONSE #100
+    RandomWalk()
+END

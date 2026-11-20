@@ -1,0 +1,23 @@
+// Distorted Dreppin: blur, detect invisible and recurring enemy dispels.
+IF
+  Global("QCH_DRA_INIT","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_DRA_INIT","LOCALS",1)
+    ReallyForceSpellRES("SPWI201",Myself)
+    ReallyForceSpellRES("SPWI203",Myself)
+END
+IF
+  See(NearestEnemyOf(Myself))
+  !GlobalTimerNotExpired("QCH_DRA_DIS","LOCALS")
+THEN
+  RESPONSE #100
+    SetGlobalTimer("QCH_DRA_DIS","LOCALS",12)
+    ReallyForceSpellRES("SPWI326",NearestEnemyOf(Myself))
+END
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END

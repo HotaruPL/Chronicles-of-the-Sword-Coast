@@ -1,0 +1,17 @@
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - BG0119 / THREE OLD KEGS
+// ---------------------------------------------------------------------------
+
+IF
+  !Exists("BDCHARRA")
+THEN
+  RESPONSE #100
+    CreateCreature("BDCHARRA",[414.558],14)
+END
+
+IF
+  !Exists("BDKATHEE")
+THEN
+  RESPONSE #100
+    CreateCreature("BDKATHEE",[881.410],14)
+END

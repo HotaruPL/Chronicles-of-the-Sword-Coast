@@ -1,0 +1,24 @@
+// Nightmare Candlekeep: Eaglehorn's willing-memory-entry dialogue sets this variable.
+IF
+  Global("QCU_MEMACTIVE","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCU_MEMACTIVE","GLOBAL",2)
+    SetGlobal("QCH_MEMENTER","GLOBAL",1)
+    ActionOverride(Player1,LeaveAreaLUA("QCHELL","QCHMEM0",[370.813],0))
+    ActionOverride(Player2,LeaveAreaLUA("QCHELL","QCHMEM0",[354.808],0))
+    ActionOverride(Player3,LeaveAreaLUA("QCHELL","QCHMEM0",[386.808],0))
+    ActionOverride(Player4,LeaveAreaLUA("QCHELL","QCHMEM0",[354.832],0))
+    ActionOverride(Player5,LeaveAreaLUA("QCHELL","QCHMEM0",[386.832],0))
+    ActionOverride(Player6,LeaveAreaLUA("QCHELL","QCHMEM0",[370.852],0))
+END
+
+// Emhrys joins Eaglehorn in the hut after their meeting in Baldur's Gate.
+IF
+  Global("QCU_EMHSENT","GLOBAL",1)
+  Global("QCU_EMHIN","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCU_EMHIN","GLOBAL",1)
+    CreateCreature("QCUEMH",[439.281],E)
+END

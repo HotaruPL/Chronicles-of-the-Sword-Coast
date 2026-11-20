@@ -1,0 +1,32 @@
+BEGIN QCSBTA
+
+IF ~Global("QCSAFANA_BD1000_AMBUSH_READY","GLOBAL",1) Global("QCSAFANA_BD1000_AMBUSH_DONE","GLOBAL",0) InParty("Safana")~ THEN BEGIN qcsbta_ambush_entry
+    SAY @1
+    IF ~~ THEN EXTERN ~SAFANJ~ qcsaf_ambush_sf1
+END
+
+IF ~~ THEN BEGIN qcsbta_ambush_bth2
+    SAY @2
+    IF ~~ THEN EXTERN ~SAFANJ~ qcsaf_ambush_sf2
+END
+
+APPEND ~SAFANJ~
+
+IF WEIGHT #-1 ~False()~ THEN BEGIN qcsaf_ambush_sf1
+    SAY @3
+    IF ~~ THEN EXTERN ~QCSBTA~ qcsbta_ambush_bth2
+END
+
+IF WEIGHT #-1 ~False()~ THEN BEGIN qcsaf_ambush_sf2
+    SAY @4
+    IF ~~ THEN DO ~SetGlobal("QCSAFANA_BD1000_AMBUSH_ATTACK","GLOBAL",1) SetGlobal("QCSAFANA_BD1000_AMBUSH_DONE","GLOBAL",1)~ EXIT
+END
+END
+
+APPEND ~QCSBTA~
+
+IF WEIGHT #-1 ~Global("QCSAFANA_BD1000_AMBUSH_READY","GLOBAL",1) Global("QCSAFANA_BD1000_AMBUSH_STARTED","GLOBAL",1) Global("QCSAFANA_BD1000_AMBUSH_DONE","GLOBAL",0) !InParty("Safana")~ THEN BEGIN qcsbta_ambush_nosafana
+    SAY @5
+    IF ~~ THEN DO ~SetGlobal("QCSAFANA_BD1000_AMBUSH_ATTACK","GLOBAL",1) SetGlobal("QCSAFANA_BD1000_AMBUSH_DONE","GLOBAL",1)~ EXIT
+END
+END

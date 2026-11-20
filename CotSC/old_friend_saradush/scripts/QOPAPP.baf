@@ -1,0 +1,163 @@
+// v1.3: Dialogue-file synchronisation BEFORE the one-time encounter.
+// Solves EXTERN transitions that stop when party NPCs are still assigned
+// their SoA/recruitment dialogue instead of ToB joined dialogue.
+// Each reset applies ONLY to a companion currently in the party.
+// Unlike a StartDialog override, SetDialog here never assigns Portal's DLG to a companion.
+// No repeat dialogue attempts; no changes after the conversation begins.
+
+IF
+  Global("QOP_DONE","GLOBAL",0)
+  Global("QOP_INIT","LOCALS",0)
+  See(Player1)
+THEN
+  RESPONSE #100
+    SetGlobal("QOP_INIT","LOCALS",1)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",1)
+  InParty("Viconia")
+THEN
+  RESPONSE #100
+    ActionOverride("Viconia",SetDialog("VICON25J"))
+    SetGlobal("QOP_INIT","LOCALS",2)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",1)
+  !InParty("Viconia")
+THEN
+  RESPONSE #100
+    SetGlobal("QOP_INIT","LOCALS",2)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",2)
+  InParty("Rasaad")
+THEN
+  RESPONSE #100
+    ActionOverride("Rasaad",SetDialog("RASAA25J"))
+    SetGlobal("QOP_INIT","LOCALS",3)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",2)
+  !InParty("Rasaad")
+THEN
+  RESPONSE #100
+    SetGlobal("QOP_INIT","LOCALS",3)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",3)
+  InParty("Mazzy")
+THEN
+  RESPONSE #100
+    ActionOverride("Mazzy",SetDialog("MAZZY25J"))
+    SetGlobal("QOP_INIT","LOCALS",4)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",3)
+  !InParty("Mazzy")
+THEN
+  RESPONSE #100
+    SetGlobal("QOP_INIT","LOCALS",4)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",4)
+  InParty("Imoen2")
+THEN
+  RESPONSE #100
+    ActionOverride("Imoen2",SetDialog("IMOEN25J"))
+    SetGlobal("QOP_INIT","LOCALS",5)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",4)
+  !InParty("Imoen2")
+THEN
+  RESPONSE #100
+    SetGlobal("QOP_INIT","LOCALS",5)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",5)
+  InParty("Jaheira")
+THEN
+  RESPONSE #100
+    ActionOverride("Jaheira",SetDialog("JAHEI25J"))
+    SetGlobal("QOP_INIT","LOCALS",6)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",5)
+  !InParty("Jaheira")
+THEN
+  RESPONSE #100
+    SetGlobal("QOP_INIT","LOCALS",6)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",6)
+  InParty("Sarevok")
+THEN
+  RESPONSE #100
+    ActionOverride("Sarevok",SetDialog("SAREV25J"))
+    SetGlobal("QOP_INIT","LOCALS",7)
+    Continue()
+END
+
+IF
+  Global("QOP_INIT","LOCALS",6)
+  !InParty("Sarevok")
+THEN
+  RESPONSE #100
+    SetGlobal("QOP_INIT","LOCALS",7)
+    Continue()
+END
+
+// Give the party-side SetDialog actions time to run before a dialog transition.
+IF
+  Global("QOP_INIT","LOCALS",7)
+THEN
+  RESPONSE #100
+    SetGlobal("QOP_INIT","LOCALS",8)
+    SetGlobalTimer("QOP_READY","LOCALS",3)
+END
+
+// Portal still walks to the protagonist and starts the conversation himself.
+IF
+  Global("QOP_DONE","GLOBAL",0)
+  Global("QOP_INIT","LOCALS",8)
+  See(Player1)
+  !Range(Player1,8)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QOP_DONE","GLOBAL",0)
+  Global("QOP_INIT","LOCALS",8)
+  GlobalTimerExpired("QOP_READY","LOCALS")
+  See(Player1)
+  Range(Player1,8)
+  !StateCheck(Player1,STATE_SLEEPING)
+THEN
+  RESPONSE #100
+    FaceObject(Player1)
+    StartDialogueNoSet(Player1)
+END

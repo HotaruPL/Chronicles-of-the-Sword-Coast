@@ -1,0 +1,9 @@
+// Scripted non-damaging trap event: called when the keyed container is opened.
+IF
+  Global("QBT_CORE_SPAWN","GLOBAL",0)
+  Global("QBT_STAGE","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("QBT_CORE_SPAWN","GLOBAL",1)
+    CreateCreature("QBTCORE",[850.785],8)
+END

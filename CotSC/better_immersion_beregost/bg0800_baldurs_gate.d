@@ -1,0 +1,70 @@
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - BG0800
+// ---------------------------------------------------------------------------
+
+BEGIN BGBG0801
+IF ~True()~ THEN BEGIN 0
+  SAY @1
+  IF ~~ THEN EXIT
+END
+
+BEGIN BGBG0802
+IF ~True()~ THEN BEGIN 0
+  SAY @2
+  IF ~~ THEN EXIT
+END
+
+BEGIN BGBG0803
+IF ~True()~ THEN BEGIN 0
+  SAY @3
+  IF ~~ THEN EXIT
+END
+
+BEGIN BGBG0804
+IF ~True()~ THEN BEGIN 0
+  SAY @4
+  IF ~~ THEN EXIT
+END
+
+BEGIN BGBG0806
+IF ~True()~ THEN BEGIN 0
+  SAY @5
+  IF ~~ THEN EXIT
+END
+
+BEGIN BGBG0807
+IF ~True()~ THEN BEGIN 0
+  SAY @6
+  IF ~~ THEN EXIT
+END
+
+BEGIN BGBG0808
+IF ~True()~ THEN BEGIN 0
+  SAY @7
+  IF ~~ THEN EXIT
+END
+
+BEGIN BGBG0809
+IF ~True()~ THEN BEGIN 0
+  SAY @8
+  IF ~~ THEN EXIT
+END
+
+BEGIN BGBG0810
+IF ~True()~ THEN BEGIN 0
+  SAY @9
+  IF ~~ THEN EXIT
+END
+
+BEGIN BGBG0811
+IF ~True()~ THEN BEGIN 0
+  SAY @10
+  IF ~~ THEN EXIT
+END
+
+
+BEGIN BGBG0813
+IF ~True()~ THEN BEGIN 0
+  SAY @11
+  IF ~~ THEN EXIT
+END

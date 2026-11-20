@@ -1,0 +1,7 @@
+IF
+  Global("QCASTAR_SPAWNED","BG0121",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCASTAR_SPAWNED","BG0121",1)
+    CreateCreature("QCASTAR",[739.699],0)
+END

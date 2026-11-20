@@ -1,0 +1,9 @@
+// Local roaming behavior for hostile kobolds in QCCFIR.
+// This occupies the actor-specific script slot, leaving the creature's
+// original Override/Class/Race/General/Default combat scripts intact.
+IF
+  !See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    RandomWalkContinuousTime(2)
+END

@@ -1,0 +1,71 @@
+// CotSC Batch 36: English WeiDU component names and Enhanced Edition journal titles.
+// This supplements the existing Setup.tra without altering any older translation files.
+
+// Installer component names
+@6000 = ~QC: Lady Lydia - The Lost Necklace~
+@6001 = ~QC: Merlee - The Bandit Wannabe~
+@6002 = ~QC: Nebbish and Ethon - The Cellar Key (Rebuilt Nebbish 4.6)~
+@6003 = ~QC: Wizshade and Cedric Shan - Ulcaster [5.7]~
+@6004 = ~QC: Popper the Kobold - Nashkel Carnival~
+@6005 = ~QC: Alphyra - Curse of the White Flame~
+@6006 = ~QC: Halbazzer's Exotic Watchmen~
+@6007 = ~QC: Astarion - Dangerous Bargain~
+@6008 = ~QC: Submerged House & Auntie Ethel~
+@6009 = ~QC: Xantam's Sewer Ambush~
+@6010 = ~QC: Lendarn and Birkin - The Lost Diary~
+@6011 = ~QC: Mystery of a Missing Horse~
+@6012 = ~QC: Surprise at Burning Wizard~
+@6013 = ~QC: Eastern Carnival~
+@6014 = ~QC: Better Immersion to Beregost~
+@6015 = ~QC: Better Immersion to Friendly Arm Inn~
+@6016 = ~QC: Better Immersion to Nashkel~
+@6017 = ~QC: Better Immersion to Carnival~
+@6018 = ~QC: Better Immersion to Baldur's Gate~
+@6019 = ~QC: Remnants of the Past~
+@6020 = ~QC: Halruaan and the Flying Ship~
+@6021 = ~QC: Additions to Balduran's Island~
+@6022 = ~QC: Drow Hunters~
+@6023 = ~QC: Cure for Madness~
+@6024 = ~QC: Coran's Old Flame~
+@6025 = ~QC: Safana the Pirate~
+@6026 = ~QC: Quentin the Traveler~
+@6027 = ~QC: Harder Durlag's Tower - READ README!~
+@6028 = ~QC: Richer Wildernesses - READ README!~
+@6029 = ~QC: Harder Undercity - READ README!~
+@6030 = ~QC: Lich in Candlekeep Catacombs - READ README!~
+@6031 = ~QC: Bag of Holding in Candlekeep~
+@6032 = ~QC: Bag of Holding in Irenicus Dungeon~
+@6033 = ~QC: River District in Athkatla~
+@6034 = ~QC: Ranger and His Wife~
+@6035 = ~QC: Poor Wyvern~
+@6036 = ~QC: Viconia and Valas~
+@6037 = ~QC: Coral and Stolen Pearl~
+@6038 = ~QC: Beggar's Plea~
+@6039 = ~QC: Unicorn Grove and Distorted Memories~
+@6040 = ~QC: Better Immersion for Athkatla~
+@6041 = ~QC: Better Immersion for Trademeet~
+@6042 = ~QC: Additions to De'Arnise Keep~
+@6043 = ~QC: Old Friend in Saradush~
+@6044 = ~QC: Reputation Adjuster - READ README!~
+@6045 = ~QC: Miscellaneous Merchants~
+@6046 = ~QC: Potions of Life Saving~
+@6047 = ~QC: BP-BGT Worldmap Compatibility (Optional; install before Worldmap)~
+
+// Explicit quest-journal titles
+@7000 = ~Alfie's Kobold Problem~
+@7001 = ~Durbem's Key~
+@7002 = ~Missing Drow~
+@7003 = ~Torm's Hand~
+@7004 = ~Haunted Orphanage~
+@7005 = ~In need for a pet~
+@7006 = ~Drow Hunters~
+@7007 = ~Crazy Mad Love~
+@7008 = ~Lucky Ring~
+@7009 = ~Hannibal the Pirate~
+@7010 = ~Wife or Slave~
+@7011 = ~Curse of a Wise Werewolf~
+@7012 = ~Stolen Flute~
+@7013 = ~Erica~
+@7014 = ~Sirine in Distress~
+@7015 = ~Meeting after Dark~
+@7016 = ~Unicorn Grove~

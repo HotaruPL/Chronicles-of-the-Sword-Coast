@@ -1,0 +1,22 @@
+// Annaebiel - QCANNA behavior in QCANAE
+// She approaches the party and starts her custom dialogue once the party is close enough.
+
+IF
+  Global("QCCORAN_ANNA_DIALOG_STARTED","GLOBAL",0)
+  See(Player1)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QCCORAN_ANNA_DIALOG_STARTED","GLOBAL",0)
+  See(Player1)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCCORAN_ANNA_DIALOG_STARTED","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCANNA",Player1)
+END

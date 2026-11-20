@@ -1,0 +1,90 @@
+@100 = ~Erica
+
+Ranger Don of Imnesvale has asked me to find his missing wife, Erica. He believes she may have travelled to Larswood with a druid named Seorad. He has promised three hundred gold pieces and magical arrows if I discover what became of her.~
+@101 = ~Erica
+
+I found Erica in Larswood. She intends to remain with Seorad and has begged me not to bring her back. I must decide what to tell Ranger Don in Imnesvale.~
+@102 = ~Erica
+
+Ranger Don's search for Erica has ended. I have reported the outcome of my journey to Larswood.~
+
+// Extracted from the original English dialogue for translation.
+// Original @100-@102 journal strings are preserved unchanged.
+@103 = ~Thank you for helping me find the truth about Erica. I have much to think about, and I'd rather do so in private.~
+@104 = ~Erica! You found her! I can't tell you how happy I am to see you. I was worried sick! Here, take these arrows and three hundred gold pieces with my thanks. Now, if you'll excuse us, Erica and I have a great deal to discuss... beginning with the boundaries we ought to respect in our marriage!~
+@105 = ~You're back! But... where is my wife? Where is Erica?!~
+@106 = ~We found her bloodied, torn clothes in the woods. We were too late to save her.~
+@107 = ~We left her in Larswood. She chose to stay with Seorad.~
+@108 = ~Any word of Erica? Please, if you go to Larswood, look for her near the druids' enclave. I can't leave Imnesvale unattended.~
+@109 = ~Excuse me, have... have you seen my wife? She's about my height, with dark hair and green eyes. Her name is Erica. You'd remember her if you saw her. She's very beautiful.~
+@110 = ~I'm sorry, I don't think I have. Is she missing?~
+@111 = ~No, I don't think I have. Sorry.~
+@112 = ~Er... all right. Please let me know if you see someone matching her description.~
+@113 = ~Erica went out to gather herbs a few days ago. A routine chore; she does it all the time. But she hasn't come home since. I've looked everywhere for her.~
+@114 = ~That damned druid must have something to do with it! If he does, I'll...~
+@115 = ~Druid?~
+@116 = ~Seorad is his name, I believe. He was an outcast from the forests up north. His family feared his strange gift for controlling animals and entrusted him to a circle of druids who promised to care for him. He was gone nearly a decade, but one night he came back and took a sudden interest in Erica.~
+@117 = ~Erica is an exceptionally beautiful woman, and she knows it. I've forgiven every flirtation, but this is different. He returns, she speaks to him, and days later she's gone? My instincts tell me he's involved. If he hurt her, I'll never forgive myself for failing to protect her.~
+@118 = ~If only I knew where that enclave was. That miserable bastard wouldn't see me coming.~
+@119 = ~Enclave? Do you know where he lives?~
+@120 = ~It's hardly my problem, unless I hear a few coins clinking.~
+@121 = ~I'm sorry, but I can't help you right now.~
+@122 = ~Yes. Erica mentioned it when I asked about the druid. His sect is hidden in a forest called Larswood, not far from Baldur's Gate. I'm only a local ranger; I'm not used to travelling so far north.~
+@123 = ~They must be hiding there. Erica seemed excited about a journey north when I questioned her about Seorad. If that isn't evidence enough, I don't know what is. And I can't abandon the village, especially after what happened to Merella...~
+@124 = ~The people here barely trust me as their defender, but I do everything I can to keep them safe. Without Erica, it's difficult to concentrate on the dangers facing Imnesvale. I need to know she's safe. If my suspicions are true, and she's left with that nature-obsessed bastard...~
+@125 = ~I know the northern forests. I'll try to find her.~
+@126 = ~Perhaps the sound of coin would persuade me to help.~
+@127 = ~I'm sorry, but I don't have time for this.~
+@128 = ~I can spare three hundred gold pieces and some enchanted arrows. That's what I can offer, and every coin is honestly earned. Will you help me?~
+@129 = ~Very well. I'll look for Erica.~
+@130 = ~That's not enough for the journey.~
+@131 = ~I understand. If you change your mind, please come and see me. I'll keep searching as best I can.~
+@132 = ~I... I can't believe this. My Erica... dead? This is horrible! How could I let it happen? I should have watched over her, kept her from wandering into the woods alone. Damn it all...~
+@133 = ~You held up your end of the bargain, and I'll honour mine. Three hundred gold pieces, and a few arrows from my collection. I... I need to be alone now.~
+@134 = ~You what?! I asked you to bring her home, not abandon her to that savage! How could you leave her there? Our agreement is off. You'll get nothing from me!~
+@135 = ~You will? Thank you. You have no idea what this means to me. I hope the journey won't cost you too much time. I trust you know where to find Larswood. Please do everything you can to find Erica. I'll pay you three hundred gold pieces and give you some enchanted arrows for your trouble. Good luck!~
+@136 = ~Have you lost your mind, rivvin? You would travel all the way north to fetch a foolish shrew who fell for some half-wit's charms? We would have finished with Irenicus by now, were it not for your sickening benevolence.~
+@137 = ~Chasin' a tree-humpin' sod-buster across half o' Faerûn... bah, a bloody dream come true! Ye'll owe me a proper tankard o' dwarven stout, not watered-down horse piss, for puttin' up with this snivellin' nonsense!~
+@138 = ~Back north we go, then! Boo sounds happy to visit an old stopping place.~
+@139 = ~How amusing that your altruism is the greatest thief of time we have ever known.~
+@140 = ~A meagre reward for such an enormous waste of time.~
+@141 = ~You really killed him! I... I can't believe it! Seorad, you...!~
+@142 = ~You're coming with me.~
+@143 = ~I have a great deal to discuss with Don. Please allow us some privacy.~
+@144 = ~Please, leave me in peace. I've made my choice.~
+@145 = ~What are you doing here?!~
+@146 = ~Are you Erica? Your husband is searching for you. He sent us to find you.~
+@147 = ~Sorry to disturb you.~
+@148 = ~I have nothing more to say to you.~
+@149 = ~Yes, I'm Erica. I can't believe you came all this way, but I'm not going anywhere. And I certainly won't be going back to Don.~
+@150 = ~I didn't ask anyone to come after me.~
+@151 = ~He has never cared for me, and frankly, I never cared for him. We married because our parents arranged it. I had no say in the matter. A girl has little choice when the family makes its deals.~
+@152 = ~Seorad and I have known each other since childhood. He always cared for me, brought me gifts, made me feel special. With Don, it's constant bickering, protectiveness and jealousy. With Seorad, there is peace and happiness. The life I always wanted.~
+@153 = ~Look, I haven't much to offer besides a few potions. But if you tell Don you found my torn clothes near a bear's cave in the woods, he'll believe you. He trusts people without demanding proof. It's cruel, perhaps, but I was never happy with him. Please try to understand.~
+@154 = ~I understand what a forced marriage can do to a person. I won't destroy your happiness. I'll tell Don what you ask.~
+@155 = ~I gave Don my word. You're coming with us!~
+@156 = ~Thank you. You're kinder than I could ever be. I'll remain here with Seorad. Take these potions; I hope they serve you well. Goodbye.~
+@157 = ~SEORAD! HELP ME!~
+@158 = ~They're trying to drag me back! I can't go! Protect me!~
+@159 = ~I've lost Seorad, and I don't know what to feel. I suppose there is nothing left for me here. Take me back to Imnesvale.~
+@160 = ~I... hadn't thought of that. Hells, I haven't thought of anyone but myself. Don sacrificed so much for me, and I was blind to it. I've been so desperate for freedom that I may have ruined another person's life. Seorad, darling, I love you, but this cannot go on.~
+@161 = ~I'm sorry, Seorad. There's nothing more to say. I'll remember the time we spent together, but I do have a husband in Imnesvale. If he truly cares, I owe him an honest conversation. I have to go.~
+@162 = ~Seorad... I...~
+@163 = ~...Bastard. Let's... let us go.~
+@164 = ~What is going on here?! Erica?~
+@165 = ~Stay away from us.~
+@166 = ~Let her go, now, or you'll feel my wrath!~
+@167 = ~Get out of my way, or you die!~
+@168 = ~Keldorn?~
+@169 = ~Hexxat? Can you help?~
+@170 = ~So be it! You'll pay for interfering in our affairs!~
+@171 = ~Wh... Erica! You can't! We were to be married in a tenday. I've already begun the preparations...~
+@172 = ~This is... just leave. I don't care about you. I never did.~
+@173 = ~You were a consort, nothing more. I chose you for your beauty, that's all. I'll find another.~
+@174 = ~Weaklings such as yourself can scarcely be considered protectors.~
+@175 = ~Of course this was a waste of time. What else did you expect?~
+@176 = ~Larswood. A vast wilderness southeast of Baldur's Gate, teeming with wild creatures and bandits.~
+@177 = ~Little lady must not refuse! It is dangerous here for a young woman like you. Your husband is very worried!~
+@178 = ~Erica, I understand your suffering, but we came on behalf of a worried ranger whose thoughts have been consumed by your disappearance. You are right that coercion has no place in marriage, yet Don does seem to care deeply for you. His heart aches for your return. Could you not at least speak to him honestly before deciding your future?~
+@179 = ~Look at him, Erica. He is a fragile creature, consumed by passion that may wither like autumn leaves. Don's hearth offers stability, a quiet life, and a feeling that endured long after the novelty faded. You should at least speak with your husband before casting all that aside for a fleeting spark.~
+@180 = ~If Don did not care, he would never have sent us this far to find you. You are no mere prize to him, but the woman he loves. He showed us great concern, and your disappearance has broken his heart. Speak with him before the damage becomes permanent.~

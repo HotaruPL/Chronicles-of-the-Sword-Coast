@@ -1,0 +1,22 @@
+// BG0705 - Elfsong Tavern
+IF
+  !Exists("BIBELW01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBELW01",[244.763],8)
+END
+
+IF
+  Global("BIB_IRINA_SPAWNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("BIB_IRINA_SPAWNED","GLOBAL",1)
+    CreateCreature("BDIRINA",[395.395],0)
+END
+
+IF
+  !Exists("BIBHOG01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHOG01",[777.840],0)
+END

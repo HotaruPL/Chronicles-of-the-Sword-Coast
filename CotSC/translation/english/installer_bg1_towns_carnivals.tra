@@ -1,0 +1,77 @@
+// Installer text for BG1 towns and carnival NPCs, equipment and notes.
+// Batch 31. Extracted from verified B30 setup-qac.tp2; English unchanged.
+@1000 = ~Rhynn~
+@1001 = ~Overly Enthusiastic Person~
+@1002 = ~Laslo the Snake~
+@1003 = ~This small wooden box contains Laslo, a rare Dead Grass Snake from the Western Heartlands. Rhynn considers him a loyal friend and companion, and would probably prefer that you do not shake the box.~
+@1004 = ~Woman~
+@1005 = ~Little Girl~
+@1006 = ~Alfie~
+@1007 = ~Kobold's Note~
+@1008 = ~The elephant trainer has the sword. We plan on getting it back, but we cannot because of the guards. They always see us. With the sword, we can surely beat those creatures that chased us out of our caves.~
+@1009 = ~Lucky Blade~
+@1010 = ~This scimitar belonged to a skilled warrior named Xian Tarakashi from Kara Tur. Xian was a bright Samurai who travelled all over Faerun to offer his assistance and extraordinarily good fighting skills to anyone in need. Despite never gathering reputation or gaining a name to himself, he was willing to lend his sword to those weaker than him. His fighting style brisked with elegancy and swiftness, and he always seemed to be lucky enough to win even against powerful foes. Until they day of his demise came. One day, he was tasked with annihilating a cabal of undead spellcasters known as Twisted Rune - a fight took a tragic turn when Xian overestimated his own abilities and attacked without preparation, like he always seemed to do. His overconfidence was disastrous in effects and his body was never found following the encounter. His blade was found deep within Amnian wilderness and preserved. You wonder if wearing such blade really increases luck?
+
+Equipped Abilities:
+
+- Luck +2
+
+STATISTICS:
+
+Damage: 1d8 (slashing)
+Speed Factor: 5
+Proficiency Type: Scimitar/Wakizashi/Ninjato
+Type: One-handed
+Requires:
+10 Strength
+
+Weight: 4~
+@1011 = ~Fergie~
+@1012 = ~Potion of Life Saving~
+@1013 = ~When consumed, the potion restores 80 HP of the person. This is the most powerful variant of the healing potion. The effect is instantaneous, and the potion is destroyed in the process.
+
+STATISTICS:
+
+Special: Restores 80 Hit Points
+
+Weight: 1~
+@1014 = ~Zara the Mummy~
+@1015 = ~Sandrine~
+@1016 = ~Virage~
+@1017 = ~Halindar Droun~
+@1018 = ~Gnome Citizen~
+@1019 = ~Halfling Citizen~
+@1020 = ~Betsie Finkle~
+@1021 = ~Elven Commoner~
+@1022 = ~Dwarf Commoner~
+@1023 = ~Half-Elven Commoner~
+@1024 = ~Dwarven Commoner~
+@1025 = ~Gross Wine~
+@1026 = ~Gross Wine
+
+A bottle of supposedly traditional honey wine, prepared from an old family recipe. The murky liquid smells strangely sour, and its bitter, unpleasant flavour suggests the maker followed the recipe rather poorly. Despite its dreadful taste, the wine is harmless.~
+@1027 = ~A bottle of strangely murky wine with a sour smell and an unpleasant, bitter flavour. It appears harmless, if barely drinkable.~
+@1028 = ~Elven Traveler~
+@1029 = ~Halfling Commoner~
+@1030 = ~Dwarven Peasant~
+@1031 = ~Orc~
+@1032 = ~Dwarf Cook~
+@1033 = ~Dog~
+@1034 = ~Ravoc~
+@1035 = ~Fisherman~
+@1036 = ~Halfling Mourner~
+@1037 = ~Tiefling Citizen~
+@1038 = ~Gnome Commoner~
+@1039 = ~Cat~
+@1040 = ~Half-Orc Farmer~
+@1041 = ~Moose~
+@1042 = ~Bouncer~
+@1043 = ~Guard~
+@1044 = ~Amnian Guard~
+@1045 = ~Fire Eater~
+@1046 = ~Statue Lover~
+@1047 = ~Halfling Farmer~
+@1048 = ~Orc Archer~
+@1049 = ~Trained Wolf~
+@1050 = ~Half-Ogre~
+@1051 = ~Elf~

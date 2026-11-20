@@ -1,0 +1,10 @@
+
+// BEGIN CotSC BP-BGT Worldmap translations (QCWM v1.0)
+@QCSW_1001 = "Torm's###Hand"
+@QCSW_1002 = "Shandalar's###Home"
+@QCSW_1003 = "Northern###Wilderness"
+@QCSW_1004 = "River###District"
+@QCSW_1005 = "Forest###Brewery"
+@QCSW_1006 = "Unicorn###Grove"
+@QCSW_1007 = "Eastern###Carnival"
+// END CotSC BP-BGT Worldmap translations

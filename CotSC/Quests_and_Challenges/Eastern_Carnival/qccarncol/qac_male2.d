@@ -1,0 +1,6 @@
+BEGIN QACM02
+
+IF ~True()~ THEN BEGIN 0
+    SAY @3
+    IF ~~ THEN EXIT
+END

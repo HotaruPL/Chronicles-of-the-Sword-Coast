@@ -1,0 +1,39 @@
+IF
+  Global("QCVarunQuest","GLOBAL",2)
+  Global("QCVarunAmbushIntro","GLOBAL",0)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QCVarunQuest","GLOBAL",2)
+  Global("QCVarunAmbushIntro","GLOBAL",0)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCVarunAmbushIntro","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCVVARUN",Player1)
+END
+
+IF
+  Global("QCVarunQuest","GLOBAL",4)
+  Global("QCVarunAfterFight","GLOBAL",0)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QCVarunQuest","GLOBAL",4)
+  Global("QCVarunAfterFight","GLOBAL",0)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCVarunAfterFight","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCVVARUN",Player1)
+END

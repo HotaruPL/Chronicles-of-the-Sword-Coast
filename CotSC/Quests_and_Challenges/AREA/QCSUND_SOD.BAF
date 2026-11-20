@@ -1,0 +1,15 @@
+IF
+  Global("QCSUND_Z_SPAWNED","BD0121",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCSUND_Z_SPAWNED","BD0121",1)
+    CreateCreature("QCSUNDZ",[672.173],0)
+END
+
+IF
+  Global("QCSUND_N_SPAWNED","BD0121",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCSUND_N_SPAWNED","BD0121",1)
+    CreateCreature("QCSUNDN",[310.306],4)
+END

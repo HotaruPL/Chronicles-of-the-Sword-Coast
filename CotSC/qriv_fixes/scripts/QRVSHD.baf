@@ -1,0 +1,17 @@
+// Rescues missing River District Shady Man without duplicating a living actor.
+IF
+  Global("QRVSHD_INIT","GLOBAL",0)
+  !Exists("QRVSHAD")
+THEN
+  RESPONSE #100
+    SetGlobal("QRVSHD_INIT","GLOBAL",1)
+    CreateCreature("QRVSHAD",[2318.587],12)
+END
+
+IF
+  Global("QRVSHD_INIT","GLOBAL",0)
+  Exists("QRVSHAD")
+THEN
+  RESPONSE #100
+    SetGlobal("QRVSHD_INIT","GLOBAL",1)
+END

@@ -1,0 +1,9 @@
+// Mark the wine as collected when the party takes it from Dragonspear Castle.
+// Stored as a GLOBAL so the EET campaign transition can refer to it.
+IF
+  Global("QC_QF_DSWIN_FOUND","GLOBAL",0)
+  PartyHasItem("QFIDSWIN")
+THEN
+  RESPONSE #100
+    SetGlobal("QC_QF_DSWIN_FOUND","GLOBAL",1)
+END

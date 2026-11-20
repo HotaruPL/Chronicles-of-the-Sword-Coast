@@ -1,0 +1,45 @@
+// QC v33: After an Imoen scene actually ends (its existing state flag is 2),
+// restore her EET joined dialogue. In particular, the QCHELL introduction
+// previously left her assigned to QCHIMTR, breaking later IMOEN2J CHAIN lines.
+// This is a one-time repair after each scene; there are no retries and no
+// attempts to start a new conversation. Other party members are unaffected.
+IF
+  Global("QCH_IMINTRO","GLOBAL",2)
+  Global("QC33_IMINTRO","GLOBAL",0)
+  InParty("Imoen2")
+  InMyArea("Imoen2")
+THEN
+  RESPONSE #100
+    SetGlobal("QC33_IMINTRO","GLOBAL",1)
+    ActionOverride("Imoen2",SetDialog("IMOEN2J"))
+END
+IF
+  Global("QCH_IMDREPP","GLOBAL",2)
+  Global("QC33_IMDREPP","GLOBAL",0)
+  InParty("Imoen2")
+  InMyArea("Imoen2")
+THEN
+  RESPONSE #100
+    SetGlobal("QC33_IMDREPP","GLOBAL",1)
+    ActionOverride("Imoen2",SetDialog("IMOEN2J"))
+END
+IF
+  Global("QCH_IMROOM","GLOBAL",2)
+  Global("QC33_IMROOM","GLOBAL",0)
+  InParty("Imoen2")
+  InMyArea("Imoen2")
+THEN
+  RESPONSE #100
+    SetGlobal("QC33_IMROOM","GLOBAL",1)
+    ActionOverride("Imoen2",SetDialog("IMOEN2J"))
+END
+IF
+  Global("QCH_ST_IMO","GLOBAL",2)
+  Global("QC33_IMSTORE","GLOBAL",0)
+  InParty("Imoen2")
+  InMyArea("Imoen2")
+THEN
+  RESPONSE #100
+    SetGlobal("QC33_IMSTORE","GLOBAL",1)
+    ActionOverride("Imoen2",SetDialog("IMOEN2J"))
+END

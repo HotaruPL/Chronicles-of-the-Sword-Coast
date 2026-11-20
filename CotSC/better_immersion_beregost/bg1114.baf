@@ -1,0 +1,9 @@
+// Single encounter; no respawn after the kobold walks away.
+IF
+  Global("QC37KobSpawn","GLOBAL",0)
+  !Exists("BIBKOB19")
+THEN
+  RESPONSE #100
+    SetGlobal("QC37KobSpawn","GLOBAL",1)
+    CreateCreature("BIBKOB19",[555.395],6)
+END

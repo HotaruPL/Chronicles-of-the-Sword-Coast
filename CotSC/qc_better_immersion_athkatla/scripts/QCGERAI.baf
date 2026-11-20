@@ -1,0 +1,16 @@
+IF
+  See(NearestEnemyOf(Myself))
+  !StateCheck(Myself,STATE_INVISIBLE)
+  GlobalTimerExpired("QCGerInvis","LOCALS")
+THEN
+  RESPONSE #100
+    ApplySpellRES("SPWI206",Myself)
+    SetGlobalTimer("QCGerInvis","LOCALS",12)
+END
+
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

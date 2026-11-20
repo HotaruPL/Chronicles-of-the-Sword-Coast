@@ -1,0 +1,26 @@
+IF
+  Global("QCSANDRINE_STATE","GLOBAL",0)
+  See(Player1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCSANDRINE_STATE","GLOBAL",1)
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QCSANDRINE_STATE","GLOBAL",1)
+  Range(Player1,4)
+THEN
+  RESPONSE #100
+    StartDialogueNoSet(Player1)
+END
+
+IF
+  Global("QAC_LASLO_STARTED","GLOBAL",1)
+  Global("QAC_LASLO_RETURNED","GLOBAL",0)
+  Global("QAC_LASLO_OVERLY_CONFRONTED","GLOBAL",0)
+  !Exists("QACOVER")
+THEN
+  RESPONSE #100
+    CreateCreature("QACOVER",[3401.2402],0)
+END

@@ -1,0 +1,13 @@
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Dead("QCRWSEOR")
+  Dead("QCRWDR1")
+  Dead("QCRWDR2")
+  Global("QCRW_ERA_POSTFIGHT","GLOBAL",0)
+  See(Player1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCRW_ERA_POSTFIGHT","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCRWERA",Player1)
+END

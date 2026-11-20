@@ -1,0 +1,31 @@
+// Carnival creatures appear once per campaign, never on repeated visits.
+// Protect saves that already contain existing Carnival civilians from v27.
+IF
+  Global("QCCARN_POP_INIT","GLOBAL",0)
+  Exists("QACRHYN")
+THEN
+  RESPONSE #100
+    SetGlobal("QCCARN_POP_INIT","GLOBAL",1)
+END
+
+IF
+  Global("QCCARN_POP_INIT","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCCARN_POP_INIT","GLOBAL",1)
+    CreateCreature("QACAMN01",[855.1387],0)
+    CreateCreature("QACAMN02",[699.785],0)
+    CreateCreature("QACAMN03",[1144.634],0)
+    CreateCreature("QACCIT01",[618.997],0)
+    CreateCreature("QACCIT02",[526.1155],0)
+    CreateCreature("QACCIT03",[184.1342],0)
+    CreateCreature("QACRHYN",[1146.1117],0)
+    CreateCreature("QCKOB01",[1966.470],0)
+    CreateCreature("QCKOB02",[1906.323],0)
+    CreateCreature("QCKOB03",[2561.816],0)
+    CreateCreature("QCKOB04",[2612.667],0)
+    CreateCreature("QCKSH01",[2613.735],0)
+    CreateCreature("QCLEOP01",[837.113],0)
+    CreateCreature("QCSQRL01",[2308.1639],0)
+    CreateCreature("QCSQRL02",[1221.1722],0)
+END

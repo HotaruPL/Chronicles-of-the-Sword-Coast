@@ -1,0 +1,35 @@
+// CotSC Batch 18 - extracted original English dialogue for torm_tavern_npcs.d
+// Keep existing @ numbers stable when translating.
+@1 = ~Welcome to Shriveled Potato. What can I get you, wanderer?~
+@2 = ~Let me see what you got.~
+@3 = ~Nothing at the moment.~
+@4 = ~You're new around here? You should speak to Alma in the Fortress.~
+@5 = ~Bandits skip our town. There's not much to steal in here. Let's hope you are just as wise and will leave our coffers untouched.~
+@6 = ~Hello. My name is Nyriel. Nyriel Otton. Paladin of Torm and a protector of Torm's Hand. What brings you to our small village?~
+@7 = ~Nice to meet you. My name is <CHARNAME>. We were sent here with a mission to investigate disappearances that occur in this area. Can you tell us more?~
+@8 = ~Have anyone else visit the village recently? We've been told there was another agent sent.~
+@9 = ~We gonna take a look at the village.~
+@10 = ~You're not the first people asking. Yes, I can tell you what I know. It started a few weeks ago, when Henric's wife went missing. She was collecting herbs near the river and didn't come back home.~
+@11 = ~My fellow priesthood organised a search. We covered the woods within the close proximity but to no avail. Some of our paladins went as far as to Ulgoth's Beard. Not a trace was ever found. We contacted a... group we are familiar with to aid us in this.~
+@12 = ~The mysterious grounds behind these vanishings are beyond our limited understanding. I cannot even offer you any leads except for asking at the Fortress.~
+@13 = ~The Fortress is that massive, fortified temple near the tavern. You have full authority to enter, od course. Speak to Alma - our grand priestess. She is privy to specific details that us, lower ranking servants of Torm, are not given information on.~
+@14 = ~What else do you wish to ask?~
+@15 = ~Have anyone else visit the village recently? We've been told there was another agent sent.~
+@16 = ~We gonna take a look at the village.~
+@17 = ~Yes. We had a bunch of adventurers such as yourselves who heard about our problem, and a few other associates we contacted to detect the nature of the issue. Every single one of them is gone. Details are murky as no one truly seen anything. They promised to investigate, left and never came back. Most plausible theory is that they've been either killed by beasts in the forest or simply gave up and abandoned our cause.~
+@18 = ~I'd appreciate any help. Please, look around. Seek aid at the Fortress. Remember to speak to Alma. She knows a bit more than humble paladins.~
+@19 = ~<CHARNAME>! Good to see you! Isaac got out of the caves before you! He already filled me in! Alma... how could she do that? We trusted her. She was our headmistress. Well... at least her death resulted in a step up for the whole Fortress. As her devoted ex-right hand I shall overtake her activities and role as headmaster of Torm's Fortress.~
+@20 = ~First duty I shall perform is erasing that god forsaken place down below. No one needs to know what went on down there. As for you, I know Alma possibly manipulated you into thinking she'll pay you. We aren't the wealthiest but here. Take these 2000 gold coins and these few scrolls. You'll put them to better use than us.~
+@21 = ~First duty I shall perform is erasing that god forsaken place down below. No one needs to know what went on down there. As for you, I know Alma possibly manipulated you into thinking she'll pay you. We aren't the wealthiest but here. Take these 2000 gold coins and these few scrolls. You'll put them to better use than us.~
+@22 = ~Naturally. You have my sympathy over the crisis you're enrolled in. As a Harper, I vow to resolve the issue as efficiently as we can.~
+@23 = ~It's delightful that more agents are being sent.~
+@24 = ~You be next group seeking vanished people?~
+@25 = ~Maybe. You know something about it?~
+@26 = ~No. We're just looking around.~
+@27 = ~A little. Me stand in the tavern most time. Something be not right. The village always calm, no trouble. The tremors be... different.~
+@28 = ~Tremors?~
+@29 = ~Strange feeling... underneath our feet. Me walking home, feeling it. Darkness underneath... strange sensations. Not liking it.~
+@30 = ~Does Torm's Hand have any caves or underground?~
+@31 = ~Not know. Me live here 5 years but never be to Fortress. They know more than us. Me work here but not know about underground. You go to Fortress.~
+@32 = ~Will do. Thanks.~
+@33 = ~Be on your way then.~

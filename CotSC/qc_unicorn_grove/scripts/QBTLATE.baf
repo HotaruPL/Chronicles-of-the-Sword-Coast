@@ -1,0 +1,15 @@
+// Dragon defeat, one-time return to Eaglehorn's hut. Preserve prior memory combat AI.
+IF
+  Global("QBT_CORE_SPAWN","GLOBAL",1)
+  Global("QBT_WOKEN","GLOBAL",0)
+  Dead("QBTCORE")
+THEN
+  RESPONSE #100
+    SetGlobal("QBT_WOKEN","GLOBAL",1)
+    ActionOverride(Player1,LeaveAreaLUA("QCGHUT","",[535.330],8))
+    ActionOverride(Player2,LeaveAreaLUA("QCGHUT","",[510.340],8))
+    ActionOverride(Player3,LeaveAreaLUA("QCGHUT","",[565.335],8))
+    ActionOverride(Player4,LeaveAreaLUA("QCGHUT","",[490.370],8))
+    ActionOverride(Player5,LeaveAreaLUA("QCGHUT","",[560.385],8))
+    ActionOverride(Player6,LeaveAreaLUA("QCGHUT","",[520.395],8))
+END

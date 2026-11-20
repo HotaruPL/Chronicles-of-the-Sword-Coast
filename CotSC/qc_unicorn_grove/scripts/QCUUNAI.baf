@@ -1,0 +1,7 @@
+// Painted unicorn proxies are click-only; there is no automatic dialogue.
+IF
+  False()
+THEN
+  RESPONSE #100
+    NoAction()
+END

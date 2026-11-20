@@ -1,0 +1,8 @@
+// BIBG4801 - remove Nyriel from the Shriveled Potato after Alma's death.
+IF
+  Global("TCR_ALMA_DEAD","GLOBAL",1)
+  Exists("BITNYRIE")
+THEN
+  RESPONSE #100
+    ActionOverride("BITNYRIE",DestroySelf())
+END

@@ -1,0 +1,107 @@
+@1 = ~This component requires Baldur's Gate II: Enhanced Edition with the Enhanced Edition Trilogy (EET) installed.~
+@2 = ~BG2600.BCS was not found. This version of Quests and Challenges requires the EET Candlekeep garden resources.~
+@3 = ~NOBLEW2.CRE was not found. The Lady Lydia component requires the standard Candlekeep noblewoman creature resource.~
+@4 = ~BG3300.BCS was not found. The Merlee component requires the standard EET Beregost town-square script.~
+@5 = ~MTOWBE.CRE was not found. The Merlee component requires the standard male townsfolk creature resource.~
+@6 = ~BG3301.ARE was not found. The Merlee component requires the standard EET Beregost smithy area.~
+@10 = ~Lady Lydia~
+@11 = ~Lydia's Pearl Necklace~
+@12 = ~A string of fine pearls set on a delicate silver chain. It belonged to Lady Lydia's late husband and carries considerable sentimental value.~
+@20 = ~Lady Lydia's Necklace~
+@21 = ~Lady Lydia, a resident of Candlekeep, has lost a pearl necklace somewhere in the gardens. She asked me to find it for her.~
+@22 = ~I found Lady Lydia's pearl necklace and returned it to her. She rewarded me with 10 gold pieces and I gained a little respect for helping her.~
+@50 = ~Merlee~
+@40 = ~BG0705.BCS was not found. The Nebbish and Ethon component requires the EET Elfsong Tavern area script.~
+@41 = ~FATMAN.CRE was not found. The Nebbish component requires the standard male fatman creature resource.~
+@42 = ~COOKGE.CRE was not found. The Ethon component requires the standard kitchen cook creature resource.~
+@44 = ~MISC97.ITM was not found. The Cormyrian Liquor item requires the standard BG1 ale item resource.~
+@45 = ~KEY01.ITM was not found. The Ethon cellar key requires the standard key item resource.~
+
+@26 = ~Nebbish~
+@27 = ~Ethon~
+@28 = ~Cellar Key~
+@29 = ~A key used to open the cellar door at the Elfsong Tavern.~
+@30 = ~Cormyrian Liquor~
+@31 = ~This liquor has a strange odour, but a nice smell. It is exceptionally potent and should be consumed with caution.~
+@32 = ~This component requires an EET game.~
+@33 = ~Ulcaster resources are required for the Wizshade and Cedric Shan component.~
+
+@34 = ~BG4900.ARE was not found. The Popper component requires the Nashkel Carnival area.~
+@35 = ~KOBOLD.CRE was not found. The Popper component requires a standard kobold creature resource.~
+@36 = ~MISC9Y.ITM was not found. The Popper component requires the Brine Potion item resource.~
+@37 = ~BOOT02.ITM was not found. The Popper component requires the Boots of Stealth item resource.~
+
+@38 = ~BG2302.BCS was not found. The Alphyra component requires the Friendly Arm Inn second-floor area script.~
+@39 = ~NATASH.CRE was not found. The Alphyra component requires the standard female mage creature resource.~
+@110 = ~WAND11.ITM was not found. The Alphyra component requires the Wand of the Heavens item resource.~
+@111 = ~HALBAZ.DLG was not found. The Alphyra component requires Halbazzer Drin's standard dialogue resource.~
+@112 = ~EDWIN.DLG was not found. The Alphyra component requires Edwin's standard dialogue resource for the optional advice branch.~
+@43 = ~DYNAHJ.DLG was not found. The Alphyra component requires Dynaheir's joined-party dialogue resource for the optional advice branch.~
+
+@46 = ~EDWINJ_.DLG was not found. The Alphyra component requires Edwin's joined-party dialogue resource for the optional advice branch.~
+
+@47 = ~BG0703.BCS was not found. Halbazzer's Exotic Watchmen requires the Sorcerous Sundries area script.~
+@48 = ~BD0121.BCS was not found. Halbazzer's Exotic Watchmen requires the Siege of Dragonspear Sorcerous Sundries area script.~
+@49 = ~BEHOLD01.CRE was not found. Halbazzer's Exotic Watchmen requires the standard beholder creature resource.~
+
+@113 = ~BG0121.BCS was not found. The Astarion - Dangerous Bargain component requires the Astarion room area script.~
+@51 = ~ENDER.CRE was not found. The Astarion - Dangerous Bargain component uses an elven thief creature resource as its chassis.~
+
+@52 = ~Viconia's dialogue resource was not found. The Astarion - Dangerous Bargain component requires VICONIA.DLG or VICONI_.DLG.~
+
+@53 = ~BG0156.BCS was not found. The Astarion - Dangerous Bargain component requires Derek's house area script.~
+@54 = ~MTOWBE.CRE was not found. The Astarion - Dangerous Bargain component requires a standard male townsfolk creature resource for Derek.~
+@55 = ~MISC65.ITM was not found. The Astarion - Dangerous Bargain component uses Brage's Body as the chassis for Derek's custom body quest item.~
+
+@56 = ~Astarion has hired us to kill an art dealer named Derek in Baldur's Gate. We are to bring Derek's body back to Astarion for a payment of 6000 gold.~
+@57 = ~Derek escaped Baldur's Gate before we could reach him. Astarion claimed that his fate was already sealed, then attacked us.~
+@58 = ~We decided not to continue working for Astarion. He turned hostile and attacked us.~
+
+@59 = ~BD7310.CRE was not found. The Submerged House component requires the standard Siege of Dragonspear interior creature resources.~
+@63 = ~KEY01.ITM was not found. The Submerged House component requires the standard key item resource.~
+@64 = ~BG3800.BCS was not found. The Submerged House component requires the Beregost road area script.~
+
+@65 = ~BG0224.BCS was not found. The Xantam's Sewer Ambush component requires the Baldur's Gate sewers area script.~
+@66 = ~BEHOLD01.CRE was not found. The Xantam's Sewer Ambush component requires the standard beholder creature resource.~
+@67 = ~LELLYN.CRE was not found. The Xantam's Sewer Ambush component requires the standard Lellyn thief creature resource.~
+@68 = ~BOW03.ITM was not found. The Xantam's Sewer Ambush component requires the standard longbow item resource.~
+@69 = ~AROW07.ITM was not found. The Xantam's Sewer Ambush component requires the standard Arrow of Dispelling item resource.~
+@70 = ~POTN34.ITM was not found. The Xantam's Sewer Ambush component requires the standard Potion of Magic Protection item resource.~
+@71 = ~SCRL2I.ITM was not found. The Xantam's Sewer Ambush component requires the standard letter item resource.~
+
+@72 = ~LENDAR.CRE was not found. The Lendarn and Birkin component requires Lendarn's standard creature resource.~
+@73 = ~OGREMA02.CRE was not found. The Lendarn and Birkin component requires the standard Firewine Ogre Mage resource.~
+@74 = ~SCRL3F.ITM was not found. The Lendarn and Birkin component requires Sarevok's standard diary item as a journal template.~
+@75 = ~Lendarn's Diary~
+@76 = ~This diary belongs to a mage named Lendarn, who dwelled within the Firewine Ruins. All dates appear to have been deliberately smudged beyond recognition.
+
+Alone in the dust. I have nothing left. Nothing. Hells, why do I even write this? I suppose it makes me feel at ease with my own thoughts. How could they cast me out? How could my own sister cast me out? I curse our parents. I curse my sister. Anora, you'll burn in the Nine Hells for this! You treacherous wench.
+
+I'm stuck in this cold, miserable cave with nothing but a few loaves of bread. I managed to steal them from the marketplace in Eshpurta. I saw her... my sister. She seemed happy. Happy that I was gone. She erased me from her memory so quickly. Moved on as though I were nothing but a stranger, easy to forget. Well, enjoy your life while you can, little sister. One day, it will come to a miserable end.
+
+I don't have much time. He is here. That Ogre Mage. Had I known this cave was inhabited, I would never have come here. When I made an excuse to leave, he made me stay. He's further down the cave, near the exit. The only exit! What do I do? I... have no choice but to use the last spells I have if the need arises.
+
+Ogre Mage... Birkin. He introduced himself to me and said that I am free to stay with him for as long as I wish. His attempt at sounding threatening went up in flames, for I could see something in his eyes. The same feeling I have endured... loneliness. And, just like me, he wants to rise above his station. To become someone. He told me... he told me that he'll teach me how to control my magic, and that together we can achieve great things. I shouldn't take his word for it. But... I do trust him. I really do. Who could have thought an Ogre Mage could show me more kindness than my own flesh and blood?
+
+I haven't written in quite a while. Birkin and I are on our way to the Sword Coast. He's familiar with these territories, more so than I am. I haven't been here since I was a little boy, when we visited Uncle Bergen in Beregost. Perhaps I'll pay him a little visit. Surely, the news of my departure haven't reached him yet. He was the only member of my family I could count on. The only one who ever protected me from my mother's wrath. But social visits will have to wait until Birkin and I establish a new base for our little conspiracy.
+
+My legs feel numb. We've been walking for a week, and Birkin says we're getting near. Funny. He says that every couple of hours, and I still haven't seen a shred of civilisation. In his own twisted way, however, he does show me care. Yesterday, he sacrificed the larger portion of a lamb for me, despite his own hunger. I have also learned a little more about him. He said he feels uncomfortable telling me much about his past and cut the conversation short, but I know that Ogre Mages are highly cultured and orderly. They love, they feel, and they are fiercely protective of their own families. Well... some of them. Birkin's family was exactly like that, until they chased him from their home because of their own greed. He wouldn't say what happened. He changed the subject almost immediately. I felt his pain. His suffering. His bitterness. All the emotions I came to know not so long ago. We may be different species, but we are partners. That's all that matters.
+
+Firewine. An old elven trading town, completely destroyed around 1168 DR during a massive sorcerous battle. Its remains are... magnificent. I never dreamed I would see a historical relic such as this with my own eyes. The complex beneath it is apparently a labyrinth of corridors and chambers. What purpose did these places serve, I wonder? Birkin said he contacted a "friend" and arranged a meeting. We are waiting for him now. That view... it's breathtaking.
+
+Jenkal. That is his name. A sadistic halfling with narcissistic tendencies. How I despise this little vermin. The moment he looked at me, the hair stood up on the back of my neck. There is something terrifying in his cold eyes, made all the worse by that charming, warm voice of his. Why is Birkin acting kinder toward him than toward me? I am supposed to be his family now. But... fine. He can get us treasure. The deal is that Jenkal will unleash a group of kobolds inhabiting the Firewine undergrounds upon Gullykin. Apparently, the halflings of Gullykin built great storage vaults for their brewery and winery. Over time, their excavations breached or connected directly to the pre-existing underground storerooms of the ancient elven complex, effectively joining the two locations beneath the village. It makes sense, I suppose. I have no idea how this Jenkal found common ground with the kobolds, nor why they obey him, but it proves that he is at least competent. The kobolds will spread fear throughout the halfling village, prompting them to call for adventurers. Adventurers with gold. Adventurers with treasure. We kill them. We take their wealth. And once we have enough, we can begin a new life. Just the two of us. Brothers.
+
+So far, the plan is going brilliantly. We have murdered four different adventurers over the past few days, and more will come. I must be a monster, killing all these innocents. Well... Birkin doesn't think so. He says I deserve a good life more than they do because I have suffered. Just as he has. I am certain he loves me. Like a brother. I always wanted a brother. The only thing standing in my way now is Jenkal. He ingratiates himself with Birkin far too much for my liking. He tries to take him away from me. To make me look expendable. For the time being, he is useful. But soon... he will not be. And once his usefulness evaporates into thin air, I will kill him and blame the kobolds for his death. Then Birkin and I can remain a family forever. No one will ever dare touch us. The perfect family I always wanted.
+
+The diary contains no further entries.~
+@77 = ~Birkin~
+@90 = ~BG2300.ARE is required for the Mystery of a Missing Horse component.~
+@91 = ~MTOWFR_A.CRE is required for the Mystery of a Missing Horse component.~
+@92 = ~HORSE.CRE is required for the Mystery of a Missing Horse component.~
+@93 = ~FRIEND.DLG is required for the Mystery of a Missing Horse component.~
+@94 = ~HOBGOB.CRE is required for the Mystery of a Missing Horse component.~
+@95 = ~IMOEN2J.DLG was not found. The Mystery of a Missing Horse interjections require Imoen's BG1 joined-party dialogue resource.~
+@96 = ~XZARJ.DLG was not found. The Mystery of a Missing Horse interjections require Xzar's BG1 joined-party dialogue resource.~
+@97 = ~JAHEIRAJ.DLG was not found. The Mystery of a Missing Horse interjections require Jaheira's BG1 joined-party dialogue resource.~
+@98 = ~FALDOJ.DLG was not found. The Mystery of a Missing Horse interjections require Faldorn's BG1 joined-party dialogue resource.~
+@99 = ~VICONJ.DLG was not found. The Mystery of a Missing Horse interjections require Viconia's BG1 joined-party dialogue resource.~

@@ -1,0 +1,7 @@
+IF
+  Global("HDT_BG0504","BG0504",0)
+THEN
+  RESPONSE #100
+    SetGlobal("HDT_BG0504","BG0504",1)
+    CreateCreature("VAMPAT01",[573.178],0)
+END

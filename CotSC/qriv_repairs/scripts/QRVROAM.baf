@@ -1,0 +1,7 @@
+// Simple non-hostile wandering, no weapons, no dialogue auto-trigger.
+IF
+  True()
+THEN
+  RESPONSE #100
+    RandomWalk()
+END

@@ -1,0 +1,82 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// Elven Commoner at 3795,3081, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBELF18")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBELF18",[3795.3081],4)
+END
+
+// Female Human Commoner at 3833,3081, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHUM15")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHUM15",[3833.3081],12)
+END
+
+// Wandering Halfling Commoner at 2096,715.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL17")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL17",[2096.715],0)
+END
+
+// Orc Commoner at 432,1225, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBORC12")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBORC12",[432.1225],12)
+END
+
+// Orc Commoner at 439,1255, facing east-south.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBORC13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBORC13",[439.1255],13)
+END
+
+// Wandering Kobold Commoner at 1071,629.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBKOB20")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBKOB20",[1071.629],0)
+END
+
+// Wandering Dwarven Commoner at 569,415.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDWR17")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDWR17",[569.415],0)
+END
+
+// Human baker at 2617,2545, facing north.
+IF
+  Global("BIB_BG0600_BAKERY_SPAWNED","GLOBAL",0)
+  !Exists("BIBBAK01")
+THEN
+  RESPONSE #100
+    SetGlobal("BIB_BG0600_BAKERY_SPAWNED","GLOBAL",1)
+    CreateCreature("BIBBAK01",[2617.2545],8)
+END

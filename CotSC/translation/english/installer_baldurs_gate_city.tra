@@ -1,0 +1,209 @@
+// CotSC Batch 32 - Baldur's Gate city NPC names, item descriptions, area captions.
+// Copied exactly from the tested Batch 31 cumulative installer; no text rewritten.
+
+@2000 = ~Watch Member~
+
+@2001 = ~Half Orc Citizen~
+
+@2002 = ~Drow Commoner~
+
+@2003 = ~Halfling Commoner~
+
+@2004 = ~Orc Commoner~
+
+@2005 = ~Homeless Dog~
+
+@2006 = ~Hobgoblin Commoner~
+
+@2007 = ~Elven Girl~
+
+@2008 = ~Gnome Commoner~
+
+@2009 = ~Robel~
+
+@2010 = ~Goblin Commoner~
+
+@2011 = ~Flaming Fist Officer~
+
+@2012 = ~Elven Commoner~
+
+@2013 = ~Kobold Commoner~
+
+@2014 = ~Commoner~
+
+@2015 = ~Tiefling Commoner~
+
+@2016 = ~Dwarven Watch Member~
+
+@2017 = ~Cook~
+
+@2018 = ~Dog~
+
+@2019 = ~Duergar Commoner~
+
+@2020 = ~Half Ogre Commoner~
+
+@2021 = ~Elvin the Courier~
+
+@2022 = ~Elven Boy~
+
+@2023 = ~Cat~
+
+@2024 = ~Bouncer~
+
+@2025 = ~Dwarf Commoner~
+
+@2026 = ~Cook's Assistant~
+
+@2027 = ~Porter~
+
+@2028 = ~Docks Worker~
+
+@2029 = ~Dwarven Commoner~
+
+@2030 = ~Githyanki~
+
+@2031 = ~Halfling Citizen~
+
+@2032 = ~Orc Citizen~
+
+@2033 = ~Tout~
+
+@2034 = ~Patricio Moons~
+
+@2035 = ~Elven Worker~
+
+@2036 = ~Irina~
+
+@2037 = ~Kira~
+
+@2038 = ~Kira's Greatsword~
+
+@2039 = ~Orc~
+
+@2040 = ~Baker~
+
+@2041 = ~Drow~
+
+@2042 = ~Troll~
+
+@2043 = ~High Constable~
+
+@2044 = ~Bemley~
+
+@2045 = ~Adan~
+
+@2046 = ~Thug~
+
+@2047 = ~Ogre~
+
+@2048 = ~Gnome Gardener~
+
+@2049 = ~Theo the Historian~
+
+@2050 = ~Kaeira~
+
+@2051 = ~Randalla Brasshorn~
+
+@2052 = ~Lady Delcia Caan~
+
+@2053 = ~Hendron~
+
+@2054 = ~Bartender~
+
+@2055 = ~Purple Wyrm Inn~
+
+@2056 = ~Ulua~
+
+@2057 = ~Durbem~
+
+@2058 = ~Copper Coronet +1~
+
+@2059 = ~Though forged of simple copper, this coronet hums with protective elven enchantments that stave off wear and tear. It was created to mark the construction of the Copper Coronet, Athkatla’s notorious tavern. Whispers in the Slums suggest that the structure's eccentric architect wore the piece until the day she died. In the centuries since, the crown has passed through an endless chain of shady vendors and traveling merchants, slowly drifting north until it arrived in Baldur's Gate.
+
+STATISTICS:
+- +5 walking speed
+- +20 magic resistance~
+
+@2060 = ~Vhaidra~
+
+@2061 = ~Merchant~
+
+@2062 = ~Squirrel~
+
+@2063 = ~Guard Dog~
+
+@2064 = ~Paladin of Torm~
+
+@2065 = ~Alma~
+
+@2066 = ~Belion~
+
+@2067 = ~Fortress of Torm~
+
+@2068 = ~Ghost~
+
+@2069 = ~Isaac Wildflame~
+
+@2070 = ~Scroll~
+
+@2071 = ~This ancient scroll are soaked with evil energy. Though unclear how Alma came into possession of such powerful spell, it's going to prove handy. The incantation dispels the magical barrier that enshrouds the system of caves beneath Torm's Hand.~
+
+@2072 = ~Bow of Silent Leaves~
+
+@2073 = ~Enchanted with powerful magic, Bow of Silent Leaves is a perfect ranged weapon for archers. Some stories claim the bow is a remnant after an ancient elven tribe from forests of Tethyr, others claim it was forged for Ellesime herself - the queen of Suldanesselar. The truth isn't known, but the bow is a formidable weapon due to elven magic application.
+
+STATISTICS:
+
+Equipped abilities:
+- Luck: +1
+- Dexterity: +1 (when equipped)~
+
+@2074 = ~Nyriel Otton~
+
+@2075 = ~Shriveled Potato~
+
+@2076 = ~Rare Spices~
+
+@2077 = ~These rare spices come from Amn and have a peculiar and intense yet truly pleasant odour to them. Red Fang Marauders were hoarding them in their caverns as a trophy stolen from nearby raided caravan.~
+
+@2078 = ~Moose~
+
+@2079 = ~Wolf~
+
+@2080 = ~Red Fang Marauder Goblin~
+
+@2081 = ~Red Fang Marauder Orc~
+
+@2082 = ~Red Fang Marauder Orc Shaman~
+
+@2083 = ~Red Queen~
+
+@2084 = ~Female Commoner~
+
+@2085 = ~Farmer~
+
+@2086 = ~Durbem's Key~
+
+@2087 = ~A finely wrought golden key. Its intricate design is covered with tiny symbols and delicate engravings. It belongs to Durbem, the dwarf at the Purple Wyrm Inn; what it opens remains a mystery.~
+
+@2088 = ~Friendly Cat~
+
+@2089 = ~A friendly stray cat that seems content to wander the streets in search of food.~
+
+@2090 = ~Strange Coin~
+
+@2091 = ~This coin seems elaborate and sophisticatedly crafted, but its purpose is unknown.~
+
+@2092 = ~Allesia Faithhammer~
+
+@2093 = ~Mia~
+
+@2094 = ~Alice~
+
+@2095 = ~Cole~
+
+@2096 = ~Kevin~
+
+@2097 = ~Tilda~
+

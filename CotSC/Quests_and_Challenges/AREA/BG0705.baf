@@ -1,0 +1,15 @@
+IF
+  Global("QCNEBBISH_SPAWNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCNEBBISH_SPAWNED","GLOBAL",1)
+    CreateCreature("QCNBBISH",[785.497],0)
+END
+
+IF
+  Global("QCETHON_SPAWNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCETHON_SPAWNED","GLOBAL",1)
+    CreateCreature("QCETHON",[665.266],0)
+END

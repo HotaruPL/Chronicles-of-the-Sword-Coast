@@ -1,0 +1,26 @@
+// Nightmare Candlekeep: BG2301 memory copy, all actors are custom.
+IF
+  Global("QCJ_FIGHT","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCJ_FIGHT","GLOBAL",2)
+    ActionOverride("QCJKHAL",Enemy())
+    ActionOverride("QCJJAHR",Enemy())
+END
+IF
+  Global("QCJ_FIGHT","GLOBAL",2)
+  Global("QCJ_VIC","GLOBAL",0)
+  !Exists("QCJKHAL")
+  !Exists("QCJJAHR")
+  !Exists("QCJSHAD")
+  !Exists("QCJBONE")
+  !Exists("QCJASHI")
+  !Exists("QCJOGRE")
+  !Exists("QCJDEVS")
+  !Exists("QCJBHOR")
+  IsValidForPartyDialog("Viconia")
+THEN
+  RESPONSE #100
+    SetGlobal("QCJ_VIC","GLOBAL",1)
+    ActionOverride("Viconia",StartDialog("QCJVICO",Player1))
+END

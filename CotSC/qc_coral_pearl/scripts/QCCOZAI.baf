@@ -1,0 +1,35 @@
+// Do not interfere with the Prince's vanilla SAHPR2 scripts.
+// Zexylinn follows the Prince into battle, or triggers the faction by provoking him.
+IF
+  Allegiance("sahpr2",ENEMY)
+  Allegiance(Myself,NEUTRAL)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+
+IF
+  Global("QCCOR_FIGHT","GLOBAL",1)
+  Allegiance(Myself,NEUTRAL)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+
+IF
+  AttackedBy([GOODCUTOFF],DEFAULT)
+  Allegiance(Myself,NEUTRAL)
+THEN
+  RESPONSE #100
+    SetGlobal("QCCOR_FIGHT","GLOBAL",1)
+    ActionOverride("sahpr2",Enemy())
+    Enemy()
+END
+
+IF
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

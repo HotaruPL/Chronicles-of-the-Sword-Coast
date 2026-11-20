@@ -1,0 +1,30 @@
+// TORMCR - ASMODEUS SYMBOL CLICK TARGET
+// The hidden native door supplies the gear/activator cursor. A type-0 trigger
+// region sits over the same coordinates and actually catches the click.
+// Alma is not teleported in. She starts elsewhere in the cavern and walks to
+// the symbol chamber, then begins her dialogue.
+IF
+  Global("TCR_ALMA_STARTED","GLOBAL",0)
+  Clicked([ANYONE])
+THEN
+  RESPONSE #100
+    SetGlobal("TCR_ALMA_STARTED","GLOBAL",1)
+    CreateCreature("TCRALMA",[1207.760],0)
+    Wait(1)
+    Wait(2)
+    ActionOverride("TCRALMA",Dialogue(Player1))
+END
+
+// Keep the native door event as a fallback. The global prevents duplicate
+// spawning if both the overlapping region and door event are ever fired.
+IF
+  Global("TCR_ALMA_STARTED","GLOBAL",0)
+  Opened(Player1)
+THEN
+  RESPONSE #100
+    SetGlobal("TCR_ALMA_STARTED","GLOBAL",1)
+    CreateCreature("TCRALMA",[1207.760],0)
+    Wait(1)
+    Wait(2)
+    ActionOverride("TCRALMA",Dialogue(Player1))
+END

@@ -1,0 +1,11 @@
+// Kazhmira is placed directly in BG0125 by the area script.
+// Her CRE is based directly on Dark Horizons' Isolde and keeps Isolde's
+// original general/default behaviour, except that the default script below
+// makes her hostile immediately instead of waiting for Tristan to be attacked.
+IF
+  Global("QCHU_BG0125","BG0125",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCHU_BG0125","BG0125",1)
+    CreateCreature("QCKAZHM",[850.401],0)
+END

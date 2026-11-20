@@ -1,0 +1,7 @@
+// Roam Amkethran without touching other actors or area scripts.
+IF
+  True()
+THEN
+  RESPONSE #100
+    RandomWalk()
+END
