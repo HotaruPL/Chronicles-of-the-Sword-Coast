@@ -1,0 +1,93 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR1106.ARE~ BEGIN
+  FAIL @20271
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR1100.ARE~ BEGIN
+  FAIL @20272
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~WYVERN.CRE~ BEGIN
+  FAIL @20273
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~WOLFDI.CRE~ BEGIN
+  FAIL @20274
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC01.ITM~ BEGIN
+  FAIL @20275
+END
+
+// The wolf carcass: visible inventory and description art from the supplied picture.
+COPY ~CotSC/qc_poor_wyvern/items/QCPWICO.BAM~ ~override/QCPWICO.BAM~
+COPY ~CotSC/qc_poor_wyvern/items/QCPWDES.BAM~ ~override/QCPWDES.BAM~
+COPY_EXISTING ~MISC01.ITM~ ~override/QCPWBODY.ITM~
+  SAY NAME1 @5029
+  SAY NAME2 @5029
+  SAY UNIDENTIFIED_DESC @5030
+  SAY DESC @5030
+  WRITE_SHORT 0x42 0
+  WRITE_LONG 0x34 0
+  WRITE_LONG 0x4c 40
+  WRITE_ASCII 0x3a ~QCPWICO~ #8
+  WRITE_ASCII 0x58 ~QCPWDES~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Non-hostile, gravely weakened cave wyvern, with no inherited attack scripts.
+COPY_EXISTING ~WYVERN.CRE~ ~override/QCPWWYV.CRE~
+  SAY NAME1 @5031
+  SAY NAME2 @5031
+  WRITE_SHORT 0x24 5
+  WRITE_SHORT 0x26 70
+  WRITE_LONG 0x14 0
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCPWWYV~ #32
+  WRITE_ASCII 0x2cc ~QCPWWYV~ #8
+  WRITE_ASCII 0x248 ~QCPWWYV~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Stronger but otherwise vanilla dire wolf; special item is lootable upon death.
+COPY_EXISTING ~WOLFDI.CRE~ ~override/QCPWWOLF.CRE~
+  SAY NAME1 @5032
+  SAY NAME2 @5032
+  WRITE_SHORT 0x24 70
+  WRITE_SHORT 0x26 70
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCPWWOLF~ #32
+  ADD_CRE_ITEM ~QCPWBODY~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+
+// Append only one actor in each original area. No replacement of AR1100/AR1106.
+COPY_EXISTING ~AR1106.ARE~ ~override/AR1106.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1001
+      fj_loc_y = 1330
+      fj_orientation = 6 // north-west
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCPWWYV
+      fj_cre_resref = QCPWWYV
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR1100.ARE~ ~override/AR1100.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 4954
+      fj_loc_y = 118
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCPWWOLF
+      fj_cre_resref = QCPWWOLF
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qc_poor_wyvern/scripts/QCPWWYV.baf~
+COMPILE ~CotSC/qc_poor_wyvern/dialogue/poor_wyvern.d~ USING ~CotSC/translation/%LANGUAGE%/qc_poor_wyvern/dialogue/poor_wyvern.tra~
+
+// Public installer: development progress message omitted.

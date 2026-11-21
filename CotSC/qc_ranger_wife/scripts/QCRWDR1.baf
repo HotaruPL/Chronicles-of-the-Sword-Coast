@@ -1,0 +1,45 @@
+// v1.1: First follower becomes hostile alongside Seorad and actively fights.
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  !Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+  Global("QC_F1_AI","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QC_F1_AI","LOCALS",1)
+    SetGlobalTimer("QC_F1_NEXT","LOCALS",6)
+    ReallyForceSpellRES("SPPR113",NearestEnemyOf(Myself)) // Doom
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+  Global("QC_F1_AI","LOCALS",1)
+  GlobalTimerExpired("QC_F1_NEXT","LOCALS")
+THEN
+  RESPONSE #100
+    SetGlobal("QC_F1_AI","LOCALS",2)
+    ReallyForceSpellRES("SPPR208",NearestEnemyOf(Myself)) // Hold Person
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",5)
+  Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    MoveToObject(NearestEnemyOf(Myself))
+END

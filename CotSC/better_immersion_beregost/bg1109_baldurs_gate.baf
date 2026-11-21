@@ -1,0 +1,22 @@
+// Half-Ogre Bouncer at 451,252, facing south-east.
+IF
+  !Exists("BIBOGRB3")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBOGRB3",[451.252],14)
+END
+
+// The Bouncer attacks Phandalyn on sight once they are close enough.
+// Phandalyn's script name is PHANDA.
+IF
+  Global("BIB_BOUNCER_PHANDALYN","LOCALS",0)
+  Allegiance(Myself,NEUTRAL)
+  Exists("PHANDA")
+  Range("PHANDA",20)
+  !StateCheck("PHANDA",CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    SetGlobal("BIB_BOUNCER_PHANDALYN","LOCALS",1)
+    Enemy()
+    Attack("PHANDA")
+END

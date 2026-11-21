@@ -1,0 +1,10 @@
+IF
+  Global("HDT_BG0511","BG0511",0)
+THEN
+  RESPONSE #100
+    SetGlobal("HDT_BG0511","BG0511",1)
+    CreateCreature("VAMPAT01",[163.1466],0)
+    CreateCreature("IMPQUA01",[1713.2449],0)
+    CreateCreature("UMBHUL01",[3419.1327],0)
+    CreateCreature("UMBHUL01",[3214.1344],0)
+END

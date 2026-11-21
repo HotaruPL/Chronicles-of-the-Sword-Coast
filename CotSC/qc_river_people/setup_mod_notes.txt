@@ -1,0 +1,1 @@
+Addon v2.2: add 19 local actors & cat, six approved container shapes left as-is, loot assigned. Requires v2.1.

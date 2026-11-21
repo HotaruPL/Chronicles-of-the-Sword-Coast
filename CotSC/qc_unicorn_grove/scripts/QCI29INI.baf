@@ -1,0 +1,22 @@
+// v29 experimental Imoen joined-dialogue initialization on first visit.
+// Only runs while Imoen is actually in the party. Does not change models,
+// voices, NPC scripts, quest variables or dialogue content.
+IF
+  InParty("Imoen2")
+  Global("QC29IM2","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QC29IM2","LOCALS",1)
+    ActionOverride("Imoen2",SetDialog("IMOEN2J"))
+    Continue()
+END
+IF
+  InParty("Imoen")
+  !InParty("Imoen2")
+  Global("QC29IM1","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QC29IM1","LOCALS",1)
+    ActionOverride("Imoen",SetDialog("IMOENJ"))
+    Continue()
+END

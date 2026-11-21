@@ -1,0 +1,7 @@
+// Combat AI for the three extra BG3500 goblins. Does not modify vanilla goblins.
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

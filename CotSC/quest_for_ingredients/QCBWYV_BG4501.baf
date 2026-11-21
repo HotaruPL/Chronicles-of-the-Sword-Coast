@@ -1,0 +1,9 @@
+IF
+  Global("QC_QF_BW_SPAWNED","BG4501",0)
+  Global("QC_QUENT_DONE","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QC_QF_BW_SPAWNED","BG4501",1)
+    CreateCreature("QCBWYV",[745.791],0)
+    ChangeEnemyAlly("QCBWYV",ENEMY)
+END

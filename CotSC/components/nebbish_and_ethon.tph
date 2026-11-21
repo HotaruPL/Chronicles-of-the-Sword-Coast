@@ -1,0 +1,78 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/Setup.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0705.BCS~ BEGIN
+  FAIL @40
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BANDIT.CRE~ BEGIN
+  FAIL @42
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC97.ITM~ BEGIN
+  FAIL @46
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KEY01.ITM~ BEGIN
+  FAIL @45
+END
+
+// Remove the old nine-character Nebbish resource from earlier prototypes, if present.
+ACTION_IF FILE_EXISTS_IN_GAME ~QCNEBBISH.CRE~ BEGIN
+  DELETE ~override/QCNEBBISH.CRE~
+END
+
+// Fresh Nebbish: eight-character CRE resref, copied directly from the known-working male BANDIT base.
+COPY_EXISTING ~BANDIT.CRE~ ~override/QCNBBISH.CRE~
+  SAY NAME1 @26
+  SAY NAME2 @26
+  WRITE_ASCII 0x2cc ~QCNBBISH~ #8
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCNBBISH_DEAD~ #32
+
+COPY_EXISTING ~BANDIT.CRE~ ~override/QCETHON.CRE~
+  SAY NAME1 @27
+  SAY NAME2 @27
+  WRITE_ASCII 0x2cc ~QCETHON~ #8
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~QCNKEY~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+  WRITE_ASCII 0x280 ~QCETHON_DEAD~ #32
+
+// Nebbish cellar key has its own resource; Auntie Ethel retains QCEKEY.
+COPY_EXISTING ~KEY01.ITM~ ~override/QCNKEY.ITM~
+  SAY NAME1 @28
+  SAY NAME2 @28
+  SAY DESC @29
+
+COPY_EXISTING ~POTN08.ITM~ ~override/QCCORMYR.ITM~
+  SAY NAME1 @30
+  SAY NAME2 @30
+  SAY DESC @31
+  WRITE_SHORT 0x1c 9
+  LPF ADD_ITEM_EFFECT
+    INT_VAR
+      opcode = 49
+      target = 1
+      timing = 1
+      parameter1 = 1
+      parameter2 = 0
+      header = 1
+      type = 3
+  END
+
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCNBBISH.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCNBBISH.TRA~
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCETHON.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCETHON.TRA~
+
+ADD_JOURNAL TITLE (@23) @24 @25 USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCNBBISH.TRA~
+
+EXTEND_TOP ~BG0705.BCS~ ~CotSC/Quests_and_Challenges/AREA/BG0705.baf~

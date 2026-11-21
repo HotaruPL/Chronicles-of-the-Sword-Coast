@@ -1,0 +1,14 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+
+// v75 added civilian spawns.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBWIN75")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBWIN75",[474.294],0)
+END
+

@@ -1,0 +1,29 @@
+IF
+  Global("QCEuliciaMet","LOCALS",0)
+  See([PC])
+THEN
+  RESPONSE #100
+    SetGlobal("QCEuliciaMet","LOCALS",1)
+    MoveToObject(LastSeenBy(Myself))
+END
+
+IF
+  Global("QCEuliciaMet","LOCALS",1)
+  See([PC])
+  Range(LastSeenBy(Myself),12)
+THEN
+  RESPONSE #100
+    FaceObject(LastSeenBy(Myself))
+    SetGlobal("QCEuliciaMet","LOCALS",2)
+    StartDialog("QCDEULI",LastSeenBy(Myself))
+END
+
+// Once Eulicia turns hostile through dialogue, choose nearby enemies
+// dynamically rather than repeatedly locking on to Player1.
+IF
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

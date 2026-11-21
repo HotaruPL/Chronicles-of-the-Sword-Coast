@@ -1,0 +1,11 @@
+IF
+  Global("HDT_BG0512","BG0512",0)
+THEN
+  RESPONSE #100
+    SetGlobal("HDT_BG0512","BG0512",1)
+    CreateCreature("MINDFL01",[1925.688],0)
+    CreateCreature("UMBHUL01",[999.618],8)
+    CreateCreature("MEPLIG01",[331.1516],4)
+    CreateCreature("BEHGAU01",[2268.925],4)
+    ActionOverride("Container24",CreateItem("HDTKIELL",0,0,0))
+END

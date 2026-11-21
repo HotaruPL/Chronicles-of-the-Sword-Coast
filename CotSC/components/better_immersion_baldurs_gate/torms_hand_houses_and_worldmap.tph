@@ -1,0 +1,330 @@
+// ---------------------------------------------------------------------------
+// STAGE 26 - TORM'S HAND HOUSE RESIDENTS / HOUSE RETURNS / AREA LABELS
+// ---------------------------------------------------------------------------
+// The four house interiors already have working travel regions back to TORMHA,
+// targeting destination entrances HSE1-HSE4.  Add those four named entrances
+// to TORMHA without changing any of the existing entry regions.
+
+// Torm's Hand house residents, house returns, and area labels are part of the main Better Immersion component.
+
+// Female Commoner resource; placed in T48A01 to avoid the vanilla Amnian guard response in T48B01.
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/T48BFEMC.CRE~
+  SAY NAME1 @2084
+  SAY NAME2 @2084
+  WRITE_ASCII 0x2cc ~T48BFEMD~ #8
+  WRITE_ASCII 0x280 ~T48BFEMC~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Dwarf Commoner in T48A01.
+COPY_EXISTING ~SAILAL.CRE~ ~override/T48ADWRC.CRE~
+  SAY NAME1 @2025
+  SAY NAME2 @2025
+  WRITE_ASCII 0x2cc ~T48ADWRD~ #8
+  WRITE_ASCII 0x280 ~T48ADWRC~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Farmer in T18A01.
+COPY_EXISTING ~FARM.CRE~ ~override/T18FARMC.CRE~
+  SAY NAME1 @2085
+  SAY NAME2 @2085
+  WRITE_ASCII 0x2cc ~T18FARMD~ #8
+  WRITE_ASCII 0x280 ~T18FARMC~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/torm_hand_houses.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/torm_hand_houses.tra~
+
+// House residents.
+// The Female Commoner is deliberately placed in T48A01 rather than T48B01.
+// T48B01 has the vanilla Amnian guard response when its containers are opened;
+// keeping her there would give the house an unwanted guard encounter.
+COPY_EXISTING ~T48A01.ARE~ ~override/T48A01.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 520
+      fj_loc_y = 293
+      fj_dest_x = 520
+      fj_dest_y = 293
+      fj_spawned = 1
+      fj_orientation = 0
+      fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = T48BFEMC
+      fj_cre_resref = T48BFEMC
+      fj_dlg_resref = T48BFEMD
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 453
+      fj_loc_y = 293
+      fj_dest_x = 453
+      fj_dest_y = 293
+      fj_spawned = 1
+      fj_orientation = 2
+      fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = T48ADWRC
+      fj_cre_resref = T48ADWRC
+      fj_dlg_resref = T48ADWRD
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~T18A01.ARE~ ~override/T18A01.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 330
+      fj_loc_y = 291
+      fj_dest_x = 330
+      fj_dest_y = 291
+      fj_spawned = 1
+      fj_orientation = 6
+      fj_schedule = 0xFFFFFF
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = T18FARMC
+      fj_cre_resref = T18FARMC
+      fj_dlg_resref = T18FARMD
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// T48B01: 5 gold pieces in its first container; the second remains empty.
+COPY_EXISTING ~T48B01.ARE~ ~override/T48B01.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 5
+    STR_VAR
+      item_to_add = MISC07
+      flags = IDENTIFIED
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// T48A01: one Bloodstone, one Turquoise Gem, and one Flail in its three
+// existing containers. T48A02 is deliberately left untouched.
+COPY_EXISTING ~T48A01.ARE~ ~override/T48A01.ARE~
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = MISC20
+      flags = IDENTIFIED
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = MISC19
+      flags = IDENTIFIED
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+      charges1 = 1
+    STR_VAR
+      item_to_add = BLUN02
+      flags = IDENTIFIED
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Add the four named return entrances required by the existing interior exits.
+// Coordinates are placed at the centers of the corresponding exterior travel
+// regions already present in TORMHA.
+COPY_EXISTING ~TORMHA.ARE~ ~override/TORMHA.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 150
+      fj_loc_y = 43
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = HSE1
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 405
+      fj_loc_y = 209
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = HSE2
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 689
+      fj_loc_y = 227
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = HSE3
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1471
+      fj_loc_y = 755
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = HSE4
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// ---------------------------------------------------------------------------
+// FINAL TORMHA TRAVEL CURSORS
+// ---------------------------------------------------------------------------
+// All building/tavern/fortress travel regions use the standard door cursor.
+// The two TORMWORLD regions above retain the gear/world-map cursor.
+COPY_EXISTING ~TORMHA.ARE~ ~override/TORMHA.ARE~
+  LPF ALTER_AREA_REGION
+    INT_VAR cursor = 30
+    STR_VAR region_name = ~ENT_HSE1~
+  END
+  LPF ALTER_AREA_REGION
+    INT_VAR cursor = 30
+    STR_VAR region_name = ~ENT_HSE2~
+  END
+  LPF ALTER_AREA_REGION
+    INT_VAR cursor = 30
+    STR_VAR region_name = ~ENT_HSE3~
+  END
+  LPF ALTER_AREA_REGION
+    INT_VAR cursor = 30
+    STR_VAR region_name = ~ENT_HSE4~
+  END
+  LPF ALTER_AREA_REGION
+    INT_VAR cursor = 30
+    STR_VAR region_name = ~ENT_TAVERN~
+  END
+  LPF ALTER_AREA_REGION
+    INT_VAR cursor = 30
+    STR_VAR region_name = ~TORMFORT1~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Restore the two existing TORMHA information-point captions.
+// They are the map text labels attached to TORMTAVSIG and TORMFORT2.
+COPY_EXISTING ~TORMHA.ARE~ ~override/TORMHA.ARE~
+  READ_LONG 0x5c tormha_region_offset
+  SET tormha_tavern_caption = tormha_region_offset + (5 * 0xc4) + 0x64
+  SET tormha_fortress_caption = tormha_region_offset + (7 * 0xc4) + 0x64
+  SAY tormha_tavern_caption @2075
+  SAY tormha_fortress_caption @2067
+BUT_ONLY_IF_IT_CHANGES
+
+// CotSC v62: village day/night and map labels; only ARE type/note records.
+COPY_EXISTING ~TORMHA.ARE~ ~override/TORMHA.ARE~
+  READ_SHORT 0x48 qc_tormha_area_type
+  WRITE_SHORT 0x48 (qc_tormha_area_type BOR 0x0002)
+  ADD_MAP_NOTE #1330 #81 ~blue~ ~Torm Fortress~
+  ADD_MAP_NOTE #600 #461 ~orange~ ~Shriveled Potato~
+BUT_ONLY_IF_IT_CHANGES
+
+// Torm's Hand world-map integration is part of the main Better Immersion component.
+// ---------------------------------------------------------------------------
+// FINAL TORM'S HAND WORLD MAP ENTRY
+// ---------------------------------------------------------------------------
+// EET uses the unified "worldmap" map.  Add TORMHA to that WMP, but keep it
+// undiscovered until Randalla's quest is accepted.  PWYRAND.d calls
+// RevealAreaOnMap("TORMHA") at the acceptance point.
+//
+// AddAreaType is intentionally NOT used here: it changes an area's type flags;
+// it does not create a world-map entry.
+ACTION_IF GAME_IS ~eet~ BEGIN
+  INCLUDE ~EET/other/EET_functions.tph~
+
+  // Torm's Hand: place it immediately east of the actual Ulgoth's Beard
+  // world-map entry (BG1000). In EET, BG1000 is Ulgoth's Beard.
+  // AR1000 is the BG2 Government District and must not be used here.
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY toNewArea BEGIN
+    "BG1000" => "Exitwmp"
+  END
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY fromNewArea BEGIN
+    // Exitwmp has an invalid arrival point in some EET world-map builds.
+    "BG1000" => "QCTULRET"
+  END
+
+  // Use the same safe in-bounds arrival as the already verified Halruaan
+  // Ulgoth's Beard exit, but with a unique resref owned by Torm's Hand.
+  COPY_EXISTING ~BG1000.ARE~ ~override/BG1000.ARE~
+    // Legacy saved world maps may still point at Exitwmp (the old destination).
+    // Repair that location too, without changing any other entrance/region.
+    READ_LONG 0x68 qc_ug_ent_off
+    READ_LONG 0x6c qc_ug_ent_count
+    SET qc_ug_wmp_exists = 0
+    FOR (qc_ug_i = 0; qc_ug_i < qc_ug_ent_count; qc_ug_i += 1) BEGIN
+      SET qc_ug_pos = qc_ug_ent_off + (0x68 * qc_ug_i)
+      READ_ASCII qc_ug_pos qc_ug_name (32) NULL
+      PATCH_IF (~%qc_ug_name%~ STRING_EQUAL ~Exitwmp~) BEGIN
+        WRITE_SHORT (qc_ug_pos + 0x20) 2970
+        WRITE_SHORT (qc_ug_pos + 0x22) 877
+        SET qc_ug_wmp_exists = 1
+      END
+    END
+    PATCH_IF (qc_ug_wmp_exists == 0) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_loc_x = 2970 fj_loc_y = 877 fj_orientation = 8
+        STR_VAR fj_structure_type = entrance fj_name = Exitwmp
+      END
+    END
+    LPF fj_are_structure
+      INT_VAR fj_loc_x = 2970 fj_loc_y = 877 fj_orientation = 8
+      STR_VAR fj_structure_type = entrance fj_name = QCTULRET
+    END
+  BUT_ONLY_IF_IT_CHANGES
+
+  OUTER_SPRINT qc_wm_tormha_name @19001
+  OUTER_SPRINT qc_wm_tormha_desc @19001
+  LAF sc#addWmpAre
+    INT_VAR
+      mapIcon = 5
+      xCoord = 540
+      yCoord = 1475
+      tTime = 0
+      visible = 0
+      visibleAdjacent = 0
+      reachable = 1
+      visited = 0
+      inclSv = 0
+    STR_VAR
+      areName = ~TORMHA~
+      strName = EVAL ~%qc_wm_tormha_name%~
+      strDesc = EVAL ~%qc_wm_tormha_desc%~
+      worldmap = ~worldmap~
+  END
+END
+
+// World-map arrival point for Torm's Hand. The BG1000 -> TORMHA
+// world-map link uses the destination entrance named Exitwmp.
+// Keep this entrance at the requested TORMHA coordinates.
+COPY_EXISTING ~TORMHA.ARE~ ~override/TORMHA.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1550
+      fj_loc_y = 890
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = Exitwmp
+  END
+BUT_ONLY_IF_IT_CHANGES
+

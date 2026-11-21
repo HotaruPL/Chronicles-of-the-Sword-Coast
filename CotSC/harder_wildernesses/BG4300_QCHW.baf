@@ -1,0 +1,15 @@
+IF
+  Global("QCHW_BG4300","BG4300",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCHW_BG4300","BG4300",1)
+    CreateCreature("NEDEER1",[976.529],0)
+    CreateCreature("orc02",[3259.746],0)
+    CreateCreature("orc02",[3499.767],0)
+    CreateCreature("orc01",[3435.1074],0)
+    CreateCreature("BDBUGB01",[3410.925],0)
+    CreateCreature("BDBUGB01",[3017.782],0)
+    CreateCreature("WORG",[4896.2357],0)
+    CreateCreature("BDBUGB01",[4550.3537],0)
+    CreateCreature("BDBUGB01",[4604.3598],0)
+END

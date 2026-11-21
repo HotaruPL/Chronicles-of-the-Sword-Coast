@@ -1,0 +1,598 @@
+// v2.1: QCHELL nightmare Candlekeep area - 2x enlarged artwork test.
+COPY ~CotSC/qc_unicorn_grove/area/QCHELL.ARE~ ~override/QCHELL.ARE~
+COPY ~CotSC/qc_unicorn_grove/area/QCHELL.WED~ ~override/QCHELL.WED~
+COPY ~CotSC/qc_unicorn_grove/area/QCHL20.TIS~ ~override/QCHL20.TIS~
+COPY ~CotSC/qc_unicorn_grove/area/QCHELLSR.BMP~ ~override/QCHELLSR.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCHELLLM.BMP~ ~override/QCHELLLM.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCHELLHT.BMP~ ~override/QCHELLHT.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2000.PVRZ~ ~override/QHL2000.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2001.PVRZ~ ~override/QHL2001.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2002.PVRZ~ ~override/QHL2002.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2003.PVRZ~ ~override/QHL2003.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2004.PVRZ~ ~override/QHL2004.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2005.PVRZ~ ~override/QHL2005.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2006.PVRZ~ ~override/QHL2006.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2007.PVRZ~ ~override/QHL2007.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2008.PVRZ~ ~override/QHL2008.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2009.PVRZ~ ~override/QHL2009.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2010.PVRZ~ ~override/QHL2010.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHL2011.PVRZ~ ~override/QHL2011.PVRZ~
+
+
+// QCHIN1: separate first-render test for the infernal house interior.
+// Install this component independently; it does not overwrite QCHELL or the Unicorn Grove quests.
+
+// ---------- Integrated milestone: QC: Infernal House (QCHIN1 area render test)~ ----------
+
+COPY ~CotSC/qc_unicorn_grove/area/QCHIN1.ARE~ ~override/QCHIN1.ARE~
+COPY ~CotSC/qc_unicorn_grove/area/QCHIN1.WED~ ~override/QCHIN1.WED~
+COPY ~CotSC/qc_unicorn_grove/area/QCHIN1.TIS~ ~override/QCHIN1.TIS~
+COPY ~CotSC/qc_unicorn_grove/area/QCHIN1SR.BMP~ ~override/QCHIN1SR.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCHIN1LM.BMP~ ~override/QCHIN1LM.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCHIN1HT.BMP~ ~override/QCHIN1HT.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QHIN100.PVRZ~ ~override/QHIN100.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHIN101.PVRZ~ ~override/QHIN101.PVRZ~
+
+COPY_EXISTING ~QCHIN1.ARE~ ~override/QCHIN1.ARE~
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 623 fj_loc_y = 631 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCINENT
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+
+// === Better Immersion: Nightmare Candlekeep memory encounters ===
+// Install after QC Unicorn Grove and QCHIN1. This patch changes ARE scripts/actors/regions only.
+// Source WED/TIS/PVRZ/SR/LM/HT and QCHIN1 containers are never modified.
+
+// ---------- Integrated milestone: QC: Nightmare Candlekeep encounters, dialogue and battle music (QCHELL + QCHIN1)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHELL.ARE~ BEGIN FAIL ~Install QC Unicorn Grove (QCHELL) first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHIN1.ARE~ BEGIN FAIL ~Install QC Infernal House (QCHIN1) first.~ END
+
+// Existing EE trick: Ogg/Vorbis payloads with .acm extension, matching QCGRVA.
+MKDIR ~music/QCHBTL~
+MKDIR ~music/QCHEND~
+COPY ~CotSC/qc_unicorn_grove/music/QCHBTLA.acm~ ~music/QCHBTL/QCHBTLA.acm~
+COPY ~CotSC/qc_unicorn_grove/music/QCHENDA.acm~ ~music/QCHEND/QCHENDA.acm~
+ADD_MUSIC ~QCH_BATTLE~ ~CotSC/qc_unicorn_grove/music/QCHBTL.MUS~
+ADD_MUSIC ~QCH_VICTORY~ ~CotSC/qc_unicorn_grove/music/QCHEND.MUS~
+MKDIR ~music/QCHAMB~
+COPY ~CotSC/qc_unicorn_grove/music/QCHAMBA.acm~ ~music/QCHAMB/QCHAMBA.acm~
+ADD_MUSIC ~QCH_AMBIENT~ ~CotSC/qc_unicorn_grove/music/QCHAMB.MUS~
+
+COPY ~CotSC/qc_unicorn_grove/portraits/QCDIMOS.BMP~ ~override/QCDIMOS.BMP~
+COPY ~CotSC/qc_unicorn_grove/portraits/QCDIMOL.BMP~ ~override/QCDIMOL.BMP~
+
+COPY_EXISTING ~BATTHO.CRE~ ~override/QCHBHOR.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHBHOR~ #32
+  WRITE_SHORT 0x24 165
+  WRITE_SHORT 0x26 165
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDDEAD01.CRE~ BEGIN
+  FAIL @20287
+END
+COPY_EXISTING ~BDDEAD01.CRE~ ~override/QCHDRWN.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHDRWN~ #32
+  SAY NAME1 @3070
+  SAY NAME2 @3070
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~UHCREAT.CRE~ ~override/QCHSHAD.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHSHAD~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~GHOULSU.CRE~ ~override/QCHGHOU.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHGHOU~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HGSKU01.CRE~ ~override/QCHFLAM.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHFLAM~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HGSKL03.CRE~ ~override/QCHSKMG.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHSKMG~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF FILE_EXISTS_IN_GAME ~WOLFVA.CRE~ BEGIN
+COPY_EXISTING ~WOLFVA.CRE~ ~override/QCHVWLF.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHVWLF~ #32
+  SAY NAME1 @3071
+  SAY NAME2 @3071
+BUT_ONLY_IF_IT_CHANGES
+
+END ELSE BEGIN
+COPY_EXISTING ~SHAWOL01.CRE~ ~override/QCHVWLF.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHVWLF~ #32
+  SAY NAME1 @3071
+  SAY NAME2 @3071
+BUT_ONLY_IF_IT_CHANGES
+
+END
+COPY_EXISTING ~MEPSMO01.CRE~ ~override/QCHMSMO.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHMSMO~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~MEPSAL01.CRE~ ~override/QCHMSAL.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHMSAL~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~MEPSAL01.CRE~ ~override/QCHSALT.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHSALT~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF FILE_EXISTS_IN_GAME ~ELEMEP08.CRE~ BEGIN
+COPY_EXISTING ~ELEMEP08.CRE~ ~override/QCHMDUS.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHMDUS~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+END ELSE BEGIN
+COPY_EXISTING ~FAMDUST.CRE~ ~override/QCHMDUS.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHMDUS~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+END
+COPY_EXISTING ~MEPLIG01.CRE~ ~override/QCHMLIG.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHMLIG~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~MEPMIN01.CRE~ ~override/QCHMMIN.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHMMIN~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~MUMGRE01.CRE~ ~override/QCHMUMY.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCHMUMY~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DREPPI2.CRE~ ~override/QCDREPP.CRE~
+  SAY NAME1 @3072
+  SAY NAME2 @3072
+  WRITE_SHORT 0x24 86
+  WRITE_SHORT 0x26 86
+  WRITE_BYTE 0x270 255
+  WRITE_BYTE 0x27b 35 // neutral evil
+  WRITE_BYTE 0x273 2  // Fighter class, not inherited INNOCENT
+  WRITE_BYTE 0x7f 0 // BGEE reputation change when killed: none
+  WRITE_BYTE 0x44 0
+  WRITE_ASCII 0x280 ~QCDREPP~ #32
+  WRITE_ASCII 0x248 ~QCHDRAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_LONG 0x20 0x20000000 // BLUR state
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~IMOEN2.CRE~ ~override/QCDIMOE.CRE~
+  SAY NAME1 @3073
+  SAY NAME2 @3073
+  WRITE_LONG 0x14 7000
+  WRITE_LONG 0x1c 0
+  WRITE_SHORT 0x24 110
+  WRITE_SHORT 0x26 110
+  WRITE_LONG 0x28 0x6210 // MAGE_FEMALE_HUMAN; soundset remains from IMOEN2.CRE
+  WRITE_BYTE 0x270 128 // neutral for dialogue; hostile only after final line
+  WRITE_BYTE 0x27b 51 // chaotic evil
+  WRITE_BYTE 0x44 0
+  WRITE_LONG 0x20 0x20008000 // permanent blur + haste states
+  WRITE_ASCII 0x280 ~QCDIMOE~ #32
+  WRITE_ASCII 0x2cc ~QCHDARK~ #8
+  WRITE_ASCII 0x248 ~QCHDIMAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_ASCII 0x34 ~QCDIMOS~ #8
+  WRITE_ASCII 0x3c ~QCDIMOL~ #8
+  WRITE_BYTE 0x2c 0 // metal
+  WRITE_BYTE 0x2d 0 // minor clothing: black
+  WRITE_BYTE 0x2e 0 // major clothing: black
+  WRITE_BYTE 0x30 0 // leather: black
+  WRITE_BYTE 0x31 0 // armor: black
+  WRITE_BYTE 0x32 105 // EET white colour gradient, not the old brown index 39
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~CLCK17~ #0 #0 #0 ~IDENTIFIED&UNDROPPABLE~ ~ARMOR~ EQUIP
+  ADD_CRE_ITEM ~DAGG15~ #0 #0 #0 ~IDENTIFIED&UNDROPPABLE~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+// Stackable +2 throwing axe for QCHST1, based on the consumable
+// stock AX1H04 rather than the returning/non-stackable AX1H05.
+COPY_EXISTING ~AX1H04.ITM~ ~override/QCHAX2.ITM~
+  SAY NAME1 @3074
+  SAY NAME2 @3075
+  SAY IDENTIFIED_DESC @3076
+  READ_LONG 0x18 qc_axe_flags
+  WRITE_LONG 0x18 (qc_axe_flags BOR 0x40) // magical
+  WRITE_SHORT 0x38 40                   // stack cap
+  WRITE_LONG 0x60 2                     // enchantment +2
+  READ_LONG 0x64 qc_axe_ability_offset
+  READ_SHORT 0x68 qc_axe_ability_count
+  FOR (i = 0; i < qc_axe_ability_count; i += 1) BEGIN
+    WRITE_SHORT (qc_axe_ability_offset + i * 0x38 + 0x14) 2 // THAC0 +2
+    WRITE_SHORT (qc_axe_ability_offset + i * 0x38 + 0x1a) 2 // damage +2
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// No STALKE narration proxy: QCHLAR.BAF performs the arrival narration.
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCHLAR.baf~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/scripts/QCHLAR.tra~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCHINAR.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCHDRAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCHDIMAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/QCHINTRO.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QCHINTRO.tra~
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/QCHIMTR.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QCHIMTR.tra~
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/QCHDARK.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QCHDARK.tra~
+
+// Only the song table and area-script pointer are overwritten in existing QCHELL ARE data.
+COPY_EXISTING ~QCHELL.ARE~ ~override/QCHELL.ARE~
+  WRITE_ASCII 0x94 ~QCHLAR~ #8
+  READ_LONG 0xbc qch_song_table
+  PATCH_IF (qch_song_table > 0) AND (qch_song_table + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG (qch_song_table + 0) %QCH_AMBIENT%
+    WRITE_LONG (qch_song_table + 4) %QCH_AMBIENT%
+    WRITE_LONG (qch_song_table + 8) %QCH_VICTORY%
+    WRITE_LONG (qch_song_table + 12) %QCH_BATTLE%
+  END ELSE BEGIN
+    PATCH_FAIL @20288
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 659 fj_loc_y = 1439 fj_orientation = 6
+    STR_VAR fj_structure_type = actor fj_name = QCHHB01 fj_cre_resref = QCHBHOR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 745 fj_loc_y = 1476 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHDB01 fj_cre_resref = QCHDRWN
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 682 fj_loc_y = 1525 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHDB02 fj_cre_resref = QCHDRWN
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 778 fj_loc_y = 1527 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHDB03 fj_cre_resref = QCHDRWN
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1250 fj_loc_y = 1793 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHHB02 fj_cre_resref = QCHBHOR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1890 fj_loc_y = 1678 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHFL01 fj_cre_resref = QCHFLAM
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1984 fj_loc_y = 1629 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSH08 fj_cre_resref = QCHSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2424 fj_loc_y = 1535 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHHB03 fj_cre_resref = QCHBHOR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2482 fj_loc_y = 1006 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSM01 fj_cre_resref = QCHSKMG
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2392 fj_loc_y = 344 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSA01 fj_cre_resref = QCHSALT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2581 fj_loc_y = 491 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSA02 fj_cre_resref = QCHSALT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1940 fj_loc_y = 234 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHDM01 fj_cre_resref = QCDREPP
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1342 fj_loc_y = 278 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHDB04 fj_cre_resref = QCHDRWN
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1136 fj_loc_y = 234 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHHB04 fj_cre_resref = QCHBHOR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1617 fj_loc_y = 1050 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHDI01 fj_cre_resref = QCDIMOE
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1018 fj_loc_y = 1687 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSH01 fj_cre_resref = QCHSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1133 fj_loc_y = 1688 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSH02 fj_cre_resref = QCHSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1152 fj_loc_y = 1772 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSH03 fj_cre_resref = QCHSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1062 fj_loc_y = 1765 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSH04 fj_cre_resref = QCHSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1092 fj_loc_y = 1733 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSH05 fj_cre_resref = QCHSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1202 fj_loc_y = 1706 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSH06 fj_cre_resref = QCHSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1282 fj_loc_y = 1732 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHSH07 fj_cre_resref = QCHSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2679 fj_loc_y = 1030 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QCHGH01 fj_cre_resref = QCHGHOU
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2572 fj_loc_y = 1003 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QCHGH02 fj_cre_resref = QCHGHOU
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2512 fj_loc_y = 939 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QCHGH03 fj_cre_resref = QCHGHOU
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2350 fj_loc_y = 947 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QCHGH04 fj_cre_resref = QCHGHOU
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2374 fj_loc_y = 1004 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QCHGH05 fj_cre_resref = QCHGHOU
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2446 fj_loc_y = 905 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QCHGH06 fj_cre_resref = QCHGHOU
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2435 fj_loc_y = 840 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QCHGH07 fj_cre_resref = QCHGHOU
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2351 fj_loc_y = 836 fj_orientation = 0
+    STR_VAR fj_structure_type = actor fj_name = QCHGH08 fj_cre_resref = QCHGHOU
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1887 fj_loc_y = 314 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHVW01 fj_cre_resref = QCHVWLF
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 2031 fj_loc_y = 282 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHVW02 fj_cre_resref = QCHVWLF
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1887 fj_loc_y = 216 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHGH09 fj_cre_resref = QCHGHOU
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 2 fj_box_left = 615 fj_box_top = 285 fj_box_right = 671 fj_box_bottom = 343
+      fj_cursor_idx = 30 fj_flags = 4
+      fj_vertex_0 = 615 + (285 << 16)
+      fj_vertex_1 = 671 + (285 << 16)
+      fj_vertex_2 = 671 + (343 << 16)
+      fj_vertex_3 = 615 + (343 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHIN_DO
+      fj_destination_area = QCHIN1 fj_destination_name = QCINENT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 370 fj_loc_y = 813 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCHMEM0
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 730 fj_loc_y = 367 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCHRET
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 1266 fj_box_top = 1620
+      fj_box_right = 1298 fj_box_bottom = 1656 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~The door seems to be replaced with strange cross-shaped bars lined with spikes. As you try to squeeze through, the spikes extend. Passing through would risk being impaled.~)
+      fj_vertex_0 = 1266 + (1620 << 16)
+      fj_vertex_1 = 1298 + (1620 << 16)
+      fj_vertex_2 = 1298 + (1656 << 16)
+      fj_vertex_3 = 1266 + (1656 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHINFO1
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 585 fj_box_top = 315
+      fj_box_right = 617 fj_box_bottom = 351 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~Winthrop Inn~)
+      fj_vertex_0 = 585 + (315 << 16)
+      fj_vertex_1 = 617 + (315 << 16)
+      fj_vertex_2 = 617 + (351 << 16)
+      fj_vertex_3 = 585 + (351 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHINFO2
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 1729 fj_box_top = 223
+      fj_box_right = 1761 fj_box_bottom = 259 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~You peer inside the building, but all you see is impenetrable darkness. The void beckons, as if calling you to enter, and you immediately pull back. You know better than to fall for such a trap.~)
+      fj_vertex_0 = 1729 + (223 << 16)
+      fj_vertex_1 = 1761 + (223 << 16)
+      fj_vertex_2 = 1761 + (259 << 16)
+      fj_vertex_3 = 1729 + (259 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHINFO3
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 2308 fj_box_top = 413
+      fj_box_right = 2340 fj_box_bottom = 449 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~The customary engraving representing the Temple of Oghma has been replaced by a distorted hand.~)
+      fj_vertex_0 = 2308 + (413 << 16)
+      fj_vertex_1 = 2340 + (413 << 16)
+      fj_vertex_2 = 2340 + (449 << 16)
+      fj_vertex_3 = 2308 + (449 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHINFO4
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 2647 fj_box_top = 1518
+      fj_box_right = 2679 fj_box_bottom = 1554 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~The gate leading out of this dream-version of Candlekeep seems not to exist. This memory apparently intends to keep you contained within it.~)
+      fj_vertex_0 = 2647 + (1518 << 16)
+      fj_vertex_1 = 2679 + (1518 << 16)
+      fj_vertex_2 = 2679 + (1554 << 16)
+      fj_vertex_3 = 2647 + (1554 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHINFO5
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 2003 fj_box_top = 1269
+      fj_box_right = 2035 fj_box_bottom = 1305 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~Blood Gardens~)
+      fj_vertex_0 = 2003 + (1269 << 16)
+      fj_vertex_1 = 2035 + (1269 << 16)
+      fj_vertex_2 = 2035 + (1305 << 16)
+      fj_vertex_3 = 2003 + (1305 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHINFO6
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 1886 fj_box_top = 1349
+      fj_box_right = 1918 fj_box_bottom = 1385 fj_cursor_idx = 22
+      fj_info_point_strref = RESOLVE_STR_REF(~Blood Gardens~)
+      fj_vertex_0 = 1886 + (1349 << 16)
+      fj_vertex_1 = 1918 + (1349 << 16)
+      fj_vertex_2 = 1918 + (1385 << 16)
+      fj_vertex_3 = 1886 + (1385 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHINFO7
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 1 fj_box_left = 1554 fj_box_top = 981
+      fj_box_right = 1586 fj_box_bottom = 1017 fj_cursor_idx = 30
+      fj_info_point_strref = RESOLVE_STR_REF(~An unfamiliar passage awaits beyond here. Its destination is not yet part of this memory.~)
+      fj_vertex_0 = 1554 + (981 << 16)
+      fj_vertex_1 = 1586 + (981 << 16)
+      fj_vertex_2 = 1586 + (1017 << 16)
+      fj_vertex_3 = 1554 + (1017 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHPEND1
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 2 fj_box_left = 875 fj_box_top = 193
+      fj_box_right = 907 fj_box_bottom = 229 fj_cursor_idx = 30 fj_flags = 4
+      fj_vertex_0 = 875 + (193 << 16)
+      fj_vertex_1 = 907 + (193 << 16)
+      fj_vertex_2 = 907 + (229 << 16)
+      fj_vertex_3 = 875 + (229 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHPEND2
+      fj_destination_area = QCHST1 fj_destination_name = QCSTENT
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// World/area MAP notes (distinct from existing in-world question-mark regions).
+// Insert after all QCHELL region and actor additions; component 4 retains these.
+COPY_EXISTING ~QCHELL.ARE~ ~override/QCHELL.ARE~
+  ADD_MAP_NOTE #604 #203 ~gray~ ~Winthrop's Ruined Inn~
+  ADD_MAP_NOTE #1552 #952 ~gray~ ~Candlekeep's Library~
+BUT_ONLY_IF_IT_CHANGES
+
+// QCHIN1: area script, five mephits and exit to QCHELL. Containers and search map unaffected.
+COPY_EXISTING ~QCHIN1.ARE~ ~override/QCHIN1.ARE~
+  WRITE_ASCII 0x94 ~QCHINAR~ #8
+  READ_LONG 0xbc qchin_song_table
+  PATCH_IF (qchin_song_table > 0) AND (qchin_song_table + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG (qchin_song_table + 0) %QCH_AMBIENT%
+    WRITE_LONG (qchin_song_table + 4) %QCH_AMBIENT%
+    WRITE_LONG (qchin_song_table + 8) %QCH_VICTORY%
+    WRITE_LONG (qchin_song_table + 12) %QCH_BATTLE%
+  END ELSE BEGIN
+    PATCH_FAIL @20289
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 274 fj_loc_y = 506 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHM01 fj_cre_resref = QCHMSMO
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 460 fj_loc_y = 535 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHM02 fj_cre_resref = QCHMSAL
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 403 fj_loc_y = 671 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHM03 fj_cre_resref = QCHMDUS
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 615 fj_loc_y = 585 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHM04 fj_cre_resref = QCHMLIG
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 712 fj_loc_y = 345 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCHM05 fj_cre_resref = QCHMMIN
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 2 fj_box_left = 779 fj_box_top = 659 fj_box_right = 833 fj_box_bottom = 713
+      fj_cursor_idx = 30 fj_flags = 4
+      fj_vertex_0 = 779 + (659 << 16)
+      fj_vertex_1 = 833 + (659 << 16)
+      fj_vertex_2 = 833 + (713 << 16)
+      fj_vertex_3 = 779 + (713 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCHOUT_DO
+      fj_destination_area = QCHELL fj_destination_name = QCHRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// New interior shares these ambient and combat song IDs; install with Nightmare encounters.
+COPY ~CotSC/qc_unicorn_grove/area/QCHST1.ARE~ ~override/QCHST1.ARE~
+COPY ~CotSC/qc_unicorn_grove/area/QCHST1.WED~ ~override/QCHST1.WED~
+COPY ~CotSC/qc_unicorn_grove/area/QCHST1.TIS~ ~override/QCHST1.TIS~
+COPY ~CotSC/qc_unicorn_grove/area/QCHST1SR.BMP~ ~override/QCHST1SR.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCHST1LM.BMP~ ~override/QCHST1LM.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCHST1HT.BMP~ ~override/QCHST1HT.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QHST100.PVRZ~ ~override/QHST100.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QHST101.PVRZ~ ~override/QHST101.PVRZ~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCHSTAR.baf~
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/QCHSTIM.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QCHSTIM.tra~
+COPY_EXISTING ~QCHST1.ARE~ ~override/QCHST1.ARE~
+  WRITE_ASCII 0x94 ~QCHSTAR~ #8
+  READ_LONG 0xbc qchst_song_table
+  PATCH_IF (qchst_song_table > 0) AND (qchst_song_table + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG (qchst_song_table + 0) %QCH_AMBIENT%
+    WRITE_LONG (qchst_song_table + 4) %QCH_AMBIENT%
+    WRITE_LONG (qchst_song_table + 8) %QCH_VICTORY%
+    WRITE_LONG (qchst_song_table + 12) %QCH_BATTLE%
+  END ELSE BEGIN
+    PATCH_FAIL @20290
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 559 fj_loc_y = 527 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCSTENT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 2 fj_box_left = 502 fj_box_top = 483
+      fj_box_right = 533 fj_box_bottom = 512
+      fj_cursor_idx = 30 fj_flags = 4
+      fj_vertex_0 = 502 + (483 << 16)
+      fj_vertex_1 = 533 + (483 << 16)
+      fj_vertex_2 = 533 + (512 << 16)
+      fj_vertex_3 = 502 + (512 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCSTBACK
+      fj_destination_area = QCHELL fj_destination_name = QCSTRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Return point created in QCHELL by encounter component; keep artwork/collision unchanged.
+COPY_EXISTING ~QCHELL.ARE~ ~override/QCHELL.ARE~
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 909 fj_loc_y = 272 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCSTRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+
+// v14: self-contained optional memory area using the *native* BG2301 WED/TIS/PVRZ.
+// BG2301 source copied verbatim apart from removed original actors/extra regions and two item substitutions.
+

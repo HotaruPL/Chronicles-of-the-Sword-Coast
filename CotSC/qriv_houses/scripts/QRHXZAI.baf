@@ -1,0 +1,23 @@
+IF
+  Global("QRH_XZOR_SCENE","GLOBAL",0)
+  Range(Player1,15)
+  !Dead("QRVNATE")
+THEN
+  RESPONSE #100
+    SetGlobal("QRH_XZOR_SCENE","GLOBAL",1)
+    StartDialogNoSet(Player1)
+END
+IF
+  Global("QRH_XZOR_FIGHT","GLOBAL",1)
+  Allegiance(Myself,NEUTRAL)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+IF
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

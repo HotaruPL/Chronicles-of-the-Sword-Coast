@@ -1,0 +1,190 @@
+// ---------------------------------------------------------------------------
+// ULUA QUEST - VHAIDRA / BG0112
+// ---------------------------------------------------------------------------
+// Vhaidra uses BDKAELET as her full combat chassis. Preserve Kaelet's
+// original fighting scripts, spells and equipment; only the identity and
+// dialogue fields needed by this quest are changed.
+COPY_EXISTING ~BDHELM12.ITM~ ~override/QCCORON.ITM~
+  SAY NAME1 @2058
+  SAY NAME2 @2058
+  SAY DESC @2059
+  WRITE_ASCII 0x3a ~QCCORON~ #8
+  WRITE_ASCII 0x44 ~QCCORON~ #8
+  LPF DELETE_ITEM_EQEFFECT
+    INT_VAR opcode_to_delete = 189
+  END
+  LPF DELETE_ITEM_EQEFFECT
+    INT_VAR opcode_to_delete = 126
+  END
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR
+      opcode = 63
+      target = 1
+      timing = 2
+      parameter1 = 0
+      parameter2 = 0
+      probability1 = 100
+  END
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR
+      opcode = 166
+      target = 1
+      timing = 2
+      parameter1 = 20
+      parameter2 = 0
+      probability1 = 100
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~CotSC/better_immersion_beregost/QCCORON.BAM~ ~override/QCCORON.BAM~
+
+COPY_EXISTING ~BDKAELET.CRE~ ~override/PWYVHAI.CRE~
+  SAY NAME1 @2060
+  SAY NAME2 @2060
+  WRITE_ASCII 0x2cc ~PWYVHAI~ #8
+  WRITE_ASCII 0x280 ~PWYVHAI~ #32
+  LPF DELETE_CRE_ITEM
+    STR_VAR
+      item_to_delete = ~BDINSIGR~
+  END
+  ADD_CRE_ITEM ~QCCORON~ #0 #0 #0 ~IDENTIFIED~ ~INV16~
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/PWYVHAI.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/missing_drow_quest.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0112_vhaidra.baf~
+EXTEND_TOP ~BG0112.BCS~ ~CotSC/better_immersion_beregost/bg0112_vhaidra.baf~
+
+COMPILE ~CotSC/better_immersion_beregost/PWYRINN.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/durbem_quest.tra~
+COMPILE ~CotSC/better_immersion_beregost/PWYRAND.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/torm_quest.tra~
+COMPILE ~CotSC/better_immersion_beregost/bibwander.baf~
+COMPILE ~CotSC/better_immersion_beregost/PWYRINN.baf~
+COMPILE ~CotSC/better_immersion_beregost/PWYDELCS.baf~
+COMPILE ~CotSC/better_immersion_beregost/PWYHENDS.baf~
+COMPILE ~CotSC/better_immersion_beregost/PWYULUA.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/missing_drow_quest.tra~
+DELETE ~override/PWYDURBS.BCS~
+
+// Purple Wyrm downstairs: new standalone custom EET music slot.
+// Audio is Ogg Vorbis in a .ACM wrapper (supported by EE); ambient is unchanged.
+COPY ~CotSC/better_immersion_beregost/music/QCPWYRA.ACM~ ~music/QCPWYR/QCPWYRA.ACM~
+ADD_MUSIC QCPWYMUS ~CotSC/better_immersion_beregost/music/QCPWYR.MUS~
+
+// ---------------------------------------------------------------------------
+// PURPLE WYRM - FINAL TAVERN AUDIO OVERRIDE
+// ---------------------------------------------------------------------------
+// The ARE song table controls the area's day/night music and its main ambient
+// channels. The original Purple Wyrm inherited the Carnival's audio. In
+// addition, the separate ambient list contained Carnival sounds, so changing
+// only the song table was not sufficient.
+// BG(2)EE songlist.ids: 41 = Tavern1, 42 = Tavern2.
+
+COPY_EXISTING ~BIPWYR.ARE~ ~override/BIPWYR.ARE~
+  READ_LONG 0xBC pwy_song_off
+  WRITE_LONG "%pwy_song_off%" QCPWYMUS
+  WRITE_LONG ("%pwy_song_off%" + 0x04) QCPWYMUS
+  WRITE_ASCII ("%pwy_song_off%" + 0x28) ~AMB_M08A~ #8
+  WRITE_ASCII ("%pwy_song_off%" + 0x30) ~ ~ #8
+  WRITE_LONG ("%pwy_song_off%" + 0x38) 30
+  WRITE_ASCII ("%pwy_song_off%" + 0x3C) ~AMB_M08A~ #8
+  WRITE_ASCII ("%pwy_song_off%" + 0x44) ~ ~ #8
+  WRITE_LONG ("%pwy_song_off%" + 0x4C) 30
+  READ_LONG 0x84 pwy_amb_off
+  READ_SHORT 0x82 pwy_amb_count
+  PATCH_IF pwy_amb_count > 0 BEGIN
+    // Replace the first ambient list with tavern ambience.
+    WRITE_ASCII ("%pwy_amb_off%" + 0x30) ~AMB_M08A~ #8
+    WRITE_ASCII ("%pwy_amb_off%" + 0x38) ~ ~ #8
+    WRITE_ASCII ("%pwy_amb_off%" + 0x40) ~ ~ #8
+    WRITE_ASCII ("%pwy_amb_off%" + 0x48) ~ ~ #8
+    WRITE_ASCII ("%pwy_amb_off%" + 0x50) ~ ~ #8
+    WRITE_ASCII ("%pwy_amb_off%" + 0x58) ~ ~ #8
+    WRITE_ASCII ("%pwy_amb_off%" + 0x60) ~ ~ #8
+    WRITE_ASCII ("%pwy_amb_off%" + 0x68) ~ ~ #8
+    WRITE_ASCII ("%pwy_amb_off%" + 0x70) ~ ~ #8
+    WRITE_ASCII ("%pwy_amb_off%" + 0x78) ~ ~ #8
+    WRITE_SHORT ("%pwy_amb_off%" + 0x80) 1
+    WRITE_LONG ("%pwy_amb_off%" + 0x84) 5
+    WRITE_LONG ("%pwy_amb_off%" + 0x88) 0
+    WRITE_LONG ("%pwy_amb_off%" + 0x8C) 0xFFFFFF
+    WRITE_LONG ("%pwy_amb_off%" + 0x90) 0x05
+    // Disable the remaining original ambient lists (Carnival dogs/crowd).
+    FOR (idx = 1; idx < pwy_amb_count; ++idx) BEGIN
+      SET amb_off = pwy_amb_off + (idx * 0xD4)
+      WRITE_SHORT amb_off + 0x80 0
+      WRITE_LONG amb_off + 0x90 0
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BIPWYRUP.ARE~ ~override/BIPWYRUP.ARE~
+  READ_LONG 0xBC pwyup_song_off
+  WRITE_LONG "%pwyup_song_off%" 41
+  WRITE_LONG ("%pwyup_song_off%" + 0x04) 42
+  WRITE_ASCII ("%pwyup_song_off%" + 0x28) ~AMB_M08A~ #8
+  WRITE_ASCII ("%pwyup_song_off%" + 0x30) ~ ~ #8
+  WRITE_LONG ("%pwyup_song_off%" + 0x38) 30
+  WRITE_ASCII ("%pwyup_song_off%" + 0x3C) ~AMB_M08A~ #8
+  WRITE_ASCII ("%pwyup_song_off%" + 0x44) ~ ~ #8
+  WRITE_LONG ("%pwyup_song_off%" + 0x4C) 30
+  READ_LONG 0x84 pwyup_amb_off
+  READ_SHORT 0x82 pwyup_amb_count
+  PATCH_IF pwyup_amb_count > 0 BEGIN
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x30) ~AMB_M08A~ #8
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x38) ~ ~ #8
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x40) ~ ~ #8
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x48) ~ ~ #8
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x50) ~ ~ #8
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x58) ~ ~ #8
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x60) ~ ~ #8
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x68) ~ ~ #8
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x70) ~ ~ #8
+    WRITE_ASCII ("%pwyup_amb_off%" + 0x78) ~ ~ #8
+    WRITE_SHORT ("%pwyup_amb_off%" + 0x80) 1
+    WRITE_LONG ("%pwyup_amb_off%" + 0x84) 5
+    WRITE_LONG ("%pwyup_amb_off%" + 0x88) 0
+    WRITE_LONG ("%pwyup_amb_off%" + 0x8C) 0xFFFFFF
+    WRITE_LONG ("%pwyup_amb_off%" + 0x90) 0x05
+    FOR (idx = 1; idx < pwyup_amb_count; ++idx) BEGIN
+      SET amb_off = pwyup_amb_off + (idx * 0xD4)
+      WRITE_SHORT amb_off + 0x80 0
+      WRITE_LONG amb_off + 0x90 0
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Force the current music immediately when the area script starts. This is
+// deliberately in addition to the ARE song table because it also works when
+// the area is reached through a direct teleport/debug jump and avoids carrying
+// the Carnival's currently playing track into the inn.
+COMPILE EVALUATE_BUFFER ~CotSC/better_immersion_beregost/BIPWYR.baf~
+COMPILE ~CotSC/better_immersion_beregost/BIPWYRUP.baf~
+
+
+
+// v76 FREEZE: PWYTR1/PWYTR2 audio from v74 is preserved verbatim here.
+// v76 FREEZE: Red Fang Orc Shaman uses GORORC03.CRE.
+// v76 FREEZE: Red Queen uses PWYREDQ dialogue and inventory logic below.
+
+
+COPY ~CotSC/better_immersion_beregost/area/PWYTR1.ARE~ ~override/PWYTR1.ARE~
+COPY ~CotSC/better_immersion_beregost/area/PWYTR1.WED~ ~override/PWYTR1.WED~
+// Padded 2-pixel atlas gutters prevent vertical 64-pixel tile rendering seams.
+// Artwork RGB, WED layout, music, scripts and search-map collision are preserved.
+COPY ~CotSC/better_immersion_beregost/area/BIPYTR.TIS~ ~override/BIPYTR.TIS~
+COPY ~CotSC/better_immersion_beregost/area/BPYTR00.PVRZ~ ~override/BPYTR00.PVRZ~
+COPY ~CotSC/better_immersion_beregost/area/BPYTR01.PVRZ~ ~override/BPYTR01.PVRZ~
+COPY ~CotSC/better_immersion_beregost/area/PWYTR1SR.BMP~ ~override/PWYTR1SR.BMP~
+COPY ~CotSC/better_immersion_beregost/area/PWYTR1LM.BMP~ ~override/PWYTR1LM.BMP~
+COPY ~CotSC/better_immersion_beregost/area/PWYTR1HT.BMP~ ~override/PWYTR1HT.BMP~
+
+// Randalla Brasshorn quest area: Torm's Hand.
+// Visual area shell; quest actors/dialogue and final collision are added separately.
+COPY ~CotSC/better_immersion_beregost/area/TORMHA.ARE~ ~override/TORMHA.ARE~
+COPY ~CotSC/better_immersion_beregost/area/TORMHA.WED~ ~override/TORMHA.WED~
+COPY ~CotSC/better_immersion_beregost/area/TORMHA.TIS~ ~override/TORMHA.TIS~
+COPY ~CotSC/better_immersion_beregost/area/TRMHA00.PVRZ~ ~override/TRMHA00.PVRZ~
+COPY ~CotSC/better_immersion_beregost/area/TRMHA01.PVRZ~ ~override/TRMHA01.PVRZ~
+COPY ~CotSC/better_immersion_beregost/area/TORMHASR.BMP~ ~override/TORMHASR.BMP~
+COPY ~CotSC/better_immersion_beregost/area/TORMHALM.BMP~ ~override/TORMHALM.BMP~
+COPY ~CotSC/better_immersion_beregost/area/TORMHAHT.BMP~ ~override/TORMHAHT.BMP~
+
+

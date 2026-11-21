@@ -1,0 +1,102 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCPPOPER.TRA~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG4900.ARE~ BEGIN
+  FAIL @34
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KOBOLD.CRE~ BEGIN
+  FAIL @35
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC9Y.ITM~ BEGIN
+  FAIL @36
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BOOT02.ITM~ BEGIN
+  FAIL @37
+END
+
+// Popper: clean neutral kobold merchant based on the native kobold chassis.
+COPY_EXISTING ~KOBOLD.CRE~ ~override/QCPPOPER.CRE~
+  SAY NAME1 @5001
+  SAY NAME2 @5001
+  WRITE_ASCII 0x2cc ~QCPPOPER~ #8
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_SHORT 0x244 0x4000
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCPPOPER_DEAD~ #32
+
+// Potion of Clear Consiousness: Brine Potion mechanics, new name and description.
+COPY_EXISTING ~MISC9Y.ITM~ ~override/QCPCLEAR.ITM~
+  SAY NAME1 @8
+  SAY NAME2 @8
+  SAY DESC @11
+
+// Boots of NightCrawler: based on Boots of Stealth, retaining its native +15 Hide in Shadows
+// and adding another +15 Hide in Shadows plus +10 Set Traps. The resulting in-game bonus is +30 Hide in Shadows.
+COPY_EXISTING ~BOOT02.ITM~ ~override/QCPNIGHT.ITM~
+  SAY NAME1 @9
+  SAY NAME2 @9
+  SAY DESC @12
+  LPF DELETE_ITEM_EQEFFECT INT_VAR opcode_to_delete = 59 END
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR opcode = 275 target = 1 timing = 2 parameter1 = 15 parameter2 = 0
+  END
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR opcode = 277 target = 1 timing = 2 parameter1 = 10 parameter2 = 0
+  END
+
+// Gloves 'Beautification': +5 Charisma while equipped.
+// BRAC07 provides a wearable hand-slot chassis in the EE item system.
+COPY_EXISTING ~BRAC07.ITM~ ~override/QCPBEAUT.ITM~
+  SAY NAME1 @10
+  SAY NAME2 @10
+  SAY DESC @13
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR opcode = 6 target = 1 timing = 2 parameter1 = 5 parameter2 = 0
+  END
+
+// Popper's dedicated shop. STO4901 is a native Nashkel Carnival shop chassis.
+// Clear its sale list first so Popper does not inherit another merchant's stock.
+COPY_EXISTING ~STO4901.STO~ ~override/QCPPOPST.STO~
+  REMOVE_STORE_ITEM ~.+~
+  ADD_STORE_ITEM ~POTN08~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN52~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN20~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN02~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN27~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN45~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN09~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN10~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN37~ #0 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM ~POTN14~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~POTN04~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~QUIVER01~ #0 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~QCPCLEAR~ #0 #0 #0 ~IDENTIFIED~ #5
+  ADD_STORE_ITEM ~QCPNIGHT~ #0 #0 #0 ~IDENTIFIED~ #1
+  ADD_STORE_ITEM ~QCPBEAUT~ #0 #0 #0 ~IDENTIFIED~ #1
+
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCPPOPER.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCPPOPER.TRA~
+
+// Add Popper to BG4900 at the requested coordinates, facing NE (orientation 10).
+COPY_EXISTING ~BG4900.ARE~ ~override/BG4900.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2495
+      fj_loc_y = 3260
+      fj_dest_x = 2495
+      fj_dest_y = 3260
+      fj_spawned = 1
+      fj_orientation = 10
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Popper
+      fj_cre_resref = QCPPOPER
+      fj_dlg_resref = QCPPOPER
+  END

@@ -1,0 +1,39 @@
+// Death-variable backup to the global shout. Losing ANY brigand alarms all.
+IF
+  Global("QH_ALARM","GLOBAL",0)
+  OR(8)
+    Dead("QHBG01")
+    Dead("QHBG02")
+    Dead("QHBG03")
+    Dead("QHBG04")
+    Dead("QHBG05")
+    Dead("QHBG06")
+    Dead("QHBG07")
+    Dead("QHBG08")
+THEN
+  RESPONSE #100
+    SetGlobal("QH_ALARM","GLOBAL",1)
+END
+
+// Hannibal's reinforcement wave appears only after he speaks.
+IF
+  Global("QH_HANN_FIGHT","GLOBAL",1)
+  Global("QH_REINFORCED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_REINFORCED","GLOBAL",1)
+    SetGlobal("QH_ALARM","GLOBAL",1)
+    CreateCreature("QHCMACK",[2698.907],8)
+    CreateCreature("QHBLD1",[2450.885],8)
+    CreateCreature("QHBLD2",[2589.1132],8)
+END
+
+// Hannibal's established Delgado quest must actually know he is dead.
+// Death variable is QHHANIB (set in the QHHANIB.CRE template copy).
+IF
+  Dead("QHHANIB")
+  Global("QRH_HANNIBAL_DEAD","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QRH_HANNIBAL_DEAD","GLOBAL",1)
+END

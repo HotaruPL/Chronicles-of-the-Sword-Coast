@@ -1,0 +1,13 @@
+// Batch 38: user-facing names and Torn Letter text in the BG sewer integration.
+// Keep all key numbers unchanged when translating.
+@12000 = ~Cadok~
+@12001 = ~Shante~
+@12002 = ~Torn letter~
+@12003 = ~Torn letter:
+
+My Dear Friend Mizuri,
+
+It has been nearly three seasons since your departure from the high halls of Candlekeep, and yet your desk in the eastern scriptorium remains tragically bare. I find myself looking toward the road daily, hoping to see your familiar robes approaching our gates. When you first arrived from far-off Kozakura, you spoke of the vast distance you traveled across Kara-Tur just to seek our library's archives. I admired that fierce hunger for knowledge. But when you left for Baldur's Gate, chasing whispers of forbidden texts hidden beneath the city, my heart misgave me. The structural foundations of that city hold secrets that are best left buried, and the dark, damp recesses below its streets are no place for a sage of your standing. Your long absence weighs heavily upon me, Mizuri. A scholar of your brilliant mind should be here, debating philosophy over evening tea, not lost in the sprawling shadows of the Coast. Whatever it is you seek in those forgotten vaults, I implore you—abandon it and return to us. The books can wait; your life cannot. May Oghma guide your steps back to the light.
+
+Your brother in knowledge,
+Gorion~

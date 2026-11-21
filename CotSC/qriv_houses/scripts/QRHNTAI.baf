@@ -1,0 +1,30 @@
+IF
+  Global("QRH_XZOR_FIGHT","GLOBAL",1)
+  Allegiance(Myself,NEUTRAL)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+IF
+  Allegiance(Myself,ENEMY)
+  Global("QRH_NATE_HID","LOCALS",0)
+  HasItem("POTN10",Myself)
+THEN
+  RESPONSE #100
+    SetGlobal("QRH_NATE_HID","LOCALS",1)
+    UseItem("POTN10",Myself)
+END
+IF
+  Allegiance(Myself,ENEMY)
+  See(WeakestOf([PC]))
+THEN
+  RESPONSE #100
+    AttackReevaluate(WeakestOf([PC]),30)
+END
+IF
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

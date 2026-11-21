@@ -1,0 +1,32 @@
+// Carnival guards remain neutral but directly attack Oopah when he becomes hostile.
+// This is checked by each guard's own script, avoiding reliance on the area script's ActionOverride.
+IF
+  OR(2)
+    Allegiance("OOPAH",ENEMY)
+    Allegiance("OOPAH2",ENEMY)
+THEN
+  RESPONSE #100
+    AttackReevaluate("OOPAH",30)
+END
+
+IF
+  AttackedBy([GOODCUTOFF],DEFAULT)
+  Allegiance(Myself,NEUTRAL)
+THEN
+  RESPONSE #100
+    Enemy()
+END
+
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END
+
+IF
+  AttackedBy([ANYONE],DEFAULT)
+THEN
+  RESPONSE #100
+    Attack(LastAttackerOf(Myself))
+END

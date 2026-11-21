@@ -1,0 +1,13 @@
+// QRWH01 only: remove the warehouse werewolf once Dar'kan has left for
+// Thalantyr (QRD_ST reaches 3).  The previous script checked QRD_ST == 3
+// and committed a removal flag even if the creature could not be removed.
+// The successful quest ends at QRD_ST = 8, so a later return to QRWH01
+// must be able to remove a creature retained in an older save.
+// No guard based on the obsolete QRD_WH_REMOVED flag.
+IF
+  GlobalGT("QRD_ST","GLOBAL",2)
+  Exists("QRVDARK")
+THEN
+  RESPONSE #100
+    ActionOverride("QRVDARK",DestroySelf())
+END

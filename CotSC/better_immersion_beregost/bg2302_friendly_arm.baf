@@ -1,0 +1,6 @@
+IF
+  !Exists("BIFRAVOC")
+THEN
+  RESPONSE #100
+    CreateCreature("BIFRAVOC",[668.416],14)
+END

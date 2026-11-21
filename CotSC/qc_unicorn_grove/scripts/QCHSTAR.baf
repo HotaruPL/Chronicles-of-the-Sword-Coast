@@ -1,0 +1,10 @@
+// One-time Imoen reaction after entering Nightmare Candlekeep storage room.
+IF
+  Global("QCH_ST_IMO","GLOBAL",0)
+  IsValidForPartyDialog("Imoen2")
+  InMyArea("Imoen2")
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_ST_IMO","GLOBAL",1)
+    ActionOverride("Imoen2",StartDialog("QCHSTIM",Player1))
+END

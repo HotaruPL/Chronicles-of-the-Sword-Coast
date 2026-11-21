@@ -1,0 +1,17 @@
+IF
+  Global("HDT_BG0513","BG0513",0)
+THEN
+  RESPONSE #100
+    SetGlobal("HDT_BG0513","BG0513",1)
+    CreateCreature("MUMMY01",[1858.2579],0)
+    CreateCreature("MUMMY01",[1890.2638],0)
+    CreateCreature("MUMMY01",[1957.2602],0)
+    CreateCreature("MUMMY01",[1964.2638],0)
+    CreateCreature("MUMGRE01",[1951.2661],0)
+    CreateCreature("MUMGRE01",[1957.2557],0)
+    CreateCreature("OTYUGH",[2475.1660],0)
+    CreateCreature("SHADOW01",[3771.1800],0)
+    ActionOverride("Container 5",CreateItem("HDTMECHE",0,0,0))
+END
+
+

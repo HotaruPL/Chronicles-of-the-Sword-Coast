@@ -1,0 +1,8 @@
+// Extra last-chance check during the final Siege of Dragonspear area.
+IF
+  Global("QC_QF_DSWIN_FOUND","GLOBAL",0)
+  PartyHasItem("QFIDSWIN")
+THEN
+  RESPONSE #100
+    SetGlobal("QC_QF_DSWIN_FOUND","GLOBAL",1)
+END

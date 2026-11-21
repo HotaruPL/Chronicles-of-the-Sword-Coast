@@ -1,0 +1,23 @@
+// QBTAREA v27 - recover Core summon when Imoen's interjection interrupted
+// the original ritual and QBT_STAGE was never set to 1.
+// Same trigger as the working v24.5, but the dialogue-global gate is removed.
+// Key and door-open conditions are preserved; QBT_CORE_SPAWN prevents duplicates.
+IF
+  Global("QBT_CORE_SPAWN","GLOBAL",0)
+  OpenState("QBTLOCK",TRUE)
+  PartyHasItem("QBTKEY")
+THEN
+  RESPONSE #100
+    SetGlobal("QBT_CORE_SPAWN","GLOBAL",1)
+    CreateCreature("QBTCORE",[850.785],8)
+END
+
+// A separate safety net: if the player kills Alianna after interrupted
+// dialogue, proceed to the already installed cultist/guardian battle logic.
+IF
+  Global("QBT_STAGE","GLOBAL",0)
+  Dead("QBTALIA")
+THEN
+  RESPONSE #100
+    SetGlobal("QBT_STAGE","GLOBAL",1)
+END

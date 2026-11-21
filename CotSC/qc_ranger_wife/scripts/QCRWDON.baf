@@ -1,0 +1,22 @@
+IF
+  Global("QCRW_STAGE","GLOBAL",0)
+  Global("QCRW_DON_FIRST","GLOBAL",0)
+  See(Player1)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCRW_DON_FIRST","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCRWDON",Player1)
+END
+IF
+  Global("QCRW_STAGE","GLOBAL",6)
+  Global("QCRW_DON_REUNION","GLOBAL",0)
+  See(Player1)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCRW_DON_REUNION","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCRWDON",Player1)
+END

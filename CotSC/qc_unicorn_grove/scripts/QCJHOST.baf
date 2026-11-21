@@ -1,0 +1,15 @@
+// Hold hostile creatures until the Dark Khalid/Jaheira memory has finished.
+IF
+  Global("QCJ_FIGHT","GLOBAL",2)
+  Allegiance(Myself,NEUTRAL)
+THEN
+ RESPONSE #100
+  Enemy()
+END
+IF
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+ RESPONSE #100
+  Attack(NearestEnemyOf(Myself))
+END

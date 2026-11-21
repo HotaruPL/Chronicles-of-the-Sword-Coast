@@ -1,0 +1,101 @@
+// Part II: Siege of Dragonspear (EET only).
+// The eleven item resources are owned by component 0; install that first.
+// Former WeiDU component: Miscellaneous Merchants - Part II: Siege of Dragonspear (4 locations)
+
+COPY ~CotSC/QCMM/stores/QCMS11.STO~ ~override/QCMS11.STO~
+  SAY 0x0c @4067
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM11.CRE~
+  SAY NAME1 @4068
+  SAY NAME2 @4068
+  WRITE_ASCII 0x2cc ~QCMM11~ #8
+  WRITE_ASCII 0x280 ~QCMM11~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no inherited merchant scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY ~CotSC/QCMM/stores/QCMS12.STO~ ~override/QCMS12.STO~
+  SAY 0x0c @4067
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM12.CRE~
+  SAY NAME1 @4068
+  SAY NAME2 @4068
+  WRITE_ASCII 0x2cc ~QCMM12~ #8
+  WRITE_ASCII 0x280 ~QCMM12~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no inherited merchant scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY ~CotSC/QCMM/stores/QCMS13.STO~ ~override/QCMS13.STO~
+  SAY 0x0c @4080
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM13.CRE~
+  SAY NAME1 @4081
+  SAY NAME2 @4081
+  WRITE_ASCII 0x2cc ~QCMM13~ #8
+  WRITE_ASCII 0x280 ~QCMM13~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no inherited merchant scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+// Original Horst and his wife stay in place: modify the actual store BDHORST.
+COPY_EXISTING ~BDHORST.STO~ ~override~
+  ADD_STORE_ITEM + ~QCMEAT~ #1 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM + ~QCSAUSG~ #1 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM + ~QCBREAD~ #1 #0 #0 ~IDENTIFIED~ #10
+  ADD_STORE_ITEM + ~QCWATER~ #1 #0 #0 ~IDENTIFIED~ #10
+
+COMPILE ~CotSC/QCMM/dialogue/QCMM11.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM11.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM12.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM12.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM13.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM13.tra~
+
+COPY_EXISTING ~BD1000.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3070
+      fj_loc_y = 1788
+      fj_dest_x = 3070
+      fj_dest_y = 1788
+      fj_orientation = 2
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM11_Actor~
+      fj_cre_resref = ~QCMM11~
+  END
+
+COPY_EXISTING ~BD3000.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1280
+      fj_loc_y = 1888
+      fj_dest_x = 1280
+      fj_dest_y = 1888
+      fj_orientation = 8
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM12_Actor~
+      fj_cre_resref = ~QCMM12~
+  END
+
+COPY_EXISTING ~BD7200.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 264
+      fj_loc_y = 149
+      fj_dest_x = 264
+      fj_dest_y = 149
+      fj_orientation = 0
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM13_Actor~
+      fj_cre_resref = ~QCMM13~
+  END
+
+
+// Horst fixed-price barter is offered on his original opening dialogue.
+COMPILE ~CotSC/QCMM/dialogue/QCMMHR.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMMHR.tra~
+
+

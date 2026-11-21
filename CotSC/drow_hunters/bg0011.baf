@@ -1,0 +1,27 @@
+IF
+  Global("DH7_FINAL","GLOBAL",0)
+  Global("DH7_CLUE3","GLOBAL",1)
+  Dead("JARDAK")
+THEN
+  RESPONSE #100
+    SetGlobal("DH7_FINAL","GLOBAL",1)
+    SetGlobal("DH7_JARDAK_DEAD","GLOBAL",1)
+    AddJournalEntry(@104,QUEST)
+END
+
+// After Jardak is actually dead and Davaeorn's letter has been found, start
+// the preserved final Viconia conversation here in BG0011, where the fight occurs.
+// This keeps the final conversation gated behind the complete clue chain.
+IF
+  Global("DH7_FINAL","GLOBAL",1)
+  Global("DH7_CLUE3","GLOBAL",1)
+  Global("DH7_FINAL_TALK","GLOBAL",0)
+  Global("DH7_FINAL_STARTED","GLOBAL",0)
+  InParty("VICONIA")
+THEN
+  RESPONSE #100
+    SetGlobal("DH7_FINAL_STARTED","GLOBAL",1)
+    ActionOverride("VICONIA",FaceObject(Player1))
+    ActionOverride("VICONIA",Wait(1))
+    ActionOverride("VICONIA",StartDialog("DHVICON",Player1))
+END

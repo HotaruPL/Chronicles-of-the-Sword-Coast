@@ -1,0 +1,286 @@
+// ---------------------------------------------------------------------------
+// SLUMS DISTRICT - AR0400
+// ---------------------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0400.ARE~ BEGIN
+  FAIL @20324
+END
+
+// Orc Beggar - requested ORC01 model, neutral and weaponless.
+COPY_EXISTING ~ORC01.CRE~ ~override/QC40OBEG.CRE~
+  SAY NAME1 @3112
+  SAY NAME2 @3112
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC40OBEG~ #8
+  WRITE_ASCII 0x280 ~QC40OBEG~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QC40KOB.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC40KOB~ #8
+  WRITE_ASCII 0x280 ~QC40KOB~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Gnoll Commoner - converted from proven neutral monster chassis.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC40GNOL.CRE~
+  SAY NAME1 @3113
+  SAY NAME2 @3113
+  WRITE_SHORT 0x28 0x8000
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x272 110    // GNOLL
+  WRITE_BYTE 0x273 120    // GNOLL class
+  WRITE_ASCII 0x2cc ~QC40GNOL~ #8
+  WRITE_ASCII 0x280 ~QC40GNOL~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Weaponless Orc resident - requested ORC01 model.
+COPY_EXISTING ~ORC01.CRE~ ~override/QC40ORC.CRE~
+  SAY NAME1 @3114
+  SAY NAME2 @3114
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC40ORC~ #8
+  WRITE_ASCII 0x280 ~QC40ORC~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BENTLY.CRE~ ~override/QC40GNOM.CRE~
+  SAY NAME1 @3105
+  SAY NAME2 @3105
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC40GNOM~ #8
+  WRITE_ASCII 0x280 ~QC40GNOM~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SARELF01.CRE~ ~override/QC40EBEG.CRE~
+  SAY NAME1 @3115
+  SAY NAME2 @3115
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC40EBEG~ #8
+  WRITE_ASCII 0x280 ~QC40EBEG~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DOGWIL01.CRE~ ~override/QC40DOG.CRE~
+  SAY NAME1 @3116
+  SAY NAME2 @3116
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC40DOG~ #8
+  WRITE_ASCII 0x280 ~QC40DOG~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SAILAL.CRE~ ~override/QC40DWAR.CRE~
+  SAY NAME1 @3109
+  SAY NAME2 @3109
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC40DWAR~ #8
+  WRITE_ASCII 0x280 ~QC40DWAR~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HALFG3.CRE~ ~override/QC40HALF.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC40HALF~ #8
+  WRITE_ASCII 0x280 ~QC40HALF~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0400.ARE~ ~override~
+  // X=2026 Y=2889 - Orc Beggar, north.
+  LPF fj_are_structure INT_VAR fj_loc_x=2026 fj_loc_y=2889 fj_dest_x=2026 fj_dest_y=2889 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QC40OBEG fj_cre_resref=QC40OBEG fj_dlg_resref=QC40OBEG END
+  // X=285 Y=2580 - Kobold Commoner, east.
+  LPF fj_are_structure INT_VAR fj_loc_x=285 fj_loc_y=2580 fj_dest_x=285 fj_dest_y=2580 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QC40KOB fj_cre_resref=QC40KOB fj_dlg_resref=QC40KOB END
+  // X=495 Y=1674 - Gnoll Commoner, south-west.
+  LPF fj_are_structure INT_VAR fj_loc_x=495 fj_loc_y=1674 fj_dest_x=495 fj_dest_y=1674 fj_orientation=2 STR_VAR fj_structure_type=actor fj_name=QC40GNOL fj_cre_resref=QC40GNOL fj_dlg_resref=QC40GNOL END
+  // X=314 Y=962 - weaponless Orc, south.
+  LPF fj_are_structure INT_VAR fj_loc_x=314 fj_loc_y=962 fj_dest_x=314 fj_dest_y=962 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC40ORC fj_cre_resref=QC40ORC fj_dlg_resref=QC40ORC END
+  // X=1302 Y=700 - Gnome Commoner, east.
+  LPF fj_are_structure INT_VAR fj_loc_x=1302 fj_loc_y=700 fj_dest_x=1302 fj_dest_y=700 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QC40GNOM fj_cre_resref=QC40GNOM fj_dlg_resref=QC40GNOM END
+  // X=3050 Y=1764 - Elven Beggar, east.
+  LPF fj_are_structure INT_VAR fj_loc_x=3050 fj_loc_y=1764 fj_dest_x=3050 fj_dest_y=1764 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QC40EBEG fj_cre_resref=QC40EBEG fj_dlg_resref=QC40EBEG END
+  // X=3458 Y=2105 - Aggressive Dog, north. Starts neutral; dialogue turns it hostile.
+  LPF fj_are_structure INT_VAR fj_loc_x=3458 fj_loc_y=2105 fj_dest_x=3458 fj_dest_y=2105 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QC40DOG fj_cre_resref=QC40DOG fj_dlg_resref=QC40DOG fj_bcs_override=QCAHOST END
+  // X=2925 Y=1895 - Dwarf Commoner.
+  LPF fj_are_structure INT_VAR fj_loc_x=2925 fj_loc_y=1895 fj_dest_x=2925 fj_dest_y=1895 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC40DWAR fj_cre_resref=QC40DWAR fj_dlg_resref=QC40DWAR END
+  // X=1046 Y=1939 - Halfling Commoner.
+  LPF fj_are_structure INT_VAR fj_loc_x=1046 fj_loc_y=1939 fj_dest_x=1046 fj_dest_y=1939 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC40HALF fj_cre_resref=QC40HALF fj_dlg_resref=QC40HALF END
+BUT_ONLY_IF_IT_CHANGES
+
+// ---------------------------------------------------------------------------
+// COPPER CORONET - AR0406
+// ---------------------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0406.ARE~ BEGIN
+  FAIL @20325
+END
+
+// Requested ENDER-based Elven Warrior. Preserve ENDER's normal equipment and
+// add/select a standard scimitar plus dagger off-hand.
+COPY_EXISTING ~ENDER.CRE~ ~override/QC46ELF.CRE~
+  SAY NAME1 @3117
+  SAY NAME2 @3117
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC46ELF~ #8
+  WRITE_ASCII 0x280 ~QC46ELF~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  ADD_CRE_ITEM ~SW1H20~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~DAGG01~ #0 #0 #0 ~IDENTIFIED~ ~SHIELD~
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC46HOB.CRE~
+  SAY NAME1 @3110
+  SAY NAME2 @3110
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC46HOB~ #8
+  WRITE_ASCII 0x280 ~QC46HOB~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Half-Ogre commoner, neutral and unarmed.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC46HOG.CRE~
+  SAY NAME1 @3118
+  SAY NAME2 @3118
+  WRITE_SHORT 0x28 0x7000
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x272 113    // OGRE race
+  WRITE_BYTE 0x273 127    // OGRE_HALFOGRE class
+  WRITE_ASCII 0x2cc ~QC46HOG~ #8
+  WRITE_ASCII 0x280 ~QC46HOG~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC46ORC.CRE~
+  SAY NAME1 @3119
+  SAY NAME2 @3119
+  WRITE_SHORT 0x28 0x6105
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x272 143
+  WRITE_BYTE 0x273 2
+  WRITE_ASCII 0x2cc ~QC46ORC~ #8
+  WRITE_ASCII 0x280 ~QC46ORC~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Hostile panther, using the native AR0406 jaguar chassis but the panther
+// animation. The QC hostile script guarantees it actually attacks.
+COPY_EXISTING ~CATJAG01.CRE~ ~override/QC46PANT.CRE~
+  SAY NAME1 @3120
+  SAY NAME2 @3120
+  WRITE_SHORT 0x28 0x7f0a
+  WRITE_BYTE 0x270 255
+  WRITE_BYTE 0x272 137
+  WRITE_BYTE 0x273 175
+  WRITE_ASCII 0x280 ~QC46PANT~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0406.ARE~ ~override~
+  // X=1289 Y=1501 - ENDER-based Elven Warrior.
+  LPF fj_are_structure INT_VAR fj_loc_x=1289 fj_loc_y=1501 fj_dest_x=1289 fj_dest_y=1501 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC46ELF fj_cre_resref=QC46ELF fj_dlg_resref=QC46ELF END
+  // X=573 Y=1557 - Hobgoblin, south.
+  LPF fj_are_structure INT_VAR fj_loc_x=573 fj_loc_y=1557 fj_dest_x=573 fj_dest_y=1557 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC46HOB fj_cre_resref=QC46HOB fj_dlg_resref=QC46HOB END
+  // X=1461 Y=470 - Half-Ogre.
+  LPF fj_are_structure INT_VAR fj_loc_x=1461 fj_loc_y=470 fj_dest_x=1461 fj_dest_y=470 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC46HOG fj_cre_resref=QC46HOG fj_dlg_resref=QC46HOG END
+  // X=1893 Y=927 - name-only Tiefling (v0.4 model retained).
+  LPF fj_are_structure INT_VAR fj_loc_x=1893 fj_loc_y=927 fj_dest_x=1893 fj_dest_y=927 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC46ORC fj_cre_resref=QC46ORC fj_dlg_resref=QC46ORC END
+  // X=3346 Y=1696 - hostile Panther.
+  LPF fj_are_structure INT_VAR fj_loc_x=3346 fj_loc_y=1696 fj_dest_x=3346 fj_dest_y=1696 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC46PANT fj_cre_resref=QC46PANT fj_bcs_override=QCAHOST END
+BUT_ONLY_IF_IT_CHANGES
+

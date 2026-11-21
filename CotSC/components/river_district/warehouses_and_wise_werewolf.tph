@@ -1,0 +1,535 @@
+// ====================================================================
+// PART 8/8: v2.8 warehouse loot, NPCs, and the Wise Werewolf
+// ====================================================================
+
+// Required resources verified at install time. Do not silently substitute wrong assets.
+ACTION_FOR_EACH itm IN ~AMUL11~ ~AROW01~ ~AROW08~ ~AX1H04~ ~BOLT01~ ~BOW06~ ~BULL01~ ~DAGG01~ ~DAGG02~ ~LEAT01~ ~LEAT04~ ~MISC07~ ~MISC16~ ~MISC18~ ~MISC20~ ~MISC26~ ~MISC27~ ~MISC37~ ~MISC43~ ~POTN09~ ~POTN10~ ~POTN39~ ~RING11~ ~SCRL75~ ~STAF01~ ~SW1H07~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%itm%.ITM~ BEGIN
+    FAIL @20238
+  END
+END
+
+// QRWH02: 11 item entries, preserving all 10 original container shapes.
+COPY_EXISTING ~QRWH02.ARE~ ~override/QRWH02.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 10) BEGIN PATCH_FAIL ~QRWH02 must contain exactly ten cloned containers~ END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~LEAT01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~LEAT01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~DAGG01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~DAGG01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~DAGG01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+      charges1 = 13
+    STR_VAR
+      item_to_add = ~MISC07~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~MISC20~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 5
+      charges1 = 2
+    STR_VAR
+      item_to_add = ~MISC26~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 6
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~STAF01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 7
+      charges1 = 12
+    STR_VAR
+      item_to_add = ~AROW01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 7
+      charges1 = 13
+    STR_VAR
+      item_to_add = ~BOLT01~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRWH03: 10 item entries, preserving all 10 original container shapes.
+COPY_EXISTING ~QRWH03.ARE~ ~override/QRWH03.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 10) BEGIN PATCH_FAIL ~QRWH03 must contain exactly ten cloned containers~ END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 2
+    STR_VAR
+      item_to_add = ~MISC07~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~DAGG01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~LEAT04~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~MISC37~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+      charges1 = 16
+    STR_VAR
+      item_to_add = ~AX1H04~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 5
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~POTN09~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 6
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~LEAT01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 6
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~DAGG01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 7
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~POTN39~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 8
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~SCRL75~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRWH01: 10 item entries, preserving all 10 original container shapes.
+COPY_EXISTING ~QRWH01.ARE~ ~override/QRWH01.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 10) BEGIN PATCH_FAIL ~QRWH01 must contain exactly ten cloned containers~ END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 5
+    STR_VAR
+      item_to_add = ~MISC16~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 25
+    STR_VAR
+      item_to_add = ~AROW01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+      charges1 = 40
+    STR_VAR
+      item_to_add = ~BULL01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~MISC43~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 5
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~LEAT01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 5
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~RING11~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 6
+      charges1 = 3
+    STR_VAR
+      item_to_add = ~MISC18~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 7
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~AMUL11~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 7
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~SW1H07~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 8
+      charges1 = 15
+    STR_VAR
+      item_to_add = ~MISC07~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Dialogue and scripts for the warehouse stories. Scope limited to cloned
+// warehouse ARE, companion dialogue append, and High Hedge's existing script.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~THALAN.DLG~ BEGIN
+  FAIL @20239
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3202.BCS~ BEGIN
+  FAIL @20240
+END
+ADD_JOURNAL TITLE (@7011) @900 @901 @902 @903 @904 USING ~CotSC/translation/%LANGUAGE%/qriv_houses/tra/qriv_werewolf.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+COMPILE ~CotSC/qriv_houses/dialogue/qriv_v28_quest.d~ USING ~CotSC/translation/%LANGUAGE%/qriv_houses/tra/qriv_werewolf.tra~
+COMPILE ~CotSC/qriv_houses/scripts/QRVLEAI.baf~
+COMPILE ~CotSC/qriv_houses/scripts/QRVLEFI.baf~
+COMPILE ~CotSC/qriv_houses/scripts/QRDPORT.baf~
+COMPILE ~CotSC/qriv_houses/scripts/QRDWH01.baf~
+// Insert into High Hedge without replacing its normal area script.
+EXTEND_TOP ~BG3202.BCS~ ~CotSC/qriv_houses/scripts/QRDHH.baf~
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~OGREHA.CRE~ BEGIN FAIL ~River District v2.8 missing template OGREHA.CRE~ END
+COPY_EXISTING ~OGREHA.CRE~ ~override/QRVWOR2.CRE~
+  SAY NAME1 @3034
+  SAY NAME2 @3034
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QRVWOR2~ #32
+  WRITE_ASCII 0x2cc ~QRVWK2~ #8
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  
+  
+BUT_ONLY_IF_IT_CHANGES
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FARM.CRE~ BEGIN FAIL ~River District v2.8 missing template FARM.CRE~ END
+COPY_EXISTING ~FARM.CRE~ ~override/QRVDWRK.CRE~
+  SAY NAME1 @3035
+  SAY NAME2 @3035
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QRVDWRK~ #32
+  WRITE_ASCII 0x2cc ~QRVDWRK~ #8
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  
+  
+BUT_ONLY_IF_IT_CHANGES
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KRYSTI.CRE~ BEGIN FAIL ~River District v2.8 missing template KRYSTI.CRE~ END
+COPY_EXISTING ~KRYSTI.CRE~ ~override/QRVLESL.CRE~
+  SAY NAME1 @3036
+  SAY NAME2 @3036
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QRVLESL~ #32
+  WRITE_ASCII 0x2cc ~QRVLLES~ #8
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x248 ~QRVLEAI~ #8
+  WRITE_LONG 0x1c 0
+  WRITE_BYTE 0x2d 0
+  WRITE_BYTE 0x2e 0
+  ADD_CRE_ITEM ~DAGG02~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  // Borrow a BG2 female Shadow Thief's voice, rather than Krysti's soundset.
+  FOR (qr_v_offset = 0xA4; qr_v_offset <= 0x230; qr_v_offset += 4) BEGIN
+    INNER_PATCH_FILE ~SHTHASS1.CRE~ BEGIN
+      READ_LONG qr_v_offset qr_v_sound
+    END
+    WRITE_LONG qr_v_offset qr_v_sound
+  END
+BUT_ONLY_IF_IT_CHANGES
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~VVMADMAN.CRE~ BEGIN FAIL ~River District v2.8 missing template VVMADMAN.CRE~ END
+COPY_EXISTING ~VVMADMAN.CRE~ ~override/QRVBLAC.CRE~
+  SAY NAME1 @3037
+  SAY NAME2 @3037
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QRVBLAC~ #32
+  WRITE_ASCII 0x2cc ~QRVBLAC~ #8
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x248 ~QRVLEFI~ #8
+  
+BUT_ONLY_IF_IT_CHANGES
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SHTHASS1.CRE~ BEGIN FAIL ~River District v2.8 missing template SHTHASS1.CRE~ END
+COPY_EXISTING ~SHTHASS1.CRE~ ~override/QRVEVIE.CRE~
+  SAY NAME1 @3038
+  SAY NAME2 @3038
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QRVEVIE~ #32
+  WRITE_ASCII 0x2cc ~QRVEVIE~ #8
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x248 ~QRVLEFI~ #8
+  ADD_CRE_ITEM ~BOW06~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~AROW08~ #40 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+  SET_BG2_PROFICIENCY ~PROFICIENCYSHORTBOW~ 2
+BUT_ONLY_IF_IT_CHANGES
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~WEREWO.CRE~ BEGIN FAIL ~River District v2.8 missing template WEREWO.CRE~ END
+COPY_EXISTING ~WEREWO.CRE~ ~override/QRVDARK.CRE~
+  SAY NAME1 @3039
+  SAY NAME2 @3039
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QRVDARK~ #32
+  WRITE_ASCII 0x2cc ~QRVDARK~ #8
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  
+  WRITE_SHORT 0x24 80
+  WRITE_SHORT 0x26 80
+  WRITE_BYTE 0x238 16
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FARM.CRE~ BEGIN FAIL ~River District v2.8 missing template FARM.CRE~ END
+COPY_EXISTING ~FARM.CRE~ ~override/QRVDHEL.CRE~
+  SAY NAME1 @3039
+  SAY NAME2 @3039
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x280 ~QRVDHEL~ #32
+  WRITE_ASCII 0x2cc ~QRVDHEL~ #8
+  WRITE_LONG 0x20 0
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  
+  WRITE_LONG 0x28 0x6101
+  WRITE_BYTE 0x238 12
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SHAWOL02.CRE~ BEGIN FAIL ~Missing SHAWOL02.CRE for the spectral wolf~ END
+COPY_EXISTING ~SHAWOL02.CRE~ ~override/QRDWOLF.CRE~
+  SAY NAME1 @3040
+  SAY NAME2 @3040
+  WRITE_ASCII 0x280 ~QRDWOLF~ #32
+  WRITE_ASCII 0x2cc ~~ #8
+  WRITE_BYTE 0x270 255
+  WRITE_SHORT 0x24 160
+  WRITE_SHORT 0x26 160
+  WRITE_BYTE 0x238 25
+  LPF ADD_CRE_EFFECT
+    INT_VAR
+      opcode = 65
+      target = 1
+      timing = 9
+      probability1 = 100
+  END
+BUT_ONLY_IF_IT_CHANGES
+// Quest key: not consumed until the future Hannibal component is authored.
+COPY_EXISTING ~MISC27.ITM~ ~override/QRVHBKEY.ITM~
+  SAY NAME1 @3041
+  SAY NAME2 @3041
+  SAY DESC @3042
+  SAY UNIDENTIFIED_DESC @3043
+  WRITE_SHORT 0x1c 46 // key type
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~QRVLESL.CRE~ ~override/QRVLESL.CRE~
+  ADD_CRE_ITEM ~QRVHBKEY~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+// QRWH03: Leslie and her associates start neutral, armed only as requested.
+COPY_EXISTING ~QRWH03.ARE~ ~override/QRWH03.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 457
+      fj_loc_y = 719
+      fj_dest_x = 457
+      fj_dest_y = 719
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Warehouse Worker
+      fj_cre_resref = QRVWOR2
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1275
+      fj_loc_y = 412
+      fj_dest_x = 1275
+      fj_dest_y = 412
+      fj_orientation = 2
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Leslie
+      fj_cre_resref = QRVLESL
+  END
+BUT_ONLY_IF_IT_CHANGES
+// QRWH01: Dar'kan's worker companion and his hiding place. The user has not
+// specified exact positions for these two; they are provisional test coordinates.
+COPY_EXISTING ~QRWH01.ARE~ ~override/QRWH01.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 500
+      fj_loc_y = 710
+      fj_dest_x = 500
+      fj_dest_y = 710
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Daltan
+      fj_cre_resref = QRVDWRK
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1250
+      fj_loc_y = 650
+      fj_dest_x = 1250
+      fj_dest_y = 650
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QRVDARK
+      fj_cre_resref = QRVDARK
+  END
+  WRITE_ASCII 0x94 ~QRDWH01~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// River District v2.9: map notes only. Existing entry regions, WED, art,
+// collision, music, containers and actors are deliberately not changed.
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  ADD_MAP_NOTE #2353 #342 ~blue~ ~Baldie's Goods~
+  ADD_MAP_NOTE #2109 #1476 ~blue~ ~Delgado's House~
+  ADD_MAP_NOTE #1072 #1458 ~blue~ ~Thylion's House~
+  ADD_MAP_NOTE #694 #1469 ~blue~ ~Larissa's House~
+  ADD_MAP_NOTE #285 #630 ~blue~ ~Warehouse~
+  ADD_MAP_NOTE #1559 #505 ~blue~ ~Temple of Helm~
+BUT_ONLY_IF_IT_CHANGES
+
+
+// ====================================================================
+// v3.1: River District world-map arrival at the southern gate.
+// Reposition the existing one entrance, leaving all region/door/actor records intact.
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  READ_LONG 0x68 qr_arrive_off
+  READ_LONG 0x6c qr_arrive_count
+  PATCH_IF (qr_arrive_count < 1) OR (qr_arrive_off + 0x68 > SOURCE_SIZE) BEGIN
+    PATCH_FAIL @20241
+  END
+  WRITE_ASCII qr_arrive_off ~ARRIVE~ #32
+  WRITE_SHORT (qr_arrive_off + 0x20) 1670
+  WRITE_SHORT (qr_arrive_off + 0x22) 1593
+BUT_ONLY_IF_IT_CHANGES
+
+// v3.1: River District exploration music in private houses and warehouses.
+// The shop and temple are intentionally EXCLUDED. No other ARE fields touched.
+ACTION_FOR_EACH qr_indoor IN ~QRHO01~ ~QRHO02~ ~QRHO03~ ~QRHO04~ ~QRHO05~ ~QRWH01~ ~QRWH02~ ~QRWH03~ BEGIN
+  COPY_EXISTING ~%qr_indoor%.ARE~ ~override/%qr_indoor%.ARE~
+    READ_LONG 0xbc qr_indoor_songs
+    PATCH_IF (qr_indoor_songs > 0) AND (qr_indoor_songs + 0x90 <= SOURCE_SIZE) BEGIN
+      WRITE_LONG qr_indoor_songs %QRIV_THEME%
+      WRITE_LONG (qr_indoor_songs + 4) %QRIV_THEME%
+    END ELSE BEGIN
+      PATCH_FAIL @20242
+    END
+  BUT_ONLY_IF_IT_CHANGES
+END
+

@@ -1,0 +1,9 @@
+INCLUDE ~CotSC/components/river_district/outdoor_area_and_music.tph~
+INCLUDE ~CotSC/components/river_district/outdoor_npcs_and_loot.tph~
+INCLUDE ~CotSC/components/river_district/companion_dialogue_and_felicity.tph~
+INCLUDE ~CotSC/components/river_district/interiors_and_doorways.tph~
+INCLUDE ~CotSC/components/river_district/hannibal_encounter.tph~
+INCLUDE ~CotSC/components/river_district/interior_quests_and_loot.tph~
+INCLUDE ~CotSC/components/river_district/warehouses_and_wise_werewolf.tph~
+INCLUDE ~CotSC/components/river_district/forest_brewery_and_worldmap.tph~
+INCLUDE ~CotSC/components/river_district/temple_of_helm_and_stolen_flute.tph~

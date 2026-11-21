@@ -1,0 +1,27 @@
+// The first sighting starts Hannibal's full one-line challenge.
+IF
+  See([PC])
+  Global("QH_HANN_SAID","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_HANN_SAID","GLOBAL",1)
+    StartDialog("QHHAN",Player1)
+END
+
+// Barbarian Rage, NOT Berserker Enrage (SPCL152 vs SPCL321).
+IF
+  Global("QH_HANN_FIGHT","GLOBAL",1)
+  Global("QH_RAGED","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QH_RAGED","LOCALS",1)
+    ReallyForceSpellRES("SPCL152",Myself)
+END
+
+IF
+  Global("QH_HANN_FIGHT","GLOBAL",1)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

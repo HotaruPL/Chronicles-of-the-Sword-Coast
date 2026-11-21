@@ -1,0 +1,22 @@
+// ---------------------------------------------------------------------------
+// Integrated, frozen QCSEWR component: original sewer installer logic unchanged.
+// ---------------------------------------------------------------------------
+INCLUDE ~CotSC/bgsewer/sewer_integration.tpa~
+
+// Durbem's key is the only addition to the frozen sewer installation.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KEY01.ITM~ BEGIN
+  FAIL @20034
+END
+COPY_EXISTING ~KEY01.ITM~ ~override/PWYDKKEY.ITM~
+  SAY NAME1 @2086
+  SAY NAME2 @2086
+  SAY UNIDENTIFIED_DESC @2087
+  SAY DESC @2087
+BUT_ONLY_IF_IT_CHANGES
+
+// Place the key on the hostile sewerfolk next to Shante; leave his AI unchanged.
+COPY_EXISTING ~QSEWRF1.CRE~ ~override/QSEWRF1.CRE~
+  ADD_CRE_ITEM ~PWYDKKEY~ #0 #0 #0 ~IDENTIFIED~ ~INV1~
+BUT_ONLY_IF_IT_CHANGES
+
+

@@ -1,0 +1,17 @@
+// Elvin the Courier wanders until his dialogue is finished, then walks away and disappears.
+IF
+  Global("BIB_ELVIN_LEAVE","LOCALS",0)
+THEN
+  RESPONSE #100
+    RandomWalkContinuous()
+END
+
+IF
+  Global("BIB_ELVIN_LEAVE","LOCALS",1)
+  !StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    MoveToPoint([4220.1111])
+    Wait(2)
+    DestroySelf()
+END

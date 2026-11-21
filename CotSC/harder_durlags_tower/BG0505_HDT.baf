@@ -1,0 +1,7 @@
+IF
+  Global("HDT_BG0505","BG0505",0)
+THEN
+  RESPONSE #100
+    SetGlobal("HDT_BG0505","BG0505",1)
+    CreateCreature("MEPDUS",[1088.712],8)
+END

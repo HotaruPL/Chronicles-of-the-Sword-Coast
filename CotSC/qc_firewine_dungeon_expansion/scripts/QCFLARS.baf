@@ -1,0 +1,13 @@
+// Lara approaches the first party member she sees and initiates her warning once.
+// This deliberately mirrors the proven Kira/Delcia pattern used in earlier
+// Better Immersion components: See([PC]) + LastSeenBy(Myself).
+IF
+    See([PC])
+    Global("QCFLaraState","LOCALS",0)
+    !StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+    RESPONSE #100
+        SetGlobal("QCFLaraState","LOCALS",1)
+        MoveToObject(LastSeenBy(Myself))
+        StartDialogueNoSet(LastSeenBy(Myself))
+END

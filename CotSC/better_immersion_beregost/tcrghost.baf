@@ -1,0 +1,13 @@
+// TORMCR Ghost combat initializer.
+// Based on DAITEL, but do not allow the original Shadow Door / Dimension Door
+// escape sequence to remove the ghost from the cavern. The original DAITEL
+// race script is preserved for the later spell sequence.
+IF
+  Global("TCR_GHOST_HOSTILE","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("TCR_GHOST_HOSTILE","LOCALS",1)
+    SetGlobal("DimensionDoor","GLOBAL",1)
+    Enemy()
+    Attack(Player1)
+END

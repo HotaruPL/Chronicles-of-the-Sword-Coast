@@ -1,0 +1,254 @@
+// Test interior cloned from Siege of Dragonspear's BD7310.
+// The original BD7310 resources are never overwritten or patched.
+COPY ~CotSC/Quests_and_Challenges/AREA/QCSUBH01.ARE~ ~override/QCSUBH01.ARE~
+COPY_EXISTING ~QCSUBH01.ARE~ ~override/QCSUBH01.ARE~
+  WRITE_ASCII 0x08 ~BD7310~ #8
+  WRITE_ASCII 0x94 ~ ~ #8
+
+  // The cloned BD7310 interior contains its original SoD actors.
+  // Remove all area actors from our Q&C copy; BD7310 itself is untouched.
+  WRITE_SHORT 0x58 0
+
+  // Keep the three original containers as scenery/interactable objects,
+  // but empty them of all items. The unused item records are left in the
+  // file so the offsets of the remaining area structures stay unchanged.
+  READ_LONG 0x70 container_offset
+  READ_SHORT 0x74 container_count
+  FOR (i = 0; i < container_count; ++i) BEGIN
+    WRITE_LONG (container_offset + (0xc0 * i) + 0x40) 0
+    WRITE_LONG (container_offset + (0xc0 * i) + 0x44) 0
+  END
+  WRITE_SHORT 0x76 0
+
+  // Chest01 is the altar. Patch the second container directly.
+  // This avoids relying on ALTER_AREA_CONTAINER and its macro argument names.
+  // ARE container structure: type +0x24, lock difficulty +0x26, flags +0x28,
+  // key resource +0x78. Chest01 is container index 1.
+  WRITE_SHORT (container_offset + 0xc0 + 0x24) 7
+  WRITE_SHORT (container_offset + 0xc0 + 0x26) 60
+  WRITE_LONG  (container_offset + 0xc0 + 0x28) 1
+  WRITE_ASCII (container_offset + 0xc0 + 0x78) ~QCEKEY~ #8
+
+  // Auntie Ethel is a permanent actor in the interior area.
+  // She is present in QCSUBH01 from the moment the area loads; there is no
+  // delayed interior CreateCreature step. The exterior Ethel is destroyed
+  // after the invitation, while this separate area actor is already here.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 357
+      fj_loc_y = 328
+      fj_dest_x = 357
+      fj_dest_y = 328
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = AuntieEthel
+      fj_cre_resref = QCETHELI
+      fj_dlg_resref = QCETHEL
+  END
+
+  // Small incidental loot in the other two containers. Container numbering
+  // is the order in QCSUBH01.ARE: Table01=1, Chest01=2, Alcove=3.
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = 0
+      fj_charge0 = 12
+    STR_VAR
+      fj_structure_type = itm
+      fj_name = MISC07
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = 2
+      fj_charge0 = 1
+    STR_VAR
+      fj_structure_type = itm
+      fj_name = POTN08
+  END
+
+  // Altar loot: Stoneskin scroll, Greater Malison scroll, Wand of
+  // Polymorphing, 110 gold pieces, and the custom skull helmet.
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = 1
+      fj_charge0 = 1
+    STR_VAR
+      fj_structure_type = itm
+      fj_name = SCRL2B
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = 1
+      fj_charge0 = 1
+    STR_VAR
+      fj_structure_type = itm
+      fj_name = SCRL5I
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = 1
+      fj_charge0 = 10
+    STR_VAR
+      fj_structure_type = itm
+      fj_name = WAND09
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = 1
+      fj_charge0 = 110
+    STR_VAR
+      fj_structure_type = itm
+      fj_name = MISC07
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = 1
+      fj_charge0 = 1
+    STR_VAR
+      fj_structure_type = itm
+      fj_name = QCETHELM
+  END
+// Add the invisible entrance trigger behind the Submerged House.
+// The actual trigger is centred on the requested BG3800 coordinates 3021,1343.
+COPY_EXISTING ~BG3800.ARE~ ~override/BG3800.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3021
+      fj_loc_y = 1343
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = ExitQCSUB_EXT
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 2981
+      fj_box_top = 1303
+      fj_box_right = 3061
+      fj_box_bottom = 1383
+      fj_cursor_idx = 30
+      fj_vertex_0 = 2981 + (1303 << 16)
+      fj_vertex_1 = 3061 + (1303 << 16)
+      fj_vertex_2 = 3061 + (1383 << 16)
+      fj_vertex_3 = 2981 + (1383 << 16)
+      fj_flags = 260
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QCSUBH01_ENTRY
+      fj_destination_area = QCSUBH01
+      fj_destination_name = ExitQCSUB
+  END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3800.BCS~ BEGIN
+  FAIL @64
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~KEY01.ITM~ BEGIN
+  FAIL @63
+END
+
+
+// Auntie Ethel is part of the Submerged House component.
+
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCETHEL.TRA~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3800.BCS~ BEGIN
+  FAIL @2
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DUSHAI.CRE~ BEGIN
+  FAIL @3
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BANSHE01.CRE~ BEGIN
+  FAIL @3
+END
+
+
+// Ethel's altar key. Restore the Ethel-specific QCEKEY resource used by
+// the altar and the indoor Ethel. This preserves the existing altar resref.
+COPY_EXISTING ~KEY01.ITM~ ~override/QCEKEY.ITM~
+  SAY NAME1 @32
+  SAY NAME2 @32
+  SAY DESC @33
+
+// Ethel's transformed form: a completely normal Cornugon chassis.
+// Only the display name and Ethel's altar key are added; the native Cornugon
+// stats, equipment, abilities, spells, and AI are otherwise left untouched.
+COPY_EXISTING ~DEMCOR01.CRE~ ~override/QCEBANS.CRE~
+  SAY NAME1 @30
+  SAY NAME2 @30
+  ADD_CRE_ITEM ~QCEKEY~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+  WRITE_ASCII 0x280 ~QCEBANS_DEAD~ #32
+
+// Ethel uses Dushai's elderly-woman animation/appearance, but keeps the
+// proven working creature-dialogue architecture from the fresh Ethel test.
+COPY_EXISTING ~DUSHAI.CRE~ ~override/QCETHEL.CRE~
+  SAY NAME1 @30
+  SAY NAME2 @30
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QCETHEL~ #8
+  WRITE_ASCII 0x248 ~QCETHEL~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  ADD_CRE_ITEM ~QCEKEY~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+  WRITE_ASCII 0x280 ~QCETHEL_DEAD~ #32
+
+// Interior Ethel is a separate CRE so only the indoor version carries the altar key.
+// It uses the exact same Dushai appearance, dialogue, and working override script.
+COPY_EXISTING ~DUSHAI.CRE~ ~override/QCETHELI.CRE~
+  SAY NAME1 @30
+  SAY NAME2 @30
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QCETHEL~ #8
+  WRITE_ASCII 0x248 ~QCETHEL~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  ADD_CRE_ITEM ~QCEKEY~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+  WRITE_ASCII 0x280 ~QCETHELI_DEAD~ #32
+
+// Ethel's Skull. HELM17 provides the skull-shaped helmet appearance/icon.
+// Remove its active ability and original equipping effects, then add the
+// requested passive bonuses: +50 magic resistance and +1 Intelligence.
+COPY_EXISTING ~HELM17.ITM~ ~override/QCETHELM.ITM~
+  SAY NAME1 @34
+  SAY NAME2 @34
+  SAY DESC @35
+  WRITE_LONG 0x4c 2
+  LPF DELETE_ITEM_HEADER
+    INT_VAR
+      header_type = 3
+  END
+  LPF DELETE_ITEM_EQEFFECT
+    INT_VAR
+      opcode_to_delete = "-1"
+  END
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR
+      opcode = 166
+      target = 1
+      timing = 2
+      parameter1 = 50
+      parameter2 = 0
+  END
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR
+      opcode = 19
+      target = 1
+      timing = 2
+      parameter1 = 1
+      parameter2 = 0
+  END
+
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCETHEL.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCETHEL.TRA~
+COMPILE ~CotSC/Quests_and_Challenges/AREA/QCETHEL.BAF~
+
+EXTEND_BOTTOM ~BG3800.BCS~ ~CotSC/Quests_and_Challenges/AREA/BG3800_QCETHEL_SPAWN.BAF~

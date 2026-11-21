@@ -1,0 +1,48 @@
+// Xvart spokesman: first sighting initiates rescue, no hostile behavior to the party.
+IF
+  Global("QCDXALRM","GLOBAL",0)
+  Global("QCDXINTRO","LOCALS",0)
+  See(Player1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCDXINTRO","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCDXLEAD",Player1)
+END
+// After both trolls are permanently dead the spokesman gives the promised ring.
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  Global("QCDXREWD","GLOBAL",0)
+  Global("QCDXTALK","LOCALS",0)
+  Dead("QCDTROL1")
+  Dead("QCDTROL2")
+  See(Player1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCDXTALK","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCDXLEAD",Player1)
+END
+// After the reward, escape with the survivors.
+IF
+  Global("QCDXREWD","GLOBAL",1)
+THEN
+  RESPONSE #100
+    EscapeArea()
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  !Dead("QCDTROL1")
+  See("QCDTROL1")
+THEN
+  RESPONSE #100
+    Attack("QCDTROL1")
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  !Dead("QCDTROL2")
+  See("QCDTROL2")
+THEN
+  RESPONSE #100
+    Attack("QCDTROL2")
+END

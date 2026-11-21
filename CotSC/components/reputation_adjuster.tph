@@ -1,0 +1,113 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+// Build NEW QC-prefixed creatures from the requested originals.
+// No original CRE is overwritten or modified.
+
+// Mervin in BG2304
+COPY_EXISTING ~FUMIN.CRE~ ~override/QCRPMERV.CRE~
+  SAY NAME1 @5051
+  SAY NAME2 @5051
+  WRITE_ASCII 0x2cc ~QCRPMERV~ #8
+  WRITE_ASCII 0x280 ~QCRPMERV~ #32
+  WRITE_ASCII 0x248 ~~ #40 // Remove inherited AI scripts
+  WRITE_BYTE 0x270 128 // Neutral allegiance, can initiate dialogue
+  WRITE_BYTE 0x32 0 // Dark/black hair colour gradient
+
+COMPILE ~CotSC/QCRPA/dialogue/QCRPMERV.d~ USING ~CotSC/translation/%LANGUAGE%/QCRPA/dialogue/QCRPMERV.tra~
+
+COPY_EXISTING ~BG2304.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 491
+      fj_loc_y = 287
+      fj_dest_x = 491
+      fj_dest_y = 287
+      fj_orientation = 2
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCRPMERV_Actor~
+      fj_cre_resref = ~QCRPMERV~
+  END
+
+// Flora in BD3000
+COPY_EXISTING ~AMMAJIRA.CRE~ ~override/QCRPFLOR.CRE~
+  SAY NAME1 @5052
+  SAY NAME2 @5052
+  WRITE_ASCII 0x2cc ~QCRPFLOR~ #8
+  WRITE_ASCII 0x280 ~QCRPFLOR~ #32
+  WRITE_ASCII 0x248 ~~ #40 // Remove inherited AI scripts
+  WRITE_BYTE 0x270 128 // Neutral allegiance, can initiate dialogue
+
+COMPILE ~CotSC/QCRPA/dialogue/QCRPFLOR.d~ USING ~CotSC/translation/%LANGUAGE%/QCRPA/dialogue/QCRPFLOR.tra~
+
+COPY_EXISTING ~BD3000.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2303
+      fj_loc_y = 1723
+      fj_dest_x = 2303
+      fj_dest_y = 1723
+      fj_orientation = 4
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCRPFLOR_Actor~
+      fj_cre_resref = ~QCRPFLOR~
+  END
+
+// Sebastien in AR0901
+COPY_EXISTING ~PRIHEL.CRE~ ~override/QCRPSEBA.CRE~
+  SAY NAME1 @5053
+  SAY NAME2 @5053
+  WRITE_ASCII 0x2cc ~QCRPSEBA~ #8
+  WRITE_ASCII 0x280 ~QCRPSEBA~ #32
+  WRITE_ASCII 0x248 ~~ #40 // Remove inherited AI scripts
+  WRITE_BYTE 0x270 128 // Neutral allegiance, can initiate dialogue
+
+COMPILE ~CotSC/QCRPA/dialogue/QCRPSEBA.d~ USING ~CotSC/translation/%LANGUAGE%/QCRPA/dialogue/QCRPSEBA.tra~
+
+COPY_EXISTING ~AR0901.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1140
+      fj_loc_y = 333
+      fj_dest_x = 1140
+      fj_dest_y = 333
+      fj_orientation = 0
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCRPSEBA_Actor~
+      fj_cre_resref = ~QCRPSEBA~
+  END
+
+// Kai in AR4500
+COPY_EXISTING ~BDLEMURE.CRE~ ~override/QCRPKAI.CRE~
+  SAY NAME1 @5054
+  SAY NAME2 @5054
+  WRITE_ASCII 0x2cc ~QCRPKAI~ #8
+  WRITE_ASCII 0x280 ~QCRPKAI~ #32
+  WRITE_ASCII 0x248 ~~ #40 // Remove inherited AI scripts
+  WRITE_BYTE 0x270 128 // Neutral allegiance, can initiate dialogue
+
+COMPILE ~CotSC/QCRPA/dialogue/QCRPKAI.d~ USING ~CotSC/translation/%LANGUAGE%/QCRPA/dialogue/QCRPKAI.tra~
+
+COPY_EXISTING ~AR4500.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2252
+      fj_loc_y = 1123
+      fj_dest_x = 2252
+      fj_dest_y = 1123
+      fj_orientation = 0
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCRPKAI_Actor~
+      fj_cre_resref = ~QCRPKAI~
+  END

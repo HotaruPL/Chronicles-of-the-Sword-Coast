@@ -1,0 +1,10 @@
+// Quests and Challenges: Lady Lydia.
+// Additive only: existing BG2600 script remains intact.
+
+IF
+  Global("QCLYDIA_SPAWNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCLYDIA_SPAWNED","GLOBAL",1)
+    CreateCreature("QCLYDIA",[1034.686],14)
+END

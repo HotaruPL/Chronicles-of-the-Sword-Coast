@@ -1,0 +1,26 @@
+BEGIN BNBOUNCE
+IF ~True()~ THEN BEGIN 0
+  SAY @1
+  IF ~~ THEN EXIT
+END
+
+BEGIN BNGUARD0
+IF ~True()~ THEN BEGIN 0
+  SAY @2
+  IF ~InParty("Safana") InMyArea("Safana") !StateCheck("Safana",CD_STATE_NOTVALID)~ THEN EXTERN SAFANJ QC37_SAF_GUARD
+  IF ~~ THEN EXIT
+END
+
+// The guard's response is reachable only through Safana's actual party dialogue.
+APPEND ~SAFANJ~
+IF ~~ THEN BEGIN QC37_SAF_GUARD
+  SAY @3
+  IF ~~ THEN EXTERN BNGUARD0 QC37_GUARD_SAF_REPLY
+END
+END
+APPEND ~BNGUARD0~
+IF ~~ THEN BEGIN QC37_GUARD_SAF_REPLY
+  SAY @4
+  IF ~~ THEN EXIT
+END
+END

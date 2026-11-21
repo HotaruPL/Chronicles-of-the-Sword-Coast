@@ -1,0 +1,8 @@
+// Remove only the QCHALI Shandalar clone after the Ice Island quest ends.
+// Shandalar's own creature scripts are otherwise untouched.
+IF
+    Global("QC_SHANDALAR_REMOVE","GLOBAL",1)
+THEN
+    RESPONSE #100
+        DestroySelf()
+END

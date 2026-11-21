@@ -1,0 +1,10 @@
+IF
+  Global("ORPHAN_TILDA","GLOBAL",1)
+  Global("ORPHAN_QUEST_DONE","GLOBAL",0)
+  Clicked([ANYONE])
+THEN
+  RESPONSE #100
+    SetGlobal("ORPHAN_FLOWER_FOUND","GLOBAL",1)
+    SetGlobal("ORPHAN_MYSTERY","GLOBAL",3)
+    ActionOverride(Player1,StartDialogNoName("ORPHFLWR",Player1))
+END

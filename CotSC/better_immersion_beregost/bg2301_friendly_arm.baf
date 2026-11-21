@@ -1,0 +1,20 @@
+IF
+  !Exists("BIFORC01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIFORC01",[810.423],0)
+END
+
+IF
+  !Exists("BIFELF01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIFELF01",[608.423],6)
+END
+
+IF
+  !Exists("BIFFCOOK")
+THEN
+  RESPONSE #100
+    CreateCreature("BIFFCOOK",[1319.618],6)
+END

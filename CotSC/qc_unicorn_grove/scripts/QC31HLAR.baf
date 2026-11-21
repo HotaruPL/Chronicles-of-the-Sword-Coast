@@ -1,0 +1,483 @@
+// v31: Imoen begins dialogue using her actual party slot.
+// Dialogue file temporarily overridden, original joined DLG untouched.
+// Fallback retries if a conversation cannot start, until dialogue ends (flag=2).
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen2",Player2)
+  InMyArea(Player2)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player2,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen2",Player2)
+  InMyArea(Player2)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player2,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen",Player2)
+  InMyArea(Player2)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player2,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen",Player2)
+  InMyArea(Player2)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player2,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen2",Player3)
+  InMyArea(Player3)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player3,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen2",Player3)
+  InMyArea(Player3)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player3,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen",Player3)
+  InMyArea(Player3)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player3,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen",Player3)
+  InMyArea(Player3)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player3,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen2",Player4)
+  InMyArea(Player4)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player4,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen2",Player4)
+  InMyArea(Player4)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player4,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen",Player4)
+  InMyArea(Player4)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player4,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen",Player4)
+  InMyArea(Player4)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player4,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen2",Player5)
+  InMyArea(Player5)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player5,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen2",Player5)
+  InMyArea(Player5)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player5,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen",Player5)
+  InMyArea(Player5)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player5,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen",Player5)
+  InMyArea(Player5)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player5,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen2",Player6)
+  InMyArea(Player6)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player6,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen2",Player6)
+  InMyArea(Player6)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player6,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",0)
+  Name("Imoen",Player6)
+  InMyArea(Player6)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMINTRO","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player6,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_INTRO_DONE","GLOBAL",1)
+  Global("QCH_IMINTRO","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMIT","GLOBAL")
+  Name("Imoen",Player6)
+  InMyArea(Player6)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMIT","GLOBAL",8)
+    ActionOverride(Player6,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen2",Player2)
+  InMyArea(Player2)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player2,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen2",Player2)
+  InMyArea(Player2)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player2,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen",Player2)
+  InMyArea(Player2)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player2,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen",Player2)
+  InMyArea(Player2)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player2,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen2",Player3)
+  InMyArea(Player3)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player3,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen2",Player3)
+  InMyArea(Player3)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player3,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen",Player3)
+  InMyArea(Player3)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player3,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen",Player3)
+  InMyArea(Player3)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player3,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen2",Player4)
+  InMyArea(Player4)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player4,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen2",Player4)
+  InMyArea(Player4)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player4,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen",Player4)
+  InMyArea(Player4)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player4,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen",Player4)
+  InMyArea(Player4)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player4,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen2",Player5)
+  InMyArea(Player5)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player5,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen2",Player5)
+  InMyArea(Player5)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player5,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen",Player5)
+  InMyArea(Player5)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player5,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen",Player5)
+  InMyArea(Player5)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player5,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen2",Player6)
+  InMyArea(Player6)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player6,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen2",Player6)
+  InMyArea(Player6)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player6,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",0)
+  Name("Imoen",Player6)
+  InMyArea(Player6)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_IMDREPP","GLOBAL",1)
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player6,StartDialogOverride("QCHIMTR",Player1))
+END
+IF
+  Global("QCH_DREPP_DEAD","GLOBAL",1)
+  Global("QCH_IMDREPP","GLOBAL",1)
+  RealGlobalTimerExpired("QC31IMDR","GLOBAL")
+  Name("Imoen",Player6)
+  InMyArea(Player6)
+  CombatCounter(0)
+THEN
+  RESPONSE #100
+    RealSetGlobalTimer("QC31IMDR","GLOBAL",8)
+    ActionOverride(Player6,StartDialogOverride("QCHIMTR",Player1))
+END

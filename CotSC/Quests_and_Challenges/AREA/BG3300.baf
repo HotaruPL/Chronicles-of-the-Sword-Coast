@@ -1,0 +1,10 @@
+// Quests and Challenges: Merlee.
+// Beregost town square. Facing 0 = south.
+
+IF
+  Global("QCMERLEE_SPAWNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCMERLEE_SPAWNED","GLOBAL",1)
+    CreateCreature("QCMERLEE",[2001.2093],0)
+END

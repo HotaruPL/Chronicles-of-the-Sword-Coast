@@ -1,0 +1,8 @@
+// BG0702 - Docks Worker
+
+IF
+  !Exists("BIBDCK15")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDCK15",[358.331],0)
+END

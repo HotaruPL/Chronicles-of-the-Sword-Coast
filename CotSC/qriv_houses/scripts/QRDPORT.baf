@@ -1,0 +1,19 @@
+// Party transfer to BG3202. Dar'kan's separate copy will be created there.
+IF
+ True()
+THEN
+ RESPONSE #100
+  CutSceneId(Player1)
+  FadeToColor([20.0],0)
+  // Destroy the original warehouse instance BEFORE anyone leaves the area.
+  // A distinct rescued copy is spawned at High Hedge by QRDHH.BCS.
+  ActionOverride("QRVDARK",DestroySelf())
+  ActionOverride(Player1,LeaveAreaLUA("BG3202","",[400.300],S))
+  ActionOverride(Player2,LeaveAreaLUA("BG3202","",[400.300],S))
+  ActionOverride(Player3,LeaveAreaLUA("BG3202","",[400.300],S))
+  ActionOverride(Player4,LeaveAreaLUA("BG3202","",[400.300],S))
+  ActionOverride(Player5,LeaveAreaLUA("BG3202","",[400.300],S))
+  ActionOverride(Player6,LeaveAreaLUA("BG3202","",[400.300],S))
+  FadeFromColor([20.0],0)
+  EndCutSceneMode()
+END

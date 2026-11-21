@@ -1,0 +1,8 @@
+IF
+  Global("QC_QUENT_SPAWNED","BG3357",0)
+  Global("QC_QUENT_DONE","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QC_QUENT_SPAWNED","BG3357",1)
+    CreateCreature("QCQUENT",[579.367],12)
+END

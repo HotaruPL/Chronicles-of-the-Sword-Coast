@@ -1,0 +1,9 @@
+// Reunited Erica in Imnesvale is created only after successful return.
+IF
+  Global("QCRW_STAGE","GLOBAL",6)
+  Global("QCRW_ERA_HOME","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCRW_ERA_HOME","GLOBAL",1)
+    CreateCreature("QCRWERA",[2360.3140],0)
+END

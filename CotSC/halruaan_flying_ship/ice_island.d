@@ -1,0 +1,159 @@
+// ============================================================
+// Ice Island / Halruaan quest continuation
+// ============================================================
+
+BEGIN QCBEYN
+IF ~True()~ THEN BEGIN 0
+  SAY @12
+  IF ~~ THEN REPLY @13 GOTO 1
+  IF ~~ THEN REPLY @14 DO ~ChangeEnemyAlly(Myself,ENEMY)~ EXIT
+END
+IF ~~ THEN BEGIN 1
+  SAY @15
+  IF ~~ THEN GOTO 2
+END
+IF ~~ THEN BEGIN 2
+  SAY @16
+  IF ~~ THEN GOTO 3
+END
+IF ~~ THEN BEGIN 3
+  SAY @17
+  IF ~~ THEN REPLY @18 GOTO 4
+  IF ~~ THEN REPLY @19 GOTO 7
+  IF ~~ THEN REPLY @20 DO ~ChangeEnemyAlly(Myself,ENEMY)~ EXIT
+END
+IF ~~ THEN BEGIN 4
+  SAY @21
+  IF ~~ THEN GOTO 5
+END
+IF ~~ THEN BEGIN 5
+  SAY @22
+  IF ~~ THEN GOTO 6
+END
+IF ~~ THEN BEGIN 6
+  SAY @23
+  IF ~~ THEN REPLY @24 GOTO 4
+  IF ~~ THEN REPLY @25 GOTO 7
+  IF ~~ THEN REPLY @26 DO ~ChangeEnemyAlly(Myself,ENEMY)~ EXIT
+END
+IF ~~ THEN BEGIN 7
+  SAY @27
+  IF ~~ THEN GOTO 8
+END
+IF ~~ THEN BEGIN 8
+  SAY @28
+  IF ~~ THEN REPLY @29 GOTO 9
+  IF ~~ THEN REPLY @30 GOTO 10
+  IF ~~ THEN REPLY @31 EXIT
+END
+IF ~~ THEN BEGIN 9
+  SAY @32
+  IF ~~ THEN GOTO 8
+END
+IF ~~ THEN BEGIN 10
+  SAY @33
+  IF ~~ THEN GOTO 8
+END
+
+BEGIN QCHLICE
+IF ~True()~ THEN BEGIN 0
+  SAY @34
+  IF ~~ THEN DO ~ChangeEnemyAlly(Myself,ENEMY)~ EXIT
+END
+
+BEGIN QCOZER
+IF ~True()~ THEN BEGIN 0
+  SAY @35
+  IF ~~ THEN DO ~Enemy()~ EXIT
+END
+
+BEGIN QCVESNAM
+IF ~True()~ THEN BEGIN 0
+  SAY @36
+  IF ~~ THEN DO ~Enemy()~ EXIT
+END
+
+BEGIN QCDELI
+IF ~True()~ THEN BEGIN 0
+  SAY @37
+  IF ~~ THEN REPLY @38 GOTO 1
+  IF ~~ THEN REPLY @39 GOTO 5
+  IF ~~ THEN REPLY @40 GOTO 9
+END
+IF ~~ THEN BEGIN 1
+  SAY @41
+  IF ~~ THEN REPLY @42 GOTO 2
+  IF ~~ THEN REPLY @43 GOTO 2
+END
+IF ~~ THEN BEGIN 2
+  SAY @44
+  IF ~~ THEN GOTO 3
+END
+IF ~~ THEN BEGIN 3
+  SAY @45
+  IF ~~ THEN GOTO 4
+END
+IF ~~ THEN BEGIN 4
+  SAY @46
+  IF ~~ THEN REPLY @47 GOTO 10
+END
+IF ~~ THEN BEGIN 10
+  SAY @48
+  IF ~~ THEN DO ~SetGlobal("QCFlyShipQuest","GLOBAL",9) AddJournalEntry(@9,QUEST) EscapeArea()~ EXIT
+END
+IF ~~ THEN BEGIN 5
+  SAY @49
+  IF ~~ THEN GOTO 6
+END
+IF ~~ THEN BEGIN 6
+  SAY @50
+  IF ~~ THEN GOTO 7
+END
+IF ~~ THEN BEGIN 7
+  SAY @51
+  IF ~~ THEN GOTO 4
+END
+IF ~~ THEN BEGIN 9
+  SAY @52
+  IF ~~ THEN GOTO 2
+END
+
+BEGIN QCDELIF
+IF ~True()~ THEN BEGIN 0
+  SAY @53
+  IF ~~ THEN REPLY @54 GOTO 1
+  IF ~~ THEN REPLY @55 EXIT
+END
+IF ~~ THEN BEGIN 1
+  SAY @56
+  IF ~~ THEN DO ~SetGlobal("QCFlyShipQuest","GLOBAL",10)
+AddExperienceParty(13000)
+SetGlobal("QC_SHANDALAR_REMOVE","GLOBAL",1)
+ActionOverride("QCSHAND",DestroySelf())
+ActionOverride(Player1,LeaveAreaLUA("BG1000","",[1807.705],0))
+ActionOverride(Player2,LeaveAreaLUA("BG1000","",[1807.705],0))
+ActionOverride(Player3,LeaveAreaLUA("BG1000","",[1807.705],0))
+ActionOverride(Player4,LeaveAreaLUA("BG1000","",[1807.705],0))
+ActionOverride(Player5,LeaveAreaLUA("BG1000","",[1807.705],0))
+ActionOverride(Player6,LeaveAreaLUA("BG1000","",[1807.705],0))
+EscapeArea()~ SOLVED_JOURNAL @11 EXIT
+END
+
+BEGIN QCSHICE
+IF ~True()~ THEN BEGIN 0
+  SAY @57
+  IF ~~ THEN REPLY @58 GOTO 1
+  IF ~~ THEN REPLY @59 GOTO 2
+END
+IF ~~ THEN BEGIN 1
+  SAY @60
+  IF ~~ THEN DO ~ChangeEnemyAlly(Myself,ENEMY) SetGlobal("QCICE_FINAL_DELO","GLOBAL",1)~ EXIT
+END
+IF ~~ THEN BEGIN 2
+  SAY @61
+  IF ~~ THEN GOTO 3
+END
+IF ~~ THEN BEGIN 3
+  SAY @62
+  IF ~~ THEN DO ~ChangeEnemyAlly(Myself,ENEMY) SetGlobal("QCICE_FINAL_DELO","GLOBAL",1)~ EXIT
+END

@@ -1,0 +1,102 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3300.BCS~ BEGIN
+  FAIL @2
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~LINDIN.CRE~ BEGIN
+  FAIL @3
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~TELKA.CRE~ BEGIN
+  FAIL @4
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SCRLNEI.ITM~ BEGIN
+  FAIL @5
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0011.BCS~ BEGIN
+  FAIL @6
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG1603.BCS~ BEGIN
+  FAIL @7
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG1803.BCS~ BEGIN
+  FAIL @8
+END
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~
+
+ADD_JOURNAL TITLE (@7006) @100 @101 @102 @103 @104 @105 USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+
+COPY_EXISTING ~SCRLNEI.ITM~ ~override/DHNOTE1.ITM~
+  SAY NAME1 @110
+  SAY NAME2 @110
+  SAY DESC @111
+  SAY IDENTIFIED_DESC @111
+COPY_EXISTING ~SCRLNEI.ITM~ ~override/DHNOTE2.ITM~
+  SAY NAME1 @112
+  SAY NAME2 @112
+  SAY DESC @113
+  SAY IDENTIFIED_DESC @113
+COPY_EXISTING ~SCRLNEI.ITM~ ~override/DHNOTE3.ITM~
+  SAY NAME1 @114
+  SAY NAME2 @114
+  SAY DESC @115
+  SAY IDENTIFIED_DESC @115
+
+COPY_EXISTING ~LINDIN.CRE~ ~override/DHDIMW9.CRE~
+  SAY NAME1 @5009
+  SAY NAME2 @5009
+  // Dark Horizons / Tristan architecture: INITDLG in the override slot,
+  // custom combat AI in the Default slot, and the dialogue assigned normally.
+  WRITE_ASCII 0x2cc ~DHDIMW9~ #8
+  WRITE_ASCII 0x248 ~INITDLG~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~DHDIMW9~ #8
+  WRITE_ASCII 0x280 ~DH_DIMWO9_DEAD~ #32
+  WRITE_BYTE 0x270 128
+  ADD_CRE_ITEM ~DHNOTE1~ #1 #0 #0 ~IDENTIFIED~ ~INV~
+
+COPY_EXISTING ~TELKA.CRE~ ~override/DHZEPH8.CRE~
+  SAY NAME1 @5010
+  SAY NAME2 @5010
+  // Match the Dark Horizons Isolde CRE architecture: SHOUT in Override,
+  // WTARSGT in General, and a shared combat script in Default.
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~SHOUT~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~WTARSGT~ #8
+  WRITE_ASCII 0x268 ~DHDIMW9~ #8
+  // Script name must match the object targeted by Dimwoork's dialogue.
+  WRITE_ASCII 0x280 ~DHZEPH8~ #32
+  // Remain neutral while Dimwoork speaks; his final dialogue action starts combat.
+  WRITE_BYTE 0x270 128
+
+// Do not statically install the later clue letters.
+// BG1603.BCS and BG1803.BCS create them in their existing containers only
+// after the previous clue has actually been collected. The DELETE_AREA_ITEM
+// calls also clean up copies from earlier builds of this component.
+COPY_EXISTING ~BG1603.ARE~ ~override/BG1603.ARE~
+  LPF DELETE_AREA_ITEM
+    STR_VAR item_to_delete = ~DHNOTE2~
+  END
+  BUT_ONLY
+
+COPY_EXISTING ~BG1803.ARE~ ~override/BG1803.ARE~
+  LPF DELETE_AREA_ITEM
+    STR_VAR item_to_delete = ~DHNOTE3~
+  END
+  BUT_ONLY
+
+// Compile Viconia first so its APPEND_EARLY VICONJ state exists before Dimwoork EXTERNs to it.
+COMPILE ~CotSC/drow_hunters/viconia.d~ USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~
+COMPILE ~CotSC/drow_hunters/dimwoork9.d~ USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~
+COMPILE ~CotSC/drow_hunters/dimwoork9.baf~ USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~
+COMPILE ~CotSC/drow_hunters/dhzepheira9.baf~ USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~
+
+EXTEND_TOP ~BG3300.BCS~ ~CotSC/drow_hunters/bg3300.baf~ USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~
+EXTEND_TOP ~BG0011.BCS~ ~CotSC/drow_hunters/bg0011.baf~ USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~
+EXTEND_TOP ~BG1603.BCS~ ~CotSC/drow_hunters/bg1603.baf~ USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~
+EXTEND_TOP ~BG1803.BCS~ ~CotSC/drow_hunters/bg1803.baf~ USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~
+
+COMPILE ~CotSC/drow_hunters/interjections.d~ USING ~CotSC/translation/%LANGUAGE%/drow_hunters/drow_hunters.tra~

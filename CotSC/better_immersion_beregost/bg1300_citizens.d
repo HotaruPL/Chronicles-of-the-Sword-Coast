@@ -1,0 +1,70 @@
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - BG1300 / BG1306
+// ---------------------------------------------------------------------------
+
+BEGIN BIBFFO01
+IF ~True()~ THEN BEGIN 0
+  SAY @1
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBHAL13
+IF ~True()~ THEN BEGIN 0
+  SAY @2
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBELF13
+IF ~True()~ THEN BEGIN 0
+  SAY @3
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBKOB13
+IF ~True()~ THEN BEGIN 0
+  SAY @4
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBHUM13
+IF ~True()~ THEN BEGIN 0
+  SAY @5
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBKOB14
+IF ~True()~ THEN BEGIN 0
+  SAY @6
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBHAL14
+IF ~True()~ THEN BEGIN 0
+  SAY @7
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBTIE13
+IF ~True()~ THEN BEGIN 0
+  SAY @8
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBDWR13
+IF ~True()~ THEN BEGIN 0
+  SAY @9
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBHOB13
+IF ~True()~ THEN BEGIN 0
+  SAY @10
+  IF ~~ THEN EXIT
+END
+
+BEGIN BIBCOOK1
+IF ~True()~ THEN BEGIN 0
+  SAY @11
+  IF ~~ THEN EXIT
+END
+

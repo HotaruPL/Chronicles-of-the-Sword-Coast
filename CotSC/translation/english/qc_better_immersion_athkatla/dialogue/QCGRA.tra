@@ -1,0 +1,91 @@
+// QC: Better Immersion for Athkatla - Graveyard District
+// Original English dialogue only. New translation file for QCGRA.d.
+
+@1 = ~One... two...~
+
+@2 = ~Wait! Step away from the edge. What are you doing?~
+
+@3 = ~Oh, I am not getting involved with this.~
+
+@4 = ~I don't want to live anymore. I am sick of being accused of stealing. My wife left me, I lost my job and now Amnian soldiers are after me. I can't take this any longer.~
+
+@5 = ~So I decided to take my next step and simply jump to my death. And you can't stop me! You can watch if it gives you pleasure but you can't stop me!~
+
+@6 = ~Stop this instant! There is so much to live for.~
+
+@7 = ~I am not interfering. This is his life.~
+
+@8 = ~Good! Leave. I am doing it!~
+
+@9 = ~Good. I am jumping! Now!~
+
+@10 = ~Like what? I lost everything! I just want to end it all!~
+
+@11 = ~Look at me! Step away from the edge. I can help you but I need you to trust me.~
+
+@12 = ~Look at me! Step away from the edge. I can help you but I need you to trust me.~
+
+@13 = ~Keldorn. Can you talk him down?~
+
+@14 = ~Hexxat. Could you use your charm to get him to calm down?~
+
+@15 = ~Haer'Dalis. I need your help with this.~
+
+@16 = ~Dorn. I know you don't care, but can you help with this?~
+
+@17 = ~My life is over... I don't know what to do. You can't stop me. Shield your eyes. You might not want to see it.~
+
+@18 = ~Help? I... was promised help by so many and yet it never came to pass. If you're willing to... fine, I will come down. You have my attention.~
+
+@19 = ~I know it feels like the weight of the world is crushing you right now, but death is final. Your life has value, and your name can be cleared. Step away from the ledge. Walk with me, and we will find a way to fix this together.~
+
+@20 = ~Think about it logically. If you jump, Amnian forces win, your wife never regrets leaving, and you die branded as a thief. Is that really how you want your story to end? Step down and live, if only to prove them all wrong.~
+
+@21 = ~Then jump. The world is overcrowded as it is, and your pathetic sniveling is getting tedious. Just do it already and clear the space.~
+
+@22 = ~You... you actually care? Everyone else turned their backs on me, but you're looking at me like I'm still a man. God bless you. I'll come down... I'll try to find a way forward. Thank you for not giving up on me.~
+
+@23 = ~You... make a grim sort of sense. If I die today, they all get exactly what they want. They'll just call me a cowardly thief. No... I won't let them have the last word. I'm coming down. I have to find a way to clear my name. Thank you for the harsh truth.~
+
+@24 = ~You... you monster! If no one in this cursed city has a shred of pity left... then so be it! Watch then! (The man takes a deep breath, closes his eyes, and hurls himself off the ledge. You approach the ledge and look down to see his body. He's gone.)~
+
+@25 = ~You think this is the right call for me?~
+
+@26 = ~You're... right. I can't throw my life away like this. I need to keep going. I thank you, good paladin. I shall seek their air immediately. I... thank you.~
+
+@27 = ~No! Stay back! Your eyes... they look dead! You want to push me, don't you?! Stay away! (In the panic, the man slips and falls to his death. You only hear his scream. There is nothing you could've done to catch him in time.)~
+
+@28 = ~Script? Are you serious?! I am about to jump, and you talk about theatrical play to me?!~
+
+@29 = ~I... I don't understand half of what you're saying, but you've thoroughly confused me. And... maybe you're right. Jumping feels wrong now. I'll come down and try to figure something else out. Thanks, I guess.~
+
+@30 = ~W-what?! You want me to jump? You're a monster!~
+
+@31 = ~No! Stay away from me! I... I don't want to die like that! I'm leaving, I'm leaving! Just don't touch me!~
+
+@32 = ~My brother would be disappointed had he learned that I didn't follow the military traditions. No matter what I did I could never satisfy him. But he is dead now, and I am my own man. Bless his soul.~
+
+@33 = ~We have to stop this fool before he actually do something stupid.~
+
+@34 = ~Stop this instant! There is so much to live for.~
+
+@35 = ~I am not interfering. This is his life.~
+
+@36 = ~Listen to me, young man. As a paladin I endured countless hardships and I was forced to make many commitments that could easily cost me my family. Did I feel desperation and fear? Did I experience doubt? Naturally. This is the order of things and I can only pray that you walk down a better path and make a name for yourself. Join the church of Torm. I chose to do so and have no regrets whatsoever.~
+
+@37 = ~Yes. Now, please. Step away from the edge and come to me. I promise you that you will be in good hands. Find the church of Torm in temple district and tell them Keldorn sent you. They'll take you in and give you purpose and training.~
+
+@38 = ~Listen to me. Look into my eyes, mortal. Feel the cold embrace of the night. Your pain is irrelevant. Your death is yours to claim, but not tonight. Step away from the edge. Come toward me.~
+
+@39 = ~Well, I suppose some things are beyond one's control. Maybe you could've coerced him differently.~
+
+@40 = ~You there, sparrow upon the ledge! You wish to leap into the great, dark abyss? Death is a beautiful mistress, true, but she is a patient one. Why rush to her embrace when the comedy of your life still has so many verses left to sing? Step back, let us change the script together!~
+
+@41 = ~Come down from your high perch, little sparrow. Go find a new stage, wear a different mask, and write a grander second act for yourself. You've earned that much.~
+
+@42 = ~Do you seriously believe I would do anything to save this worm? I crash weaklings like this with my boot. If you want to die, jump. Stop wasting our time with your pathetic sniveling.~
+
+@43 = ~I am a realist. If you lack the stomach to fight your troubles, then end it. But if you dare step down from there, I will give you a *real* reason to fear for your life. Jump, or get out of my sight before I drag you down myself and make it painful!~
+
+@44 = ~Eh, he left. I'll be honest, I wanted him to jump and die, not to save him but my coercion seemed to have gone amiss. Whatever.~
+

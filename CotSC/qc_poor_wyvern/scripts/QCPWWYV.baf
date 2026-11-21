@@ -1,0 +1,13 @@
+// Passive, injured wyvern: approaches the initial conversation only once.
+IF
+  Global("QCPW_FIRST_TALK","LOCALS",0)
+  Global("QCPW_RESULT","GLOBAL",0)
+  Global("QCPW_MET","GLOBAL",0)
+  See(Player1)
+  Range(Player1,14)
+THEN
+  RESPONSE #100
+    SetGlobal("QCPW_FIRST_TALK","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCPWWYV",Player1)
+END

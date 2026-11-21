@@ -1,0 +1,7 @@
+// Basic wyvern combat, not locked onto the protagonist.
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END

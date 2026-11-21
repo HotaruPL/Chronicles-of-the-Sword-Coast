@@ -1,0 +1,30 @@
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0602.ARE~ BEGIN
+  FAIL @20173
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BAG31.ITM~ BEGIN
+  FAIL @20171
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BAG31.STO~ BEGIN
+  FAIL @20172
+END
+
+// QC-prefixed independent copy of the game's standard Bag of Holding.
+// A unique STO keeps this copy's contents independent from other Bag of Holding instances/components.
+COPY_EXISTING ~BAG31.ITM~ ~override/QCBAGI.ITM~
+COPY_EXISTING ~BAG31.STO~ ~override/QCBAGI.STO~
+
+// AR0602: the container nearest the requested X=3083, Y=2863 is the stock
+// "Jailkeep Table" at X=3109, Y=2829. It is container index 37 in the supplied AR0602.ARE.
+// Add the QC-prefixed Bag of Holding to that existing container only.
+COPY_EXISTING ~AR0602.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_con_itm_idx = 37
+      fj_flags       = 1 // identified
+    STR_VAR
+      fj_name           = QCBAGI
+      fj_structure_type = itm
+  END
+BUT_ONLY_IF_IT_CHANGES

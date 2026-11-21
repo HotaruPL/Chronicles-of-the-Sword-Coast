@@ -1,0 +1,14 @@
+// v68 backup reveal for General Sovalidaas's greeting action.
+// No Elhan/Underdark-exit condition remains in this script.
+IF
+  Global("QCUGSovalMet","GLOBAL",1)
+  Global("QCUGSovalRevealedV68","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCUGSovalRevealedV68","GLOBAL",1)
+    SetGlobal("QCUGMapShown","GLOBAL",1)
+    RevealAreaOnMap("QCCGRV")
+    AddWorldmapAreaFlag("QCCGRV",VISIBLE)
+    AddWorldmapAreaFlag("QCCGRV",ENABLED)
+    AddWorldmapAreaFlag("QCCGRV",EXPLORABLE)
+END

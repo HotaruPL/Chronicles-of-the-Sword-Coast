@@ -1,0 +1,303 @@
+// v24.2: replace the empty locked altar CONTAINER with a native clickable
+// INFORMATION REGION and an event-bound key-check script. No inventory UI.
+// The original marker is at x134..158,y719..772; v24 placed it ~60px too high.
+
+// ---------- Integrated milestone: QC: Final Temple Memory - Keyed Recess and Core Activation Fix (QCBTEM)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBTEM.ARE~ BEGIN FAIL ~Install the QCBTEM interior first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTCORE.CRE~ BEGIN FAIL ~Install the v24 Core Dragon and Unicorn Grove Finale component first.~ END
+
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTDOOR.baf~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/scripts/QBTDOOR.tra~
+
+COPY_EXISTING ~QCBTEM.ARE~ ~override/QCBTEM.ARE~
+  // Remove only the previous erroneous container (with its associated vertices).
+  READ_LONG 0x70 qbt242_cont_off
+  READ_SHORT 0x74 qbt242_cont_num
+  SET qbt242_found = 0
+  FOR (qbt242_i = 0; qbt242_i < qbt242_cont_num; qbt242_i += 1) BEGIN
+    SET qbt242_c = qbt242_cont_off + qbt242_i * 0xc0
+    READ_ASCII qbt242_c qbt242_name (32) NULL
+    PATCH_IF (~%qbt242_name%~ STRING_EQUAL ~QBTLOCK~) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_delete_mode = qbt242_i
+        STR_VAR fj_structure_type = container
+      END
+      SET qbt242_found = 1
+      SET qbt242_i = qbt242_cont_num
+    END
+  END
+  PATCH_IF (qbt242_found == 0) BEGIN
+    PATCH_FAIL @20303
+  END
+
+  // An oval/angled polygon following the user's original small blue highlight.
+  // Use a DOOR cursor, but this is an info region: no WED door animation is needed.
+  // The script's Clicked() trigger is essential: Core is never spawned by the
+  // completion of the ritual dialogue alone.
+  LPF fj_are_structure
+    INT_VAR fj_type = 1
+      fj_box_left = 134 fj_box_top = 719
+      fj_box_right = 159 fj_box_bottom = 773
+      fj_cursor_idx = 30
+      fj_flags = 1152
+      fj_alt_x = 207 fj_alt_y = 751
+      fj_vertex_0 = 142 + (719 << 16)
+      fj_vertex_1 = 152 + (725 << 16)
+      fj_vertex_2 = 158 + (737 << 16)
+      fj_vertex_3 = 158 + (760 << 16)
+      fj_vertex_4 = 149 + (772 << 16)
+      fj_vertex_5 = 138 + (771 << 16)
+      fj_vertex_6 = 134 + (755 << 16)
+      fj_vertex_7 = 134 + (733 << 16)
+    STR_VAR fj_structure_type = region fj_name = QBTLOCK
+      fj_reg_script = QBTDOOR
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+PRINT @20304
+
+
+// v24.3: replace v24.2's nonfunctional door-cursor information region with a
+// native locked AREA/WED door. The WED replacement is exactly the verified
+// working indoor area plus a zero-graphic, zero-wall, 26-byte door record.
+
+// ---------- Integrated milestone: QC: Final Temple Memory - Native Bhaal Key Door Repair (QCBTEM)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBTEM.ARE~ BEGIN FAIL ~Install QCBTEM first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTCORE.CRE~ BEGIN FAIL ~Install the Core finale component first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTKEY.ITM~ BEGIN FAIL ~Install the Bhaal's Key resource first.~ END
+
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QBTDOOR.baf~
+
+// Keep every byte of the existing area WED except the newly added native
+// door record and the requisite header pointers / door count.
+COPY ~CotSC/qc_unicorn_grove/area/QCBTEM.WED~ ~override/QCBTEM.WED~
+
+COPY_EXISTING ~QCBTEM.ARE~ ~override/QCBTEM.ARE~
+  // Delete the old QBTLOCK information region, leaving all other
+  // information and travel regions untouched.
+  READ_LONG 0x5c qbt243_roff
+  READ_SHORT 0x5a qbt243_rnum
+  SET qbt243_found = 0
+  FOR (qbt243_i = 0; qbt243_i < qbt243_rnum; qbt243_i += 1) BEGIN
+    SET qbt243_entry = qbt243_roff + qbt243_i * 0xc4
+    READ_ASCII qbt243_entry qbt243_name (32) NULL
+    PATCH_IF (~%qbt243_name%~ STRING_EQUAL ~QBTLOCK~) BEGIN
+      LPF fj_are_structure
+        INT_VAR fj_delete_mode = qbt243_i
+        STR_VAR fj_structure_type = region
+      END
+      SET qbt243_found = 1
+      SET qbt243_i = qbt243_rnum
+    END
+  END
+  PATCH_IF (qbt243_found == 0) BEGIN
+    PATCH_FAIL @20305
+  END
+
+  // Native engine door. Both the open and closed clickable polygons follow
+  // the original small user-marked recess at X=134..159, Y=719..773.
+  // Lock difficulty 100 is the engine's unpickable lock sentinel.
+  // The key resref and special lock message are in the normal ARE door fields.
+  LPF fj_are_structure
+    INT_VAR
+      fj_flags = 514 // locked + custom locked information text on EE
+      fj_open_box_left = 134 fj_open_box_top = 719
+      fj_open_box_right = 159 fj_open_box_bottom = 773
+      fj_closed_box_left = 134 fj_closed_box_top = 719
+      fj_closed_box_right = 159 fj_closed_box_bottom = 773
+      fj_cursor_idx = 30
+      fj_locked_diff = 100
+      fj_open_loc_x = 207 fj_open_loc_y = 751
+      fj_closed_loc_x = 207 fj_closed_loc_y = 751
+      fj_lockpick_strref = RESOLVE_STR_REF(~This lock cannot be opened without a key or ward.~)
+      fj_door_open_vert_0 = 142 + (719 << 16)
+      fj_door_open_vert_1 = 152 + (725 << 16)
+      fj_door_open_vert_2 = 158 + (737 << 16)
+      fj_door_open_vert_3 = 158 + (760 << 16)
+      fj_door_open_vert_4 = 149 + (772 << 16)
+      fj_door_open_vert_5 = 138 + (771 << 16)
+      fj_door_open_vert_6 = 134 + (755 << 16)
+      fj_door_open_vert_7 = 134 + (733 << 16)
+      fj_door_closed_vert_0 = 142 + (719 << 16)
+      fj_door_closed_vert_1 = 152 + (725 << 16)
+      fj_door_closed_vert_2 = 158 + (737 << 16)
+      fj_door_closed_vert_3 = 158 + (760 << 16)
+      fj_door_closed_vert_4 = 149 + (772 << 16)
+      fj_door_closed_vert_5 = 138 + (771 << 16)
+      fj_door_closed_vert_6 = 134 + (755 << 16)
+      fj_door_closed_vert_7 = 134 + (733 << 16)
+    STR_VAR
+      fj_structure_type = door
+      fj_name = QBTLOCK
+      fj_door_wed_id = QBTLOCK
+      fj_door_script = QBTDOOR
+      fj_key_resref = QBTKEY
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+PRINT @20306
+
+
+// v24.4: repair invalid native WED door geometry which crashed on click.
+// This replaces ONLY the WED and leaves the already-installed ARE door,
+// compiled door script, Core, key, ritual, collision, art and other areas intact.
+
+// ---------- Integrated milestone: QC: Final Temple Memory - Native Door Crash Repair (QCBTEM)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCBTEM.ARE~ BEGIN FAIL ~Install QCBTEM first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTKEY.ITM~ BEGIN FAIL ~Install Bhaal's Key first.~ END
+
+COPY ~CotSC/qc_unicorn_grove/area/QCBTEM.WED~ ~override/QCBTEM.WED~
+
+// Public installer: development progress message omitted.
+
+// v24.5: do not reconstruct the already-tested native locked door.
+// Only append a reliable state-based dragon spawn trigger to the
+// temple area script; preserve all other encounters, music and resources.
+
+// ---------- Integrated milestone: QC: Final Temple Memory - Core Spawn on Door Opening Fix (QCBTEM)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTAREA.BCS~ BEGIN FAIL ~Install QCBTEM ritual first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTCORE.CRE~ BEGIN FAIL ~Install the Core finale first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QBTKEY.ITM~ BEGIN FAIL ~Install Bhaal's Key first.~ END
+
+EXTEND_TOP ~QBTAREA.BCS~ ~CotSC/qc_unicorn_grove/scripts/QBTOPENA.baf~
+
+PRINT @20307
+
+
+// Unicorn Grove remains hidden until General Sovalidaas greets the party
+// with his first line, "Welcome.". Source artwork, exits and quest untouched.
+
+// ---------- Integrated milestone: QC: Unicorn Grove - Sovalidaas greeting unlock~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCCGRV.ARE~ BEGIN FAIL ~Install Unicorn Grove itself first.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~WORLDMAP.WMP~ BEGIN FAIL ~Missing worldmap.wmp.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BALDUR.BCS~ BEGIN FAIL ~Missing BALDUR.BCS.~ END
+
+OUTER_SET qcwm_found = 0
+OUTER_SET qcwm_existing = 0
+OUTER_SET qcwm_x = 0
+OUTER_SET qcwm_y = 0
+COPY_EXISTING ~WORLDMAP.WMP~ ~override/WORLDMAP.WMP~
+  READ_LONG 0x08 qcwm_world_count
+  READ_LONG 0x0c qcwm_world_table
+  PATCH_IF (qcwm_world_count < 1) OR (qcwm_world_count > 20) BEGIN
+    PATCH_FAIL @20308
+  END
+  FOR (qcwm_m = 0; qcwm_m < qcwm_world_count; qcwm_m += 1) BEGIN
+    SET qcwm_world = qcwm_world_table + (qcwm_m * 0xb8)
+    READ_LONG (qcwm_world + 0x20) qcwm_area_count
+    READ_LONG (qcwm_world + 0x24) qcwm_area_table
+    PATCH_IF (qcwm_area_count > 0) AND (qcwm_area_count < 5000) BEGIN
+      FOR (qcwm_a = 0; qcwm_a < qcwm_area_count; qcwm_a += 1) BEGIN
+        SET qcwm_area_entry = qcwm_area_table + (qcwm_a * 0xf0)
+        READ_ASCII qcwm_area_entry qcwm_area_name (8) NULL
+        PATCH_IF (~%qcwm_area_name%~ STRING_EQUAL_CASE ~AR2600~) BEGIN
+          READ_LONG (qcwm_area_entry + 0x38) qcwm_x
+          READ_LONG (qcwm_area_entry + 0x3c) qcwm_y
+          SET qcwm_found = 1
+        END
+        PATCH_IF (~%qcwm_area_name%~ STRING_EQUAL_CASE ~QCCGRV~) BEGIN
+          SET qcwm_existing = 1
+        END
+      END
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF (qcwm_found == 0) BEGIN
+  FAIL @20309
+END
+ACTION_IF (qcwm_existing != 0) BEGIN
+  PRINT @20310
+END
+
+// Keep the icon near the Forest of Tethir. All four flags zero means invisible,
+// not visible-from-adjacent, unreachable and not visited: no greyed-out marker.
+OUTER_SET qcwm_grove_x = qcwm_x + 64
+OUTER_SET qcwm_grove_y = qcwm_y - 44
+
+// These are worldmap links, not area transitions. Destinations use existing
+// QCCGRV's tested QCSTART entrance; no geometry or ARE files are overwritten.
+ACTION_DEFINE_ASSOCIATIVE_ARRAY toNewArea BEGIN
+  "AR2500" => "QCSTART"
+  "AR2600" => "QCSTART"
+  "AR1800" => "QCSTART"
+END
+ACTION_DEFINE_ASSOCIATIVE_ARRAY fromNewArea BEGIN
+  "AR2500" => "Exitwmp"
+  "AR2600" => "Exitwmp"
+  "AR1800" => "Exitwmp"
+END
+ACTION_IF (qcwm_existing == 0) BEGIN
+OUTER_SPRINT qc_wm_qccgrv_name @19008
+OUTER_SPRINT qc_wm_qccgrv_desc @19008
+LAF sc#addWmpAre
+  INT_VAR
+    mapIcon = 16
+    xCoord = qcwm_grove_x
+    yCoord = qcwm_grove_y
+    tTime = 2
+    inclSv = 1
+    visible = 0
+    visibleAdjacent = 0
+    reachable = 0
+    visited = 0
+  STR_VAR
+    areName = ~QCCGRV~
+    strName = EVAL ~%qc_wm_qccgrv_name%~
+    strDesc = EVAL ~%qc_wm_qccgrv_desc%~
+    worldmap = ~worldmap~
+END
+
+END
+
+// v68: hook Sovalidaas's *actual* creature dialogue. His BG2 actor is
+// C6GENER.CRE, but mods can redirect its DLG resref. Resolve that first.
+// His opening line is just "Welcome." (including the full stop).
+OUTER_SPRINT qcug_soval_file ~C6GENER~
+OUTER_SPRINT qcug_soval_credlg ~~
+ACTION_IF FILE_EXISTS_IN_GAME ~C6GENER.CRE~ BEGIN
+  COPY_EXISTING ~C6GENER.CRE~ ~override/C6GENER.CRE~
+    READ_ASCII 0x04 qcug_soval_crever (4)
+    PATCH_IF (~%qcug_soval_crever%~ STRING_EQUAL_CASE ~V1.0~) BEGIN
+      READ_ASCII 0x2cc qcug_soval_credlg (8) NULL
+    END ELSE PATCH_IF (~%qcug_soval_crever%~ STRING_EQUAL_CASE ~V9.0~) BEGIN
+      READ_ASCII 0x334 qcug_soval_credlg (8) NULL
+    END
+  BUT_ONLY_IF_IT_CHANGES
+  ACTION_IF FILE_EXISTS_IN_GAME ~%qcug_soval_credlg%.DLG~ BEGIN
+    OUTER_SPRINT qcug_soval_file ~%qcug_soval_credlg%~
+  END
+END
+OUTER_SET qcug_soval_found = 0
+ACTION_IF FILE_EXISTS_IN_GAME ~%qcug_soval_file%.DLG~ BEGIN
+  OUTER_SET qcug_soval_state = STATE_WHICH_SAYS ~Welcome.~ FROM ~%qcug_soval_file%.DLG~
+  ACTION_IF (qcug_soval_state >= 0) BEGIN
+    COMPILE EVALUATE_BUFFER ~CotSC/qc_unicorn_grove/dialogue/QCUGSOVA.d~
+    OUTER_SET qcug_soval_found = 1
+    PRINT @20311
+  END
+END
+ACTION_IF (qcug_soval_found == 0) AND FILE_EXISTS_IN_GAME ~C6GENER.DLG~ BEGIN
+  OUTER_SPRINT qcug_soval_file ~C6GENER~
+  OUTER_SET qcug_soval_state = STATE_WHICH_SAYS ~Welcome.~ FROM ~C6GENER.DLG~
+  ACTION_IF (qcug_soval_state >= 0) BEGIN
+    COMPILE EVALUATE_BUFFER ~CotSC/qc_unicorn_grove/dialogue/QCUGSOVA.d~
+    OUTER_SET qcug_soval_found = 1
+    PRINT @20312
+  END
+END
+// Localized/mutated dialogue strings may not match verbatim. His first
+// greeting is normally the first state, which is safer than Elhan's fallback.
+ACTION_IF (qcug_soval_found == 0) AND FILE_EXISTS_IN_GAME ~%qcug_soval_file%.DLG~ BEGIN
+  OUTER_SET qcug_soval_state = 0
+  COMPILE EVALUATE_BUFFER ~CotSC/qc_unicorn_grove/dialogue/QCUGSOVA.d~
+  OUTER_SET qcug_soval_found = 1
+  WARN @20313
+END
+ACTION_IF (qcug_soval_found == 0) BEGIN
+  WARN @20314
+END
+EXTEND_TOP ~BALDUR.BCS~ ~CotSC/qc_unicorn_grove/scripts/QCUGMAP.baf~
+
+PRINT @20315
+
+

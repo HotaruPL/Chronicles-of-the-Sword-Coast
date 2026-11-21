@@ -1,0 +1,21 @@
+// Vesnam: start only QCVESNAM.DLG while neutral. Enemy() at the end of that
+// dialogue releases the original Davaeorn class/default scripts unchanged,
+// so DAVAEORN.BCS supplies his scripted spellcasting instead of a forced
+// quarterstaff Attack() action.
+IF
+    Global("QCVSTalk","LOCALS",0)
+    See([PC])
+    !Allegiance(Myself,ENEMY)
+THEN
+    RESPONSE #100
+        SetGlobal("QCVSTalk","LOCALS",1)
+        StartDialog("QCVESNAM",Player1)
+END
+
+IF
+    Global("QCVSTalk","LOCALS",1)
+    !Allegiance(Myself,ENEMY)
+THEN
+    RESPONSE #100
+        NoAction()
+END

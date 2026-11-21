@@ -1,0 +1,21 @@
+// v76 night schedule for CotSC ambient NPCs ONLY.
+// 06:00 <= hour < 18:00: normal civilian AI is allowed to run.
+// At night, the CRE removes itself; the original daytime-only area spawner
+// recreates it the following morning. No persistent quest actor uses this.
+IF
+  OR(2)
+    !TimeGT(5)
+    !TimeLT(18)
+THEN
+  RESPONSE #100
+    DestroySelf()
+END
+
+// Pass all daytime actions through to the creature's previous AI script,
+// which is preserved in the next available lower-priority script slot.
+IF
+  True()
+THEN
+  RESPONSE #100
+    Continue()
+END

@@ -1,0 +1,67 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - BG0300
+// ---------------------------------------------------------------------------
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0301")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0301",[632.1810],14)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0302")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0302",[905.1448],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0303")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0303",[144.929],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0304")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0304",[997.2496],2)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0305")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0305",[594.3072],0)
+END
+
+IF
+  !Exists("BIB0306")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0306",[2125.2483],4)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIB0307")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB0307",[1991.321],0)
+END

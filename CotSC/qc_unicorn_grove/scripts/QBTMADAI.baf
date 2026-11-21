@@ -1,0 +1,47 @@
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Allegiance(Myself,NEUTRAL)
+THEN
+ RESPONSE #100
+  Enemy()
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_M_BUFF","LOCALS",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_M_BUFF","LOCALS",1)
+  SpellNoDecRES("SPPR101",Myself) // Bless
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_M_BUFF","LOCALS",1)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_M_BUFF","LOCALS",2)
+  SpellNoDecRES("SPPR303",Player1) // Dispel Magic
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_M_BUFF","LOCALS",2)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_M_BUFF","LOCALS",3)
+  SpellNoDecRES("SPPR613",Myself) // Physical Mirror
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  HPPercentLT(Myself,55)
+  HasItem("POTN52",Myself)
+THEN
+ RESPONSE #100
+  UseItem("POTN52",Myself)
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_M_BUFF","LOCALS",3)
+  See(NearestEnemyOf(Myself))
+THEN
+ RESPONSE #100
+  Attack(NearestEnemyOf(Myself))
+END

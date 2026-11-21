@@ -1,0 +1,149 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+// Independent component; does NOT access or change QCRIVD or QCBREW.
+// This requires the BG2/EET game resources and Larswood BG2900 in the installed game.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR1100.ARE~ BEGIN
+  FAIL @20263
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG2900.ARE~ BEGIN
+  FAIL @20264
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR1100.BCS~ BEGIN
+  FAIL @20265
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG2900.BCS~ BEGIN
+  FAIL @20266
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~OHRDALTN.CRE~ BEGIN
+  FAIL @20267
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~PROSBA_C.CRE~ BEGIN
+  FAIL @20268
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~CECHALLE.CRE~ BEGIN
+  FAIL @20269
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DGDRU01.CRE~ BEGIN
+  FAIL @20270
+END
+
+// Valid game items; keep Don's weapon selection limited to sword, longbow, leather armour.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BOW01.ITM~ BEGIN FAIL ~Missing BOW01 longbow.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SW1H01.ITM~ BEGIN FAIL ~Missing SW1H01 longsword.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~LEAT01.ITM~ BEGIN FAIL ~Missing LEAT01 leather armor.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BLUN01.ITM~ BEGIN FAIL ~Missing BLUN01 club.~ END
+
+// Actors are independent, unique QC-prefixed copies of existing templates.
+COPY_EXISTING ~OHRDALTN.CRE~ ~override/QCRWDON.CRE~
+  SAY NAME1 @5025
+  SAY NAME2 @5025
+  REMOVE_CRE_ITEMS
+  REMOVE_CRE_EFFECTS
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QCRWDON~ #32
+  WRITE_ASCII 0x2cc ~QCRWDON~ #8
+  WRITE_ASCII 0x248 ~QCRWDON~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  ADD_CRE_ITEM ~BOW01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~
+  ADD_CRE_ITEM ~SW1H01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~PROSBA_C.CRE~ ~override/QCRWERA.CRE~
+  SAY NAME1 @5026
+  SAY NAME2 @5026
+  REMOVE_CRE_ITEMS
+  REMOVE_CRE_EFFECTS
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QCRWERA~ #32
+  WRITE_ASCII 0x2cc ~QCRWERA~ #8
+  WRITE_ASCII 0x248 ~QCRWERA~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x32 0 // black hair
+  WRITE_BYTE 0x2d 18 // brown outfit
+  WRITE_BYTE 0x2e 28 // dark red outfit
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~CECHALLE.CRE~ ~override/QCRWSEOR.CRE~
+  SAY NAME1 @5027
+  SAY NAME2 @5027
+  REMOVE_CRE_ITEMS
+  REMOVE_CRE_EFFECTS
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QCRWSEOR~ #32
+  WRITE_ASCII 0x2cc ~QCRWSEOR~ #8
+  WRITE_ASCII 0x248 ~QCRWSEOR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  // v1.2: equip a normal club for melee when a spell is not being cast.
+  ADD_CRE_ITEM ~BLUN01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DGDRU01.CRE~ ~override/QCRWDR1.CRE~
+  SAY NAME1 @5028
+  SAY NAME2 @5028
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QCRWDR1~ #32
+  WRITE_ASCII 0x248 ~QCRWDR1~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  // v1.2: equip a normal club for melee when a spell is not being cast.
+  ADD_CRE_ITEM ~BLUN01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~DGDRU01.CRE~ ~override/QCRWDR2.CRE~
+  SAY NAME1 @5028
+  SAY NAME2 @5028
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QCRWDR2~ #32
+  WRITE_ASCII 0x248 ~QCRWDR2~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  // v1.2: equip a normal club for melee when a spell is not being cast.
+  ADD_CRE_ITEM ~BLUN01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+// Spawn Don in Imnesvale as an ARE actor; do not overwrite AR1100.ARE.
+COPY_EXISTING ~AR1100.ARE~ ~override/AR1100.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2386
+      fj_loc_y = 3152
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCRWDON
+      fj_cre_resref = QCRWDON
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Extend the vanilla area scripts instead of replacing their existing actions.
+EXTEND_TOP ~AR1100.BCS~ ~CotSC/qc_ranger_wife/scripts/QCRW1100.baf~
+EXTEND_TOP ~BG2900.BCS~ ~CotSC/qc_ranger_wife/scripts/QCRW2900.baf~
+COMPILE ~CotSC/qc_ranger_wife/scripts/QCRWDON.baf~
+COMPILE ~CotSC/qc_ranger_wife/scripts/QCRWERA.baf~
+COMPILE ~CotSC/qc_ranger_wife/scripts/QCRWSEOR.baf~
+COMPILE ~CotSC/qc_ranger_wife/scripts/QCRWDR1.baf~
+COMPILE ~CotSC/qc_ranger_wife/scripts/QCRWDR2.baf~
+
+ADD_JOURNAL TITLE (@7013) @100 @101 @102 USING ~CotSC/translation/%LANGUAGE%/qc_ranger_wife/tra/erica.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+COMPILE ~CotSC/qc_ranger_wife/dialogue/erica.d~ USING ~CotSC/translation/%LANGUAGE%/qc_ranger_wife/tra/erica.tra~
+
+// Public installer: development progress message omitted.

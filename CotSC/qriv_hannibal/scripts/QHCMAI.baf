@@ -1,0 +1,17 @@
+// Override only to coordinate the encounter; allow preserved class/race AI.
+IF
+  Global("QH_ALARM","GLOBAL",0)
+  See([PC])
+THEN
+  RESPONSE #100
+    SetGlobal("QH_ALARM","GLOBAL",1)
+    GlobalShout(9188)
+END
+
+IF
+  Global("QH_HANN_FIGHT","GLOBAL",1)
+  !See([PC])
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END

@@ -1,0 +1,308 @@
+// Part I: original Baldur's Gate (EET area resources BGxxxx).
+// Former WeiDU component: Miscellaneous Merchants - Part I: Baldur's Gate (10 merchants)
+
+COPY ~CotSC/QCMM/stores/QCMS01.STO~ ~override/QCMS01.STO~
+  SAY 0x0c @4067
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM01.CRE~
+  SAY NAME1 @4068
+  SAY NAME2 @4068
+  WRITE_ASCII 0x2cc ~QCMM01~ #8
+  WRITE_ASCII 0x280 ~QCMM01~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY ~CotSC/QCMM/stores/QCMS02.STO~ ~override/QCMS02.STO~
+  SAY 0x0c @4067
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM02.CRE~
+  SAY NAME1 @4068
+  SAY NAME2 @4068
+  WRITE_ASCII 0x2cc ~QCMM02~ #8
+  WRITE_ASCII 0x280 ~QCMM02~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY ~CotSC/QCMM/stores/QCMS03.STO~ ~override/QCMS03.STO~
+  SAY 0x0c @4067
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM03.CRE~
+  SAY NAME1 @4068
+  SAY NAME2 @4068
+  WRITE_ASCII 0x2cc ~QCMM03~ #8
+  WRITE_ASCII 0x280 ~QCMM03~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY ~CotSC/QCMM/stores/QCMS04.STO~ ~override/QCMS04.STO~
+  SAY 0x0c @4067
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM04.CRE~
+  SAY NAME1 @4068
+  SAY NAME2 @4068
+  WRITE_ASCII 0x2cc ~QCMM04~ #8
+  WRITE_ASCII 0x280 ~QCMM04~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY ~CotSC/QCMM/stores/QCMS05.STO~ ~override/QCMS05.STO~
+  SAY 0x0c @4069
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM05.CRE~
+  SAY NAME1 @4070
+  SAY NAME2 @4070
+  WRITE_ASCII 0x2cc ~QCMM05~ #8
+  WRITE_ASCII 0x280 ~QCMM05~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_LONG 0x28 51456
+  WRITE_BYTE 0x2d 32
+  WRITE_BYTE 0x2e 34
+
+COPY ~CotSC/QCMM/stores/QCMS06.STO~ ~override/QCMS06.STO~
+  SAY 0x0c @4071
+COPY_EXISTING ~FTOWBE_B.CRE~ ~override/QCMM06.CRE~
+  SAY NAME1 @4072
+  SAY NAME2 @4072
+  WRITE_ASCII 0x2cc ~QCMM06~ #8
+  WRITE_ASCII 0x280 ~QCMM06~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_BYTE 0x237 2 // female sex, for voice/casting type
+  WRITE_BYTE 0x275 2 // female gender
+  WRITE_LONG 0x28 51472
+
+COPY ~CotSC/QCMM/stores/QCMS07.STO~ ~override/QCMS07.STO~
+  SAY 0x0c @4073
+COPY_EXISTING ~FTOWBE_B.CRE~ ~override/QCMM07.CRE~
+  SAY NAME1 @4074
+  SAY NAME2 @4074
+  WRITE_ASCII 0x2cc ~QCMM07~ #8
+  WRITE_ASCII 0x280 ~QCMM07~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_BYTE 0x237 2 // female sex, for voice/casting type
+  WRITE_BYTE 0x275 2 // female gender
+  WRITE_LONG 0x28 24851
+  WRITE_BYTE 0x2d 12
+  WRITE_BYTE 0x2e 12
+
+COPY ~CotSC/QCMM/stores/QCMS08.STO~ ~override/QCMS08.STO~
+  SAY 0x0c @4075
+COPY_EXISTING ~FTOWBE_B.CRE~ ~override/QCMM08.CRE~
+  SAY NAME1 @4076
+  SAY NAME2 @4076
+  WRITE_ASCII 0x2cc ~QCMM08~ #8
+  WRITE_ASCII 0x280 ~QCMM08~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_BYTE 0x237 2 // female sex, for voice/casting type
+  WRITE_BYTE 0x275 2 // female gender
+  WRITE_LONG 0x28 24851
+  WRITE_BYTE 0x2d 49
+  WRITE_BYTE 0x2e 54
+
+COPY_EXISTING ~FTOWBE_B.CRE~ ~override/QCMM09.CRE~
+  SAY NAME1 @4077
+  SAY NAME2 @4077
+  WRITE_ASCII 0x2cc ~QCMM09~ #8
+  WRITE_ASCII 0x280 ~QCMM09~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_BYTE 0x237 2 // female sex, for voice/casting type
+  WRITE_BYTE 0x275 2 // female gender
+  WRITE_LONG 0x28 51472
+
+COPY ~CotSC/QCMM/stores/QCMS10.STO~ ~override/QCMS10.STO~
+  SAY 0x0c @4078
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM10.CRE~
+  SAY NAME1 @4079
+  SAY NAME2 @4079
+  WRITE_ASCII 0x2cc ~QCMM10~ #8
+  WRITE_ASCII 0x280 ~QCMM10~ #32
+  WRITE_ASCII 0x248 ~~ #40 // clear reused creature AI scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_LONG 0x28 24834
+  WRITE_BYTE 0x2d 56
+  WRITE_BYTE 0x2e 54
+
+// Each custom creature uses its own QC dialog file.
+COMPILE ~CotSC/QCMM/dialogue/QCMM01.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM01.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM02.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM02.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM03.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM03.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM04.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM04.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM05.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM05.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM06.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM06.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM07.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM07.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM08.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM08.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM09.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM09.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM10.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM10.tra~
+
+// Static area actors, no area script or original NPC overwritten.
+COPY_EXISTING ~BG3300.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1895
+      fj_loc_y = 3429
+      fj_dest_x = 1895
+      fj_dest_y = 3429
+      fj_orientation = 4
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM01_Actor~
+      fj_cre_resref = ~QCMM01~
+  END
+
+COPY_EXISTING ~BG4900.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2765
+      fj_loc_y = 3663
+      fj_dest_x = 2765
+      fj_dest_y = 3663
+      fj_orientation = 0
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM02_Actor~
+      fj_cre_resref = ~QCMM02~
+  END
+
+COPY_EXISTING ~BG0800.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3115
+      fj_loc_y = 2521
+      fj_dest_x = 3115
+      fj_dest_y = 2521
+      fj_orientation = 4
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM03_Actor~
+      fj_cre_resref = ~QCMM03~
+  END
+
+COPY_EXISTING ~BG0700.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2708
+      fj_loc_y = 571
+      fj_dest_x = 2708
+      fj_dest_y = 571
+      fj_orientation = 2
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM04_Actor~
+      fj_cre_resref = ~QCMM04~
+  END
+
+COPY_EXISTING ~BG1000.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 918
+      fj_loc_y = 1571
+      fj_dest_x = 918
+      fj_dest_y = 1571
+      fj_orientation = 8
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM05_Actor~
+      fj_cre_resref = ~QCMM05~
+  END
+
+COPY_EXISTING ~BG4800.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 4328
+      fj_loc_y = 2551
+      fj_dest_x = 4328
+      fj_dest_y = 2551
+      fj_orientation = 0
+      fj_animation = 51472
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM06_Actor~
+      fj_cre_resref = ~QCMM06~
+  END
+
+COPY_EXISTING ~BG4000.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1313
+      fj_loc_y = 916
+      fj_dest_x = 1313
+      fj_dest_y = 916
+      fj_orientation = 0
+      fj_animation = 24851
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM07_Actor~
+      fj_cre_resref = ~QCMM07~
+  END
+
+COPY_EXISTING ~BG4000.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 491
+      fj_loc_y = 706
+      fj_dest_x = 491
+      fj_dest_y = 706
+      fj_orientation = 0
+      fj_animation = 24851
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM08_Actor~
+      fj_cre_resref = ~QCMM08~
+  END
+
+COPY_EXISTING ~BG0120.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 933
+      fj_loc_y = 534
+      fj_dest_x = 933
+      fj_dest_y = 534
+      fj_orientation = 6
+      fj_animation = 51472
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM09_Actor~
+      fj_cre_resref = ~QCMM09~
+  END
+
+COPY_EXISTING ~BG2301.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1206
+      fj_loc_y = 467
+      fj_dest_x = 1206
+      fj_dest_y = 467
+      fj_orientation = 0
+      fj_animation = 24834
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM10_Actor~
+      fj_cre_resref = ~QCMM10~
+  END
+
+
+

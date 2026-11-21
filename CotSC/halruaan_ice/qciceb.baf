@@ -1,0 +1,7 @@
+IF
+    Global("QCFlyShipQuest","GLOBAL",8)
+    See("QCHLICE")
+THEN
+    RESPONSE #100
+        Continue()
+END

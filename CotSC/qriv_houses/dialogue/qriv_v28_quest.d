@@ -1,0 +1,411 @@
+// River District v2.8: warehouse encounters and the Curse of a Wise Werewolf.
+// All unique labels declared in this compilation. The original THALAN DLG is
+// extended, never overwritten. The canonical resource is THALAN, not THALAN.dlg.
+
+BEGIN ~QRVLLES~
+IF ~Global("QRV_LESL_FIGHT","GLOBAL",0) Global("QRV_LESL_LETGO","GLOBAL",0)~ THEN BEGIN start
+  SAY @905
+  IF ~~ THEN REPLY @906 GOTO challenge
+  IF ~~ THEN REPLY @907 GOTO defy
+  IF ~~ THEN REPLY @908 GOTO leaving
+END
+IF ~Global("QRV_LESL_FIGHT","GLOBAL",0) Global("QRV_LESL_LETGO","GLOBAL",1)~ THEN BEGIN repeat
+  SAY @909
+  IF ~~ THEN REPLY @910 EXIT
+  IF ~~ THEN REPLY @911 GOTO defy
+END
+IF ~True()~ THEN BEGIN combat_repeat
+  SAY @912
+  IF ~~ THEN EXIT
+END
+IF ~~ THEN BEGIN challenge
+  SAY @913
+  IF ~~ THEN DO ~SetGlobal("QRV_LESL_FIGHT","GLOBAL",1) CreateCreature("QRVBLAC",[1424.552],8) CreateCreature("QRVEVIE",[1167.485],8) Enemy() Attack(Player1)~ EXIT
+END
+IF ~~ THEN BEGIN defy
+  SAY @914
+  IF ~~ THEN DO ~SetGlobal("QRV_LESL_FIGHT","GLOBAL",1) CreateCreature("QRVBLAC",[1424.552],8) CreateCreature("QRVEVIE",[1167.485],8) Enemy() Attack(Player1)~ EXIT
+END
+IF ~~ THEN BEGIN leaving
+  SAY @915
+  IF ~~ THEN DO ~SetGlobal("QRV_LESL_LETGO","GLOBAL",1)~ EXIT
+END
+
+BEGIN ~QRVWK2~
+IF ~True()~ THEN BEGIN start
+  SAY @916
+  IF ~~ THEN EXIT
+END
+
+BEGIN ~QRVDWRK~
+IF ~True()~ THEN BEGIN start
+  SAY @917
+  IF ~~ THEN REPLY @918 GOTO explain
+  IF ~~ THEN EXIT
+END
+IF ~~ THEN BEGIN explain
+  SAY @919
+  IF ~~ THEN DO ~EscapeArea()~ EXIT
+END
+
+// The wounded werewolf stays non-hostile unless the player deliberately attacks.
+BEGIN ~QRVDARK~
+IF ~Global("QRD_ST","GLOBAL",2)~ THEN BEGIN return_with_news
+  SAY @920
+  IF ~~ THEN REPLY @921 GOTO travel
+  IF ~~ THEN REPLY @922 EXIT
+END
+IF ~Global("QRD_REFUSED","GLOBAL",1) Global("QRD_ST","GLOBAL",0)~ THEN BEGIN second_chance
+  SAY @923
+  IF ~~ THEN REPLY @924 GOTO thalantyr
+  IF ~~ THEN REPLY @925 GOTO thalantyr
+  IF ~~ THEN REPLY @926 GOTO refuse
+END
+IF ~Global("QRD_ST","GLOBAL",1)~ THEN BEGIN waiting
+  SAY @927
+  IF ~~ THEN EXIT
+END
+IF ~Global("QRD_ST","GLOBAL",0)~ THEN BEGIN start
+  SAY @928
+  IF ~~ THEN REPLY @929 GOTO introduction
+  IF ~~ THEN REPLY @930 GOTO introduction
+  IF ~~ THEN REPLY @931 GOTO fight
+END
+IF ~True()~ THEN BEGIN later
+  SAY @932
+  IF ~~ THEN EXIT
+END
+IF ~~ THEN BEGIN fight
+  SAY @933
+  IF ~~ THEN DO ~Enemy()~ EXIT
+END
+IF ~~ THEN BEGIN introduction
+  SAY @934
+  IF ~~ THEN REPLY @935 GOTO sentient
+END
+IF ~~ THEN BEGIN sentient
+  SAY @936
+  IF ~~ THEN REPLY @937 GOTO merchandise
+  IF ~IsValidForPartyDialog("Cernd")~ THEN REPLY @938 EXTERN ~CERNDJ~ QRD_CERND_CHAIN
+END
+IF ~~ THEN BEGIN merchandise
+  SAY @939
+  IF ~~ THEN GOTO rune
+END
+IF ~~ THEN BEGIN rune
+  SAY @940
+  IF ~InParty("Viconia")~ THEN EXTERN ~VICONIJ~ QRDVIC01
+  IF ~!InParty("Viconia")~ THEN GOTO tossed
+END
+IF ~~ THEN BEGIN tossed
+  SAY @941
+  IF ~~ THEN REPLY @942 GOTO hybrid
+  IF ~~ THEN REPLY @943 GOTO source
+END
+IF ~~ THEN BEGIN source
+  SAY @944
+  IF ~~ THEN GOTO hybrid
+END
+IF ~~ THEN BEGIN hybrid
+  SAY @945
+  IF ~InParty("Nalia")~ THEN EXTERN ~NALIAJ~ QRDNAL01
+  IF ~!InParty("Nalia")~ THEN GOTO asking
+END
+IF ~~ THEN BEGIN asking
+  SAY @946
+  IF ~~ THEN REPLY @947 GOTO thalantyr
+  IF ~~ THEN REPLY @948 GOTO thalantyr
+  IF ~~ THEN REPLY @949 GOTO refuse
+END
+IF ~~ THEN BEGIN thalantyr
+  SAY @950
+  IF ~~ THEN DO ~SetGlobal("QRD_ST","GLOBAL",1) SetGlobal("QRD_REFUSED","GLOBAL",0)~ UNSOLVED_JOURNAL @900 EXIT
+END
+IF ~~ THEN BEGIN refuse
+  SAY @951
+  IF ~~ THEN DO ~SetGlobal("QRD_REFUSED","GLOBAL",1)~ EXIT
+END
+IF ~~ THEN BEGIN travel
+  SAY @952
+  IF ~~ THEN DO ~SetGlobal("QRD_ST","GLOBAL",3) StartCutSceneMode() StartCutScene("QRDPORT")~ EXIT
+END
+// Speaking during the High Hedge visit.
+IF ~~ THEN BEGIN hh_name
+  SAY @953
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_INSPECT
+END
+IF ~~ THEN BEGIN hh_scars
+  SAY @954
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_MARKED
+END
+IF ~~ THEN BEGIN hh_shocked
+  SAY @955
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_APPEAR
+END
+IF ~~ THEN BEGIN hh_why
+  SAY @956
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_RUNESTONE
+END
+IF ~~ THEN BEGIN hh_stone
+  SAY @957
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_OVERSIMPLIFY
+END
+IF ~~ THEN BEGIN hh_hope
+  SAY @958
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_MOONSTONE
+END
+IF ~~ THEN BEGIN hh_wait
+  SAY @959
+  IF ~~ THEN EXIT
+END
+IF ~~ THEN BEGIN hh_questions
+  SAY @960
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_REASSURE
+END
+IF ~~ THEN BEGIN hh_reassure
+  SAY @961
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_MOONSTONE
+END
+IF ~~ THEN BEGIN hh_ritual
+  SAY @962
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_HURT
+END
+IF ~~ THEN BEGIN hh_pain
+  SAY @963
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_PAIN
+END
+IF ~~ THEN BEGIN hh_wolf
+  SAY @964
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_WOLF
+END
+
+// Dar'kan's restored body has a new CRE and independent DLG resource.
+BEGIN ~QRVDHEL~
+IF ~~ THEN BEGIN hands
+  SAY @965
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_HANDS
+END
+IF ~~ THEN BEGIN gratitude
+  SAY @966
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_THANKS
+END
+IF ~~ THEN BEGIN belongings
+  SAY @967
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_REWARD_CHOICE
+END
+IF ~~ THEN BEGIN declinegold
+  SAY @968
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_FAREWELL
+END
+IF ~~ THEN BEGIN acceptgold
+  SAY @969
+  IF ~~ THEN DO ~GiveGoldForce(600)~ EXTERN ~THALAN~ QRDT_FAREWELL
+END
+IF ~~ THEN BEGIN vow
+  SAY @970
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_FAREWELL
+END
+IF ~~ THEN BEGIN going
+  SAY @971
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_FINAL
+END
+IF ~~ THEN BEGIN goodbye
+  SAY @972
+  IF ~~ THEN DO ~SetGlobal("QRD_ST","GLOBAL",8) AddXPObject(Player1,7000) AddXPObject(Player2,7000) AddXPObject(Player3,7000) AddXPObject(Player4,7000) AddXPObject(Player5,7000) AddXPObject(Player6,7000) EscapeArea()~ SOLVED_JOURNAL @904 EXIT
+END
+
+// The custom branch is attached to the existing return-to-Thalantyr greeting (state 1).
+// We do NOT replace THALAN.DLG or overwrite unrelated player response options.
+EXTEND_BOTTOM ~THALAN~ 1
+  IF ~Global("QRD_ST","GLOBAL",1)~ THEN REPLY @973 GOTO QRDT_RESEARCH
+END
+
+// For an escort encounter, the new global-specific greeting must take precedence
+// over the vanilla NumTimesTalkedTo and unconditional True() initial states.
+ADD_STATE_TRIGGER ~THALAN~ 0 ~!Global("QRD_ST","GLOBAL",3) !Global("QRD_ST","GLOBAL",4) !Global("QRD_ST","GLOBAL",6)~
+ADD_STATE_TRIGGER ~THALAN~ 1 ~!Global("QRD_ST","GLOBAL",3) !Global("QRD_ST","GLOBAL",4) !Global("QRD_ST","GLOBAL",6)~
+APPEND ~THALAN~
+IF ~~ THEN BEGIN QRDT_RESEARCH
+  SAY @974
+  IF ~~ THEN GOTO QRDT_RESEARCH2
+END
+IF ~~ THEN BEGIN QRDT_RESEARCH2
+  SAY @975
+  IF ~~ THEN REPLY @976 GOTO QRDT_REQUIRE
+END
+IF ~~ THEN BEGIN QRDT_REQUIRE
+  SAY @977
+  IF ~~ THEN GOTO QRDT_SEND
+END
+IF ~~ THEN BEGIN QRDT_SEND
+  SAY @978
+  IF ~~ THEN DO ~SetGlobal("QRD_ST","GLOBAL",2)~ UNSOLVED_JOURNAL @901 EXIT
+END
+IF ~Global("QRD_ST","GLOBAL",3)~ THEN BEGIN QRDT_ESCORT
+  SAY @979
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_name
+END
+IF ~~ THEN BEGIN QRDT_INSPECT
+  SAY @980
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_scars
+END
+IF ~~ THEN BEGIN QRDT_MARKED
+  SAY @981
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_shocked
+END
+IF ~~ THEN BEGIN QRDT_APPEAR
+  SAY @982
+  IF ~~ THEN GOTO QRDT_EXPLANATIONS
+END
+IF ~~ THEN BEGIN QRDT_EXPLANATIONS
+  SAY @983
+  IF ~~ THEN REPLY @984 GOTO QRDT_EXPLAIN1
+  IF ~~ THEN REPLY @985 GOTO QRDT_EXPLAIN2
+  IF ~~ THEN REPLY @986 GOTO QRDT_EXPLAIN3
+END
+IF ~~ THEN BEGIN QRDT_EXPLAIN1
+  SAY @987
+  IF ~~ THEN GOTO QRDT_SIGNATURE
+END
+IF ~~ THEN BEGIN QRDT_EXPLAIN2
+  SAY @988
+  IF ~~ THEN GOTO QRDT_SIGNATURE
+END
+IF ~~ THEN BEGIN QRDT_EXPLAIN3
+  SAY @989
+  IF ~~ THEN GOTO QRDT_SIGNATURE
+END
+IF ~~ THEN BEGIN QRDT_SIGNATURE
+  SAY @990
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_stone
+END
+IF ~~ THEN BEGIN QRDT_OVERSIMPLIFY
+  SAY @991
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_hope
+END
+IF ~~ THEN BEGIN QRDT_RUNESTONE
+  SAY @992
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_hope
+END
+IF ~~ THEN BEGIN QRDT_MOONSTONE
+  SAY @993
+  IF ~PartyHasItem("MISC27")~ THEN REPLY @994 DO ~SetGlobal("QRD_ST","GLOBAL",4)~ GOTO QRDT_HAVE
+  IF ~!PartyHasItem("MISC27")~ THEN REPLY @995 GOTO QRDT_NOSTONE
+  IF ~~ THEN REPLY @996 GOTO QRDT_UNCERTAIN
+END
+IF ~~ THEN BEGIN QRDT_HAVE
+  SAY @997
+  IF ~PartyHasItem("MISC27")~ THEN DO ~TakePartyItem("MISC27") DestroyItem("MISC27") SetGlobal("QRD_ST","GLOBAL",5)~ GOTO QRDT_RITUAL
+  IF ~!PartyHasItem("MISC27")~ THEN GOTO QRDT_NOSTONE
+END
+IF ~~ THEN BEGIN QRDT_NOSTONE
+  SAY @998
+  IF ~~ THEN DO ~SetGlobal("QRD_ST","GLOBAL",4)~ UNSOLVED_JOURNAL @902 EXIT
+END
+IF ~~ THEN BEGIN QRDT_UNCERTAIN
+  SAY @999
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_questions
+END
+IF ~~ THEN BEGIN QRDT_REASSURE
+  SAY @1000
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_reassure
+END
+IF ~Global("QRD_ST","GLOBAL",4)~ THEN BEGIN QRDT_AWAIT_STONE
+  SAY @1001
+  IF ~PartyHasItem("MISC27")~ THEN REPLY @1002 GOTO QRDT_HAVE
+  IF ~~ THEN REPLY @1003 EXIT
+END
+IF ~~ THEN BEGIN QRDT_RITUAL
+  SAY @1004
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_ritual
+END
+IF ~~ THEN BEGIN QRDT_HURT
+  SAY @1005
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_pain
+END
+IF ~~ THEN BEGIN QRDT_PAIN
+  SAY @1006
+  IF ~~ THEN EXTERN ~QRVDARK~ hh_wolf
+END
+IF ~~ THEN BEGIN QRDT_WOLF
+  SAY @1007
+  IF ~~ THEN DO ~SetGlobal("QRD_ST","GLOBAL",5) SetGlobal("QRD_RITUAL","GLOBAL",1)~ UNSOLVED_JOURNAL @903 EXIT
+END
+IF ~Global("QRD_ST","GLOBAL",6)~ THEN BEGIN QRDT_VICTORY
+  SAY @1008
+  IF ~~ THEN DO ~SetGlobal("QRD_ST","GLOBAL",7)~ EXTERN ~QRVDHEL~ hands
+END
+IF ~~ THEN BEGIN QRDT_HANDS
+  SAY @1009
+  IF ~~ THEN EXTERN ~QRVDHEL~ gratitude
+END
+IF ~~ THEN BEGIN QRDT_THANKS
+  SAY @1010
+  IF ~~ THEN EXTERN ~THALAN~ QRDT_AFTER_RITUAL
+END
+IF ~~ THEN BEGIN QRDT_REWARD_CHOICE
+  SAY @1011
+  IF ~~ THEN REPLY @1012 EXTERN ~QRVDHEL~ declinegold
+  IF ~~ THEN REPLY @1013 EXTERN ~QRVDHEL~ acceptgold
+  IF ~~ THEN REPLY @1014 EXTERN ~QRVDHEL~ vow
+END
+IF ~~ THEN BEGIN QRDT_FAREWELL
+  SAY @1015
+  IF ~~ THEN EXTERN ~QRVDHEL~ going
+END
+IF ~~ THEN BEGIN QRDT_FINAL
+  SAY @1016
+  IF ~~ THEN EXTERN ~QRVDHEL~ goodbye
+END
+END
+
+// Bonus interjections kept self-contained and optional when an EE companion resource
+// is absent. Quoted external labels never depend on another installer.
+APPEND IF_FILE_EXISTS ~VICONIJ~
+IF ~~ THEN BEGIN QRDVIC01
+  SAY @1017
+  IF ~~ THEN EXTERN ~QRVDARK~ tossed
+END
+END
+APPEND IF_FILE_EXISTS ~NALIAJ~
+IF ~~ THEN BEGIN QRDNAL01
+  SAY @1018
+  IF ~~ THEN EXTERN ~QRVDARK~ asking
+END
+END
+
+CHAIN ~CERNDJ~ QRD_CERND_CHAIN
+  @1019
+  == ~QRVDARK~
+    @1020
+  == ~CERNDJ~
+    @1021
+  == ~QRVDARK~
+    @1022
+  == ~CERNDJ~
+    @1023
+  == ~QRVDARK~
+    @1024
+  == ~CERNDJ~
+    @1025
+  == ~QRVDARK~
+    @1026
+  == ~VICONIJ~ IF ~InParty("Viconia")~ THEN
+    @1027
+  == ~CERNDJ~
+    @1028
+END ~QRVDARK~ hybrid
+
+// Final party reactions after the enchantment is severed. They share one
+// coherent conversation rather than a first-match-only transition.
+CHAIN ~THALAN~ QRDT_AFTER_RITUAL
+  @1029
+  == ~CERNDJ~ IF ~IsValidForPartyDialog("Cernd")~ THEN
+    @1030
+  == ~VICONIJ~ IF ~IsValidForPartyDialog("Viconia")~ THEN
+    @1031
+  == ~DORNJ~ IF ~IsValidForPartyDialog("Dorn")~ THEN
+    @1032
+  == ~QRVDHEL~
+    @1033
+END ~THALAN~ QRDT_REWARD_CHOICE

@@ -1,0 +1,26 @@
+IF
+  Global("QCVarunQuest","GLOBAL",5)
+  Global("QCVarunNashTalk","GLOBAL",0)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QCVarunQuest","GLOBAL",5)
+  Global("QCVarunNashTalk","GLOBAL",0)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCVarunNashTalk","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCVVARUN",Player1)
+END
+
+IF
+  GlobalGT("QCVarunQuest","GLOBAL",5)
+THEN
+  RESPONSE #100
+    DestroySelf()
+END

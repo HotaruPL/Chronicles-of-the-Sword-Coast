@@ -1,0 +1,22 @@
+IF
+  Global("HDT_BG0514","BG0514",0)
+THEN
+  RESPONSE #100
+    SetGlobal("HDT_BG0514","BG0514",1)
+    CreateCreature("BEHGAU01",[1307.1860],0)
+    CreateCreature("MEPOOZ01",[201.1315],0)
+    CreateCreature("MEPOOZ01",[3051.2921],0)
+    CreateCreature("MEPOOZ01",[3946.2878],0)
+    CreateCreature("HDTVGHUL",[3581.2061],0)
+    CreateCreature("UMBHUL01",[2868.962],0)
+    CreateCreature("UMBHUL01",[2850.907],0)
+    CreateCreature("UMBHUL01",[2739.911],0)
+    CreateCreature("OHHSPID1",[1516.1232],0)
+    CreateCreature("ETTER01",[1759.1400],0)
+    CreateCreature("BDSPIDGA",[1676.972],0)
+    CreateCreature("SPIDPH01",[1506.947],0)
+    CreateCreature("SPIDWR01",[972.1161],0)
+    CreateCreature("MEPMAG01",[2382.1696],0)
+    ActionOverride("Crate04",CreateItem("SCRLA4",1,0,0))
+    ActionOverride("Crate01",CreateItem("POTN55",1,0,0))
+END

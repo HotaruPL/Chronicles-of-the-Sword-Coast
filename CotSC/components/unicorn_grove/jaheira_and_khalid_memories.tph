@@ -1,0 +1,492 @@
+// ---------- Integrated milestone: QC: Distorted Memories of Jaheira and Khalid (QCJHR1)~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCHELL.ARE~ BEGIN FAIL ~Install Nightmare Candlekeep before this component.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG2301.WED~ BEGIN FAIL ~Native BG2301 graphics are required (the uploaded BG2301.ARE uses BG2301.WED).~ END
+// ARE-to-search/light/height map names follow the new area resref, not its original WED.
+// Duplicate native BMPs under QCJHR1 so rendering/pathfinding work with the copied area.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG2301SR.BMP~ BEGIN FAIL ~Original BG2301 search map missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG2301LM.BMP~ BEGIN FAIL ~Original BG2301 light map missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG2301HT.BMP~ BEGIN FAIL ~Original BG2301 height map missing.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~UDOGRE.CRE~ BEGIN FAIL ~UDOGRE.CRE required for Ogre Warrior.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~ASHIRU.CRE~ BEGIN FAIL ~ASHIRU.CRE required for Ashirukuru; no Shadow substitution will be used.~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDBONBAT.CRE~ BEGIN FAIL ~BDBONBAT.CRE required for Bonebats; no Shadow substitution will be used.~ END
+COPY_EXISTING ~BG2301SR.BMP~ ~override/QCJHR1SR.BMP~
+COPY_EXISTING ~BG2301LM.BMP~ ~override/QCJHR1LM.BMP~
+COPY_EXISTING ~BG2301HT.BMP~ ~override/QCJHR1HT.BMP~
+
+// Separate registrations point to the SAME three music files used by QCHELL.
+// Component-local ids are required because v14 can be installed separately from component 3.
+ADD_MUSIC ~QCJ_AMBIENT~ ~CotSC/qc_unicorn_grove/music/QCHAMB.MUS~
+ADD_MUSIC ~QCJ_BATTLE~ ~CotSC/qc_unicorn_grove/music/QCHBTL.MUS~
+ADD_MUSIC ~QCJ_VICTORY~ ~CotSC/qc_unicorn_grove/music/QCHEND.MUS~
+
+// The custom +2 sword keeps the base item's stats, adding only acid damage on hit.
+COPY_EXISTING ~SW1H41.ITM~ ~override/QCJKWR.ITM~
+  SAY NAME1 @3077
+  SAY NAME2 @3078
+  SAY IDENTIFIED_DESC @3079
+  LPF ADD_ITEM_EFFECT INT_VAR type = 1 header = 1 opcode = 12 target = 2 timing = 1 parameter1 = 1 parameter2 = 65536 probability1 = 100 END
+BUT_ONLY_IF_IT_CHANGES
+
+// Use the exact real creature templates from this installation. NEVER rename Shadows.
+COPY_EXISTING ~ASHIRU.CRE~ ~override/QCJASHI.CRE~
+  SAY NAME1 @3080
+  SAY NAME2 @3080
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCJASHI~ #32
+  WRITE_ASCII 0x248 ~QCJHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BDBONBAT.CRE~ ~override/QCJBONE.CRE~
+  SAY NAME1 @3081
+  SAY NAME2 @3081
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCJBONE~ #32
+  WRITE_ASCII 0x248 ~QCJHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Devil Shade: prefer an installed exact creature. A substitute is clearly identified if unavailable.
+ACTION_IF FILE_EXISTS_IN_GAME ~DEVLSHD.CRE~ BEGIN
+  OUTER_SPRINT qc_src_QCJDEVS ~DEVLSHD.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~DEVILSHD.CRE~ BEGIN
+  OUTER_SPRINT qc_src_QCJDEVS ~DEVILSHD.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~DEVSHAD.CRE~ BEGIN
+  OUTER_SPRINT qc_src_QCJDEVS ~DEVSHAD.CRE~
+END ELSE BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~SHADOW01.CRE~ BEGIN
+    OUTER_SPRINT qc_src_QCJDEVS ~SHADOW01.CRE~
+  END ELSE BEGIN
+    OUTER_SPRINT qc_src_QCJDEVS ~QCHSHAD.CRE~
+  END
+END
+COPY_EXISTING ~%qc_src_QCJDEVS%~ ~override/QCJDEVS.CRE~
+  SAY NAME1 @3082
+  SAY NAME2 @3082
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCJDEVS~ #32
+  WRITE_ASCII 0x248 ~QCJHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QCHSHAD.CRE~ ~override/QCJSHAD.CRE~
+  SAY NAME1 @3083
+  SAY NAME2 @3083
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCJSHAD~ #32
+  WRITE_ASCII 0x248 ~QCJHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QCHBHOR.CRE~ ~override/QCJBHOR.CRE~
+  SAY NAME1 @3084
+  SAY NAME2 @3084
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCJBHOR~ #32
+  WRITE_ASCII 0x248 ~QCJHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~UDOGRE.CRE~ ~override/QCJOGRE.CRE~
+  SAY NAME1 @3085
+  SAY NAME2 @3085
+  // UDOGRE is a scripted source creature: strip invulnerability and minimum-HP protection.
+  READ_LONG 0x96 qcj_ogre_attributes
+  WRITE_LONG 0x96 (qcj_ogre_attributes BAND 0xfffffdff) // remove Invulnerable, bit 9
+  READ_LONG 0x10 qcj_ogre_flags
+  WRITE_LONG 0x10 (qcj_ogre_flags BAND 0xfffdffff) // remove legacy invulnerability flag
+  WRITE_SHORT 0x24 95
+  WRITE_SHORT 0x26 95
+  LPF DELETE_CRE_EFFECT INT_VAR opcode_to_delete = 208 END // Minimum HP limit
+
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCJOGRE~ #32
+  WRITE_ASCII 0x248 ~QCJHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+ACTION_IF FILE_EXISTS_IN_GAME ~JAHEIR.CRE~ BEGIN
+  OUTER_SPRINT qc_src_QCJJAHR ~JAHEIR.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~JAHEIR2.CRE~ BEGIN
+  OUTER_SPRINT qc_src_QCJJAHR ~JAHEIR2.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~JAHEIR15.CRE~ BEGIN
+  OUTER_SPRINT qc_src_QCJJAHR ~JAHEIR15.CRE~
+END ELSE BEGIN
+  FAIL @20291
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~KHALID.CRE~ BEGIN
+  OUTER_SPRINT qc_src_QCJKHAL ~KHALID.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~KHALID2.CRE~ BEGIN
+  OUTER_SPRINT qc_src_QCJKHAL ~KHALID2.CRE~
+END ELSE BEGIN
+  FAIL @20292
+END
+COPY_EXISTING ~%qc_src_QCJJAHR%~ ~override/QCJJAHR.CRE~
+  SAY NAME1 @3086
+  SAY NAME2 @3086
+  WRITE_LONG 0x14 11000
+  WRITE_SHORT 0x24 130
+  WRITE_SHORT 0x26 130
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x27b 51
+  WRITE_BYTE 0x32 105 // white hair
+  WRITE_BYTE 0x2d 110 // pale-major clothing
+  WRITE_BYTE 0x2e 110
+  WRITE_LONG 0x20 0x20000000 // blur visual state
+  WRITE_ASCII 0x280 ~QCJJAHR~ #32
+  WRITE_ASCII 0x2cc ~QCJJAHE~ #8
+  WRITE_ASCII 0x248 ~QCJJAIA~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~CHAN18~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~ EQUIP
+  ADD_CRE_ITEM ~BLUN04~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~
+  ADD_CRE_ITEM ~HELM01~ #0 #0 #0 ~IDENTIFIED~ ~HELMET~ EQUIP
+  ADD_CRE_ITEM ~SLNG04~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON2~ EQUIP
+  ADD_CRE_ITEM ~BULL03~ #30 #0 #0 ~IDENTIFIED~ ~QUIVER1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~%qc_src_QCJKHAL%~ ~override/QCJKHAL.CRE~
+  SAY NAME1 @3087
+  SAY NAME2 @3087
+  WRITE_LONG 0x14 11000
+  WRITE_SHORT 0x24 140
+  WRITE_SHORT 0x26 140
+  WRITE_BYTE 0x52 5 // THAC0 5; lower is better, makes him hit reliably
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x27b 51
+  WRITE_BYTE 0x2d 0
+  WRITE_BYTE 0x2e 0
+  WRITE_BYTE 0x238 25 // Strength
+  WRITE_LONG 0x20 0x20008000 // blur and permanent haste
+  WRITE_ASCII 0x280 ~QCJKHAL~ #32
+  WRITE_ASCII 0x2cc ~QCJKHAL~ #8
+  WRITE_ASCII 0x248 ~QCJKHAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~PLAT05~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~ EQUIP
+  ADD_CRE_ITEM ~SHLD26~ #0 #0 #0 ~IDENTIFIED~ ~SHIELD~ EQUIP
+  ADD_CRE_ITEM ~QCJKWR~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCJAR.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCJHOST.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCJKHAI.baf~
+COMPILE ~CotSC/qc_unicorn_grove/scripts/QCJJAIA.baf~
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/QCJKHAL.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QCJKHAL.tra~
+COMPILE ~CotSC/qc_unicorn_grove/dialogue/QCJVICO.d~ USING ~CotSC/translation/%LANGUAGE%/qc_unicorn_grove/dialogue/QCJVICO.tra~
+
+COPY ~CotSC/qc_unicorn_grove/area/QCJHR1.ARE~ ~override/QCJHR1.ARE~
+  READ_LONG 0xbc qcj_song
+  PATCH_IF (qcj_song > 0) AND (qcj_song + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG (qcj_song + 0) %QCJ_AMBIENT%
+    WRITE_LONG (qcj_song + 4) %QCJ_AMBIENT%
+    WRITE_LONG (qcj_song + 8) %QCJ_VICTORY%
+    WRITE_LONG (qcj_song + 12) %QCJ_BATTLE%
+  END ELSE BEGIN
+    PATCH_FAIL @20293
+  END
+  // BG2301 retained two original searchable containers: their old contents were replaced in source.
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 1 charges1 = 15 STR_VAR item_to_add = ~AROW05~ END
+  // Exact BG2301 staircase at (581,833), retained as a non-travelling marker.
+  // Next memory area is not built yet. Later: change type to 2 and provide destination.
+  LPF fj_are_structure
+    INT_VAR fj_type = 1
+      fj_box_left = 531 fj_box_top = 812
+      fj_box_right = 656 fj_box_bottom = 858
+      fj_cursor_idx = 28 // original BG2301 Stairs2302 cursor
+      fj_loc_x = 581 fj_loc_y = 833
+      fj_vertex_0 = 550 + (841 << 16)
+      fj_vertex_1 = 624 + (857 << 16)
+      fj_vertex_2 = 656 + (858 << 16)
+      fj_vertex_3 = 613 + (816 << 16)
+      fj_vertex_4 = 576 + (813 << 16)
+      fj_vertex_5 = 531 + (812 << 16)
+      fj_info_point_strref = RESOLVE_STR_REF(~The next memory lies beyond these stairs, but its path has not yet taken shape.~)
+    STR_VAR fj_structure_type = region fj_name = QCJNEXT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1090 fj_loc_y = 845 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCJENT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 805 fj_loc_y = 779 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX01 fj_cre_resref = QCJKHAL
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 828 fj_loc_y = 760 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX02 fj_cre_resref = QCJJAHR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 679 fj_loc_y = 683 fj_orientation = 13 fj_flags = 0
+    STR_VAR fj_structure_type = actor fj_name = QCJX03 fj_cre_resref = QCJOGRE
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1115 fj_loc_y = 645 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX04 fj_cre_resref = QCJASHI
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 670 fj_loc_y = 889 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX05 fj_cre_resref = QCJASHI
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 819 fj_loc_y = 254 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX06 fj_cre_resref = QCJDEVS
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 328 fj_loc_y = 631 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX07 fj_cre_resref = QCJBHOR
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 693 fj_loc_y = 805 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX08 fj_cre_resref = QCJSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 969 fj_loc_y = 792 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX09 fj_cre_resref = QCJSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1172 fj_loc_y = 718 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX10 fj_cre_resref = QCJSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1236 fj_loc_y = 787 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX11 fj_cre_resref = QCJSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 819 fj_loc_y = 608 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX12 fj_cre_resref = QCJSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 764 fj_loc_y = 547 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX13 fj_cre_resref = QCJSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1004 fj_loc_y = 540 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX14 fj_cre_resref = QCJSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 647 fj_loc_y = 625 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX15 fj_cre_resref = QCJSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 560 fj_loc_y = 649 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX16 fj_cre_resref = QCJSHAD
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 806 fj_loc_y = 555 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX17 fj_cre_resref = QCJBONE
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 756 fj_loc_y = 463 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX18 fj_cre_resref = QCJBONE
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 634 fj_loc_y = 456 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX19 fj_cre_resref = QCJBONE
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 567 fj_loc_y = 565 fj_orientation = 8
+    STR_VAR fj_structure_type = actor fj_name = QCJX20 fj_cre_resref = QCJBONE
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Replace the existing information-marker QCHPEND1 with a *real* entrance.
+// Keeps the existing region polygon and changes only its type and destination.
+COPY_EXISTING ~QCHELL.ARE~ ~override/QCHELL.ARE~
+  READ_LONG 0x5c qcj_region_offset
+  READ_SHORT 0x5a qcj_region_count
+  SET qcj_found = 0
+  FOR (qcj_i = 0; qcj_i < qcj_region_count; qcj_i += 1) BEGIN
+    READ_ASCII (qcj_region_offset + qcj_i * 0xc4) qcj_name (32) NULL
+    PATCH_IF (~%qcj_name%~ STRING_EQUAL ~QCHPEND1~) BEGIN
+      SET qcj_r = qcj_region_offset + qcj_i * 0xc4
+      WRITE_SHORT (qcj_r + 0x20) 2
+      WRITE_LONG (qcj_r + 0x60) 4 // full party required to travel
+      WRITE_ASCII (qcj_r + 0x38) ~QCJHR1~ #8
+      WRITE_ASCII (qcj_r + 0x40) ~QCJENT~ #8
+      SET qcj_found = 1
+    END
+  END
+  PATCH_IF (qcj_found = 0) BEGIN
+    PATCH_FAIL @20294
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 1550 fj_loc_y = 1105 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCJRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+
+// v15: independent post-v14.2 enhancement. Keeps the existing QCJKHAL.d / Jaheira
+// interjection resources unchanged. Requires the QCJHR1 component already installed.
+
+// ---------- Integrated milestone: QC: Bhaal's Temple in the Forest (QCBHAL) + Dark Memory Portraits / Ogre Repair~ ----------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCJHR1.ARE~ BEGIN FAIL ~Install QC: Distorted Memories of Jaheira and Khalid before Bhaal's Temple.~ END
+
+// Portraits for the two hostile memory echoes, as supplied by the player.
+COPY ~CotSC/qc_unicorn_grove/portraits/QCJJAHS.BMP~ ~override/QCJJAHS.BMP~
+COPY ~CotSC/qc_unicorn_grove/portraits/QCJJAHL.BMP~ ~override/QCJJAHL.BMP~
+COPY ~CotSC/qc_unicorn_grove/portraits/QCJKHLS.BMP~ ~override/QCJKHLS.BMP~
+COPY ~CotSC/qc_unicorn_grove/portraits/QCJKHLL.BMP~ ~override/QCJKHLL.BMP~
+COPY_EXISTING ~QCJJAHR.CRE~ ~override/QCJJAHR.CRE~
+  WRITE_ASCII 0x34 ~QCJJAHS~ #8
+  WRITE_ASCII 0x3c ~QCJJAHL~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~QCJKHAL.CRE~ ~override/QCJKHAL.CRE~
+  WRITE_ASCII 0x34 ~QCJKHLS~ #8
+  WRITE_ASCII 0x3c ~QCJKHLL~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// UDOGRE is a special creature. Use a normal mortal Ogre base instead,
+// while preserving the Ogre Warrior's position and encounter behaviour.
+ACTION_IF FILE_EXISTS_IN_GAME ~OGRE01.CRE~ BEGIN
+  OUTER_SPRINT qcb_mortal_ogre ~OGRE01.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~OGRE.CRE~ BEGIN
+  OUTER_SPRINT qcb_mortal_ogre ~OGRE.CRE~
+END ELSE ACTION_IF FILE_EXISTS_IN_GAME ~OGRE1.CRE~ BEGIN
+  OUTER_SPRINT qcb_mortal_ogre ~OGRE1.CRE~
+END ELSE BEGIN
+  // Safety fallback: this still strips all attached protection effects.
+  OUTER_SPRINT qcb_mortal_ogre ~UDOGRE.CRE~
+END
+COPY_EXISTING ~%qcb_mortal_ogre%~ ~override/QCJOGRE.CRE~
+  SAY NAME1 @3085
+  SAY NAME2 @3085
+  READ_LONG 0x10 qcb_ogre_flags
+  WRITE_LONG 0x10 (qcb_ogre_flags BAND 0xffffdfff) // no quest-critical immunity
+  WRITE_LONG 0x20 0 // clear states inherited from the creature template
+  WRITE_SHORT 0x24 95
+  WRITE_SHORT 0x26 95
+  WRITE_BYTE 0x52 8
+  WRITE_BYTE 0x53 2
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCJOGRE~ #32
+  WRITE_ASCII 0x248 ~QCJHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  LPF DELETE_CRE_EFFECT INT_VAR opcode_to_delete = 208 END
+BUT_ONLY_IF_IT_CHANGES
+
+// Repair the placed actor too: ARE actor flag bit 2 makes an actor invulnerable.
+// Make the previously installed staircase into an actual party travel region.
+COPY_EXISTING ~QCJHR1.ARE~ ~override/QCJHR1.ARE~
+  READ_LONG 0x54 qcb_actors_off
+  READ_SHORT 0x58 qcb_actors_count
+  FOR (qcb_i = 0; qcb_i < qcb_actors_count; qcb_i += 1) BEGIN
+    SET qcb_actor = qcb_actors_off + (qcb_i * 0x110)
+    READ_ASCII qcb_actor qcb_actor_name (32) NULL
+    PATCH_IF (~%qcb_actor_name%~ STRING_EQUAL ~QCJX03~) BEGIN
+      READ_LONG (qcb_actor + 0x28) qcb_actor_flags
+      WRITE_LONG (qcb_actor + 0x28) (qcb_actor_flags BAND 0xfffffffb)
+    END
+  END
+  READ_LONG 0x5c qcb_regions_off
+  READ_SHORT 0x5a qcb_regions_count
+  SET qcb_stairs_found = 0
+  FOR (qcb_j = 0; qcb_j < qcb_regions_count; qcb_j += 1) BEGIN
+    SET qcb_r = qcb_regions_off + (qcb_j * 0xc4)
+    READ_ASCII qcb_r qcb_r_name (32) NULL
+    PATCH_IF (~%qcb_r_name%~ STRING_EQUAL ~QCJNEXT~) BEGIN
+      WRITE_SHORT (qcb_r + 0x20) 2  // travel region
+      WRITE_LONG (qcb_r + 0x34) 28  // stairs cursor
+      WRITE_LONG (qcb_r + 0x60) 4   // entire party
+      WRITE_ASCII (qcb_r + 0x38) ~QCBHAL~ #8
+      WRITE_ASCII (qcb_r + 0x40) ~QCBENT~ #32
+      SET qcb_stairs_found = 1
+    END
+  END
+  PATCH_IF (qcb_stairs_found = 0) BEGIN
+    PATCH_FAIL @20295
+  END
+  // Return spawn next to the staircase, not at the other end of the hall.
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 592 fj_loc_y = 875 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCJSTRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// v17: restored curved, user-painted altar hitbox and two genuine searchable altars.
+// SHLD20 (Kiel's Buckler): copy all combat effects, restrictions, icons and other properties unchanged.
+COPY_EXISTING ~SHLD20.ITM~ ~override/QCB7REF.ITM~
+  SAY NAME1 @3088
+  SAY NAME2 @3088
+  SAY IDENTIFIED_DESC @3089
+BUT_ONLY_IF_IT_CHANGES
+
+// v18: The two unverified, custom priest scroll items were removed from the container.
+// SPPR309 and SPPR513 are real SPELL resrefs, not verified stock scroll ITM resrefs.
+// No item-resource substitution is made without a verified original from the game.
+
+// Final memory approach: original artwork, rebuilt engine tiles, provisional open collision.
+COPY ~CotSC/qc_unicorn_grove/area/QCBHAL.ARE~ ~override/QCBHAL.ARE~
+COPY ~CotSC/qc_unicorn_grove/area/QCBHAL.WED~ ~override/QCBHAL.WED~
+COPY ~CotSC/qc_unicorn_grove/area/QCBHAL.TIS~ ~override/QCBHAL.TIS~
+COPY ~CotSC/qc_unicorn_grove/area/QCBHALSR.BMP~ ~override/QCBHALSR.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCBHALLM.BMP~ ~override/QCBHALLM.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QCBHALHT.BMP~ ~override/QCBHALHT.BMP~
+COPY ~CotSC/qc_unicorn_grove/area/QBHAL00.PVRZ~ ~override/QBHAL00.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QBHAL01.PVRZ~ ~override/QBHAL01.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QBHAL02.PVRZ~ ~override/QBHAL02.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QBHAL03.PVRZ~ ~override/QBHAL03.PVRZ~
+COPY ~CotSC/qc_unicorn_grove/area/QBHAL04.PVRZ~ ~override/QBHAL04.PVRZ~
+
+// Same tracks as QCHELL and QCJHR1. Separate IDs avoid assuming component-scope variables.
+ADD_MUSIC ~QCB_AMBIENT~ ~CotSC/qc_unicorn_grove/music/QCHAMB.MUS~
+ADD_MUSIC ~QCB_BATTLE~ ~CotSC/qc_unicorn_grove/music/QCHBTL.MUS~
+ADD_MUSIC ~QCB_VICTORY~ ~CotSC/qc_unicorn_grove/music/QCHEND.MUS~
+COPY_EXISTING ~QCBHAL.ARE~ ~override/QCBHAL.ARE~
+  READ_LONG 0xbc qcb_song_table
+  PATCH_IF (qcb_song_table > 0) AND (qcb_song_table + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG (qcb_song_table + 0) %QCB_AMBIENT%
+    WRITE_LONG (qcb_song_table + 4) %QCB_AMBIENT%
+    WRITE_LONG (qcb_song_table + 8) %QCB_VICTORY%
+    WRITE_LONG (qcb_song_table + 12) %QCB_BATTLE%
+  END ELSE BEGIN
+    PATCH_FAIL @20296
+  END
+  LPF fj_are_structure
+    INT_VAR fj_loc_x = 740 fj_loc_y = 1377 fj_orientation = 8
+    STR_VAR fj_structure_type = entrance fj_name = QCBENT
+  END
+  LPF fj_are_structure
+    INT_VAR fj_type = 2 fj_box_left = 659 fj_box_top = 1423
+      fj_box_right = 827 fj_box_bottom = 1491
+      fj_cursor_idx = 28 fj_flags = 4
+      fj_vertex_0 = 659 + (1423 << 16)
+      fj_vertex_1 = 827 + (1423 << 16)
+      fj_vertex_2 = 827 + (1491 << 16)
+      fj_vertex_3 = 659 + (1491 << 16)
+    STR_VAR fj_structure_type = region fj_name = QCBRET
+      fj_destination_area = QCJHR1 fj_destination_name = QCJSTRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Public installer: development progress message omitted.
+

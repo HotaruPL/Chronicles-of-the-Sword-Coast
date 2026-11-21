@@ -1,0 +1,77 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCWIZSHD.TRA~
+
+// Required resources are native to the EET game. COPY_EXISTING below will
+// fail normally if a required resource is unavailable; no preflight ACTION_IF
+// checks are needed here.
+// Wizshade: based on the stable Vampiric Mist chassis.
+// The old mist's weapon is removed so it cannot level-drain the party.
+// RING95 is retained as a hidden source of immunity to normal weapons and several
+// undead protections. Magic resistance is set to 25%, matching the classic lore.
+COPY_EXISTING ~MISTVA01.CRE~ ~override/QCWIZSHD.CRE~
+  SAY NAME1 @1
+  SAY NAME2 @1
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~QCWIZSHD~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 255
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~RING95~ #0 #0 #0 ~IDENTIFIED~ ~RRING~
+  ADD_MEMORIZED_SPELL ~SPWI112~ #0 ~wizard~ ( 2 )
+  ADD_MEMORIZED_SPELL ~SPWI116~ #0 ~wizard~ ( 1 )
+  ADD_MEMORIZED_SPELL ~SPWI118~ #0 ~wizard~ ( 1 )
+  ADD_MEMORIZED_SPELL ~SPWI212~ #1 ~wizard~ ( 1 )
+  LPF ADD_CRE_EFFECT
+    INT_VAR
+      opcode = 166
+      target = 1
+      timing = 1
+      parameter1 = 25
+      parameter2 = 0
+      probability1 = 100
+  END
+  WRITE_ASCII 0x280 ~QCWIZSHD_DEAD~ #32
+
+// Cedric Shan: rebuilt as a clean, standalone male elf CRE.
+// KIVAN.CRE is used only as a binary chassis for a valid EET CRE; all
+// NPC-specific script/dialogue resources are explicitly cleared and replaced.
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCCEDRIC.TRA~
+// Reuse ORDULI appearance only; preserve Cedric equipment, statistics, dialogue, AI.
+COPY_EXISTING ~ORDULI.CRE~ ~override~
+  READ_LONG 0x28 qc_cedric_animation
+  FOR (qc_cedric_color = 0; qc_cedric_color < 7; qc_cedric_color += 1) BEGIN
+    READ_BYTE (0x2c + qc_cedric_color) qc_cedric_palette_value
+    SET $qc_cedric_palette("%qc_cedric_color%") = qc_cedric_palette_value
+  END
+COPY_EXISTING ~KIVAN.CRE~ ~override/QCCEDRIC.CRE~
+  WRITE_LONG 0x28 qc_cedric_animation
+  FOR (qc_cedric_color = 0; qc_cedric_color < 7; qc_cedric_color += 1) BEGIN
+    WRITE_BYTE (0x2c + qc_cedric_color) $qc_cedric_palette("%qc_cedric_color%")
+  END
+  SAY NAME1 @2
+  SAY NAME2 @2
+  WRITE_ASCII 0x2cc ~QCCEDRIC~ #8
+  WRITE_ASCII 0x248 ~QCCEDRIC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x271 0
+  WRITE_BYTE 0x272 2
+  WRITE_BYTE 0x273 12
+  WRITE_BYTE 0x274 0
+  WRITE_BYTE 0x275 1
+  WRITE_BYTE 0x27b 0x12
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~PLAT06~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~ EQUIP
+  ADD_CRE_ITEM ~BOW03~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  WRITE_ASCII 0x280 ~QCCEDRIC_DEAD~ #32
+
+COMPILE ~CotSC/Quests_and_Challenges/DLG/QCCEDRIC.D~ USING ~CotSC/translation/%LANGUAGE%/Quests_and_Challenges/DLG/QCCEDRIC.TRA~
+COMPILE ~CotSC/Quests_and_Challenges/AREA/QCCEDRIC.BAF~
+COMPILE ~CotSC/Quests_and_Challenges/AREA/QCWIZSHD.BAF~
+
+EXTEND_TOP ~BG3900.BCS~ ~CotSC/Quests_and_Challenges/AREA/BG3900.baf~

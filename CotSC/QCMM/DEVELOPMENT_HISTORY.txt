@@ -1,0 +1,380 @@
+QC MISCELLANEOUS MERCHANTS - ITEM TESTING PACK v0.2
+
+UPDATE FROM v0.1:
+1. Uninstall the v0.1 component using setup-QCMM.exe (or choose Re-install when WeiDU recognises it).
+2. Replace setup-QCMM.exe and the complete QCMM folder with the v0.2 archive contents.
+3. Run setup-QCMM.exe and install/reinstall the item test component.
+4. Create FRESH copies of the items through the console for testing. Old items in saved inventories
+   may still carry v0.1 charges/stack information until recreated.
+
+This is a standalone item test. It does not touch NPCs, stores, previous frozen components, or areas.
+All resrefs remain unchanged from v0.1 to avoid console-code and save incompatibilities.
+All eleven items stack up to 99 copies. Each individual unit keeps its assigned weight.
+The six trade goods have an inert header so they stack but are not usable.
+
+CONSOLE CODES:
+C:CreateItem("QCMEAT")    Meat    Weight: 0 lb.    Stack limit: 99    Restores 10 HP
+C:CreateItem("QCSAUSG")    Sausage    Weight: 0 lb.    Stack limit: 99    Restores 6 HP
+C:CreateItem("QCBREAD")    Bread    Weight: 0 lb.    Stack limit: 99    Restores 5 HP
+C:CreateItem("QCCOKIE")    Cookies    Weight: 0 lb.    Stack limit: 99    Restores 4 HP
+C:CreateItem("QCWATER")    Waterskin    Weight: 0 lb.    Stack limit: 99    Restores 12 HP
+C:CreateItem("QCHONEY")    Honey    Weight: 0 lb.    Stack limit: 99
+C:CreateItem("QCCORN")    Corn    Weight: 0 lb.    Stack limit: 99
+C:CreateItem("QCEGGS")    Eggs    Weight: 0 lb.    Stack limit: 99
+C:CreateItem("QCFLOUR")    Flour    Weight: 100 lb.    Stack limit: 99
+C:CreateItem("QCGRAIN")    Grain    Weight: 165 lb.    Stack limit: 99
+C:CreateItem("QCFABRC")    Luxurious Fabric    Weight: 54 lb.    Stack limit: 99
+
+Notes:
+- Test by summoning two fresh copies of Cookies and combining their stacks in inventory.
+- Test weight with one fresh Grain, Flour or Luxurious Fabric, compare character carried load before/after.
+- Each food/drink should restore the requested HP and consume ONE item from its stack.
+- Trade goods should not offer a usable ability.
+- All descriptions show game weight as text and weight is also written to ITM offset 0x4C.
+- Fabric has only the exact requested one-sentence prose description, plus generic statistics.
+- Merchant inventories will be implemented only after the item test succeeds.
+- All prices remain provisional; no balance changes made.
+- This package is structurally checked but cannot be tested in the game here.
+
+
+==================================================
+VERSION 0.3 - BG1 MERCHANTS (FIRST IMPLEMENTATION)
+==================================================
+Item component (index 0) is unchanged from v0.2. BG1 merchants are a NEW
+installation component (index 1); install it separately after the items.
+It is EET-only due to BGxxxx resource names. No earlier QC mod components touched.
+
+BG1 merchants: 10, with NPC CRE/DLG/area actors. Each store has only
+its specified stock: 10 finite units of each item. All custom resources
+retain QC prefix. Selling ordinary goods to the merchant using the
+standard store Sell button is disabled intentionally. Specific-price
+purchase is performed through the NPC dialogue with exact prices.
+Sellers can buy one unit at a time, even out of stacked quantities.
+
+If you tested BG1 maps in an old save already, it is safer to test using
+an area that has not been visited/saved, because explored-area ARE resources
+may already have been serialized into your save.
+
+Test order:
+- BG3300 (generic food-only)
+- BG1000 Eustache (grain shop, takes honey for 65 gold)
+- BG4800 Evelyn (eggs shop, buys flour 60 / corn 25)
+- BG4000 Bronya and Orina (prices and reciprocal comments)
+- BG0120 Cindel (grain for 136)
+- BG2301 Will (grain 70 / eggs 15)
+
+NPC sprites/palettes: generic sellers clone MERCH2.CRE; named NPCs use
+commoner, halfling, or dwarf animation slots, with assigned clothing colors.
+Please verify these visually in game before freezing this build.
+
+Further components for Siege of Dragonspear, BG2 and Throne of Bhaal
+are NOT included in v0.3. Existing Horst store and the special Felicia
+exchange remain unmodified in this incremental BG1 test release.
+
+
+
+==================================================
+VERSION 0.4 - BG1 MERCHANT BUGFIX
+==================================================
+The v0.3 merchant dialogues allowed repeated sales because a trade
+immediately returned to the same dialogue state; item-presence options
+could remain available before the party inventory was re-evaluated.
+
+FIX: Each successful fixed-price exchange takes exactly one unit,
+pays exactly once, then closes dialogue. Talk to the merchant again
+to make another sale. This applies to Eustache, Evelyn, Bronya,
+Orina, Cindel and Will.
+
+Evelyn, Bronya, Orina and Cindel now use the BG1 female PROSBA_B
+creature as the base rather than MERCH2 (with their existing
+requested visual animations/palettes unchanged). Both CRE sex and
+gender bytes are explicitly set to female.
+
+NOTE FOR OLD SAVES: Areas/creatures already stored in a saved game
+might continue using the old dialogue or old voice even after
+reinstalling. Test with a save BEFORE the first visit to the area,
+or load a fresh/new game, or use C:CreateCreature("QCMM09") to
+spawn a test instance from the newly installed CRE. Dialogue files
+are rebuilt in override, but already-instantiated CRE instances
+can retain their previous sound data.
+
+This is a narrowly scoped correction. Items, icons, prices,
+inventories, coordinates, and planned later merchants remain unchanged.
+
+
+==================================================
+VERSION 0.5 - BG1 COMMONER VOICES + SIEGE OF DRAGONSPEAR
+==================================================
+
+The BG1 merchant component now derives Evelyn, Bronya, Orina and Cindel
+from the ordinary female Beregost commoner FTOWBE_B.CRE instead of the
+courtesan PROSBA_B.CRE, whose selection/acknowledgement lines were
+inappropriate. All their other setup, positions, palettes and shops are
+unchanged. Their existing instances in an already-visited saved game may
+retain the old sound slots: test in a fresh instance/unvisited area.
+
+Part II is a third WeiDU component (index 2), EET / SoD only:
+- BD1000 (3070,1788), southwest-facing displaced Food Merchant:
+  Meat, Sausage, Bread, Cookies, Waterskin x10 each.
+- BD3000 (1280,1888), north-facing Food Merchant: same stock.
+- BD7300 Horst: modifies BDHORST.STO, retaining all of his original stock,
+  appending Meat, Sausage, Bread and Waterskin x10 each. Four bartering
+  replies appended to his original dialogue's first state, with one-unit
+  consumption and exact gold payouts (grain 70, flour 56, corn 42, eggs 18).
+  Does not copy/replace his CRE or overwrite BDHORST.DLG.
+- BD7200 (264,149) Kash: Cookies, Meat, Sausage, Bread, Waterskin,
+  Corn, Eggs x10 each; uses generic merchant animation.
+
+IMPORTANT TEST NOTES:
+- Install both items and BG1 and then SoD components. Existing v0.4 item
+  ITMs/BAMs and BG1 merchant DLGs/STOs remain byte-for-byte identical.
+- Horst's purchase replies are injected into BDHORST dialogue STATE 0.
+  The exact state flow varies based on whether his original plot dialogue
+  has been exhausted. In-game test that the barter replies show up on
+  first meeting and after reopening his shop; report if not.
+- Selling an item through any QC dialogue closes the conversation after
+  paying ONCE; after selling your last copy, the option should vanish.
+- Horst's original store is patched (not replaced) with four sale items.
+- SoD area edits need a save that has NOT already visited/serialized the
+  relevant area, or a new game, for reliable actor placement testing.
+- Existing shop resale prices remain handled by the built-in game engine;
+  Horst's special four offered barter rates are separate dialogue actions.
+- This package is built/checked structurally, not tested in an installed EET.
+
+
+==================================================
+VERSION 0.6 - SHADOWS OF AMN
+==================================================
+Component 3 (Part III: Shadows of Amn), EET:
+- Riggo AR0300 [1963,2391], black-clothed thief sprite, nervous food seller.
+- AR0406 container nearest [215,1054] receives a stack of two Cookies.
+- Halina AR0406 [1199,1598] buys Cookies for 17gp, Honey for 34gp.
+- AR0400 [1190,799] Food Merchant: Meat/Sausage/Bread/Waterskin.
+- AR0700 [1710,1398] Food Merchant: same four foods.
+- Jaden AR0700 [3754,379] sells Cookies/Honey; buys Flour 99gp.
+- Lynda AR1105 [1131,303] buys Meat 89gp.
+- Igor AR1602 [607,728] uses Prism CRE base; buys Meat 20,
+  Sausage 50, Cookies 67, Honey 78, Eggs 43 gp.
+- AR1515 container nearest [1466,648] receives one Waterskin.
+- AR1902's only container receives a stack of two Breads.
+- AR2000 [952,2774] Food Merchant sells Cookies, Meat, Sausage,
+  Bread, Waterskin, Corn and Eggs.
+- Adelaide AR2000 [2593,2661] based on Emitar; buys Corn 500,
+  Flour 320, Grain 365 gold.
+- Gorvin AR2100 [1586,3775] copies original UDSVIR02.CRE
+  Svirfneblin (avoids needing custom deep-gnome animation mods);
+  sells Meat, Sausage, Bread, Waterskin.
+- Ulvryn AR2202 [1567,463] male Drow with green palette; buys Bread
+  50, Flour 3000, Grain 1200, Honey 5000, Cookies 899 gp.
+- Ulvryn turns hostile when original Ust Natha bartender UDDROW22
+  becomes ENEMY. A tiny script in a free slot on the actual bartender
+  sets global QCMMUHST; Ulvryn has QCMMULV to match hostility.
+- All stocked items are finite: 10 each. Each dialogue sale removes
+  exactly one item, pays once and exits to avoid stale menu exploits.
+- Existing v0.5 item, BG1 and SoD resource files, dialogues and stores
+  are unchanged. No Throne of Bhaal content is installed yet.
+
+Installation:
+  Replace prior QCMM folder and setup-QCMM.exe with this package;
+  run setup-QCMM.exe. Existing first three components may be kept as
+  installed; install new Part III component index 3 separately.
+  The first time an area is entered after installing is the safest
+  test; old visited areas saved inside a savegame may retain old state.
+
+Developer check: assets and source structurally validated; EET runtime
+not available here. Report WeiDU errors and exact affected area.
+
+VERSION 0.6.1 - WeiDU PARSE CORRECTION
+Corrects unary minus expression in QCMM_NEAREST_CONTAINER at v0.6 line 1014.
+After validating a non-empty container array, initialise the nearest index to 0.
+No changes to items, merchant data, resources, shops, scripts, or dialogues.
+This fixes the reported parse error; EET install/gameplay not available for runtime testing.
+
+==================================================
+VERSION 0.7 - THRONE OF BHAAL + TWO SoA VOICES
+==================================================
+All existing BG1, SoD, SoA items, stores, creatures, scripts, and
+area patch text are identical to v0.6.1 (except the VERSION header).
+
+Part IV: Throne of Bhaal (independent install component)
+- AR5003 Saradush [658,551]: Miley, female courtesan appearance;
+  faces south-east; stocks 10 Cookies, Meat, Sausage, Bread, Waterskin.
+- AR5500 Amkethran [1483,1370]: Blake, yellow-paletted merchant;
+  stocks exactly 10 of ALL 11 custom items including fabric.
+- AR5500 Amkethran [3440,925]: Felicia, female commoner, random walks.
+  Without fabric: wistful line about fabric, no journal or store.
+  With 1+ QC fabric and first visit: offers exchange of ONE fabric for
+  10000 PARTY-WIDE XP (split amongst living members), plus one each:
+    SCRLB4: Wish
+    SCRL7U: Contingency
+    SCRL9G: Abi-Dalzim's Horrid Wilting
+  Global QCMMFLRX tracks redemption; no repeated rewards.
+  Player may refuse to hand over fabric and ask again later.
+
+Additional independent component: SoA Voice Correction
+- Riggo QCMM14: sounds from base game's GENTHF01 thug.
+- Igor QCMM20: sounds from base game's BNOBLE1 male noble.
+- No changes to SoA component, sprites, palettes, shops, dialogues.
+- Install after Part III; no need to reinstall the working component.
+
+Install guidance for users already on v0.6.1:
+  1) Replace QCMM folder and setup-QCMM.exe with contents of v0.7.
+  2) Run setup-QCMM.exe and leave Parts 0-I-II-III installed.
+  3) Install new Part IV.
+  4) Install the separate SoA Voice Correction.
+  5) Enter AR5003 and AR5500 on a save BEFORE visiting those areas
+     (saved visited AREs will retain old creature placements).
+
+Testing Felicia:
+  C:CreateItem("QCFABRC")
+  (Speak to her; accept; watch the fabric disappear and 3 scrolls appear.)
+  Speak a second time: her reward must never repeat.
+
+==================================================
+VERSION 0.8 - PRICE, FELICIA REPEAT LINE, SOUNDSET FIX
+==================================================
+Confirmed working v0.7 ToB merchants and exchange remain unchanged, except:
+- QCFABRC Luxurious Fabric now has a base value of 9000 GP (ITM 0x34).
+  The existing installed item is patched by reinstalling Part IV (ToB),
+  so there is no need to reinstall original item component; item component
+  also contains new value for fresh installations.
+- Felicia, AFTER accepting one fabric and rewarding the party, now says
+  exactly "Good day to you, friends." on subsequent interactions. This
+  uses the already-established QCMMFLRX global; no duplicate rewards.
+- Standalone SoA Voice Correction uses built-in WeiDU INNER_PATCH_FILE,
+  READ_LONG and WRITE_LONG to copy CRE sound references 0xa4..0x233
+  from GENTHF01.CRE (Riggo) / BNOBLE1.CRE (Igor). Removes calls to
+  missing READ_SOUNDSET/WRITE_SOUNDSET macros that failed in v0.7.
+
+For upgrades from installed v0.7:
+1. Unzip v0.8 over the old QCMM folder and setup-QCMM.exe.
+2. Open setup-QCMM.exe. Choose Re-install for Part IV: Throne of Bhaal.
+   This updates Felicia's dialogue and patches the fabric price.
+3. Install the standalone SoA Voice Correction component (previously
+   failed so WeiDU should offer it as uninstalled).
+4. Leave items, BG1, SoD and SoA merchant components installed.
+5. Old NPC instances inside existing saved AREs may retain their former
+   CRE soundsets: test Riggo/Igor from an unvisited save or summon
+   a new instance via C:CreateCreature("QCMM14") (Riggo) or
+   C:CreateCreature("QCMM20") (Igor).
+6. If Felicia's exchange has already occurred, speak to her again to
+   hear her new greeting; the global condition works on existing saves.
+
+Archive and resource structural checks were performed; in-game test
+must be conducted in the user's EET installation.
+
+
+==================================================
+VERSION 0.9 - BG1 CONTAINER-LOOT INSTALLMENT
+==================================================
+Confirmed in-game working baseline: v0.8, BG1 + SoD + SoA + ToB
+merchants and Riggo/Igor voice patch. Previous content is unchanged.
+
+New independent component: Part V - BG1 Container Loot
+- 61 distinct BG1/OH area files
+- 73 specified container positions
+- 107 different item stacks
+- 155 total individual item units (including 12 coins)
+- All locations / item resrefs / quantities in BG1_CONTAINER_MANIFEST.csv
+- Preserves original containers' contents. No containers are replaced.
+- Uses nearest existing container to coordinates supplied; never creates containers.
+- Uses fj_are_structure add-item patch; add quantities in stack count.
+- Special vanilla items: Scimitar SW1H20, Wakizashi SW1H46, Ninja-To
+  SW1H48, scrolls SCRL7Q/SCRL6P, POTN52, gold MISC07 stack of 12.
+- Missing areas or areas with no containers are reported as warnings.
+  Please review SETUP-QCMM.DEBUG for these (if any).
+
+To install over v0.8: extract this archive over old QCMM and setup-QCMM.exe;
+run installer; leave existing components installed and select only
+'Miscellaneous Merchants - Part V: BG1 Container Loot (73 placements)'.
+
+IMPORTANT: Game save files retain saved/visited area instances. Test
+from before entering an area in that game, or load a fresh game.
+Install structural checks were performed outside a live EET game.
+
+
+==================================================
+VERSION 1.0 - BG1 COMPANION STARTING PROVISIONS
+==================================================
+The tested v0.9 container-loot component and all v0.8 content are unchanged.
+New OPTIONAL Part VI patches the BG1 / BGEE versions of 15 recruitable
+companions only. Does not add new creatures or alter BG2/ToB recruitable
+creatures, character classes, portraits, scripts, stats, spells, or gear.
+
+Inventory additions (one stack of each item listed):
+ Xzar       : 2 Waterskins, 1 Sausage
+ Montaron   : 1 Waterskin, 3 Cookies
+ Imoen      : 2 Waterskins, 1 Sausage
+ Jaheira    : 2 Breads
+ Khalid     : 1 Waterskin, 1 Sausage
+ Garrick    : 1 Waterskin, 1 Bread
+ Kagain     : 2 Waterskins, 2 Meats
+ Safana     : 1 Waterskin
+ Coran      : 2 Sausages, 1 Cookie
+ Minsc      : 1 Bread
+ Edwin      : 2 Meats
+ Ajantis    : 2 Waterskins, 1 Bread, 1 Sausage
+ Rasaad     : 1 Waterskin, 1 Sausage
+ Kivan      : 1 Waterskin, 2 Sausages
+ Shar-Teel  : 1 Waterskin, 2 Meats
+
+Uses WeiDU COPY_EXISTING and ADD_CRE_ITEM with IDENTIFIED and NOMOVE.
+Each stack is represented by one item with the quantity in charge1.
+Adds to free backpack slots only, skipping items if the target creature
+has no free slot (in order to preserve its existing equipment).
+Known BG1 low-level creature variants are explicitly enumerated; absent
+optional variants are harmlessly skipped. No high-level BG2 or SoD resources.
+A manifest of specific creature files is BG1_COMPANION_PROVISIONS.csv.
+
+Install on EET *after* the 11 items component, and preferably late after
+other NPC/class/stat altering mods. No re-install of Parts 0-V is required.
+Existing saves with already spawned companions keep old in-game copies;
+test with fresh spawns from resource files or new game / before recruitment.
+This is a structural test build: confirm starting provisions in your EET.
+
+
+==================================================
+VERSION 1.1 - SIEGE OF DRAGONSPEAR CONTAINER LOOT
+==================================================
+Install order for players updating from v1.0:
+1. Overwrite the QCMM folder and setup-QCMM.exe with this archive.
+2. Run the WeiDU installer and REINSTALL Part VI: BG1 Companion
+   Starting Provisions if you want Xzar's corrected item-slot search.
+   The change affects Xzar's BG1 CRE variants only; his items can
+   use an empty quick-item slot if his backpack has no space.
+   Other 14 companion inventory patches are unchanged.
+3. INSTALL the new Part VII: Siege of Dragonspear Container Loot.
+   Existing components 0-V do not require reinstallation.
+
+PART VII: 11 Siege of Dragonspear ARE resources, 17 unique positions,
+20 item stacks. Adds food/trade items to the nearest existing container
+specified by the user and retains every pre-existing item.
+No merchants, dialogues, voices or CREs are changed by Part VII.
+See SoD_CONTAINER_MANIFEST.csv for the exact placement list.
+
+Note: EET areas saved in a game may already contain cached container
+contents. Test using saves made before entering the affected area.
+Similarly, BG1 Xzar already spawned in your save retains his old CRE;
+test the change with a fresh game or a fresh spawn of the BG1 NPC.
+The quick-item fallback only works while either backpack or quick-item
+slots remain available; the patch will never discard old equipment.
+
+This is an untested EET installer build; confirm in-game behaviour.
+
+
+==== v1.2: Part VIII - Shadows of Amn Container Loot ====
+Optional EET-only component: 73 container locations across 48 areas; 102 item entries, totaling 143 objects.
+Adds all locations from the supplied list. Existing loot is preserved. There are no changes to previously confirmed content.
+Install the existing 7 components as before. To test the new loot, install only Part VIII. If the target area was already visited in your save, use a pre-entry save or a fresh game.
+
+Corrections from the supplied shorthand: MEAR = Meat, EGS = Eggs, 0H6100 = OH6100 (letter O).
+Special vanilla items: SCRL5N (Domination), POTN55 (Superior Healing), AROW07 (Arrows of Dispelling).
+A separate SoA_CONTAINER_MANIFEST.csv lists each area, coordinate and item quantity.
+
+
+==== v1.3: Part IX - Throne of Bhaal Container Loot ====
+Optional EET-only component: 13 container locations in 11 areas, 19 item stack placements totaling 26 individual items.
+This is the final container-loot batch from the user: the nearest existing containers are patched without removing other loot.
+All previous components and assets are preserved. Install only Part IX in an existing v1.2 installation, after updating the QCMM files.
+Areas already instantiated in a save may retain their pre-installation inventories; test with a save from before entering them.
+QCMM/ToB_CONTAINER_MANIFEST.csv records each target coordinate, item resref and quantity.

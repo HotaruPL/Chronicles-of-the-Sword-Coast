@@ -1,0 +1,27 @@
+// Final temple memory: spawn the childhood image in the protagonist's gender.
+IF
+  Global("QBT_CHILD","GLOBAL",0)
+  Gender(Player1,FEMALE)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_CHILD","GLOBAL",1)
+  CreateCreature("QBTCHGF",[723.665],2)
+END
+IF
+  Global("QBT_CHILD","GLOBAL",0)
+  !Gender(Player1,FEMALE)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_CHILD","GLOBAL",1)
+  CreateCreature("QBTCHBM",[723.665],2)
+END
+// The Guardians enter ONLY once the conversation finishes.
+IF
+ Global("QBT_STAGE","GLOBAL",1)
+ Global("QBT_GUARDS","GLOBAL",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_GUARDS","GLOBAL",1)
+  CreateCreature("QBTGRDN",[1311.599],8)
+  CreateCreature("QBTGRDN",[536.905],0)
+END

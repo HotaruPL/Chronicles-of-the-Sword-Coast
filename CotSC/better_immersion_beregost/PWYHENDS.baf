@@ -1,0 +1,12 @@
+// Purple Wyrm Inn - Hendron departure backup.
+
+IF
+  Global("PWY_DELCIA_LEAVE","GLOBAL",1)
+  Global("PWY_DELCIA_DONE","GLOBAL",0)
+  !StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    MoveToPoint([1240.1295])
+    Wait(4)
+    DestroySelf()
+END

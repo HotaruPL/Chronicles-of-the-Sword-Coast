@@ -1,0 +1,12 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// Dwarf Commoner at 462,838, wandering.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDWR02")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDWR02",[462.838],0)
+END

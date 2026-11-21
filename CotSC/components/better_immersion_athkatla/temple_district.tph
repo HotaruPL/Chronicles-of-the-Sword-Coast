@@ -1,0 +1,136 @@
+// ---------------------------------------------------------------------------
+// TEMPLE DISTRICT - AR0900 + AR0902
+// ---------------------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0900.ARE~ BEGIN
+  FAIL @20335
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0902.ARE~ BEGIN
+  FAIL @20336
+END
+
+COMPILE ~CotSC/qc_better_immersion_athkatla/dialogue/QCTEMP.d~ USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCTEMP.tra~
+
+// Gnoll Commoner - same proven neutral gnoll conversion used in the Slums.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC90GNOL.CRE~
+  SAY NAME1 @3113
+  SAY NAME2 @3113
+  WRITE_SHORT 0x28 0x8000
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x272 110
+  WRITE_BYTE 0x273 120
+  WRITE_ASCII 0x2cc ~QC90GNOL~ #8
+  WRITE_ASCII 0x280 ~QC90GNOL~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Rude female commoner.
+COPY_EXISTING ~FTOBE3.CRE~ ~override/QC90RUDE.CRE~
+  SAY NAME1 @3005
+  SAY NAME2 @3005
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC90RUDE~ #8
+  WRITE_ASCII 0x280 ~QC90RUDE~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Kobold Commoner.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QC90KOB.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC90KOB~ #8
+  WRITE_ASCII 0x280 ~QC90KOB~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming cat.
+COPY_EXISTING ~CAT.CRE~ ~override/QC90CAT.CRE~
+  SAY NAME1 @3017
+  SAY NAME2 @3017
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~QC90CAT~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming red-palette Dwarven Commoner.
+COPY_EXISTING ~SAILAL.CRE~ ~override/QC90DWAR.CRE~
+  SAY NAME1 @3132
+  SAY NAME2 @3132
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC90DWAR~ #8
+  WRITE_ASCII 0x280 ~QC90DWAR~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x2d 47
+  WRITE_BYTE 0x2e 47
+  WRITE_BYTE 0x30 47
+  WRITE_BYTE 0x31 47
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Vandal - ordinary male commoner chassis.
+COPY_EXISTING ~FARM.CRE~ ~override/QC92VAND.CRE~
+  SAY NAME1 @3133
+  SAY NAME2 @3133
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC92VAND~ #8
+  WRITE_ASCII 0x280 ~QC92VAND~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0900.ARE~ ~override~
+  // X=4013 Y=1833 - Gnoll Commoner, south-west.
+  LPF fj_are_structure INT_VAR fj_loc_x=4013 fj_loc_y=1833 fj_dest_x=4013 fj_dest_y=1833 fj_orientation=2 STR_VAR fj_structure_type=actor fj_name=QC90GNOL fj_cre_resref=QC90GNOL fj_dlg_resref=QC90GNOL END
+  // X=3778 Y=2228 - rude female Commoner, south-west.
+  LPF fj_are_structure INT_VAR fj_loc_x=3778 fj_loc_y=2228 fj_dest_x=3778 fj_dest_y=2228 fj_orientation=2 STR_VAR fj_structure_type=actor fj_name=QC90RUDE fj_cre_resref=QC90RUDE fj_dlg_resref=QC90RUDE END
+  // X=3751 Y=2253 - Kobold Commoner.
+  LPF fj_are_structure INT_VAR fj_loc_x=3751 fj_loc_y=2253 fj_dest_x=3751 fj_dest_y=2253 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC90KOB fj_cre_resref=QC90KOB fj_dlg_resref=QC90KOB END
+  // X=2169 Y=2575 - roaming cat.
+  LPF fj_are_structure INT_VAR fj_loc_x=2169 fj_loc_y=2575 fj_dest_x=2169 fj_dest_y=2575 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC90CAT fj_cre_resref=QC90CAT fj_bcs_override=QCAWAND END
+  // X=2243 Y=2891 - roaming red Dwarven Commoner.
+  LPF fj_are_structure INT_VAR fj_loc_x=2243 fj_loc_y=2891 fj_dest_x=2243 fj_dest_y=2891 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC90DWAR fj_cre_resref=QC90DWAR fj_dlg_resref=QC90DWAR fj_bcs_override=QCAWAND END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0902.ARE~ ~override~
+  // X=755 Y=1034 - Vandal.
+  LPF fj_are_structure INT_VAR fj_loc_x=755 fj_loc_y=1034 fj_dest_x=755 fj_dest_y=1034 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC92VAND fj_cre_resref=QC92VAND fj_dlg_resref=QC92VAND END
+BUT_ONLY_IF_IT_CHANGES
+

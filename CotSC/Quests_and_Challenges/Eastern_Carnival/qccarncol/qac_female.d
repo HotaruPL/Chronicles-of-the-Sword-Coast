@@ -1,0 +1,6 @@
+BEGIN QACF01
+
+IF ~True()~ THEN BEGIN 0
+    SAY @4
+    IF ~~ THEN EXIT
+END

@@ -1,0 +1,313 @@
+// ---------------------------------------------------------------------------
+// GOVERNMENT DISTRICT - AR1000 + AR1005, VARUN ESCORT QUEST
+// ---------------------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR1000.ARE~ BEGIN
+  FAIL @20328
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR1005.ARE~ BEGIN
+  FAIL @20329
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0020.ARE~ BEGIN
+  FAIL @20330
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0020.BCS~ BEGIN
+  FAIL @20331
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG4800.ARE~ BEGIN
+  FAIL @20332
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG4800.BCS~ BEGIN
+  FAIL @20333
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG5600.WED~ BEGIN
+  FAIL @20334
+END
+
+COMPILE ~CotSC/qc_better_immersion_athkatla/scripts/QCVGATE.baf~
+COMPILE ~CotSC/qc_better_immersion_athkatla/scripts/QCVAMB.baf~
+COMPILE ~CotSC/qc_better_immersion_athkatla/scripts/QCVAREA.baf~
+COMPILE ~CotSC/qc_better_immersion_athkatla/scripts/QCVNASH.baf~
+ADD_JOURNAL TITLE (@1) @2 @3 USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCGOV.tra~
+COMPILE ~CotSC/qc_better_immersion_athkatla/dialogue/QCGOV.d~ USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCGOV.tra~
+
+// Female roaming Halfling Commoner.
+COPY_EXISTING ~HALFFG.CRE~ ~override/QC10HAL.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC10HAL~ #8
+  WRITE_ASCII 0x280 ~QC10HAL~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Varun in the Government District.
+COPY_EXISTING ~GMTOWN01.CRE~ ~override/QC10VAR.CRE~
+  SAY NAME1 @3128
+  SAY NAME2 @3128
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCVVARUN~ #8
+  WRITE_ASCII 0x280 ~QC10VAR~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QC10KOB.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC10KOB~ #8
+  WRITE_ASCII 0x280 ~QC10KOB~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~GNOBLEM1.CRE~ ~override/QC10NOB.CRE~
+  SAY NAME1 @3129
+  SAY NAME2 @3129
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC10NOB~ #8
+  WRITE_ASCII 0x280 ~QC10NOB~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~GNOBLEF1.CRE~ ~override/QC10NOL.CRE~
+  SAY NAME1 @3130
+  SAY NAME2 @3130
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC10NOL~ #8
+  WRITE_ASCII 0x280 ~QC10NOL~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Brown-palette Half-Elf Commoner.
+COPY_EXISTING ~GAXIR.CRE~ ~override/QC10HLF.CRE~
+  SAY NAME1 @3015
+  SAY NAME2 @3015
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC10HLF~ #8
+  WRITE_ASCII 0x280 ~QC10HLF~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x2d 21
+  WRITE_BYTE 0x2e 20
+  WRITE_BYTE 0x30 21
+  WRITE_BYTE 0x31 20
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC10PRS.CRE~
+  SAY NAME1 @3131
+  SAY NAME2 @3131
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC10PRS~ #8
+  WRITE_ASCII 0x280 ~QC10PRS~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR1000.ARE~ ~override~
+  // X=2767 Y=615 - roaming female Halfling.
+  LPF fj_are_structure INT_VAR fj_loc_x=2767 fj_loc_y=615 fj_dest_x=2767 fj_dest_y=615 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC10HAL fj_cre_resref=QC10HAL fj_dlg_resref=QC10HAL fj_bcs_override=QCAWAND END
+  // X=3074 Y=1434 - Varun.
+  LPF fj_are_structure INT_VAR fj_loc_x=3074 fj_loc_y=1434 fj_dest_x=3074 fj_dest_y=1434 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC10VAR fj_cre_resref=QC10VAR fj_dlg_resref=QCVVARUN END
+  // X=463 Y=1346 - Kobold Commoner, south-west.
+  LPF fj_are_structure INT_VAR fj_loc_x=463 fj_loc_y=1346 fj_dest_x=463 fj_dest_y=1346 fj_orientation=2 STR_VAR fj_structure_type=actor fj_name=QC10KOB fj_cre_resref=QC10KOB fj_dlg_resref=QC10KOB END
+  // X=1806 Y=3033 - Nobleman, north-east.
+  LPF fj_are_structure INT_VAR fj_loc_x=1806 fj_loc_y=3033 fj_dest_x=1806 fj_dest_y=3033 fj_orientation=10 STR_VAR fj_structure_type=actor fj_name=QC10NOB fj_cre_resref=QC10NOB fj_dlg_resref=QC10NOB END
+  // X=1825 Y=3020 - Noblewoman, south-west.
+  LPF fj_are_structure INT_VAR fj_loc_x=1825 fj_loc_y=3020 fj_dest_x=1825 fj_dest_y=3020 fj_orientation=2 STR_VAR fj_structure_type=actor fj_name=QC10NOL fj_cre_resref=QC10NOL fj_dlg_resref=QC10NOL END
+  // X=4140 Y=3459 - brown-palette Half-Elf.
+  LPF fj_are_structure INT_VAR fj_loc_x=4140 fj_loc_y=3459 fj_dest_x=4140 fj_dest_y=3459 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC10HLF fj_cre_resref=QC10HLF fj_dlg_resref=QC10HLF END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR1005.ARE~ ~override~
+  // X=670 Y=837 - Hobgoblin Prisoner.
+  LPF fj_are_structure INT_VAR fj_loc_x=670 fj_loc_y=837 fj_dest_x=670 fj_dest_y=837 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC10PRS fj_cre_resref=QC10PRS fj_dlg_resref=QC10PRS END
+BUT_ONLY_IF_IT_CHANGES
+
+// ---------------------------------------------------------------------------
+// VARUN - CITY GATES, AMBUSH AREA, NASHKEL
+// ---------------------------------------------------------------------------
+
+// Waiting Varun at the City Gates.
+COPY_EXISTING ~GMTOWN01.CRE~ ~override/QCVGATE.CRE~
+  SAY NAME1 @3128
+  SAY NAME2 @3128
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCVVARUN~ #8
+  WRITE_ASCII 0x280 ~QCVGATE~ #32
+  WRITE_ASCII 0x248 ~QCVGATE~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Varun in the ambush. Neutral and unable to drop below 1 HP.
+COPY_EXISTING ~GMTOWN01.CRE~ ~override/QCVAMB.CRE~
+  SAY NAME1 @3128
+  SAY NAME2 @3128
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCVVARUN~ #8
+  WRITE_ASCII 0x280 ~QCVAMB~ #32
+  WRITE_ASCII 0x248 ~QCVAMB~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  LPF ADD_CRE_EFFECT INT_VAR opcode=208 target=1 timing=9 parameter1=1 resist_dispel=2 END
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Final Nashkel Varun.
+COPY_EXISTING ~GMTOWN01.CRE~ ~override/QCVNASH.CRE~
+  SAY NAME1 @3128
+  SAY NAME2 @3128
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCVVARUN~ #8
+  WRITE_ASCII 0x280 ~QCVNASH~ #32
+  WRITE_ASCII 0x248 ~QCVNASH~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Seven separate Ghasts, each with its own death variable so the area script
+// can reliably detect when the ambush is over.
+COPY_EXISTING ~GHAST.CRE~ ~override/QCVGH1.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCVGH1~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~GHAST.CRE~ ~override/QCVGH2.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCVGH2~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~GHAST.CRE~ ~override/QCVGH3.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCVGH3~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~GHAST.CRE~ ~override/QCVGH4.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCVGH4~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~GHAST.CRE~ ~override/QCVGH5.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCVGH5~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~GHAST.CRE~ ~override/QCVGH6.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCVGH6~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~GHAST.CRE~ ~override/QCVGH7.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCVGH7~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Spawn the waiting Varun only after the Government District conversation.
+EXTEND_TOP ~AR0020.BCS~ ~CotSC/qc_better_immersion_athkatla/scripts/QCVGSPN.baf~
+
+// Spawn the final Varun when the party reaches Nashkel.
+EXTEND_TOP ~BG4800.BCS~ ~CotSC/qc_better_immersion_athkatla/scripts/QCVNSPN.baf~
+
+// QCVRUN is a clean copy of the supplied BG5601 ARE: it has no original
+// actors or travel regions.  Its original BG5601 script is replaced with the
+// QC ambush script, so none of BG5601's scripted enemies are inherited.
+COPY ~CotSC/qc_better_immersion_athkatla/areas/QCVRUN.ARE~ ~override/QCVRUN.ARE~
+  WRITE_ASCII 0x08 ~QCVRUN~ #8
+  READ_LONG 0x14 qcv_area_flags
+  WRITE_LONG 0x14 (qcv_area_flags BOR 0x40)
+  WRITE_LONG 0x20 0
+  WRITE_LONG 0x2c 0
+  WRITE_LONG 0x38 0
+  WRITE_LONG 0x44 0
+  WRITE_ASCII 0x94 ~QCVAREA~ #8
+  LPF fj_are_structure INT_VAR fj_loc_x=691 fj_loc_y=537 fj_dest_x=691 fj_dest_y=537 fj_orientation=4 STR_VAR fj_structure_type=actor fj_name=QCVAMB fj_cre_resref=QCVAMB fj_dlg_resref=QCVVARUN fj_bcs_override=QCVAMB END
+  LPF fj_are_structure INT_VAR fj_loc_x=460 fj_loc_y=430 fj_dest_x=460 fj_dest_y=430 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCVGH1 fj_cre_resref=QCVGH1 fj_bcs_override=QCAHOST END
+  LPF fj_are_structure INT_VAR fj_loc_x=569 fj_loc_y=400 fj_dest_x=569 fj_dest_y=400 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCVGH2 fj_cre_resref=QCVGH2 fj_bcs_override=QCAHOST END
+  LPF fj_are_structure INT_VAR fj_loc_x=798 fj_loc_y=407 fj_dest_x=798 fj_dest_y=407 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCVGH3 fj_cre_resref=QCVGH3 fj_bcs_override=QCAHOST END
+  LPF fj_are_structure INT_VAR fj_loc_x=991 fj_loc_y=504 fj_dest_x=991 fj_dest_y=504 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCVGH4 fj_cre_resref=QCVGH4 fj_bcs_override=QCAHOST END
+  LPF fj_are_structure INT_VAR fj_loc_x=948 fj_loc_y=674 fj_dest_x=948 fj_dest_y=674 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCVGH5 fj_cre_resref=QCVGH5 fj_bcs_override=QCAHOST END
+  LPF fj_are_structure INT_VAR fj_loc_x=780 fj_loc_y=812 fj_dest_x=780 fj_dest_y=812 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCVGH6 fj_cre_resref=QCVGH6 fj_bcs_override=QCAHOST END
+  LPF fj_are_structure INT_VAR fj_loc_x=475 fj_loc_y=745 fj_dest_x=475 fj_dest_y=745 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCVGH7 fj_cre_resref=QCVGH7 fj_bcs_override=QCAHOST END
+
+// Give the custom ARE its own QC-prefixed WED and search/light/height maps.
+// The WED itself still references the original BG5600 tileset, as BG5601 does.
+COPY_EXISTING ~BG5600.WED~ ~override/QCVRUN.WED~
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG5601SR.BMP~ BEGIN
+  COPY_EXISTING ~BG5601SR.BMP~ ~override/QCVRUNSR.BMP~
+END ELSE BEGIN
+  COPY_EXISTING ~BG5600SR.BMP~ ~override/QCVRUNSR.BMP~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~BG5601LM.BMP~ BEGIN
+  COPY_EXISTING ~BG5601LM.BMP~ ~override/QCVRUNLM.BMP~
+END ELSE BEGIN
+  COPY_EXISTING ~BG5600LM.BMP~ ~override/QCVRUNLM.BMP~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~BG5601HT.BMP~ BEGIN
+  COPY_EXISTING ~BG5601HT.BMP~ ~override/QCVRUNHT.BMP~
+END ELSE BEGIN
+  COPY_EXISTING ~BG5600HT.BMP~ ~override/QCVRUNHT.BMP~
+END
+
+

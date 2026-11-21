@@ -1,0 +1,7 @@
+// Magic Missile on a one-shot container trap, targeting the triggering opener.
+IF
+  True()
+THEN
+  RESPONSE #100
+    ReallyForceSpellRES("SPWI112",LastTrigger)
+END

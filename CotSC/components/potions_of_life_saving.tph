@@ -1,0 +1,230 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_final_small_components.tra~
+
+// Original potion source: Eastern Carnival, setup-qccol.tp2:597-622.
+// Same name, text, icon and 80-HP instant healing effect, but new resource name.
+COPY_EXISTING ~POTN08.ITM~ ~override/QCPLIFE.ITM~
+  SAY NAME1 @5055
+  SAY NAME2 @5055
+  SAY DESC @5056
+  WRITE_ASCII 0x3a ~QCPLIFE~ #8
+  WRITE_ASCII 0x44 ~QCPLIFE~ #8
+  WRITE_ASCII 0x58 ~QCPLIFE~ #8
+  // The quick-item slot renders the item ABILITY icon, not the inventory icon.
+  READ_LONG 0x64 qc_lifesave_header_offset
+  READ_SHORT 0x68 qc_lifesave_header_count
+  FOR (qc_lifesave_h = 0; qc_lifesave_h < qc_lifesave_header_count; qc_lifesave_h += 1) BEGIN
+    WRITE_ASCII (qc_lifesave_header_offset + qc_lifesave_h * 0x38 + 0x04) ~QCPLIFE~ #8
+  END
+  LPF ALTER_ITEM_EFFECT
+    INT_VAR
+      check_headers = 1
+      check_globals = 0
+      match_opcode = 17
+      match_parameter1 = 9
+      parameter1 = 80
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~CotSC/QCPOLS/bam/QCPLIFE.BAM~ ~override/QCPLIFE.BAM~
+
+// Working nearest-existing-container insertion pattern, as used in QCMM.
+// All pre-existing container inventory stays intact; no new containers are created.
+DEFINE_PATCH_FUNCTION QCPOLS_NEAREST_CONTAINER
+  INT_VAR x = 0 y = 0
+BEGIN
+  READ_SHORT 0x74 qcpols_cnt
+  READ_LONG  0x70 qcpols_off
+  PATCH_IF (qcpols_cnt > 0) BEGIN
+    SET qcpols_best = 0
+    SET qcpols_best_dist = 2147483647
+    FOR (qcpols_i = 0; qcpols_i < qcpols_cnt; qcpols_i += 1) BEGIN
+      READ_SHORT (qcpols_off + qcpols_i * 0xc0 + 0x20) qcpols_x
+      READ_SHORT (qcpols_off + qcpols_i * 0xc0 + 0x22) qcpols_y
+      SET qcpols_dx = qcpols_x - x
+      SET qcpols_dy = qcpols_y - y
+      SET qcpols_dist = qcpols_dx * qcpols_dx + qcpols_dy * qcpols_dy
+      PATCH_IF (qcpols_dist < qcpols_best_dist) BEGIN
+        SET qcpols_best_dist = qcpols_dist
+        SET qcpols_best = qcpols_i
+      END
+    END
+    LPF fj_are_structure
+      INT_VAR
+        fj_con_itm_idx = qcpols_best
+        fj_charge0 = 1
+        fj_flags = 1
+      STR_VAR
+        fj_structure_type = ~itm~
+        fj_name = ~QCPLIFE~
+    END
+  END
+  // When an area contains no containers, do nothing: no loot is inserted.
+END
+
+// Every target area uses the exact coordinates supplied by the player.
+// Missing areas are logged rather than creating substitute containers.
+
+// BG1: BG0514.ARE, nearest existing container to 2652, 602.
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0514.ARE~ BEGIN
+  COPY_EXISTING ~BG0514.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 2652 y = 602 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20478
+
+END
+
+// BG1: BG1602.ARE, nearest existing container to 153, 187.
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1602.ARE~ BEGIN
+  COPY_EXISTING ~BG1602.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 153 y = 187 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20479
+
+END
+
+// BG1: BG3901.ARE, nearest existing container to 1128, 1408.
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3901.ARE~ BEGIN
+  COPY_EXISTING ~BG3901.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 1128 y = 1408 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20480
+
+END
+
+// Siege of Dragonspear: BD1200.ARE, nearest existing container to 1968, 2438.
+ACTION_IF FILE_EXISTS_IN_GAME ~BD1200.ARE~ BEGIN
+  COPY_EXISTING ~BD1200.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 1968 y = 2438 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20481
+
+END
+
+// Siege of Dragonspear: BD5300.ARE, nearest existing container to 1523, 1109.
+ACTION_IF FILE_EXISTS_IN_GAME ~BD5300.ARE~ BEGIN
+  COPY_EXISTING ~BD5300.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 1523 y = 1109 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20482
+
+END
+
+// Shadows of Amn: AR0082.ARE, nearest existing container to 326, 268.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0082.ARE~ BEGIN
+  COPY_EXISTING ~AR0082.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 326 y = 268 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20483
+
+END
+
+// Shadows of Amn: AR0206.ARE, nearest existing container to 575, 430.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0206.ARE~ BEGIN
+  COPY_EXISTING ~AR0206.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 575 y = 430 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20484
+
+END
+
+// Shadows of Amn: AR0412.ARE, nearest existing container to 722, 490.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0412.ARE~ BEGIN
+  COPY_EXISTING ~AR0412.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 722 y = 490 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20485
+
+END
+
+// Shadows of Amn: AR0807.ARE, nearest existing container to 420, 304.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR0807.ARE~ BEGIN
+  COPY_EXISTING ~AR0807.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 420 y = 304 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20486
+
+END
+
+// Shadows of Amn: AR1202.ARE, nearest existing container to 3277, 1795.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR1202.ARE~ BEGIN
+  COPY_EXISTING ~AR1202.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 3277 y = 1795 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20487
+
+END
+
+// Shadows of Amn: AR2102.ARE, nearest existing container to 780, 638.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2102.ARE~ BEGIN
+  COPY_EXISTING ~AR2102.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 780 y = 638 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20488
+
+END
+
+// Shadows of Amn: AR2802.ARE, nearest existing container to 666, 312.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR2802.ARE~ BEGIN
+  COPY_EXISTING ~AR2802.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 666 y = 312 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20489
+
+END
+
+// Shadows of Amn: AR3021.ARE, nearest existing container to 831, 670.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR3021.ARE~ BEGIN
+  COPY_EXISTING ~AR3021.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 831 y = 670 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20490
+
+END
+
+// Throne of Bhaal: AR5201.ARE, nearest existing container to 2056, 2248.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR5201.ARE~ BEGIN
+  COPY_EXISTING ~AR5201.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 2056 y = 2248 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20491
+
+END
+
+// Throne of Bhaal: AR6012.ARE, nearest existing container to 494, 309.
+ACTION_IF FILE_EXISTS_IN_GAME ~AR6012.ARE~ BEGIN
+  COPY_EXISTING ~AR6012.ARE~ ~override~
+    LPF QCPOLS_NEAREST_CONTAINER INT_VAR x = 494 y = 309 END
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+
+PRINT @20492
+
+END

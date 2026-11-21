@@ -1,0 +1,7 @@
+// Wandering Dwarven Commoner at 336,350.
+IF
+  !Exists("BGBG0725")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0725",[336.350],0)
+END

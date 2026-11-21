@@ -1,0 +1,66 @@
+// Alianna: initiates once, never before the player approaches the scene.
+IF
+  Global("QBT_STAGE","GLOBAL",0)
+  Global("QBT_TALK","LOCALS",0)
+  Range(Player1,32)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_TALK","LOCALS",1)
+  FaceObject(Player1)
+  StartDialog("QBTALIA",Player1)
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Allegiance(Myself,NEUTRAL)
+THEN
+ RESPONSE #100
+  Enemy()
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_A_BUFF","LOCALS",0)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_A_BUFF","LOCALS",1)
+  SpellNoDecRES("SPPR406",Myself) // Defensive Harmony
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_A_BUFF","LOCALS",1)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_A_BUFF","LOCALS",2)
+  SpellNoDecRES("SPPR508",Myself) // Chaotic Commands (verify installed spell)
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_A_BUFF","LOCALS",2)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_A_BUFF","LOCALS",3)
+  SpellNoDecRES("SPPR202",Myself) // Barkskin
+END
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_A_BUFF","LOCALS",3)
+THEN
+ RESPONSE #100
+  SetGlobal("QBT_A_BUFF","LOCALS",4)
+  SpellNoDecRES("SPPR214",Myself) // Draw Upon Holy Might
+END
+IF
+ Global("QBT_STAGE","GLOBAL",1)
+ HPPercentLT(Myself,50)
+ HasItem("POTN52",Myself)
+THEN
+ RESPONSE #100
+  UseItem("POTN52",Myself)
+END
+IF
+ Global("QBT_STAGE","GLOBAL",1)
+ Global("QBT_A_BUFF","LOCALS",4)
+ See(NearestEnemyOf(Myself))
+THEN
+ RESPONSE #100
+  Attack(NearestEnemyOf(Myself))
+END

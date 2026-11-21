@@ -1,0 +1,26 @@
+APPEND LAHL
+IF ~False()~ THEN BEGIN QCLAHL_OFFER
+  SAY @1
+  IF ~~ THEN REPLY @2 GOTO QCLAHL_SPAWN
+  IF ~~ THEN REPLY @3 EXIT
+END
+
+IF ~False()~ THEN BEGIN QCLAHL_SPAWN
+  SAY @4
+  IF ~~ THEN DO ~SetGlobal("QCLahlBug","GLOBAL",1)
+CreateCreature("QCLAHANK",[2770.1025],0)
+CreateCreature("QCLAHANK",[2789.980],0)
+CreateCreature("QCLAHANK",[2698.771],0)
+CreateCreature("QCLAHANK",[2932.884],0)
+CreateCreature("QCLAHANK",[2784.672],0)~ EXIT
+END
+
+IF WEIGHT #-1000 ~Global("QCLahlBug","GLOBAL",2)~ THEN BEGIN QCLAHL_REWARD
+  SAY @5
+  IF ~~ THEN DO ~GiveItemCreate("POTN14",Player1,1,0,0) AddExperienceParty(200) SetGlobal("QCLahlBug","GLOBAL",3)~ EXIT
+END
+END
+
+EXTEND_BOTTOM LAHL 1
+  IF ~Global("QCLahlBug","GLOBAL",0)~ THEN REPLY @6 GOTO QCLAHL_OFFER
+END

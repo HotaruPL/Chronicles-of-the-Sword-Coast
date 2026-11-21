@@ -1,0 +1,16 @@
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/journal_and_outer_districts.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/harbor_and_taverns.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/docks_and_west_district.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/purple_wyrm_and_elfsong.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/central_and_inner_districts.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/purple_wyrm_residents.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/ulua_quest_and_tavern_audio.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/torms_hand_village_and_dungeon.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/torms_hand_tavern_and_cave.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/torms_hand_houses_and_worldmap.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/sewer_integration.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/hopes_haven_orphanage.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/night_schedules_1.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/night_schedules_2.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/night_schedules_3.tph~
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/night_schedules_4.tph~

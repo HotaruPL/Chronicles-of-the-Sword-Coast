@@ -1,0 +1,7 @@
+IF
+  Global("QCOLMYR_SPAWN","BG2615",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCOLMYR_SPAWN","BG2615",1)
+    CreateCreature("QCOLMYR",[545.986],2)
+END

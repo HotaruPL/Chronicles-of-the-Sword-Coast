@@ -1,0 +1,8 @@
+// Bhaal's forest temple approach: introduction is once per game.
+IF
+  Global("QCB_INTRO","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCB_INTRO","GLOBAL",1)
+    ActionOverride(Player1,StartDialogOverride("PLAYER1",Player1))
+END

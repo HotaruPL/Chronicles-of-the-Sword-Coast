@@ -1,0 +1,16 @@
+// Black/Evie only materialise on Leslie's explicit attack command.
+IF
+  Global("QRV_LESL_FIGHT","GLOBAL",1)
+  !Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    Enemy()
+    Attack(Player1)
+END
+IF
+  Global("QRV_LESL_FIGHT","GLOBAL",1)
+  Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),15)
+END

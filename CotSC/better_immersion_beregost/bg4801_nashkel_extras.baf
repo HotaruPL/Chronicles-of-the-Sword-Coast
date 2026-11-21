@@ -1,0 +1,18 @@
+// Bouncer at 244,313, facing south-east.
+IF
+  !Exists("BNBOUNCE")
+THEN
+  RESPONSE #100
+    CreateCreature("BNBOUNCE",[244.313],3)
+END
+
+// If Neira becomes hostile, the bouncer joins the fight while remaining neutral to the party.
+IF
+  Exists("NEIRA")
+  Allegiance("NEIRA",ENEMY)
+  !Global("BNBOUNC_JOINED","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("BNBOUNC_JOINED","GLOBAL",1)
+    ActionOverride("BNBOUNCE",Attack("NEIRA"))
+END

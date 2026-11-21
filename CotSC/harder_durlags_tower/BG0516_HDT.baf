@@ -1,0 +1,7 @@
+IF
+  Global("HDT_BG0516","BG0516",0)
+THEN
+  RESPONSE #100
+    SetGlobal("HDT_BG0516","BG0516",1)
+    CreateCreature("HDTVERZI",[801.580],0)
+END

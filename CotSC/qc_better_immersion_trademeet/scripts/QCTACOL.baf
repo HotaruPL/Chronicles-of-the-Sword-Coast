@@ -1,0 +1,36 @@
+// v69: Hodrig's acolytes stay neutral until the fight starts. On his command,
+// engage visibly, even if line of sight is briefly interrupted. The original
+// self-invisibility spell could leave them invisible and idle indefinitely.
+IF
+  Global("QCTHodrigGone","GLOBAL",1)
+THEN
+  RESPONSE #100
+    DestroySelf()
+END
+
+IF
+  Global("QCTHodrigFight","GLOBAL",1)
+  Global("QCTAcolStarted","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCTAcolStarted","LOCALS",1)
+    ChangeEnemyAlly(Myself,ENEMY)
+    Attack(Player1)
+END
+
+IF
+  Global("QCTHodrigFight","GLOBAL",1)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END
+
+IF
+  Global("QCTHodrigFight","GLOBAL",1)
+  Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    Attack(Player1)
+END

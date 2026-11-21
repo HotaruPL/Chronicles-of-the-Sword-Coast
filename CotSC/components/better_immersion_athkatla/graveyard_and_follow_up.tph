@@ -1,0 +1,437 @@
+// ---------------------------------------------------------------------------
+// GRAVEYARD DISTRICT - AR0800
+// ---------------------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0800.ARE~ BEGIN
+  FAIL @20337
+END
+
+COMPILE ~CotSC/qc_better_immersion_athkatla/dialogue/QCGRA.d~ USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCGRA.tra~
+
+// Suicidal Commoner - male commoner, green/blue palette, no equipment.
+COPY_EXISTING ~FARM.CRE~ ~override/QCGSUI.CRE~
+  SAY NAME1 @3134
+  SAY NAME2 @3134
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCGSUI~ #8
+  WRITE_ASCII 0x280 ~QCGSUI~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  // Green and blue clothing.
+  WRITE_BYTE 0x2d 5
+  WRITE_BYTE 0x2e 17
+  WRITE_BYTE 0x30 5
+  WRITE_BYTE 0x31 17
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Daytime-only Elven Mourner.
+COPY_EXISTING ~SARELF01.CRE~ ~override/QCGMOUR.CRE~
+  SAY NAME1 @3135
+  SAY NAME2 @3135
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCGMOUR~ #8
+  WRITE_ASCII 0x280 ~QCGMOUR~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0800.ARE~ ~override~
+  // X=2714 Y=900 - Suicidal Commoner, north-east.
+  LPF fj_are_structure INT_VAR fj_loc_x=2714 fj_loc_y=900 fj_dest_x=2714 fj_dest_y=900 fj_orientation=10 STR_VAR fj_structure_type=actor fj_name=QCGSUI fj_cre_resref=QCGSUI fj_dlg_resref=QCGSUI END
+  // X=1866 Y=1473 - Elven Mourner, north-east. Added last so its actor schedule can be patched below.
+  LPF fj_are_structure INT_VAR fj_loc_x=1866 fj_loc_y=1473 fj_dest_x=1866 fj_dest_y=1473 fj_orientation=10 STR_VAR fj_structure_type=actor fj_name=QCGMOUR fj_cre_resref=QCGMOUR fj_dlg_resref=QCGMOUR END
+  // Actor records are 0x110 bytes. The mourner is the actor just appended above.
+  // Enable only bits 6-19: 06:30 through 20:29. He therefore disappears at night.
+  READ_LONG 0x54 qc80_actor_offset
+  READ_SHORT 0x58 qc80_actor_count
+  WRITE_LONG (qc80_actor_offset + ((qc80_actor_count - 1) * 0x110) + 0x40) 0x000fffc0
+BUT_ONLY_IF_IT_CHANGES
+
+// ---------------------------------------------------------------------------
+// DOCKS DISTRICT - AR0300 + AR0313
+// Final district pass. All new resources use QC prefixes.
+// ---------------------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0300.ARE~ BEGIN
+  FAIL @20338
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0313.ARE~ BEGIN
+  FAIL @20339
+END
+
+COMPILE ~CotSC/qc_better_immersion_athkatla/scripts/QCEULIA.baf~
+COMPILE ~CotSC/qc_better_immersion_athkatla/scripts/QCGERAI.baf~
+ADD_JOURNAL TITLE (@1) @2 @3 @4 @5 USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCDOCK.tra~
+COMPILE ~CotSC/qc_better_immersion_athkatla/dialogue/QCDOCK.d~ USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCDOCK.tra~
+
+// Quest amulet carried by Pilther.
+COPY_EXISTING ~AMUL01.ITM~ ~override/QCFAMUL.ITM~
+  SAY NAME1 @3136
+  SAY NAME2 @3137
+  SAY DESC @3138
+  SAY IDENTIFIED_DESC @3138
+BUT_ONLY_IF_IT_CHANGES
+
+// Female Halfling Commoner.
+COPY_EXISTING ~HALFFG.CRE~ ~override/QCDHF1.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDHF1~ #8
+  WRITE_ASCII 0x280 ~QCDHF1~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Male Halfling from Gullykin.
+COPY_EXISTING ~HALFG3.CRE~ ~override/QCDHF2.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDHF2~ #8
+  WRITE_ASCII 0x280 ~QCDHF2~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Eulicia - DHANIA chassis, white palette, automatic approach/dialogue.
+COPY_EXISTING ~DHANIA.CRE~ ~override/QCEULIA.CRE~
+  SAY NAME1 @3139
+  SAY NAME2 @3139
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDEULI~ #8
+  WRITE_ASCII 0x280 ~QCEULIA~ #32
+  WRITE_ASCII 0x248 ~QCEULIA~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x2d 15
+  WRITE_BYTE 0x2e 15
+  WRITE_BYTE 0x30 15
+  WRITE_BYTE 0x31 15
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Eulicia's invisible/backstabbing goon Gerais.
+COPY_EXISTING ~KAYSMG01.CRE~ ~override/QCEGER.CRE~
+  SAY NAME1 @3140
+  SAY NAME2 @3140
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCEGER~ #32
+  WRITE_ASCII 0x248 ~QCGERAI~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  ADD_CRE_ITEM ~DAGG01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+BUT_ONLY_IF_IT_CHANGES
+
+// Eulicia's second goon Velais.
+COPY_EXISTING ~BMUGG1.CRE~ ~override/QCEVEL.CRE~
+  SAY NAME1 @3141
+  SAY NAME2 @3141
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QCEVEL~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Fistacio - native BG2 Orog chassis.
+COPY_EXISTING ~ORC05.CRE~ ~override/QCDFIST.CRE~
+  SAY NAME1 @3142
+  SAY NAME2 @3142
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDFIST~ #8
+  WRITE_ASCII 0x280 ~QCDFIST~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Potion Merchant - use the existing Docks merchant chassis, but with a
+// QC-owned dialogue and independent cloned store.
+COPY_EXISTING ~DSHOP01.CRE~ ~override/QCDPOTM.CRE~
+  SAY NAME1 @3143
+  SAY NAME2 @3143
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDPOTM~ #8
+  WRITE_ASCII 0x280 ~QCDPOTM~ #32
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Independent potion-only store.  DSHOP01 is used only as a structurally
+// valid STO template; every inherited sale item is removed before the potion
+// stock is added.  No weapons, armour, scrolls or miscellaneous stock remains.
+COPY_EXISTING ~DSHOP01.STO~ ~override/QCDPOTS.STO~
+  LPF REMOVE_STORE_ITEM_EX STR_VAR item_name = ~.*~ END
+
+  // Strength/resistance/healing and general utility potions.
+  ADD_STORE_ITEM ~POTN02~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN03~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN04~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN05~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN06~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN07~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN08~ LAST #0 #0 #0 IDENTIFIED #10
+  ADD_STORE_ITEM ~POTN09~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN10~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN11~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN12~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN13~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN14~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN15~ LAST #0 #0 #0 IDENTIFIED #3
+  ADD_STORE_ITEM ~POTN16~ LAST #0 #0 #0 IDENTIFIED #3
+  ADD_STORE_ITEM ~POTN17~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN18~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN19~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN20~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN21~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN22~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN23~ LAST #0 #0 #0 IDENTIFIED #3
+  ADD_STORE_ITEM ~POTN24~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN25~ LAST #0 #0 #0 IDENTIFIED #3
+  ADD_STORE_ITEM ~POTN26~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN27~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN28~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN29~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN30~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN31~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN32~ LAST #0 #0 #0 IDENTIFIED #3
+  ADD_STORE_ITEM ~POTN33~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN34~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN35~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN36~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN37~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN38~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN39~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN40~ LAST #0 #0 #0 IDENTIFIED #3
+  ADD_STORE_ITEM ~POTN41~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN42~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN43~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN44~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN45~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN46~ LAST #0 #0 #0 IDENTIFIED #5
+  ADD_STORE_ITEM ~POTN52~ LAST #0 #0 #0 IDENTIFIED #10
+  ADD_STORE_ITEM ~POTN55~ LAST #0 #0 #0 IDENTIFIED #5
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming Kobold Commoner.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QCDKOB.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDKOB~ #8
+  WRITE_ASCII 0x280 ~QCDKOB~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Ogre lifters - four neutral, unarmed workers.
+COPY_EXISTING ~OGRE01.CRE~ ~override/QCDLIF1.CRE~
+  SAY NAME1 @3144
+  SAY NAME2 @3144
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDLIF1~ #8
+  WRITE_ASCII 0x280 ~QCDLIF1~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~OGRE01.CRE~ ~override/QCDLIF2.CRE~
+  SAY NAME1 @3144
+  SAY NAME2 @3144
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDLIF2~ #8
+  WRITE_ASCII 0x280 ~QCDLIF2~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~OGRE01.CRE~ ~override/QCDLIF3.CRE~
+  SAY NAME1 @3144
+  SAY NAME2 @3144
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDLIF3~ #8
+  WRITE_ASCII 0x280 ~QCDLIF3~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~OGRE01.CRE~ ~override/QCDLIF4.CRE~
+  SAY NAME1 @3144
+  SAY NAME2 @3144
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDLIF4~ #8
+  WRITE_ASCII 0x280 ~QCDLIF4~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Elven Fisherman.
+COPY_EXISTING ~SARELF01.CRE~ ~override/QCDFISH.CRE~
+  SAY NAME1 @3145
+  SAY NAME2 @3145
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDFISH~ #8
+  WRITE_ASCII 0x280 ~QCDFISH~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Orc Thug.
+COPY_EXISTING ~ORC01.CRE~ ~override/QCDTHUG.CRE~
+  SAY NAME1 @3014
+  SAY NAME2 @3014
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCDTHUG~ #8
+  WRITE_ASCII 0x280 ~QCDTHUG~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Pilther - BANDITCY base as requested, recolored with blond hair. Carries Fistacio's amulet.
+COPY_EXISTING ~BANDITCY.CRE~ ~override/QCDPILT.CRE~
+  SAY NAME1 @3146
+  SAY NAME2 @3146
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x32 0x42 // blond hair
+  WRITE_ASCII 0x2cc ~QCDPILT~ #8
+  WRITE_ASCII 0x280 ~QCDPILT~ #32
+  WRITE_ASCII 0x248 ~QCAHOST~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~DAGG01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~QCFAMUL~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// AR0313 Half-Ogre bouncer, using the proven half-ogre conversion.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QCD13BOU.CRE~
+  SAY NAME1 @3111
+  SAY NAME2 @3111
+  WRITE_SHORT 0x28 0x7000
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x272 113
+  WRITE_BYTE 0x273 127
+  WRITE_ASCII 0x2cc ~QCD13BOU~ #8
+  WRITE_ASCII 0x280 ~QCD13BOU~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// AR0313 roaming Kobold Commoner.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/QCD13KOB.CRE~
+  SAY NAME1 @3009
+  SAY NAME2 @3009
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCD13KOB~ #8
+  WRITE_ASCII 0x280 ~QCD13KOB~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0300.ARE~ ~override~
+  // X=2781 Y=365 - female Halfling, east.
+  LPF fj_are_structure INT_VAR fj_loc_x=2781 fj_loc_y=365 fj_dest_x=2781 fj_dest_y=365 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QCDHF1 fj_cre_resref=QCDHF1 fj_dlg_resref=QCDHF1 END
+  // X=2839 Y=371 - male Halfling from Gullykin, west.
+  LPF fj_are_structure INT_VAR fj_loc_x=2839 fj_loc_y=371 fj_dest_x=2839 fj_dest_y=371 fj_orientation=4 STR_VAR fj_structure_type=actor fj_name=QCDHF2 fj_cre_resref=QCDHF2 fj_dlg_resref=QCDHF2 END
+  // X=2581 Y=630 - Eulicia, north. ARE-level override script is required for auto-talk.
+  LPF fj_are_structure INT_VAR fj_loc_x=2581 fj_loc_y=630 fj_dest_x=2581 fj_dest_y=630 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCEULIA fj_cre_resref=QCEULIA fj_dlg_resref=QCDEULI fj_bcs_override=QCEULIA END
+  // X=1524 Y=1407 - Fistacio, south-east.
+  LPF fj_are_structure INT_VAR fj_loc_x=1524 fj_loc_y=1407 fj_dest_x=1524 fj_dest_y=1407 fj_orientation=14 STR_VAR fj_structure_type=actor fj_name=QCDFIST fj_cre_resref=QCDFIST fj_dlg_resref=QCDFIST fj_bcs_override=QCAHOST END
+  // X=3019 Y=1464 - Potion Merchant, QC dialogue/store.
+  LPF fj_are_structure INT_VAR fj_loc_x=3019 fj_loc_y=1464 fj_dest_x=3019 fj_dest_y=1464 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCDPOTM fj_cre_resref=QCDPOTM fj_dlg_resref=QCDPOTM END
+  // X=3394 Y=1354 - roaming Kobold Commoner.
+  LPF fj_are_structure INT_VAR fj_loc_x=3394 fj_loc_y=1354 fj_dest_x=3394 fj_dest_y=1354 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCDKOB fj_cre_resref=QCDKOB fj_dlg_resref=QCDKOB fj_bcs_override=QCAWAND END
+  // X=3578 Y=2783 - Lifter.
+  LPF fj_are_structure INT_VAR fj_loc_x=3578 fj_loc_y=2783 fj_dest_x=3578 fj_dest_y=2783 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCDLIF1 fj_cre_resref=QCDLIF1 fj_dlg_resref=QCDLIF1 END
+  // X=3954 Y=3195 - Elven Fisherman.
+  LPF fj_are_structure INT_VAR fj_loc_x=3954 fj_loc_y=3195 fj_dest_x=3954 fj_dest_y=3195 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCDFISH fj_cre_resref=QCDFISH fj_dlg_resref=QCDFISH END
+  // X=2511 Y=2232 - Orc Thug.
+  LPF fj_are_structure INT_VAR fj_loc_x=2511 fj_loc_y=2232 fj_dest_x=2511 fj_dest_y=2232 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCDTHUG fj_cre_resref=QCDTHUG fj_dlg_resref=QCDTHUG END
+  // X=1775 Y=3183 - Lifter, east.
+  LPF fj_are_structure INT_VAR fj_loc_x=1775 fj_loc_y=3183 fj_dest_x=1775 fj_dest_y=3183 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QCDLIF2 fj_cre_resref=QCDLIF2 fj_dlg_resref=QCDLIF2 END
+  // X=2192 Y=3197 - Lifter, south.
+  LPF fj_are_structure INT_VAR fj_loc_x=2192 fj_loc_y=3197 fj_dest_x=2192 fj_dest_y=3197 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCDLIF3 fj_cre_resref=QCDLIF3 fj_dlg_resref=QCDLIF3 END
+  // X=2193 Y=3243 - Ergh, north.
+  LPF fj_are_structure INT_VAR fj_loc_x=2193 fj_loc_y=3243 fj_dest_x=2193 fj_dest_y=3243 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QCDLIF4 fj_cre_resref=QCDLIF4 fj_dlg_resref=QCDLIF4 END
+  // X=1837 Y=2971 - Pilther.
+  LPF fj_are_structure INT_VAR fj_loc_x=1837 fj_loc_y=2971 fj_dest_x=1837 fj_dest_y=2971 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCDPILT fj_cre_resref=QCDPILT fj_dlg_resref=QCDPILT fj_bcs_override=QCAHOST END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0313.ARE~ ~override~
+  // X=283 Y=372 - Half-Ogre Bouncer, south-east.
+  LPF fj_are_structure INT_VAR fj_loc_x=283 fj_loc_y=372 fj_dest_x=283 fj_dest_y=372 fj_orientation=14 STR_VAR fj_structure_type=actor fj_name=QCD13BOU fj_cre_resref=QCD13BOU fj_dlg_resref=QCD13BOU END
+  // X=722 Y=379 - roaming Kobold Commoner.
+  LPF fj_are_structure INT_VAR fj_loc_x=722 fj_loc_y=379 fj_dest_x=722 fj_dest_y=379 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QCD13KOB fj_cre_resref=QCD13KOB fj_dlg_resref=QCD13KOB fj_bcs_override=QCAWAND END
+BUT_ONLY_IF_IT_CHANGES

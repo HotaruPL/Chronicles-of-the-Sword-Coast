@@ -1,0 +1,9 @@
+// QCHALI Shandalar cleanup. This block is prepended to the original
+// SHOUTDLG override script, so all of his old behavior survives until the
+// Ice Island quest sets QC_SHANDALAR_REMOVE.
+IF
+    Global("QC_SHANDALAR_REMOVE","GLOBAL",1)
+THEN
+    RESPONSE #100
+        DestroySelf()
+END

@@ -1,0 +1,11 @@
+// Zephira fallback combat script. The main combat logic mirrors the
+// Dark Horizons CMTRISD script; this separate override gives the area
+// script a deterministic second path into combat after Dimwoork's dialogue.
+IF
+  Global("DH9_TRIST_FIGHT","GLOBAL",1)
+  !Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    Enemy()
+    AttackReevaluate(Player1,30)
+END

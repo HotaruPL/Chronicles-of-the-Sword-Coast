@@ -1,0 +1,25 @@
+// A real WED/ARE door. The engine provides native Locked feedback and
+// checks the QBTKEY item when the player attempts to open QBTLOCK.
+// Opened() is a door-script-only event: do not replace it with Clicked().
+IF
+  Opened([PC])
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_CORE_SPAWN","GLOBAL",0)
+  PartyHasItem("QBTKEY")
+THEN
+  RESPONSE #100
+    SetGlobal("QBT_CORE_SPAWN","GLOBAL",1)
+    CreateCreature("QBTCORE",[850.785],8)
+END
+
+// Even if a spell or script bypasses the lock, opening without the key
+// must not summon Core. Close/relock the recess before another interaction.
+IF
+  Global("QBT_CORE_SPAWN","GLOBAL",0)
+  OpenState("QBTLOCK",TRUE)
+  !PartyHasItem("QBTKEY")
+THEN
+  RESPONSE #100
+    CloseDoor("QBTLOCK")
+    Lock("QBTLOCK")
+END

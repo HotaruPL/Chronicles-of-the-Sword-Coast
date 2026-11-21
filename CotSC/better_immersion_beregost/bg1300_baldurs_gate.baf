@@ -1,0 +1,94 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// BG1300 - Baldur's Gate district additions
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBFFO01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBFFO01",[1430.538],10)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL13",[2247.587],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBELF13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBELF13",[2736.277],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBKOB13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBKOB13",[2077.1438],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHUM13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHUM13",[2078.1478],8)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBKOB14")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBKOB14",[1762.2394],4)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL14")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL14",[1247.2936],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBTIE13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBTIE13",[294.3013],10)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDWR13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDWR13",[141.2812],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHOB13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHOB13",[385.818],3)
+END

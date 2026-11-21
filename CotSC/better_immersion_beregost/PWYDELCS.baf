@@ -1,0 +1,26 @@
+// Purple Wyrm Inn - Lady Delcia Caan
+// One-time encounter: approach, initiate dialogue, then leave with Hendron.
+
+IF
+  Global("PWY_DELCIA_MET","LOCALS",0)
+  Global("PWY_DELCIA_LEAVE","GLOBAL",0)
+  See([PC])
+  !StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_DELCIA_MET","LOCALS",1)
+    MoveToObject(LastSeenBy(Myself))
+    StartDialogueNoSet(LastSeenBy(Myself))
+END
+
+IF
+  Global("PWY_DELCIA_LEAVE","GLOBAL",1)
+  !StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    ActionOverride("PWYHEND",MoveToPoint([1240.1295]))
+    MoveToPoint([1215.1278])
+    Wait(4)
+    ActionOverride("PWYHEND",DestroySelf())
+    DestroySelf()
+END

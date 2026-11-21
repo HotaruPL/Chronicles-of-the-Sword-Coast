@@ -1,0 +1,20 @@
+// Quest monster is nocturnal, never spawns until Shalvey's quest is active.
+IF
+  Global("QCBP_STAGE","GLOBAL",2)
+  Global("QCBP_GHDEAD","GLOBAL",0)
+  Global("QCBP_DONE","GLOBAL",0)
+  Global("QCBP_GH_SPAWNED","GLOBAL",0)
+  TimeOfDay(NIGHT)
+THEN
+  RESPONSE #100
+    SetGlobal("QCBP_GH_SPAWNED","GLOBAL",1)
+    CreateCreature("QCBPGHOL",[186.2210],5)
+END
+IF
+  Global("QCBP_STAGE","GLOBAL",2)
+  Global("QCBP_GHDEAD","GLOBAL",0)
+  Dead("QCBPGHOL")
+THEN
+  RESPONSE #100
+    SetGlobal("QCBP_GHDEAD","GLOBAL",1)
+END

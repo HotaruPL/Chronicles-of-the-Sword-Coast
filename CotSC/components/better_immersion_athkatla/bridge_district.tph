@@ -1,0 +1,238 @@
+// ---------------------------------------------------------------------------
+// BRIDGE DISTRICT - AR0500 + FIVE FLAGONS - AR0513
+// ---------------------------------------------------------------------------
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0500.ARE~ BEGIN
+  FAIL @20326
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AR0513.ARE~ BEGIN
+  FAIL @20327
+END
+
+COMPILE ~CotSC/qc_better_immersion_athkatla/scripts/QC50HOGA.baf~
+ADD_JOURNAL TITLE (@1) @2 @3 USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCBRIDGE.tra~
+COMPILE ~CotSC/qc_better_immersion_athkatla/dialogue/QCBRIDGE.d~ USING ~CotSC/translation/%LANGUAGE%/qc_better_immersion_athkatla/dialogue/QCBRIDGE.tra~
+
+// Irving's reward drawing: inventory-only misc item using the user's supplied sketch.
+COPY ~CotSC/qc_better_immersion_athkatla/items/QCBDRAW.ITM~ ~override/QCBDRAW.ITM~
+  SAY NAME1 @3121
+  SAY NAME2 @3122
+  SAY DESC @3123
+  // Plain movable/displayable misc item: no critical/undroppable flag.
+  WRITE_LONG 0x18 0x0000000c
+COPY ~CotSC/qc_better_immersion_athkatla/items/QCBDRAW.BAM~ ~override/QCBDRAW.BAM~
+
+// Gnome Beggar - requested GELLAN chassis, recolored. Some EET installs may not
+// contain GELLAN unless the BG1 source/mod that provides it is present, so keep
+// a harmless gnome-commoner fallback instead of making the whole component fail.
+ACTION_IF FILE_EXISTS_IN_GAME ~GELLAN.CRE~ BEGIN
+  COPY_EXISTING ~GELLAN.CRE~ ~override/QC50GBEG.CRE~
+    SAY NAME1 @3124
+    SAY NAME2 @3124
+    WRITE_BYTE 0x270 128
+    WRITE_ASCII 0x2cc ~QC50GBEG~ #8
+    WRITE_ASCII 0x280 ~QC50GBEG~ #32
+    WRITE_ASCII 0x248 ~ ~ #8
+    WRITE_ASCII 0x250 ~ ~ #8
+    WRITE_ASCII 0x258 ~ ~ #8
+    WRITE_ASCII 0x260 ~ ~ #8
+    WRITE_ASCII 0x268 ~ ~ #8
+    WRITE_BYTE 0x2d 34
+    WRITE_BYTE 0x2e 47
+    WRITE_BYTE 0x30 34
+    WRITE_BYTE 0x31 47
+    REMOVE_CRE_ITEMS
+    SAY INITIAL_MEETING ~ ~
+    SAY SELECT_COMMON1 ~ ~
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+  COPY_EXISTING ~BENTLY.CRE~ ~override/QC50GBEG.CRE~
+    SAY NAME1 @3124
+    SAY NAME2 @3124
+    WRITE_BYTE 0x270 128
+    WRITE_ASCII 0x2cc ~QC50GBEG~ #8
+    WRITE_ASCII 0x280 ~QC50GBEG~ #32
+    WRITE_ASCII 0x248 ~ ~ #8
+    WRITE_ASCII 0x250 ~ ~ #8
+    WRITE_ASCII 0x258 ~ ~ #8
+    WRITE_ASCII 0x260 ~ ~ #8
+    WRITE_ASCII 0x268 ~ ~ #8
+    WRITE_BYTE 0x2d 34
+    WRITE_BYTE 0x2e 47
+    WRITE_BYTE 0x30 34
+    WRITE_BYTE 0x31 47
+    REMOVE_CRE_ITEMS
+    SAY INITIAL_MEETING ~ ~
+    SAY SELECT_COMMON1 ~ ~
+  BUT_ONLY_IF_IT_CHANGES
+END
+
+// Goblin Fisherman - actual goblin animation/race, neutral and weaponless.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC50GOBF.CRE~
+  SAY NAME1 @3125
+  SAY NAME2 @3125
+  WRITE_SHORT 0x28 0xE400
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x272 161
+  WRITE_BYTE 0x273 155
+  WRITE_ASCII 0x2cc ~QC50GOBF~ #8
+  WRITE_ASCII 0x280 ~QC50GOBF~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Irving - requested GAXIR half-elf chassis, with a different palette and no old scripts/equipment.
+COPY_EXISTING ~GAXIR.CRE~ ~override/QC50IRV.CRE~
+  SAY NAME1 @3126
+  SAY NAME2 @3126
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC50IRV~ #8
+  WRITE_ASCII 0x280 ~QC50IRV~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x2d 19
+  WRITE_BYTE 0x2e 54
+  WRITE_BYTE 0x30 19
+  WRITE_BYTE 0x31 54
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Roaming female Halfling.
+COPY_EXISTING ~HALFFG.CRE~ ~override/QC50HALF.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC50HALF~ #8
+  WRITE_ASCII 0x280 ~QC50HALF~ #32
+  WRITE_ASCII 0x248 ~QCAWAND~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+// Half-Ogre. Neutral until the Korgan exchange turns him hostile.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC50HOG.CRE~
+  SAY NAME1 @3118
+  SAY NAME2 @3118
+  WRITE_SHORT 0x28 0x7000
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x272 113
+  WRITE_BYTE 0x273 127
+  WRITE_LONG 0x1c 89
+  WRITE_ASCII 0x2cc ~QC50HOG~ #8
+  WRITE_ASCII 0x280 ~QC50HOG~ #32
+  WRITE_ASCII 0x248 ~QC50HOGA~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  ADD_CRE_ITEM ~RING11~ #0 #0 #0 ~IDENTIFIED~ ~INV~
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC50HOB.CRE~
+  SAY NAME1 @3110
+  SAY NAME2 @3110
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC50HOB~ #8
+  WRITE_ASCII 0x280 ~QC50HOB~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FTOBE3.CRE~ ~override/QC50ALIN.CRE~
+  SAY NAME1 @3127
+  SAY NAME2 @3127
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC50ALIN~ #8
+  WRITE_ASCII 0x280 ~QC50ALIN~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0500.ARE~ ~override~
+  // X=3586 Y=255 - Gnome Beggar, south-east.
+  LPF fj_are_structure INT_VAR fj_loc_x=3586 fj_loc_y=255 fj_dest_x=3586 fj_dest_y=255 fj_orientation=14 STR_VAR fj_structure_type=actor fj_name=QC50GBEG fj_cre_resref=QC50GBEG fj_dlg_resref=QC50GBEG END
+  // X=4954 Y=2062 - Goblin Fisherman.
+  LPF fj_are_structure INT_VAR fj_loc_x=4954 fj_loc_y=2062 fj_dest_x=4954 fj_dest_y=2062 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QC50GOBF fj_cre_resref=QC50GOBF fj_dlg_resref=QC50GOBF END
+  // X=4094 Y=2017 - Irving.
+  LPF fj_are_structure INT_VAR fj_loc_x=4094 fj_loc_y=2017 fj_dest_x=4094 fj_dest_y=2017 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC50IRV fj_cre_resref=QC50IRV fj_dlg_resref=QC50IRV END
+  // X=3534 Y=1449 - roaming female Halfling.
+  LPF fj_are_structure INT_VAR fj_loc_x=3534 fj_loc_y=1449 fj_dest_x=3534 fj_dest_y=1449 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC50HALF fj_cre_resref=QC50HALF fj_dlg_resref=QC50HALF fj_bcs_override=QCAWAND END
+  // X=1509 Y=2272 - Half-Ogre.
+  LPF fj_are_structure INT_VAR fj_loc_x=1509 fj_loc_y=2272 fj_dest_x=1509 fj_dest_y=2272 fj_orientation=0 STR_VAR fj_structure_type=actor fj_name=QC50HOG fj_cre_resref=QC50HOG fj_dlg_resref=QC50HOG fj_bcs_override=QC50HOGA END
+  // X=1026 Y=3599 - Hobgoblin, west.
+  LPF fj_are_structure INT_VAR fj_loc_x=1026 fj_loc_y=3599 fj_dest_x=1026 fj_dest_y=3599 fj_orientation=4 STR_VAR fj_structure_type=actor fj_name=QC50HOB fj_cre_resref=QC50HOB fj_dlg_resref=QC50HOB END
+  // X=994 Y=3599 - Alina, east.
+  LPF fj_are_structure INT_VAR fj_loc_x=994 fj_loc_y=3599 fj_dest_x=994 fj_dest_y=3599 fj_orientation=12 STR_VAR fj_structure_type=actor fj_name=QC50ALIN fj_cre_resref=QC50ALIN fj_dlg_resref=QC50ALIN END
+BUT_ONLY_IF_IT_CHANGES
+
+// Five Flagons additions.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/QC513BOU.CRE~
+  SAY NAME1 @3111
+  SAY NAME2 @3111
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC513BOU~ #8
+  WRITE_ASCII 0x280 ~QC513BOU~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BENTLY.CRE~ ~override/QC513GNO.CRE~
+  SAY NAME1 @3105
+  SAY NAME2 @3105
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QC513GNO~ #8
+  WRITE_ASCII 0x280 ~QC513GNO~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  SAY INITIAL_MEETING ~ ~
+  SAY SELECT_COMMON1 ~ ~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~AR0513.ARE~ ~override~
+  // X=464 Y=832 - Bouncer, north-west.
+  LPF fj_are_structure INT_VAR fj_loc_x=464 fj_loc_y=832 fj_dest_x=464 fj_dest_y=832 fj_orientation=6 STR_VAR fj_structure_type=actor fj_name=QC513BOU fj_cre_resref=QC513BOU fj_dlg_resref=QC513BOU END
+  // X=512 Y=449 - Gnome Commoner, north.
+  LPF fj_are_structure INT_VAR fj_loc_x=512 fj_loc_y=449 fj_dest_x=512 fj_dest_y=449 fj_orientation=8 STR_VAR fj_structure_type=actor fj_name=QC513GNO fj_cre_resref=QC513GNO fj_dlg_resref=QC513GNO END
+BUT_ONLY_IF_IT_CHANGES
+
+

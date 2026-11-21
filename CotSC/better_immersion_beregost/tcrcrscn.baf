@@ -1,0 +1,31 @@
+// TORMCR - ALMA DEATH TRACKER
+// TCRALMA has its own Death Variable, so Dead("TCRALMA") is the actual
+// engine death check for the second Alma. Once she dies, unlock the post-Alma
+// state used by TORMFO, the tavern, Randalla, and the cavern exit.
+IF
+  Dead("TCRALMA")
+  Global("TCR_ALMA_DEAD","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("TCR_ALMA_DEAD","GLOBAL",1)
+    // Isaac's custom CRE originally inherited NEMAGREB's Death Variable.
+    // Destroy both identifiers so this also catches saves made before the DV fix.
+    ActionOverride("TCRISAC",DestroySelf())
+    ActionOverride("NEMAGREB",DestroySelf())
+END
+
+// Alma's scroll return: the item sets TCRSCRLU when used. Use explicit
+// LeaveAreaLUA actions so every party member arrives at the validated
+// TORMFO entrance point rather than inheriting TORMCR coords.
+IF
+  Global("TCRSCRLU","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("TCRSCRLU","GLOBAL",2)
+    ActionOverride(Player1,LeaveAreaLUA("TORMFO","",[1007.339],8))
+    ActionOverride(Player2,LeaveAreaLUA("TORMFO","",[1007.339],8))
+    ActionOverride(Player3,LeaveAreaLUA("TORMFO","",[1007.339],8))
+    ActionOverride(Player4,LeaveAreaLUA("TORMFO","",[1007.339],8))
+    ActionOverride(Player5,LeaveAreaLUA("TORMFO","",[1007.339],8))
+    ActionOverride(Player6,LeaveAreaLUA("TORMFO","",[1007.339],8))
+END

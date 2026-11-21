@@ -1,0 +1,9 @@
+// Emhrys's dialogue changes only after the quest has actually been completed.
+IF
+  Global("QBT_DONE","GLOBAL",1)
+  Global("QBT_EMH_FIN","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QBT_EMH_FIN","LOCALS",1)
+    SetDialog("QBTEMHR")
+END

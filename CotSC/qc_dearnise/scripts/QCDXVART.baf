@@ -1,0 +1,29 @@
+// Friendly Xvarts participate only after the spokesman has requested aid.
+// They flee if the leader dies; otherwise wait until the ring is awarded.
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  Dead("QCDTROL1")
+  Dead("QCDTROL2")
+  OR(2)
+    Global("QCDXREWD","GLOBAL",1)
+    Dead("QCDXLEAD")
+THEN
+  RESPONSE #100
+    EscapeArea()
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  !Dead("QCDTROL1")
+  See("QCDTROL1")
+THEN
+  RESPONSE #100
+    Attack("QCDTROL1")
+END
+IF
+  Global("QCDXALRM","GLOBAL",1)
+  !Dead("QCDTROL2")
+  See("QCDTROL2")
+THEN
+  RESPONSE #100
+    Attack("QCDTROL2")
+END

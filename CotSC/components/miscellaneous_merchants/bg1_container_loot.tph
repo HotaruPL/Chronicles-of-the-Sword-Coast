@@ -1,0 +1,715 @@
+// Part V. BG1 container additions requested 24 October 2026.
+// This component does not modify items, merchants, creatures, stores or dialogue.
+// Each item is added to the existing container whose ARE position is nearest to
+// the coordinates supplied by the user. Original container loot is retained.
+// Quantities are encoded as item stack counts (fj_charge0), including 12 gold.
+// Former WeiDU component: Miscellaneous Merchants - Part V: BG1 Container Loot (73 placements)
+
+// Independent of the Part III SoA container helper, so the earlier frozen
+// component need not be reinstalled or executed for Part V to work.
+DEFINE_PATCH_FUNCTION QCMM_BG1_CONTAINER_LOOT
+  INT_VAR x = 0 y = 0 charge = 1
+  STR_VAR item = ~~
+BEGIN
+  READ_SHORT 0x74 qcmm_bg1_cnt
+  READ_LONG  0x70 qcmm_bg1_off
+  PATCH_IF (qcmm_bg1_cnt > 0) BEGIN
+    SET qcmm_bg1_best = 0
+    SET qcmm_bg1_dist_best = 2147483647
+    FOR (qcmm_bg1_i = 0; qcmm_bg1_i < qcmm_bg1_cnt; qcmm_bg1_i += 1) BEGIN
+      READ_SHORT (qcmm_bg1_off + qcmm_bg1_i * 0xc0 + 0x20) qcmm_bg1_x
+      READ_SHORT (qcmm_bg1_off + qcmm_bg1_i * 0xc0 + 0x22) qcmm_bg1_y
+      SET qcmm_bg1_dx = qcmm_bg1_x - x
+      SET qcmm_bg1_dy = qcmm_bg1_y - y
+      SET qcmm_bg1_dist = qcmm_bg1_dx * qcmm_bg1_dx + qcmm_bg1_dy * qcmm_bg1_dy
+      PATCH_IF (qcmm_bg1_dist < qcmm_bg1_dist_best) BEGIN
+        SET qcmm_bg1_dist_best = qcmm_bg1_dist
+        SET qcmm_bg1_best = qcmm_bg1_i
+      END
+    END
+    LPF fj_are_structure
+      INT_VAR
+        fj_con_itm_idx = qcmm_bg1_best
+        fj_charge0 = charge
+        fj_flags = 1
+      STR_VAR
+        fj_structure_type = ~itm~
+        fj_name = EVAL ~%item%~
+    END
+  END ELSE BEGIN
+    PATCH_PRINT @20344
+  END
+END
+
+// Areas absent from an installation are reported, rather than silently
+// causing the whole component to roll back. See the manifest for all 73 targets.
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG2617.ARE~ BEGIN
+  COPY_EXISTING ~BG2617.ARE~ ~override~
+    // Requested nearest container: 213, 358
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 213 y = 358 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20345
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG2600.ARE~ BEGIN
+  COPY_EXISTING ~BG2600.ARE~ ~override~
+    // Requested nearest container: 1970, 2913
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1970 y = 2913 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20346
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3343.ARE~ BEGIN
+  COPY_EXISTING ~BG3343.ARE~ ~override~
+    // Requested nearest container: 199, 233
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 199 y = 233 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20347
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3330.ARE~ BEGIN
+  COPY_EXISTING ~BG3330.ARE~ ~override~
+    // Requested nearest container: 200, 329
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 200 y = 329 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20348
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3308.ARE~ BEGIN
+  COPY_EXISTING ~BG3308.ARE~ ~override~
+    // Requested nearest container: 228, 323
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 228 y = 323 charge = 3 STR_VAR item = ~QCCOKIE~ END
+    // Requested nearest container: 240, 130
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 240 y = 130 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20349
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3357.ARE~ BEGIN
+  COPY_EXISTING ~BG3357.ARE~ ~override~
+    // Requested nearest container: 319, 204
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 319 y = 204 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20350
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3303.ARE~ BEGIN
+  COPY_EXISTING ~BG3303.ARE~ ~override~
+    // Requested nearest container: 536, 508
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 536 y = 508 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20351
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3328.ARE~ BEGIN
+  COPY_EXISTING ~BG3328.ARE~ ~override~
+    // Requested nearest container: 207, 361
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 207 y = 361 charge = 2 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20352
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3314.ARE~ BEGIN
+  COPY_EXISTING ~BG3314.ARE~ ~override~
+    // Requested nearest container: 229, 325
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 229 y = 325 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20353
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3321.ARE~ BEGIN
+  COPY_EXISTING ~BG3321.ARE~ ~override~
+    // Requested nearest container: 897, 444
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 897 y = 444 charge = 1 STR_VAR item = ~QCHONEY~ END
+END ELSE BEGIN
+
+PRINT @20354
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3351.ARE~ BEGIN
+  COPY_EXISTING ~BG3351.ARE~ ~override~
+    // Requested nearest container: 697, 238
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 697 y = 238 charge = 1 STR_VAR item = ~QCCORN~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 697 y = 238 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20355
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3315.ARE~ BEGIN
+  COPY_EXISTING ~BG3315.ARE~ ~override~
+    // Requested nearest container: 209, 233
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 209 y = 233 charge = 2 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20356
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG2306.ARE~ BEGIN
+  COPY_EXISTING ~BG2306.ARE~ ~override~
+    // Requested nearest container: 221, 221
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 221 y = 221 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 221 y = 221 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20357
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG2302.ARE~ BEGIN
+  COPY_EXISTING ~BG2302.ARE~ ~override~
+    // Requested nearest container: 742, 386
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 742 y = 386 charge = 2 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20358
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG2303.ARE~ BEGIN
+  COPY_EXISTING ~BG2303.ARE~ ~override~
+    // Requested nearest container: 439, 484
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 439 y = 484 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20359
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG4001.ARE~ BEGIN
+  COPY_EXISTING ~BG4001.ARE~ ~override~
+    // Requested nearest container: 342, 150
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 342 y = 150 charge = 1 STR_VAR item = ~QCCORN~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 342 y = 150 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20360
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG4009.ARE~ BEGIN
+  COPY_EXISTING ~BG4009.ARE~ ~override~
+    // Requested nearest container: 202, 207
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 202 y = 207 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20361
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG4008.ARE~ BEGIN
+  COPY_EXISTING ~BG4008.ARE~ ~override~
+    // Requested nearest container: 216, 282
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 216 y = 282 charge = 1 STR_VAR item = ~QCHONEY~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 216 y = 282 charge = 2 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20362
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG4801.ARE~ BEGIN
+  COPY_EXISTING ~BG4801.ARE~ ~override~
+    // Requested nearest container: 831, 318
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 831 y = 318 charge = 1 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20363
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG4800.ARE~ BEGIN
+  COPY_EXISTING ~BG4800.ARE~ ~override~
+    // Requested nearest container: 3942, 2954
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 3942 y = 2954 charge = 1 STR_VAR item = ~QCGRAIN~ END
+END ELSE BEGIN
+
+PRINT @20364
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG4807.ARE~ BEGIN
+  COPY_EXISTING ~BG4807.ARE~ ~override~
+    // Requested nearest container: 212, 224
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 212 y = 224 charge = 2 STR_VAR item = ~QCSAUSG~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 212 y = 224 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20365
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG4907.ARE~ BEGIN
+  COPY_EXISTING ~BG4907.ARE~ ~override~
+    // Requested nearest container: 370, 258
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 370 y = 258 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20366
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG4900.ARE~ BEGIN
+  COPY_EXISTING ~BG4900.ARE~ ~override~
+    // Requested nearest container: 3540, 2115
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 3540 y = 2115 charge = 1 STR_VAR item = ~SW1H20~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 3540 y = 2115 charge = 1 STR_VAR item = ~SW1H46~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 3540 y = 2115 charge = 1 STR_VAR item = ~SW1H48~ END
+END ELSE BEGIN
+
+PRINT @20367
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG5406.ARE~ BEGIN
+  COPY_EXISTING ~BG5406.ARE~ ~override~
+    // Requested nearest container: 271, 413
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 271 y = 413 charge = 1 STR_VAR item = ~QCHONEY~ END
+END ELSE BEGIN
+
+PRINT @20368
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG5401.ARE~ BEGIN
+  COPY_EXISTING ~BG5401.ARE~ ~override~
+    // Requested nearest container: 1498, 808
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1498 y = 808 charge = 5 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20369
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG5405.ARE~ BEGIN
+  COPY_EXISTING ~BG5405.ARE~ ~override~
+    // Requested nearest container: 605, 985
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 605 y = 985 charge = 2 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 605 y = 985 charge = 1 STR_VAR item = ~QCSAUSG~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 605 y = 985 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20370
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1404.ARE~ BEGIN
+  COPY_EXISTING ~BG1404.ARE~ ~override~
+    // Requested nearest container: 365, 155
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 365 y = 155 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 365 y = 155 charge = 2 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20371
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1403.ARE~ BEGIN
+  COPY_EXISTING ~BG1403.ARE~ ~override~
+    // Requested nearest container: 642, 342
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 642 y = 342 charge = 3 STR_VAR item = ~QCFLOUR~ END
+END ELSE BEGIN
+
+PRINT @20372
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0901.ARE~ BEGIN
+  COPY_EXISTING ~BG0901.ARE~ ~override~
+    // Requested nearest container: 206, 235
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 206 y = 235 charge = 1 STR_VAR item = ~QCGRAIN~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 206 y = 235 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20373
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0401.ARE~ BEGIN
+  COPY_EXISTING ~BG0401.ARE~ ~override~
+    // Requested nearest container: 376, 152
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 376 y = 152 charge = 2 STR_VAR item = ~QCFLOUR~ END
+END ELSE BEGIN
+
+PRINT @20374
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1001.ARE~ BEGIN
+  COPY_EXISTING ~BG1001.ARE~ ~override~
+    // Requested nearest container: 472, 633
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 472 y = 633 charge = 1 STR_VAR item = ~QCSAUSG~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 472 y = 633 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20375
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0705.ARE~ BEGIN
+  COPY_EXISTING ~BG0705.ARE~ ~override~
+    // Requested nearest container: 283, 716
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 283 y = 716 charge = 2 STR_VAR item = ~QCGRAIN~ END
+END ELSE BEGIN
+
+PRINT @20376
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0804.ARE~ BEGIN
+  COPY_EXISTING ~BG0804.ARE~ ~override~
+    // Requested nearest container: 381, 117
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 381 y = 117 charge = 1 STR_VAR item = ~QCHONEY~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 381 y = 117 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20377
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0153.ARE~ BEGIN
+  COPY_EXISTING ~BG0153.ARE~ ~override~
+    // Requested nearest container: 957, 234
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 957 y = 234 charge = 1 STR_VAR item = ~SW1H46~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 957 y = 234 charge = 3 STR_VAR item = ~QCMEAT~ END
+    // Requested nearest container: 743, 671
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 743 y = 671 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20378
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0300.ARE~ BEGIN
+  COPY_EXISTING ~BG0300.ARE~ ~override~
+    // Requested nearest container: 1914, 2193
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1914 y = 2193 charge = 1 STR_VAR item = ~QCHONEY~ END
+    // Requested nearest container: 94, 3043
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 94 y = 3043 charge = 1 STR_VAR item = ~QCCORN~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 94 y = 3043 charge = 1 STR_VAR item = ~SCRL7Q~ END
+END ELSE BEGIN
+
+PRINT @20379
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0306.ARE~ BEGIN
+  COPY_EXISTING ~BG0306.ARE~ ~override~
+    // Requested nearest container: 388, 106
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 388 y = 106 charge = 1 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 388 y = 106 charge = 2 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20380
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0114.ARE~ BEGIN
+  COPY_EXISTING ~BG0114.ARE~ ~override~
+    // Requested nearest container: 1067, 826
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1067 y = 826 charge = 1 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1067 y = 826 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Requested nearest container: 501, 422
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 501 y = 422 charge = 2 STR_VAR item = ~QCFLOUR~ END
+END ELSE BEGIN
+
+PRINT @20381
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0014.ARE~ BEGIN
+  COPY_EXISTING ~BG0014.ARE~ ~override~
+    // Requested nearest container: 477, 114
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 477 y = 114 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20382
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0012.ARE~ BEGIN
+  COPY_EXISTING ~BG0012.ARE~ ~override~
+    // Requested nearest container: 202, 365
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 202 y = 365 charge = 1 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 202 y = 365 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20383
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0007.ARE~ BEGIN
+  COPY_EXISTING ~BG0007.ARE~ ~override~
+    // Requested nearest container: 182, 376
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 182 y = 376 charge = 2 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20384
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0700.ARE~ BEGIN
+  COPY_EXISTING ~BG0700.ARE~ ~override~
+    // Requested nearest container: 2075, 1246
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 2075 y = 1246 charge = 1 STR_VAR item = ~QCCORN~ END
+END ELSE BEGIN
+
+PRINT @20385
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0722.ARE~ BEGIN
+  COPY_EXISTING ~BG0722.ARE~ ~override~
+    // Requested nearest container: 401, 282
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 401 y = 282 charge = 1 STR_VAR item = ~QCHONEY~ END
+END ELSE BEGIN
+
+PRINT @20386
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0117.ARE~ BEGIN
+  COPY_EXISTING ~BG0117.ARE~ ~override~
+    // Requested nearest container: 403, 435
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 403 y = 435 charge = 1 STR_VAR item = ~QCHONEY~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 403 y = 435 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20387
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0158.ARE~ BEGIN
+  COPY_EXISTING ~BG0158.ARE~ ~override~
+    // Requested nearest container: 197, 325
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 197 y = 325 charge = 1 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20388
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0162.ARE~ BEGIN
+  COPY_EXISTING ~BG0162.ARE~ ~override~
+    // Requested nearest container: 362, 701
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 362 y = 701 charge = 5 STR_VAR item = ~QCCOKIE~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 362 y = 701 charge = 1 STR_VAR item = ~QCHONEY~ END
+END ELSE BEGIN
+
+PRINT @20389
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0170.ARE~ BEGIN
+  COPY_EXISTING ~BG0170.ARE~ ~override~
+    // Requested nearest container: 237, 322
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 237 y = 322 charge = 1 STR_VAR item = ~QCBREAD~ END
+END ELSE BEGIN
+
+PRINT @20390
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0101.ARE~ BEGIN
+  COPY_EXISTING ~BG0101.ARE~ ~override~
+    // Requested nearest container: 1204, 473
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1204 y = 473 charge = 2 STR_VAR item = ~QCHONEY~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1204 y = 473 charge = 1 STR_VAR item = ~QCCORN~ END
+END ELSE BEGIN
+
+PRINT @20391
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0102.ARE~ BEGIN
+  COPY_EXISTING ~BG0102.ARE~ ~override~
+    // Requested nearest container: 573, 1109
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 573 y = 1109 charge = 1 STR_VAR item = ~QCHONEY~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 573 y = 1109 charge = 1 STR_VAR item = ~QCWATER~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 573 y = 1109 charge = 2 STR_VAR item = ~QCSAUSG~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 573 y = 1109 charge = 4 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 573 y = 1109 charge = 2 STR_VAR item = ~QCEGGS~ END
+END ELSE BEGIN
+
+PRINT @20392
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG0136.ARE~ BEGIN
+  COPY_EXISTING ~BG0136.ARE~ ~override~
+    // Requested nearest container: 674, 511
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 674 y = 511 charge = 1 STR_VAR item = ~QCSAUSG~ END
+END ELSE BEGIN
+
+PRINT @20393
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1208.ARE~ BEGIN
+  COPY_EXISTING ~BG1208.ARE~ ~override~
+    // Requested nearest container: 648, 664
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 648 y = 664 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Requested nearest container: 840, 204
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 840 y = 204 charge = 1 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20394
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1200.ARE~ BEGIN
+  COPY_EXISTING ~BG1200.ARE~ ~override~
+    // Requested nearest container: 2161, 1341
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 2161 y = 1341 charge = 1 STR_VAR item = ~QCCORN~ END
+END ELSE BEGIN
+
+PRINT @20395
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1206.ARE~ BEGIN
+  COPY_EXISTING ~BG1206.ARE~ ~override~
+    // Requested nearest container: 186, 314
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 186 y = 314 charge = 1 STR_VAR item = ~QCFLOUR~ END
+END ELSE BEGIN
+
+PRINT @20396
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1100.ARE~ BEGIN
+  COPY_EXISTING ~BG1100.ARE~ ~override~
+    // Requested nearest container: 3303, 1648
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 3303 y = 1648 charge = 1 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20397
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1105.ARE~ BEGIN
+  COPY_EXISTING ~BG1105.ARE~ ~override~
+    // Requested nearest container: 541, 235
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 541 y = 235 charge = 1 STR_VAR item = ~QCWATER~ END
+END ELSE BEGIN
+
+PRINT @20398
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1108.ARE~ BEGIN
+  COPY_EXISTING ~BG1108.ARE~ ~override~
+    // Requested nearest container: 284, 429
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 284 y = 429 charge = 1 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 284 y = 429 charge = 1 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20399
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1900.ARE~ BEGIN
+  COPY_EXISTING ~BG1900.ARE~ ~override~
+    // Requested nearest container: 2212, 1103
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 2212 y = 1103 charge = 1 STR_VAR item = ~SCRL6P~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 2212 y = 1103 charge = 1 STR_VAR item = ~QCBREAD~ END
+    // Requested nearest container: 2026, 487
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 2026 y = 487 charge = 1 STR_VAR item = ~QCSAUSG~ END
+    // Requested nearest container: 3311, 985
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 3311 y = 985 charge = 1 STR_VAR item = ~QCGRAIN~ END
+END ELSE BEGIN
+
+PRINT @20400
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1806.ARE~ BEGIN
+  COPY_EXISTING ~BG1806.ARE~ ~override~
+    // Requested nearest container: 222, 292
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 222 y = 292 charge = 1 STR_VAR item = ~QCSAUSG~ END
+    // Requested nearest container: 346, 203
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 346 y = 203 charge = 1 STR_VAR item = ~QCCOKIE~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 346 y = 203 charge = 1 STR_VAR item = ~QCEGGS~ END
+END ELSE BEGIN
+
+PRINT @20401
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1804.ARE~ BEGIN
+  COPY_EXISTING ~BG1804.ARE~ ~override~
+    // Requested nearest container: 1567, 840
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1567 y = 840 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Requested nearest container: 1970, 910
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1970 y = 910 charge = 1 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1970 y = 910 charge = 1 STR_VAR item = ~QCEGGS~ END
+    // Requested nearest container: 1032, 1400
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1032 y = 1400 charge = 1 STR_VAR item = ~QCEGGS~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1032 y = 1400 charge = 1 STR_VAR item = ~QCHONEY~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1032 y = 1400 charge = 12 STR_VAR item = ~MISC07~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1032 y = 1400 charge = 5 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20402
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1802.ARE~ BEGIN
+  COPY_EXISTING ~BG1802.ARE~ ~override~
+    // Requested nearest container: 933, 881
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 933 y = 881 charge = 1 STR_VAR item = ~QCBREAD~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 933 y = 881 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Requested nearest container: 1309, 635
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1309 y = 635 charge = 1 STR_VAR item = ~QCWATER~ END
+    // Requested nearest container: 1729, 347
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1729 y = 347 charge = 1 STR_VAR item = ~QCEGGS~ END
+END ELSE BEGIN
+
+PRINT @20403
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~BG1803.ARE~ BEGIN
+  COPY_EXISTING ~BG1803.ARE~ ~override~
+    // Requested nearest container: 1218, 173
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1218 y = 173 charge = 1 STR_VAR item = ~POTN52~ END
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 1218 y = 173 charge = 1 STR_VAR item = ~QCCOKIE~ END
+END ELSE BEGIN
+
+PRINT @20404
+
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~OH2000.ARE~ BEGIN
+  COPY_EXISTING ~OH2000.ARE~ ~override~
+    // Requested nearest container: 2627, 3284
+    LPF QCMM_BG1_CONTAINER_LOOT INT_VAR x = 2627 y = 3284 charge = 2 STR_VAR item = ~QCMEAT~ END
+END ELSE BEGIN
+
+PRINT @20405
+
+END
+
+

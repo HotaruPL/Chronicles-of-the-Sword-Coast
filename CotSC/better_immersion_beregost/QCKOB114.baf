@@ -1,0 +1,6 @@
+IF
+  Global("QC37KobBye","LOCALS",1)
+THEN
+  RESPONSE #100
+    EscapeArea()
+END

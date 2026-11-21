@@ -1,0 +1,17 @@
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - BG0103
+// ---------------------------------------------------------------------------
+
+IF
+  !Exists("BIB1031")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB1031",[537.499],2)
+END
+
+IF
+  !Exists("BIB1032")
+THEN
+  RESPONSE #100
+    CreateCreature("BIB1032",[798.563],2)
+END

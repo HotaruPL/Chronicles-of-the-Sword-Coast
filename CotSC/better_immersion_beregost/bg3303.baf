@@ -1,0 +1,13 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// Additional Elven Commoner in BG3303, standing, facing west.
+// No coordinate was specified; placed in an open-looking interior position near the existing rooms.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBELF02")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBELF02",[700.250],4)
+END

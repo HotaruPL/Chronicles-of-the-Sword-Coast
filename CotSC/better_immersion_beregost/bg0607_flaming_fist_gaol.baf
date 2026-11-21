@@ -1,0 +1,33 @@
+// Drow prisoner at 809,1158, facing west.
+IF
+  !Exists("BIBDRO07")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDRO07",[809.1158],4)
+END
+
+// Troll prisoner at 534,406, facing south. Non-hostile.
+IF
+  !Exists("BIBTROL7")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBTROL7",[534.406],0)
+END
+
+// High Constable at 1267,741, facing south.
+// He leaves the game from Chapter 6 onward.
+IF
+  GlobalLT("Chapter","GLOBAL",6)
+  !Exists("BIBHCON7")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHCON7",[1267.741],0)
+END
+
+IF
+  GlobalGT("Chapter","GLOBAL",5)
+  Exists("BIBHCON7")
+THEN
+  RESPONSE #100
+    ActionOverride("BIBHCON7",DestroySelf())
+END

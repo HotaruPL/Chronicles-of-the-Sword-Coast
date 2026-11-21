@@ -1,0 +1,47 @@
+IF
+  Entered(Player1)
+THEN
+  RESPONSE #100
+    ApplyDamage(Player1,12,PIERCING)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player2)
+THEN
+  RESPONSE #100
+    ApplyDamage(Player2,12,PIERCING)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player3)
+THEN
+  RESPONSE #100
+    ApplyDamage(Player3,12,PIERCING)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player4)
+THEN
+  RESPONSE #100
+    ApplyDamage(Player4,12,PIERCING)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player5)
+THEN
+  RESPONSE #100
+    ApplyDamage(Player5,12,PIERCING)
+    TriggerActivation(Myself,FALSE)
+END
+
+IF
+  Entered(Player6)
+THEN
+  RESPONSE #100
+    ApplyDamage(Player6,12,PIERCING)
+    TriggerActivation(Myself,FALSE)
+END

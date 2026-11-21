@@ -1,0 +1,576 @@
+// ---------------------------------------------------------------------------
+// BG0700 - BALDUR'S GATE DISTRICT ADDITIONS
+// ---------------------------------------------------------------------------
+
+// Female Elven Commoner — SARELF04 chassis, static and weaponless.
+COPY_EXISTING ~SARELF04.CRE~ ~override/BGBG0701.CRE~
+  SAY NAME1 @2012
+  SAY NAME2 @2012
+  WRITE_ASCII 0x2cc ~BGBG0701~ #8
+  WRITE_ASCII 0x280 ~BGBG0701~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Hobgoblin Commoner — weaponless, static.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BGBG0702.CRE~
+  SAY NAME1 @2006
+  SAY NAME2 @2006
+  WRITE_ASCII 0x2cc ~BGBG0702~ #8
+  WRITE_ASCII 0x280 ~BGBG0702~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering dog — preserve the normal dog movement AI.
+COPY_EXISTING ~KPDOG02.CRE~ ~override/BGBG0703.CRE~
+  SAY NAME1 @2018
+  SAY NAME2 @2018
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BGBG0703~ #32
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+// Orc Commoner — weaponless, static.
+COPY_EXISTING ~ORC02.CRE~ ~override/BGBG0704.CRE~
+  SAY NAME1 @2004
+  SAY NAME2 @2004
+  WRITE_ASCII 0x2cc ~BGBG0704~ #8
+  WRITE_ASCII 0x280 ~BGBG0704~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Gnome Commoner — retain BENTLY's sprite/chassis, but use CELVAN's sound-set.
+COPY_EXISTING ~BENTLY.CRE~ ~override/BGBG0705.CRE~
+  SAY NAME1 @2008
+  SAY NAME2 @2008
+  WRITE_ASCII 0x2cc ~BGBG0705~ #8
+  WRITE_ASCII 0x280 ~BGBG0705~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+  // Read CELVAN's 100 sound-set strrefs while leaving its actual CRE untouched.
+  INNER_PATCH_FILE ~CELVAN.CRE~ BEGIN
+    READ_LONG 0xa4 bib_gv_0
+    READ_LONG 0xa8 bib_gv_1
+    READ_LONG 0xac bib_gv_2
+    READ_LONG 0xb0 bib_gv_3
+    READ_LONG 0xb4 bib_gv_4
+    READ_LONG 0xb8 bib_gv_5
+    READ_LONG 0xbc bib_gv_6
+    READ_LONG 0xc0 bib_gv_7
+    READ_LONG 0xc4 bib_gv_8
+    READ_LONG 0xc8 bib_gv_9
+    READ_LONG 0xcc bib_gv_10
+    READ_LONG 0xd0 bib_gv_11
+    READ_LONG 0xd4 bib_gv_12
+    READ_LONG 0xd8 bib_gv_13
+    READ_LONG 0xdc bib_gv_14
+    READ_LONG 0xe0 bib_gv_15
+    READ_LONG 0xe4 bib_gv_16
+    READ_LONG 0xe8 bib_gv_17
+    READ_LONG 0xec bib_gv_18
+    READ_LONG 0xf0 bib_gv_19
+    READ_LONG 0xf4 bib_gv_20
+    READ_LONG 0xf8 bib_gv_21
+    READ_LONG 0xfc bib_gv_22
+    READ_LONG 0x100 bib_gv_23
+    READ_LONG 0x104 bib_gv_24
+    READ_LONG 0x108 bib_gv_25
+    READ_LONG 0x10c bib_gv_26
+    READ_LONG 0x110 bib_gv_27
+    READ_LONG 0x114 bib_gv_28
+    READ_LONG 0x118 bib_gv_29
+    READ_LONG 0x11c bib_gv_30
+    READ_LONG 0x120 bib_gv_31
+    READ_LONG 0x124 bib_gv_32
+    READ_LONG 0x128 bib_gv_33
+    READ_LONG 0x12c bib_gv_34
+    READ_LONG 0x130 bib_gv_35
+    READ_LONG 0x134 bib_gv_36
+    READ_LONG 0x138 bib_gv_37
+    READ_LONG 0x13c bib_gv_38
+    READ_LONG 0x140 bib_gv_39
+    READ_LONG 0x144 bib_gv_40
+    READ_LONG 0x148 bib_gv_41
+    READ_LONG 0x14c bib_gv_42
+    READ_LONG 0x150 bib_gv_43
+    READ_LONG 0x154 bib_gv_44
+    READ_LONG 0x158 bib_gv_45
+    READ_LONG 0x15c bib_gv_46
+    READ_LONG 0x160 bib_gv_47
+    READ_LONG 0x164 bib_gv_48
+    READ_LONG 0x168 bib_gv_49
+    READ_LONG 0x16c bib_gv_50
+    READ_LONG 0x170 bib_gv_51
+    READ_LONG 0x174 bib_gv_52
+    READ_LONG 0x178 bib_gv_53
+    READ_LONG 0x17c bib_gv_54
+    READ_LONG 0x180 bib_gv_55
+    READ_LONG 0x184 bib_gv_56
+    READ_LONG 0x188 bib_gv_57
+    READ_LONG 0x18c bib_gv_58
+    READ_LONG 0x190 bib_gv_59
+    READ_LONG 0x194 bib_gv_60
+    READ_LONG 0x198 bib_gv_61
+    READ_LONG 0x19c bib_gv_62
+    READ_LONG 0x1a0 bib_gv_63
+    READ_LONG 0x1a4 bib_gv_64
+    READ_LONG 0x1a8 bib_gv_65
+    READ_LONG 0x1ac bib_gv_66
+    READ_LONG 0x1b0 bib_gv_67
+    READ_LONG 0x1b4 bib_gv_68
+    READ_LONG 0x1b8 bib_gv_69
+    READ_LONG 0x1bc bib_gv_70
+    READ_LONG 0x1c0 bib_gv_71
+    READ_LONG 0x1c4 bib_gv_72
+    READ_LONG 0x1c8 bib_gv_73
+    READ_LONG 0x1cc bib_gv_74
+    READ_LONG 0x1d0 bib_gv_75
+    READ_LONG 0x1d4 bib_gv_76
+    READ_LONG 0x1d8 bib_gv_77
+    READ_LONG 0x1dc bib_gv_78
+    READ_LONG 0x1e0 bib_gv_79
+    READ_LONG 0x1e4 bib_gv_80
+    READ_LONG 0x1e8 bib_gv_81
+    READ_LONG 0x1ec bib_gv_82
+    READ_LONG 0x1f0 bib_gv_83
+    READ_LONG 0x1f4 bib_gv_84
+    READ_LONG 0x1f8 bib_gv_85
+    READ_LONG 0x1fc bib_gv_86
+    READ_LONG 0x200 bib_gv_87
+    READ_LONG 0x204 bib_gv_88
+    READ_LONG 0x208 bib_gv_89
+    READ_LONG 0x20c bib_gv_90
+    READ_LONG 0x210 bib_gv_91
+    READ_LONG 0x214 bib_gv_92
+    READ_LONG 0x218 bib_gv_93
+    READ_LONG 0x21c bib_gv_94
+    READ_LONG 0x220 bib_gv_95
+    READ_LONG 0x224 bib_gv_96
+    READ_LONG 0x228 bib_gv_97
+    READ_LONG 0x22c bib_gv_98
+    READ_LONG 0x230 bib_gv_99
+  END
+  WRITE_LONG 0xa4 "%bib_gv_0%"
+  WRITE_LONG 0xa8 "%bib_gv_1%"
+  WRITE_LONG 0xac "%bib_gv_2%"
+  WRITE_LONG 0xb0 "%bib_gv_3%"
+  WRITE_LONG 0xb4 "%bib_gv_4%"
+  WRITE_LONG 0xb8 "%bib_gv_5%"
+  WRITE_LONG 0xbc "%bib_gv_6%"
+  WRITE_LONG 0xc0 "%bib_gv_7%"
+  WRITE_LONG 0xc4 "%bib_gv_8%"
+  WRITE_LONG 0xc8 "%bib_gv_9%"
+  WRITE_LONG 0xcc "%bib_gv_10%"
+  WRITE_LONG 0xd0 "%bib_gv_11%"
+  WRITE_LONG 0xd4 "%bib_gv_12%"
+  WRITE_LONG 0xd8 "%bib_gv_13%"
+  WRITE_LONG 0xdc "%bib_gv_14%"
+  WRITE_LONG 0xe0 "%bib_gv_15%"
+  WRITE_LONG 0xe4 "%bib_gv_16%"
+  WRITE_LONG 0xe8 "%bib_gv_17%"
+  WRITE_LONG 0xec "%bib_gv_18%"
+  WRITE_LONG 0xf0 "%bib_gv_19%"
+  WRITE_LONG 0xf4 "%bib_gv_20%"
+  WRITE_LONG 0xf8 "%bib_gv_21%"
+  WRITE_LONG 0xfc "%bib_gv_22%"
+  WRITE_LONG 0x100 "%bib_gv_23%"
+  WRITE_LONG 0x104 "%bib_gv_24%"
+  WRITE_LONG 0x108 "%bib_gv_25%"
+  WRITE_LONG 0x10c "%bib_gv_26%"
+  WRITE_LONG 0x110 "%bib_gv_27%"
+  WRITE_LONG 0x114 "%bib_gv_28%"
+  WRITE_LONG 0x118 "%bib_gv_29%"
+  WRITE_LONG 0x11c "%bib_gv_30%"
+  WRITE_LONG 0x120 "%bib_gv_31%"
+  WRITE_LONG 0x124 "%bib_gv_32%"
+  WRITE_LONG 0x128 "%bib_gv_33%"
+  WRITE_LONG 0x12c "%bib_gv_34%"
+  WRITE_LONG 0x130 "%bib_gv_35%"
+  WRITE_LONG 0x134 "%bib_gv_36%"
+  WRITE_LONG 0x138 "%bib_gv_37%"
+  WRITE_LONG 0x13c "%bib_gv_38%"
+  WRITE_LONG 0x140 "%bib_gv_39%"
+  WRITE_LONG 0x144 "%bib_gv_40%"
+  WRITE_LONG 0x148 "%bib_gv_41%"
+  WRITE_LONG 0x14c "%bib_gv_42%"
+  WRITE_LONG 0x150 "%bib_gv_43%"
+  WRITE_LONG 0x154 "%bib_gv_44%"
+  WRITE_LONG 0x158 "%bib_gv_45%"
+  WRITE_LONG 0x15c "%bib_gv_46%"
+  WRITE_LONG 0x160 "%bib_gv_47%"
+  WRITE_LONG 0x164 "%bib_gv_48%"
+  WRITE_LONG 0x168 "%bib_gv_49%"
+  WRITE_LONG 0x16c "%bib_gv_50%"
+  WRITE_LONG 0x170 "%bib_gv_51%"
+  WRITE_LONG 0x174 "%bib_gv_52%"
+  WRITE_LONG 0x178 "%bib_gv_53%"
+  WRITE_LONG 0x17c "%bib_gv_54%"
+  WRITE_LONG 0x180 "%bib_gv_55%"
+  WRITE_LONG 0x184 "%bib_gv_56%"
+  WRITE_LONG 0x188 "%bib_gv_57%"
+  WRITE_LONG 0x18c "%bib_gv_58%"
+  WRITE_LONG 0x190 "%bib_gv_59%"
+  WRITE_LONG 0x194 "%bib_gv_60%"
+  WRITE_LONG 0x198 "%bib_gv_61%"
+  WRITE_LONG 0x19c "%bib_gv_62%"
+  WRITE_LONG 0x1a0 "%bib_gv_63%"
+  WRITE_LONG 0x1a4 "%bib_gv_64%"
+  WRITE_LONG 0x1a8 "%bib_gv_65%"
+  WRITE_LONG 0x1ac "%bib_gv_66%"
+  WRITE_LONG 0x1b0 "%bib_gv_67%"
+  WRITE_LONG 0x1b4 "%bib_gv_68%"
+  WRITE_LONG 0x1b8 "%bib_gv_69%"
+  WRITE_LONG 0x1bc "%bib_gv_70%"
+  WRITE_LONG 0x1c0 "%bib_gv_71%"
+  WRITE_LONG 0x1c4 "%bib_gv_72%"
+  WRITE_LONG 0x1c8 "%bib_gv_73%"
+  WRITE_LONG 0x1cc "%bib_gv_74%"
+  WRITE_LONG 0x1d0 "%bib_gv_75%"
+  WRITE_LONG 0x1d4 "%bib_gv_76%"
+  WRITE_LONG 0x1d8 "%bib_gv_77%"
+  WRITE_LONG 0x1dc "%bib_gv_78%"
+  WRITE_LONG 0x1e0 "%bib_gv_79%"
+  WRITE_LONG 0x1e4 "%bib_gv_80%"
+  WRITE_LONG 0x1e8 "%bib_gv_81%"
+  WRITE_LONG 0x1ec "%bib_gv_82%"
+  WRITE_LONG 0x1f0 "%bib_gv_83%"
+  WRITE_LONG 0x1f4 "%bib_gv_84%"
+  WRITE_LONG 0x1f8 "%bib_gv_85%"
+  WRITE_LONG 0x1fc "%bib_gv_86%"
+  WRITE_LONG 0x200 "%bib_gv_87%"
+  WRITE_LONG 0x204 "%bib_gv_88%"
+  WRITE_LONG 0x208 "%bib_gv_89%"
+  WRITE_LONG 0x20c "%bib_gv_90%"
+  WRITE_LONG 0x210 "%bib_gv_91%"
+  WRITE_LONG 0x214 "%bib_gv_92%"
+  WRITE_LONG 0x218 "%bib_gv_93%"
+  WRITE_LONG 0x21c "%bib_gv_94%"
+  WRITE_LONG 0x220 "%bib_gv_95%"
+  WRITE_LONG 0x224 "%bib_gv_96%"
+  WRITE_LONG 0x228 "%bib_gv_97%"
+  WRITE_LONG 0x22c "%bib_gv_98%"
+  WRITE_LONG 0x230 "%bib_gv_99%"
+BUT_ONLY_IF_IT_CHANGES
+
+// Kobold Commoner — weaponless, static.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BGBG0706.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BGBG0706~ #8
+  WRITE_ASCII 0x280 ~BGBG0706~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BGBG0707.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BGBG0707~ #8
+  WRITE_ASCII 0x280 ~BGBG0707~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering Halfling Commoner — continuous wandering behaviour.
+COPY_EXISTING ~HALFG3.CRE~ ~override/BGBG0708.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~BGBG0708~ #8
+  WRITE_ASCII 0x280 ~BGBG0708~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Female Dwarf Commoner — FEAR chassis with continuous wandering behaviour.
+COPY_EXISTING ~FEAR.CRE~ ~override/BGBG0709.CRE~
+  SAY NAME1 @2019
+  SAY NAME2 @2019
+  WRITE_ASCII 0x2cc ~BGBG0709~ #8
+  WRITE_ASCII 0x280 ~BGBG0709~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Half Ogre Commoner — weaponless, continuous wandering behaviour.
+COPY_EXISTING ~OGREHA.CRE~ ~override/BGBG0710.CRE~
+  SAY NAME1 @2020
+  SAY NAME2 @2020
+  WRITE_ASCII 0x2cc ~BGBG0710~ #8
+  WRITE_ASCII 0x280 ~BGBG0710~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering Kobold Commoner.
+COPY_EXISTING ~KOBCOMM.CRE~ ~override/BGBG0711.CRE~
+  SAY NAME1 @2013
+  SAY NAME2 @2013
+  WRITE_ASCII 0x2cc ~BGBG0711~ #8
+  WRITE_ASCII 0x280 ~BGBG0711~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Elvin the Courier — human commoner, wandering until his dialogue is finished.
+COPY_EXISTING ~FARM.CRE~ ~override/BGBG0712.CRE~
+  SAY NAME1 @2021
+  SAY NAME2 @2021
+  WRITE_ASCII 0x2cc ~BGBG0712~ #8
+  WRITE_ASCII 0x280 ~BGBG0712~ #32
+  WRITE_ASCII 0x248 ~BIBELVIN~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Elven boy — use the existing human-boy chassis.
+COPY_EXISTING ~BOY1.CRE~ ~override/BGBG0713.CRE~
+  SAY NAME1 @2022
+  SAY NAME2 @2022
+  WRITE_ASCII 0x2cc ~BGBG0713~ #8
+  WRITE_ASCII 0x280 ~BGBG0713~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Half Elf Commoner — use a female elven sprite as requested.
+COPY_EXISTING ~SARELF04.CRE~ ~override/BGBG0714.CRE~
+  SAY NAME1 @2015
+  SAY NAME2 @2015
+  WRITE_ASCII 0x2cc ~BGBG0714~ #8
+  WRITE_ASCII 0x280 ~BGBG0714~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Female Human Commoner — static.
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/BGBG0715.CRE~
+  SAY NAME1 @2014
+  SAY NAME2 @2014
+  WRITE_ASCII 0x2cc ~BGBG0715~ #8
+  WRITE_ASCII 0x280 ~BGBG0715~ #32
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering Hobgoblin Commoner.
+COPY_EXISTING ~HOBGBEG1.CRE~ ~override/BGBG0716.CRE~
+  SAY NAME1 @2006
+  SAY NAME2 @2006
+  WRITE_ASCII 0x2cc ~BGBG0716~ #8
+  WRITE_ASCII 0x280 ~BGBG0716~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+// Wandering cat — preserve the normal cat movement AI.
+COPY_EXISTING ~CAT.CRE~ ~override/BGBG0717.CRE~
+  SAY NAME1 @2023
+  SAY NAME2 @2023
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x280 ~BGBG0717~ #32
+  WRITE_BYTE 0x270 128
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0700_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0700_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bibelvin.baf~
+COMPILE ~CotSC/better_immersion_beregost/bg0700_baldurs_gate.baf~
+EXTEND_TOP ~BG0700.BCS~ ~CotSC/better_immersion_beregost/bg0700_baldurs_gate.baf~
+
+// ---------------------------------------------------------------------------
+// BG0720 - DRAKON'S TAVERN
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~OGREHA.CRE~ ~override/BGBG0720.CRE~
+  SAY NAME1 @2024
+  SAY NAME2 @2024
+  WRITE_ASCII 0x2cc ~BGBG0720~ #8
+  WRITE_ASCII 0x280 ~BGBG0720~ #32
+  WRITE_ASCII 0x248 ~BIBBOUNC~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0720_drakon_tavern.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0720_drakon_tavern.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0720_drakon_tavern.baf~
+EXTEND_TOP ~BG0720.BCS~ ~CotSC/better_immersion_beregost/bg0720_drakon_tavern.baf~
+
+// ---------------------------------------------------------------------------
+// BG0725 - DICE / BETTING DISTRICT
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~SAILAL.CRE~ ~override/BGBG0725.CRE~
+  SAY NAME1 @2025
+  SAY NAME2 @2025
+  WRITE_ASCII 0x2cc ~BGBG0725~ #8
+  WRITE_ASCII 0x280 ~BGBG0725~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0725_fair.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0725_fair.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0725_fair.baf~
+EXTEND_TOP ~BG0725.BCS~ ~CotSC/better_immersion_beregost/bg0725_fair.baf~
+
+// ---------------------------------------------------------------------------
+// BG0119 - THE THREE OLD KEGS
+// ---------------------------------------------------------------------------
+
+COMPILE ~CotSC/better_immersion_beregost/bg0119_three_old_kegs.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0119_three_old_kegs.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0119_three_old_kegs.baf~
+EXTEND_TOP ~BG0119.BCS~ ~CotSC/better_immersion_beregost/bg0119_three_old_kegs.baf~
+
+// ---------------------------------------------------------------------------
+// BG0120 - BALDUR'S GATE INN / KITCHEN
+// ---------------------------------------------------------------------------
+
+COPY_EXISTING ~HALFG3.CRE~ ~override/BIB1201.CRE~
+  SAY NAME1 @2003
+  SAY NAME2 @2003
+  WRITE_ASCII 0x2cc ~BIB1201~ #8
+  WRITE_ASCII 0x280 ~BIB1201~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~QUINN.CRE~ ~override/BIB1202.CRE~
+  SAY NAME1 @2026
+  SAY NAME2 @2026
+  WRITE_ASCII 0x2cc ~BIB1202~ #8
+  WRITE_ASCII 0x280 ~BIB1202~ #32
+  WRITE_ASCII 0x248 ~BIBWANDR~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_BYTE 0x270 128
+  REMOVE_CRE_ITEMS
+BUT_ONLY_IF_IT_CHANGES
+
+COMPILE ~CotSC/better_immersion_beregost/bg0120_baldurs_gate.d~ USING ~CotSC/translation/%LANGUAGE%/better_immersion_beregost/bg0120_baldurs_gate.tra~
+COMPILE ~CotSC/better_immersion_beregost/bg0120_baldurs_gate.baf~
+EXTEND_TOP ~BG0120.BCS~ ~CotSC/better_immersion_beregost/bg0120_baldurs_gate.baf~
+

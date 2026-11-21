@@ -1,0 +1,7 @@
+IF
+  Global("QCCALPHY_SPAWNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCCALPHY_SPAWNED","GLOBAL",1)
+    CreateCreature("QCCALPHY",[751.736],4)
+END

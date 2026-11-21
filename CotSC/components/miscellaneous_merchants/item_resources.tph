@@ -1,0 +1,98 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/installer_remaining_major_items_npcs.tra~
+
+// The eleven previously separate installation sections now run sequentially as one transaction.
+// Keep this order: item resources -> merchants -> voices -> containers -> companion CRE patches -> more containers.
+
+COPY ~CotSC/QCMM/bam~ ~override~
+
+COPY ~CotSC/QCMM/items/QCMEAT.ITM~ ~override/QCMEAT.ITM~
+  SAY 0x08 @4045
+  SAY 0x0c @4045
+  SAY 0x50 @4046
+  SAY 0x54 @4046
+  WRITE_LONG 0x4c 0
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCSAUSG.ITM~ ~override/QCSAUSG.ITM~
+  SAY 0x08 @4047
+  SAY 0x0c @4047
+  SAY 0x50 @4048
+  SAY 0x54 @4048
+  WRITE_LONG 0x4c 0
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCBREAD.ITM~ ~override/QCBREAD.ITM~
+  SAY 0x08 @4049
+  SAY 0x0c @4049
+  SAY 0x50 @4050
+  SAY 0x54 @4050
+  WRITE_LONG 0x4c 0
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCCOKIE.ITM~ ~override/QCCOKIE.ITM~
+  SAY 0x08 @4051
+  SAY 0x0c @4051
+  SAY 0x50 @4052
+  SAY 0x54 @4052
+  WRITE_LONG 0x4c 0
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCWATER.ITM~ ~override/QCWATER.ITM~
+  SAY 0x08 @4053
+  SAY 0x0c @4053
+  SAY 0x50 @4054
+  SAY 0x54 @4054
+  WRITE_LONG 0x4c 0
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCHONEY.ITM~ ~override/QCHONEY.ITM~
+  SAY 0x08 @4055
+  SAY 0x0c @4055
+  SAY 0x50 @4056
+  SAY 0x54 @4056
+  WRITE_LONG 0x4c 0
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCCORN.ITM~ ~override/QCCORN.ITM~
+  SAY 0x08 @4057
+  SAY 0x0c @4057
+  SAY 0x50 @4058
+  SAY 0x54 @4058
+  WRITE_LONG 0x4c 0
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCEGGS.ITM~ ~override/QCEGGS.ITM~
+  SAY 0x08 @4059
+  SAY 0x0c @4059
+  SAY 0x50 @4060
+  SAY 0x54 @4060
+  WRITE_LONG 0x4c 0
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCFLOUR.ITM~ ~override/QCFLOUR.ITM~
+  SAY 0x08 @4061
+  SAY 0x0c @4061
+  SAY 0x50 @4062
+  SAY 0x54 @4062
+  WRITE_LONG 0x4c 100
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCGRAIN.ITM~ ~override/QCGRAIN.ITM~
+  SAY 0x08 @4063
+  SAY 0x0c @4063
+  SAY 0x50 @4064
+  SAY 0x54 @4064
+  WRITE_LONG 0x4c 165
+  WRITE_SHORT 0x38 99
+
+COPY ~CotSC/QCMM/items/QCFABRC.ITM~ ~override/QCFABRC.ITM~
+  SAY 0x08 @4065
+  SAY 0x0c @4065
+  SAY 0x50 @4066
+  SAY 0x54 @4066
+  WRITE_LONG 0x34 9000 // Base value (Blake store markup is 100%)
+  WRITE_LONG 0x4c 54
+  WRITE_SHORT 0x38 99
+
+
+

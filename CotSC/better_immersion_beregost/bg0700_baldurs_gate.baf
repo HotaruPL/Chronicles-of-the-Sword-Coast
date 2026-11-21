@@ -1,0 +1,176 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// ---------------------------------------------------------------------------
+// BETTER IMMERSION FOR BALDUR'S GATE - BG0700
+// ---------------------------------------------------------------------------
+
+// Female Elven Commoner at 467,1454, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0701")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0701",[467.1454],4)
+END
+
+// Hobgoblin Commoner at 425,1455, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0702")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0702",[425.1455],12)
+END
+
+// Wandering dog at 1190,1377.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0703")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0703",[1190.1377],0)
+END
+
+// Orc Commoner at 1419,2645, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0704")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0704",[1419.2645],12)
+END
+
+// Wandering Gnome Commoner at 958,3115.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0705")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0705",[958.3115],0)
+END
+
+// Kobold Commoner at 2266,2381, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0706")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0706",[2266.2381],12)
+END
+
+// Kobold Commoner at 2296,2381, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0707")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0707",[2296.2381],4)
+END
+
+// Wandering Halfling Commoner at 2938,2590.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0708")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0708",[2938.2590],0)
+END
+
+// Wandering female Dwarf Commoner at 3875,3054.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0709")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0709",[3875.3054],0)
+END
+
+// Wandering Half Ogre Commoner at 2516,1432.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0710")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0710",[2516.1432],12)
+END
+
+// Wandering Kobold Commoner at 3531,1505.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0711")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0711",[3531.1505],0)
+END
+
+// Elvin the Courier at 4014,1111.  He is spawned once per game.
+IF
+  Global("BIB_BG0700_ELVIN_SPAWNED","GLOBAL",0)
+  !Exists("BGBG0712")
+THEN
+  RESPONSE #100
+    SetGlobal("BIB_BG0700_ELVIN_SPAWNED","GLOBAL",1)
+    CreateCreature("BGBG0712",[4014.1111],0)
+END
+
+// Wandering Elven boy at 3640,302.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0713")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0713",[3640.302],0)
+END
+
+// Half Elf Commoner at 2846,358, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0714")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0714",[2846.358],4)
+END
+
+// Female Human Commoner at 2826,358, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0715")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0715",[2826.358],12)
+END
+
+// Wandering Hobgoblin Commoner at 1991,321.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0716")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0716",[1991.321],0)
+END
+
+// Wandering cat at 918,825.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0717")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0717",[918.825],0)
+END

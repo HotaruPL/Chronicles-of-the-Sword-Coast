@@ -1,0 +1,22 @@
+
+// BEGIN CotSC BP-BGT Worldmap links (QCWM v1.0)
+SRC_AREA SRC_NWSE TARGET_ARE ENTRY_NAME TRV_TIME DEF_ENTRY ENC1 ENC2 ENC3 ENC4 ENC5 ENC_PROB
+BG1000   S TORMHA   Exitwmp     0        1        N N N N N 0
+TORMHA   N BG1000   QCTULRET    0        1        N N N N N 0
+BG1000   E QCHALR   Exitwmp     0        1        N N N N N 0
+QCHALR   W BG1000   Exitwmp     0        1        N N N N N 0
+BG1000   N QCHALF   Exitwmp     0        1        N N N N N 0
+QCHALF   S BG1000   Exitwmp     0        1        N N N N N 0
+AR0020   W QCRIVD   ARRIVE      0        1        N N N N N 0
+QCRIVD   E AR0020   ExitNE      0        1        N N N N N 0
+AR0020   E QCBREW   ARRIVE      1        1        N N N N N 0
+QCBREW   W AR0020   ExitNE      1        1        N N N N N 0
+AR2500   E QCCGRV   QCSTART     2        1        N N N N N 0
+QCCGRV   W AR2500   Exitwmp     2        1        N N N N N 0
+AR2600   S QCCGRV   QCSTART     2        1        N N N N N 0
+QCCGRV   N AR2600   Exitwmp     2        1        N N N N N 0
+AR1800   E QCCGRV   QCSTART     2        1        N N N N N 0
+QCCGRV   W AR1800   Exitwmp     2        1        N N N N N 0
+BG4900   E QCCARN   Exitwmp     0        1        N N N N N 0
+QCCARN   W BG4900   QCCRET      0        1        N N N N N 0
+// END CotSC BP-BGT Worldmap links

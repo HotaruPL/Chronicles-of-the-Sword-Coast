@@ -1,0 +1,45 @@
+// Dark Imoen only attacks after her dialogue resolves.
+IF
+  Global("QCH_DARK_TALK","LOCALS",0)
+  Global("QCH_DARK_FIGHT","GLOBAL",0)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_DARK_TALK","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCHDARK",Player1)
+END
+IF
+  Global("QCH_DARK_FIGHT","GLOBAL",2)
+  Global("QCH_DARK_BUFF","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCH_DARK_BUFF","LOCALS",1)
+    ReallyForceSpellRES("SPWI201",Myself)
+    ReallyForceSpellRES("SPWI305",Myself)
+    ReallyForceSpellRES("SPWI212",Myself)
+    Enemy()
+END
+IF
+  Global("QCH_DARK_FIGHT","GLOBAL",2)
+  See(NearestEnemyOf(Myself))
+  !GlobalTimerNotExpired("QCH_DARK_DEATH","LOCALS")
+THEN
+  RESPONSE #100
+    SetGlobalTimer("QCH_DARK_DEATH","LOCALS",40)
+    ReallyForceSpellRES("SPWI605",NearestEnemyOf(Myself))
+END
+IF
+  Global("QCH_DARK_FIGHT","GLOBAL",2)
+  !StateCheck(Myself,STATE_HASTED)
+THEN
+  RESPONSE #100
+    ReallyForceSpellRES("SPWI305",Myself)
+END
+IF
+  Global("QCH_DARK_FIGHT","GLOBAL",2)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END

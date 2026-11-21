@@ -1,0 +1,163 @@
+// QCCFIR wild-magic field, matching the method used by Shades of the Sword Coast
+// in Firewine Bridge (AR4500): periodically apply the engine's WILD_MAGIC_AREA
+// spell to Player1 while the party is in the area.
+IF
+  !GlobalTimerNotExpired("WildmagicTimer","QCCFIR")
+THEN
+  RESPONSE #100
+    ApplySpell(Player1,WILD_MAGIC_AREA)
+    SetGlobalTimer("WildmagicTimer","QCCFIR",14)
+END
+
+// Reset exploration once for this build so older test saves do not keep rooms
+// revealed from the earlier high-visibility versions. On a genuine first visit
+// the area is already unexplored, so this has no practical effect.
+IF
+  Global("QCFIR_FOGRESET32","GLOBAL",0)
+THEN
+  RESPONSE #100
+    UndoExplore()
+    SetGlobal("QCFIR_FOGRESET32","GLOBAL",1)
+END
+
+// v1.37 migration for saves already tested with v1.36. Remove the
+// previous range-7 effect once, then apply the slightly larger range-8 version.
+// This is a one-time swap only; there is still no periodic refresh.
+IF
+  Global("QCFIR_VIS37_MIGRATED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ApplySpellRES("QCFVRES",Player1)
+    ApplySpellRES("QCFVRES",Player2)
+    ApplySpellRES("QCFVRES",Player3)
+    ApplySpellRES("QCFVRES",Player4)
+    ApplySpellRES("QCFVRES",Player5)
+    ApplySpellRES("QCFVRES",Player6)
+    ApplySpellRES("QCFLOWV",Player1)
+    ApplySpellRES("QCFLOWV",Player2)
+    ApplySpellRES("QCFLOWV",Player3)
+    ApplySpellRES("QCFLOWV",Player4)
+    ApplySpellRES("QCFLOWV",Player5)
+    ApplySpellRES("QCFLOWV",Player6)
+    SetGlobal("QCFIR_LOWVIS_ACTIVE","GLOBAL",1)
+    SetGlobal("QCFIR_VIS33_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS34_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS35_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS36_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS37_MIGRATED","GLOBAL",1)
+END
+
+// v1.36 migration for saves already tested with v1.35. Remove the
+// previous range-5 effect once, then apply the larger range-7 version.
+// This is a one-time swap only; there is still no periodic refresh.
+IF
+  Global("QCFIR_VIS36_MIGRATED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ApplySpellRES("QCFVRES",Player1)
+    ApplySpellRES("QCFVRES",Player2)
+    ApplySpellRES("QCFVRES",Player3)
+    ApplySpellRES("QCFVRES",Player4)
+    ApplySpellRES("QCFVRES",Player5)
+    ApplySpellRES("QCFVRES",Player6)
+    ApplySpellRES("QCFLOWV",Player1)
+    ApplySpellRES("QCFLOWV",Player2)
+    ApplySpellRES("QCFLOWV",Player3)
+    ApplySpellRES("QCFLOWV",Player4)
+    ApplySpellRES("QCFLOWV",Player5)
+    ApplySpellRES("QCFLOWV",Player6)
+    SetGlobal("QCFIR_LOWVIS_ACTIVE","GLOBAL",1)
+    SetGlobal("QCFIR_VIS33_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS34_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS35_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS36_MIGRATED","GLOBAL",1)
+END
+
+// v1.35 migration for saves already tested with v1.34. Remove the
+// previous range-4 effect once, then apply the slightly larger range-5 version.
+// This is a one-time swap only; there is still no periodic refresh.
+IF
+  Global("QCFIR_VIS35_MIGRATED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ApplySpellRES("QCFVRES",Player1)
+    ApplySpellRES("QCFVRES",Player2)
+    ApplySpellRES("QCFVRES",Player3)
+    ApplySpellRES("QCFVRES",Player4)
+    ApplySpellRES("QCFVRES",Player5)
+    ApplySpellRES("QCFVRES",Player6)
+    ApplySpellRES("QCFLOWV",Player1)
+    ApplySpellRES("QCFLOWV",Player2)
+    ApplySpellRES("QCFLOWV",Player3)
+    ApplySpellRES("QCFLOWV",Player4)
+    ApplySpellRES("QCFLOWV",Player5)
+    ApplySpellRES("QCFLOWV",Player6)
+    SetGlobal("QCFIR_LOWVIS_ACTIVE","GLOBAL",1)
+    SetGlobal("QCFIR_VIS33_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS34_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS35_MIGRATED","GLOBAL",1)
+END
+
+// v1.34 migration for saves already tested with v1.32/v1.33. Remove the
+// previous low-visibility effect once, then apply the tuned range-4 version.
+// This is a one-time swap only; there is still no periodic refresh.
+IF
+  Global("QCFIR_VIS34_MIGRATED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ApplySpellRES("QCFVRES",Player1)
+    ApplySpellRES("QCFVRES",Player2)
+    ApplySpellRES("QCFVRES",Player3)
+    ApplySpellRES("QCFVRES",Player4)
+    ApplySpellRES("QCFVRES",Player5)
+    ApplySpellRES("QCFVRES",Player6)
+    ApplySpellRES("QCFLOWV",Player1)
+    ApplySpellRES("QCFLOWV",Player2)
+    ApplySpellRES("QCFLOWV",Player3)
+    ApplySpellRES("QCFLOWV",Player4)
+    ApplySpellRES("QCFLOWV",Player5)
+    ApplySpellRES("QCFLOWV",Player6)
+    SetGlobal("QCFIR_LOWVIS_ACTIVE","GLOBAL",1)
+    SetGlobal("QCFIR_VIS33_MIGRATED","GLOBAL",1)
+    SetGlobal("QCFIR_VIS34_MIGRATED","GLOBAL",1)
+END
+
+// v1.33 migration for saves already tested with v1.32. Remove any existing
+// QCFLOWV (VISUALRANGE 1) once, then apply the slightly larger range-2 version.
+// This runs only once per saved game and does not create a refresh/pulse cycle.
+IF
+  Global("QCFIR_VIS33_MIGRATED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ApplySpellRES("QCFVRES",Player1)
+    ApplySpellRES("QCFVRES",Player2)
+    ApplySpellRES("QCFVRES",Player3)
+    ApplySpellRES("QCFVRES",Player4)
+    ApplySpellRES("QCFVRES",Player5)
+    ApplySpellRES("QCFVRES",Player6)
+    ApplySpellRES("QCFLOWV",Player1)
+    ApplySpellRES("QCFLOWV",Player2)
+    ApplySpellRES("QCFLOWV",Player3)
+    ApplySpellRES("QCFLOWV",Player4)
+    ApplySpellRES("QCFLOWV",Player5)
+    ApplySpellRES("QCFLOWV",Player6)
+    SetGlobal("QCFIR_LOWVIS_ACTIVE","GLOBAL",1)
+    SetGlobal("QCFIR_VIS33_MIGRATED","GLOBAL",1)
+END
+
+// Tight dungeon visibility. Apply the visual-range effect ONCE on entry.
+// QCFLOWV uses opcode 262 with flat VISUALRANGE 8 and a very long duration.
+// It is explicitly removed in BG5201 on exit, so there is no expiry/reapply
+// cycle and therefore no pulsing or changing radius.
+IF
+  Global("QCFIR_LOWVIS_ACTIVE","GLOBAL",0)
+THEN
+  RESPONSE #100
+    ApplySpellRES("QCFLOWV",Player1)
+    ApplySpellRES("QCFLOWV",Player2)
+    ApplySpellRES("QCFLOWV",Player3)
+    ApplySpellRES("QCFLOWV",Player4)
+    ApplySpellRES("QCFLOWV",Player5)
+    ApplySpellRES("QCFLOWV",Player6)
+    SetGlobal("QCFIR_LOWVIS_ACTIVE","GLOBAL",1)
+END

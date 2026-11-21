@@ -1,0 +1,173 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// BG1200 - Baldur's Gate Docks additions
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBPOR12")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBPOR12",[4009.2663],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBKOB15")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBKOB15",[3845.2042],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDCK12")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDCK12",[2868.2202],3)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDCK13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDCK13",[2052.2084],1)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHOB14")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHOB14",[2216.1637],3)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBELF14")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBELF14",[1898.876],4)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBELF15")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBELF15",[1848.882],12)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHOB15")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHOB15",[1866.201],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL15")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL15",[2599.734],8)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDWR14")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDWR14",[2597.701],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDCK14")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDCK14",[1470.1550],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBFFO02")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBFFO02",[1061.1391],12)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBFFO03")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBFFO03",[1093.1393],4)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBKOB16")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBKOB16",[408.2566],0)
+END
+
+IF
+  !Exists("BIBGIT12")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBGIT12",[902.2900],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBKOB17")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBKOB17",[221.3208],4)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBFFO04")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBFFO04",[577.771],3)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDWR15")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDWR15",[832.408],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDOG13")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDOG13",[3934.393],0)
+END

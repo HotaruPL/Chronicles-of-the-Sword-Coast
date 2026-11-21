@@ -1,0 +1,11 @@
+// Human baker departure script.
+IF
+  Global("BIB_BAKER_BG0600_LEAVE","LOCALS",1)
+  !StateCheck(Myself,CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    SetGlobal("BIB_BAKER_BG0600_LEAVE","LOCALS",2)
+    MoveToPoint([2690.2620])
+    Wait(2)
+    DestroySelf()
+END

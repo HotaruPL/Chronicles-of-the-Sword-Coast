@@ -1,0 +1,40 @@
+// ---------------------------------------------------------------------------
+// RED FANG MARAUDER RANDOM LOOT
+// One small random extra item per goblin/orc. Base-template inventory is kept.
+// ---------------------------------------------------------------------------
+
+IF
+  Global("PWY_RED_FANG_LOOT","LOCALS",0)
+  RandomNum(4,1)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_RED_FANG_LOOT","LOCALS",1)
+    CreateItem("MISC07",10,0,0)
+END
+
+IF
+  Global("PWY_RED_FANG_LOOT","LOCALS",0)
+  RandomNum(4,2)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_RED_FANG_LOOT","LOCALS",1)
+    CreateItem("MISC16",1,0,0)
+END
+
+IF
+  Global("PWY_RED_FANG_LOOT","LOCALS",0)
+  RandomNum(4,3)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_RED_FANG_LOOT","LOCALS",1)
+    CreateItem("MISC20",1,0,0)
+END
+
+IF
+  Global("PWY_RED_FANG_LOOT","LOCALS",0)
+  RandomNum(4,4)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_RED_FANG_LOOT","LOCALS",1)
+    CreateItem("POTN52",1,0,0)
+END

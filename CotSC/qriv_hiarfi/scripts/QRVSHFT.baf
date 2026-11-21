@@ -1,0 +1,9 @@
+// Shady Man: stay talkable/neutral before Hiarfi's quest confrontation.
+// When dialogue turns him hostile, fight instead of idling as a civilian.
+IF
+  Allegiance(Myself,ENEMY)
+  See(Player1)
+THEN
+  RESPONSE #100
+    Attack(Player1)
+END

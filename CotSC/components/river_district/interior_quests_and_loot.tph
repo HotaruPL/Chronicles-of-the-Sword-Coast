@@ -1,0 +1,507 @@
+// ====================================================================
+// PART 7/7: v2.4 experimental interior NPCs, encounters, quests and chest contents
+// ====================================================================
+
+// This standalone expansion is installed AFTER the working v2.3a interiors.
+// Only copies/patches QRHO01..05, QRSHOP, adds new creature/script/dialogue/item resources.
+ACTION_FOR_EACH area IN ~QRHO01~ ~QRHO02~ ~QRHO03~ ~QRHO04~ ~QRHO05~ ~QRSHOP~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%area%.ARE~ BEGIN
+    FAIL @20233
+  END
+END
+
+// Creature template checks before any changes. EET resource names are case-insensitive.
+ACTION_FOR_EACH cre IN ~MTOWBEST~ ~THIEF~ ~THIEFM~ ~HALFG3~ ~FTWBAX_C~ ~FARM~ ~BASILL~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%cre%.CRE~ BEGIN
+    FAIL @20234
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~RING01.ITM~ BEGIN FAIL ~Missing base ring RING01.ITM~ END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SHOP06.STO~ BEGIN FAIL ~Missing store SHOP06.STO~ END
+ACTION_FOR_EACH itm IN ~AROW01~ ~AROW11~ ~BULL01~ ~MISC07~ ~BOOK32~ ~BOW03~ ~SW1H01~ ~SW1H09~ ~LEAT01~ ~POTN08~ ~POTN10~ ~POTN19~ ~POTN52~ ~DAGG01~ ~RING11~ ~MISC22~ ~MISC27~ ~MISC37~ ~XBOW01~ ~BOLT04~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%itm%.ITM~ BEGIN
+    FAIL @20235
+  END
+END
+// Validate companions actually required for the interior quests.
+// Yoshimo uses YOSHJ.DLG in BG2/EET (NOT YOSHIMJ.DLG).
+// His single comment is optional if the resource is absent.
+ACTION_FOR_EACH dlg IN ~JAHEIRAJ~ ~NALIAJ~ ~VICONIJ~ ~AERIEJ~ ~MAZZYJ~ ~KELDORJ~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~%dlg%.DLG~ BEGIN
+    FAIL @20236
+  END
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~YOSHJ.DLG~ BEGIN
+  PRINT @20237
+END
+
+// Register both interior stories with the BG2EE/EET quest database.
+// The old version only registered Lucky Ring, leaving these in ordinary Journal.
+ADD_JOURNAL TITLE (@7009) @100 @104 USING ~CotSC/translation/%LANGUAGE%/qriv_houses/tra/qriv_houses.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+ADD_JOURNAL TITLE (@7010) @101 @102 USING ~CotSC/translation/%LANGUAGE%/qriv_houses/tra/qriv_houses.tra~ ~CotSC/translation/%LANGUAGE%/installer_component_names_journal_titles.tra~
+
+// Compile all scripted/companion conversations in ONE unit: no cross-installer labels.
+COMPILE ~CotSC/qriv_houses/dialogue/qriv_houses.d~ USING ~CotSC/translation/%LANGUAGE%/qriv_houses/tra/qriv_houses.tra~
+COMPILE ~CotSC/qriv_houses/scripts/QRHXZAI.baf~
+COMPILE ~CotSC/qriv_houses/scripts/QRHNTAI.baf~
+COMPILE ~CotSC/qriv_houses/scripts/QRH02AI.baf~ USING ~CotSC/translation/%LANGUAGE%/qriv_houses/tra/qriv_houses.tra~
+
+// Ring: custom magical accessory sets Charisma to 18 while equipped.
+COPY_EXISTING ~RING01.ITM~ ~override/QRVMAG.ITM~
+  SAY NAME1 @3024
+  SAY NAME2 @3024
+  SAY DESC @3025
+  SAY UNIDENTIFIED_DESC @3026
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR
+      opcode = 6
+      target = 1
+      timing = 2
+      parameter1 = 18
+      parameter2 = 1
+      probability1 = 100
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// MTOWBEST's seated animation caused Delgado to remain seated.
+// FARM supplies a regular standing male human, while retaining Delgado's
+// unique identity, dialogue, location and conversational logic.
+COPY_EXISTING ~FARM.CRE~ ~override/QRVDEL.CRE~
+  SAY NAME1 @3027
+  SAY NAME2 @3027
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QRVDEL~ #8
+  WRITE_ASCII 0x280 ~QRVDEL~ #32
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 20
+  WRITE_SHORT 0x26 20
+  REMOVE_CRE_EFFECTS
+  WRITE_BYTE 0x270 128 // neutral until explicitly made hostile
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~THIEF.CRE~ ~override/QRVXZO.CRE~
+  SAY NAME1 @3028
+  SAY NAME2 @3028
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QRVXZO~ #8
+  WRITE_ASCII 0x280 ~QRVXZO~ #32
+  WRITE_BYTE 0x270 128 // neutral until explicitly made hostile
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x248 ~QRHXZAI~ #8
+  WRITE_LONG 0x1c 73
+  WRITE_BYTE 0x2d 0
+  WRITE_BYTE 0x2e 0
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~XBOW01~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  ADD_CRE_ITEM ~BOLT04~ #20 #0 #0 ~IDENTIFIED~ ~QUIVER1~
+  SET_BG2_PROFICIENCY ~PROFICIENCYCROSSBOW~ 1
+  ADD_CRE_ITEM ~POTN52~ #1 #0 #0 ~IDENTIFIED~ ~QITEM1~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~THIEFM.CRE~ ~override/QRVNAT.CRE~
+  SAY NAME1 @3029
+  SAY NAME2 @3029
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QRVNAT~ #8
+  WRITE_ASCII 0x280 ~QRVNAT~ #32
+  WRITE_BYTE 0x270 128 // neutral until explicitly made hostile
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_ASCII 0x248 ~QRHNTAI~ #8
+  WRITE_BYTE 0x2d 0
+  WRITE_BYTE 0x2e 0
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~
+  ADD_CRE_ITEM ~SW1H09~ #0 #0 #0 ~IDENTIFIED~ ~WEAPON1~ EQUIP
+  SET_BG2_PROFICIENCY ~PROFICIENCYSHORTSWORD~ 1
+  ADD_CRE_ITEM ~POTN10~ #1 #0 #0 ~IDENTIFIED~ ~QITEM1~
+  ADD_CRE_ITEM ~POTN10~ #1 #0 #0 ~IDENTIFIED~ ~QITEM2~
+  ADD_CRE_ITEM ~POTN19~ #1 #0 #0 ~IDENTIFIED~ ~QITEM3~
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~HALFG3.CRE~ ~override/QRVHAL.CRE~
+  SAY NAME1 @3007
+  SAY NAME2 @3007
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QRVHAL~ #8
+  WRITE_ASCII 0x280 ~QRVHAL~ #32
+  WRITE_BYTE 0x270 128 // neutral until explicitly made hostile
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~BASILL.CRE~ ~override/QRVBASI.CRE~
+  SAY NAME1 @3030
+  SAY NAME2 @3030
+  WRITE_ASCII 0x280 ~QRVBASI~ #32
+  WRITE_BYTE 0x270 255 // hostile
+  WRITE_ASCII 0x2cc ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FARM.CRE~ ~override/QRVTHYL.CRE~
+  SAY NAME1 @3031
+  SAY NAME2 @3031
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QRVTHYL~ #8
+  WRITE_ASCII 0x280 ~QRVTHYL~ #32
+  WRITE_BYTE 0x270 128 // neutral until explicitly made hostile
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  // Raw STATE_STONE_DEATH in the CRE header prevented the actor from
+  // reliably appearing. Use the game's proper, curable petrification effect.
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 20
+  WRITE_SHORT 0x26 20
+  REMOVE_CRE_EFFECTS
+  LPF ADD_CRE_EFFECT
+    INT_VAR
+      opcode = 134 // genuine petrification; Stone to Flesh (opcode 43) cures it
+      target = 1
+      timing = 9 // permanent, until cured
+      resist_dispel = 0
+      probability1 = 100
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~FTWBAX_C.CRE~ ~override/QRVLAR.CRE~
+  SAY NAME1 @3032
+  SAY NAME2 @3032
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QRVLAR~ #8
+  WRITE_ASCII 0x280 ~QRVLAR~ #32
+  WRITE_BYTE 0x270 128 // neutral until explicitly made hostile
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Use the user's requested merchant model when available.
+// FARM is the known-working fallback for unusual EET resource layouts.
+ACTION_IF FILE_EXISTS_IN_GAME ~MERC0706.CRE~ BEGIN
+  OUTER_SPRINT qr_baldie_base ~MERC0706~
+END ELSE BEGIN
+  OUTER_SPRINT qr_baldie_base ~FARM~
+END
+COPY_EXISTING ~%qr_baldie_base%.CRE~ ~override/QRVBAL.CRE~
+  SAY NAME1 @3033
+  SAY NAME2 @3033
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QRVBAL~ #8
+  WRITE_ASCII 0x280 ~QRVBAL~ #32
+  WRITE_LONG 0x20 0
+  WRITE_SHORT 0x24 20
+  WRITE_SHORT 0x26 20
+  REMOVE_CRE_EFFECTS
+  WRITE_BYTE 0x270 128 // neutral until explicitly made hostile
+  WRITE_BYTE 0x92 12
+  WRITE_BYTE 0x93 2
+  WRITE_ASCII 0x248 ~~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// QRHO01: add only the new actors, leave old doors/containers/map sections intact.
+COPY_EXISTING ~QRHO01.ARE~ ~override/QRHO01.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 344
+      fj_loc_y = 261
+      fj_dest_x = 344
+      fj_dest_y = 261
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Larissa
+      fj_cre_resref = QRVLAR
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRHO02: add only the new actors, leave old doors/containers/map sections intact.
+COPY_EXISTING ~QRHO02.ARE~ ~override/QRHO02.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 362
+      fj_loc_y = 261
+      fj_dest_x = 362
+      fj_dest_y = 261
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Basilisk
+      fj_cre_resref = QRVBASI
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 451
+      fj_loc_y = 520 // within 12x9 WED grid, original 590 was out of bounds
+      fj_dest_x = 451
+      fj_dest_y = 520
+      fj_orientation = 10
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Thylion
+      fj_cre_resref = QRVTHYL
+  END
+  WRITE_ASCII 0x94 ~QRH02AI~ #8 // only this new clone needs an area script
+BUT_ONLY_IF_IT_CHANGES
+
+// QRHO03: add only the new actors, leave old doors/containers/map sections intact.
+COPY_EXISTING ~QRHO03.ARE~ ~override/QRHO03.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 342
+      fj_loc_y = 284
+      fj_dest_x = 342
+      fj_dest_y = 284
+      fj_orientation = 2
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Delgado
+      fj_cre_resref = QRVDEL
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRHO04: add only the new actors, leave old doors/containers/map sections intact.
+COPY_EXISTING ~QRHO04.ARE~ ~override/QRHO04.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 410
+      fj_loc_y = 276
+      fj_dest_x = 410
+      fj_dest_y = 276
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Xzor
+      fj_cre_resref = QRVXZO
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 229
+      fj_loc_y = 252
+      fj_dest_x = 229
+      fj_dest_y = 252
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Nate
+      fj_cre_resref = QRVNAT
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRHO05: add only the new actors, leave old doors/containers/map sections intact.
+COPY_EXISTING ~QRHO05.ARE~ ~override/QRHO05.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 499
+      fj_loc_y = 472
+      fj_dest_x = 499
+      fj_dest_y = 472
+      fj_orientation = 10
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Halfling
+      fj_cre_resref = QRVHAL
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRSHOP: add only the new actors, leave old doors/containers/map sections intact.
+COPY_EXISTING ~QRSHOP.ARE~ ~override/QRSHOP.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 316
+      fj_loc_y = 269
+      fj_dest_x = 316
+      fj_dest_y = 269
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Baldie
+      fj_cre_resref = QRVBAL
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRHO01: exact requested loot; other containers remain empty.
+COPY_EXISTING ~QRHO01.ARE~ ~override/QRHO01.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 2) BEGIN PATCH_FAIL ~Wrong container count in QRHO01: expected original cloned inventory sections~ END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 20
+    STR_VAR
+      item_to_add = ~AROW01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 14
+    STR_VAR
+      item_to_add = ~BULL01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 15
+    STR_VAR
+      item_to_add = ~MISC07~
+  END
+  // No named owner and no container lock/theft flags on Larissa's chests.
+  READ_LONG 0x70 q24co
+  FOR (i = 0; i < 2; ++i) BEGIN
+    WRITE_LONG (q24co + i * 0xc0 + 0x28) 0
+    WRITE_ASCII (q24co + i * 0xc0 + 0x58) ~~ #32
+    WRITE_SHORT (q24co + i * 0xc0 + 0x26) 0
+    WRITE_SHORT (q24co + i * 0xc0 + 0x30) 0
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRHO02: exact requested loot; other containers remain empty.
+COPY_EXISTING ~QRHO02.ARE~ ~override/QRHO02.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 2) BEGIN PATCH_FAIL ~Wrong container count in QRHO02: expected original cloned inventory sections~ END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 17
+    STR_VAR
+      item_to_add = ~MISC07~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 3
+    STR_VAR
+      item_to_add = ~AROW11~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~BOOK32~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~BOW03~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRHO04: exact requested loot; other containers remain empty.
+COPY_EXISTING ~QRHO04.ARE~ ~override/QRHO04.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 2) BEGIN PATCH_FAIL ~Wrong container count in QRHO04: expected original cloned inventory sections~ END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~SW1H01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~LEAT01~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRHO05: exact requested loot; other containers remain empty.
+COPY_EXISTING ~QRHO05.ARE~ ~override/QRHO05.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 2) BEGIN PATCH_FAIL ~Wrong container count in QRHO05: expected original cloned inventory sections~ END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~POTN08~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~DAGG01~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 1
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~RING11~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+      charges1 = 5
+    STR_VAR
+      item_to_add = ~MISC07~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// QRSHOP: exact requested loot; other containers remain empty.
+COPY_EXISTING ~QRSHOP.ARE~ ~override/QRSHOP.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 4) BEGIN PATCH_FAIL ~Wrong container count in QRSHOP: expected original cloned inventory sections~ END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 3
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~MISC37~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+      charges1 = 2
+    STR_VAR
+      item_to_add = ~MISC22~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 4
+      charges1 = 1
+    STR_VAR
+      item_to_add = ~MISC27~
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// First-contact Nate/Xzor scene is initiated by Xzor's own script in range.
+// Once dialogue sets QRH_XZOR_FIGHT to 1, the pair becomes hostile.
+// Larissa's brewing location, Hannibal's compound and Thylion's future rewards
+// remain unimplemented beyond their present quest starts, intentionally.
+
+

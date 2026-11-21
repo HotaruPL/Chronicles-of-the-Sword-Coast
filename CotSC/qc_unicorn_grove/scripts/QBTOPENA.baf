@@ -1,0 +1,14 @@
+// New v24.5: after the completed ritual, opening the native key-locked
+// QBTLOCK door (with Bhaal's Key in the party) triggers Core exactly once.
+// Unlike Opened([PC]) in the door script, this state check survives past
+// the one-frame event and runs from the active QBTAREA area script.
+IF
+  Global("QBT_STAGE","GLOBAL",1)
+  Global("QBT_CORE_SPAWN","GLOBAL",0)
+  OpenState("QBTLOCK",TRUE)
+  PartyHasItem("QBTKEY")
+THEN
+  RESPONSE #100
+    SetGlobal("QBT_CORE_SPAWN","GLOBAL",1)
+    CreateCreature("QBTCORE",[850.785],8)
+END

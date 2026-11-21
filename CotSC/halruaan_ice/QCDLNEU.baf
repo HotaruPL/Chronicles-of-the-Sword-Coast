@@ -1,0 +1,26 @@
+// Delorna's immortality is handled separately and is frozen.
+// This script only guarantees that attacking her never makes her a combatant.
+// No Continue(): the always-true final block deliberately prevents inherited
+// combat scripts from running, while dialogue remains usable.
+IF
+    Allegiance(Myself,EVILCUTOFF)
+THEN
+    RESPONSE #100
+        ChangeEnemyAlly(Myself,GOODBUTBLUE)
+        ClearActions(Myself)
+END
+
+IF
+    AttackedBy([ANYONE],DEFAULT)
+THEN
+    RESPONSE #100
+        ChangeEnemyAlly(Myself,GOODBUTBLUE)
+        ClearActions(Myself)
+END
+
+IF
+    True()
+THEN
+    RESPONSE #100
+        NoAction()
+END

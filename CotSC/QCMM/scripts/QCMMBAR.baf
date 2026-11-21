@@ -1,0 +1,8 @@
+// The original Ust Natha bartender broadcasts his *own* hostile EA status.
+IF
+  Allegiance(Myself,ENEMY)
+  Global("QCMMUHST","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCMMUHST","GLOBAL",1)
+END

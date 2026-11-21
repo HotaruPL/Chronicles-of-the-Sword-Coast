@@ -1,0 +1,46 @@
+// Ordinary, INTERRUPTIBLE casting. No ReallyForceSpell/ForceSpell.
+// Each spell receives a normal incantation and may be disrupted by the party.
+IF
+  Global("QCB_PST_INIT","LOCALS",0)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    SetGlobal("QCB_PST_INIT","LOCALS",1)
+    SpellNoDecRES("SPWI408",Myself) // Stoneskin
+END
+IF
+  Global("QCB_PST_INIT","LOCALS",1)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    SetGlobal("QCB_PST_INIT","LOCALS",2)
+    SpellNoDecRES("SPWI406",Myself) // Minor Globe of Invulnerability
+END
+IF
+  Global("QCB_PST_INIT","LOCALS",2)
+  Global("QCB_PST_NEXT","LOCALS",0)
+  See(NearestEnemyOf(Myself))
+  !GlobalTimerNotExpired("QCB_PST_CAST","LOCALS")
+THEN
+  RESPONSE #100
+    SetGlobal("QCB_PST_NEXT","LOCALS",1)
+    SetGlobalTimer("QCB_PST_CAST","LOCALS",8)
+    SpellNoDecRES("SPWI205",NearestEnemyOf(Myself)) // Horror
+END
+IF
+  Global("QCB_PST_INIT","LOCALS",2)
+  Global("QCB_PST_NEXT","LOCALS",1)
+  See(NearestEnemyOf(Myself))
+  !GlobalTimerNotExpired("QCB_PST_CAST","LOCALS")
+THEN
+  RESPONSE #100
+    SetGlobal("QCB_PST_NEXT","LOCALS",0)
+    SetGlobalTimer("QCB_PST_CAST","LOCALS",8)
+    SpellNoDecRES("SPWI211",NearestEnemyOf(Myself)) // Melf's Acid Arrow
+END
+IF
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    Attack(NearestEnemyOf(Myself))
+END

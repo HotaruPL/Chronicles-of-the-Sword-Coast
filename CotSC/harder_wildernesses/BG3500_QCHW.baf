@@ -1,0 +1,12 @@
+IF
+  Global("QCHW_BG3500","BG3500",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCHW_BG3500","BG3500",1)
+    CreateCreature("QCHWSN3",[1366.3289],0)
+    ActionOverride("QCHWSN3",Enemy())
+    CreateCreature("QCHWGO1",[2290.3468],0)
+    CreateCreature("QCHWGO1",[2363.3483],0)
+    CreateCreature("QCHWGO1",[2371.3547],0)
+    CreateCreature("NEMOOSE1",[4820.1179],0)
+END

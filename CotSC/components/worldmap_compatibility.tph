@@ -1,0 +1,32 @@
+ACTION_IF MOD_IS_INSTALLED ~bp-bgt-worldmap/setup-bp-bgt-worldmap.tp2~ 0 BEGIN
+  FAIL @20493
+END
+ACTION_IF MOD_IS_INSTALLED ~setup-qc-worldmap.tp2~ 0 BEGIN
+  FAIL @20494
+END
+
+// Do not edit WORLDMAP.WMP here: leave the normal EET map untouched.
+// BP-BGT Worldmap reads the following three tables when it installs.
+MKDIR ~worldmap~
+ACTION_IF FILE_EXISTS ~worldmap/map_mods_areas.tbl~ BEGIN
+  COPY ~worldmap/map_mods_areas.tbl~ ~worldmap/map_mods_areas.tbl~
+    APPEND_FILE ~CotSC/worldmap_compat/tables/areas.tbl~
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+  COPY ~CotSC/worldmap_compat/tables/areas.tbl~ ~worldmap/map_mods_areas.tbl~
+END
+ACTION_IF FILE_EXISTS ~worldmap/map_mods_links.tbl~ BEGIN
+  COPY ~worldmap/map_mods_links.tbl~ ~worldmap/map_mods_links.tbl~
+    APPEND_FILE ~CotSC/worldmap_compat/tables/links.tbl~
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+  COPY ~CotSC/worldmap_compat/tables/links.tbl~ ~worldmap/map_mods_links.tbl~
+END
+ACTION_IF FILE_EXISTS ~worldmap/map_mods_trans.tra~ BEGIN
+  COPY ~worldmap/map_mods_trans.tra~ ~worldmap/map_mods_trans.tra~
+    APPEND_FILE ~CotSC/translation/%LANGUAGE%/worldmap/worldmap_trans.tra~
+  BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+  COPY ~CotSC/translation/%LANGUAGE%/worldmap/worldmap_trans.tra~ ~worldmap/map_mods_trans.tra~
+END
+PRINT @20495

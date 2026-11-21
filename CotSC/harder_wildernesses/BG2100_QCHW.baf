@@ -1,0 +1,19 @@
+IF
+  Global("QCHW_BG2100","BG2100",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCHW_BG2100","BG2100",1)
+    CreateCreature("SPIDPH",[4141.808],0)
+    CreateCreature("SPIDPH",[4097.762],0)
+    CreateCreature("SPIDGI",[3557.321],0)
+    CreateCreature("SPIDSW",[3576.273],0)
+    CreateCreature("SPIDPH",[3460.215],0)
+    CreateCreature("QCHWSRN",[119.722],0)
+    ActionOverride("QCHWSRN",Enemy())
+    CreateCreature("icmyc01",[3123.549],0)
+    CreateCreature("icmyc01",[3203.577],0)
+    CreateCreature("ANKHEG",[3662.2050],0)
+    CreateCreature("icmyc01",[1417.3034],0)
+    CreateCreature("icmyc01",[1444.3115],0)
+    CreateCreature("icmyc01",[1325.3116],0)
+END

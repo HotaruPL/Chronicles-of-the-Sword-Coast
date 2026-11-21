@@ -1,0 +1,68 @@
+// Shalvey NPC, on sight introduction and actual cast detection.
+IF
+  Global("QCBP_DONE","GLOBAL",0)
+  Global("QCBP_TALK_INIT","LOCALS",0)
+  Global("QCBP_HEAL_RESPONSE","GLOBAL",0)
+  Global("QCBP_CURE_RESPONSE","GLOBAL",0)
+  See(Player1)
+  Range(Player1,18)
+THEN
+  RESPONSE #100
+    SetGlobal("QCBP_TALK_INIT","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCBPSHAL",Player1)
+END
+
+// Ordinary wound-healing NEVER cures ghoul fever. Handle it separately and first.
+IF
+  Global("QCBP_HEAL_READY","GLOBAL",1)
+  Global("QCBP_CURED","GLOBAL",0)
+  Global("QCBP_HEAL_RESPONSE","GLOBAL",0)
+  Global("QCBP_CURE_RESPONSE","GLOBAL",0)
+  OR(7)
+    SpellCastOnMeRES("SPPR103",[ANYONE])
+    SpellCastOnMeRES("SPPR315",[ANYONE])
+    SpellCastOnMeRES("SPPR401",[ANYONE])
+    SpellCastOnMeRES("SPPR502",[ANYONE])
+    SpellCastOnMeRES("SPPR607",[ANYONE])
+    SpellCastOnMeRES("SPPR514",[ANYONE])
+    SpellCastOnMeRES("SPIN109",[ANYONE])
+THEN
+  RESPONSE #100
+    SetGlobal("QCBP_HEAL_READY","GLOBAL",0)
+    SetGlobal("QCBP_WAIT_SPELL","GLOBAL",0)
+    // Plain healing cannot set or preserve the quest's infected->cured flag.
+    SetGlobal("QCBP_CURE_RESPONSE","GLOBAL",0)
+    SetGlobal("QCBP_HEAL_RESPONSE","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCBPSHAL",Player1)
+END
+
+// ONLY Lesser Restoration and Remove Curse (cleric/wizard) remove the infection.
+// Explicitly exclude ordinary cure/healing spells from this branch. This is a
+// second guard in addition to matching the exact restoration spell RESREF.
+IF
+  GlobalGT("QCBP_STAGE","GLOBAL",0)
+  Global("QCBP_CURED","GLOBAL",0)
+  Global("QCBP_HEAL_RESPONSE","GLOBAL",0)
+  Global("QCBP_CURE_RESPONSE","GLOBAL",0)
+  !SpellCastOnMeRES("SPPR103",[ANYONE])
+  !SpellCastOnMeRES("SPPR315",[ANYONE])
+  !SpellCastOnMeRES("SPPR401",[ANYONE])
+  !SpellCastOnMeRES("SPPR502",[ANYONE])
+  !SpellCastOnMeRES("SPPR607",[ANYONE])
+  !SpellCastOnMeRES("SPPR514",[ANYONE])
+  !SpellCastOnMeRES("SPIN109",[ANYONE])
+  OR(3)
+    SpellCastOnMeRES("SPPR417",[ANYONE])
+    SpellCastOnMeRES("SPPR307",[ANYONE])
+    SpellCastOnMeRES("SPWI410",[ANYONE])
+THEN
+  RESPONSE #100
+    SetGlobal("QCBP_HEAL_READY","GLOBAL",0)
+    SetGlobal("QCBP_CURED","GLOBAL",1)
+    SetGlobal("QCBP_CURE_RESPONSE","GLOBAL",1)
+    SetGlobal("QCBP_WAIT_SPELL","GLOBAL",0)
+    FaceObject(Player1)
+    StartDialog("QCBPSHAL",Player1)
+END

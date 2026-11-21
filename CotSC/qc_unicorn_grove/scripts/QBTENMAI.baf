@@ -1,0 +1,15 @@
+// Neutral actors become enemies only after Gorion orders the boys to flee.
+IF
+ Global("QBT_STAGE","GLOBAL",1)
+ Allegiance(Myself,NEUTRAL)
+THEN
+ RESPONSE #100
+  Enemy()
+END
+IF
+ Global("QBT_STAGE","GLOBAL",1)
+ See(NearestEnemyOf(Myself))
+THEN
+ RESPONSE #100
+  Attack(NearestEnemyOf(Myself))
+END

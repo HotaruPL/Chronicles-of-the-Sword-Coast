@@ -1,0 +1,28 @@
+// QCBPGHOL: one conversation at night; combat after dialogue only.
+IF
+  Global("QCBP_GH_TALK","LOCALS",0)
+  Global("QCBP_FIGHT","GLOBAL",0)
+  See(Player1)
+  Range(Player1,19)
+THEN
+  RESPONSE #100
+    SetGlobal("QCBP_GH_TALK","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCBPGHOL",Player1)
+END
+IF
+  !TimeOfDay(NIGHT)
+  Global("QCBP_FIGHT","GLOBAL",0)
+  Global("QCBP_GHDEAD","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCBP_GH_SPAWNED","GLOBAL",0)
+    DestroySelf()
+END
+IF
+  Global("QCBP_FIGHT","GLOBAL",1)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

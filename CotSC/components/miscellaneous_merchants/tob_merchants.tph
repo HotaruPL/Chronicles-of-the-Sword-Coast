@@ -1,0 +1,125 @@
+// Part IV. Throne of Bhaal; independent of the three confirmed earlier campaigns.
+// Former WeiDU component: Miscellaneous Merchants - Part IV: Throne of Bhaal (Miley, Blake, Felicia)
+
+// Update the fabric value even if the original item component is already installed.
+// The item name, graphics, weight, charges, stacking, description and flags stay intact.
+COPY_EXISTING ~QCFABRC.ITM~ ~override~
+  WRITE_LONG 0x34 9000
+
+// Stores: each assigned item has precisely 10 in stock.
+COPY ~CotSC/QCMM/stores/QCMS25.STO~ ~override/QCMS25.STO~
+  SAY 0x0c @4093
+COPY ~CotSC/QCMM/stores/QCMS26.STO~ ~override/QCMS26.STO~
+  SAY 0x0c @4094
+
+// Miley: courtesan appearance (request), stationary, facing south-east.
+COPY_EXISTING ~BPROST1.CRE~ ~override/QCMM25.CRE~
+  SAY NAME1 @4095
+  SAY NAME2 @4095
+  WRITE_ASCII 0x2cc ~QCMM25~ #8
+  WRITE_ASCII 0x280 ~QCMM25~ #32
+  WRITE_ASCII 0x248 ~~ #40
+  WRITE_BYTE 0x270 128 // Neutral
+  WRITE_BYTE 0x237 2 // female
+  WRITE_BYTE 0x275 2
+
+// Blake: original merchant appearance with yellow colour palette; no dialogue scripts inherited.
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM26.CRE~
+  SAY NAME1 @4096
+  SAY NAME2 @4096
+  WRITE_ASCII 0x2cc ~QCMM26~ #8
+  WRITE_ASCII 0x280 ~QCMM26~ #32
+  WRITE_ASCII 0x248 ~~ #40
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x2d 19
+  WRITE_BYTE 0x2e 19
+
+// Felicia: ordinary woman, no courtesan voice. Script supports roaming Amkethran.
+COPY_EXISTING ~FTOWBE_B.CRE~ ~override/QCMM27.CRE~
+  SAY NAME1 @4097
+  SAY NAME2 @4097
+  WRITE_ASCII 0x2cc ~QCMM27~ #8
+  WRITE_ASCII 0x280 ~QCMM27~ #32
+  WRITE_ASCII 0x248 ~QCMMFEL~ #8
+  WRITE_ASCII 0x250 ~~ #32
+  WRITE_BYTE 0x270 128
+  WRITE_BYTE 0x237 2
+  WRITE_BYTE 0x275 2
+
+COMPILE ~CotSC/QCMM/scripts/QCMMFEL.baf~
+COMPILE ~CotSC/QCMM/dialogue/QCMM25.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM25.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM26.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM26.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM27.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM27.tra~
+
+COPY_EXISTING ~AR5003.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 658
+      fj_loc_y = 551
+      fj_dest_x = 658
+      fj_dest_y = 551
+      fj_orientation = 14 // south-east
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM25_Actor~
+      fj_cre_resref = ~QCMM25~
+  END
+
+COPY_EXISTING ~AR5500.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1483
+      fj_loc_y = 1370
+      fj_dest_x = 1483
+      fj_dest_y = 1370
+      fj_orientation = 0
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM26_Actor~
+      fj_cre_resref = ~QCMM26~
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3440
+      fj_loc_y = 925
+      fj_dest_x = 3440
+      fj_dest_y = 925
+      fj_orientation = 0
+      fj_wander_dist_actor = 2400
+      fj_mvmt_dist_actor = 2400
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM27_Actor~
+      fj_cre_resref = ~QCMM27~
+  END
+
+// Optional, separate component for SoA voice changes. Does not alter its dialogue,
+// animation, shops, positions, appearance, AI or previously working payments.
+// Former WeiDU component: Miscellaneous Merchants - SoA Voice Correction (Riggo and Igor)
+
+// CRE V1.0 sound slot references occupy 100 DWORDs, 0x00A4 through 0x0233.
+// INNER_PATCH_FILE reads each slot from the vanilla donor creature directly
+// from game resources; no extra libraries or WeiDU helpers required.
+// Only the 100 voice/sound strrefs change. Animation, palette, AI, dialogues,
+// stores, creature names and every other byte of QCMM14/20 are preserved.
+COPY_EXISTING ~QCMM14.CRE~ ~override~
+  FOR (qcmm_slot = 0; qcmm_slot < 100; qcmm_slot += 1) BEGIN
+    INNER_PATCH_FILE ~GENTHF01.CRE~ BEGIN
+      READ_LONG (0xa4 + qcmm_slot * 4) qcmm_soundref
+    END
+    WRITE_LONG (0xa4 + qcmm_slot * 4) qcmm_soundref
+  END
+
+COPY_EXISTING ~QCMM20.CRE~ ~override~
+  FOR (qcmm_slot = 0; qcmm_slot < 100; qcmm_slot += 1) BEGIN
+    INNER_PATCH_FILE ~BNOBLE1.CRE~ BEGIN
+      READ_LONG (0xa4 + qcmm_slot * 4) qcmm_soundref
+    END
+    WRITE_LONG (0xa4 + qcmm_slot * 4) qcmm_soundref
+  END
+
+

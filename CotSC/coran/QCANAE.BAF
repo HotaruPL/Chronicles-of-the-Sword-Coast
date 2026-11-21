@@ -1,0 +1,24 @@
+// Coran's Old Flame - Annaebiel spawn in QCANAE
+
+IF
+    Global("QCCORAN_ANNA_SPAWNED","GLOBAL",0)
+    !Exists("QCANNA")
+THEN
+    RESPONSE #100
+        CreateCreature("QCANNA",[304.277],0)
+        SetGlobal("QCCORAN_ANNA_SPAWNED","GLOBAL",1)
+END
+
+// Return to Annaebiel after the Helm priest has examined Coran.
+IF
+    Global("QCCORAN_HELM_RETURN","GLOBAL",1)
+    Global("QCCORAN_HELM_RETURN_TALK","GLOBAL",0)
+    InParty("CORAN")
+    Exists("QCANNA")
+THEN
+    RESPONSE #100
+        SetGlobal("QCCORAN_HELM_RETURN_TALK","GLOBAL",1)
+        ActionOverride("QCANNA",MoveToObject(Player1))
+        Wait(1)
+        ActionOverride("QCANNA",StartDialog("QCANNA",Player1))
+END

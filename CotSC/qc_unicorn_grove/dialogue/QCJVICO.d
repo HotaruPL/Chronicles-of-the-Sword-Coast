@@ -1,0 +1,5 @@
+BEGIN ~QCJVICO~
+IF ~Global("QCJ_VIC","GLOBAL",1)~ THEN BEGIN memory
+  SAY @1
+  IF ~~ THEN DO ~SetGlobal("QCJ_VIC","GLOBAL",2)~ EXIT
+END

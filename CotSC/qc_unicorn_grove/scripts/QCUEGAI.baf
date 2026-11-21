@@ -1,0 +1,12 @@
+// Only the Emhrys reunion initiates on sight. All other Eaglehorn dialogue is click-to-talk.
+IF
+  Global("QCU_EMHSENT","GLOBAL",1)
+  Global("QCU_REUNION","GLOBAL",0)
+  Global("QCU_EMHIN","GLOBAL",1)
+  InMyArea(Player1)
+THEN
+  RESPONSE #100
+    SetGlobal("QCU_REUNION","GLOBAL",1)
+    FaceObject(Player1)
+    StartDialog("QCUEAG",Player1)
+END

@@ -1,0 +1,16 @@
+IF
+    Global("QCICE_FINAL_DELO","GLOBAL",1)
+    Dead("QCSHICE")
+    Global("QCICE_FINAL_DELO_TALKED","GLOBAL",0)
+THEN
+    RESPONSE #100
+        SetGlobal("QCICE_FINAL_DELO_TALKED","GLOBAL",1)
+        ActionOverride("QCDELIF",StartDialog("QCDELIF",Player1))
+END
+
+IF
+    True()
+THEN
+    RESPONSE #100
+        Continue()
+END

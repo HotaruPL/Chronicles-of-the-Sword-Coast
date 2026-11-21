@@ -1,0 +1,23 @@
+IF
+  Global("QCTHodrigFight","GLOBAL",1)
+  Global("QCTHodrigSurrender","GLOBAL",0)
+  HPPercentLT(Myself,34)
+THEN
+  RESPONSE #100
+    SetGlobal("QCTHodrigSurrender","GLOBAL",1)
+    ChangeEnemyAlly(Myself,NEUTRAL)
+    ActionOverride("QCTAC1",ChangeEnemyAlly(Myself,NEUTRAL))
+    ActionOverride("QCTAC2",ChangeEnemyAlly(Myself,NEUTRAL))
+    ActionOverride("QCTAC3",ChangeEnemyAlly(Myself,NEUTRAL))
+    ClearActions(Myself)
+    StartDialog("QCTHODR",Player1)
+END
+
+IF
+  Global("QCTHodrigFight","GLOBAL",1)
+  Allegiance(Myself,ENEMY)
+  See(NearestEnemyOf(Myself))
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),30)
+END

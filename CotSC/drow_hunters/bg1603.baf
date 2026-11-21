@@ -1,0 +1,27 @@
+// BG1603 - Peter's letter is created in Container 1 only after Dimwoork's letter
+// has actually been collected by the party. Once DHNOTE2 is taken, Viconia reacts
+// exactly once as before.
+IF
+  Global("DH8_PETER_NOTE_PLACED","BG1603",0)
+  PartyHasItem("DHNOTE1")
+THEN
+  RESPONSE #100
+    ActionOverride("Container1",CreateItem("DHNOTE2",0,0,0))
+    SetGlobal("DH8_PETER_NOTE_PLACED","BG1603",1)
+END
+
+IF
+  Global("DH7_PETER_NOTE","BG1603",0)
+  Global("DH7_CLUE2","GLOBAL",0)
+  Global("DH7_CLUE2_STARTED","GLOBAL",0)
+  PartyHasItem("DHNOTE2")
+  InParty("VICONIA")
+THEN
+  RESPONSE #100
+    SetGlobal("DH7_PETER_NOTE","BG1603",1)
+    SetGlobal("DH7_CLUE2","GLOBAL",1)
+    SetGlobal("DH7_CLUE2_STARTED","GLOBAL",1)
+    ActionOverride("VICONIA",FaceObject(Player1))
+    ActionOverride("VICONIA",Wait(1))
+    ActionOverride("VICONIA",StartDialog("DHVICON",Player1))
+END

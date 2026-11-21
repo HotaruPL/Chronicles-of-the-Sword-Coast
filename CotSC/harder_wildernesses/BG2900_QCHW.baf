@@ -1,0 +1,18 @@
+IF
+  Global("QCHW_BG2900","BG2900",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCHW_BG2900","BG2900",1)
+    CreateCreature("BDBUGB01",[4677.2898],0)
+    CreateCreature("BDBUGB01",[4768.2917],0)
+    CreateCreature("BDBUGB01",[4793.3025],0)
+    CreateCreature("BDBUGB01",[4672.3055],0)
+    CreateCreature("BDBUGB01",[4588.3075],0)
+    CreateCreature("BDBUGB01",[4767.3162],0)
+    CreateCreature("BDBUGB01",[4860.3150],0)
+    CreateCreature("NEMOOSE1",[3123.1769],0)
+    CreateCreature("NEDEER1",[3839.1149],0)
+    CreateCreature("NEDEER1",[1347.1073],0)
+    CreateCreature("grhog01",[3558.2610],0)
+    CreateCreature("CATLEO01",[4991.1669],0)
+END

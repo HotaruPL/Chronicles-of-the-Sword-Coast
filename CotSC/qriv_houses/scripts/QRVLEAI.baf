@@ -1,0 +1,27 @@
+// Leslie initially speaks as a neutral NPC. Once provoked, she fights.
+IF
+  Global("QRV_LESL_FIGHT","GLOBAL",1)
+  !Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    Enemy()
+    Attack(Player1)
+END
+IF
+  Global("QRV_LESL_FIGHT","GLOBAL",1)
+  Allegiance(Myself,ENEMY)
+THEN
+  RESPONSE #100
+    AttackReevaluate(NearestEnemyOf(Myself),15)
+END
+IF
+  Global("QRV_LESL_FIGHT","GLOBAL",0)
+  Global("QRV_LESL_LETGO","GLOBAL",0)
+  Global("QRV_LESL_TALK","LOCALS",0)
+  Range(Player1,15)
+THEN
+  RESPONSE #100
+    SetGlobal("QRV_LESL_TALK","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QRVLLES",Player1)
+END

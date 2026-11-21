@@ -1,0 +1,22 @@
+IF
+    Global("QCSAFANA_BALTHRIM_STARTED","GLOBAL",0)
+    Global("QCSAFANA_BALTHRIM_DONE","GLOBAL",0)
+    InParty("Safana")
+    InMyArea("Safana")
+    Range(Player1,20)
+THEN
+    RESPONSE #100
+        SetGlobal("QCSAFANA_BALTHRIM_STARTED","GLOBAL",1)
+        FaceObject(Player1)
+        StartDialog("QCSBTH",Player1)
+END
+
+IF
+    Global("QCSAFANA_BALTHRIM_HOSTILE","GLOBAL",1)
+    Global("QCSAFANA_BALTHRIM_POSTKILL","GLOBAL",0)
+    Dead("Safana")
+THEN
+    RESPONSE #100
+        Wait(1)
+        StartDialog("QCSBTH",Player1)
+END

@@ -1,0 +1,21 @@
+IF
+  Global("ORPHAN_TILDA","GLOBAL",0)
+THEN
+  RESPONSE #100
+    TriggerActivation("ORPHFLOWER",FALSE)
+END
+
+IF
+  Global("ORPHAN_QUEST_DONE","GLOBAL",1)
+THEN
+  RESPONSE #100
+    TriggerActivation("ORPHFLOWER",FALSE)
+END
+
+IF
+  Global("ORPHAN_TILDA","GLOBAL",1)
+  !Global("ORPHAN_QUEST_DONE","GLOBAL",1)
+THEN
+  RESPONSE #100
+    TriggerActivation("ORPHFLOWER",TRUE)
+END

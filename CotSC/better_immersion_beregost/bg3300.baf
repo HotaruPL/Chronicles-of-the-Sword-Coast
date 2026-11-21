@@ -1,0 +1,133 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+
+// Gnome Citizen at 3799,2526, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBGNOME")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBGNOME",[3799.2526],4)
+END
+
+// Halfling Citizen at 4569,3127, wandering.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL01",[4569.3127],0)
+END
+
+// Halfling Citizen at 2354,2239, wandering.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL02")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL02",[2354.2239],0)
+END
+
+// Betsie Finkle at 1133,3499, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBETSY")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBETSY",[1133.3499],12)
+END
+
+// Elven Commoner at 1387,1482, facing south.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBELF01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBELF01",[1387.1482],0)
+END
+
+// Female Halfling Citizen at 2162,1726, wandering, facing west initially.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL03")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL03",[2162.1726],4)
+END
+
+// Dog #1 at 2302,745, facing east.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDOG01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDOG01",[2302.745],12)
+END
+
+// Dog #2 at 4137,933, facing south.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDOG02")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDOG02",[4137.933],0)
+END
+
+// Dwarf Commoner at 4750,1600, wandering.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBDWR01")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBDWR01",[4750.1600],0)
+END
+
+// Halfling Citizen at 2725,2249, standing, facing south.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL04")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL04",[2725.2249],0)
+END
+
+// Halfling Citizen at 2725,2274, standing, facing north.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHAL05")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHAL05",[2725.2274],8)
+END
+
+// v75 added civilian spawns.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBHLF75")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBHLF75",[2208.3239],0)
+END
+
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BIBKAV75")
+THEN
+  RESPONSE #100
+    CreateCreature("BIBKAV75",[2210.3264],8)
+END
+

@@ -1,0 +1,526 @@
+BACKUP ~weidu_external/backup/CotSC~
+AUTHOR ~HOTARU & MAPEK~
+VERSION ~1.4~
+
+LANGUAGE ~English~ ~english~ ~CotSC/translation/english/Quests_and_Challenges/DLG/Setup.tra~ ~CotSC/translation/english/installer_component_names_journal_titles.tra~ ~CotSC/translation/english/installer_native_eet_worldmap.tra~ ~CotSC/translation/english/installer_diagnostics.tra~
+
+LANGUAGE ~Simplified Chinese~ ~schinese~
+  ~CotSC/translation/schinese/Quests_and_Challenges/DLG/Setup.tra~
+  ~CotSC/translation/schinese/installer_component_names_journal_titles.tra~
+  ~CotSC/translation/schinese/installer_native_eet_worldmap.tra~
+  ~CotSC/translation/schinese/installer_diagnostics.tra~
+
+BEGIN @6000
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @1
+
+INCLUDE ~CotSC/components/lady_lydia.tph~
+
+BEGIN @6001
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @1
+
+INCLUDE ~CotSC/components/merlee.tph~
+
+BEGIN @6002
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @1
+
+INCLUDE ~CotSC/components/nebbish_and_ethon.tph~
+
+
+BEGIN @6003
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @32
+
+INCLUDE ~CotSC/components/wizshade_and_cedric_shan.tph~
+
+
+BEGIN @6004
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @32
+
+INCLUDE ~CotSC/components/popper_the_kobold.tph~
+
+
+
+BEGIN @6005
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @32
+
+INCLUDE ~CotSC/components/alphyra.tph~
+
+BEGIN @6006
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @32
+
+INCLUDE ~CotSC/components/halbazzers_exotic_watchmen.tph~
+
+
+
+BEGIN @6007
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @32
+
+INCLUDE ~CotSC/components/astarion.tph~
+
+BEGIN @6008
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @1
+
+
+INCLUDE ~CotSC/components/submerged_house_and_auntie_ethel.tph~
+
+BEGIN @6009
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @1
+
+INCLUDE ~CotSC/components/xantams_sewer_ambush.tph~
+
+
+BEGIN @6010
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @1
+
+INCLUDE ~CotSC/components/lendarn_and_birkin.tph~
+
+
+BEGIN @6011
+
+REQUIRE_PREDICATE
+  GAME_IS ~eet~
+  @1
+
+INCLUDE ~CotSC/components/missing_horse.tph~
+
+
+// --------------------------------------------------------------------------
+// Chronicles of the Sword Coast — Surprise at Burning Wizard
+// Independent BG1 encounter; original VIEKANG resources are never edited.
+// Intentionally do NOT import his original script: it can chain a self-damage
+// response into another escape sequence. The effect here is visual ONLY.
+// --------------------------------------------------------------------------
+BEGIN @6012
+REQUIRE_PREDICATE GAME_IS ~eet~ ~This component requires EET.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BG3307.ARE~ ~Beregost Burning Wizard ground floor (BG3307.ARE) missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~VIEKANG.CRE~ ~Original BG2 Viekang (VIEKANG.CRE) missing.~
+
+INCLUDE ~CotSC/components/surprise_at_burning_wizard.tph~
+
+
+// ---------------------------------------------------------------
+// Component 14: Eastern Carnival (original Stage 48 baseline)
+// Integrated installer paths only; the actual Carnival data is unchanged.
+// ---------------------------------------------------------------
+BEGIN @6013
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/eastern_carnival.tph~
+
+// ---------------------------------------------------------------------------
+// Chronicles of the Sword Coast: legacy BG1 city immersion collection.
+// Preserved from the FINAL city package, with only WeiDU display-name updates
+// and the single BG1/EET Minsc joined-dialogue reference fix.
+// ---------------------------------------------------------------------------
+
+
+BEGIN @6014
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/better_immersion_beregost.tph~
+
+BEGIN @6015
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/better_immersion_friendly_arm_inn.tph~
+
+BEGIN @6016
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/better_immersion_nashkel.tph~
+
+BEGIN @6017
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/better_immersion_carnival.tph~
+
+BEGIN @6018
+
+// This component includes the frozen EET sewer package.
+REQUIRE_PREDICATE GAME_IS ~EET~ ~This component requires EET.~
+
+INCLUDE ~CotSC/components/better_immersion_baldurs_gate/install.tph~
+
+BEGIN @6019
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/remnants_of_the_past.tph~
+
+// -------------------------------------------------------------
+// CotSC: Halruaan and the Flying Ship; imported from stable v7.20
+// Changes: QCHALF day/night flag and QCHALF Ervin teleport delay.
+// -------------------------------------------------------------
+BEGIN @6020
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/halruaan_and_the_flying_ship.tph~
+
+// ============================================================
+// QC: Additions to Balduran's Island — preserved standalone v1.0-test6
+// ============================================================
+BEGIN @6021
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/additions_to_baldurans_island.tph~
+
+
+// ------------------------------------------------------------
+// QC: Drow Hunters - Viconia quest (original standalone Parse37)
+// Kept original DH resource names to preserve all internal references.
+// ------------------------------------------------------------
+BEGIN @6022
+
+// Parse 37: preserve Parse 36 frozen content; gate later letters and the final conversation behind the preceding clues.
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/drow_hunters.tph~
+
+// ------------------------------------------------------------
+// QC: Cure for Madness — BG1 Tiax and Arbolon
+// Original standalone v0.1 Parse9, no changes to story or quest progression.
+// ------------------------------------------------------------
+BEGIN @6023
+
+REQUIRE_PREDICATE GAME_IS ~eet~ ~This component requires a Baldur's Gate: Enhanced Edition EET installation.~
+
+INCLUDE ~CotSC/components/cure_for_madness.tph~
+
+
+// ------------------------------------------------------------
+// QC: Coran's Old Flame — Annaebiel and Helm priest encounter
+// Original Coran's Old Flame standalone (BG1 states restored).
+// Retains original companion-script safeguards and dialog paths.
+// ------------------------------------------------------------
+BEGIN @6024
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/corans_old_flame.tph~
+
+// ---------------------------------------------------------------------------
+// 26. Safana the Pirate — Balthrim BG1 encounter + Siege of Dragonspear ambush.
+// Converted from the user's frozen standalone; the original BG1 dialogue text
+// remains unchanged. Two SoD fixes: Safana-absent follow-up and party combat AI.
+// ---------------------------------------------------------------------------
+BEGIN @6025
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/safana_the_pirate.tph~
+
+
+// ===========================================================================
+// Quentin the Traveler - entire-trilogy ingredient quest
+// ===========================================================================
+BEGIN @6026
+REQUIRE_PREDICATE GAME_IS ~eet~ ~Quentin the Traveler requires EET.~
+
+INCLUDE ~CotSC/components/quentin_the_traveler.tph~
+
+
+// ---------------------------------------------------------------------------
+// CotSC v51: imported durlag standalone component (original body unchanged).
+// ---------------------------------------------------------------------------
+BEGIN @6027
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/harder_durlags_tower.tph~
+
+
+// ---------------------------------------------------------------------------
+// CotSC v51: imported wild standalone component (original body unchanged).
+// ---------------------------------------------------------------------------
+BEGIN @6028
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/richer_wildernesses.tph~
+
+
+// ---------------------------------------------------------------------------
+// CotSC v51: imported under standalone component (original body unchanged).
+// ---------------------------------------------------------------------------
+BEGIN @6029
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/harder_undercity.tph~
+
+
+// ---------------------------------------------------------------------------
+// CotSC v51: imported lich standalone component (original body unchanged).
+// ---------------------------------------------------------------------------
+BEGIN @6030
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/lich_in_candlekeep.tph~
+
+// CotSC v52: merged from the tested standalone component.
+BEGIN @6031
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/bag_of_holding_candlekeep.tph~
+
+
+// CotSC v52: merged from the tested standalone component.
+BEGIN @6032
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/bag_of_holding_irenicus.tph~
+
+
+// CotSC v53: original v5.1 River District unified component preserved.
+// This is a single installation transaction; original eight-part area/quest work
+// remains in its author-tested installation order.
+BEGIN @6033
+
+REQUIRE_PREDICATE GAME_IS ~eet~ ~River District requires EET.~
+// Prevent overlaying a separately installed Brewery; the merged build owns QCBREW
+// and its world-map registration. Only one installation should own those resources.
+FORBID_COMPONENT ~setup-qc-brewery.tp2~ 0 ~Standalone Forest Brewery is still installed. Uninstall it with setup-qc-brewery.exe BEFORE installing this merged component (and keep a save-game backup).~
+FORBID_COMPONENT ~setup-qriv-music.tp2~ 0 ~Old River District Music addon is still installed. Uninstall the historical components in reverse order before installing this unified component.~
+FORBID_COMPONENT ~setup-qriv-people.tp2~ 0 ~Old River District People addon is still installed. Do not layer the unified component over it.~
+FORBID_COMPONENT ~setup-qriv-repairs.tp2~ 0 ~Old River District Repairs addon is still installed. Uninstall the historical addons first.~
+FORBID_COMPONENT ~setup-qriv-felicity.tp2~ 0 ~Old River District Felicity addon is still installed. Uninstall the historical addons first.~
+FORBID_COMPONENT ~setup-qriv-interiors.tp2~ 0 ~Old River District Interiors addon is still installed. Uninstall the historical addons first.~
+FORBID_COMPONENT ~setup-qriv-houses.tp2~ 0 ~Old River District Houses addon is still installed. Uninstall the historical addons first.~
+
+INCLUDE ~CotSC/components/river_district/install.tph~
+
+
+// ================================================================
+// MERGED v54: QC: Ranger and His Wife
+// Original standalone component retained except installer metadata.
+// ================================================================
+BEGIN @6034
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/ranger_and_his_wife.tph~
+
+// ================================================================
+// MERGED v54: QC: Poor Wyvern
+// Original standalone component retained except installer metadata.
+// ================================================================
+BEGIN @6035
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/poor_wyvern.tph~
+
+// ================================================================
+// MERGED v54: QC: Viconia and Valas
+// Original standalone component retained except installer metadata.
+// ================================================================
+BEGIN @6036
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/viconia_and_valas.tph~
+
+// ================================================================
+// MERGED v54: QC: Coral and Stolen Pearl
+// Original standalone component retained except installer metadata.
+// ================================================================
+BEGIN @6037
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/coral_and_stolen_pearl.tph~
+
+// ================================================================
+// MERGED v54: QC: Beggar's Plea
+// Original standalone component retained except installer metadata.
+// ================================================================
+BEGIN @6038
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/beggars_plea.tph~
+
+// ================================================================
+// MERGED v55: Final verified Unicorn Grove v34.0 unified build.
+// Imoen fresh-session/dark-Imoen recovery, Core, final journal fix retained.
+// ================================================================
+BEGIN @6039
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/unicorn_grove/install.tph~
+
+// ================================================================
+// MERGED v56: QC: Better Immersion for Athkatla (original standalone gameplay source retained)
+// ================================================================
+BEGIN @6040
+REQUIRE_PREDICATE GAME_IS ~eet~ ~This component is currently built for EET.~
+
+INCLUDE ~CotSC/components/better_immersion_athkatla/install.tph~
+
+// ================================================================
+// MERGED v56: QC: Better Immersion for Trademeet (original standalone gameplay source retained)
+// ================================================================
+BEGIN @6041
+REQUIRE_PREDICATE GAME_IS ~eet~ ~This component is currently built for EET.~
+
+INCLUDE ~CotSC/components/better_immersion_trademeet.tph~
+
+// ================================================================
+// MERGED v58: QC: Additions to De'Arnise Keep — existing standalone gameplay source unchanged
+// ================================================================
+BEGIN @6042
+
+REQUIRE_PREDICATE GAME_IS ~eet~ @1
+
+INCLUDE ~CotSC/components/additions_to_dearnise_keep.tph~
+
+// ================================================================
+// MERGED v58: QC: Old Friend in Saradush — existing standalone gameplay source unchanged
+// ================================================================
+BEGIN @6043
+// For EET ToB resources. On installations without PORTAL.CRE
+// (the original BG1 hermit), installation aborts rather than inventing a creature.
+REQUIRE_PREDICATE (GAME_IS ~eet~) @1
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~AR5003.ARE~) ~Missing AR5003.ARE (Tankard Tree Tavern).~
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~PORTAL.CRE~) ~Missing PORTAL.CRE from Baldur's Gate I; an EET game installation is recommended.~
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~HELM02.ITM~) ~Missing HELM02.ITM.~
+
+INCLUDE ~CotSC/components/old_friend_in_saradush.tph~
+
+// ================================================================
+// MERGED v59: QC: Reputation Adjuster - READ README!
+// Original v1.0 gameplay logic preserved; standalone installer header omitted.
+// ================================================================
+BEGIN @6044
+REQUIRE_PREDICATE GAME_IS ~eet~ ~This component requires Enhanced Edition Trilogy (EET).~
+
+// Preflight all referenced assets before writing any resources.
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~FUMIN.CRE~ ~Required creature FUMIN.CRE could not be found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BG2304.ARE~ ~Required EET area BG2304.ARE could not be found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AMMAJIRA.CRE~ ~Required creature AMMAJIRA.CRE could not be found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BD3000.ARE~ ~Required EET area BD3000.ARE could not be found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~PRIHEL.CRE~ ~Required creature PRIHEL.CRE could not be found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR0901.ARE~ ~Required EET area AR0901.ARE could not be found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BDLEMURE.CRE~ ~Required creature BDLEMURE.CRE could not be found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR4500.ARE~ ~Required EET area AR4500.ARE could not be found.~
+
+INCLUDE ~CotSC/components/reputation_adjuster.tph~
+
+// ================================================================
+// MERGED v60: QC: Miscellaneous Merchants (standalone v1.4)
+// All eleven former subcomponents already unified as one transaction.
+// ================================================================
+BEGIN @6045
+REQUIRE_PREDICATE GAME_IS ~eet~ ~The complete Miscellaneous Merchants package requires Enhanced Edition Trilogy (EET).~
+// Preflight: required original game assets across all four campaigns.
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BG3300.ARE~ ~BG3300 area was not found; this component needs EET with BG1 areas installed.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~FTOWBE_B.CRE~ ~Female BG1 commoner base FTOWBE_B.CRE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BD1000.ARE~ ~Siege of Dragonspear area BD1000.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BD3000.ARE~ ~Siege of Dragonspear area BD3000.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BD7300.ARE~ ~Siege of Dragonspear area BD7300.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BD7200.ARE~ ~Siege of Dragonspear area BD7200.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BDHORST.STO~ ~The original Horst store, BDHORST.STO, could not be found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BDHORST.DLG~ ~Horst's original dialogue BDHORST.DLG could not be found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~MERCH2.CRE~ ~The generic merchant creature MERCH2.CRE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~PRISM.CRE~ ~The requested Prism creature base is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~EMITAR.CRE~ ~The requested Emitar creature base is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~UDDROW23.CRE~ ~The Ust Natha drow creature base is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~UDSVIR02.CRE~ ~The original Svirfneblin base is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~UDDROW22.CRE~ ~The Ust Natha bartender UDDROW22 is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR0300.ARE~ ~Area AR0300.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR0400.ARE~ ~Area AR0400.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR0406.ARE~ ~Area AR0406.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR0700.ARE~ ~Area AR0700.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR1105.ARE~ ~Area AR1105.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR1515.ARE~ ~Area AR1515.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR1602.ARE~ ~Area AR1602.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR1902.ARE~ ~Area AR1902.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR2000.ARE~ ~Area AR2000.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR2100.ARE~ ~Area AR2100.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR2202.ARE~ ~Area AR2202.ARE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR5003.ARE~ ~AR5003 (Saradush) is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AR5500.ARE~ ~AR5500 (Amkethran) is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BPROST1.CRE~ ~Original female courtesan BPROST1.CRE is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~SCRLB4.ITM~ ~Original Wish scroll SCRLB4.ITM is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~SCRL7U.ITM~ ~Original Contingency scroll SCRL7U.ITM is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~SCRL9G.ITM~ ~Original Abi-Dalzim's Horrid Wilting scroll SCRL9G.ITM is missing.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~GENTHF01.CRE~ ~Generic thug GENTHF01.CRE not found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~BNOBLE1.CRE~ ~Noble BNOBLE1.CRE not found.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~SW1H20.ITM~ ~Original-game item SW1H20.ITM is unavailable.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~SW1H46.ITM~ ~Original-game item SW1H46.ITM is unavailable.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~SW1H48.ITM~ ~Original-game item SW1H48.ITM is unavailable.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~SCRL7Q.ITM~ ~Original-game item SCRL7Q.ITM is unavailable.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~SCRL6P.ITM~ ~Original-game item SCRL6P.ITM is unavailable.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~POTN52.ITM~ ~Original-game item POTN52.ITM is unavailable.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~MISC07.ITM~ ~Original-game item MISC07.ITM is unavailable.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~SCRL5N.ITM~ ~Domination scroll (SCRL5N) must be available in the game.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~POTN55.ITM~ ~Potion of Superior Healing (POTN55) must be available in the game.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~AROW07.ITM~ ~Arrows of Dispelling (AROW07) must be available in the game.~
+
+INCLUDE ~CotSC/components/miscellaneous_merchants/install.tph~
+
+
+// ================================================================
+// MERGED v60: QC: Potions of Life Saving (standalone v1.0)
+// 15 rare container placements, separate from Eastern Carnival QCLIFE.
+// ================================================================
+BEGIN @6046
+REQUIRE_PREDICATE GAME_IS ~eet~ ~Potions of Life Saving requires an EET installation.~
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~POTN08.ITM~ ~The base Potion of Healing (POTN08.ITM) is required.~
+
+INCLUDE ~CotSC/components/potions_of_life_saving.tph~
+
+// ----------------------------------------------------------
+// Optional integration with BP-BGT Worldmap v13.1.1.
+// This is a data registration component ONLY: it does not patch
+// the built-in EET world map or any CotSC quest scripts.
+// Install after CotSC content, before BP-BGT Worldmap component 0.
+// ----------------------------------------------------------
+BEGIN @6047
+REQUIRE_PREDICATE GAME_IS ~eet~ ~The Worldmap integration requires EET.~
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~TORMHA.ARE~ OR FILE_EXISTS_IN_GAME ~QCCGRV.ARE~ OR FILE_EXISTS_IN_GAME ~QCRIVD.ARE~ OR FILE_EXISTS_IN_GAME ~QCHALR.ARE~ OR FILE_EXISTS_IN_GAME ~QCBREW.ARE~ OR FILE_EXISTS_IN_GAME ~QCCARN.ARE~) ~Install the desired CotSC area components first.~
+
+INCLUDE ~CotSC/components/worldmap_compatibility.tph~

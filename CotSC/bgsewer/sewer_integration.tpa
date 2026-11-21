@@ -1,0 +1,928 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/bgsewer/sewer_installer.tra~
+
+// Install the supplied working QCSEWR area before modifying it.
+COPY ~CotSC/bgsewer/QCSEWR.ARE~ ~override/QCSEWR.ARE~
+COPY ~CotSC/bgsewer/QCSEWR.WED~ ~override/QCSEWR.WED~
+COPY ~CotSC/bgsewer/QCSEWR.TIS~ ~override/QCSEWR.TIS~
+COPY ~CotSC/bgsewer/QSEWR00.PVRZ~ ~override/QSEWR00.PVRZ~
+COPY ~CotSC/bgsewer/QSEWR01.PVRZ~ ~override/QSEWR01.PVRZ~
+COPY ~CotSC/bgsewer/QSEWR02.PVRZ~ ~override/QSEWR02.PVRZ~
+COPY ~CotSC/bgsewer/QSEWR03.PVRZ~ ~override/QSEWR03.PVRZ~
+COPY ~CotSC/bgsewer/QSEWR04.PVRZ~ ~override/QSEWR04.PVRZ~
+COPY ~CotSC/bgsewer/QSEWR05.PVRZ~ ~override/QSEWR05.PVRZ~
+COPY ~CotSC/bgsewer/QSEWR06.PVRZ~ ~override/QSEWR06.PVRZ~
+COPY ~CotSC/bgsewer/QCSEWRSR.BMP~ ~override/QCSEWRSR.BMP~
+COPY ~CotSC/bgsewer/QCSEWRHT.BMP~ ~override/QCSEWRHT.BMP~
+COPY ~CotSC/bgsewer/QCSEWRLM.BMP~ ~override/QCSEWRLM.BMP~
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SHVERT.CRE~ BEGIN
+  FAIL @20496
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~GHOUL.CRE~ BEGIN
+  FAIL @20497
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~JELLMU.CRE~ BEGIN
+  FAIL @20498
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~CARRIO.CRE~ BEGIN
+  FAIL @20499
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~OTYUGH.CRE~ BEGIN
+  FAIL @20500
+END
+// Cadok: standalone copy of the native SHVERT creature, retaining its appearance/chassis.
+// Scripts are cleared so he remains stationary until the player talks to him.
+COPY_EXISTING ~SHVERT.CRE~ ~override/QCCADOK.CRE~
+  SAY NAME1 @12000
+  SAY NAME2 @12000
+  WRITE_ASCII 0x2cc ~QCCADOK~ #8
+  WRITE_ASCII 0x248 ~QCCADOK~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  WRITE_SHORT 0x244 0x4000
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~QCCADOK_DEAD~ #32
+
+// Cadok at 1627,782, facing NE (10).
+COPY_EXISTING ~QCSEWR.ARE~ ~override/QCSEWR.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1627
+      fj_loc_y = 782
+      fj_dest_x = 1627
+      fj_dest_y = 782
+      fj_spawned = 1
+      fj_orientation = 10
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Cadok
+      fj_cre_resref = QCCADOK
+      fj_dlg_resref = QCCADOK
+      fj_bcs_override = QCCADOK
+  END
+
+// Ghouls.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1719
+      fj_loc_y = 1175
+      fj_dest_x = 1719
+      fj_dest_y = 1175
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCGHOUL1
+      fj_cre_resref = GHOUL
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1366
+      fj_loc_y = 1069
+      fj_dest_x = 1366
+      fj_dest_y = 1069
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCGHOUL2
+      fj_cre_resref = GHOUL
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1435
+      fj_loc_y = 1116
+      fj_dest_x = 1435
+      fj_dest_y = 1116
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCGHOUL3
+      fj_cre_resref = GHOUL
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1408
+      fj_loc_y = 263
+      fj_dest_x = 1408
+      fj_dest_y = 263
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCGHOUL4
+      fj_cre_resref = GHOUL
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1532
+      fj_loc_y = 211
+      fj_dest_x = 1532
+      fj_dest_y = 211
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCGHOUL5
+      fj_cre_resref = GHOUL
+  END
+
+// Otyugh at 2765,1050.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2765
+      fj_loc_y = 1050
+      fj_dest_x = 2765
+      fj_dest_y = 1050
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCOTYUGH
+      fj_cre_resref = OTYUGH
+  END
+
+// Mustard jellies.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2749
+      fj_loc_y = 913
+      fj_dest_x = 2749
+      fj_dest_y = 913
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCJELLY1
+      fj_cre_resref = JELLMU
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2663
+      fj_loc_y = 1146
+      fj_dest_x = 2663
+      fj_dest_y = 1146
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCJELLY2
+      fj_cre_resref = JELLMU
+  END
+
+// Carrion crawler at 222,101, facing south (0).
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 222
+      fj_loc_y = 101
+      fj_dest_x = 222
+      fj_dest_y = 101
+      fj_spawned = 1
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QCCARRIO
+      fj_cre_resref = CARRIO
+  END
+
+
+// Shante: use the exact CRE chassis of Lady Delcia Caan, a confirmed-working
+// automatically-speaking BG1 NPC from Better Immersion, then copy only the
+// courtesan visual/colour fields from the BG1/EET Beregost courtesan PROSBA_B.CRE.
+// This avoids guessing at a creature-era chassis while retaining the intended look.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DELCIA.CRE~ BEGIN
+  FAIL @20501
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~PROSBA_B.CRE~ BEGIN
+  FAIL @20502
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SEWERF1.CRE~ BEGIN
+  FAIL @20503
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SEWERF3.CRE~ BEGIN
+  FAIL @20504
+END
+
+COPY_EXISTING ~DELCIA.CRE~ ~override/QCSHANTE.CRE~
+  SAY NAME1 @12001
+  SAY NAME2 @12001
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x2cc ~QCSHANTE~ #8
+  WRITE_ASCII 0x248 ~QCSHANTE~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+  REMOVE_CRE_ITEMS
+  INNER_PATCH_FILE ~PROSBA_B.CRE~ BEGIN
+    READ_LONG 0x28 shantee_animation
+    READ_BYTE 0x2d shantee_color1
+    READ_BYTE 0x2e shantee_color2
+    READ_BYTE 0x30 shantee_color3
+    READ_BYTE 0x31 shantee_color4
+  END
+  WRITE_LONG 0x28 "%shantee_animation%"
+  WRITE_BYTE 0x2d "%shantee_color1%"
+  WRITE_BYTE 0x2e "%shantee_color2%"
+  WRITE_BYTE 0x30 "%shantee_color3%"
+  WRITE_BYTE 0x31 "%shantee_color4%"
+BUT_ONLY_IF_IT_CHANGES
+
+// The two freed sewerfolk are hostile from the moment the area loads.
+// Use standalone copies so the original SEWERF1/SEWERF3 creatures remain untouched.
+COPY_EXISTING ~SEWERF1.CRE~ ~override/QSEWRF1.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QSEWRF1_DEAD~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SEWERF3.CRE~ ~override/QSEWRF3.CRE~
+  WRITE_BYTE 0x270 255
+  WRITE_ASCII 0x280 ~QSEWRF3_DEAD~ #32
+BUT_ONLY_IF_IT_CHANGES
+
+// Torn letter found in QCSEWL container 2. SCRL2I is a native
+// BG2/EET item whose physical icon is a letter rather than a book.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SCRL2I.ITM~ BEGIN
+  FAIL @20505
+END
+
+COPY_EXISTING ~SCRL2I.ITM~ ~override/QCSHLTR.ITM~
+  SAY NAME1 @12002
+  SAY NAME2 @12002
+  SAY DESC @12003
+BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// QCSEWL: independent copy of BG2613
+//
+// The installer ships with WeiDU 2.23. That version can use
+// COPY_EXISTING_REGEXP, but it cannot safely use regexp capture groups
+// in the destination filename here. Use explicit per-page copies instead.
+// Only pages that actually exist in the installed game are copied.
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~B261300.PVRZ~ BEGIN
+  FAIL @20506
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261300.PVRZ~ BEGIN
+  COPY_EXISTING ~B261300.PVRZ~ ~override/QSEWL00.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261301.PVRZ~ BEGIN
+  COPY_EXISTING ~B261301.PVRZ~ ~override/QSEWL01.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261302.PVRZ~ BEGIN
+  COPY_EXISTING ~B261302.PVRZ~ ~override/QSEWL02.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261303.PVRZ~ BEGIN
+  COPY_EXISTING ~B261303.PVRZ~ ~override/QSEWL03.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261304.PVRZ~ BEGIN
+  COPY_EXISTING ~B261304.PVRZ~ ~override/QSEWL04.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261305.PVRZ~ BEGIN
+  COPY_EXISTING ~B261305.PVRZ~ ~override/QSEWL05.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261306.PVRZ~ BEGIN
+  COPY_EXISTING ~B261306.PVRZ~ ~override/QSEWL06.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261307.PVRZ~ BEGIN
+  COPY_EXISTING ~B261307.PVRZ~ ~override/QSEWL07.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261308.PVRZ~ BEGIN
+  COPY_EXISTING ~B261308.PVRZ~ ~override/QSEWL08.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261309.PVRZ~ BEGIN
+  COPY_EXISTING ~B261309.PVRZ~ ~override/QSEWL09.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261310.PVRZ~ BEGIN
+  COPY_EXISTING ~B261310.PVRZ~ ~override/QSEWL10.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261311.PVRZ~ BEGIN
+  COPY_EXISTING ~B261311.PVRZ~ ~override/QSEWL11.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261312.PVRZ~ BEGIN
+  COPY_EXISTING ~B261312.PVRZ~ ~override/QSEWL12.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261313.PVRZ~ BEGIN
+  COPY_EXISTING ~B261313.PVRZ~ ~override/QSEWL13.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261314.PVRZ~ BEGIN
+  COPY_EXISTING ~B261314.PVRZ~ ~override/QSEWL14.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261315.PVRZ~ BEGIN
+  COPY_EXISTING ~B261315.PVRZ~ ~override/QSEWL15.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261316.PVRZ~ BEGIN
+  COPY_EXISTING ~B261316.PVRZ~ ~override/QSEWL16.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261317.PVRZ~ BEGIN
+  COPY_EXISTING ~B261317.PVRZ~ ~override/QSEWL17.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261318.PVRZ~ BEGIN
+  COPY_EXISTING ~B261318.PVRZ~ ~override/QSEWL18.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261319.PVRZ~ BEGIN
+  COPY_EXISTING ~B261319.PVRZ~ ~override/QSEWL19.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261320.PVRZ~ BEGIN
+  COPY_EXISTING ~B261320.PVRZ~ ~override/QSEWL20.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261321.PVRZ~ BEGIN
+  COPY_EXISTING ~B261321.PVRZ~ ~override/QSEWL21.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261322.PVRZ~ BEGIN
+  COPY_EXISTING ~B261322.PVRZ~ ~override/QSEWL22.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261323.PVRZ~ BEGIN
+  COPY_EXISTING ~B261323.PVRZ~ ~override/QSEWL23.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261324.PVRZ~ BEGIN
+  COPY_EXISTING ~B261324.PVRZ~ ~override/QSEWL24.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261325.PVRZ~ BEGIN
+  COPY_EXISTING ~B261325.PVRZ~ ~override/QSEWL25.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261326.PVRZ~ BEGIN
+  COPY_EXISTING ~B261326.PVRZ~ ~override/QSEWL26.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261327.PVRZ~ BEGIN
+  COPY_EXISTING ~B261327.PVRZ~ ~override/QSEWL27.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261328.PVRZ~ BEGIN
+  COPY_EXISTING ~B261328.PVRZ~ ~override/QSEWL28.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261329.PVRZ~ BEGIN
+  COPY_EXISTING ~B261329.PVRZ~ ~override/QSEWL29.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261330.PVRZ~ BEGIN
+  COPY_EXISTING ~B261330.PVRZ~ ~override/QSEWL30.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261331.PVRZ~ BEGIN
+  COPY_EXISTING ~B261331.PVRZ~ ~override/QSEWL31.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261332.PVRZ~ BEGIN
+  COPY_EXISTING ~B261332.PVRZ~ ~override/QSEWL32.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261333.PVRZ~ BEGIN
+  COPY_EXISTING ~B261333.PVRZ~ ~override/QSEWL33.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261334.PVRZ~ BEGIN
+  COPY_EXISTING ~B261334.PVRZ~ ~override/QSEWL34.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261335.PVRZ~ BEGIN
+  COPY_EXISTING ~B261335.PVRZ~ ~override/QSEWL35.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261336.PVRZ~ BEGIN
+  COPY_EXISTING ~B261336.PVRZ~ ~override/QSEWL36.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261337.PVRZ~ BEGIN
+  COPY_EXISTING ~B261337.PVRZ~ ~override/QSEWL37.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261338.PVRZ~ BEGIN
+  COPY_EXISTING ~B261338.PVRZ~ ~override/QSEWL38.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261339.PVRZ~ BEGIN
+  COPY_EXISTING ~B261339.PVRZ~ ~override/QSEWL39.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261340.PVRZ~ BEGIN
+  COPY_EXISTING ~B261340.PVRZ~ ~override/QSEWL40.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261341.PVRZ~ BEGIN
+  COPY_EXISTING ~B261341.PVRZ~ ~override/QSEWL41.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261342.PVRZ~ BEGIN
+  COPY_EXISTING ~B261342.PVRZ~ ~override/QSEWL42.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261343.PVRZ~ BEGIN
+  COPY_EXISTING ~B261343.PVRZ~ ~override/QSEWL43.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261344.PVRZ~ BEGIN
+  COPY_EXISTING ~B261344.PVRZ~ ~override/QSEWL44.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261345.PVRZ~ BEGIN
+  COPY_EXISTING ~B261345.PVRZ~ ~override/QSEWL45.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261346.PVRZ~ BEGIN
+  COPY_EXISTING ~B261346.PVRZ~ ~override/QSEWL46.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261347.PVRZ~ BEGIN
+  COPY_EXISTING ~B261347.PVRZ~ ~override/QSEWL47.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261348.PVRZ~ BEGIN
+  COPY_EXISTING ~B261348.PVRZ~ ~override/QSEWL48.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261349.PVRZ~ BEGIN
+  COPY_EXISTING ~B261349.PVRZ~ ~override/QSEWL49.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261350.PVRZ~ BEGIN
+  COPY_EXISTING ~B261350.PVRZ~ ~override/QSEWL50.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261351.PVRZ~ BEGIN
+  COPY_EXISTING ~B261351.PVRZ~ ~override/QSEWL51.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261352.PVRZ~ BEGIN
+  COPY_EXISTING ~B261352.PVRZ~ ~override/QSEWL52.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261353.PVRZ~ BEGIN
+  COPY_EXISTING ~B261353.PVRZ~ ~override/QSEWL53.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261354.PVRZ~ BEGIN
+  COPY_EXISTING ~B261354.PVRZ~ ~override/QSEWL54.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261355.PVRZ~ BEGIN
+  COPY_EXISTING ~B261355.PVRZ~ ~override/QSEWL55.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261356.PVRZ~ BEGIN
+  COPY_EXISTING ~B261356.PVRZ~ ~override/QSEWL56.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261357.PVRZ~ BEGIN
+  COPY_EXISTING ~B261357.PVRZ~ ~override/QSEWL57.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261358.PVRZ~ BEGIN
+  COPY_EXISTING ~B261358.PVRZ~ ~override/QSEWL58.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261359.PVRZ~ BEGIN
+  COPY_EXISTING ~B261359.PVRZ~ ~override/QSEWL59.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261360.PVRZ~ BEGIN
+  COPY_EXISTING ~B261360.PVRZ~ ~override/QSEWL60.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261361.PVRZ~ BEGIN
+  COPY_EXISTING ~B261361.PVRZ~ ~override/QSEWL61.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261362.PVRZ~ BEGIN
+  COPY_EXISTING ~B261362.PVRZ~ ~override/QSEWL62.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261363.PVRZ~ BEGIN
+  COPY_EXISTING ~B261363.PVRZ~ ~override/QSEWL63.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261364.PVRZ~ BEGIN
+  COPY_EXISTING ~B261364.PVRZ~ ~override/QSEWL64.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261365.PVRZ~ BEGIN
+  COPY_EXISTING ~B261365.PVRZ~ ~override/QSEWL65.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261366.PVRZ~ BEGIN
+  COPY_EXISTING ~B261366.PVRZ~ ~override/QSEWL66.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261367.PVRZ~ BEGIN
+  COPY_EXISTING ~B261367.PVRZ~ ~override/QSEWL67.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261368.PVRZ~ BEGIN
+  COPY_EXISTING ~B261368.PVRZ~ ~override/QSEWL68.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261369.PVRZ~ BEGIN
+  COPY_EXISTING ~B261369.PVRZ~ ~override/QSEWL69.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261370.PVRZ~ BEGIN
+  COPY_EXISTING ~B261370.PVRZ~ ~override/QSEWL70.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261371.PVRZ~ BEGIN
+  COPY_EXISTING ~B261371.PVRZ~ ~override/QSEWL71.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261372.PVRZ~ BEGIN
+  COPY_EXISTING ~B261372.PVRZ~ ~override/QSEWL72.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261373.PVRZ~ BEGIN
+  COPY_EXISTING ~B261373.PVRZ~ ~override/QSEWL73.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261374.PVRZ~ BEGIN
+  COPY_EXISTING ~B261374.PVRZ~ ~override/QSEWL74.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261375.PVRZ~ BEGIN
+  COPY_EXISTING ~B261375.PVRZ~ ~override/QSEWL75.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261376.PVRZ~ BEGIN
+  COPY_EXISTING ~B261376.PVRZ~ ~override/QSEWL76.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261377.PVRZ~ BEGIN
+  COPY_EXISTING ~B261377.PVRZ~ ~override/QSEWL77.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261378.PVRZ~ BEGIN
+  COPY_EXISTING ~B261378.PVRZ~ ~override/QSEWL78.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261379.PVRZ~ BEGIN
+  COPY_EXISTING ~B261379.PVRZ~ ~override/QSEWL79.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261380.PVRZ~ BEGIN
+  COPY_EXISTING ~B261380.PVRZ~ ~override/QSEWL80.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261381.PVRZ~ BEGIN
+  COPY_EXISTING ~B261381.PVRZ~ ~override/QSEWL81.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261382.PVRZ~ BEGIN
+  COPY_EXISTING ~B261382.PVRZ~ ~override/QSEWL82.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261383.PVRZ~ BEGIN
+  COPY_EXISTING ~B261383.PVRZ~ ~override/QSEWL83.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261384.PVRZ~ BEGIN
+  COPY_EXISTING ~B261384.PVRZ~ ~override/QSEWL84.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261385.PVRZ~ BEGIN
+  COPY_EXISTING ~B261385.PVRZ~ ~override/QSEWL85.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261386.PVRZ~ BEGIN
+  COPY_EXISTING ~B261386.PVRZ~ ~override/QSEWL86.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261387.PVRZ~ BEGIN
+  COPY_EXISTING ~B261387.PVRZ~ ~override/QSEWL87.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261388.PVRZ~ BEGIN
+  COPY_EXISTING ~B261388.PVRZ~ ~override/QSEWL88.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261389.PVRZ~ BEGIN
+  COPY_EXISTING ~B261389.PVRZ~ ~override/QSEWL89.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261390.PVRZ~ BEGIN
+  COPY_EXISTING ~B261390.PVRZ~ ~override/QSEWL90.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261391.PVRZ~ BEGIN
+  COPY_EXISTING ~B261391.PVRZ~ ~override/QSEWL91.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261392.PVRZ~ BEGIN
+  COPY_EXISTING ~B261392.PVRZ~ ~override/QSEWL92.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261393.PVRZ~ BEGIN
+  COPY_EXISTING ~B261393.PVRZ~ ~override/QSEWL93.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261394.PVRZ~ BEGIN
+  COPY_EXISTING ~B261394.PVRZ~ ~override/QSEWL94.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261395.PVRZ~ BEGIN
+  COPY_EXISTING ~B261395.PVRZ~ ~override/QSEWL95.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261396.PVRZ~ BEGIN
+  COPY_EXISTING ~B261396.PVRZ~ ~override/QSEWL96.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261397.PVRZ~ BEGIN
+  COPY_EXISTING ~B261397.PVRZ~ ~override/QSEWL97.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261398.PVRZ~ BEGIN
+  COPY_EXISTING ~B261398.PVRZ~ ~override/QSEWL98.PVRZ~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~B261399.PVRZ~ BEGIN
+  COPY_EXISTING ~B261399.PVRZ~ ~override/QSEWL99.PVRZ~
+END
+
+COPY_EXISTING ~BG2613.TIS~ ~override/QCSEWL.TIS~
+COPY_EXISTING ~BG2613SR.BMP~ ~override/QCSEWLSR.BMP~
+COPY_EXISTING ~BG2613LM.BMP~ ~override/QCSEWLLM.BMP~
+COPY_EXISTING ~BG2613HT.BMP~ ~override/QCSEWLHT.BMP~
+
+COPY ~CotSC/bgsewer/BG2613.WED~ ~override/QCSEWL.WED~
+  WRITE_ASCII 0x24 ~QCSEWL~ #8
+
+COPY ~CotSC/bgsewer/BG2613.bcs~ ~override/QCSEWL.BCS~
+
+COPY ~CotSC/bgsewer/BG2613.ARE~ ~override/QCSEWL.ARE~
+  // ARE 0x08 = WED resref; ARE 0x94 = area script.
+  WRITE_ASCII 0x08 ~QCSEWL~ #8
+  WRITE_ASCII 0x94 ~QCSEWL~ #8
+  // Exit2613 is the original BG2613 information point whose tooltip is visible
+  // in the copied area. Clear its information strref so the old Tethoril text
+  // is not carried into QCSEWL.
+  WRITE_LONG 0x244 0
+
+  // Use the existing BG2613 travel exit (Door2615), but make it return to QCSEWR.
+  LPF ALTER_AREA_REGION
+    STR_VAR
+      region_name = ~Door2615~
+      destination_area = ~QCSEWR~
+      entrance_name = ~QCSEWL_RETURN~
+  END
+
+  // Remove every original scroll from the three copied containers.
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~SCRL83~ END
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~SCRL1U~ END
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~SCRL2H~ END
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~SCRL1B~ END
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~SCRL1K~ END
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~SCRL1G~ END
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~SCRL1Z~ END
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~SCRL2A~ END
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~SCRL75~ END
+
+  // Container 1: History of Cormyr + History of Sembia.
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 1
+    STR_VAR item_to_add = ~BOOK11~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 1
+    STR_VAR item_to_add = ~BOOK18~
+  END
+
+  // Container 2: History of Shadowdale V + History of Tethyr.
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 2
+    STR_VAR item_to_add = ~BOOK23~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 2
+    STR_VAR item_to_add = ~BOOK32~
+  END
+
+  // Container 3: History of the Drow I + Mirror Image + Secret Word.
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 3
+    STR_VAR item_to_add = ~BOOK38~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 3
+    STR_VAR item_to_add = ~SCRL96~
+  END
+  LPF ADD_AREA_ITEM
+    INT_VAR container_to_add_to = 3
+    STR_VAR item_to_add = ~SCRL6O~
+  END
+
+  // Shante, rescued courtesan, facing north at X=160, Y=290.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 160
+      fj_loc_y = 290
+      fj_dest_x = 160
+      fj_dest_y = 290
+      fj_spawned = 1
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = Shante
+      fj_cre_resref = QCSHANTE
+      fj_dlg_resref = QCSHANTE
+      fj_bcs_override = QCSHANTE
+  END
+
+  // Sewer prisoner/freed NPC 1 beside Shante.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 251
+      fj_loc_y = 188
+      fj_dest_x = 251
+      fj_dest_y = 188
+      fj_spawned = 1
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QSEWRF1
+      fj_cre_resref = QSEWRF1
+  END
+
+  // Sewer prisoner/freed NPC 3 beside Shante.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 298
+      fj_loc_y = 193
+      fj_dest_x = 298
+      fj_dest_y = 193
+      fj_spawned = 1
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = actor
+      fj_name = QSEWRF3
+      fj_cre_resref = QSEWRF3
+  END
+
+  // Replace the prior copied letter item with the corrected letter-icon version.
+  LPF DELETE_AREA_ITEM STR_VAR item_to_delete = ~QCSHLTR~ END
+
+  // The letter goes into the second container alongside the histories.
+  LPF ADD_AREA_ITEM
+    INT_VAR
+      container_to_add_to = 2
+    STR_VAR
+      item_to_add = ~QCSHLTR~
+      flags = IDENTIFIED
+  END
+
+  BUT_ONLY
+
+// New entrance/return point in QCSEWR.
+COPY_EXISTING ~QCSEWR.ARE~ ~override/QCSEWR.ARE~
+  // Travel trigger centered on the requested coordinate X=111, Y=247.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 91
+      fj_box_top = 227
+      fj_box_right = 131
+      fj_box_bottom = 267
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 91 + (227 << 16)
+      fj_vertex_1 = 131 + (227 << 16)
+      fj_vertex_2 = 131 + (267 << 16)
+      fj_vertex_3 = 91 + (267 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = ~QCSEWL_ENTRY~
+      fj_destination_area = ~QCSEWL~
+      fj_destination_name = ~Exit2615~
+  END
+
+  // Arrival point back in QCSEWR, kept just outside the travel trigger to avoid
+  // an immediate bounce when the party returns from the copied location.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 111
+      fj_loc_y = 280
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = ~QCSEWL_RETURN~
+  END
+
+  BUT_ONLY
+
+
+
+// -----------------------------------------------------------------------------
+// BG0226: restore the working entrance to the custom Slime Tunnels.
+// The entrance was previously placed at X=1366, Y=3289 with a
+// "To Slime Tunnels" automap note. Do not replace the native BG0226 area;
+// patch it in place so the rest of the original sewer area remains intact.
+
+COPY_EXISTING ~BG0226.ARE~ ~override/BG0226.ARE~
+  // Travel trigger at the established sewer entrance location.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 1346
+      fj_box_top = 3269
+      fj_box_right = 1386
+      fj_box_bottom = 3309
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 1346 + (3269 << 16)
+      fj_vertex_1 = 1386 + (3269 << 16)
+      fj_vertex_2 = 1386 + (3309 << 16)
+      fj_vertex_3 = 1346 + (3309 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = ~QCSEWR_ENTRY~
+      fj_destination_area = ~QCSEWR~
+      fj_destination_name = ~QCBG0226_ENTRY~
+  END
+
+  // Restore the automap marker at the same location.
+  ADD_MAP_NOTE #1366 #3289 ~green~
+  ~To Slime Tunnels~
+
+  BUT_ONLY
+
+// Matching arrival point inside QCSEWR.
+COPY_EXISTING ~QCSEWR.ARE~ ~override/QCSEWR.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1613
+      fj_loc_y = 1935
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = ~QCBG0226_ENTRY~
+  END
+
+  // Return transition to BG0226. This is the matching return that was
+  // previously working with the Slime Tunnels entrance.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 1593
+      fj_box_top = 1915
+      fj_box_right = 1633
+      fj_box_bottom = 1955
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 1593 + (1915 << 16)
+      fj_vertex_1 = 1633 + (1915 << 16)
+      fj_vertex_2 = 1633 + (1955 << 16)
+      fj_vertex_3 = 1593 + (1955 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = ~SEWER_EXIT~
+      fj_destination_area = ~BG0226~
+      fj_destination_name = ~SEWER_EXIT~
+  END
+  BUT_ONLY
+
+// Matching destination entrance in BG0226.
+COPY_EXISTING ~BG0226.ARE~ ~override/BG0226.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1366
+      fj_loc_y = 3329
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = ~SEWER_EXIT~
+  END
+  BUT_ONLY
+
+COMPILE ~CotSC/bgsewer/QCCADOK.baf~
+COMPILE ~CotSC/bgsewer/QCCADOK.d~ USING ~CotSC/translation/%LANGUAGE%/bgsewer/QCCADOK.tra~
+COMPILE ~CotSC/bgsewer/QCSHANTE.baf~
+COMPILE ~CotSC/bgsewer/QCSHANTE.d~ USING ~CotSC/translation/%LANGUAGE%/bgsewer/QCSHANTE.tra~
+
+

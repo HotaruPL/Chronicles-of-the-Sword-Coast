@@ -1,0 +1,13 @@
+IF
+  Global("QCVarunQuest","GLOBAL",3)
+  Dead("QCVGH1")
+  Dead("QCVGH2")
+  Dead("QCVGH3")
+  Dead("QCVGH4")
+  Dead("QCVGH5")
+  Dead("QCVGH6")
+  Dead("QCVGH7")
+THEN
+  RESPONSE #100
+    SetGlobal("QCVarunQuest","GLOBAL",4)
+END

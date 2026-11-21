@@ -1,0 +1,36 @@
+// ---------------------------------------------------------------------------
+// KAEIRA - SPICE RAID TRAVEL / RETURN
+// The same Kaeira CRE moves between Purple Wyrm and PWYTR1.
+// ---------------------------------------------------------------------------
+
+IF
+  Global("PWY_KAEIRA_ACCEPTED","GLOBAL",1)
+  Global("PWY_KAEIRA_TRAVEL_DONE","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_KAEIRA_TRAVEL_DONE","GLOBAL",1)
+    SetDialog("PWYKTRD")
+    ActionOverride(Player1,LeaveAreaLUA("PWYTR1","",[275.937],0))
+    ActionOverride(Player2,LeaveAreaLUA("PWYTR1","",[275.937],0))
+    ActionOverride(Player3,LeaveAreaLUA("PWYTR1","",[275.937],0))
+    ActionOverride(Player4,LeaveAreaLUA("PWYTR1","",[275.937],0))
+    ActionOverride(Player5,LeaveAreaLUA("PWYTR1","",[275.937],0))
+    ActionOverride(Player6,LeaveAreaLUA("PWYTR1","",[275.937],0))
+    LeaveAreaLUA("PWYTR1","",[344.824],12)
+END
+
+IF
+  Global("PWY_KAEIRA_RETURN","GLOBAL",1)
+  Global("PWY_KAEIRA_RETURN_DONE","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_KAEIRA_RETURN_DONE","GLOBAL",1)
+    SetDialog("PWYKAEI")
+    ActionOverride(Player1,LeaveAreaLUA("BIPWYR","",[1215.1278],8))
+    ActionOverride(Player2,LeaveAreaLUA("BIPWYR","",[1215.1278],8))
+    ActionOverride(Player3,LeaveAreaLUA("BIPWYR","",[1215.1278],8))
+    ActionOverride(Player4,LeaveAreaLUA("BIPWYR","",[1215.1278],8))
+    ActionOverride(Player5,LeaveAreaLUA("BIPWYR","",[1215.1278],8))
+    ActionOverride(Player6,LeaveAreaLUA("BIPWYR","",[1215.1278],8))
+    LeaveAreaLUA("BIPWYR","",[1580.1021],8)
+END

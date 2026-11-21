@@ -1,0 +1,739 @@
+// ====================================================================
+// PART 6/7: v2.3a three warehouses, five houses, temple, shop, nine paired doorways
+// ====================================================================
+
+// Requires the existing River District and game-original IE area resources.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QCRIVD.ARE~ BEGIN
+  FAIL @20198
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~QRVTHUG.CRE~ BEGIN
+  FAIL @20199
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~DRUFF1.CRE~ BEGIN
+  FAIL @20200
+END
+
+// These sources already exist in BG2EE/EET; the user supplied ARE/WED templates.
+// The cloned WEDs continue referencing the original TIS resources.
+// The copied search/light/height maps use each NEW six-character area resref.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG1207SR.BMP~ BEGIN
+  FAIL @20201
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG1207LM.BMP~ BEGIN
+  FAIL @20202
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG1207HT.BMP~ BEGIN
+  FAIL @20203
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG4807SR.BMP~ BEGIN
+  FAIL @20204
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG4807LM.BMP~ BEGIN
+  FAIL @20205
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG4807HT.BMP~ BEGIN
+  FAIL @20206
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0002SR.BMP~ BEGIN
+  FAIL @20207
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0002LM.BMP~ BEGIN
+  FAIL @20208
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0002HT.BMP~ BEGIN
+  FAIL @20209
+END
+// BG0810.ARE uses BG0304 as its WED. BG0810SR/LM/HT do NOT exist
+// on this EET install, so use the shared artwork area's maps instead.
+// Keep QRSHOP.ARE's WED reference as BG0304 (no WED clone needed).
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0304SR.BMP~ BEGIN
+  FAIL @20210
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0304LM.BMP~ BEGIN
+  FAIL @20211
+END
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG0304HT.BMP~ BEGIN
+  FAIL @20212
+END
+// Do not require COPY_EXISTING BG0304.WED: QRSHOP.ARE uses BG0304.WED directly.
+
+// QRWH01: empty clone of BG1207 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRWH01.ARE~ ~override/QRWH01.ARE~
+COPY ~CotSC/qriv_interiors/areas/QRWH01.WED~ ~override/QRWH01.WED~
+COPY_EXISTING ~BG1207SR.BMP~ ~override/QRWH01SR.BMP~
+COPY_EXISTING ~BG1207LM.BMP~ ~override/QRWH01LM.BMP~
+COPY_EXISTING ~BG1207HT.BMP~ ~override/QRWH01HT.BMP~
+
+// QRHO01: empty clone of BG4807 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRHO01.ARE~ ~override/QRHO01.ARE~
+COPY ~CotSC/qriv_interiors/areas/QRHO01.WED~ ~override/QRHO01.WED~
+COPY_EXISTING ~BG4807SR.BMP~ ~override/QRHO01SR.BMP~
+COPY_EXISTING ~BG4807LM.BMP~ ~override/QRHO01LM.BMP~
+COPY_EXISTING ~BG4807HT.BMP~ ~override/QRHO01HT.BMP~
+
+// QRHO02: empty clone of BG4807 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRHO02.ARE~ ~override/QRHO02.ARE~
+COPY ~CotSC/qriv_interiors/areas/QRHO02.WED~ ~override/QRHO02.WED~
+COPY_EXISTING ~BG4807SR.BMP~ ~override/QRHO02SR.BMP~
+COPY_EXISTING ~BG4807LM.BMP~ ~override/QRHO02LM.BMP~
+COPY_EXISTING ~BG4807HT.BMP~ ~override/QRHO02HT.BMP~
+
+// QRHO03: empty clone of BG4807 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRHO03.ARE~ ~override/QRHO03.ARE~
+COPY ~CotSC/qriv_interiors/areas/QRHO03.WED~ ~override/QRHO03.WED~
+COPY_EXISTING ~BG4807SR.BMP~ ~override/QRHO03SR.BMP~
+COPY_EXISTING ~BG4807LM.BMP~ ~override/QRHO03LM.BMP~
+COPY_EXISTING ~BG4807HT.BMP~ ~override/QRHO03HT.BMP~
+
+// QRHO04: empty clone of BG4807 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRHO04.ARE~ ~override/QRHO04.ARE~
+COPY ~CotSC/qriv_interiors/areas/QRHO04.WED~ ~override/QRHO04.WED~
+COPY_EXISTING ~BG4807SR.BMP~ ~override/QRHO04SR.BMP~
+COPY_EXISTING ~BG4807LM.BMP~ ~override/QRHO04LM.BMP~
+COPY_EXISTING ~BG4807HT.BMP~ ~override/QRHO04HT.BMP~
+
+// QRHO05: empty clone of BG4807 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRHO05.ARE~ ~override/QRHO05.ARE~
+COPY ~CotSC/qriv_interiors/areas/QRHO05.WED~ ~override/QRHO05.WED~
+COPY_EXISTING ~BG4807SR.BMP~ ~override/QRHO05SR.BMP~
+COPY_EXISTING ~BG4807LM.BMP~ ~override/QRHO05LM.BMP~
+COPY_EXISTING ~BG4807HT.BMP~ ~override/QRHO05HT.BMP~
+
+// QRWH02: empty clone of BG1207 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRWH02.ARE~ ~override/QRWH02.ARE~
+COPY ~CotSC/qriv_interiors/areas/QRWH02.WED~ ~override/QRWH02.WED~
+COPY_EXISTING ~BG1207SR.BMP~ ~override/QRWH02SR.BMP~
+COPY_EXISTING ~BG1207LM.BMP~ ~override/QRWH02LM.BMP~
+COPY_EXISTING ~BG1207HT.BMP~ ~override/QRWH02HT.BMP~
+
+// QRWH03: empty clone of BG1207 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRWH03.ARE~ ~override/QRWH03.ARE~
+COPY ~CotSC/qriv_interiors/areas/QRWH03.WED~ ~override/QRWH03.WED~
+COPY_EXISTING ~BG1207SR.BMP~ ~override/QRWH03SR.BMP~
+COPY_EXISTING ~BG1207LM.BMP~ ~override/QRWH03LM.BMP~
+COPY_EXISTING ~BG1207HT.BMP~ ~override/QRWH03HT.BMP~
+
+// QRSHOP: empty clone of BG0810 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRSHOP.ARE~ ~override/QRSHOP.ARE~
+// QRSHOP.ARE points to BG0304.WED, as source BG0810.ARE does.
+// No QRSHOP.WED file needed; engine uses existing BG0304 graphics.
+COPY_EXISTING ~BG0304SR.BMP~ ~override/QRSHOPSR.BMP~
+COPY_EXISTING ~BG0304LM.BMP~ ~override/QRSHOPLM.BMP~
+COPY_EXISTING ~BG0304HT.BMP~ ~override/QRSHOPHT.BMP~
+
+// QRTEMP: empty clone of BG0002 (no original actors or loot).
+COPY ~CotSC/qriv_interiors/areas/QRTEMP.ARE~ ~override/QRTEMP.ARE~
+COPY ~CotSC/qriv_interiors/areas/QRTEMP.WED~ ~override/QRTEMP.WED~
+COPY_EXISTING ~BG0002SR.BMP~ ~override/QRTEMPSR.BMP~
+COPY_EXISTING ~BG0002LM.BMP~ ~override/QRTEMPLM.BMP~
+COPY_EXISTING ~BG0002HT.BMP~ ~override/QRTEMPHT.BMP~
+
+// Add QCRIVD door regions AND interior->exterior arrival points by appending.
+// Does not copy/overwrite the existing main ARE, beyond these new region/entrance records.
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  // QRWH01: door at (279,737); outside landing at (296, 772).
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 257
+      fj_box_top = 714
+      fj_box_right = 301
+      fj_box_bottom = 760
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 257 + (714 << 16)
+      fj_vertex_1 = 301 + (714 << 16)
+      fj_vertex_2 = 301 + (760 << 16)
+      fj_vertex_3 = 257 + (760 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQRWH01DOOR
+      fj_destination_area = QRWH01
+      fj_destination_name = Exit1200
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 296
+      fj_loc_y = 772
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRWH1RET
+  END
+  // QRHO01: door at (705,1447); outside landing at (712, 1406).
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 683
+      fj_box_top = 1424
+      fj_box_right = 727
+      fj_box_bottom = 1470
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 683 + (1424 << 16)
+      fj_vertex_1 = 727 + (1424 << 16)
+      fj_vertex_2 = 727 + (1470 << 16)
+      fj_vertex_3 = 683 + (1470 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQRHO01DOOR
+      fj_destination_area = QRHO01
+      fj_destination_name = Exit4800
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 712
+      fj_loc_y = 1406
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRHO1RET
+  END
+  // QRHO02: door at (1075,1458); outside landing at (1080, 1418).
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 1053
+      fj_box_top = 1435
+      fj_box_right = 1097
+      fj_box_bottom = 1481
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 1053 + (1435 << 16)
+      fj_vertex_1 = 1097 + (1435 << 16)
+      fj_vertex_2 = 1097 + (1481 << 16)
+      fj_vertex_3 = 1053 + (1481 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQRHO02DOOR
+      fj_destination_area = QRHO02
+      fj_destination_name = Exit4800
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1080
+      fj_loc_y = 1418
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRHO2RET
+  END
+  // QRHO03: door at (2105,1473); outside landing at (2104, 1430).
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 2083
+      fj_box_top = 1450
+      fj_box_right = 2127
+      fj_box_bottom = 1496
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 2083 + (1450 << 16)
+      fj_vertex_1 = 2127 + (1450 << 16)
+      fj_vertex_2 = 2127 + (1496 << 16)
+      fj_vertex_3 = 2083 + (1496 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQRHO03DOOR
+      fj_destination_area = QRHO03
+      fj_destination_name = Exit4800
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2104
+      fj_loc_y = 1430
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRHO3RET
+  END
+  // QRHO04: door at (2560,1463); outside landing at (2568, 1430).
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 2538
+      fj_box_top = 1440
+      fj_box_right = 2582
+      fj_box_bottom = 1486
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 2538 + (1440 << 16)
+      fj_vertex_1 = 2582 + (1440 << 16)
+      fj_vertex_2 = 2582 + (1486 << 16)
+      fj_vertex_3 = 2538 + (1486 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQRHO04DOOR
+      fj_destination_area = QRHO04
+      fj_destination_name = Exit4800
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2568
+      fj_loc_y = 1430
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRHO4RET
+  END
+  // QRHO05: door at (2957,1383); outside landing at (2936, 1346).
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 2935
+      fj_box_top = 1360
+      fj_box_right = 2979
+      fj_box_bottom = 1406
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 2935 + (1360 << 16)
+      fj_vertex_1 = 2979 + (1360 << 16)
+      fj_vertex_2 = 2979 + (1406 << 16)
+      fj_vertex_3 = 2935 + (1406 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQRHO05DOOR
+      fj_destination_area = QRHO05
+      fj_destination_name = Exit4800
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2936
+      fj_loc_y = 1346
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRHO5RET
+  END
+  // QRWH02: door at (3156,860); outside landing at (3096, 843).
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 3093
+      fj_box_top = 806
+      fj_box_right = 3180
+      fj_box_bottom = 885
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 3093 + (806 << 16)
+      fj_vertex_1 = 3180 + (806 << 16)
+      fj_vertex_2 = 3180 + (885 << 16)
+      fj_vertex_3 = 3093 + (885 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQRWH02DOOR
+      fj_destination_area = QRWH02
+      fj_destination_name = Exit1200
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3096
+      fj_loc_y = 843
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRWH2RET
+  END
+  // QRWH03: door at (2887,563); outside landing at (2872, 532).
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 2865
+      fj_box_top = 540
+      fj_box_right = 2909
+      fj_box_bottom = 586
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 2865 + (540 << 16)
+      fj_vertex_1 = 2909 + (540 << 16)
+      fj_vertex_2 = 2909 + (586 << 16)
+      fj_vertex_3 = 2865 + (586 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQRWH03DOOR
+      fj_destination_area = QRWH03
+      fj_destination_name = Exit1200
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2872
+      fj_loc_y = 532
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRWH3RET
+  END
+  // QRSHOP: door at (2345,397); outside landing at (2344, 436).
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 2323
+      fj_box_top = 374
+      fj_box_right = 2367
+      fj_box_bottom = 420
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 2323 + (374 << 16)
+      fj_vertex_1 = 2367 + (374 << 16)
+      fj_vertex_2 = 2367 + (420 << 16)
+      fj_vertex_3 = 2323 + (420 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQRSHOPDOOR
+      fj_destination_area = QRSHOP
+      fj_destination_name = Exit0800
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2344
+      fj_loc_y = 436
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRSHOPRT
+  END
+  // v3.3: Temple of Helm exterior doorway at (1558,583).
+  // Connect the existing QRTEMP interior exit (Door0200) to this new region.
+  // The interior exit already targets QCRIVD:QRTEMRET.
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 1529
+      fj_box_top = 551
+      fj_box_right = 1587
+      fj_box_bottom = 615
+      fj_cursor_idx = 30
+      fj_flags = 4
+      fj_vertex_0 = 1529 + (551 << 16)
+      fj_vertex_1 = 1587 + (551 << 16)
+      fj_vertex_2 = 1587 + (615 << 16)
+      fj_vertex_3 = 1529 + (615 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQTEMDOOR
+      fj_destination_area = QRTEMP
+      fj_destination_name = Exit0200
+  END
+  // Landing is on approved walkable ground, in front of the temple.
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1558
+      fj_loc_y = 640
+      fj_orientation = 8
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRTEMRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// v3.5: exterior return arrival reserved for Hannibal's Hideout.
+// The new stairs trigger is directly below, activated only when the hideout
+// actually exists; do not send the party to a missing ARE on this interim build.
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2470
+      fj_loc_y = 239
+      fj_orientation = 0
+    STR_VAR
+      fj_structure_type = entrance
+      fj_name = QRHANRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// v3.6: active descent into installed Hannibal's Hideout.
+// Preserve the v3.5 bounding box/stair cursor and its exterior return point.
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 2438
+      fj_box_top = 164
+      fj_box_right = 2502
+      fj_box_bottom = 224
+      fj_cursor_idx = 28
+      fj_flags = 4
+      fj_vertex_0 = 2438 + (164 << 16)
+      fj_vertex_1 = 2502 + (164 << 16)
+      fj_vertex_2 = 2502 + (224 << 16)
+      fj_vertex_3 = 2438 + (224 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = RQHANSTAIRS
+      fj_destination_area = QCHANN
+      fj_destination_name = QRHANENT
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// v4.9: the exit was previously offset after the v4.3 artwork reduction.
+// Requested new trigger centre: X=612 Y=316. Same 146x138 trigger size.
+// Exterior QCRIVD arrival QRHANRET is unchanged.
+COPY_EXISTING ~QCHANN.ARE~ ~override/QCHANN.ARE~
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 2
+      fj_box_left = 539
+      fj_box_top = 247
+      fj_box_right = 685
+      fj_box_bottom = 385
+      fj_cursor_idx = 28
+      fj_flags = 4
+      fj_vertex_0 = 539 + (247 << 16)
+      fj_vertex_1 = 685 + (247 << 16)
+      fj_vertex_2 = 685 + (385 << 16)
+      fj_vertex_3 = 539 + (385 << 16)
+    STR_VAR
+      fj_structure_type = region
+      fj_name = QRHANEXIT
+      fj_destination_area = QCRIVD
+      fj_destination_name = QRHANRET
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// v4.5 — QCHANN: seven empty interactive containers from the user-painted blue shapes.
+// Preserve the approved v4.3 graphics, v4.4 collision and all pre-existing exits.
+// Apply after the QCHANN travel trigger; this modifies only the installed AREA.
+// Keep this addition inside the SINGLE existing unified component.
+COPY_EXISTING ~QCHANN.ARE~ ~override/QCHANN.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 0) BEGIN
+    PATCH_FAIL @20213
+  END
+  // Container 1: Stairwell barrel, exact painted footprint
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 8 // invisible/openable hotspot; matches working QCRIVD containers
+      fj_loc_x = 593
+      fj_loc_y = 405
+      fj_box_left = 570
+      fj_box_top = 376
+      fj_box_right = 618
+      fj_box_bottom = 436
+      fj_trap_loc_x = 593
+      fj_trap_loc_y = 405
+      fj_lock_diff = 0
+      fj_trap_remove_diff = 0
+      fj_flags = 0
+      fj_vertex_0 = 574 + (377 << 16)
+      fj_vertex_1 = 570 + (410 << 16)
+      fj_vertex_2 = 582 + (432 << 16)
+      fj_vertex_3 = 608 + (434 << 16)
+      fj_vertex_4 = 616 + (424 << 16)
+      fj_vertex_5 = 616 + (400 << 16)
+      fj_vertex_6 = 601 + (376 << 16)
+    STR_VAR
+      fj_structure_type = container
+      fj_name = QHC01BAR
+  END
+  // Container 2: Storage wall shelf, exact painted footprint
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 8 // invisible/openable hotspot; matches working QCRIVD containers
+      fj_loc_x = 566
+      fj_loc_y = 919
+      fj_box_left = 500
+      fj_box_top = 891
+      fj_box_right = 627
+      fj_box_bottom = 951
+      fj_trap_loc_x = 566
+      fj_trap_loc_y = 919
+      fj_lock_diff = 0
+      fj_trap_remove_diff = 0
+      fj_flags = 0
+      fj_vertex_0 = 500 + (891 << 16)
+      fj_vertex_1 = 515 + (935 << 16)
+      fj_vertex_2 = 626 + (949 << 16)
+      fj_vertex_3 = 624 + (904 << 16)
+    STR_VAR
+      fj_structure_type = container
+      fj_name = QHC02SHF
+  END
+  // Container 3: Storage floor crate, exact painted footprint
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 8 // invisible/openable hotspot; matches working QCRIVD containers
+      fj_loc_x = 566
+      fj_loc_y = 1210
+      fj_box_left = 548
+      fj_box_top = 1193
+      fj_box_right = 585
+      fj_box_bottom = 1231
+      fj_trap_loc_x = 566
+      fj_trap_loc_y = 1210
+      fj_lock_diff = 0
+      fj_trap_remove_diff = 0
+      fj_flags = 0
+      fj_vertex_0 = 552 + (1193 << 16)
+      fj_vertex_1 = 548 + (1221 << 16)
+      fj_vertex_2 = 577 + (1229 << 16)
+      fj_vertex_3 = 583 + (1198 << 16)
+    STR_VAR
+      fj_structure_type = container
+      fj_name = QHC03CRT
+  END
+  // Container 4: Barracks bedside 1, exact painted footprint
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 8 // invisible/openable hotspot; matches working QCRIVD containers
+      fj_loc_x = 1823
+      fj_loc_y = 1023
+      fj_box_left = 1804
+      fj_box_top = 1008
+      fj_box_right = 1844
+      fj_box_bottom = 1042
+      fj_trap_loc_x = 1823
+      fj_trap_loc_y = 1023
+      fj_lock_diff = 0
+      fj_trap_remove_diff = 0
+      fj_flags = 0
+      fj_vertex_0 = 1838 + (1008 << 16)
+      fj_vertex_1 = 1804 + (1016 << 16)
+      fj_vertex_2 = 1809 + (1040 << 16)
+      fj_vertex_3 = 1843 + (1031 << 16)
+    STR_VAR
+      fj_structure_type = container
+      fj_name = QHC04BR1
+  END
+  // Container 5: Barracks bedside 2, exact painted footprint
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 8 // invisible/openable hotspot; matches working QCRIVD containers
+      fj_loc_x = 2085
+      fj_loc_y = 1008
+      fj_box_left = 2069
+      fj_box_top = 995
+      fj_box_right = 2104
+      fj_box_bottom = 1023
+      fj_trap_loc_x = 2085
+      fj_trap_loc_y = 1008
+      fj_lock_diff = 0
+      fj_trap_remove_diff = 0
+      fj_flags = 0
+      fj_vertex_0 = 2103 + (995 << 16)
+      fj_vertex_1 = 2069 + (1000 << 16)
+      fj_vertex_2 = 2074 + (1021 << 16)
+      fj_vertex_3 = 2101 + (1014 << 16)
+      fj_vertex_4 = 2098 + (998 << 16)
+    STR_VAR
+      fj_structure_type = container
+      fj_name = QHC05BR2
+  END
+  // Container 6: Bedroom wall cabinet, exact painted footprint
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 8 // invisible/openable hotspot; matches working QCRIVD containers
+      fj_loc_x = 2677
+      fj_loc_y = 815
+      fj_box_left = 2662
+      fj_box_top = 803
+      fj_box_right = 2694
+      fj_box_bottom = 828
+      fj_trap_loc_x = 2677
+      fj_trap_loc_y = 815
+      fj_lock_diff = 0
+      fj_trap_remove_diff = 0
+      fj_flags = 0
+      fj_vertex_0 = 2662 + (805 << 16)
+      fj_vertex_1 = 2663 + (821 << 16)
+      fj_vertex_2 = 2691 + (826 << 16)
+      fj_vertex_3 = 2693 + (810 << 16)
+    STR_VAR
+      fj_structure_type = container
+      fj_name = QHC06CAB
+  END
+  // Container 7: Bedroom small table, exact painted footprint
+  LPF fj_are_structure
+    INT_VAR
+      fj_type = 8 // invisible/openable hotspot; matches working QCRIVD containers
+      fj_loc_x = 2515
+      fj_loc_y = 1090
+      fj_box_left = 2496
+      fj_box_top = 1073
+      fj_box_right = 2537
+      fj_box_bottom = 1109
+      fj_trap_loc_x = 2515
+      fj_trap_loc_y = 1090
+      fj_lock_diff = 0
+      fj_trap_remove_diff = 0
+      fj_flags = 0
+      fj_vertex_0 = 2498 + (1078 << 16)
+      fj_vertex_1 = 2496 + (1097 << 16)
+      fj_vertex_2 = 2506 + (1107 << 16)
+      fj_vertex_3 = 2527 + (1107 << 16)
+      fj_vertex_4 = 2535 + (1099 << 16)
+      fj_vertex_5 = 2533 + (1084 << 16)
+      fj_vertex_6 = 2525 + (1075 << 16)
+      fj_vertex_7 = 2506 + (1073 << 16)
+    STR_VAR
+      fj_structure_type = container
+      fj_name = QHC07TBL
+  END
+  PATCH_IF (SHORT_AT 0x74 != 7) BEGIN
+    PATCH_FAIL @20214
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// v4.7: Seven original containers and all v4.6 loot remain unchanged.
+// Each trapped chest uses its OWN script, triggered only by Opened([ANYONE]).
+// Its trap is detected/disarmed through the native ARE container trap fields.
+// The container Trap-resets flag (bit 3) stays clear.
+COMPILE ~CotSC/qriv_hannibal/scripts/QRHT02.baf~
+COMPILE ~CotSC/qriv_hannibal/scripts/QRHT06.baf~
+COPY_EXISTING ~QCHANN.ARE~ ~override/QCHANN.ARE~
+  PATCH_IF (SHORT_AT 0x74 != 7) BEGIN
+    PATCH_FAIL @20215
+  END
+  READ_LONG 0x70 q46co
+  // Container 2: trapped shelf by x=580,y=955; detectable and removable.
+  WRITE_LONG (q46co + 1 * 0xc0 + 0x28) 0 // No reset, no lock.
+  WRITE_SHORT (q46co + 1 * 0xc0 + 0x2c) 30
+  WRITE_SHORT (q46co + 1 * 0xc0 + 0x2e) 35
+  WRITE_SHORT (q46co + 1 * 0xc0 + 0x30) 1
+  WRITE_SHORT (q46co + 1 * 0xc0 + 0x32) 0
+  WRITE_ASCII (q46co + 1 * 0xc0 + 0x48) ~QRHT02~ #8
+  // Container 6: cabinet near x=2680,y=843, locked at 50% and trapped.
+  WRITE_SHORT (q46co + 5 * 0xc0 + 0x26) 50
+  WRITE_LONG (q46co + 5 * 0xc0 + 0x28) 1 // Locked; no trap-reset bit.
+  WRITE_SHORT (q46co + 5 * 0xc0 + 0x2c) 35
+  WRITE_SHORT (q46co + 5 * 0xc0 + 0x2e) 40
+  WRITE_SHORT (q46co + 5 * 0xc0 + 0x30) 1
+  WRITE_SHORT (q46co + 5 * 0xc0 + 0x32) 0
+  WRITE_ASCII (q46co + 5 * 0xc0 + 0x48) ~QRHT06~ #8
+
+  // #1 Stairwell barrel: Invisibility and 20 Bolts of Lightning.
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 1 charges1 = 1 STR_VAR item_to_add = ~POTN10~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 1 charges1 = 20 STR_VAR item_to_add = ~BOLT03~ END
+  // #2 Trapped storage shelf: three ordinary bottles of wine + Haste scroll.
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 2 charges1 = 1 STR_VAR item_to_add = ~QRHWINE~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 2 charges1 = 1 STR_VAR item_to_add = ~QRHWINE~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 2 charges1 = 1 STR_VAR item_to_add = ~QRHWINE~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 2 charges1 = 1 STR_VAR item_to_add = ~SCRL1H~ END
+  // #3 Floor crate: skull and silver ring.
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 3 charges1 = 1 STR_VAR item_to_add = ~MISC50~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 3 charges1 = 1 STR_VAR item_to_add = ~RING11~ END
+  // #4 Barracks shelf: 12 gp + Potion of Magic Shielding.
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 4 charges1 = 12 STR_VAR item_to_add = ~MISC07~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 4 charges1 = 1 STR_VAR item_to_add = ~POTN35~ END
+  // #5 Barracks shelf: Beljuril gem.
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 5 charges1 = 1 STR_VAR item_to_add = ~MISC6Z~ END
+  // #6 Trapped and locked bedroom cabinet: Felicity's Ring, dagger, 80gp, BDAMUL02.
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 6 charges1 = 1 STR_VAR item_to_add = ~QRVFRING~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 6 charges1 = 1 STR_VAR item_to_add = ~DAGG01~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 6 charges1 = 80 STR_VAR item_to_add = ~MISC07~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 6 charges1 = 1 STR_VAR item_to_add = ~BDAMUL02~ END
+  // #7 Small bedroom table: 2 gp + Potion of Healing.
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 7 charges1 = 2 STR_VAR item_to_add = ~MISC07~ END
+  LPF ADD_AREA_ITEM INT_VAR container_to_add_to = 7 charges1 = 1 STR_VAR item_to_add = ~POTN08~ END
+BUT_ONLY_IF_IT_CHANGES
+
+// v4.9: The old Helmite medallion is recoverable from Hannibal's body.
+// Use MISC04 artwork/type unchanged; keep this loot separate from the
+// Felicity ring/other quest items. Senyan accepts this exact resref.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~MISC04.ITM~ BEGIN
+  FAIL @20216
+END
+COPY_EXISTING ~MISC04.ITM~ ~override/QHHSYM.ITM~
+  SAY NAME1 @3018
+  SAY NAME2 @3018
+  SAY DESC @3019
+BUT_ONLY_IF_IT_CHANGES
+

@@ -1,0 +1,96 @@
+// ---------------------------------------------------------------------------
+// RED QUEEN - RED FANG MARAUDER BOSS AI
+// FROZEN BASELINE: immediate attack, PWYSPICE, BLUN04 mace, shield/armor,
+// music/ambient, and Orc Shaman resource are preserved.
+// New in this version: actual memorised priest spells with combat AI.
+// ---------------------------------------------------------------------------
+
+// First script cycle: attack on sight exactly as in the frozen baseline.
+IF
+  !Global("PWY_RED_QUEEN_ONSIGHT","LOCALS",1)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_RED_QUEEN_ONSIGHT","LOCALS",1)
+    Enemy()
+    Attack(Player1)
+END
+
+// Put up Armor of Faith once after combat begins.
+IF
+  Global("PWY_RED_QUEEN_ONSIGHT","LOCALS",1)
+  !Global("PWY_RQ_FAITH","LOCALS",1)
+  HaveSpell(CLERIC_ARMOR_OF_FAITH)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_RQ_FAITH","LOCALS",1)
+    Spell(Myself,CLERIC_ARMOR_OF_FAITH)
+    Attack(Player1)
+END
+
+// Emergency self-healing. The memorized charges are finite.
+IF
+  ActuallyInCombat()
+  HPPercentLT(Myself,50)
+  HaveSpell(CLERIC_CURE_MEDIUM_WOUNDS)
+THEN
+  RESPONSE #100
+    Spell(Myself,CLERIC_CURE_MEDIUM_WOUNDS)
+    Attack(Player1)
+END
+
+// Cycle through offensive spells. Each successful Spell() consumes one memorized use.
+IF
+  ActuallyInCombat()
+  See(NearestEnemyOf(Myself))
+  HaveSpell(CLERIC_HOLD_PERSON)
+  Global("PWY_RQ_SPELL_MODE","LOCALS",0)
+THEN
+  RESPONSE #100
+    Spell(NearestEnemyOf(Myself),CLERIC_HOLD_PERSON)
+    SetGlobal("PWY_RQ_SPELL_MODE","LOCALS",1)
+    Attack(Player1)
+END
+
+IF
+  ActuallyInCombat()
+  See(NearestEnemyOf(Myself))
+  HaveSpell(CLERIC_UNHOLY_BLIGHT)
+  Global("PWY_RQ_SPELL_MODE","LOCALS",1)
+THEN
+  RESPONSE #100
+    Spell(NearestEnemyOf(Myself),CLERIC_UNHOLY_BLIGHT)
+    SetGlobal("PWY_RQ_SPELL_MODE","LOCALS",2)
+    Attack(Player1)
+END
+
+IF
+  ActuallyInCombat()
+  See(NearestEnemyOf(Myself))
+  HaveSpell(CLERIC_RIGID_THINKING)
+  Global("PWY_RQ_SPELL_MODE","LOCALS",2)
+THEN
+  RESPONSE #100
+    Spell(NearestEnemyOf(Myself),CLERIC_RIGID_THINKING)
+    SetGlobal("PWY_RQ_SPELL_MODE","LOCALS",0)
+    Attack(Player1)
+END
+
+// Safety fallback: if the player attacks her first, retaliate normally.
+IF
+  AttackedBy([ANYONE],DEFAULT)
+THEN
+  RESPONSE #100
+    Enemy()
+    Attack(LastAttackerOf(Myself))
+END
+
+// Preserve the working spice fallback from v79.
+IF
+  !Dead("PWYREDQ")
+  !HasItem("PWYSPICE",Myself)
+  !Global("PWY_RED_QUEEN_GEAR","LOCALS",1)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_RED_QUEEN_GEAR","LOCALS",1)
+    CreateItem("PWYSPICE",1,0,0)
+END

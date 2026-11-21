@@ -1,0 +1,10 @@
+// Emhrys exists only after Eaglehorn asks the party to find him.
+IF
+  Global("QCU_EMHREQ","GLOBAL",1)
+  Global("QCU_EMHSENT","GLOBAL",0)
+  Global("QCU_EMHSPAWN","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCU_EMHSPAWN","GLOBAL",1)
+    CreateCreature("QCUEMH",[392.282],SE)
+END

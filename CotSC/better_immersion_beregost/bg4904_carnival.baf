@@ -1,0 +1,13 @@
+IF
+  !Exists("BICOGRE1")
+THEN
+  RESPONSE #100
+    CreateCreature("BICOGRE1",[730.444],4)
+END
+
+IF
+  !Exists("BICELF01")
+THEN
+  RESPONSE #100
+    CreateCreature("BICELF01",[377.184],0)
+END

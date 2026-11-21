@@ -1,0 +1,37 @@
+// Flower investigation: all companion branches return to this menu so every
+// companion present can be consulted. Yeslick/Branwen identify the flower by name;
+// Viconia does not, so she does not unlock the named-flower question at Allesia.
+
+APPEND ~YESLIJ~
+IF ~~ THEN BEGIN ORPH_FLOWER_YES
+  SAY @1
+  IF ~~ THEN GOTO ORPH_FLOWER_YES2
+END
+IF ~~ THEN BEGIN ORPH_FLOWER_YES2
+  SAY @2
+  IF ~~ THEN DO ~SetGlobal("ORPHAN_FLOWER_YES_DONE","GLOBAL",1) SetGlobal("ORPHAN_FLOWER_NAMED","GLOBAL",1)~ EXTERN ~ORPHFLWR~ 0
+END
+END
+
+APPEND ~VICONJ~
+IF ~~ THEN BEGIN ORPH_FLOWER_VIC
+  SAY @3
+  IF ~~ THEN DO ~SetGlobal("ORPHAN_FLOWER_VIC_DONE","GLOBAL",1)~ EXTERN ~ORPHFLWR~ 0
+END
+END
+
+APPEND ~BRANWJ~
+IF ~~ THEN BEGIN ORPH_FLOWER_BRAN
+  SAY @4
+  IF ~~ THEN DO ~SetGlobal("ORPHAN_FLOWER_BRAN_DONE","GLOBAL",1) SetGlobal("ORPHAN_FLOWER_NAMED","GLOBAL",1)~ EXTERN ~ORPHFLWR~ 0
+END
+END
+
+BEGIN ORPHFLWR
+IF ~Global("ORPHAN_TILDA","GLOBAL",1) Global("ORPHAN_FLOWER_FOUND","GLOBAL",1) Global("ORPHAN_QUEST_DONE","GLOBAL",0)~ THEN BEGIN 0
+  SAY @5
+  IF ~InParty("Yeslick") !Global("ORPHAN_FLOWER_YES_DONE","GLOBAL",1)~ THEN REPLY @6 EXTERN ~YESLIJ~ ORPH_FLOWER_YES
+  IF ~InParty("Viconia") !Global("ORPHAN_FLOWER_VIC_DONE","GLOBAL",1)~ THEN REPLY @7 EXTERN ~VICONJ~ ORPH_FLOWER_VIC
+  IF ~InParty("Branwen") !Global("ORPHAN_FLOWER_BRAN_DONE","GLOBAL",1)~ THEN REPLY @8 EXTERN ~BRANWJ~ ORPH_FLOWER_BRAN
+  IF ~~ THEN REPLY @9 EXIT
+END

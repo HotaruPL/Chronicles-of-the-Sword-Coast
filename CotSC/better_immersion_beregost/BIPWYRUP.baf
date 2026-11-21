@@ -1,0 +1,21 @@
+IF
+  Global("PWYRMusicSet","BIPWYRUP",0)
+  OR(2)
+    TimeLT(6)
+    TimeGT(21)
+THEN
+  RESPONSE #100
+    PlaySong(42)
+    SetGlobal("PWYRMusicSet","BIPWYRUP",1)
+END
+
+IF
+  Global("PWYRMusicSet","BIPWYRUP",0)
+  !OR(2)
+    TimeLT(6)
+    TimeGT(21)
+THEN
+  RESPONSE #100
+    PlaySong(41)
+    SetGlobal("PWYRMusicSet","BIPWYRUP",1)
+END

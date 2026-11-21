@@ -1,0 +1,16 @@
+Campaign,Area,X,Y,Item Resref,Quantity,Location rule
+BG1,BG0514,2652,602,QCPLIFE,1,Nearest existing container
+BG1,BG1602,153,187,QCPLIFE,1,Nearest existing container
+BG1,BG3901,1128,1408,QCPLIFE,1,Nearest existing container
+Siege of Dragonspear,BD1200,1968,2438,QCPLIFE,1,Nearest existing container
+Siege of Dragonspear,BD5300,1523,1109,QCPLIFE,1,Nearest existing container
+Shadows of Amn,AR0082,326,268,QCPLIFE,1,Nearest existing container
+Shadows of Amn,AR0206,575,430,QCPLIFE,1,Nearest existing container
+Shadows of Amn,AR0412,722,490,QCPLIFE,1,Nearest existing container
+Shadows of Amn,AR0807,420,304,QCPLIFE,1,Nearest existing container
+Shadows of Amn,AR1202,3277,1795,QCPLIFE,1,Nearest existing container
+Shadows of Amn,AR2102,780,638,QCPLIFE,1,Nearest existing container
+Shadows of Amn,AR2802,666,312,QCPLIFE,1,Nearest existing container
+Shadows of Amn,AR3021,831,670,QCPLIFE,1,Nearest existing container
+Throne of Bhaal,AR5201,2056,2248,QCPLIFE,1,Nearest existing container
+Throne of Bhaal,AR6012,494,309,QCPLIFE,1,Nearest existing container

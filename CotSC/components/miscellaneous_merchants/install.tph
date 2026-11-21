@@ -1,0 +1,10 @@
+INCLUDE ~CotSC/components/miscellaneous_merchants/item_resources.tph~
+INCLUDE ~CotSC/components/miscellaneous_merchants/bg1_merchants.tph~
+INCLUDE ~CotSC/components/miscellaneous_merchants/sod_merchants.tph~
+INCLUDE ~CotSC/components/miscellaneous_merchants/soa_merchants.tph~
+INCLUDE ~CotSC/components/miscellaneous_merchants/tob_merchants.tph~
+INCLUDE ~CotSC/components/miscellaneous_merchants/bg1_container_loot.tph~
+INCLUDE ~CotSC/components/miscellaneous_merchants/bg1_companion_provisions.tph~
+INCLUDE ~CotSC/components/miscellaneous_merchants/sod_container_loot.tph~
+INCLUDE ~CotSC/components/miscellaneous_merchants/soa_container_loot.tph~
+INCLUDE ~CotSC/components/miscellaneous_merchants/tob_container_loot.tph~

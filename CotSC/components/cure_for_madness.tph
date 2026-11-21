@@ -1,0 +1,51 @@
+LOAD_TRA ~CotSC/translation/%LANGUAGE%/cure_for_madness/tra/english/cure_for_madness.tra~
+
+// Give Arbolon a standard male BG1 farmer voice. The standalone's
+// READ_SOUNDSET / WRITE_SOUNDSET macros were undefined; copy only the 100
+// sound strrefs using the same tested method as QCCALPHY.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FARM.CRE~ BEGIN
+  FAIL @20148
+END
+COPY_EXISTING ~FARM.CRE~ ~override~
+  FOR (qc_arbol_slot = 0; qc_arbol_slot < 100; qc_arbol_slot += 1) BEGIN
+    READ_LONG (0xa4 + qc_arbol_slot * 4) qc_arbol_sound_strref
+    SET $qc_arbol_sound("%qc_arbol_slot%") = qc_arbol_sound_strref
+  END
+  BUT_ONLY_IF_IT_CHANGES
+
+
+// Use Bassilus only as a visual/statistical donor for a neutral male human priest.
+// Arbolon's inherited AI is cleared; the original custom ARBOLON script
+// remains assigned to the Override slot (0x248).
+COPY_EXISTING ~FARM.CRE~ ~override/ARBOLON.CRE~
+  FOR (qc_arbol_slot = 0; qc_arbol_slot < 100; qc_arbol_slot += 1) BEGIN
+    WRITE_LONG (0xa4 + qc_arbol_slot * 4) $qc_arbol_sound("%qc_arbol_slot%")
+  END
+  SAY 0x08 @0
+  SAY 0x0c @0
+  REMOVE_CRE_ITEMS
+  // EET/EE standard HUMAN_MALE_CLERIC, with leather armour visibly equipped.
+  WRITE_LONG 0x28 0x6000
+  ADD_CRE_ITEM ~LEAT01~ #0 #0 #0 ~IDENTIFIED~ ~ARMOR~ EQUIP
+  WRITE_ASCII 0x248 ~ARBOLON~ #8
+  WRITE_ASCII 0x250 ~~ #8
+  WRITE_ASCII 0x258 ~~ #8
+  WRITE_ASCII 0x260 ~~ #8
+  WRITE_ASCII 0x268 ~~ #8
+  WRITE_BYTE 0x270 128
+  WRITE_ASCII 0x280 ~ARBOLON~ #32
+  WRITE_ASCII 0x2cc ~QCARBOL~ #8
+BUT_ONLY_IF_IT_CHANGES
+
+// Arbolon's personal behavior.
+COMPILE ~CotSC/cure_for_madness/arbolon.baf~
+
+// Main conversation.
+COMPILE ~CotSC/cure_for_madness/qcarbol.d~ USING ~CotSC/translation/%LANGUAGE%/cure_for_madness/tra/english/cure_for_madness.tra~
+
+// Tiax's post-fight line is kept in a separate dialogue resource so the
+// existing BG1NPC Tiax dialogue remains untouched.
+COMPILE ~CotSC/cure_for_madness/qcatiax.d~ USING ~CotSC/translation/%LANGUAGE%/cure_for_madness/tra/english/cure_for_madness.tra~
+
+// Red Canyon event controller.
+EXTEND_TOP ~BG3700.BCS~ ~CotSC/cure_for_madness/bg3700.baf~

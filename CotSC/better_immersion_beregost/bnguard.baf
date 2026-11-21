@@ -1,0 +1,11 @@
+// If the Storekeep becomes hostile, the Guard turns hostile and attacks him.
+IF
+  Exists("SHOPKN")
+  Allegiance("SHOPKN",ENEMY)
+  !Global("BNGUARD_HOSTILE","GLOBAL",1)
+THEN
+  RESPONSE #100
+    SetGlobal("BNGUARD_HOSTILE","GLOBAL",1)
+    Enemy()
+    Attack("SHOPKN")
+END

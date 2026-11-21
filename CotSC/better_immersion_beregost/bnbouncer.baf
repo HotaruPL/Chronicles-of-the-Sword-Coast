@@ -1,0 +1,8 @@
+IF
+  Die()
+  Global("BNBOUNC_REP","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("BNBOUNC_REP","GLOBAL",1)
+    ReputationInc(-1)
+END

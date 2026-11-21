@@ -1,0 +1,6 @@
+IF
+  !Exists("QCHALIN")
+THEN
+  RESPONSE #100
+    CreateCreature("QCHALIN",[675.294],0)
+END

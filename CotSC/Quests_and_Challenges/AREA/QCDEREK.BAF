@@ -1,0 +1,25 @@
+IF
+  Global("QCDEREK_TALKED","LOCALS",0)
+  See(Player1)
+  !Range(Player1,20)
+THEN
+  RESPONSE #100
+    MoveToObject(Player1)
+END
+
+IF
+  Global("QCDEREK_TALKED","LOCALS",0)
+  See(Player1)
+  Range(Player1,20)
+THEN
+  RESPONSE #100
+    SetGlobal("QCDEREK_TALKED","LOCALS",1)
+END
+
+IF
+  Global("QCDEREK_TALKED","LOCALS",1)
+  See(Player1)
+THEN
+  RESPONSE #100
+    Dialogue(Player1)
+END

@@ -1,0 +1,40 @@
+IF
+  See(NearestEnemyOf(Myself))
+  !GlobalTimerNotExpired("QCWIZ_CAST","LOCALS")
+  !StateCheck(Myself,STATE_MIRRORIMAGE)
+  HaveSpell(WIZARD_MIRROR_IMAGE)
+THEN
+  RESPONSE #100
+    SetGlobalTimer("QCWIZ_CAST","LOCALS",ONE_ROUND)
+    Spell(Myself,WIZARD_MIRROR_IMAGE)
+END
+
+IF
+  See(NearestEnemyOf(Myself))
+  !GlobalTimerNotExpired("QCWIZ_CAST","LOCALS")
+  HaveSpell(WIZARD_MAGIC_MISSILE)
+THEN
+  RESPONSE #100
+    SetGlobalTimer("QCWIZ_CAST","LOCALS",ONE_ROUND)
+    Spell(NearestEnemyOf(Myself),WIZARD_MAGIC_MISSILE)
+END
+
+IF
+  See(NearestEnemyOf(Myself))
+  !GlobalTimerNotExpired("QCWIZ_CAST","LOCALS")
+  HaveSpell(WIZARD_SLEEP)
+THEN
+  RESPONSE #100
+    SetGlobalTimer("QCWIZ_CAST","LOCALS",ONE_ROUND)
+    Spell(NearestEnemyOf(Myself),WIZARD_SLEEP)
+END
+
+IF
+  See(NearestEnemyOf(Myself))
+  !GlobalTimerNotExpired("QCWIZ_CAST","LOCALS")
+  HaveSpell(WIZARD_CHROMATIC_ORB)
+THEN
+  RESPONSE #100
+    SetGlobalTimer("QCWIZ_CAST","LOCALS",ONE_ROUND)
+    Spell(NearestEnemyOf(Myself),WIZARD_CHROMATIC_ORB)
+END

@@ -1,0 +1,26 @@
+// v4.6: Felicity's Lucky Ring; quest completes only with unique QRVFRING.
+// Existing QRVFEL.DLG numeric states 0 and 1 remain valid replacements.
+REPLACE ~QRVFEL~
+IF ~Global("QRV_LUCKY_RING","GLOBAL",0)~ THEN BEGIN 0
+  SAY @102
+  IF ~PartyHasItem("QRVFRING")~ THEN REPLY @103 DO ~TakePartyItem("QRVFRING") DestroyItem("QRVFRING") AddexperienceParty(200) GiveGoldForce(300) SetGlobal("QRV_LUCKY_RING","GLOBAL",2) SetGlobal("QRV_RING_QUEST_REGISTERED","GLOBAL",1)~ SOLVED_JOURNAL @101 GOTO QRV_FelicityThanks
+  IF ~!PartyHasItem("QRVFRING")~ THEN DO ~SetGlobal("QRV_LUCKY_RING","GLOBAL",1) SetGlobal("QRV_RING_QUEST_REGISTERED","GLOBAL",1)~ UNSOLVED_JOURNAL @100 EXIT
+END
+IF ~Global("QRV_LUCKY_RING","GLOBAL",1)~ THEN BEGIN 1
+  SAY @104
+  IF ~PartyHasItem("QRVFRING")~ THEN REPLY @105 DO ~TakePartyItem("QRVFRING") DestroyItem("QRVFRING") AddexperienceParty(200) GiveGoldForce(300) SetGlobal("QRV_LUCKY_RING","GLOBAL",2) SetGlobal("QRV_RING_QUEST_REGISTERED","GLOBAL",1)~ SOLVED_JOURNAL @101 GOTO QRV_FelicityThanks
+  IF ~!PartyHasItem("QRVFRING") Global("QRV_RING_QUEST_REGISTERED","GLOBAL",0)~ THEN DO ~SetGlobal("QRV_RING_QUEST_REGISTERED","GLOBAL",1)~ UNSOLVED_JOURNAL @100 EXIT
+  IF ~!PartyHasItem("QRVFRING") Global("QRV_RING_QUEST_REGISTERED","GLOBAL",1)~ THEN EXIT
+END
+END
+
+APPEND ~QRVFEL~
+IF ~False()~ THEN BEGIN QRV_FelicityThanks
+  SAY @106
+  IF ~~ THEN EXIT
+END
+IF ~Global("QRV_LUCKY_RING","GLOBAL",2)~ THEN BEGIN QRV_FelicityReturned
+  SAY @107
+  IF ~~ THEN EXIT
+END
+END

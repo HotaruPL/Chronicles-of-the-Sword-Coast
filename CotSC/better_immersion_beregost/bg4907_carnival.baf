@@ -1,0 +1,6 @@
+IF
+  !Exists("BICWLF01")
+THEN
+  RESPONSE #100
+    CreateCreature("BICWLF01",[214.233],0)
+END

@@ -1,0 +1,21 @@
+// Ozeroth: force the clone's assigned QCOZER dialogue to start before the
+// inherited Narcillicus AI can launch NARCIL.DLG. After QCOZER calls Enemy(),
+// these blocks no longer match and the original SHOUT/NARC/MAGE4/WTASIGHT AI
+// is free to run normally.
+IF
+    Global("QCOZTalk","LOCALS",0)
+    See([PC])
+    !Allegiance(Myself,ENEMY)
+THEN
+    RESPONSE #100
+        SetGlobal("QCOZTalk","LOCALS",1)
+        StartDialog("QCOZER",Player1)
+END
+
+IF
+    Global("QCOZTalk","LOCALS",1)
+    !Allegiance(Myself,ENEMY)
+THEN
+    RESPONSE #100
+        NoAction()
+END

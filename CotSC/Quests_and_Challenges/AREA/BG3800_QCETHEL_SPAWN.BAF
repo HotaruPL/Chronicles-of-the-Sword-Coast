@@ -1,0 +1,16 @@
+IF
+  Global("QCE_ETHEL_SPAWNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("QCE_ETHEL_SPAWNED","GLOBAL",1)
+    CreateCreature("QCETHEL",[2985.1668],0)
+END
+
+// Once Ethel has invited the party in, enable the hidden travel region.
+// This also restores the entrance after an area reload/save game.
+IF
+  Global("QCE_ETHEL_INTRO","GLOBAL",3)
+THEN
+  RESPONSE #100
+    TriggerActivation("QCSUBH01_ENTRY",TRUE)
+END

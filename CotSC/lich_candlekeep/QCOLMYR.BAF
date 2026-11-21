@@ -1,0 +1,7 @@
+IF
+  See([ENEMY])
+  Range(Player1,30)
+THEN
+  RESPONSE #100
+    AttackReevaluate(Player1,30)
+END

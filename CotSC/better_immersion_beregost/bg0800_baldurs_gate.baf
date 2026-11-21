@@ -1,0 +1,133 @@
+// v76: each CotSC civilian now manages its own nighttime removal via QC75NITE.
+// Area script remains responsible solely for its original daytime spawn positions.
+
+// Halfling Commoner at 2742,1505, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0801")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0801",[2742.1505],4)
+END
+
+// Female Elven Commoner at 2354,1160, facing south.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0802")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0802",[2354.1160],0)
+END
+
+// Dwarf Commoner at 2346,1189, facing north.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0803")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0803",[2346.1189],8)
+END
+
+// Female Halfling Citizen at 2857,645, wandering.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0804")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0804",[2857.645],0)
+END
+
+// Wandering dog at 1751,255.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0805")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0805",[1751.255],0)
+END
+
+// Orc Citizen at 1334,553, facing south.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0806")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0806",[1334.553],0)
+END
+
+// Female Human Commoner at 1323,576, facing north.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0807")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0807",[1323.576],8)
+END
+
+// Wandering male Halfling Commoner at 1244,2038.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0808")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0808",[1244.2038],0)
+END
+
+// Weaponless Kobold Commoner at 1662,2341.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0809")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0809",[1662.2341],0)
+END
+
+// Tiefling Commoner at 2210,2963, facing northeast.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0810")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0810",[2210.2963],10)
+END
+
+// Weaponless Kobold Commoner at 3204,2323, facing south.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0811")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0811",[3204.2323],0)
+END
+
+// Wandering cat at 1179,3178.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0812")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0812",[1179.3178],0)
+END
+
+
+// Tout at the future Purple Wyrm Inn entrance, motionless, facing west.
+IF
+  TimeGT(5)
+  TimeLT(18)
+  !Exists("BGBG0813")
+THEN
+  RESPONSE #100
+    CreateCreature("BGBG0813",[2901.2645],4)
+END

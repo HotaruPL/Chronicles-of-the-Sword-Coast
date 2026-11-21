@@ -1,0 +1,9 @@
+IF
+  Global("QCU_SIR_HELLO","LOCALS",0)
+  Range(Player1,18)
+THEN
+  RESPONSE #100
+    SetGlobal("QCU_SIR_HELLO","LOCALS",1)
+    FaceObject(Player1)
+    StartDialog("QCUSIR",Player1)
+END

@@ -1,0 +1,479 @@
+// PART 8/8: Forest Brewery v1.5a merged + v3.0 world-map exit correction
+// ====================================================================
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3317.WED~ BEGIN
+  FAIL @20243
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3317SR.BMP~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3322SR.BMP~ BEGIN
+    FAIL @20244
+  END
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3317LM.BMP~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3322LM.BMP~ BEGIN
+    FAIL @20245
+  END
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3317HT.BMP~ BEGIN
+  ACTION_IF NOT FILE_EXISTS_IN_GAME ~BG3322HT.BMP~ BEGIN
+    FAIL @20246
+  END
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~WOLF01.CRE~ BEGIN
+  FAIL @20247
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~SQUIRL.CRE~ BEGIN
+  FAIL @20248
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~COW.CRE~ BEGIN
+  FAIL @20249
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~FARM.CRE~ BEGIN
+  FAIL @20250
+END
+
+COPY ~CotSC/qc_brewery/area/QBREW00.PVRZ~ ~override/QBREW00.PVRZ~
+COPY ~CotSC/qc_brewery/area/QBREW01.PVRZ~ ~override/QBREW01.PVRZ~
+COPY ~CotSC/qc_brewery/area/QBREW02.PVRZ~ ~override/QBREW02.PVRZ~
+COPY ~CotSC/qc_brewery/area/QBREW03.PVRZ~ ~override/QBREW03.PVRZ~
+COPY ~CotSC/qc_brewery/area/QBREW04.PVRZ~ ~override/QBREW04.PVRZ~
+COPY ~CotSC/qc_brewery/area/QBREW05.PVRZ~ ~override/QBREW05.PVRZ~
+COPY ~CotSC/qc_brewery/area/QBREW06.PVRZ~ ~override/QBREW06.PVRZ~
+COPY ~CotSC/qc_brewery/area/QCBREW.TIS~ ~override/QCBREW.TIS~
+COPY ~CotSC/qc_brewery/area/QCBREW.WED~ ~override/QCBREW.WED~
+COPY ~CotSC/qc_brewery/area/QCBREWHT.BMP~ ~override/QCBREWHT.BMP~
+COPY ~CotSC/qc_brewery/area/QCBREWLM.BMP~ ~override/QCBREWLM.BMP~
+COPY ~CotSC/qc_brewery/area/QCBREWSR.BMP~ ~override/QCBREWSR.BMP~
+COPY ~CotSC/qc_brewery/area/QCBREW.ARE~ ~override/QCBREW.ARE~
+  // Keep QCBREW's named world-map arrival entry; do not move the interior doorway.
+  READ_LONG 0x68 qb_entry_off
+  READ_LONG 0x6c qb_entry_count
+  PATCH_IF (qb_entry_count < 1) OR (qb_entry_off + 0x68 > SOURCE_SIZE) BEGIN
+    PATCH_FAIL @20251
+  END
+  READ_ASCII qb_entry_off qb_entry_name (32) NULL
+  PATCH_IF (~%qb_entry_name%~ STRING_EQUAL_CASE ~ARRIVE~) BEGIN
+    WRITE_SHORT (qb_entry_off + 0x20) 1229
+    WRITE_SHORT (qb_entry_off + 0x22) 105
+  END ELSE BEGIN
+    PATCH_FAIL @20252
+  END
+
+COPY ~CotSC/qc_brewery/area/QBRINT.ARE~ ~override/QBRINT.ARE~
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3317SR.BMP~ BEGIN
+  COPY_EXISTING ~BG3317SR.BMP~ ~override/QBRINTSR.BMP~
+END ELSE BEGIN
+  COPY_EXISTING ~BG3322SR.BMP~ ~override/QBRINTSR.BMP~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3317LM.BMP~ BEGIN
+  COPY_EXISTING ~BG3317LM.BMP~ ~override/QBRINTLM.BMP~
+END ELSE BEGIN
+  COPY_EXISTING ~BG3322LM.BMP~ ~override/QBRINTLM.BMP~
+END
+ACTION_IF FILE_EXISTS_IN_GAME ~BG3317HT.BMP~ BEGIN
+  COPY_EXISTING ~BG3317HT.BMP~ ~override/QBRINTHT.BMP~
+END ELSE BEGIN
+  COPY_EXISTING ~BG3322HT.BMP~ ~override/QBRINTHT.BMP~
+END
+COMPILE ~CotSC/qc_brewery/scripts/QBROAM.baf~
+COMPILE ~CotSC/qc_brewery/dialogue/QBBREWR.d~ USING ~CotSC/translation/%LANGUAGE%/qc_brewery/dialogue/QBBREWR.tra~
+COPY_EXISTING ~WOLF01.CRE~ ~override/QBWOLF.CRE~
+  SAY NAME1 @3044
+  SAY NAME2 @3044
+  WRITE_BYTE 0x270 255
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBWOLF~ #32
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~SQUIRL.CRE~ ~override/QBSQUR.CRE~
+  SAY NAME1 @3045
+  SAY NAME2 @3045
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBSQUR~ #32
+  WRITE_LONG 0x28 50176
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~QBROAM~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~COW.CRE~ ~override/QBHRSE.CRE~
+  SAY NAME1 @3046
+  SAY NAME2 @3046
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBHRSE~ #32
+  WRITE_LONG 0x28 45312
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~ ~ #8
+  // Clear the 100 cow sound strrefs (CRE v1: 0x00A4..0x0230). No patch loop.
+  WRITE_LONG 0x00A4 0xFFFFFFFF
+  WRITE_LONG 0x00A8 0xFFFFFFFF
+  WRITE_LONG 0x00AC 0xFFFFFFFF
+  WRITE_LONG 0x00B0 0xFFFFFFFF
+  WRITE_LONG 0x00B4 0xFFFFFFFF
+  WRITE_LONG 0x00B8 0xFFFFFFFF
+  WRITE_LONG 0x00BC 0xFFFFFFFF
+  WRITE_LONG 0x00C0 0xFFFFFFFF
+  WRITE_LONG 0x00C4 0xFFFFFFFF
+  WRITE_LONG 0x00C8 0xFFFFFFFF
+  WRITE_LONG 0x00CC 0xFFFFFFFF
+  WRITE_LONG 0x00D0 0xFFFFFFFF
+  WRITE_LONG 0x00D4 0xFFFFFFFF
+  WRITE_LONG 0x00D8 0xFFFFFFFF
+  WRITE_LONG 0x00DC 0xFFFFFFFF
+  WRITE_LONG 0x00E0 0xFFFFFFFF
+  WRITE_LONG 0x00E4 0xFFFFFFFF
+  WRITE_LONG 0x00E8 0xFFFFFFFF
+  WRITE_LONG 0x00EC 0xFFFFFFFF
+  WRITE_LONG 0x00F0 0xFFFFFFFF
+  WRITE_LONG 0x00F4 0xFFFFFFFF
+  WRITE_LONG 0x00F8 0xFFFFFFFF
+  WRITE_LONG 0x00FC 0xFFFFFFFF
+  WRITE_LONG 0x0100 0xFFFFFFFF
+  WRITE_LONG 0x0104 0xFFFFFFFF
+  WRITE_LONG 0x0108 0xFFFFFFFF
+  WRITE_LONG 0x010C 0xFFFFFFFF
+  WRITE_LONG 0x0110 0xFFFFFFFF
+  WRITE_LONG 0x0114 0xFFFFFFFF
+  WRITE_LONG 0x0118 0xFFFFFFFF
+  WRITE_LONG 0x011C 0xFFFFFFFF
+  WRITE_LONG 0x0120 0xFFFFFFFF
+  WRITE_LONG 0x0124 0xFFFFFFFF
+  WRITE_LONG 0x0128 0xFFFFFFFF
+  WRITE_LONG 0x012C 0xFFFFFFFF
+  WRITE_LONG 0x0130 0xFFFFFFFF
+  WRITE_LONG 0x0134 0xFFFFFFFF
+  WRITE_LONG 0x0138 0xFFFFFFFF
+  WRITE_LONG 0x013C 0xFFFFFFFF
+  WRITE_LONG 0x0140 0xFFFFFFFF
+  WRITE_LONG 0x0144 0xFFFFFFFF
+  WRITE_LONG 0x0148 0xFFFFFFFF
+  WRITE_LONG 0x014C 0xFFFFFFFF
+  WRITE_LONG 0x0150 0xFFFFFFFF
+  WRITE_LONG 0x0154 0xFFFFFFFF
+  WRITE_LONG 0x0158 0xFFFFFFFF
+  WRITE_LONG 0x015C 0xFFFFFFFF
+  WRITE_LONG 0x0160 0xFFFFFFFF
+  WRITE_LONG 0x0164 0xFFFFFFFF
+  WRITE_LONG 0x0168 0xFFFFFFFF
+  WRITE_LONG 0x016C 0xFFFFFFFF
+  WRITE_LONG 0x0170 0xFFFFFFFF
+  WRITE_LONG 0x0174 0xFFFFFFFF
+  WRITE_LONG 0x0178 0xFFFFFFFF
+  WRITE_LONG 0x017C 0xFFFFFFFF
+  WRITE_LONG 0x0180 0xFFFFFFFF
+  WRITE_LONG 0x0184 0xFFFFFFFF
+  WRITE_LONG 0x0188 0xFFFFFFFF
+  WRITE_LONG 0x018C 0xFFFFFFFF
+  WRITE_LONG 0x0190 0xFFFFFFFF
+  WRITE_LONG 0x0194 0xFFFFFFFF
+  WRITE_LONG 0x0198 0xFFFFFFFF
+  WRITE_LONG 0x019C 0xFFFFFFFF
+  WRITE_LONG 0x01A0 0xFFFFFFFF
+  WRITE_LONG 0x01A4 0xFFFFFFFF
+  WRITE_LONG 0x01A8 0xFFFFFFFF
+  WRITE_LONG 0x01AC 0xFFFFFFFF
+  WRITE_LONG 0x01B0 0xFFFFFFFF
+  WRITE_LONG 0x01B4 0xFFFFFFFF
+  WRITE_LONG 0x01B8 0xFFFFFFFF
+  WRITE_LONG 0x01BC 0xFFFFFFFF
+  WRITE_LONG 0x01C0 0xFFFFFFFF
+  WRITE_LONG 0x01C4 0xFFFFFFFF
+  WRITE_LONG 0x01C8 0xFFFFFFFF
+  WRITE_LONG 0x01CC 0xFFFFFFFF
+  WRITE_LONG 0x01D0 0xFFFFFFFF
+  WRITE_LONG 0x01D4 0xFFFFFFFF
+  WRITE_LONG 0x01D8 0xFFFFFFFF
+  WRITE_LONG 0x01DC 0xFFFFFFFF
+  WRITE_LONG 0x01E0 0xFFFFFFFF
+  WRITE_LONG 0x01E4 0xFFFFFFFF
+  WRITE_LONG 0x01E8 0xFFFFFFFF
+  WRITE_LONG 0x01EC 0xFFFFFFFF
+  WRITE_LONG 0x01F0 0xFFFFFFFF
+  WRITE_LONG 0x01F4 0xFFFFFFFF
+  WRITE_LONG 0x01F8 0xFFFFFFFF
+  WRITE_LONG 0x01FC 0xFFFFFFFF
+  WRITE_LONG 0x0200 0xFFFFFFFF
+  WRITE_LONG 0x0204 0xFFFFFFFF
+  WRITE_LONG 0x0208 0xFFFFFFFF
+  WRITE_LONG 0x020C 0xFFFFFFFF
+  WRITE_LONG 0x0210 0xFFFFFFFF
+  WRITE_LONG 0x0214 0xFFFFFFFF
+  WRITE_LONG 0x0218 0xFFFFFFFF
+  WRITE_LONG 0x021C 0xFFFFFFFF
+  WRITE_LONG 0x0220 0xFFFFFFFF
+  WRITE_LONG 0x0224 0xFFFFFFFF
+  WRITE_LONG 0x0228 0xFFFFFFFF
+  WRITE_LONG 0x022C 0xFFFFFFFF
+  WRITE_LONG 0x0230 0xFFFFFFFF
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~COW.CRE~ ~override/QBCOW1.CRE~
+  SAY NAME1 @3047
+  SAY NAME2 @3047
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBCOW1~ #32
+  WRITE_LONG 0x28 45056
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~COW.CRE~ ~override/QBCOW2.CRE~
+  SAY NAME1 @3047
+  SAY NAME2 @3047
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBCOW2~ #32
+  WRITE_LONG 0x28 45056
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~FARM.CRE~ ~override/QBBREWR.CRE~
+  SAY NAME1 @3048
+  SAY NAME2 @3048
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBBREWR~ #32
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~QBBREWR~ #8
+  WRITE_ASCII 0x248 ~ ~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~COW.CRE~ ~override/QBDEER.CRE~
+  SAY NAME1 @3049
+  SAY NAME2 @3049
+  WRITE_BYTE 0x270 128
+  WRITE_LONG 0x20 0
+  WRITE_ASCII 0x280 ~QBDEER~ #32
+  WRITE_LONG 0x28 32536
+  REMOVE_CRE_ITEMS
+  WRITE_ASCII 0x2cc ~ ~ #8
+  WRITE_ASCII 0x248 ~QBROAM~ #8
+  WRITE_ASCII 0x250 ~ ~ #8
+  WRITE_ASCII 0x258 ~ ~ #8
+  WRITE_ASCII 0x260 ~ ~ #8
+  WRITE_ASCII 0x268 ~ ~ #8
+BUT_ONLY_IF_IT_CHANGES
+MKDIR ~music/QCBREW~
+COPY ~CotSC/qc_brewery/music/QCBREW/QCBREWA.acm~ ~music/QCBREW/QCBREWA.acm~
+ADD_MUSIC ~QBREW_THEME~ ~CotSC/qc_brewery/music/QCBREW.MUS~
+COPY_EXISTING ~QCBREW.ARE~ ~override/QCBREW.ARE~
+  READ_LONG 0xBC qb_songoff
+  PATCH_IF (qb_songoff > 0) AND (qb_songoff + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG qb_songoff %QBREW_THEME%
+    WRITE_LONG (qb_songoff + 4) %QBREW_THEME%
+    WRITE_LONG (qb_songoff + 0x0c) 129
+  END
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~QBRINT.ARE~ ~override/QBRINT.ARE~
+  READ_LONG 0xBC qb_songoff
+  PATCH_IF (qb_songoff > 0) AND (qb_songoff + 0x90 <= SOURCE_SIZE) BEGIN
+    WRITE_LONG qb_songoff %QBREW_THEME%
+    WRITE_LONG (qb_songoff + 4) %QBREW_THEME%
+    WRITE_LONG (qb_songoff + 0x0c) 129
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+
+// v1.4: give the Brewer a private copy of a native BG1 tavern DRINKS store.
+// Drakon Tavern uses Westgate Ruby Wine and Golden Sands Brews.
+// Elfsong Tavern is the EET fallback with those same two drinks.
+ACTION_IF FILE_EXISTS_IN_GAME ~TAV0720.STO~ BEGIN
+  OUTER_SPRINT qb_tavern_src ~TAV0720~
+END ELSE BEGIN
+  ACTION_IF FILE_EXISTS_IN_GAME ~TAV0705.STO~ BEGIN
+    OUTER_SPRINT qb_tavern_src ~TAV0705~
+  END ELSE BEGIN
+    FAIL @20253
+  END
+END
+COPY_EXISTING ~%qb_tavern_src%.STO~ ~override/QBRDRNK.STO~
+  READ_LONG 0x10 qb_sto_flags
+  WRITE_LONG 0x08 1                         // Tavern: use Drinks tab, not normal goods or an inn
+  WRITE_LONG 0x10 (qb_sto_flags BOR 0x40)  // Allow purchase of drinks
+  WRITE_LONG 0x5c 0                         // Brewery does not provide lodgings
+  SAY 0x0c @3050
+BUT_ONLY_IF_IT_CHANGES
+
+// v3.2: Defender of Amn, Larissa's one-time quest reward.
+// Keep the native large-shield equip animations and base AC +3 from SHLD19.
+// SHLD19 already gives +3 general / +4 total vs missiles; add a further
+// -1 missile-only modifier for exactly +5 total missile protection.
+// Uses custom artwork adapted from the user's supplied shield image.
+COPY ~CotSC/qc_river_district/items/QRAMSHD.BAM~ ~override/QRAMSHD.BAM~
+COPY_EXISTING ~SHLD19.ITM~ ~override/QRAMSHD.ITM~
+  SAY NAME1 @3051
+  SAY NAME2 @3051
+  SAY DESC @3052
+  WRITE_ASCII 0x3A ~QRAMSHD~ #8
+  WRITE_ASCII 0x58 ~QRAMSHD~ #8
+  WRITE_SHORT 0x42 0 // Immediately identifiable: no Lore check needed
+  LPF ADD_ITEM_EQEFFECT
+    INT_VAR opcode = 0 target = 1 timing = 2 parameter1 = 0xFFFFFFFF parameter2 = 2
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// v3.1: Two UNIQUE, inert Larissa quest potions using the supplied bottle designs.
+// Copying MISC27 avoids inheriting active spell effects from a drinking potion.
+COPY ~CotSC/qc_brewery/items/QBLP01.BAM~ ~override/QBLP01.BAM~
+COPY ~CotSC/qc_brewery/items/QBLP02.BAM~ ~override/QBLP02.BAM~
+COPY_EXISTING ~MISC27.ITM~ ~override/QBLP01.ITM~
+  SAY NAME1 @3053
+  SAY NAME2 @3053
+  SAY DESC @3054
+  WRITE_ASCII 0x3a ~QBLP01~ #8
+  WRITE_ASCII 0x58 ~QBLP01~ #8
+  WRITE_LONG 0x34 60
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~MISC27.ITM~ ~override/QBLP02.ITM~
+  SAY NAME1 @3055
+  SAY NAME2 @3055
+  SAY DESC @3056
+  WRITE_ASCII 0x3a ~QBLP02~ #8
+  WRITE_ASCII 0x58 ~QBLP02~ #8
+  WRITE_LONG 0x34 60
+BUT_ONLY_IF_IT_CHANGES
+
+// v3.0: IMPORTANT: DO NOT enable the BreweryEastMap/BreweryNorthMap ARE
+// regions. They have EMPTY destination AREA references and intercept clicks.
+// QCBREW.ARE intentionally advertises ONLY the house doorway region (count 1).
+// The exterior world-map travel is provided natively by the 64 SR search-map
+// cells of index 14 along the north and east edges, NOT by travel regions.
+// This fixes the "party walks to the wheel icon but nothing happens" symptom.
+
+// EET has BG2's Shadows of Amn map 2283 pixels below BG1 on its merged map.
+// Use the BG2 City Gates as the entry and return route.  ARRIVE is an existing
+// Brewery entrance, ExitNE is the vanilla AR0020 City Gates entrance.
+ACTION_IF GAME_IS ~eet~ BEGIN
+  OUTER_SET qb_soa_yoff = 2283
+END ELSE BEGIN
+  OUTER_SET qb_soa_yoff = 0
+END
+ACTION_DEFINE_ASSOCIATIVE_ARRAY toNewArea BEGIN
+  ~AR0020~ => ~ARRIVE~
+END
+ACTION_DEFINE_ASSOCIATIVE_ARRAY fromNewArea BEGIN
+  ~AR0020~ => ~ExitNE~
+END
+OUTER_SPRINT qc_wm_qcbrew_name @19004
+OUTER_SPRINT qc_wm_qcbrew_desc @19005
+LAF sc#addWmpAre
+  INT_VAR
+    mapIcon = 10
+    xCoord = 675
+    yCoord = 157 + qb_soa_yoff
+    tTime = 1
+    inclSv = 0
+    visible = 1
+    visibleAdjacent = 0
+    reachable = 0
+    visited = 0
+  STR_VAR
+    areName = ~QCBREW~
+    strName = EVAL ~%qc_wm_qcbrew_name%~
+    strDesc = EVAL ~%qc_wm_qcbrew_desc%~
+    worldmap = ~worldmap~
+END
+
+// v3.1: River District is a permanent world-map location as well. It uses
+// the same City Gates links, but has its own ARRIVE at (1670,1593).
+// City-side marker is provisional and may be repositioned later if desired.
+OUTER_SPRINT qc_wm_qcrivd_name @19006
+OUTER_SPRINT qc_wm_qcrivd_desc @19007
+LAF sc#addWmpAre
+  INT_VAR
+    mapIcon = 10
+    xCoord = 205
+    yCoord = 190 + qb_soa_yoff
+    tTime = 0
+    inclSv = 0
+    visible = 1
+    visibleAdjacent = 0
+    reachable = 0
+    visited = 0
+  STR_VAR
+    areName = ~QCRIVD~
+    strName = EVAL ~%qc_wm_qcrivd_name%~
+    strDesc = EVAL ~%qc_wm_qcrivd_desc%~
+    worldmap = ~worldmap~
+END
+
+// Unlock the River District on first visiting the Athkatla Slums (AR0400),
+// and Forest Brewery on reaching the City Gates (AR0020). The v65 version
+// only used RevealAreaOnMap; the script now also applies ENABLED/EXPLORABLE
+// flags, and restores native City Gates travel after the Slums are entered.
+// Keep the original City Gates worldmap links, icons and arrival coordinates.
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BALDUR.BCS~ BEGIN
+  FAIL @20254
+END
+EXTEND_TOP ~BALDUR.BCS~ ~CotSC/qc_river_district/scripts/QCRVLOCK.baf~
+
+// v67: container use/interact positions ONLY. These coordinates are distinct
+// from the original clickable polygons and trap launch points. Preserve all
+// inventory, items, container type, trap, owner and region data.
+COPY_EXISTING ~QCBREW.ARE~ ~override/QCBREW.ARE~
+  READ_LONG 0x70 q67_coff
+  READ_SHORT 0x74 q67_ccount
+  FOR (q67_c = 0; q67_c < q67_ccount; q67_c += 1) BEGIN
+    SET q67_cp = q67_coff + q67_c * 0xc0
+    READ_ASCII q67_cp q67_cname (32) NULL
+    PATCH_IF (~%q67_cname%~ STRING_EQUAL_CASE ~QCBRC003~) BEGIN
+      WRITE_SHORT (q67_cp + 0x20) 2013
+      WRITE_SHORT (q67_cp + 0x22) 1222
+    END
+    PATCH_IF (~%q67_cname%~ STRING_EQUAL_CASE ~QCBRC002~) BEGIN
+      WRITE_SHORT (q67_cp + 0x20) 1358
+      WRITE_SHORT (q67_cp + 0x22) 1234
+    END
+    PATCH_IF (~%q67_cname%~ STRING_EQUAL_CASE ~QCBRC001~) BEGIN
+      WRITE_SHORT (q67_cp + 0x20) 960
+      WRITE_SHORT (q67_cp + 0x22) 865
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+COPY_EXISTING ~QCRIVD.ARE~ ~override/QCRIVD.ARE~
+  READ_LONG 0x70 q67_roff
+  READ_SHORT 0x74 q67_rcount
+  FOR (q67_c = 0; q67_c < q67_rcount; q67_c += 1) BEGIN
+    SET q67_cp = q67_roff + q67_c * 0xc0
+    READ_ASCII q67_cp q67_cname (32) NULL
+    PATCH_IF (~%q67_cname%~ STRING_EQUAL_CASE ~QRVC0004~) BEGIN
+      WRITE_SHORT (q67_cp + 0x20) 3235
+      WRITE_SHORT (q67_cp + 0x22) 679
+    END
+  END
+BUT_ONLY_IF_IT_CHANGES
+
+// Saved-game world maps in EE are held inside BALDUR.SAV.
+// Do not enumerate save directories or attempt loose worldmap.wmp writes.
+// Only the master WORLDMAP.WMP is updated by sc#addWmpAre (inclSv=0).
+// For correct initial lock states, test with a newly created campaign save.
+
+

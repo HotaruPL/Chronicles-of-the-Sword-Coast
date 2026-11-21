@@ -1,0 +1,13 @@
+IF
+  Global("ORPHAN_CAT_TAKEN","GLOBAL",1)
+THEN
+  RESPONSE #100
+    DestroySelf()
+END
+
+IF
+  Global("ORPHAN_CAT_TAKEN","GLOBAL",0)
+THEN
+  RESPONSE #100
+    RandomWalk()
+END

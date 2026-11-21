@@ -1,0 +1,378 @@
+// Part III: Shadows of Amn / BG2 areas. The first 3 components are frozen from v0.5.
+// Former WeiDU component: Miscellaneous Merchants - Part III: Shadows of Amn (11 NPCs, 3 loot additions)
+
+// Six stores (10 per item), original shops and their resale economics untouched.
+COPY ~CotSC/QCMM/stores/QCMS14.STO~ ~override/QCMS14.STO~
+  SAY 0x0c @4082
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM14.CRE~
+  SAY NAME1 @4083
+  SAY NAME2 @4083
+  WRITE_ASCII 0x2cc ~QCMM14~ #8
+  WRITE_ASCII 0x280 ~QCMM14~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_LONG 0x28 25344
+  WRITE_BYTE 0x2d 49
+  WRITE_BYTE 0x2e 49
+
+COPY_EXISTING ~FTOWBE_B.CRE~ ~override/QCMM15.CRE~
+  SAY NAME1 @4084
+  SAY NAME2 @4084
+  WRITE_ASCII 0x2cc ~QCMM15~ #8
+  WRITE_ASCII 0x280 ~QCMM15~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_LONG 0x28 51472
+  WRITE_BYTE 0x237 2
+  WRITE_BYTE 0x275 2
+  WRITE_BYTE 0x2d 36
+  WRITE_BYTE 0x2e 36
+
+COPY ~CotSC/QCMM/stores/QCMS16.STO~ ~override/QCMS16.STO~
+  SAY 0x0c @4067
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM16.CRE~
+  SAY NAME1 @4068
+  SAY NAME2 @4068
+  WRITE_ASCII 0x2cc ~QCMM16~ #8
+  WRITE_ASCII 0x280 ~QCMM16~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY ~CotSC/QCMM/stores/QCMS17.STO~ ~override/QCMS17.STO~
+  SAY 0x0c @4067
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM17.CRE~
+  SAY NAME1 @4068
+  SAY NAME2 @4068
+  WRITE_ASCII 0x2cc ~QCMM17~ #8
+  WRITE_ASCII 0x280 ~QCMM17~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY ~CotSC/QCMM/stores/QCMS18.STO~ ~override/QCMS18.STO~
+  SAY 0x0c @4085
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM18.CRE~
+  SAY NAME1 @4086
+  SAY NAME2 @4086
+  WRITE_ASCII 0x2cc ~QCMM18~ #8
+  WRITE_ASCII 0x280 ~QCMM18~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY_EXISTING ~FTOWBE_B.CRE~ ~override/QCMM19.CRE~
+  SAY NAME1 @4087
+  SAY NAME2 @4087
+  WRITE_ASCII 0x2cc ~QCMM19~ #8
+  WRITE_ASCII 0x280 ~QCMM19~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_LONG 0x28 51472
+  WRITE_BYTE 0x237 2
+  WRITE_BYTE 0x275 2
+
+COPY_EXISTING ~PRISM.CRE~ ~override/QCMM20.CRE~
+  SAY NAME1 @4088
+  SAY NAME2 @4088
+  WRITE_ASCII 0x2cc ~QCMM20~ #8
+  WRITE_ASCII 0x280 ~QCMM20~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY ~CotSC/QCMM/stores/QCMS21.STO~ ~override/QCMS21.STO~
+  SAY 0x0c @4067
+COPY_EXISTING ~MERCH2.CRE~ ~override/QCMM21.CRE~
+  SAY NAME1 @4068
+  SAY NAME2 @4068
+  WRITE_ASCII 0x2cc ~QCMM21~ #8
+  WRITE_ASCII 0x280 ~QCMM21~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+
+COPY_EXISTING ~EMITAR.CRE~ ~override/QCMM22.CRE~
+  SAY NAME1 @4089
+  SAY NAME2 @4089
+  WRITE_ASCII 0x2cc ~QCMM22~ #8
+  WRITE_ASCII 0x280 ~QCMM22~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_LONG 0x28 51472
+  WRITE_BYTE 0x237 2
+  WRITE_BYTE 0x275 2
+
+COPY ~CotSC/QCMM/stores/QCMS23.STO~ ~override/QCMS23.STO~
+  SAY 0x0c @4090
+COPY_EXISTING ~UDSVIR02.CRE~ ~override/QCMM23.CRE~
+  SAY NAME1 @4091
+  SAY NAME2 @4091
+  WRITE_ASCII 0x2cc ~QCMM23~ #8
+  WRITE_ASCII 0x280 ~QCMM23~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_LONG 0x28 24836
+  WRITE_BYTE 0x2d 59
+  WRITE_BYTE 0x2e 36
+
+COPY_EXISTING ~UDDROW23.CRE~ ~override/QCMM24.CRE~
+  SAY NAME1 @4092
+  SAY NAME2 @4092
+  WRITE_ASCII 0x2cc ~QCMM24~ #8
+  WRITE_ASCII 0x280 ~QCMM24~ #32
+  WRITE_ASCII 0x248 ~~ #40 // no base creature scripts
+  WRITE_BYTE 0x270 128 // neutral
+  WRITE_LONG 0x28 32551
+  WRITE_BYTE 0x2d 36
+  WRITE_BYTE 0x2e 36
+  WRITE_ASCII 0x248 ~QCMMULV~ #8 // own override to share bartender hostility
+
+// A small independent script slot on the ORIGINAL bartender relays his hostile state.
+// No dialogue, existing quests, stores or other scripts are replaced.
+COMPILE ~CotSC/QCMM/scripts/QCMMBAR.baf~
+COMPILE ~CotSC/QCMM/scripts/QCMMULV.baf~
+COPY_EXISTING ~UDDROW22.CRE~ ~override~
+  LPF ADD_CRE_SCRIPT STR_VAR script = ~QCMMBAR~ RET success END
+  PATCH_IF (success != 1) BEGIN
+    PATCH_WARN @20342
+  END
+
+COMPILE ~CotSC/QCMM/dialogue/QCMM14.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM14.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM15.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM15.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM16.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM16.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM17.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM17.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM18.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM18.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM19.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM19.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM20.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM20.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM21.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM21.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM22.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM22.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM23.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM23.tra~
+COMPILE ~CotSC/QCMM/dialogue/QCMM24.d~ USING ~CotSC/translation/%LANGUAGE%/QCMM/dialogue/QCMM24.tra~
+
+// Area actor placements: each NPC has a unique QC resource and no wandering except as requested elsewhere.
+COPY_EXISTING ~AR0300.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1963
+      fj_loc_y = 2391
+      fj_dest_x = 1963
+      fj_dest_y = 2391
+      fj_orientation = 0
+      fj_animation = 25344
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM14_Actor~
+      fj_cre_resref = ~QCMM14~
+  END
+
+COPY_EXISTING ~AR0400.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1190
+      fj_loc_y = 799
+      fj_dest_x = 1190
+      fj_dest_y = 799
+      fj_orientation = 0
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM16_Actor~
+      fj_cre_resref = ~QCMM16~
+  END
+
+COPY_EXISTING ~AR0406.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1199
+      fj_loc_y = 1598
+      fj_dest_x = 1199
+      fj_dest_y = 1598
+      fj_orientation = 0
+      fj_animation = 51472
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM15_Actor~
+      fj_cre_resref = ~QCMM15~
+  END
+
+COPY_EXISTING ~AR0700.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1710
+      fj_loc_y = 1398
+      fj_dest_x = 1710
+      fj_dest_y = 1398
+      fj_orientation = 14
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM17_Actor~
+      fj_cre_resref = ~QCMM17~
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 3754
+      fj_loc_y = 379
+      fj_dest_x = 3754
+      fj_dest_y = 379
+      fj_orientation = 2
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM18_Actor~
+      fj_cre_resref = ~QCMM18~
+  END
+
+COPY_EXISTING ~AR1105.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1131
+      fj_loc_y = 303
+      fj_dest_x = 1131
+      fj_dest_y = 303
+      fj_orientation = 2
+      fj_animation = 51472
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM19_Actor~
+      fj_cre_resref = ~QCMM19~
+  END
+
+COPY_EXISTING ~AR1602.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 607
+      fj_loc_y = 728
+      fj_dest_x = 607
+      fj_dest_y = 728
+      fj_orientation = 8
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM20_Actor~
+      fj_cre_resref = ~QCMM20~
+  END
+
+COPY_EXISTING ~AR2000.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 952
+      fj_loc_y = 2774
+      fj_dest_x = 952
+      fj_dest_y = 2774
+      fj_orientation = 0
+      fj_animation = 51456
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM21_Actor~
+      fj_cre_resref = ~QCMM21~
+  END
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 2593
+      fj_loc_y = 2661
+      fj_dest_x = 2593
+      fj_dest_y = 2661
+      fj_orientation = 14
+      fj_animation = 51472
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM22_Actor~
+      fj_cre_resref = ~QCMM22~
+  END
+
+COPY_EXISTING ~AR2100.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1586
+      fj_loc_y = 3775
+      fj_dest_x = 1586
+      fj_dest_y = 3775
+      fj_orientation = 8
+      fj_animation = 24836
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM23_Actor~
+      fj_cre_resref = ~QCMM23~
+  END
+
+COPY_EXISTING ~AR2202.ARE~ ~override~
+  LPF fj_are_structure
+    INT_VAR
+      fj_loc_x = 1567
+      fj_loc_y = 463
+      fj_dest_x = 1567
+      fj_dest_y = 463
+      fj_orientation = 0
+      fj_animation = 32551
+      fj_wander_dist_actor = 0
+      fj_mvmt_dist_actor = 0
+    STR_VAR
+      fj_structure_type = ~actor~
+      fj_name = ~QCMM24_Actor~
+      fj_cre_resref = ~QCMM24~
+  END
+
+
+// Add item(s) to the pre-existing container nearest the specified coordinates.
+// Uses live ARE container coordinates, so it also works if another mod inserted a container.
+DEFINE_PATCH_FUNCTION QCMM_NEAREST_CONTAINER
+  INT_VAR x = 0 y = 0 charge = 1
+  STR_VAR item = ~~
+BEGIN
+  READ_SHORT 0x74 qcmm_cnt
+  READ_LONG 0x70 qcmm_off
+  PATCH_IF (qcmm_cnt < 1) BEGIN
+    PATCH_FAIL @20343
+  END
+  SET qcmm_best = 0 // at least one container exists, verified above
+  SET qcmm_best_dist = 2147483647
+  FOR (qcmm_i = 0; qcmm_i < qcmm_cnt; qcmm_i += 1) BEGIN
+    READ_SHORT (qcmm_off + qcmm_i * 0xc0 + 0x20) qcmm_x
+    READ_SHORT (qcmm_off + qcmm_i * 0xc0 + 0x22) qcmm_y
+    SET qcmm_dx = qcmm_x - x
+    SET qcmm_dy = qcmm_y - y
+    SET qcmm_dist = qcmm_dx * qcmm_dx + qcmm_dy * qcmm_dy
+    PATCH_IF (qcmm_dist < qcmm_best_dist) BEGIN
+      SET qcmm_best_dist = qcmm_dist
+      SET qcmm_best = qcmm_i
+    END
+  END
+  PATCH_IF (qcmm_best >= 0) BEGIN
+    LPF fj_are_structure
+      INT_VAR
+        fj_con_itm_idx = qcmm_best
+        fj_charge0 = charge
+        fj_flags = 1 // identified
+      STR_VAR
+        fj_structure_type = ~itm~
+        fj_name = EVAL ~%item%~
+    END
+  END
+END
+
+// Three pre-existing containers, retain their other loot.
+COPY_EXISTING ~AR0406.ARE~ ~override~
+  LPF QCMM_NEAREST_CONTAINER INT_VAR x = 215 y = 1054 charge = 2 STR_VAR item = ~QCCOKIE~ END
+COPY_EXISTING ~AR1515.ARE~ ~override~
+  LPF QCMM_NEAREST_CONTAINER INT_VAR x = 1466 y = 648 charge = 1 STR_VAR item = ~QCWATER~ END
+COPY_EXISTING ~AR1902.ARE~ ~override~
+  LPF QCMM_NEAREST_CONTAINER INT_VAR x = 0 y = 0 charge = 2 STR_VAR item = ~QCBREAD~ END
+
+

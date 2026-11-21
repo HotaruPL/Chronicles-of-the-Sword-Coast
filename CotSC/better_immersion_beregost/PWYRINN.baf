@@ -1,0 +1,128 @@
+// Vhaidra has agreed to return to Ulua. Remove Ulua when the party returns.
+IF
+  Global("PWY_VHAIDRA_REUNITED","GLOBAL",1)
+  Exists("PWYULU5")
+THEN
+  RESPONSE #100
+    ActionOverride("PWYULUA",DestroySelf())
+    ActionOverride("PWYULU5",DestroySelf())
+END
+
+// ---------------------------------------------------------------------------
+// PURPLE WYRM INN - CORE NPC SPAWNS (PART 1)
+// ---------------------------------------------------------------------------
+
+IF
+  !Exists("PWYTHEO")
+THEN
+  RESPONSE #100
+    CreateCreature("PWYTHEO",[1641.1067],6)
+END
+
+// Migrate Kaeira from earlier test builds so the corrected female-commoner voice is actually used.
+IF
+  Global("PWY_KAEIRA_V9_CLEAN","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_KAEIRA_V9_CLEAN","LOCALS",1)
+    ActionOverride("PWYKAEI",DestroySelf())
+END
+
+IF
+  !Exists("PWYKAE9")
+THEN
+  RESPONSE #100
+    CreateCreature("PWYKAE9",[1580.1021],8)
+END
+
+IF
+  !Exists("PWYRAND")
+THEN
+  RESPONSE #100
+    CreateCreature("PWYRAND",[1528.990],1)
+END
+
+IF
+  Global("PWY_DELCIA_SPAWNED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_DELCIA_SPAWNED","GLOBAL",1)
+    CreateCreature("PWYDELC",[1347.1136],0)
+    CreateCreature("PWYHEND",[1372.1142],0)
+END
+
+IF
+  !Exists("PWYBART")
+THEN
+  RESPONSE #100
+    CreateCreature("PWYBART",[1658.938],0)
+END
+
+// Remove legacy Durbem/Ulua instances from earlier test builds, then spawn clean actors.
+IF
+  Global("PWY_DURB_ULUA_V15_CLEAN","LOCALS",0)
+THEN
+  RESPONSE #100
+    SetGlobal("PWY_DURB_ULUA_V15_CLEAN","LOCALS",1)
+    ActionOverride("PWYDURB",DestroySelf())
+    ActionOverride("PWYULUA",DestroySelf())
+    ActionOverride("PWYDRB5",DestroySelf())
+    ActionOverride("PWYULU5",DestroySelf())
+END
+
+IF
+  !Exists("PWYDRB5")
+THEN
+  RESPONSE #100
+    CreateCreature("PWYDRB5",[962.1099],14)
+END
+
+IF
+  !Exists("PWYULU5")
+  Global("PWY_ULUA_VHAIDRA_RESOLVED","GLOBAL",0)
+THEN
+  RESPONSE #100
+    CreateCreature("PWYULU5",[1264.924],0)
+END
+
+// Spawn current inn residents independently; no shared spawn flag.
+IF
+  !Exists("PWYHAL7")
+THEN
+  RESPONSE #100
+    CreateCreature("PWYHAL7",[1426.1012],0)
+END
+
+IF
+  !Exists("PWYCMN7")
+THEN
+  RESPONSE #100
+    CreateCreature("PWYCMN7",[1848.1201],0)
+END
+
+IF
+  !Exists("PWYCOO7")
+THEN
+  RESPONSE #100
+    CreateCreature("PWYCOO7",[1806.773],0)
+END
+
+IF
+  Exists("PWYHAL7")
+  !StateCheck("PWYHAL7",CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    ActionOverride("PWYHAL7",RandomWalkContinuous())
+END
+
+IF
+  Exists("PWYCMN7")
+  !StateCheck("PWYCMN7",CD_STATE_NOTVALID)
+THEN
+  RESPONSE #100
+    ActionOverride("PWYCMN7",RandomWalkContinuous())
+END
+
+// Delcia's departure flag is intentionally left as a follow-up behavior pass.
+// This keeps the first install focused on spawning/dialogue and avoids inventing
+// an exit route until the final inn circulation is settled.
